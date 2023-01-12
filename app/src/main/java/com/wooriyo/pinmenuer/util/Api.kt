@@ -6,14 +6,13 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface Api {
-
     @GET("/api/checkmbr.php")
-    fun checkmbr(
+    fun checkMbr(
         @Query("userid") userid: String,
         @Query("pass") pass: String,
         @Query("push_token") push_token: String,
         @Query("os") os: String,
-        @Query("osvs") osvs: String,
+        @Query("osvs") osvs: Int,
         @Query("appvs") appvs: String,
         @Query("md") md: String
     ): Call<MemberDTO>

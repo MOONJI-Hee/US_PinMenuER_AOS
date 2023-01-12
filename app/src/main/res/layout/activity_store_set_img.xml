@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        style="@style/title"
+        android:id="@+id/title"
+        android:text="@string/title_store_img"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <LinearLayout
+        android:id="@+id/back"
+        android:layout_width="72dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_title_back" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/img_default"
+        android:layout_width="500dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="80dp"
+        android:text="@string/store_img_reg_hint"
+        android:textSize="20sp"
+        android:textColor="@color/hint"
+        android:gravity="center"
+        android:background="@drawable/bg_edittext"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="500dp"
+        android:layout_height="300dp"
+        android:src="@drawable/img_skin_black"
+        android:scaleType="centerCrop"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/img_default"
+        app:layout_constraintTop_toTopOf="@+id/img_default" />
+
+    <TextView
+        style="@style/btn"
+        android:id="@+id/reg_img"
+        android:layout_width="500dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/store_img_reg"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_default"/>
+
+    <TextView
+        style="@style/subtext"
+        android:id="@+id/img_info"
+        android:text="@string/store_img_info"
+        android:lineSpacingExtra="5dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="@+id/reg_img"
+        app:layout_constraintTop_toBottomOf="@+id/reg_img"/>
+
+    <TextView
+        style="@style/btn"
+        android:id="@+id/save"
+        android:layout_width="500dp"
+        android:layout_marginBottom="80dp"
+        android:text="@string/save"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

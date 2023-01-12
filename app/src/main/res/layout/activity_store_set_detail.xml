@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        style="@style/title"
+        android:id="@+id/title"
+        android:text="@string/title_store_detail"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <LinearLayout
+        android:id="@+id/back"
+        android:layout_width="72dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_title_back" />
+    </LinearLayout>
+
+    <TextView
+        style="@style/text18"
+        android:layout_marginEnd="16dp"
+        android:text="@string/store_tel"
+        app:layout_constraintEnd_toStartOf="@+id/et_tel"
+        app:layout_constraintTop_toTopOf="@+id/et_tel"
+        app:layout_constraintBottom_toBottomOf="@+id/et_tel" />
+
+    <EditText
+        style="@style/edittext_main"
+        android:id="@+id/et_tel"
+        android:layout_marginTop="80dp"
+        android:hint="@string/store_name_hint"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        style="@style/text18"
+        android:layout_marginEnd="16dp"
+        android:text="@string/store_insta"
+        app:layout_constraintEnd_toStartOf="@+id/et_insta"
+        app:layout_constraintTop_toTopOf="@+id/et_insta"
+        app:layout_constraintBottom_toBottomOf="@+id/et_insta" />
+
+    <EditText
+        style="@style/edittext_main"
+        android:id="@+id/et_insta"
+        android:layout_marginTop="32dp"
+        android:paddingStart="42dp"
+        android:hint="@string/store_insta_hint"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/et_tel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="@string/at"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/et_insta"
+        app:layout_constraintTop_toTopOf="@+id/et_insta"
+        app:layout_constraintBottom_toBottomOf="@+id/et_insta"/>
+
+    <TextView
+        style="@style/text18"
+        android:layout_marginEnd="16dp"
+        android:text="@string/store_delivery"
+        app:layout_constraintEnd_toStartOf="@+id/group_delivery"
+        app:layout_constraintTop_toTopOf="@+id/group_delivery"
+        app:layout_constraintBottom_toBottomOf="@+id/group_delivery" />
+
+    <RadioGroup
+        android:id="@+id/group_delivery"
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="@+id/et_insta"
+        app:layout_constraintEnd_toEndOf="@+id/et_insta"
+        app:layout_constraintTop_toBottomOf="@+id/et_insta">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/store_delivery_y"
+            android:textSize="20sp"
+            android:button="@null"
+            android:drawableStart="@drawable/selector_check"
+            android:drawablePadding="6dp" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:text="@string/store_delivery_n"
+            android:textSize="20sp"
+            android:button="@null"
+            android:drawableStart="@drawable/selector_check"
+            android:drawablePadding="6dp" />
+    </RadioGroup>
+
+    <TextView
+        style="@style/text18"
+        android:layout_marginEnd="16dp"
+        android:text="@string/store_parking"
+        app:layout_constraintEnd_toStartOf="@+id/group_parking"
+        app:layout_constraintTop_toTopOf="@+id/group_parking"
+        app:layout_constraintBottom_toBottomOf="@+id/group_parking" />
+
+    <RadioGroup
+        android:id="@+id/group_parking"
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="@+id/group_delivery"
+        app:layout_constraintEnd_toEndOf="@+id/group_delivery"
+        app:layout_constraintTop_toBottomOf="@+id/group_delivery">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/store_parking_y"
+            android:textSize="20sp"
+            android:button="@null"
+            android:drawableStart="@drawable/selector_check"
+            android:drawablePadding="6dp"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:text="@string/store_parking_n"
+            android:textSize="20sp"
+            android:button="@null"
+            android:drawableStart="@drawable/selector_check"
+            android:drawablePadding="6dp"/>
+    </RadioGroup>
+
+    <TextView
+        style="@style/text18"
+        android:layout_marginEnd="16dp"
+        android:text="@string/store_parking_addr"
+        app:layout_constraintEnd_toStartOf="@+id/et_parking_addr"
+        app:layout_constraintTop_toTopOf="@+id/et_parking_addr"
+        app:layout_constraintBottom_toBottomOf="@+id/et_parking_addr" />
+
+    <EditText
+        style="@style/edittext_main"
+        android:id="@+id/et_parking_addr"
+        android:layout_marginTop="32dp"
+        android:hint="@string/store_addr_hint"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/group_parking"
+        app:layout_constraintStart_toStartOf="@+id/group_parking"
+        app:layout_constraintEnd_toEndOf="@+id/group_parking"/>
+
+    <TextView
+        style="@style/btn_small"
+        android:id="@+id/btn_map"
+        android:layout_width="98dp"
+        android:layout_marginStart="10dp"
+        android:text="@string/store_map"
+        app:layout_constraintTop_toTopOf="@+id/et_parking_addr"
+        app:layout_constraintBottom_toBottomOf="@+id/et_parking_addr"
+        app:layout_constraintStart_toEndOf="@+id/et_parking_addr" />
+
+    <TextView
+        style="@style/btn"
+        android:id="@+id/save"
+        android:layout_width="500dp"
+        android:layout_marginBottom="40dp"
+        android:text="@string/save"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

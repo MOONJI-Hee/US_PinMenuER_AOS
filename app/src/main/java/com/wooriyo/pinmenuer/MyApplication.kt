@@ -5,20 +5,32 @@ import android.content.Context
 import android.graphics.Point
 import android.os.Build
 import android.view.WindowManager
+import com.wooriyo.pinmenuer.db.AppDatabase
 import com.wooriyo.pinmenuer.model.SharedDTO
 
 class MyApplication: Application() {
     companion object {
         lateinit var pref: SharedDTO
+        lateinit var db : AppDatabase
+
         var density = 1.0F
         var dpi = 160
+
+        var osver = 0
+        lateinit var appver : String
+        lateinit var model : String
     }
 
     override fun onCreate() {
         pref = SharedDTO(applicationContext)
+        db = AppDatabase.getInstance(applicationContext)
 
         density = resources.displayMetrics.density
         dpi = resources.displayMetrics.densityDpi
+
+        osver = Build.VERSION.SDK_INT
+        appver = applicationContext.packageManager.getPackageInfo(applicationContext.packageName, 0).versionName
+        model = Build.MODEL
 
         val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
