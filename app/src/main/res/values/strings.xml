@@ -54,6 +54,27 @@
     <string name="store_day_of_week">요일별</string>
     <string name="store_break">브레이크타임</string>
     <string name="store_holiday">휴일</string>
+    <string name="store_same_hour">매일 동일한 영업시간</string>
+    <string name="store_diff_hour">매일 다른 영업시간</string>
+    <string name="store_same_break">매일 동일한 브레이크 타임</string>
+    <string name="store_diff_break">매일 다른 브레이크 타임</string>
+    <string name="store_same_holiday">매주 동일한 휴일</string>
+    <string name="store_special_holiday">특별 휴일 입력</string>
+    <string name="everyday">매일</string>
+    <string name="store_hour_info">새벽 6시 마감은 30:00으로 변경</string>
+
+    <string name="store_hour_set">영업시간 설정</string>
+    <string name="store_break_set">브레이크타임 설정</string>
+    <string name="store_holiday_set">휴일 설정</string>
+    <string name="store_holiday_name">휴일 명칭</string>
+    <string name="store_holiday_set_info">‘월’을 입력하지 않으면 ‘매월’로 표시합니다.</string>
+
+    <string name="date">날짜</string>
+    <string name="month">월</string>
+    <string name="day">일</string>
+    <string name="tilde">~</string>
+    <string name="colon">:</string>
+
     <!--  매장 대표 사진 -->
     <string name="store_img">매장사진</string>
     <string name="store_rep_img">대표 사진</string>
