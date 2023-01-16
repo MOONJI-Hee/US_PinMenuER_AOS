@@ -17,6 +17,20 @@ interface Api {
         @Query("md") md: String
     ): Call<MemberDTO>
 
+    //회원가입
+    @FormUrlEncoded
+    @POST("m/regmbr.php")
+    fun regMember(
+        @Field("userid") userid: String,
+        @Field("alpha_userid") arpayo_id: String,
+        @Field("user_pwd") pw: String,
+        @Field("push_token") push_token: String,
+        @Field("os") os: String,
+        @Field("osvs") osver: Int,
+        @Field("appvs") appver: String,
+        @Field("md") model: String
+    ): Call<MemberDTO>
+
     //아이디 중복 체크
     @FormUrlEncoded
     @POST("m/checkid.php")
@@ -31,19 +45,7 @@ interface Api {
         @Field("userid") userid: String
     ): Call<ResultDTO>
 
-    @FormUrlEncoded
-    @POST("m/regmbr.php")
-    fun regMember(
-        @Field("userid") userid: String,
-        @Field("alpha_userid") arpayo_id: String,
-        @Field("user_pwd") pw: String,
-        @Field("push_token") push_token: String,
-        @Field("os") os: String,
-        @Field("osvs") osver: Int,
-        @Field("appvs") appver: String,
-        @Field("md") model: String
-    ): Call<MemberDTO>
-
+    //회원정보 수정
     @GET("m/udtmbr.php")
     fun udtMbr (
         @Query("useridx") useridx : Int,
@@ -51,40 +53,42 @@ interface Api {
         @Query("alpha_userid") arpayo_id: String
     ): Call<ResultDTO>
 
-//    //매장등록
-//    @GET("/api/m/regstore.php")
-//    fun regstore(
-//        @Query("useridx") useridx: String,
-//        @Query("storenm") storenm: String,
-//        @Query("zip") zip: String,
-//        @Query("addr") addr: String
-//    ): Call<StoreListDTO>
-//
+    //매장 등록
+    @GET("m/regstore.php")
+    fun regStore(
+        @Query("useridx") useridx: Int,
+        @Query("storenm") storenm: String,
+        @Query("addr") addr: String,                // 주소
+        @Query("zip") zip: String                     // 우편번호
+    ): Call<ResultDTO>
+
+    //매장 정보 수정
+    @GET("m/udtstore.php")
+    fun udtStore(
+        @Query("useridx") useridx: Int,
+        @Query("idx") storeidx: Int,
+        @Query("storenm") storenm: String,
+        @Query("addr") addr: String,                // 주소
+        @Query("zip") zip: String                     // 우편번호
+    ): Call<ResultDTO>
+
+    //매장 삭제
+    @GET("m/delstore.php")
+    fun delStore(
+        @Query("useridx") useridx: Int,
+        @Query("idx") storeidx: Int
+    ): Call<ResultDTO>
+
+
+
 //    //매장 불러오기
 //    @FormUrlEncoded
 //    @POST("/api/m/store.list.php")
 //    fun storelist(
 //        @Field("useridx") useridx: String
 //    ): Call<StoreListDTO>
-//
-//    //매장 업데이트
-//    @FormUrlEncoded
-//    @POST("/api/m/uptstore.php")
-//    fun uptstore(
-//        @Field("idx") idx: String,
-//        @Field("useridx") useridx: String,
-//        @Field("storenm") storenm: String,
-//        @Field("addr") addr: String,
-//        @Field("zip") zip: String
-//    ): Call<StoreListDTO>
-//
-//    //매장 삭제
-//    @FormUrlEncoded
-//    @POST("/api/m/delstore.php")
-//    fun delstore(
-//        @Field("useridx") useridx: String,
-//        @Field("idx") idx: String
-//    ): Call<StoreListDTO>
+
+
 //
 //    //카테고리 리스트 불러오기
 //    @GET("/api/m/cate.list.php")

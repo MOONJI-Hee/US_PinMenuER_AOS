@@ -18,32 +18,37 @@
         android:theme="@style/Theme.PinMenuER"
         tools:targetApi="31">
         <activity
-            android:name=".SignUpActivity"
+            android:name=".member.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".StoreSetImgActivity"
+            android:name=".member.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".StoreSetHourActivity"
+            android:name=".member.MemberSetActivity"
             android:exported="false" />
         <activity
-            android:name=".StoreSetDetailActivity"
+            android:name=".store.StoreListActivity"
             android:exported="false" />
         <activity
-            android:name=".StoreListActivity"
+            android:name=".store.StoreSetActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".store.StoreSetDetailActivity"
             android:exported="false" />
+        <activity
+            android:name=".store.StoreSetHourActivity"
+            android:exported="false" />
+        <activity
+            android:name=".store.StoreSetImgActivity"
+            android:exported="false" />
+
         <activity
             android:name=".StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

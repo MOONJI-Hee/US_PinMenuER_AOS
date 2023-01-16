@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "916492355785",
+    "project_id": "pinmenuer",
+    "storage_bucket": "pinmenuer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:916492355785:android:80ea5fd8ec811f4289e518",
+        "android_client_info": {
+          "package_name": "com.wooriyo.pinmenuer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "916492355785-cosdbo193ff7n94h3aa4loeu9ifsqdrb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wooriyo.pinmenuer",
+            "certificate_hash": "fbb394a786751478f87d65a7c6418e170176a72d"
+          }
+        },
+        {
+          "client_id": "916492355785-u9gq1blt9p7bacb0l5j6drvaj72v6ik1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDr_B16_26ZtpRa3QSZGFOVe7BOiDXn-V8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "916492355785-u9gq1blt9p7bacb0l5j6drvaj72v6ik1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

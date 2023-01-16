@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import android.graphics.Point
 import android.os.Build
+import android.view.View
+import android.view.Window
 import android.view.WindowManager
 import com.wooriyo.pinmenuer.db.AppDatabase
 import com.wooriyo.pinmenuer.model.SharedDTO

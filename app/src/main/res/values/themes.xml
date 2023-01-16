@@ -15,6 +15,7 @@
         <item name="android:windowAnimationStyle">@null</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowNoTitle">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
     </style>
     <!-- 투명한 액티비티 테마  -->
     <style name="Transparent" parent="Theme.PinMenuER">

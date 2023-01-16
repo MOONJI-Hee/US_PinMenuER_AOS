@@ -7,8 +7,11 @@ import androidx.room.RoomDatabase
 import com.wooriyo.pinmenuer.db.dao.CategoryDAO
 import com.wooriyo.pinmenuer.db.dao.MemberDAO
 import com.wooriyo.pinmenuer.db.dao.StoreDAO
+import com.wooriyo.pinmenuer.db.entity.Category
+import com.wooriyo.pinmenuer.db.entity.Member
+import com.wooriyo.pinmenuer.db.entity.Store
 
-@Database(entities = [], version = 1)
+@Database(entities = [Member::class, Store::class, Category::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun memberDAO() : MemberDAO
     abstract fun categoryDAO() : CategoryDAO

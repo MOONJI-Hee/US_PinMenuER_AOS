@@ -904,7 +904,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
                     <EditText
                         style="@style/hinttext"
-                        android:id="@+id/brk_end_hour_thu"
+                        android:id="@+id/brk_start_min_thu"
                         android:layout_marginEnd="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

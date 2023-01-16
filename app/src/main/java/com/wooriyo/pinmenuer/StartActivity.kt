@@ -9,7 +9,9 @@ import com.wooriyo.pinmenuer.db.entity.Member
 import com.wooriyo.pinmenuer.member.LoginActivity
 import com.wooriyo.pinmenuer.model.MemberDTO
 import com.wooriyo.pinmenuer.store.StoreListActivity
+import com.wooriyo.pinmenuer.store.StoreSetActivity
 import com.wooriyo.pinmenuer.util.ApiClient
+import com.wooriyo.pinmenuer.util.AppHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,12 +29,20 @@ class StartActivity : AppCompatActivity() {
     var md = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        resources.displayMetrics.density = MyApplication.density
+        resources.displayMetrics.densityDpi = MyApplication.dpi
+        resources.displayMetrics.scaledDensity = MyApplication.density
         setContentView(R.layout.activity_start)
 
+        AppHelper.hideInset(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
         val mbrDTO = MyApplication.pref.getMbrDTO()
 
         if (mbrDTO == null) {
-            startActivity(Intent(this@StartActivity, LoginActivity::class.java).also {
+            startActivity(Intent(this@StartActivity, StoreSetActivity::class.java).also {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

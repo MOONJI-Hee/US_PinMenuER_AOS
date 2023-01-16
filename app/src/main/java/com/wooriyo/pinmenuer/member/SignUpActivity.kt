@@ -1,5 +1,6 @@
 package com.wooriyo.pinmenuer.member
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,9 +9,12 @@ import android.widget.Toast
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivitySignUpBinding
+import com.wooriyo.pinmenuer.model.MemberDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.util.ApiClient
+import com.wooriyo.pinmenuer.util.AppHelper
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 
 class SignUpActivity : AppCompatActivity(), View.OnClickListener {
@@ -26,6 +30,11 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
         binding.save.setOnClickListener(this)
         binding.btnCheckId.setOnClickListener(this)
         binding.btnArpayo.setOnClickListener(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        AppHelper.hideInset(this)
     }
 
     override fun onClick(p0: View?) {
@@ -51,25 +60,26 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
         val appvs = MyApplication.appver
         val md = MyApplication.md
 
-        //        @Field("userid") userid: String,
-        //        @Field("alpha_userid") arpayo_id: String,
-        //        @Field("user_pwd") pw: String,
-        //        @Field("push_token") push_token: String,
-        //        @Field("os") os: String,
-        //        @Field("osvs") osvs: String,
-        //        @Field("appvs") appvs: String,
-        //        @Field("md") md: String
-
         ApiClient.service.regMember(userid, arpayoId, pass, token, os, osvs, appvs, md)
+            .enqueue(object : Callback<MemberDTO>{
+                override fun onResponse(call: Call<MemberDTO>, response: Response<MemberDTO>) {
+                    Log.d(TAG, "회원가입 url : $response")
+                    if(response.isSuccessful) {
+                        val memberDTO = response.body()
+                        if(memberDTO != null) {
+                            if(memberDTO.status == 1) {
+                                Toast.makeText(this@SignUpActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                                startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
+                            }else {
+                                Toast.makeText(this@SignUpActivity, memberDTO.msg, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<MemberDTO>, t: Throwable) {
+                    Toast.makeText(this@SignUpActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "회원가입 오류 > $t")
+                }
+            })
     }
 }
-
-
-//  userid		회원아이디
-//  user_pwd  비밀번호
-//  alpha_userid				알파요 iD
-//  osvs	OS버전(예:1.0.0)
-//  appvs	어플버전
-//  md		단말기모델명
-//  os    인드로이드 A , 아이폰 I
-//  push_token 푸시 토큰

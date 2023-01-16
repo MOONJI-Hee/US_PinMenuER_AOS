@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.wooriyo.pinmenuer.databinding.ActivityStoreListBinding
+import com.wooriyo.pinmenuer.util.AppHelper
 
 class StoreListActivity : AppCompatActivity() {
     lateinit var binding : ActivityStoreListBinding
@@ -12,5 +13,10 @@ class StoreListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityStoreListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        AppHelper.hideInset(this)
     }
 }

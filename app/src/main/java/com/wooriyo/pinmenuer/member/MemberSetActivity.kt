@@ -12,6 +12,7 @@ import com.wooriyo.pinmenuer.databinding.ActivitySignUpBinding
 import com.wooriyo.pinmenuer.model.MemberDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.util.ApiClient
+import com.wooriyo.pinmenuer.util.AppHelper
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,6 +55,11 @@ class MemberSetActivity: AppCompatActivity(), View.OnClickListener {
         binding.btnArpayo.setOnClickListener(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        AppHelper.hideInset(this)
+    }
+
     override fun onClick(p0: View?) {
         when(p0?.id) {
             binding.back.id -> finish()
@@ -79,6 +85,7 @@ class MemberSetActivity: AppCompatActivity(), View.OnClickListener {
                         Toast.makeText(this@MemberSetActivity, response.body()?.msg, Toast.LENGTH_SHORT).show()
                 }
                 override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                    Toast.makeText(this@MemberSetActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "회원정보 수정 오류 > $t")
                 }
             })
@@ -100,6 +107,7 @@ class MemberSetActivity: AppCompatActivity(), View.OnClickListener {
                     }
                 }
                 override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                    Toast.makeText(this@MemberSetActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "알파요 아이디 연동 실패 > $t")
                 }
             })
