@@ -43,7 +43,7 @@ class StartActivity : AppCompatActivity() {
             token = MyApplication.pref.getToken().toString()
             osvs = MyApplication.osver
             appvs = MyApplication.appver
-            md = MyApplication.model
+            md = MyApplication.md
 
             loginWithApi()
         }

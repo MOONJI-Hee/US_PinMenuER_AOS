@@ -6,7 +6,7 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface Api {
-    @GET("/api/checkmbr.php")
+    @GET("checkmbr.php")
     fun checkMbr(
         @Query("userid") userid: String,
         @Query("pass") pass: String,
@@ -19,30 +19,37 @@ interface Api {
 
     //아이디 중복 체크
     @FormUrlEncoded
-    @POST("/api/m/checkid.php")
+    @POST("m/checkid.php")
     fun checkId(
         @Field("userid") userid: String
     ): Call<ResultDTO>
 
     //알파요 ID 연동
     @FormUrlEncoded
-    @POST("/api/m/checkalpha.php")
+    @POST("m/checkalpha.php")
     fun checkArpayo(
         @Field("userid") userid: String
     ): Call<ResultDTO>
 
     @FormUrlEncoded
-    @POST("/api/m/regmbr.php")
+    @POST("m/regmbr.php")
     fun regMember(
         @Field("userid") userid: String,
         @Field("alpha_userid") arpayo_id: String,
         @Field("user_pwd") pw: String,
         @Field("push_token") push_token: String,
         @Field("os") os: String,
-        @Field("osvs") osvs: String,
-        @Field("appvs") appvs: String,
-        @Field("md") md: String
+        @Field("osvs") osver: Int,
+        @Field("appvs") appver: String,
+        @Field("md") model: String
     ): Call<MemberDTO>
+
+    @GET("m/udtmbr.php")
+    fun udtMbr (
+        @Query("useridx") useridx : Int,
+        @Query("pass") pass : String,
+        @Query("alpha_userid") arpayo_id: String
+    ): Call<ResultDTO>
 
 //    //매장등록
 //    @GET("/api/m/regstore.php")

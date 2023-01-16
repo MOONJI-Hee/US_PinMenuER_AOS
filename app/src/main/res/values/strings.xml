@@ -25,6 +25,22 @@
     <string name="delete">삭제</string>
     <string name="essential">필수</string>
 
+    <string name="udt_info">정보변경</string>
+
+    <!-- 회원 가입 & 수정  -->
+    <string name="email">ID(이메일)</string>
+    <string name="email_hint">이메일을 입력해주세요.</string>
+    <string name="password_hint">8자리 이상 입력해주세요.</string>
+    <string name="arpayo_id">알파요 ID</string>
+    <string name="arpayo_id_hint">알파요 ID(이메일) 입력해주세요.</string>
+    <string name="signup_info">실시간 자동시급계산 앱 알파요를 이용중이신 사장님이시라면,\n핀메뉴 유료 결제에 따른 추가 보상을 알파요 앱으로 받아보실 수 있습니다.\n회원가입 이후에도 알파요 앱을 연동하여 추가 보상을 받으실 수 있습니다.</string>
+    <string name="check_id">중복체크</string>
+    <string name="unable">사용불가</string>
+    <string name="able">사용가능</string>
+    <string name="link">연동</string>
+    <string name="link_before">연동전</string>
+    <string name="link_after">연동됨</string>
+
     <!--  매장 등록 & 수정  -->
     <string name="store_name">매장명</string>
     <string name="store_name_hint">매장명을 입력해주세요.</string>
@@ -32,8 +48,8 @@
     <string name="store_addr_hint">우측 지도 검색을 눌러 주소를 입력해주세요.</string>
     <string name="store_map">지도검색</string>
     <string name="store_addr_info">매장 주소는 매우 중요한 정보입니다.\n매장 주소를 토대로 주변 고객분들께 재방문, 신규방문 이벤트가 진행됩니다.\n매장 주소는 지도에서 정확하게 선택해 주십시요.</string>
-    <string name="udt_info">정보변경</string>
     <string name="store_reg">매장등록</string>
+
     <!--  매장 세부 정보  -->
     <string name="store_detail">세부정보</string>
     <string name="store_tel">매장 전화번호</string>
@@ -74,6 +90,15 @@
     <string name="day">일</string>
     <string name="tilde">~</string>
     <string name="colon">:</string>
+    <string name="zero">00</string>
+
+    <string name="mon">월요일</string>
+    <string name="tue">화요일</string>
+    <string name="wed">수요일</string>
+    <string name="thu">목요일</string>
+    <string name="fri">금요일</string>
+    <string name="sat">토요일</string>
+    <string name="sun">일요일</string>
 
     <!--  매장 대표 사진 -->
     <string name="store_img">매장사진</string>
@@ -103,5 +128,6 @@
     <string name="msg_retry">다시 시도해주세요.</string>
     <string name="msg_no_id">아이디를 입력해주세요.</string>
     <string name="msg_no_pw">비밀번호를 입력해주세요.</string>
+    <string name="msg_complete">완료되었습니다.</string>
     <string name="backpress">뒤로 가기 버튼을 한 번 더 누르시면 종료됩니다.</string>
 </resources>

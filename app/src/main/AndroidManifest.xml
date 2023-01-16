@@ -18,6 +18,9 @@
         android:theme="@style/Theme.PinMenuER"
         tools:targetApi="31">
         <activity
+            android:name=".SignUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".StoreSetImgActivity"
             android:exported="false" />
         <activity

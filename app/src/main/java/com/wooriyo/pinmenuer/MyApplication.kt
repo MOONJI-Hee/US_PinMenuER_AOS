@@ -18,7 +18,7 @@ class MyApplication: Application() {
 
         var osver = 0
         lateinit var appver : String
-        lateinit var model : String
+        lateinit var md : String
     }
 
     override fun onCreate() {
@@ -30,7 +30,7 @@ class MyApplication: Application() {
 
         osver = Build.VERSION.SDK_INT
         appver = applicationContext.packageManager.getPackageInfo(applicationContext.packageName, 0).versionName
-        model = Build.MODEL
+        md = Build.MODEL
 
         val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
 

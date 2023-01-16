@@ -54,6 +54,7 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:gravity="center_vertical">
                 <TextView
                     style="@style/text20"
@@ -61,40 +62,522 @@
                     android:layout_weight="1"
                     android:text="@string/everyday" />
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        style="@style/tvTime" />
-
+                    style="@style/btnTime">
                     <TextView
                         style="@style/text20"
                         android:text="@string/colon"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/start_time"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
-
                     <EditText
-                        android:id="@+id/start_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/hinttext"
+                        android:id="@+id/open_hour"
                         android:layout_marginStart="16dp"
-                        android:background="null"
-                        android:hint="00"
-                        android:text="88"
-                        android:textSize="20sp"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/hint"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/open_min"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     style="@style/text20"
-                    android:text="~" />
+                    android:text="@string/tilde" />
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/close_hour"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/close_min"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="66dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center_vertical">
+                <TextView
+                    style="@style/text20"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/store_diff_hour" />
+                <CheckBox style="@style/toggle"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <CheckBox
+                    style="@style/check"
+                    android:text="@string/mon" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/open_hour_mon"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/open_min_mon"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    style="@style/text20"
+                    android:text="@string/tilde" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/close_hour_mon"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/close_min_mon"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="12dp"
+                android:gravity="center_vertical">
+                <CheckBox
+                    style="@style/check"
+                    android:text="@string/tue" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/open_hour_tue"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/open_min_tue"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    style="@style/text20"
+                    android:text="@string/tilde" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/close_hour_tue"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/close_min_tue"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <CheckBox
+                    style="@style/check"
+                    android:text="@string/wed" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/open_hour_wed"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/open_min_wed"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    style="@style/text20"
+                    android:text="@string/tilde" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/close_hour_wed"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/close_min_wed"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="12dp"
+                android:gravity="center_vertical">
+                <CheckBox
+                    style="@style/check"
+                    android:text="@string/thu" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/open_hour_thu"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/open_min_thu"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    style="@style/text20"
+                    android:text="@string/tilde" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/close_hour_thu"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/close_min_thu"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <CheckBox
+                    style="@style/check"
+                    android:text="@string/fri" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/open_hour_fri"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/open_min_fri"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    style="@style/text20"
+                    android:text="@string/tilde" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/close_hour_fri"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/close_min_fri"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="12dp"
+                android:gravity="center_vertical">
+                <CheckBox
+                    style="@style/check"
+                    android:text="@string/sat" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/open_hour_sat"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/open_min_sat"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    style="@style/text20"
+                    android:text="@string/tilde" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/close_hour_sat"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/close_min_sat"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <CheckBox
+                    style="@style/check"
+                    android:text="@string/sun" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/open_hour_sun"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/open_min_sun"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    style="@style/text20"
+                    android:text="@string/tilde" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/close_hour_sun"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/close_min_sun"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </LinearLayout>
         <View
@@ -103,11 +586,585 @@
             android:layout_marginHorizontal="45dp"
             android:background="#F9F9F9"/>
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <TextView
+                    style="@style/text20"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/store_same_break" />
+                <CheckBox style="@style/toggle"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical">
+                <TextView
+                    style="@style/text20"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/everyday" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_start_hour"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_start_min"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    style="@style/text20"
+                    android:text="@string/tilde" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_end_hour"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_end_min"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="66dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center_vertical">
+                <TextView
+                    style="@style/text20"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/store_diff_break" />
+                <CheckBox style="@style/toggle"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <CheckBox
+                    style="@style/check"
+                    android:text="@string/mon" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_start_hour_mon"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_start_min_mon"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    style="@style/text20"
+                    android:text="@string/tilde" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_end_hour_mon"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_end_min_mon"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="12dp"
+                android:gravity="center_vertical">
+                <CheckBox
+                    style="@style/check"
+                    android:text="@string/tue" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_start_hour_tue"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_start_min_tue"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    style="@style/text20"
+                    android:text="@string/tilde" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_end_hour_tue"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_end_min_tue"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <CheckBox
+                    style="@style/check"
+                    android:text="@string/wed" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_start_hour_wed"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_start_min_wed"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    style="@style/text20"
+                    android:text="@string/tilde" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_end_hour_wed"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_end_min_wed"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="12dp"
+                android:gravity="center_vertical">
+                <CheckBox
+                    style="@style/check"
+                    android:text="@string/thu" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_start_hour_thu"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_end_hour_thu"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    style="@style/text20"
+                    android:text="@string/tilde" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_end_hour_thu"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_end_min_thu"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <CheckBox
+                    style="@style/check"
+                    android:text="@string/fri" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_start_hour_fri"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_start_min_fri"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    style="@style/text20"
+                    android:text="@string/tilde" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_end_hour_fri"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_end_min_fri"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="12dp"
+                android:gravity="center_vertical">
+                <CheckBox
+                    style="@style/check"
+                    android:text="@string/sat" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_start_hour_sat"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_start_min_sat"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    style="@style/text20"
+                    android:text="@string/tilde" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_end_hour_sat"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_end_min_sat"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <CheckBox
+                    style="@style/check"
+                    android:text="@string/sun" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_start_hour_sun"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_start_min_sun"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    style="@style/text20"
+                    android:text="@string/tilde" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/btnTime">
+                    <TextView
+                        style="@style/text20"
+                        android:text="@string/colon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_end_hour_sun"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <EditText
+                        style="@style/hinttext"
+                        android:id="@+id/brk_end_min_sun"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </LinearLayout>
+
         <View
             android:layout_width="2dp"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="45dp"
             android:background="#F9F9F9"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <TextView
+                    style="@style/text20"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/store_same_holiday" />
+                <CheckBox style="@style/toggle"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+
+            </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 
