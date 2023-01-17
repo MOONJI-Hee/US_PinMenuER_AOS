@@ -79,7 +79,17 @@ interface Api {
         @Query("idx") storeidx: Int
     ): Call<ResultDTO>
 
-
+    //매장 세부정보 설정
+    @GET("m/udtstoredetail.php")
+    fun udtStoreDetail (
+        @Query("useridx") useridx: Int,
+        @Query("idx") storeidx: Int,
+        @Query("tel") tel : String,
+        @Query("sns") sns : String,
+        @Query("delivery") delivery : String,
+        @Query("parking") parking : String,
+        @Query("parkingadr") parkingAddr : String
+    ): Call<ResultDTO>
 
 //    //매장 불러오기
 //    @FormUrlEncoded

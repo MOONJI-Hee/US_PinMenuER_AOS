@@ -24,8 +24,9 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
 
     val TAG = "StoreSetActivity"
 
-    var type : Int = 2            // 1 : 등록, 2 : 수정
+    var type : Int = 0            // 1 : 등록, 2 : 수정
     var useridx : Int = 11
+    var storeidx : Int = 0
     var storeNm : String = ""
     var storeZip : String = "" // 우편번호
 
@@ -53,6 +54,7 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
 
         type = intent.getIntExtra("type", type)
         if(type == 2) {
+            storeidx = intent.getIntExtra("storeidx", storeidx)
             binding.save.visibility = View.GONE
             binding.llUdt.visibility = View.VISIBLE
         }
@@ -62,6 +64,8 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
 
         binding.back.setOnClickListener(this)
         binding.save.setOnClickListener(this)
+        binding.delete.setOnClickListener(this)
+        binding.modify.setOnClickListener(this)
         binding.btnDetail.setOnClickListener(this)
         binding.btnHour.setOnClickListener(this)
         binding.btnImg.setOnClickListener(this)
@@ -76,6 +80,8 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
         when(p0) {
             binding.back -> finish()
             binding.save -> save()
+            binding.delete -> delete()
+            binding.modify -> modify()
             binding.btnDetail -> startActivity(Intent(this@StoreSetActivity, StoreSetDetailActivity::class.java))
             binding.btnHour -> startActivity(Intent(this@StoreSetActivity, StoreSetHourActivity::class.java))
             binding.btnImg -> startActivity(Intent(this@StoreSetActivity, StoreSetImgActivity::class.java))
@@ -84,8 +90,8 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
 
     fun save() {
         storeNm = binding.etName.text.toString()
-        var storeAddr =binding.etAddr.text.toString()
-        storeZip = "54969"
+        val storeAddr =binding.etAddr.text.toString()
+        storeZip = "00000"
 
         if(storeNm.isEmpty()) {
             Toast.makeText(this@StoreSetActivity, R.string.store_name_hint, Toast.LENGTH_SHORT).show()
@@ -99,7 +105,8 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
                         val resultDTO = response.body()
                         if(resultDTO != null) {
                             if(resultDTO.status == 1) {
-                                Log.d(TAG, "성공했당 뭐하지 이제 > $resultDTO")
+                                Toast.makeText(this@StoreSetActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                                finish()
                             }else {
                                 Toast.makeText(this@StoreSetActivity, resultDTO.msg, Toast.LENGTH_SHORT).show()
                             }
@@ -108,6 +115,62 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
                     override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
                         Toast.makeText(this@StoreSetActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                         Log.d(TAG, "매장 등록 / 수정 실패 > $t")
+                    }
+                })
+        }
+    }
+
+    private fun delete() {
+        ApiClient.service.delStore(useridx, storeidx)
+            .enqueue(object : Callback<ResultDTO>{
+                override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                    Log.d(TAG, "매장 삭제 url : $response")
+                    val resultDTO = response.body()
+                    if(resultDTO != null) {
+                        if(resultDTO.status == 1) {
+                            Toast.makeText(this@StoreSetActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                            finish()
+                        }else {
+                            Toast.makeText(this@StoreSetActivity, resultDTO.msg, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                    Toast.makeText(this@StoreSetActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "매장 삭제 실패 > $t")
+                }
+            })
+    }
+
+    private fun modify() {
+        storeNm = binding.etName.text.toString()
+        val storeAddr =binding.etAddr.text.toString()
+        storeZip = "12345"
+
+        if(storeNm.isEmpty()) {
+            Toast.makeText(this@StoreSetActivity, R.string.store_name_hint, Toast.LENGTH_SHORT).show()
+        }else if (storeAddr.isEmpty()) {
+            Toast.makeText(this@StoreSetActivity, R.string.msg_no_addr, Toast.LENGTH_SHORT).show()
+        } else {
+            ApiClient.service.udtStore(useridx, storeidx, storeNm, storeAddr, storeZip)
+                .enqueue(object : Callback<ResultDTO>{
+                    override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                        Log.d(TAG, "매장 수정 url : $response")
+                        val resultDTO = response.body()
+                        if(resultDTO != null) {
+                            if(resultDTO.status == 1) {
+                                Toast.makeText(this@StoreSetActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                                finish()
+                            }else {
+                                Toast.makeText(this@StoreSetActivity, resultDTO.msg, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                        Toast.makeText(this@StoreSetActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                        Log.d(TAG, "매장 수정 실패 > $t")
                     }
                 })
         }

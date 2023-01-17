@@ -38,8 +38,8 @@
         style="@style/edittext_main"
         android:id="@+id/et_tel"
         android:layout_marginTop="80dp"
-        android:hint="@string/store_name_hint"
-        android:inputType="text"
+        android:hint="@string/store_tel_hint"
+        android:inputType="phone"
         app:layout_constraintTop_toBottomOf="@+id/title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -93,6 +93,7 @@
         app:layout_constraintEnd_toEndOf="@+id/et_insta"
         app:layout_constraintTop_toBottomOf="@+id/et_insta">
         <RadioButton
+            android:id="@+id/delivery_y"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/store_delivery_y"
@@ -101,6 +102,7 @@
             android:drawableStart="@drawable/selector_check"
             android:drawablePadding="6dp" />
         <RadioButton
+            android:id="@+id/delivery_n"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
@@ -129,6 +131,7 @@
         app:layout_constraintEnd_toEndOf="@+id/group_delivery"
         app:layout_constraintTop_toBottomOf="@+id/group_delivery">
         <RadioButton
+            android:id="@+id/parking_y"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/store_parking_y"
@@ -137,6 +140,7 @@
             android:drawableStart="@drawable/selector_check"
             android:drawablePadding="6dp"/>
         <RadioButton
+            android:id="@+id/parking_n"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
@@ -160,7 +164,7 @@
         android:id="@+id/et_parking_addr"
         android:layout_marginTop="32dp"
         android:hint="@string/store_addr_hint"
-        android:inputType="text"
+        android:enabled="false"
         app:layout_constraintTop_toBottomOf="@+id/group_parking"
         app:layout_constraintStart_toStartOf="@+id/group_parking"
         app:layout_constraintEnd_toEndOf="@+id/group_parking"/>

@@ -55,6 +55,7 @@
     <string name="store_tel">매장 전화번호</string>
     <string name="store_sns">SNS 계정 정보</string>
     <string name="store_pd">배달/주차 정보</string>
+    <string name="store_tel_hint">예) 1688-2315</string>
     <string name="store_insta">인스타그램 계정</string>
     <string name="at"><![CDATA[@]]></string>
     <string name="store_insta_hint">계정을 입력해주세요</string>
