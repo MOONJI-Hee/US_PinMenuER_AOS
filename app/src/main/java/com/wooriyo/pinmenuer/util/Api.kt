@@ -1,7 +1,9 @@
 package com.wooriyo.pinmenuer.util
 
+import com.wooriyo.pinmenuer.db.entity.Store
 import com.wooriyo.pinmenuer.model.MemberDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -89,6 +91,14 @@ interface Api {
         @Query("delivery") delivery : String,
         @Query("parking") parking : String,
         @Query("parkingadr") parkingAddr : String
+    ): Call<ResultDTO>
+
+    @Multipart
+    @POST("m/uploadstore.php")
+    fun regStoreImg (
+        @Part("useridx") useridx: Int,
+        @Part("storeidx") storeidx: Int,
+        @Part img: MultipartBody.Part?,
     ): Call<ResultDTO>
 
 //    //매장 불러오기
