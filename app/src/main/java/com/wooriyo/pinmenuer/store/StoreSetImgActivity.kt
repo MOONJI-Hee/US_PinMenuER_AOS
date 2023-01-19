@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -20,6 +21,16 @@ class StoreSetImgActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var binding : ActivityStoreSetImgBinding
 
     val REQUEST_R_STORAGE = 1
+
+
+    //registerForActivityResult
+
+    val resultLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
+
+
+    }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,11 +61,11 @@ class StoreSetImgActivity : AppCompatActivity(), View.OnClickListener {
 
     // 외부저장소 권한 확인
     fun checkPms() {
-        if(MyApplication.osver >= Build.VERSION_CODES.Q) {
-
-        }else {
-
-        }
+//        if(MyApplication.osver >= Build.VERSION_CODES.Q) {
+//
+//        }else {
+//
+//        }
 
         when {
             ContextCompat.checkSelfPermission(this@StoreSetImgActivity, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED -> getImage()

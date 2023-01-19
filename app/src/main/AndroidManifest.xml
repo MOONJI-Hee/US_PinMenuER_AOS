@@ -40,7 +40,7 @@
             android:name=".store.StoreSetDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".store.StoreSetHourActivity"
+            android:name=".store.StoreSetTimeActivity"
             android:exported="false" />
         <activity
             android:name=".store.StoreSetImgActivity"

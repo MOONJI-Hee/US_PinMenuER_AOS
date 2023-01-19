@@ -2,7 +2,6 @@ package com.wooriyo.pinmenuer.store
 
 import android.content.Intent
 import android.graphics.Rect
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
@@ -83,7 +82,7 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
             binding.delete -> delete()
             binding.modify -> modify()
             binding.btnDetail -> startActivity(Intent(this@StoreSetActivity, StoreSetDetailActivity::class.java))
-            binding.btnHour -> startActivity(Intent(this@StoreSetActivity, StoreSetHourActivity::class.java))
+            binding.btnHour -> startActivity(Intent(this@StoreSetActivity, StoreSetTimeActivity::class.java))
             binding.btnImg -> startActivity(Intent(this@StoreSetActivity, StoreSetImgActivity::class.java))
         }
     }

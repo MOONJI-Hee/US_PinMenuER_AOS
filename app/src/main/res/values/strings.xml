@@ -5,7 +5,7 @@
     <string name="id">아이디</string>
     <string name="password">비밀번호</string>
 
-    <string name="signup">회원가입</string>
+    <string name="signup">회 원 가 입</string>
 
     <string name="won">원</string>
     <string name="gea">개</string>
@@ -18,11 +18,11 @@
     <string name="tableno">테이블 번호</string>
     <string name="tablepass">테이블 비밀번호</string>
 
-    <string name="confirm">확인</string>
-    <string name="cancel">취소</string>
+    <string name="confirm">확  인</string>
+    <string name="cancel">취  소</string>
     <string name="save">저장</string>
 
-    <string name="delete">삭제</string>
+    <string name="delete">삭  제</string>
     <string name="essential">필수</string>
 
     <string name="udt_info">정보변경</string>
@@ -93,13 +93,21 @@
     <string name="colon">:</string>
     <string name="zero">00</string>
 
-    <string name="mon">월요일</string>
-    <string name="tue">화요일</string>
-    <string name="wed">수요일</string>
-    <string name="thu">목요일</string>
-    <string name="fri">금요일</string>
-    <string name="sat">토요일</string>
-    <string name="sun">일요일</string>
+    <string name="monday">월요일</string>
+    <string name="tuesday">화요일</string>
+    <string name="wednesday">수요일</string>
+    <string name="thursday">목요일</string>
+    <string name="friday">금요일</string>
+    <string name="saturday">토요일</string>
+    <string name="sunday">일요일</string>
+
+    <string name="mon">월</string>
+    <string name="tue">화</string>
+    <string name="wed">수</string>
+    <string name="thu">목</string>
+    <string name="fri">금</string>
+    <string name="sat">토</string>
+    <string name="sun">일</string>
 
     <!--  매장 대표 사진 -->
     <string name="store_img">매장사진</string>

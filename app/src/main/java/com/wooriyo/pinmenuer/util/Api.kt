@@ -4,6 +4,7 @@ import com.wooriyo.pinmenuer.db.entity.Store
 import com.wooriyo.pinmenuer.model.MemberDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import okhttp3.MultipartBody
+import org.json.JSONArray
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -93,12 +94,52 @@ interface Api {
         @Query("parkingadr") parkingAddr : String
     ): Call<ResultDTO>
 
+    // 매장 대표 이미지 설정
     @Multipart
     @POST("m/uploadstore.php")
-    fun regStoreImg (
+    fun udtStoreImg (
         @Part("useridx") useridx: Int,
         @Part("storeidx") storeidx: Int,
         @Part img: MultipartBody.Part?,
+    ): Call<ResultDTO>
+
+    // 매장 영업시간 설정
+    @FormUrlEncoded
+    @POST("m/udtTimeDetail")
+    fun udtStoreTime (
+        @Field("useridx") useridx: Int,
+        @Field("idx") storeidx: Int,
+        @Field("JSONW") JSONW : String,
+        @Field("JSONB") JSONB : String,
+        @Field("JSONH") JSONH : String,
+    ): Call<ResultDTO>
+
+    // 매장 특별 휴일 저장
+    @FormUrlEncoded
+    @POST("m/ins_holiday.php")
+    fun insHoliday (
+        @Field("useridx") useridx: Int,
+        @Field("idx") storeidx: Int,
+        @Field("title") title : String,
+        @Field("month") month : String,
+        @Field("day") day : String
+    ): Call<ResultDTO>
+
+    // 매장 특별 휴일 수정
+    @GET("m/udt_holiday.php")
+    fun udtHoliday (
+        @Query("useridx") useridx: Int,
+        @Query("idx") holidayidx : Int,
+        @Query("title") title : String,
+        @Query("month") month : String,
+        @Query("day") day : String
+    ): Call<ResultDTO>
+
+    // 매장 특별 휴일 삭제
+    @GET("m/del_holiday.php")
+    fun delHoliday (
+        @Query("useridx") useridx: Int,
+        @Query("idx") holidayidx : Int
     ): Call<ResultDTO>
 
 //    //매장 불러오기
