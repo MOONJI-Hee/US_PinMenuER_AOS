@@ -4,88 +4,92 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="800dp"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_r11w">
-
+        <TextView
+            style="@style/text20b"
+            android:id="@+id/title"
+            android:text="@string/store_holiday_set"
+            android:layout_marginTop="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
         <TextView
             style="@style/text18"
             android:layout_marginEnd="16dp"
-            android:text="@string/store_name"
+            android:text="@string/store_holiday_name"
             app:layout_constraintEnd_toStartOf="@+id/et_name"
             app:layout_constraintTop_toTopOf="@+id/et_name"
             app:layout_constraintBottom_toBottomOf="@+id/et_name" />
-
         <EditText
             style="@style/edittext_main"
             android:id="@+id/et_name"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="32dp"
             android:hint="@string/store_name_hint"
             android:inputType="text"
+            app:layout_constraintTop_toBottomOf="@+id/title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
-
-        <TextView
-            style="@style/essential"
-            android:layout_marginStart="16dp"
-            app:layout_constraintStart_toEndOf="@+id/et_name"
-            app:layout_constraintTop_toTopOf="@+id/et_name"
-            app:layout_constraintBottom_toBottomOf="@+id/et_name"/>
-
         <TextView
             style="@style/text18"
             android:layout_marginEnd="16dp"
-            android:text="@string/store_addr"
-            app:layout_constraintEnd_toStartOf="@+id/et_addr"
-            app:layout_constraintTop_toTopOf="@+id/et_addr"
-            app:layout_constraintBottom_toBottomOf="@+id/et_addr" />
-
+            android:text="@string/date"
+            app:layout_constraintEnd_toStartOf="@+id/et_month"
+            app:layout_constraintTop_toTopOf="@+id/et_month"
+            app:layout_constraintBottom_toBottomOf="@+id/et_month" />
         <EditText
-            style="@style/edittext_main"
-            android:id="@+id/et_addr"
+            style="@style/edittext"
+            android:id="@+id/et_month"
+            android:layout_width="210dp"
             android:layout_marginTop="32dp"
-            android:hint="@string/store_addr_hint"
-            android:enabled="false"
+            android:hint="@string/everymonth"
+            android:gravity="center"
             app:layout_constraintTop_toBottomOf="@+id/et_name"
-            app:layout_constraintStart_toStartOf="@+id/et_name"
-            app:layout_constraintEnd_toEndOf="@+id/et_name"/>
-
+            app:layout_constraintStart_toStartOf="@+id/et_name" />
         <TextView
-            style="@style/btn_small"
-            android:id="@+id/btn_map"
-            android:layout_width="98dp"
+            style="@style/text18"
             android:layout_marginStart="10dp"
-            android:text="@string/store_map"
-            app:layout_constraintTop_toTopOf="@+id/et_addr"
-            app:layout_constraintBottom_toBottomOf="@+id/et_addr"
-            app:layout_constraintStart_toEndOf="@+id/et_addr" />
-
+            android:text="@string/month"
+            app:layout_constraintTop_toTopOf="@+id/et_month"
+            app:layout_constraintBottom_toBottomOf="@+id/et_month"
+            app:layout_constraintStart_toEndOf="@+id/et_month"/>
+        <EditText
+            style="@style/edittext"
+            android:id="@+id/et_day"
+            android:layout_width="210dp"
+            android:layout_marginEnd="10dp"
+            android:hint="@string/zero"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="@+id/et_month"
+            app:layout_constraintBottom_toBottomOf="@+id/et_month"
+            app:layout_constraintEnd_toStartOf="@+id/tv_day"/>
         <TextView
-            style="@style/essential"
-            android:layout_marginStart="16dp"
-            app:layout_constraintStart_toEndOf="@+id/btn_map"
-            app:layout_constraintTop_toTopOf="@+id/btn_map"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_map"/>
-
+            style="@style/text18"
+            android:id="@+id/tv_day"
+            android:text="@string/day"
+            app:layout_constraintEnd_toEndOf="@+id/et_name"
+            app:layout_constraintTop_toTopOf="@+id/et_day"
+            app:layout_constraintBottom_toBottomOf="@+id/et_day" />
         <TextView
             style="@style/subtext"
             android:id="@+id/holiday_info"
             android:lineSpacingExtra="5dp"
             android:layout_marginTop="32dp"
-            app:layout_constraintStart_toStartOf="@+id/et_addr"
-            app:layout_constraintTop_toBottomOf="@+id/et_addr"/>
-
+            android:text="@string/store_holiday_set_info"
+            app:layout_constraintStart_toStartOf="@+id/et_month"
+            app:layout_constraintTop_toBottomOf="@+id/et_month"/>
         <LinearLayout
             android:orientation="horizontal"
             android:id="@+id/ll_udt"
             android:layout_width="500dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
+            android:layout_marginVertical="40dp"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/holiday_info"
             app:layout_constraintBottom_toBottomOf="parent">
             <TextView
                 style="@style/btn_cancel"
@@ -101,18 +105,16 @@
                 android:layout_weight="1"
                 android:text="@string/save"/>
         </LinearLayout>
-
         <TextView
             style="@style/btn"
             android:id="@+id/save"
             android:layout_width="500dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginVertical="40dp"
             android:text="@string/confirm"
             android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
+            app:layout_constraintTop_toBottomOf="@+id/holiday_info"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </LinearLayout>
