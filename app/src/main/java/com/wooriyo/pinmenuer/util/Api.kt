@@ -9,15 +9,16 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface Api {
-    @GET("checkmbr.php")
+    @FormUrlEncoded
+    @POST("checkmbr.php")
     fun checkMbr(
-        @Query("userid") userid: String,
-        @Query("pass") pass: String,
-        @Query("push_token") push_token: String,
-        @Query("os") os: String,
-        @Query("osvs") osvs: Int,
-        @Query("appvs") appvs: String,
-        @Query("md") md: String
+        @Field("userid") userid: String,
+        @Field("pass") pass: String,
+        @Field("push_token") push_token: String,
+        @Field("os") os: String,
+        @Field("osvs") osvs: Int,
+        @Field("appvs") appvs: String,
+        @Field("md") md: String
     ): Call<MemberDTO>
 
     //회원가입

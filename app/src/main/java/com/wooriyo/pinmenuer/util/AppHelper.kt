@@ -2,8 +2,12 @@ package com.wooriyo.pinmenuer.util
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Rect
 import android.os.Build
+import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity.INPUT_METHOD_SERVICE
 import java.text.DecimalFormat
 
 // 자주 쓰는 메소드 모음 - 문지희 (2022.10 갱신)
@@ -21,6 +25,38 @@ class AppHelper {
                         or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
             }
         }
+
+        // 바깥 클릭했을 때 키보드 내리기
+        fun hideKeyboard(activity: Activity, ev: MotionEvent) {
+            val focusView = activity.currentFocus
+            if (focusView != null) {
+                val rect = Rect()
+                focusView.getGlobalVisibleRect(rect)
+                val x = ev.x.toInt()
+                val y = ev.y.toInt()
+                if (!rect.contains(x, y)) {
+                    val imm = activity.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(focusView.windowToken, 0)
+                    focusView.clearFocus()
+                }
+            }
+        }
+
+        //    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        //        val focusView = this.currentFocus
+        //        if (focusView != null) {
+        //            val rect = Rect()
+        //            focusView.getGlobalVisibleRect(rect)
+        //            val x = ev.x.toInt()
+        //            val y = ev.y.toInt()
+        //            if (!rect.contains(x, y)) {
+        //                val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        //                imm.hideSoftInputFromWindow(focusView.windowToken, 0)
+        //                focusView.clearFocus()
+        //            }
+        //        }
+        //        return super.dispatchTouchEvent(ev)
+        //    }
 
         val dec = DecimalFormat("#,##0")
 

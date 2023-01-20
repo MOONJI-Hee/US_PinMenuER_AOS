@@ -5,7 +5,7 @@
     <string name="id">아이디</string>
     <string name="password">비밀번호</string>
 
-    <string name="signup">회 원 가 입</string>
+    <string name="signup">회원가입</string>
 
     <string name="won">원</string>
     <string name="gea">개</string>
@@ -18,11 +18,11 @@
     <string name="tableno">테이블 번호</string>
     <string name="tablepass">테이블 비밀번호</string>
 
-    <string name="confirm">확  인</string>
-    <string name="cancel">취  소</string>
-    <string name="save">저장</string>
+    <string name="confirm">확&#160;&#160;인</string>
+    <string name="cancel">취&#160;&#160;소</string>
+    <string name="save">저&#160;&#160;장</string>
 
-    <string name="delete">삭  제</string>
+    <string name="delete">삭&#160;&#160;제</string>
     <string name="essential">필수</string>
 
     <string name="udt_info">정보변경</string>

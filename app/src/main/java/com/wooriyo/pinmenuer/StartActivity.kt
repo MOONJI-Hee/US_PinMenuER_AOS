@@ -42,7 +42,7 @@ class StartActivity : AppCompatActivity() {
         val mbrDTO = MyApplication.pref.getMbrDTO()
 
         if (mbrDTO == null) {
-            startActivity(Intent(this@StartActivity, StoreSetActivity::class.java).also {
+            startActivity(Intent(this@StartActivity, LoginActivity::class.java).also {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
