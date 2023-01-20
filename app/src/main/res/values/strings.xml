@@ -78,12 +78,14 @@
     <string name="store_same_holiday">매주 동일한 휴일</string>
     <string name="store_special_holiday">특별 휴일 입력</string>
     <string name="everyday">매일</string>
+    <string name="everymonth">매월</string>
     <string name="store_hour_info">새벽 6시 마감은 30:00으로 변경</string>
 
     <string name="store_hour_set">영업시간 설정</string>
     <string name="store_break_set">브레이크타임 설정</string>
     <string name="store_holiday_set">휴일 설정</string>
     <string name="store_holiday_name">휴일 명칭</string>
+    <string name="store_holiday_name_hint">명칭을 입력해주세요.</string>
     <string name="store_holiday_set_info">‘월’을 입력하지 않으면 ‘매월’로 표시합니다.</string>
 
     <string name="date">날짜</string>
