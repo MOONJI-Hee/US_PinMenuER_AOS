@@ -116,14 +116,23 @@ interface Api {
     ): Call<ResultDTO>
 
     // 매장 특별 휴일 저장
-    @FormUrlEncoded
-    @POST("m/ins_holiday.php")
+//    @FormUrlEncoded
+//    @POST("m/ins_holiday.php")
+//    fun insHoliday (
+//        @Field("useridx") useridx: Int,
+//        @Field("idx") storeidx: Int,
+//        @Field("title") title : String,
+//        @Field("month") month : String,
+//        @Field("day") day : String
+//    ): Call<ResultDTO>
+
+    @GET("m/ins_holiday.php")
     fun insHoliday (
-        @Field("useridx") useridx: Int,
-        @Field("idx") storeidx: Int,
-        @Field("title") title : String,
-        @Field("month") month : String,
-        @Field("day") day : String
+        @Query("useridx") useridx: Int,
+        @Query("idx") storeidx: Int,
+        @Query("title") title : String,
+        @Query("month") month : String,
+        @Query("day") day : String
     ): Call<ResultDTO>
 
     // 매장 특별 휴일 수정

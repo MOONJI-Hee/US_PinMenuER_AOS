@@ -7,14 +7,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
-    val gson = GsonBuilder().setLenient().create()
-
     val service: Api = initService()
 
     private fun initService() : Api =
         Retrofit.Builder()
             .baseUrl(AppProperties.SERVER)
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(Api::class.java)
 }

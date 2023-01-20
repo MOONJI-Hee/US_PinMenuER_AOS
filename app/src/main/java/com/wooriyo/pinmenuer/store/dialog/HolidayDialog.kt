@@ -12,6 +12,7 @@ import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.DialogHolidayBinding
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.util.ApiClient
+import com.wooriyo.pinmenuer.util.Encoder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -63,6 +64,7 @@ class HolidayDialog(context: Context, val type : Int, val useridx : Int, val idx
         val day = "22"
 
         Log.d(TAG, "title : $title, month : $month, day : $day")
+        Log.d(TAG, "title 인코딩 했을 때 뭔데 >> ${Encoder.encodeUTF8(title)}")
 
         ApiClient.service.insHoliday(useridx, storeidx, title, month, day)
             .enqueue(object : Callback<ResultDTO> {

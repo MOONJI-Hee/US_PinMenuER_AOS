@@ -35,6 +35,7 @@ class StoreSetTimeActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityStoreSetTimeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.back.setOnClickListener(this)
         binding.save.setOnClickListener(this)
         binding.addHoliday.setOnClickListener(this)
     }
@@ -46,6 +47,7 @@ class StoreSetTimeActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(p0: View?) {
         when(p0) {
+            binding.back -> finish()
             binding.save -> save()
             binding.addHoliday -> HolidayDialog(this@StoreSetTimeActivity, 1, useridx, storeidx).show()
         }

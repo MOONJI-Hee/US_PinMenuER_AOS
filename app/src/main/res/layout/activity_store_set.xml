@@ -107,6 +107,7 @@
             style="@style/btn"
             android:id="@+id/btn_detail"
             android:layout_width="match_parent"
+            android:enabled="false"
             android:text="@string/store_detail" />
         <TextView
             style="@style/subtext"
