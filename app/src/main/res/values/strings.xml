@@ -144,6 +144,7 @@
     <string name="msg_no_id">아이디를 입력해주세요.</string>
     <string name="msg_no_pw">비밀번호를 입력해주세요.</string>
     <string name="msg_no_addr">주소를 입력해주세요.</string>
+    <string name="msg_no_img">이미지를 등록해주세요.</string>
     <string name="msg_complete">완료되었습니다.</string>
     <string name="backpress">뒤로 가기 버튼을 한 번 더 누르시면 종료됩니다.</string>
 </resources>

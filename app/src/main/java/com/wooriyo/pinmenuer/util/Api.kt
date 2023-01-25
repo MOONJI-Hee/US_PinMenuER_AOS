@@ -100,7 +100,7 @@ interface Api {
     @POST("m/uploadstore.php")
     fun udtStoreImg (
         @Part("useridx") useridx: Int,
-        @Part("storeidx") storeidx: Int,
+        @Part("idx") storeidx: Int,
         @Part img: MultipartBody.Part?,
     ): Call<ResultDTO>
 
