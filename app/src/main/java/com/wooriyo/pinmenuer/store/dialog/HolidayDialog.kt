@@ -1,5 +1,6 @@
 package com.wooriyo.pinmenuer.store.dialog
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
@@ -12,6 +13,7 @@ import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.DialogHolidayBinding
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.util.ApiClient
+import com.wooriyo.pinmenuer.util.AppHelper
 import com.wooriyo.pinmenuer.util.Encoder
 import retrofit2.Call
 import retrofit2.Callback
@@ -43,6 +45,7 @@ class HolidayDialog(context: Context, val type : Int, val useridx : Int, val idx
             }
         }
 
+        binding.close.setOnClickListener(this)
         binding.save.setOnClickListener(this)
         binding.delete.setOnClickListener(this)
         binding.modify.setOnClickListener(this)
@@ -51,6 +54,7 @@ class HolidayDialog(context: Context, val type : Int, val useridx : Int, val idx
     override fun onClick(p0: View?) {
         binding.run {
             when(p0) {
+                close -> dismiss()
                 save -> save()
                 delete -> delete()
                 modify -> modify()

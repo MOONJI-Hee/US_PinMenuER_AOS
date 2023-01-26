@@ -23,8 +23,8 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
 
     val TAG = "StoreSetActivity"
 
-    var type : Int = 0            // 1 : 등록, 2 : 수정
-    var useridx : Int = 11
+    var type : Int = 2            // 1 : 등록, 2 : 수정
+    var useridx : Int = 0
     var storeidx : Int = 0
     var storeNm : String = ""
     var storeZip : String = "" // 우편번호
@@ -51,15 +51,19 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityStoreSetBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //TODO useridx 받아오기
+        //TODO storeidx 받아오기
+
         type = intent.getIntExtra("type", type)
         if(type == 2) {
             storeidx = intent.getIntExtra("storeidx", storeidx)
             binding.save.visibility = View.GONE
             binding.llUdt.visibility = View.VISIBLE
+        }else if(type == 1) {
+            binding.btnDetail.isEnabled = false
+            binding.btnHour.isEnabled = false
+            binding.btnImg.isEnabled = false
         }
-
-        //TODO useridx 받아오기
-        binding.etAddr.setText( "전주시 완산구 홍산남로 75 6층")
 
         binding.back.setOnClickListener(this)
         binding.save.setOnClickListener(this)
@@ -81,9 +85,24 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
             binding.save -> save()
             binding.delete -> delete()
             binding.modify -> modify()
-            binding.btnDetail -> startActivity(Intent(this@StoreSetActivity, StoreSetDetailActivity::class.java))
-            binding.btnHour -> startActivity(Intent(this@StoreSetActivity, StoreSetTimeActivity::class.java))
-            binding.btnImg -> startActivity(Intent(this@StoreSetActivity, StoreSetImgActivity::class.java))
+            binding.btnDetail -> {
+                if(type == 2)
+                    startActivity(Intent(this@StoreSetActivity, StoreSetDetailActivity::class.java))
+                else if (type == 1)
+                    Toast.makeText(this@StoreSetActivity, R.string.msg_reg_store_first, Toast.LENGTH_SHORT).show()
+            }
+            binding.btnHour -> {
+                if(type == 2)
+                    startActivity(Intent(this@StoreSetActivity, StoreSetTimeActivity::class.java))
+                else if (type == 1)
+                    Toast.makeText(this@StoreSetActivity, R.string.msg_reg_store_first, Toast.LENGTH_SHORT).show()
+            }
+            binding.btnImg -> {
+                if(type == 2)
+                    startActivity(Intent(this@StoreSetActivity, StoreSetImgActivity::class.java))
+                else if (type == 1)
+                    Toast.makeText(this@StoreSetActivity, R.string.msg_reg_store_first, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -105,7 +124,9 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
                         if(resultDTO != null) {
                             if(resultDTO.status == 1) {
                                 Toast.makeText(this@StoreSetActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                                intent.putExtra("type", 2)
                                 finish()
+                                startActivity(intent)
                             }else {
                                 Toast.makeText(this@StoreSetActivity, resultDTO.msg, Toast.LENGTH_SHORT).show()
                             }

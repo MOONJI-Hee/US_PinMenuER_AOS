@@ -6,4 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".store.StoreListActivity">
 
+    <TextView
+        style="@style/title"
+        android:id="@+id/title"
+        android:text="@string/title_reg_store"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <LinearLayout
+        android:id="@+id/back"
+        android:layout_width="72dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_title_back" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/udtMbr"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:paddingHorizontal="20dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            style="@style/text20"
+            android:text="@string/mbr_info"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:background="@drawable/img_arpayo"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

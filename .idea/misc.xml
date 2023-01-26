@@ -17,6 +17,7 @@
         <entry key="app/src/main/res/drawable/selector_btn.xml" value="0.487" />
         <entry key="app/src/main/res/drawable/selector_check.xml" value="0.175" />
         <entry key="app/src/main/res/drawable/selector_circle.xml" value="0.487" />
+        <entry key="app/src/main/res/drawable/selector_text.xml" value="0.568" />
         <entry key="app/src/main/res/drawable/selector_toggle.xml" value="0.3015" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.24666666666666667" />
@@ -27,8 +28,9 @@
         <entry key="app/src/main/res/layout/activity_store_set_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_store_set_hour.xml" value="0.484375" />
         <entry key="app/src/main/res/layout/activity_store_set_img.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_store_set_time.xml" value="0.2529699510831586" />
+        <entry key="app/src/main/res/layout/activity_store_set_time.xml" value="0.45" />
         <entry key="app/src/main/res/layout/dialog_holiday.xml" value="0.2877604166666667" />
+        <entry key="app/src/main/res/layout/dialog_regtime.xml" value="0.28828125" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.1814814814814815" />
       </map>
     </option>

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity.INPUT_METHOD_SERVICE
 import java.text.DecimalFormat
+import java.text.NumberFormat
 
 // 자주 쓰는 메소드 모음 - 문지희 (2022.10 갱신)
 class AppHelper {
@@ -58,15 +59,22 @@ class AppHelper {
         //        return super.dispatchTouchEvent(ev)
         //    }
 
-        val dec = DecimalFormat("#,##0")
+        val dec = DecimalFormat("00")
+        val nformat = NumberFormat.getInstance()
 
         // 천 단위 콤마 찍기
         fun price(n: Int): String {
+            return nformat.format(n)
+        }
+
+        // 한자리 수 n > 0n 형식으로 변환하기
+        fun mkDouble(n: String): String {
             return dec.format(n)
         }
 
         fun osVersion(): Int = Build.VERSION.SDK_INT    // 안드로이드 버전
         fun versionName(context: Context): String = context.packageManager.getPackageInfo(context.packageName, 0).versionName
         fun getPhoneModel(): String = Build.MODEL       // 디바이스 모델명
+
     }
 }

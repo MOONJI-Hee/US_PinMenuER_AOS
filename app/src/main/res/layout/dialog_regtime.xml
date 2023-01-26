@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="800dp"
+        android:layout_height="395dp"
+        android:background="@drawable/bg_r11w">
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/text20b"
+            android:layout_marginTop="40dp"
+            android:text="@string/store_time_set"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/btn_popup_close" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/text18"
+            android:layout_marginEnd="16dp"
+            android:text="@string/everyday"
+            app:layout_constraintBottom_toBottomOf="@+id/et_start_hour"
+            app:layout_constraintEnd_toStartOf="@+id/et_start_hour"
+            app:layout_constraintTop_toTopOf="@+id/et_start_hour" />
+
+        <EditText
+            style="@style/edittext"
+            android:id="@+id/et_start_hour"
+            android:layout_width="104dp"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:hint="@string/zero"
+            android:inputType="time"
+            android:maxLength="2"
+            app:layout_constraintEnd_toStartOf="@+id/et_start_min"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+        <TextView
+            style="@style/text20b"
+            android:text="@string/colon"
+            app:layout_constraintBottom_toBottomOf="@+id/et_start_hour"
+            app:layout_constraintEnd_toStartOf="@+id/et_start_min"
+            app:layout_constraintStart_toEndOf="@+id/et_start_hour"
+            app:layout_constraintTop_toTopOf="@+id/et_start_hour" />
+
+        <EditText
+            style="@style/edittext"
+            android:id="@+id/et_start_min"
+            android:layout_width="104dp"
+            android:layout_marginStart="22dp"
+            android:gravity="center"
+            android:hint="@string/zero"
+            android:inputType="time"
+            android:maxLength="2"
+            app:layout_constraintBottom_toBottomOf="@+id/et_start_hour"
+            app:layout_constraintEnd_toStartOf="@+id/et_end_hour"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/et_start_hour"
+            app:layout_constraintTop_toTopOf="@+id/et_start_hour" />
+
+        <TextView
+            style="@style/text20b"
+            android:text="@string/tilde"
+            app:layout_constraintBottom_toBottomOf="@+id/et_start_min"
+            app:layout_constraintEnd_toStartOf="@+id/et_end_hour"
+            app:layout_constraintStart_toEndOf="@+id/et_start_min"
+            app:layout_constraintTop_toTopOf="@+id/et_start_min" />
+
+        <EditText
+            style="@style/edittext"
+            android:id="@+id/et_end_hour"
+            android:layout_width="104dp"
+            android:layout_marginStart="40dp"
+            android:gravity="center"
+            android:hint="@string/zero"
+            android:inputType="time"
+            android:maxLength="2"
+            app:layout_constraintBottom_toBottomOf="@+id/et_start_min"
+            app:layout_constraintEnd_toStartOf="@+id/et_end_min"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/et_start_min"
+            app:layout_constraintTop_toTopOf="@+id/et_start_min" />
+
+        <TextView
+            style="@style/text20b"
+            android:text="@string/colon"
+            app:layout_constraintBottom_toBottomOf="@+id/et_end_hour"
+            app:layout_constraintEnd_toStartOf="@+id/et_end_min"
+            app:layout_constraintStart_toEndOf="@+id/et_end_hour"
+            app:layout_constraintTop_toTopOf="@+id/et_end_hour" />
+
+        <EditText
+            android:id="@+id/et_end_min"
+            style="@style/edittext"
+            android:layout_width="104dp"
+            android:layout_marginStart="22dp"
+            android:gravity="center"
+            android:hint="@string/zero"
+            android:inputType="time"
+            android:maxLength="2"
+            app:layout_constraintBottom_toBottomOf="@+id/et_end_hour"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/et_end_hour"
+            app:layout_constraintTop_toTopOf="@+id/et_end_hour" />
+
+        <TextView
+            android:id="@+id/save"
+            style="@style/btn"
+            android:layout_width="500dp"
+            android:layout_marginVertical="40dp"
+            android:text="@string/confirm"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
