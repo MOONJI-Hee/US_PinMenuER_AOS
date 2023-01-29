@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".store.StoreListActivity">
-
     <TextView
         style="@style/title"
         android:id="@+id/title"
@@ -40,9 +39,48 @@
     </LinearLayout>
 
     <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="240dp"
         android:background="@drawable/img_arpayo"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/arrow_left"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="10dp"
+        android:visibility="invisible"
+        android:background="@drawable/btn_store_arrow_left"
+        app:layout_constraintEnd_toStartOf="@id/rv_store"
+        app:layout_constraintTop_toTopOf="@id/rv_store" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_store"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginHorizontal="115dp"
+        app:layout_constraintTop_toBottomOf="@+id/title"/>
+
+    <ImageView
+        android:id="@+id/arrow_right"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginStart="10dp"
+        android:visibility="invisible"
+        android:background="@drawable/btn_store_arrow_right"
+        app:layout_constraintStart_toEndOf="@id/rv_store"
+        app:layout_constraintTop_toTopOf="@id/rv_store" />
+
+    <TextView
+        style="@style/subtext"
+        android:layout_marginTop="32dp"
+        android:text="@string/store_list_info"
+        app:layout_constraintTop_toBottomOf="@+id/rv_store"
+        app:layout_constraintStart_toStartOf="@+id/rv_store"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

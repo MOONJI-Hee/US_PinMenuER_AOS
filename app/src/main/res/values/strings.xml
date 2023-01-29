@@ -27,6 +27,29 @@
 
     <string name="udt_info">정보변경</string>
 
+    <string name="date">날짜</string>
+    <string name="month">월</string>
+    <string name="day">일</string>
+    <string name="tilde">~</string>
+    <string name="colon">:</string>
+    <string name="zero">00</string>
+
+    <string name="monday">월요일</string>
+    <string name="tuesday">화요일</string>
+    <string name="wednesday">수요일</string>
+    <string name="thursday">목요일</string>
+    <string name="friday">금요일</string>
+    <string name="saturday">토요일</string>
+    <string name="sunday">일요일</string>
+
+    <string name="mon">월</string>
+    <string name="tue">화</string>
+    <string name="wed">수</string>
+    <string name="thu">목</string>
+    <string name="fri">금</string>
+    <string name="sat">토</string>
+    <string name="sun">일</string>
+
     <!-- 회원 가입 & 수정  -->
     <string name="email">ID(이메일)</string>
     <string name="email_hint">이메일을 입력해주세요.</string>
@@ -42,6 +65,9 @@
     <string name="link_after">연동됨</string>
     <string name="mbr_info">회원정보</string>
 
+    <!-- 매장 리스트 -->
+    <string name="store_list_info">운영중인 매장을 등록하여 이용하실 수 있습니다.\n복수의 매장을 운영중이시면 다수의 매장을 등록하실 수 있습니다.</string>
+
     <!--  매장 등록 & 수정  -->
     <string name="store_name">매장명</string>
     <string name="store_name_hint">매장명을 입력해주세요.</string>
@@ -50,7 +76,6 @@
     <string name="store_map">지도검색</string>
     <string name="store_addr_info">매장 주소는 매우 중요한 정보입니다.\n매장 주소를 토대로 주변 고객분들께 재방문, 신규방문 이벤트가 진행됩니다.\n매장 주소는 지도에서 정확하게 선택해 주십시요.</string>
     <string name="store_reg">매장등록</string>
-
     <!--  매장 세부 정보  -->
     <string name="store_detail">세부정보</string>
     <string name="store_tel">매장 전화번호</string>
@@ -81,37 +106,12 @@
     <string name="everyday">매일</string>
     <string name="everymonth">매월</string>
     <string name="store_time_info">새벽 6시 마감은 30:00으로 설정</string>
-
     <string name="store_time_set">영업시간 설정</string>
     <string name="store_break_set">브레이크타임 설정</string>
     <string name="store_holiday_set">휴일 설정</string>
     <string name="store_holiday_name">휴일 명칭</string>
     <string name="store_holiday_name_hint">명칭을 입력해주세요.</string>
     <string name="store_holiday_set_info">‘월’을 입력하지 않으면 ‘매월’로 표시합니다.</string>
-
-    <string name="date">날짜</string>
-    <string name="month">월</string>
-    <string name="day">일</string>
-    <string name="tilde">~</string>
-    <string name="colon">:</string>
-    <string name="zero">00</string>
-
-    <string name="monday">월요일</string>
-    <string name="tuesday">화요일</string>
-    <string name="wednesday">수요일</string>
-    <string name="thursday">목요일</string>
-    <string name="friday">금요일</string>
-    <string name="saturday">토요일</string>
-    <string name="sunday">일요일</string>
-
-    <string name="mon">월</string>
-    <string name="tue">화</string>
-    <string name="wed">수</string>
-    <string name="thu">목</string>
-    <string name="fri">금</string>
-    <string name="sat">토</string>
-    <string name="sun">일</string>
-
     <!--  매장 대표 사진 -->
     <string name="store_img">매장사진</string>
     <string name="store_rep_img">대표 사진</string>
