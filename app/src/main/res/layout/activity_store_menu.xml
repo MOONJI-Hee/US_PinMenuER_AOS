@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".store.StoreListActivity">
+    <TextView
+        style="@style/title"
+        android:id="@+id/title"
+        android:text="우리요 매장"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <LinearLayout
+        android:id="@+id/back"
+        android:layout_width="72dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_title_back" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/udtMbr"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:paddingHorizontal="20dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            style="@style/text20"
+            android:text="@string/mbr_info"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:background="@drawable/img_arpayo"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        style="@style/menu"
+        android:id="@+id/order_mgmt"
+        android:layout_width="208dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="165dp"
+        android:text="@string/order_mgmt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"/>
+
+    <TextView
+        style="@style/subtext"
+        android:layout_marginTop="32dp"
+        android:text="@string/order_info_sub"
+        app:layout_constraintTop_toBottomOf="@+id/order_mgmt"
+        app:layout_constraintStart_toStartOf="@+id/order_mgmt"
+        app:layout_constraintEnd_toEndOf="@+id/order_mgmt"/>
+
+    <TextView
+        android:id="@+id/call_mgmt"
+        style="@style/menu"
+        android:layout_width="208dp"
+        android:layout_height="180dp"
+        android:layout_marginHorizontal="30dp"
+        android:text="@string/order_mgmt"
+        app:layout_constraintBottom_toBottomOf="@+id/order_mgmt"
+        app:layout_constraintStart_toEndOf="@+id/order_mgmt"
+        app:layout_constraintTop_toTopOf="@+id/order_mgmt" />
+
+    <TextView
+        style="@style/subtext"
+        android:layout_marginTop="32dp"
+        android:text="@string/call_mgmt_sub"
+        app:layout_constraintTop_toBottomOf="@+id/call_mgmt"
+        app:layout_constraintStart_toStartOf="@+id/call_mgmt"
+        app:layout_constraintEnd_toEndOf="@+id/call_mgmt"/>
+
+
+    <TextView
+        style="@style/menu"
+        android:id="@+id/menu_mgmt"
+        android:layout_width="208dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="165dp"
+        android:text="@string/menu_mgmt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"/>
+
+    <TextView
+        style="@style/subtext"
+        android:layout_marginTop="32dp"
+        android:text="@string/menu_mgmt_sub"
+        app:layout_constraintTop_toBottomOf="@+id/menu_mgmt"
+        app:layout_constraintStart_toStartOf="@+id/menu_mgmt"
+        app:layout_constraintEnd_toEndOf="@+id/menu_mgmt"/>
+
+    <TextView
+        style="@style/subtext"
+        android:layout_marginTop="32dp"
+        android:text="@string/menu_mgmt_sub2"
+        app:layout_constraintTop_toBottomOf="@+id/menu_mgmt"
+        app:layout_constraintStart_toStartOf="@+id/menu_mgmt"
+        app:layout_constraintEnd_toEndOf="@+id/menu_mgmt"/>
+
+    <TextView
+        style="@style/menu"
+        android:id="@+id/order_mgmt"
+        android:layout_width="208dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="165dp"
+        android:text="@string/order_mgmt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"/>
+
+    <TextView
+        style="@style/subtext"
+        android:layout_marginTop="32dp"
+        android:text="@string/order_info_sub"
+        app:layout_constraintTop_toBottomOf="@+id/order_mgmt"
+        app:layout_constraintStart_toStartOf="@+id/order_mgmt"
+        app:layout_constraintEnd_toEndOf="@+id/order_mgmt"/>
+
+
+    <TextView
+        style="@style/menu"
+        android:id="@+id/order_mgmt"
+        android:layout_width="208dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="165dp"
+        android:text="@string/order_mgmt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"/>
+
+    <TextView
+        style="@style/subtext"
+        android:layout_marginTop="32dp"
+        android:text="@string/order_info_sub"
+        app:layout_constraintTop_toBottomOf="@+id/order_mgmt"
+        app:layout_constraintStart_toStartOf="@+id/order_mgmt"
+        app:layout_constraintEnd_toEndOf="@+id/order_mgmt"/>
+    <TextView
+        style="@style/menu"
+        android:id="@+id/order_mgmt"
+        android:layout_width="208dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="165dp"
+        android:text="@string/order_mgmt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"/>
+
+    <TextView
+        style="@style/subtext"
+        android:layout_marginTop="32dp"
+        android:text="@string/order_info_sub"
+        app:layout_constraintTop_toBottomOf="@+id/order_mgmt"
+        app:layout_constraintStart_toStartOf="@+id/order_mgmt"
+        app:layout_constraintEnd_toEndOf="@+id/order_mgmt"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
