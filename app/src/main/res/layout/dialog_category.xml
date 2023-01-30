@@ -41,7 +41,6 @@
             android:layout_marginTop="32dp"
             android:hint="@string/category_name_hint"
             android:inputType="text"
-            android:maxLines="1"
             app:layout_constraintTop_toBottomOf="@+id/title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -58,7 +57,6 @@
             android:layout_marginTop="32dp"
             android:hint="@string/category_exp_hint"
             android:inputType="text"
-            android:maxLines="1"
             app:layout_constraintTop_toBottomOf="@+id/et_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -117,6 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="85dp"
             android:gravity="center_vertical"
+            android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/et_name">
             <TextView
