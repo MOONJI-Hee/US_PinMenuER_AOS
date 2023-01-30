@@ -12,7 +12,7 @@
 
         <TextView
             android:id="@+id/title"
-            style="@style/text20b"
+            style="@style/text22b"
             android:layout_marginTop="40dp"
             android:text="@string/store_time_set"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +56,7 @@
             app:layout_constraintTop_toBottomOf="@+id/title" />
 
         <TextView
-            style="@style/text20b"
+            style="@style/text22b"
             android:text="@string/colon"
             app:layout_constraintBottom_toBottomOf="@+id/et_start_hour"
             app:layout_constraintEnd_toStartOf="@+id/et_start_min"
@@ -79,7 +79,7 @@
             app:layout_constraintTop_toTopOf="@+id/et_start_hour" />
 
         <TextView
-            style="@style/text20b"
+            style="@style/text22b"
             android:text="@string/tilde"
             app:layout_constraintBottom_toBottomOf="@+id/et_start_min"
             app:layout_constraintEnd_toStartOf="@+id/et_end_hour"
@@ -102,7 +102,7 @@
             app:layout_constraintTop_toTopOf="@+id/et_start_min" />
 
         <TextView
-            style="@style/text20b"
+            style="@style/text22b"
             android:text="@string/colon"
             app:layout_constraintBottom_toBottomOf="@+id/et_end_hour"
             app:layout_constraintEnd_toStartOf="@+id/et_end_min"

@@ -5,13 +5,13 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="800dp"
+        android:layout_width="920dp"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_r11w">
         <TextView
             style="@style/text22b"
             android:id="@+id/title"
-            android:text="@string/store_holiday_set"
+            android:text="@string/title_cate_add"
             android:layout_marginTop="40dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +31,7 @@
         <TextView
             style="@style/text18"
             android:layout_marginEnd="16dp"
-            android:text="@string/store_holiday_name"
+            android:text="@string/category_name"
             app:layout_constraintEnd_toStartOf="@+id/et_name"
             app:layout_constraintTop_toTopOf="@+id/et_name"
             app:layout_constraintBottom_toBottomOf="@+id/et_name" />
@@ -39,7 +39,7 @@
             style="@style/edittext_main"
             android:id="@+id/et_name"
             android:layout_marginTop="32dp"
-            android:hint="@string/store_name_hint"
+            android:hint="@string/category_name_hint"
             android:inputType="text"
             android:maxLines="1"
             app:layout_constraintTop_toBottomOf="@+id/title"
@@ -48,66 +48,33 @@
         <TextView
             style="@style/text18"
             android:layout_marginEnd="16dp"
-            android:text="@string/date"
-            app:layout_constraintEnd_toStartOf="@+id/et_month"
-            app:layout_constraintTop_toTopOf="@+id/et_month"
-            app:layout_constraintBottom_toBottomOf="@+id/et_month" />
+            android:text="@string/category_exp"
+            app:layout_constraintEnd_toStartOf="@+id/et_exp"
+            app:layout_constraintTop_toTopOf="@+id/et_exp"
+            app:layout_constraintBottom_toBottomOf="@+id/et_exp" />
         <EditText
-            style="@style/edittext"
-            android:id="@+id/et_month"
-            android:layout_width="210dp"
+            style="@style/edittext_main"
+            android:id="@+id/et_exp"
             android:layout_marginTop="32dp"
-            android:hint="@string/everymonth"
-            android:inputType="date"
-            android:maxLength="2"
-            android:gravity="center"
+            android:hint="@string/category_exp_hint"
+            android:inputType="text"
+            android:maxLines="1"
             app:layout_constraintTop_toBottomOf="@+id/et_name"
-            app:layout_constraintStart_toStartOf="@+id/et_name" />
-        <TextView
-            style="@style/text18"
-            android:layout_marginStart="10dp"
-            android:text="@string/month"
-            app:layout_constraintTop_toTopOf="@+id/et_month"
-            app:layout_constraintBottom_toBottomOf="@+id/et_month"
-            app:layout_constraintStart_toEndOf="@+id/et_month"/>
-        <EditText
-            style="@style/edittext"
-            android:id="@+id/et_day"
-            android:layout_width="210dp"
-            android:layout_marginEnd="10dp"
-            android:hint="@string/zero"
-            android:inputType="date"
-            android:maxLength="2"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="@+id/et_month"
-            app:layout_constraintBottom_toBottomOf="@+id/et_month"
-            app:layout_constraintEnd_toStartOf="@+id/tv_day"/>
-        <TextView
-            style="@style/text18"
-            android:id="@+id/tv_day"
-            android:text="@string/day"
-            app:layout_constraintEnd_toEndOf="@+id/et_name"
-            app:layout_constraintTop_toTopOf="@+id/et_day"
-            app:layout_constraintBottom_toBottomOf="@+id/et_day" />
-        <TextView
-            style="@style/subtext"
-            android:id="@+id/holiday_info"
-            android:lineSpacingExtra="5dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/store_holiday_set_info"
-            app:layout_constraintStart_toStartOf="@+id/et_month"
-            app:layout_constraintTop_toBottomOf="@+id/et_month"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <LinearLayout
             android:orientation="horizontal"
             android:id="@+id/ll_udt"
             android:layout_width="500dp"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="40dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="32dp"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/holiday_info"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/et_exp"
+            app:layout_constraintBottom_toTopOf="@+id/cate_info">
             <TextView
                 style="@style/btn_cancel"
                 android:id="@+id/delete"
@@ -126,12 +93,43 @@
             style="@style/btn"
             android:id="@+id/save"
             android:layout_width="500dp"
-            android:layout_marginVertical="40dp"
-            android:text="@string/confirm"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="32dp"
+            android:text="@string/save"
             android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/holiday_info"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/et_exp"
+            app:layout_constraintBottom_toTopOf="@+id/cate_info"/>
+
+        <TextView
+            style="@style/subtext"
+            android:id="@+id/cate_info"
+            android:layout_marginBottom="40dp"
+            android:lineSpacingExtra="5dp"
+            android:text="@string/category_dialog_info1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/et_exp" />
+
+        <LinearLayout
+            android:id="@+id/ll_dsp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="85dp"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/et_name">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="14dp"
+                android:text="@string/category_hide"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+            <ImageView
+                style="@style/toggle"
+                android:id="@+id/cate_dsp"/>
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
