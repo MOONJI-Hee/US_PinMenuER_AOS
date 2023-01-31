@@ -23,7 +23,7 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
 
     val TAG = "StoreSetActivity"
 
-    var type : Int = 2            // 1 : 등록, 2 : 수정
+    var type : Int = 0            // 1 : 등록, 2 : 수정
     var useridx : Int = 0
     var storeidx : Int = 0
     var storeNm : String = ""
@@ -57,6 +57,7 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
         type = intent.getIntExtra("type", type)
         if(type == 2) {
             storeidx = intent.getIntExtra("storeidx", storeidx)
+            binding.title.text = getString(R.string.title_udt_store)
             binding.save.visibility = View.GONE
             binding.llUdt.visibility = View.VISIBLE
         }else if(type == 1) {

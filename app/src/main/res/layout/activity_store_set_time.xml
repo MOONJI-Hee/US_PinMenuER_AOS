@@ -27,9 +27,8 @@
     </LinearLayout>
     
     <TextView
-        style="@style/btn"
+        style="@style/btn_main"
         android:id="@+id/save"
-        android:layout_width="500dp"
         android:layout_marginBottom="40dp"
         android:text="@string/save"
         app:layout_constraintStart_toStartOf="parent"

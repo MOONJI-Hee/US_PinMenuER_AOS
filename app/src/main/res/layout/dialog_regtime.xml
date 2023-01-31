@@ -125,9 +125,8 @@
             app:layout_constraintTop_toTopOf="@+id/et_end_hour" />
 
         <TextView
+            style="@style/btn_main"
             android:id="@+id/save"
-            style="@style/btn"
-            android:layout_width="500dp"
             android:layout_marginVertical="40dp"
             android:text="@string/confirm"
             android:visibility="visible"

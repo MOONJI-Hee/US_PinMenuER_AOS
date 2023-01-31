@@ -6,4 +6,125 @@
     android:layout_height="match_parent"
     tools:context=".menu.CategorySetActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/main_header"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:src="@drawable/btn_title_back" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/store_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/main_menu_logo"
+            app:layout_constraintStart_toEndOf="@+id/back"
+            app:layout_constraintEnd_toStartOf="@+id/rv_category"/>
+
+        <ImageView
+            android:id="@+id/cate_pre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/ic_category_arrow_left"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/rv_category"
+            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_category"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="42dp"
+            android:layout_marginVertical="10dp"
+            app:layout_constraintStart_toEndOf="@+id/store_logo"
+            app:layout_constraintEnd_toStartOf="@+id/btn_cate_udt"/>
+        <ImageView
+            android:id="@+id/cate_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:src="@drawable/ic_category_arrow_right"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/rv_category"/>
+        <TextView
+            style="@style/text18"
+            android:id="@+id/btn_cate_udt"
+            android:layout_width="98dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="20dp"
+            android:gravity="center"
+            android:text="@string/category_udt"
+            android:background="@drawable/selector_btn_grd"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_cate"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="194dp"
+        android:layout_marginTop="80dp"
+        android:paddingVertical="20dp"
+        android:background="@color/f9"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/header">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_store_arrow_left"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="8dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_store_arrow_right"/>
+    </LinearLayout>
+
+    <TextView
+        style="@style/btn_main"
+        android:id="@+id/save"
+        android:text="@string/save"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@+id/ll_cate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        style="@style/subtext"
+        android:id="@+id/subtext1"
+        android:text="@string/category_info1"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="129dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/save" />
+
+    <TextView
+        style="@style/subtext"
+        android:text="@string/category_info2"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/subtext1"
+        app:layout_constraintTop_toBottomOf="@+id/subtext1" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
