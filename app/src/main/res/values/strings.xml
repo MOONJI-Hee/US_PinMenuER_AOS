@@ -21,8 +21,9 @@
     <string name="confirm">확&#160;&#160;인</string>
     <string name="cancel">취&#160;&#160;소</string>
     <string name="save">저&#160;&#160;장</string>
-
     <string name="delete">삭&#160;&#160;제</string>
+    <string name="update">수&#160;정</string>
+    <string name="sequence">순&#160;서</string>
     <string name="essential">필수</string>
 
     <string name="udt_info">정보변경</string>
@@ -157,6 +158,7 @@
     <string name="category_dialog_info2"><b>카테고리 [ 숨김 ] 필요한 경우</b>에는\n우측 상단에 있는 [ 숨기기 ] 옆 Off 버튼을 On으로 변경 후 저장을 눌러주세요.\n삭제는 카테고리에 입력된 모든 메뉴 정보가 삭제되지만,\n[ 숨기기 ]는 고객에게 보여지지 않도록 설정됩니다.</string>
     <string name="category_hide">숨기기</string>
     <string name="category_udt">카테고리\n수정</string>
+    <string name="category_add">카테고리\n추가</string>
 
     <!--  권한 다이얼로그  -->
     <string name="pms_storage_title">외부 저장소 권한 요청</string>

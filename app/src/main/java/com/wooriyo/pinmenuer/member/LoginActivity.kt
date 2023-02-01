@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityLoginBinding
+import com.wooriyo.pinmenuer.menu.CategorySetActivity
 import com.wooriyo.pinmenuer.model.MemberDTO
 import com.wooriyo.pinmenuer.store.StoreListActivity
 import com.wooriyo.pinmenuer.store.StoreSetActivity
@@ -58,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
             appvs = MyApplication.appver
             md = MyApplication.md
 
-            startActivity(Intent(this@LoginActivity, StoreSetActivity::class.java))
+            startActivity(Intent(this@LoginActivity, CategorySetActivity::class.java))
 
 //            when {
 //                id.isEmpty() -> Toast.makeText(this@LoginActivity, R.string.msg_no_id, Toast.LENGTH_SHORT).show()

@@ -23,17 +23,20 @@
         android:theme="@style/Theme.PinMenuER"
         tools:targetApi="31">
         <activity
-            android:name=".MapActivity"
+            android:name=".MenuSetActivity"
             android:exported="false" />
         <activity
-            android:name=".CategorySetActivity"
+            android:name=".common.MapActivity"
+            android:exported="false" />
+        <activity
+            android:name=".menu.CategorySetActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".StoreMenuActivity"
+            android:name=".store.StoreSetActivity"
             android:exported="false" />
         <activity
             android:name=".member.LoginActivity"

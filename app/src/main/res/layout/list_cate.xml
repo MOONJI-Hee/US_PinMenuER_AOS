@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="160dp"
+    android:layout_height="match_parent">
+    <View
+        android:id="@+id/front_line"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent" />
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#33FFFFFF"
+        app:layout_constraintStart_toEndOf="@+id/front_line" />
+
+    <TextView
+        style="@style/text20"
+        android:id="@+id/name"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/subName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        style="@style/text18"
+        android:id="@+id/subName"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/cate_subname"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
+
+    <View
+        android:id="@+id/backline1"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        app:layout_constraintEnd_toStartOf="@id/backline2" />
+
+    <View
+        android:id="@+id/backline2"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#33FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,7 +34,7 @@
             android:layout_marginEnd="20dp"
             android:src="@drawable/main_menu_logo"
             app:layout_constraintStart_toEndOf="@+id/back"
-            app:layout_constraintEnd_toStartOf="@+id/rv_category"/>
+            app:layout_constraintEnd_toStartOf="@+id/rvCate"/>
 
         <ImageView
             android:id="@+id/cate_pre"
@@ -44,16 +44,16 @@
             android:src="@drawable/ic_category_arrow_left"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/rv_category"
+            app:layout_constraintEnd_toStartOf="@+id/rvCate"
             app:layout_constraintTop_toTopOf="parent" />
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_category"
+            android:id="@+id/rvCate"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginEnd="42dp"
+            android:layout_marginEnd="22dp"
             android:layout_marginVertical="10dp"
             app:layout_constraintStart_toEndOf="@+id/store_logo"
-            app:layout_constraintEnd_toStartOf="@+id/btn_cate_udt"/>
+            app:layout_constraintEnd_toStartOf="@+id/btn_cate_add"/>
         <ImageView
             android:id="@+id/cate_next"
             android:layout_width="wrap_content"
@@ -63,16 +63,14 @@
             android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/rv_category"/>
+            app:layout_constraintStart_toEndOf="@+id/rvCate"/>
         <TextView
-            style="@style/text18"
-            android:id="@+id/btn_cate_udt"
+            style="@style/btn_small"
+            android:id="@+id/btn_cate_add"
             android:layout_width="98dp"
             android:layout_height="60dp"
             android:layout_marginEnd="20dp"
-            android:gravity="center"
-            android:text="@string/category_udt"
-            android:background="@drawable/selector_btn_grd"
+            android:text="@string/category_add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -89,27 +87,59 @@
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@+id/header">
         <ImageView
+            android:id="@+id/arrow_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
             android:src="@drawable/btn_store_arrow_left"/>
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCateEdit"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="8dp"/>
+            android:layout_marginHorizontal="8dp"
+            />
         <ImageView
+            android:id="@+id/arrow_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
             android:src="@drawable/btn_store_arrow_right"/>
     </LinearLayout>
 
     <TextView
         style="@style/btn_main"
         android:id="@+id/save"
-        android:text="@string/save"
+        android:text="@string/confirm"
         android:layout_marginTop="40dp"
+        android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/ll_cate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/ll_udt"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_cate">
+        <TextView
+            style="@style/btn_cancel"
+            android:id="@+id/delete"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="20dp"
+            android:text="@string/delete" />
+        <TextView
+            style="@style/btn"
+            android:id="@+id/modify"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/save"/>
+    </LinearLayout>
 
     <TextView
         style="@style/subtext"
