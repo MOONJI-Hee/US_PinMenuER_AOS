@@ -109,7 +109,7 @@
             app:layout_constraintStart_toStartOf="@id/et_exp" />
 
         <LinearLayout
-            android:id="@+id/ll_dsp"
+            android:id="@+id/ll_use"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="85dp"
@@ -124,9 +124,10 @@
                 android:text="@string/category_hide"
                 android:textSize="16sp"
                 android:textColor="@color/black"/>
-            <ImageView
+            <CheckBox
                 style="@style/toggle"
-                android:id="@+id/cate_dsp"/>
+                android:id="@+id/cate_use"
+                android:checked="true"/>
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

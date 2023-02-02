@@ -32,18 +32,7 @@ class StoreSetDetailActivity : AppCompatActivity(), View.OnClickListener {
 
     // 바깥화면 터치하면 키보드 내리기
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        val focusView = this.currentFocus
-        if (focusView != null) {
-            val rect = Rect()
-            focusView.getGlobalVisibleRect(rect)
-            val x = ev.x.toInt()
-            val y = ev.y.toInt()
-            if (!rect.contains(x, y)) {
-                val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(focusView.windowToken, 0)
-                focusView.clearFocus()
-            }
-        }
+        AppHelper.hideKeyboard(this, currentFocus, ev)
         return super.dispatchTouchEvent(ev)
     }
 

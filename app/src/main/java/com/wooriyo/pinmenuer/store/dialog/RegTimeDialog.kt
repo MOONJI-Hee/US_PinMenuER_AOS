@@ -2,6 +2,8 @@ package com.wooriyo.pinmenuer.store.dialog
 
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.widget.Toast
 import com.wooriyo.pinmenuer.R
@@ -13,6 +15,7 @@ class RegTimeDialog(context: Context): Dialog(context) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         binding = DialogRegtimeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

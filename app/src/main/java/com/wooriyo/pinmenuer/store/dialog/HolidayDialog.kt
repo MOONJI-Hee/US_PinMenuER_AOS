@@ -28,9 +28,8 @@ class HolidayDialog(context: Context, val type : Int, val useridx : Int, val idx
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DialogHolidayBinding.inflate(layoutInflater)
-
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        binding = DialogHolidayBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         when(type) {

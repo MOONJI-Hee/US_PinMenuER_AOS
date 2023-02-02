@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
     }
     // 바깥화면 터치하면 키보드 내리기
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        AppHelper.hideKeyboard(this, ev)
+        AppHelper.hideKeyboard(this, currentFocus, ev)
         return super.dispatchTouchEvent(ev)
     }
 

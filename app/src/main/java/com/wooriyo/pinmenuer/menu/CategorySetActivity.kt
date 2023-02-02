@@ -9,6 +9,7 @@ import com.wooriyo.pinmenuer.menu.adpter.CateAdapter
 import com.wooriyo.pinmenuer.menu.adpter.CateEditAdapter
 import com.wooriyo.pinmenuer.menu.dialog.CategoryDialog
 import com.wooriyo.pinmenuer.model.CategoryDTO
+import com.wooriyo.pinmenuer.util.AppHelper
 
 class CategorySetActivity : AppCompatActivity() {
     lateinit var binding : ActivityCategorySetBinding
@@ -42,6 +43,11 @@ class CategorySetActivity : AppCompatActivity() {
             arrowRight.setOnClickListener {  }
             btnCateAdd.setOnClickListener { addDialog() }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        AppHelper.hideInset(this)
     }
 
     fun addDialog() {

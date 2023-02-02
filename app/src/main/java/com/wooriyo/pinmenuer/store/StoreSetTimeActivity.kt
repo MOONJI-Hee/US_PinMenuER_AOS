@@ -53,7 +53,6 @@ class StoreSetTimeActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-
     private fun save () {
         binding.run {
             openTimeDTO.let {

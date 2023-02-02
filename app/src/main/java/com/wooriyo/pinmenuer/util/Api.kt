@@ -46,7 +46,7 @@ interface Api {
     @FormUrlEncoded
     @POST("m/checkalpha.php")
     fun checkArpayo(
-        @Field("userid") userid: String
+        @Field("userid") arpayoId: String
     ): Call<ResultDTO>
 
     //회원정보 수정
@@ -56,6 +56,13 @@ interface Api {
         @Query("pass") pass : String,
         @Query("alpha_userid") arpayo_id: String
     ): Call<ResultDTO>
+
+    // 매장 목록 조회
+//    @FormUrlEncoded
+//    @POST("/api/m/store.list.php")
+//    fun getStoreList(
+//        @Field("useridx") useridx: String
+//    ): Call<>
 
     //매장 등록
     @GET("m/regstore.php")
@@ -152,65 +159,96 @@ interface Api {
         @Query("idx") holidayidx : Int
     ): Call<ResultDTO>
 
-//    //매장 불러오기
-//    @FormUrlEncoded
-//    @POST("/api/m/store.list.php")
-//    fun storelist(
-//        @Field("useridx") useridx: String
-//    ): Call<StoreListDTO>
-
-
-//
-//    //카테고리 리스트 불러오기
+    // 카테고리 목록 조희
 //    @GET("/api/m/cate.list.php")
-//    fun cateList(
+//    fun getCateList(
 //        @Query("useridx") useridx: String
-//    ): Call<CategoryListDTO>
-//
-//    //카테고리 등록
-//    @FormUrlEncoded
-//    @POST("/api/m/inscate.php")
-//    fun insCate(
-//        @Field("useridx") useridx: String,
-//        @Field("name") name: String,
-//        @Field("memo") memo: String,
-//        @Field("buse") buse: String
-//    ): Call<CategoryListDTO>
-//
-//    //카테고리 수정
-//    @FormUrlEncoded
-//    @POST("/api/m/udtcate.php")
-//    fun udtCate(
-//        @Field("useridx") useridx: String,
-//        @Field("idx") idx: String,
-//        @Field("name") name: String,
-//        @Field("memo") memo: String,
-//        @Field("buse") buse: String
-//    ): Call<CategoryListDTO>
-//
-//    //카테고리 삭제
-//    @FormUrlEncoded
-//    @POST("/api/m/delcate.php")
-//    fun delCate(
-//        @Field("useridx") useridx: String,
-//        @Field("code") code: String,
-//    ): Call<CategoryListDTO>
-//
-//    //배경 선택
-//    @FormUrlEncoded
-//    @POST("/api/m/setbg.php")
-//    fun setbg(
-//        @Field("useridx") useridx: String,
-//        @Field("thema_color") thema_color: String
-//    ): Call<CategoryListDTO>
-//
-//    //뷰어 모드 선택
-//    @FormUrlEncoded
-//    @POST("/api/m/setviewmode.php")
-//    fun setViewMode(
-//        @Field("useridx") useridx: String,
-//        @Field("viewmode") viewmode: String
-//    ): Call<CategoryListDTO>
+//    ): Call<>
 
+    // 카테고리 등록
+    @GET("m/inscate.php")
+    fun insCate(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("name") name : String,
+        @Query("memo") subName : String,
+        @Query("buse") buse : String
+    ): Call<ResultDTO>
 
+    // 카테고리 수정
+    @GET("m/udtcate.php")
+    fun udtCate(
+        @Query("useridx") useridx: Int,
+        @Query("idx") cateidx: Int,
+        @Query("name") name : String,
+        @Query("memo") memo : String,
+        @Query("buse") buse : String
+    ): Call<ResultDTO>
+
+    // 카테고리 삭제
+    @GET("m/delcate.php")
+    fun delCate(
+        @Query("useridx") useridx: Int,
+        @Query("idx") cateidx: Int,
+        @Query("code") code: String
+    ): Call<ResultDTO>
+
+    // 카테고리 순서 변경
+    @GET("m/udtseq.php")
+    fun udtCateSeq(
+        @Query("useridx") useridx: Int,
+        @Query("idx") cateidx: Int,
+        @Query("code") code: String,
+        @Query("seq") seq: Int
+    ): Call<ResultDTO>
+
+    // 테이블 비밀번호 변경
+    @GET("m/udt_tablepwd.php")
+    fun udtTablePwd (
+        @Query("useridx") useridx: Int,
+        @Query("idx") storeidx: Int,
+        @Query("pass") pwd: String
+    ): Call<ResultDTO>
+
+    // 메뉴판 테마색 설정
+    @GET("m/setbg.php")
+    fun setBgColor(
+        @Query("useridx") useridx: Int,
+        @Query("thema_color") color: String // d : 어두운 배경, g : 은색 배경, l : 밝은 배경, 디폴트
+    ): Call<ResultDTO>
+
+    // 메뉴판 뷰 모드 설정
+    @GET("m/setviewmode.php")
+    fun setViewMode(
+        @Query("useridx") useridx: Int,
+        @Query("viewmode") viewmode: String // b : 기본, p: 3x3
+    ): Call<ResultDTO>
+
+    // 직원 호출 목록 조회
+    @GET("m/call.list.php")
+    fun getCallList(
+        @Query("useridx") useridx: Int
+    )
+
+    // 직원 호출 등록
+    @GET("m/ins_call.php")
+    fun insCall(
+        @Query("useridx") useridx: Int,
+        @Query("name") callName : String
+    ): Call<ResultDTO>
+
+    // 직원 호출 수정
+    @GET("m/udt_call")
+    fun udtCall (
+        @Query("useridx") useridx: Int,
+        @Query("idx") callidx: Int,
+        @Query("name") callName : String
+    ): Call<ResultDTO>
+
+    // 직원 호출 삭제
+    @GET("m/del_call.php")
+    fun delCall(
+        @Query("useridx") useridx: Int,
+        @Query("idx") callidx: Int
+    )
 }

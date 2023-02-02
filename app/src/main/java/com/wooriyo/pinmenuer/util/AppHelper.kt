@@ -7,6 +7,7 @@ import android.os.Build
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatActivity.INPUT_METHOD_SERVICE
 import java.text.DecimalFormat
 import java.text.NumberFormat
@@ -28,36 +29,19 @@ class AppHelper {
         }
 
         // 바깥 클릭했을 때 키보드 내리기
-        fun hideKeyboard(activity: Activity, ev: MotionEvent) {
-            val focusView = activity.currentFocus
+        fun hideKeyboard(context: Context, focusView: View?, ev: MotionEvent) {
             if (focusView != null) {
                 val rect = Rect()
                 focusView.getGlobalVisibleRect(rect)
                 val x = ev.x.toInt()
                 val y = ev.y.toInt()
                 if (!rect.contains(x, y)) {
-                    val imm = activity.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                    val imm = context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(focusView.windowToken, 0)
                     focusView.clearFocus()
                 }
             }
         }
-
-        //    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        //        val focusView = this.currentFocus
-        //        if (focusView != null) {
-        //            val rect = Rect()
-        //            focusView.getGlobalVisibleRect(rect)
-        //            val x = ev.x.toInt()
-        //            val y = ev.y.toInt()
-        //            if (!rect.contains(x, y)) {
-        //                val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        //                imm.hideSoftInputFromWindow(focusView.windowToken, 0)
-        //                focusView.clearFocus()
-        //            }
-        //        }
-        //        return super.dispatchTouchEvent(ev)
-        //    }
 
         val dec = DecimalFormat("00")
         val nformat = NumberFormat.getInstance()
