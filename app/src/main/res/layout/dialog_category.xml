@@ -118,12 +118,9 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/et_name">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/text16"
                 android:layout_marginEnd="14dp"
-                android:text="@string/category_hide"
-                android:textSize="16sp"
-                android:textColor="@color/black"/>
+                android:text="@string/category_hide"/>
             <CheckBox
                 style="@style/toggle"
                 android:id="@+id/cate_use"

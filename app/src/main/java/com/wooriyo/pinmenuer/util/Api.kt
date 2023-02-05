@@ -1,6 +1,8 @@
 package com.wooriyo.pinmenuer.util
 
 import com.wooriyo.pinmenuer.db.entity.Store
+import com.wooriyo.pinmenuer.model.CateListDTO
+import com.wooriyo.pinmenuer.model.CategoryDTO
 import com.wooriyo.pinmenuer.model.MemberDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import okhttp3.MultipartBody
@@ -70,7 +72,7 @@ interface Api {
         @Query("useridx") useridx: Int,
         @Query("storenm") storenm: String,
         @Query("addr") addr: String,                // 주소
-        @Query("zip") zip: String                     // 우편번호
+        @Query("zip") zip: String                   // 우편번호
     ): Call<ResultDTO>
 
     //매장 정보 수정
@@ -80,7 +82,7 @@ interface Api {
         @Query("idx") storeidx: Int,
         @Query("storenm") storenm: String,
         @Query("addr") addr: String,                // 주소
-        @Query("zip") zip: String                     // 우편번호
+        @Query("zip") zip: String                   // 우편번호
     ): Call<ResultDTO>
 
     //매장 삭제
@@ -160,10 +162,11 @@ interface Api {
     ): Call<ResultDTO>
 
     // 카테고리 목록 조희
-//    @GET("/api/m/cate.list.php")
-//    fun getCateList(
-//        @Query("useridx") useridx: String
-//    ): Call<>
+    @GET("/api/m/categorylist.php")
+    fun getCateList(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+    ): Call<CateListDTO>
 
     // 카테고리 등록
     @GET("m/inscate.php")

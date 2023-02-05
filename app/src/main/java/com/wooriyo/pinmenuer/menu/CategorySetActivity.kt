@@ -14,9 +14,9 @@ import com.wooriyo.pinmenuer.util.AppHelper
 class CategorySetActivity : AppCompatActivity() {
     lateinit var binding : ActivityCategorySetBinding
 
-    val allCateList = ArrayList<CategoryDTO>()
-    val cateAdapter = CateAdapter(allCateList)
-    val cateEditAdapter = CateEditAdapter(allCateList)
+    lateinit var allCateList : ArrayList<CategoryDTO>
+    lateinit var cateAdapter : CateAdapter
+    lateinit var cateEditAdapter : CateEditAdapter
 
     var flag = 0 // 순서 수정 모드 구분 > 0 : 수정모드 X, 1 : 수정모드 O
 
@@ -25,13 +25,12 @@ class CategorySetActivity : AppCompatActivity() {
         binding = ActivityCategorySetBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        allCateList = intent.getSerializableExtra("cateList") as ArrayList<CategoryDTO>
+        if(allCateList.isEmpty()) {addDialog()}
+
+        setView()
+
         binding.run {
-            rvCate.layoutManager = LinearLayoutManager(this@CategorySetActivity, LinearLayoutManager.HORIZONTAL, false)
-            rvCate.adapter = cateAdapter
-
-            rvCateEdit.layoutManager = LinearLayoutManager(this@CategorySetActivity, LinearLayoutManager.HORIZONTAL, false)
-            rvCateEdit.adapter = cateAdapter
-
             back.setOnClickListener { finish() }
             save.setOnClickListener {
                 when(flag) {
@@ -48,6 +47,19 @@ class CategorySetActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         AppHelper.hideInset(this)
+    }
+
+    fun setView() {
+        cateAdapter = CateAdapter(allCateList)
+        cateEditAdapter = CateEditAdapter(allCateList)
+
+        binding.run {
+            rvCate.layoutManager = LinearLayoutManager(this@CategorySetActivity, LinearLayoutManager.HORIZONTAL, false)
+            rvCate.adapter = cateAdapter
+
+            rvCateEdit.layoutManager = LinearLayoutManager(this@CategorySetActivity, LinearLayoutManager.HORIZONTAL, false)
+            rvCateEdit.adapter = cateAdapter
+        }
     }
 
     fun addDialog() {

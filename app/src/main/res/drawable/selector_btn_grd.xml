@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_enabled="false">
+    <item
+        android:state_checked="false"
+        android:drawable="@drawable/bg_btn_r6"/>
+    <item
+        android:state_checked="true"
+        android:drawable="@drawable/gradient_main">
         <shape>
             <corners android:radius="6dp"/>
-            <solid android:color="@color/btn"/>
-        </shape>
-    </item>
-    <item>
-        <shape>
-            <corners android:radius="6dp"/>
-            <gradient
-                android:startColor="@color/main"
-                android:endColor="@color/sub"   />
         </shape>
     </item>
 </selector>
