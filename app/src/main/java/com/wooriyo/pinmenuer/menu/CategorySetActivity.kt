@@ -25,14 +25,14 @@ class CategorySetActivity : AppCompatActivity() {
         binding = ActivityCategorySetBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        allCateList = intent.getSerializableExtra("cateList") as ArrayList<CategoryDTO>
-        if(allCateList.isEmpty()) {addDialog()}
+        allCateList = (intent.getSerializableExtra("cateList") ?: ArrayList<CategoryDTO>()) as ArrayList<CategoryDTO>
+        if(allCateList.isNullOrEmpty()) {addDialog()}
 
         setView()
 
         binding.run {
             back.setOnClickListener { finish() }
-            save.setOnClickListener {
+            confirm.setOnClickListener {
                 when(flag) {
                     0 -> startActivity(Intent(this@CategorySetActivity, MenuSetActivity::class.java))
                     1 -> seqSave()

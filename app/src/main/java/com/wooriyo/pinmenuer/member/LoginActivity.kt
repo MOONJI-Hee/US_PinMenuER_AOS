@@ -12,6 +12,7 @@ import com.wooriyo.pinmenuer.databinding.ActivityLoginBinding
 import com.wooriyo.pinmenuer.menu.CategorySetActivity
 import com.wooriyo.pinmenuer.model.MemberDTO
 import com.wooriyo.pinmenuer.store.StoreListActivity
+import com.wooriyo.pinmenuer.store.StoreMenuActivity
 import com.wooriyo.pinmenuer.store.StoreSetActivity
 import com.wooriyo.pinmenuer.util.ApiClient
 import com.wooriyo.pinmenuer.util.AppHelper
@@ -59,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
             appvs = MyApplication.appver
             md = MyApplication.md
 
-            startActivity(Intent(this@LoginActivity, CategorySetActivity::class.java))
+            startActivity(Intent(this@LoginActivity, StoreMenuActivity::class.java))
 
 //            when {
 //                id.isEmpty() -> Toast.makeText(this@LoginActivity, R.string.msg_no_id, Toast.LENGTH_SHORT).show()
@@ -89,7 +90,7 @@ class LoginActivity : AppCompatActivity() {
                             if(memberDTO.status == 1) {
                                 MyApplication.pref.setMbrDTO(memberDTO)
                                 Toast.makeText(this@LoginActivity, memberDTO.msg, Toast.LENGTH_SHORT).show()
-                                startActivity(Intent(this@LoginActivity, StoreListActivity::class.java))
+                                startActivity(Intent(this@LoginActivity, StoreMenuActivity::class.java))
                             } else {
                                 Toast.makeText(this@LoginActivity, memberDTO.msg, Toast.LENGTH_SHORT).show()
                             }
