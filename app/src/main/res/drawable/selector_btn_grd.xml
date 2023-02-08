@@ -4,9 +4,11 @@
         android:state_checked="false"
         android:drawable="@drawable/bg_btn_r6"/>
     <item
-        android:state_checked="true"
-        android:drawable="@drawable/gradient_main">
+        android:state_checked="true">
         <shape>
+            <gradient
+                android:startColor="@color/main"
+                android:endColor="@color/sub"   />
             <corners android:radius="6dp"/>
         </shape>
     </item>

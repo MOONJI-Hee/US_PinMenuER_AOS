@@ -6,15 +6,14 @@ import com.google.gson.Gson
 
 class SharedDTO(context: Context) {
     private  val pref : SharedPreferences = context.getSharedPreferences("PinMenuER_Pref_key", Context.MODE_PRIVATE)
+    val gson = Gson()
 
     fun getMbrDTO(): MemberDTO? {
-        val gson = Gson()
         val json: String ?= pref.getString("mbrData", "")
         return gson.fromJson(json, MemberDTO::class.java)
     }
 
     fun setMbrDTO(mbrData: MemberDTO) {
-        val gson = Gson()
         val json = gson.toJson(mbrData)
         pref.edit().putString("mbrData", json).apply()
     }
@@ -41,6 +40,20 @@ class SharedDTO(context: Context) {
 
     fun setToken(push_token: String) {
         pref.edit().putString("push_token", push_token).apply()
+    }
+
+    fun getCateList(): ArrayList<CategoryDTO>? {
+        val json: String? = pref.getString("cateList", "")
+
+
+
+
+        return  null
+    }
+
+    fun setCateList(cateList : ArrayList<CategoryDTO>) {
+        val json = gson.toJson(cateList)
+        pref.edit().putString("cateList", json).apply()
     }
 
 }

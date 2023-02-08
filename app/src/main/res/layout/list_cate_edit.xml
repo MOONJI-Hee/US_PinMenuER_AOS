@@ -3,7 +3,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <LinearLayout
         android:id="@+id/ll_cate"
         android:gravity="center"
@@ -47,22 +46,28 @@
         android:layout_weight="1"
         android:text="@string/update"/>
     </LinearLayout>
+
     <ImageView
         android:id="@+id/left"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="7.5dp"
         android:src="@drawable/btn_category_move_arrow_left"
-        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ll_cate"
-        app:layout_constraintBottom_toBottomOf="@+id/ll_cate"/>
+        app:layout_constraintEnd_toStartOf="@+id/ll_cate"
+        app:layout_constraintTop_toTopOf="@id/ll_cate"
+        app:layout_constraintBottom_toBottomOf="@id/ll_cate" />
     <ImageView
         android:id="@+id/right"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="7.5dp"
         android:src="@drawable/btn_category_move_arrow_right"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ll_cate"
-        app:layout_constraintBottom_toBottomOf="@+id/ll_cate"/>
+        app:layout_constraintStart_toEndOf="@+id/ll_cate"
+        app:layout_constraintTop_toTopOf="@id/ll_cate"
+        app:layout_constraintBottom_toBottomOf="@id/ll_cate" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

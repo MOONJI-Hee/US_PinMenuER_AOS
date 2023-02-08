@@ -27,8 +27,8 @@ class CategoryDialog(context: Context, val type: Int): Dialog(context) {
 
     val TAG = "CategoryDialog"
     var useridx = 11
-    var storeidx = 0
-    var cateidx = 0
+    var storeidx = 2
+    var cateidx = 1
     var code = "001"
     var name = "커피"
     var subName = "Coffee"
@@ -98,7 +98,7 @@ class CategoryDialog(context: Context, val type: Int): Dialog(context) {
     }
 
     private fun modify() {
-        ApiClient.service.udtCate(useridx, cateidx, name, subName, buse)
+        ApiClient.service.udtCate(useridx, storeidx, cateidx, name, subName, buse)
             .enqueue(object: Callback<ResultDTO>{
                 override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                     Log.d(TAG, "카테고리 수정 url : $response")
@@ -121,7 +121,7 @@ class CategoryDialog(context: Context, val type: Int): Dialog(context) {
     }
 
     fun delete() {
-        ApiClient.service.delCate(useridx, cateidx, code).enqueue(object : Callback<ResultDTO>{
+        ApiClient.service.delCate(useridx, storeidx, cateidx, code).enqueue(object : Callback<ResultDTO>{
             override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                 Log.d(TAG, "카테고리 삭제 url : $response")
                 if(!response.isSuccessful) {return}

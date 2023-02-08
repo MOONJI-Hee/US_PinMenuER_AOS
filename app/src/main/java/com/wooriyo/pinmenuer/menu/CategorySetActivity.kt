@@ -18,6 +18,8 @@ class CategorySetActivity : AppCompatActivity() {
     lateinit var cateAdapter : CateAdapter
     lateinit var cateEditAdapter : CateEditAdapter
 
+    var useCateList = ArrayList<CategoryDTO>()
+
     var flag = 0 // 순서 수정 모드 구분 > 0 : 수정모드 X, 1 : 수정모드 O
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +28,7 @@ class CategorySetActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         allCateList = (intent.getSerializableExtra("cateList") ?: ArrayList<CategoryDTO>()) as ArrayList<CategoryDTO>
-        if(allCateList.isNullOrEmpty()) {addDialog()}
+        if(allCateList.isEmpty()) {addDialog()}
 
         setView()
 
@@ -50,7 +52,12 @@ class CategorySetActivity : AppCompatActivity() {
     }
 
     fun setView() {
-        cateAdapter = CateAdapter(allCateList)
+        allCateList.forEach {
+            if(it.buse == "Y")
+                useCateList.add(it)
+        }
+
+        cateAdapter = CateAdapter(useCateList)
         cateEditAdapter = CateEditAdapter(allCateList)
 
         binding.run {
@@ -58,7 +65,7 @@ class CategorySetActivity : AppCompatActivity() {
             rvCate.adapter = cateAdapter
 
             rvCateEdit.layoutManager = LinearLayoutManager(this@CategorySetActivity, LinearLayoutManager.HORIZONTAL, false)
-            rvCateEdit.adapter = cateAdapter
+            rvCateEdit.adapter = cateEditAdapter
         }
     }
 

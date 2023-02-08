@@ -162,7 +162,7 @@ interface Api {
     ): Call<ResultDTO>
 
     // 카테고리 목록 조희
-    @GET("/api/m/categorylist.php")
+    @GET("/api/m/getcategory.php")
     fun getCateList(
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int,
@@ -182,6 +182,7 @@ interface Api {
     @GET("m/udtcate.php")
     fun udtCate(
         @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
         @Query("idx") cateidx: Int,
         @Query("name") name : String,
         @Query("memo") memo : String,
@@ -192,6 +193,7 @@ interface Api {
     @GET("m/delcate.php")
     fun delCate(
         @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
         @Query("idx") cateidx: Int,
         @Query("code") code: String
     ): Call<ResultDTO>

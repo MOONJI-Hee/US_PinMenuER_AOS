@@ -1,6 +1,7 @@
 package com.wooriyo.pinmenuer.menu.adpter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wooriyo.pinmenuer.databinding.ListCateBinding
@@ -15,6 +16,11 @@ class CateAdapter(val dataSet: ArrayList<CategoryDTO>) : RecyclerView.Adapter<Ca
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(dataSet[position])
+
+        if(position == dataSet.lastIndex)
+            holder.binding.backline.visibility = View.VISIBLE
+        else
+            holder.binding.backline.visibility = View.GONE
     }
 
     override fun getItemCount(): Int {

@@ -53,7 +53,7 @@
             android:layout_marginEnd="22dp"
             android:layout_marginVertical="10dp"
             app:layout_constraintStart_toEndOf="@+id/store_logo"
-            app:layout_constraintEnd_toStartOf="@+id/btn_cate_add"/>
+            app:layout_constraintEnd_toStartOf="@+id/btn_cate_udt"/>
         <ImageView
             android:id="@+id/cate_next"
             android:layout_width="wrap_content"
@@ -66,7 +66,7 @@
             app:layout_constraintStart_toEndOf="@+id/rvCate"/>
         <TextView
             style="@style/btn_small"
-            android:id="@+id/btn_cate_add"
+            android:id="@+id/btn_cate_udt"
             android:layout_width="98dp"
             android:layout_height="60dp"
             android:layout_marginEnd="20dp"

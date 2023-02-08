@@ -42,7 +42,7 @@
         <entry key="app/src/main/res/layout/dialog_holiday.xml" value="0.2877604166666667" />
         <entry key="app/src/main/res/layout/dialog_regtime.xml" value="0.28828125" />
         <entry key="app/src/main/res/layout/list_cate.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/list_cate_edit.xml" value="0.2877604166666667" />
+        <entry key="app/src/main/res/layout/list_cate_edit.xml" value="0.45" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.1814814814814815" />
       </map>
     </option>

@@ -38,18 +38,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name" />
 
-    <View
-        android:id="@+id/backline1"
-        android:layout_width="1dp"
+    <LinearLayout
+        android:id="@+id/backline"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="#000000"
-        app:layout_constraintEnd_toStartOf="@id/backline2" />
-
-    <View
-        android:id="@+id/backline2"
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:background="#33FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent" />
-
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent">
+        <View
+            android:id="@+id/backline1"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#000000" />
+        <View
+            android:id="@+id/backline2"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#33FFFFFF" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
