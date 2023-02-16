@@ -18,8 +18,6 @@ class CategorySetActivity : AppCompatActivity() {
     lateinit var cateAdapter : CateAdapter
     lateinit var cateEditAdapter : CateEditAdapter
 
-    var useCateList = ArrayList<CategoryDTO>()
-
     var flag = 0 // 순서 수정 모드 구분 > 0 : 수정모드 X, 1 : 수정모드 O
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,12 +50,7 @@ class CategorySetActivity : AppCompatActivity() {
     }
 
     fun setView() {
-        allCateList.forEach {
-            if(it.buse == "Y")
-                useCateList.add(it)
-        }
-
-        cateAdapter = CateAdapter(useCateList)
+        cateAdapter = CateAdapter(allCateList)
         cateEditAdapter = CateEditAdapter(allCateList)
 
         binding.run {

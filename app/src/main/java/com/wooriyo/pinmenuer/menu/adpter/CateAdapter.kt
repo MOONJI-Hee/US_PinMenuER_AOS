@@ -1,5 +1,6 @@
 package com.wooriyo.pinmenuer.menu.adpter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,14 @@ class CateAdapter(val dataSet: ArrayList<CategoryDTO>) : RecyclerView.Adapter<Ca
         fun bind(data: CategoryDTO) {
             binding.name.text = data.name
             binding.subName.text = data.subname
+
+            if (data.buse == "N") {
+                binding.name.setTextColor(Color.parseColor("#696969"))
+                binding.subName.setTextColor(Color.parseColor("#696969"))
+            } else {
+                binding.name.setTextColor(Color.WHITE)
+                binding.subName.setTextColor(Color.WHITE)
+            }
         }
     }
 }

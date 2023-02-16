@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="822dp"
+        android:layout_height="490dp"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="40dp">
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/text22b"
+            android:text="@string/sel_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/text18b"
+            android:text="@string/bg_dark"
+            android:layout_marginBottom="11dp"
+            app:layout_constraintStart_toStartOf="@+id/iv_black"
+            app:layout_constraintEnd_toEndOf="@+id/iv_black"
+            app:layout_constraintBottom_toTopOf="@+id/iv_black"/>
+
+        <TextView
+            style="@style/text18b"
+            android:text="@string/bg_silver"
+            android:layout_marginBottom="11dp"
+            app:layout_constraintStart_toStartOf="@+id/iv_silver"
+            app:layout_constraintEnd_toEndOf="@+id/iv_silver"
+            app:layout_constraintBottom_toTopOf="@+id/iv_silver"/>
+
+        <TextView
+            style="@style/text18b"
+            android:text="@string/bg_light"
+            android:layout_marginBottom="11dp"
+            app:layout_constraintStart_toStartOf="@+id/iv_light"
+            app:layout_constraintEnd_toEndOf="@+id/iv_light"
+            app:layout_constraintBottom_toTopOf="@+id/iv_light"/>
+
+        <ImageView
+            android:id="@+id/iv_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/img_skin_black"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintEnd_toStartOf="@+id/iv_silver"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_silver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/img_skin_silver"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_black"
+            app:layout_constraintStart_toEndOf="@+id/iv_black"
+            app:layout_constraintEnd_toStartOf="@+id/iv_light"
+            app:layout_constraintTop_toTopOf="@+id/iv_black" />
+
+        <ImageView
+            android:id="@+id/iv_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_skin_white"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_silver"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_silver"
+            app:layout_constraintTop_toTopOf="@+id/iv_silver" />
+
+
+        <CheckBox style="@style/toggle"
+            android:id="@+id/check_black"
+            android:layout_marginTop="6dp"
+            app:layout_constraintStart_toStartOf="@+id/iv_black"
+            app:layout_constraintEnd_toEndOf="@+id/iv_black"
+            app:layout_constraintTop_toBottomOf="@id/iv_black" />
+
+        <CheckBox style="@style/toggle"
+            android:id="@+id/check_silver"
+            android:layout_marginTop="6dp"
+            app:layout_constraintStart_toStartOf="@+id/iv_silver"
+            app:layout_constraintEnd_toEndOf="@+id/iv_silver"
+            app:layout_constraintTop_toBottomOf="@id/iv_silver" />
+
+        <CheckBox style="@style/toggle"
+            android:id="@+id/check_light"
+            android:layout_marginTop="6dp"
+            app:layout_constraintStart_toStartOf="@+id/iv_light"
+            app:layout_constraintEnd_toEndOf="@+id/iv_light"
+            app:layout_constraintTop_toBottomOf="@id/iv_light" />
+
+        <TextView
+            style="@style/btn_main"
+            android:id="@+id/save"
+            android:text="@string/set_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

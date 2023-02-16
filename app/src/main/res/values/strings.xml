@@ -10,6 +10,9 @@
     <string name="won">원</string>
     <string name="gea">개</string>
 
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+
     <string name="total_amount">총 %d개</string>
     <string name="order">주문하기</string>
     <string name="delete_order">주문삭제</string>
@@ -23,6 +26,7 @@
     <string name="save">저&#160;&#160;장</string>
     <string name="save2">저&#160;장</string>
     <string name="delete">삭&#160;&#160;제</string>
+    <string name="delete2">삭제</string>
     <string name="update">수&#160;정</string>
     <string name="sequence">순&#160;서</string>
     <string name="essential">필수</string>
@@ -171,6 +175,17 @@
     <string name="option">옵션</string>
     <string name="option_require">필수 옵션</string>
     <string name="option_choice">선택 옵션</string>
+    
+    <!--  옵션 설정  -->
+    <string name="opt1">옵션 1</string>
+    <string name="opt_req_name">필수옵션명</string>
+    <string name="opt_chc_name">선택옵션명</string>
+    <string name="opt_name_hint">옵션 이름을 입력해주세요.</string>
+    <string name="opt_hint">옵션을 입력해주세요.</string>
+    <string name="opt_req_info1"><b>필수 옵션</b>은 사용자가 옵션을 하나만 선택할 수 있습니다.</string>
+    <string name="opt_req_info2"><b>다중 선택 옵션</b>이 필요하면 팝업을 닫고, [ + 선택 옵션 ] 버튼으로 옵션을 추가해주세요.</string>
+    <string name="opt_chc_info1"><b>선택 옵션</b>은 사용자가 옵션을 다중 선택할 수 있습니다.</string>
+    <string name="opt_chc_info2"><b>한가지 선택</b>만 가능한 옵션이 필요하면 팝업을 닫고, [ + 필수 옵션 ] 버튼으로 옵션을 추가해주세요.</string>
 
     <!--  메뉴판 설정  -->
     <string name="table_pass">테이블 비밀번호 설정</string>

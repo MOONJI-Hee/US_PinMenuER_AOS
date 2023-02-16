@@ -51,9 +51,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="22dp"
-            android:layout_marginVertical="10dp"
             app:layout_constraintStart_toEndOf="@+id/store_logo"
-            app:layout_constraintEnd_toStartOf="@+id/btn_cate_udt"/>
+            app:layout_constraintEnd_toStartOf="@+id/btn_cate_udt"
+            tools:listitem="@layout/list_cate"/>
         <ImageView
             android:id="@+id/cate_next"
             android:layout_width="wrap_content"
@@ -90,8 +90,7 @@
             android:layout_height="wrap_content"
             android:background="@color/f9"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/list_menu"
-            tools:itemCount="2"/>
+            tools:listitem="@layout/list_menu"/>
 
         <LinearLayout
             android:id="@+id/btn_plus"
@@ -285,6 +284,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <TextView
                     style="@style/text16"
+                    android:layout_marginTop="20dp"
                     android:layout_marginBottom="8dp"
                     android:text="@string/menu_img_reg_info"/>
 

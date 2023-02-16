@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="822dp"
+        android:layout_height="490dp"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="40dp">
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/text22b"
+            android:text="@string/sel_viewmode"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/text18b"
+            android:text="@string/viewmode_basic"
+            android:layout_marginBottom="11dp"
+            app:layout_constraintStart_toStartOf="@+id/iv_basic"
+            app:layout_constraintEnd_toEndOf="@+id/iv_basic"
+            app:layout_constraintBottom_toTopOf="@+id/iv_basic"/>
+
+        <TextView
+            style="@style/text18b"
+            android:text="@string/viewmode_pic"
+            android:layout_marginBottom="11dp"
+            app:layout_constraintStart_toStartOf="@+id/iv_3x3"
+            app:layout_constraintEnd_toEndOf="@+id/iv_3x3"
+            app:layout_constraintBottom_toTopOf="@+id/iv_3x3"/>
+
+
+        <ImageView
+            android:id="@+id/iv_basic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/img_mode_basic"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintEnd_toStartOf="@+id/iv_3x3"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_3x3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:src="@drawable/img_mode_3x3"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_basic"
+            app:layout_constraintStart_toEndOf="@+id/iv_basic"
+            app:layout_constraintTop_toTopOf="@+id/iv_basic"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        <CheckBox style="@style/toggle"
+            android:id="@+id/check_basic"
+            android:layout_marginTop="6dp"
+            app:layout_constraintStart_toStartOf="@+id/iv_basic"
+            app:layout_constraintEnd_toEndOf="@+id/iv_basic"
+            app:layout_constraintTop_toBottomOf="@id/iv_basic" />
+
+        <CheckBox style="@style/toggle"
+            android:id="@+id/check_3x3"
+            android:layout_marginTop="6dp"
+            app:layout_constraintStart_toStartOf="@+id/iv_3x3"
+            app:layout_constraintEnd_toEndOf="@+id/iv_3x3"
+            app:layout_constraintTop_toBottomOf="@id/iv_3x3" />
+
+
+        <TextView
+            style="@style/btn_main"
+            android:id="@+id/save"
+            android:text="@string/set_viewmode"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
