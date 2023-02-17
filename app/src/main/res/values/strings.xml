@@ -74,6 +74,8 @@
     <string name="mbr_info">회원정보</string>
 
     <!-- 매장 리스트 -->
+    <string name="store_udt">정보수정</string>
+    <string name="store_pay_info">결제정보</string>
     <string name="store_list_info">운영중인 매장을 등록하여 이용하실 수 있습니다.\n복수의 매장을 운영중이시면 다수의 매장을 등록하실 수 있습니다.</string>
 
     <!--  매장 등록 & 수정  -->

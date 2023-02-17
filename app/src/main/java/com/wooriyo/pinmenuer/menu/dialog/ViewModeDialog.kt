@@ -11,5 +11,6 @@ class ViewModeDialog(context: Context): Dialog(context) {   // 메뉴판 뷰어�
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DialogViewmodeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 }

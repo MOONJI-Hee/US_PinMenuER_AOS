@@ -11,7 +11,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityStoreSetBinding
+import com.wooriyo.pinmenuer.db.entity.Store
 import com.wooriyo.pinmenuer.model.ResultDTO
+import com.wooriyo.pinmenuer.model.StoreDTO
 import com.wooriyo.pinmenuer.util.ApiClient
 import com.wooriyo.pinmenuer.util.AppHelper
 import retrofit2.Call
@@ -24,10 +26,12 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
     val TAG = "StoreSetActivity"
 
     var type : Int = 0            // 1 : 등록, 2 : 수정
-    var useridx : Int = 0
+    var useridx : Int = 11
     var storeidx : Int = 0
     var storeNm : String = ""
     var storeZip : String = "" // 우편번호
+
+    lateinit var store : StoreDTO
 
     // 바깥화면 터치하면 키보드 내리기
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
@@ -52,18 +56,21 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         //TODO useridx 받아오기
-        //TODO storeidx 받아오기
 
         type = intent.getIntExtra("type", type)
         if(type == 2) {
-            storeidx = intent.getIntExtra("storeidx", storeidx)
             binding.title.text = getString(R.string.title_udt_store)
             binding.save.visibility = View.GONE
             binding.llUdt.visibility = View.VISIBLE
+
+            store = intent.getSerializableExtra("store") as StoreDTO
+            storeidx = store.idx
         }else if(type == 1) {
             binding.btnDetail.isEnabled = false
             binding.btnHour.isEnabled = false
             binding.btnImg.isEnabled = false
+
+            store = StoreDTO(useridx)
         }
 
         binding.back.setOnClickListener(this)

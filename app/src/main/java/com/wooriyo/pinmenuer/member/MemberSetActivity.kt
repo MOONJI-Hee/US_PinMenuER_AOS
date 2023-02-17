@@ -3,6 +3,7 @@ package com.wooriyo.pinmenuer.member
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +27,11 @@ class MemberSetActivity: AppCompatActivity(), View.OnClickListener {
     var arpayoId : String = ""
 
     var useridx : Int = 0
+
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        AppHelper.hideKeyboard(this, currentFocus, ev)
+        return super.dispatchTouchEvent(ev)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

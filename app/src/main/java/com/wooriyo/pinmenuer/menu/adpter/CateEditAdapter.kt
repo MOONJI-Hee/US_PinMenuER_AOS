@@ -30,8 +30,8 @@ class CateEditAdapter(val dataSet: ArrayList<CategoryDTO>): RecyclerView.Adapter
                 binding.name.setTextColor(Color.parseColor("#696969"))
                 binding.subName.setTextColor(Color.parseColor("#696969"))
             } else {
-                binding.name.setTextColor(Color.WHITE)
-                binding.subName.setTextColor(Color.WHITE)
+                binding.name.setTextColor(Color.BLACK)
+                binding.subName.setTextColor(Color.BLACK)
             }
         }
     }

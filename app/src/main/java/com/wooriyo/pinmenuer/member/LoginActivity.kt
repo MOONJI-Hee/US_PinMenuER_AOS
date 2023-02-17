@@ -52,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.login.setOnClickListener{
+        binding.login.setOnClickListener{       // 로그인 버튼 클릭
             id = binding.etId.text.toString()
             pw = binding.etPwd.text.toString()
             token = MyApplication.pref.getToken().toString()
@@ -60,37 +60,38 @@ class LoginActivity : AppCompatActivity() {
             appvs = MyApplication.appver
             md = MyApplication.md
 
-            startActivity(Intent(this@LoginActivity, StoreMenuActivity::class.java))
-
-//            when {
-//                id.isEmpty() -> Toast.makeText(this@LoginActivity, R.string.msg_no_id, Toast.LENGTH_SHORT).show()
-//                pw.isEmpty() -> Toast.makeText(this@LoginActivity, R.string.msg_no_pw, Toast.LENGTH_SHORT).show()
-//                else -> loginWithApi()
-//            }
+            when {
+                id.isEmpty() -> Toast.makeText(this@LoginActivity, R.string.msg_no_id, Toast.LENGTH_SHORT).show()
+                pw.isEmpty() -> Toast.makeText(this@LoginActivity, R.string.msg_no_pw, Toast.LENGTH_SHORT).show()
+                else -> loginWithApi()
+            }
         }
 
-        binding.signup.setOnClickListener {
+        binding.signup.setOnClickListener {     // 회원가입 버튼 클릭
             startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
         }
     }
 
     override fun onResume() {
         super.onResume()
-        AppHelper.hideInset(this)
+        AppHelper.hideInset(this)   // 네비게이션바 숨기기
     }
 
-    private fun loginWithApi()  {
-        ApiClient.service.checkMbr(Encoder.encodeUTF8(id), Encoder.encodeUTF8(pw), token, "A", osvs, appvs, md)
+    private fun loginWithApi()  {   // Api로 로그인
+        ApiClient.service.checkMbr(id, pw, token, "A", osvs, appvs, md)
             .enqueue(object: retrofit2.Callback<MemberDTO> {
                 override fun onResponse(call: Call<MemberDTO>, response: Response<MemberDTO>) {
                     Log.d(TAG, "로그인 url : $response")
                     if(response.isSuccessful) {
                         val memberDTO = response.body()
                         if(memberDTO != null) {
+                            Log.d(TAG, memberDTO.toString())
                             if(memberDTO.status == 1) {
                                 MyApplication.pref.setMbrDTO(memberDTO)
+                                MyApplication.pref.setUserIdx(memberDTO.useridx)
+                                MyApplication.pref.setPw(pw)
                                 Toast.makeText(this@LoginActivity, memberDTO.msg, Toast.LENGTH_SHORT).show()
-                                startActivity(Intent(this@LoginActivity, StoreMenuActivity::class.java))
+                                startActivity(Intent(this@LoginActivity, StoreListActivity::class.java))
                             } else {
                                 Toast.makeText(this@LoginActivity, memberDTO.msg, Toast.LENGTH_SHORT).show()
                             }

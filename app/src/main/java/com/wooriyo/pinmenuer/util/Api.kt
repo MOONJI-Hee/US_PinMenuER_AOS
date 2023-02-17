@@ -1,12 +1,7 @@
 package com.wooriyo.pinmenuer.util
 
-import com.wooriyo.pinmenuer.db.entity.Store
-import com.wooriyo.pinmenuer.model.CateListDTO
-import com.wooriyo.pinmenuer.model.CategoryDTO
-import com.wooriyo.pinmenuer.model.MemberDTO
-import com.wooriyo.pinmenuer.model.ResultDTO
+import com.wooriyo.pinmenuer.model.*
 import okhttp3.MultipartBody
-import org.json.JSONArray
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -60,11 +55,11 @@ interface Api {
     ): Call<ResultDTO>
 
     // 매장 목록 조회
-//    @FormUrlEncoded
-//    @POST("/api/m/store.list.php")
-//    fun getStoreList(
-//        @Field("useridx") useridx: String
-//    ): Call<>
+    @FormUrlEncoded
+    @POST("/api/m/store.list.php")
+    fun getStoreList(
+        @Field("useridx") useridx: Int
+    ): Call<StoreListDTO>
 
     //매장 등록
     @GET("m/regstore.php")

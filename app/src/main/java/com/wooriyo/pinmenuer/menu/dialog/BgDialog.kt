@@ -11,5 +11,6 @@ class BgDialog(context: Context): Dialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DialogBgBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 }

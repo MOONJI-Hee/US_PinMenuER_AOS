@@ -45,15 +45,13 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
+        style="@style/text20"
         android:id="@+id/tv_id"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
         android:paddingHorizontal="15dp"
         android:visibility="gone"
-        app:layout_constraintTop_toTopOf="@+id/et_id"
         app:layout_constraintBottom_toBottomOf="@+id/et_id"
         app:layout_constraintStart_toStartOf="@+id/et_id"
-        app:layout_constraintEnd_toEndOf="@+id/et_id"/>
+        app:layout_constraintTop_toTopOf="@+id/et_id" />
 
     <TextView
         style="@style/btn_small"
