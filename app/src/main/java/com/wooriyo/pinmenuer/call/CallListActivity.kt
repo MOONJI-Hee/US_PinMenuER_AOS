@@ -2,14 +2,18 @@ package com.wooriyo.pinmenuer.call
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.wooriyo.pinmenuer.databinding.ActivityCallListBinding
-import com.wooriyo.pinmenuer.databinding.ActivityMapBinding
+import com.wooriyo.pinmenuer.R
+import com.wooriyo.pinmenuer.databinding.ActivityOrderListBinding
 
 class CallListActivity : AppCompatActivity() {
-    lateinit var binding: ActivityCallListBinding
+    lateinit var binding: ActivityOrderListBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCallListBinding.inflate(layoutInflater)
+        binding = ActivityOrderListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.title.text = getString(R.string.call)
+        binding.btnManage.text = getString(R.string.call_manage)
     }
 }

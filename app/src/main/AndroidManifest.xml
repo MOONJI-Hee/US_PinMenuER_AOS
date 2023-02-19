@@ -23,6 +23,13 @@
         android:theme="@style/Theme.PinMenuER"
         tools:targetApi="31">
         <activity
+            android:name=".CallSetActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".call.CallListActivity"
             android:exported="false">
             <meta-data
@@ -44,7 +51,7 @@
             android:exported="false" />
         <activity
             android:name=".menu.CategorySetActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".member.LoginActivity"
             android:exported="false" />
@@ -57,8 +64,9 @@
         <activity
             android:name=".store.StoreListActivity"
             android:exported="false" />
-        <activity android:name=".store.StoreMenuActivity"
-            android:exported="false"/>
+        <activity
+            android:name=".store.StoreMenuActivity"
+            android:exported="false" />
         <activity
             android:name=".store.StoreSetActivity"
             android:exported="false" />
@@ -76,8 +84,10 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

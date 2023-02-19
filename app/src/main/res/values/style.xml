@@ -219,6 +219,17 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:includeFontPadding">false</item>
     </style>
+    <style name="num_badge18">
+        <item name="android:layout_width">18dp</item>
+        <item name="android:layout_height">18dp</item>
+        <item name="android:background">@drawable/bg_circle</item>
+        <item name="android:backgroundTint">#F06A3A</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
     <style name="thum">
         <item name="android:layout_width">186dp</item>
         <item name="android:layout_height">124dp</item>
