@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityStoreListBinding
 import com.wooriyo.pinmenuer.member.MemberSetActivity
@@ -23,7 +24,7 @@ class StoreListActivity : AppCompatActivity(), View.OnClickListener {
 
     val TAG = "StoreListActivity"
     val mActivity = this@StoreListActivity
-    var useridx = 11
+    var useridx = 0
 
     var storeList = ArrayList<StoreDTO>()
     var storeAdapter = StoreAdapter(storeList)
@@ -33,14 +34,15 @@ class StoreListActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityStoreListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.udtMbr.setOnClickListener(this)
+        useridx = MyApplication.pref.getUserIdx()
 
-        getStoreList()
+        binding.udtMbr.setOnClickListener(this)
     }
 
     override fun onResume() {
         super.onResume()
         AppHelper.hideInset(this)
+        getStoreList()
     }
 
     override fun onClick(v: View?) {
@@ -59,6 +61,7 @@ class StoreListActivity : AppCompatActivity(), View.OnClickListener {
                     if(response.isSuccessful) {
                         val storeListDTO = response.body() ?: return
                         if(storeListDTO.status == 1) {
+                            storeList.clear()
                             storeList.addAll(storeListDTO.storeList)
                             setStoreList()
                         }else {

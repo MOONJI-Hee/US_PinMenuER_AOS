@@ -1,5 +1,6 @@
 package com.wooriyo.pinmenuer.store
 
+import android.content.Intent
 import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,9 +9,12 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
+import com.wooriyo.pinmenuer.common.MapActivity
 import com.wooriyo.pinmenuer.databinding.ActivityStoreSetDetailBinding
 import com.wooriyo.pinmenuer.model.ResultDTO
+import com.wooriyo.pinmenuer.model.StoreDTO
 import com.wooriyo.pinmenuer.util.ApiClient
 import com.wooriyo.pinmenuer.util.AppHelper
 import retrofit2.Call
@@ -22,8 +26,10 @@ class StoreSetDetailActivity : AppCompatActivity(), View.OnClickListener {
 
     val TAG = "StoreSetDetailActivity"
 
-    var useridx = 11
-    var storeidx = 2
+    var useridx = 0
+    var storeidx = 0
+    lateinit var store : StoreDTO
+
     var storeTel = ""
     var storeInsta = ""
     var delivery = ""
@@ -41,6 +47,32 @@ class StoreSetDetailActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityStoreSetDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        useridx = MyApplication.pref.getUserIdx()
+
+        store = intent.getSerializableExtra("store") as StoreDTO
+        storeidx = store.idx
+
+        binding.run {
+            if(store.tel != null)
+                etTel.setText(store.tel)
+            if(store.sns != null)
+                etInsta.setText(store.sns)
+            if(store.delivery != null) {
+                when(store.delivery) {
+                    "Y" -> deliveryY.isChecked = true
+                    "N" -> deliveryN.isChecked = true
+                }
+            }
+            if(store.parking != null) {
+                when(store.parking) {
+                    "Y" -> parkingY.isChecked = true
+                    "N" -> parkingN.isChecked = true
+                }
+            }
+            if(store.parkingAddr != null)
+                etParkingAddr.setText(store.parkingAddr)
+        }
+
         binding.back.setOnClickListener(this)
         binding.btnMap.setOnClickListener(this)
         binding.save.setOnClickListener(this)
@@ -54,7 +86,7 @@ class StoreSetDetailActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when(p0) {
             binding.back -> finish()
-            binding.btnMap -> {}
+            binding.btnMap -> {startActivity(Intent(this@StoreSetDetailActivity, MapActivity::class.java))}
             binding.save -> save()
         }
     }
@@ -70,8 +102,8 @@ class StoreSetDetailActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         when(binding.groupParking.checkedRadioButtonId) {
-            binding.parkingY.id -> delivery = "Y"
-            binding.parkingN.id -> delivery = "N"
+            binding.parkingY.id -> parking = "Y"
+            binding.parkingN.id -> parking = "N"
         }
 
         ApiClient.service.udtStoreDetail(useridx, storeidx, storeTel, storeInsta, delivery, parking, parkingAddr)
@@ -82,7 +114,6 @@ class StoreSetDetailActivity : AppCompatActivity(), View.OnClickListener {
                     if(resultDTO != null) {
                         if(resultDTO.status == 1) {
                             Toast.makeText(this@StoreSetDetailActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
-                            finish()
                         }else {
                             Toast.makeText(this@StoreSetDetailActivity, resultDTO.msg, Toast.LENGTH_SHORT).show()
                         }

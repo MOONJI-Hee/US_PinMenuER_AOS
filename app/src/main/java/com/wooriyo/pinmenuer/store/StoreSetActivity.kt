@@ -9,7 +9,9 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
+import com.wooriyo.pinmenuer.common.MapActivity
 import com.wooriyo.pinmenuer.databinding.ActivityStoreSetBinding
 import com.wooriyo.pinmenuer.db.entity.Store
 import com.wooriyo.pinmenuer.model.ResultDTO
@@ -26,7 +28,7 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
     val TAG = "StoreSetActivity"
 
     var type : Int = 0            // 1 : 등록, 2 : 수정
-    var useridx : Int = 11
+    var useridx : Int = 0
     var storeidx : Int = 0
     var storeNm : String = ""
     var storeZip : String = "" // 우편번호
@@ -35,18 +37,7 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
 
     // 바깥화면 터치하면 키보드 내리기
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        val focusView = this.currentFocus
-        if (focusView != null) {
-            val rect = Rect()
-            focusView.getGlobalVisibleRect(rect)
-            val x = ev.x.toInt()
-            val y = ev.y.toInt()
-            if (!rect.contains(x, y)) {
-                val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(focusView.windowToken, 0)
-                focusView.clearFocus()
-            }
-        }
+        AppHelper.hideKeyboard(this, currentFocus, ev)
         return super.dispatchTouchEvent(ev)
     }
 
@@ -55,7 +46,7 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityStoreSetBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //TODO useridx 받아오기
+        useridx = MyApplication.pref.getUserIdx()
 
         type = intent.getIntExtra("type", type)
         if(type == 2) {
@@ -65,6 +56,9 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
 
             store = intent.getSerializableExtra("store") as StoreDTO
             storeidx = store.idx
+
+            binding.etName.setText(store.name)
+            binding.etAddr.setText(store.address)
         }else if(type == 1) {
             binding.btnDetail.isEnabled = false
             binding.btnHour.isEnabled = false
@@ -80,6 +74,7 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
         binding.btnDetail.setOnClickListener(this)
         binding.btnHour.setOnClickListener(this)
         binding.btnImg.setOnClickListener(this)
+        binding.btnMap.setOnClickListener(this)
     }
 
     override fun onResume() {
@@ -95,7 +90,7 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
             binding.modify -> modify()
             binding.btnDetail -> {
                 if(type == 2)
-                    startActivity(Intent(this@StoreSetActivity, StoreSetDetailActivity::class.java))
+                    startActivity(Intent(this@StoreSetActivity, StoreSetDetailActivity::class.java).putExtra("store", store))
                 else if (type == 1)
                     Toast.makeText(this@StoreSetActivity, R.string.msg_reg_store_first, Toast.LENGTH_SHORT).show()
             }
@@ -110,6 +105,12 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
                     startActivity(Intent(this@StoreSetActivity, StoreSetImgActivity::class.java))
                 else if (type == 1)
                     Toast.makeText(this@StoreSetActivity, R.string.msg_reg_store_first, Toast.LENGTH_SHORT).show()
+            }
+            binding.btnMap -> {
+                val intent = Intent(this@StoreSetActivity, MapActivity::class.java)
+                intent.putExtra("lat", store.lat) // 위도 (latitude)
+                intent.putExtra("long", store.long) // 경도 (longitude)
+                startActivity(intent)
             }
         }
     }
