@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
 
-class StartActivity : AppCompatActivity() {
+class StartActivity: AppCompatActivity() {
     val TAG = "StartActivity"
     var idx = 0
     var id = ""
@@ -27,6 +27,7 @@ class StartActivity : AppCompatActivity() {
     var osvs = 0
     var appvs = ""
     var md = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         resources.displayMetrics.density = MyApplication.density
