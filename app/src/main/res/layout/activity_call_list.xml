@@ -30,12 +30,11 @@
 
     <TextView
         style="@style/btn_small"
-        android:id="@+id/btn_manage"
+        android:id="@+id/btn_set"
         android:layout_width="128dp"
         android:layout_height="40dp"
         android:gravity="center"
         android:text="@string/call_manage"
-        android:background="@drawable/bg_btn_r6_grd"
         app:layout_constraintTop_toTopOf="@+id/title"
         app:layout_constraintBottom_toBottomOf="@+id/title"
         app:layout_constraintEnd_toStartOf="@+id/refresh"/>
@@ -64,13 +63,30 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_call"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        android:background="@color/btn_cancel"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/call_set_area"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_call_set"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="80dp"
         android:layout_marginBottom="20dp"
         android:layout_marginStart="166dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/call_info"/>
 
     <TextView
@@ -78,7 +94,9 @@
         android:id="@+id/call_info"
         android:layout_marginBottom="68dp"
         android:text="@string/call_info"
-        app:layout_constraintStart_toStartOf="@+id/rv_call"
+        app:layout_constraintStart_toStartOf="@+id/rv_call_set"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

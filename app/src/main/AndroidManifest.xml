@@ -23,7 +23,7 @@
         android:theme="@style/Theme.PinMenuER"
         tools:targetApi="31">
         <activity
-            android:name=".CallSetActivity"
+            android:name=".call.CallSetActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

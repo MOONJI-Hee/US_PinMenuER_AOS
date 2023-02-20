@@ -59,8 +59,8 @@ class MenuSetActivity : AppCompatActivity(), View.OnClickListener {
             binding.setTablePass -> {}
             binding.setBg -> { BgDialog(this@MenuSetActivity).show() }
             binding.setViewMode -> { ViewModeDialog(this@MenuSetActivity).show() }
-            binding.optRequire -> { OptionDialog(this@MenuSetActivity, 1).show() }
-            binding.optChoice -> { OptionDialog(this@MenuSetActivity, 2).show() }
+            binding.optRequire -> { OptionDialog(this@MenuSetActivity, 1, null).show() }
+            binding.optChoice -> { OptionDialog(this@MenuSetActivity, 2, null).show() }
         }
     }
 

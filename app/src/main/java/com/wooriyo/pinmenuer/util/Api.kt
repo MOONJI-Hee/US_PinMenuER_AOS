@@ -228,7 +228,7 @@ interface Api {
     @GET("m/call.list.php")
     fun getCallList(
         @Query("useridx") useridx: Int
-    )
+    ): Call<CallSetListDTO>
 
     // 직원 호출 등록
     @GET("m/ins_call.php")
@@ -250,5 +250,5 @@ interface Api {
     fun delCall(
         @Query("useridx") useridx: Int,
         @Query("idx") callidx: Int
-    )
+    ): Call<ResultDTO>
 }

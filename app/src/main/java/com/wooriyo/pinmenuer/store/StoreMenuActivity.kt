@@ -55,7 +55,7 @@ class StoreMenuActivity : AppCompatActivity(), OnClickListener {
 
     override fun onClick(p0: View?) {
         when(p0) {
-            binding.back -> finish()
+            binding.back -> startActivity(Intent(this@StoreMenuActivity, StoreListActivity::class.java))
             binding.udtMbr -> startActivity(Intent(this@StoreMenuActivity, MemberSetActivity::class.java))
             binding.order -> startActivity(Intent(this@StoreMenuActivity, OrderListActivity::class.java))
             binding.call -> startActivity(Intent(this@StoreMenuActivity, CallListActivity::class.java))

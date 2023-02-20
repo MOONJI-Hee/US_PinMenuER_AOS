@@ -41,19 +41,4 @@ class SharedDTO(context: Context) {
     fun setToken(push_token: String) {
         pref.edit().putString("push_token", push_token).apply()
     }
-
-    fun getCateList(): ArrayList<CategoryDTO>? {
-        val json: String? = pref.getString("cateList", "")
-
-
-
-
-        return  null
-    }
-
-    fun setCateList(cateList : ArrayList<CategoryDTO>) {
-        val json = gson.toJson(cateList)
-        pref.edit().putString("cateList", json).apply()
-    }
-
 }

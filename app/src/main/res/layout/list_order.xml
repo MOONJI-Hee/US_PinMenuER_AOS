@@ -1,6 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_marginEnd="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            android:background="#5A5A5A"
+            android:paddingHorizontal="20dp">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tableno"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/tableNo"
+                app:layout_constraintStart_toStartOf="@+id/tableNo"
+                app:layout_constraintEnd_toEndOf="@+id/tableNo"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/tableNo"
+                android:layout_width="86dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_r4b"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <TextView
+                style="@style/text18"
+                android:id="@+id/date"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toTopOf="@+id/textView"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                style="@style/text22b"
+                android:id="@+id/time"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tableNo"
+                app:layout_constraintBottom_toBottomOf="@+id/tableNo" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:paddingHorizontal="20dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#EBEBEB">
+
+            <TextView
+                style="@style/text16"
+                android:text="@string/tot_price"/>
+
+            <TextView
+                style="@style/text18b"
+                android:id="@+id/totPrice"
+                android:layout_marginHorizontal="5dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                style="@style/text16"
+                android:text="@string/won"/>
+
+        </LinearLayout>
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/basic_area"
+            android:layout_width="match_parent"
+            android:layout_height="131dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="25dp"
+            android:paddingHorizontal="20dp"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/btn"
+                android:id="@+id/pos"
+                android:layout_width="0dp"
+                android:layout_height="38dp"
+                android:text="@string/pos"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/print"/>
+
+            <TextView
+                style="@style/btn"
+                android:id="@+id/print"
+                android:layout_width="0dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="10dp"
+                android:text="@string/print"
+                app:layout_constraintStart_toEndOf="@+id/pos"
+                app:layout_constraintTop_toTopOf="@+id/pos"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                style="@style/btn"
+                android:id="@+id/complete"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:text="@string/complete"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/merge_area"
+            android:layout_width="match_parent"
+            android:layout_height="131dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingBottom="25dp"
+            android:paddingHorizontal="20dp"
+            android:visibility="gone">
+
+            <CheckBox
+                android:id="@+id/check_merge"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginVertical="18dp"
+                android:button="@null"
+                android:background="@drawable/selector_check_big"/>
+
+            <TextView
+                style="@style/btn"
+                android:id="@+id/btn_merge"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:text="@string/order_sel_merge"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
