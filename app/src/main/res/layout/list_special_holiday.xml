@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="13dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <TextView
+        style="@style/text20"
+        android:id="@+id/holiday_name"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/holiday_date"
+        android:layout_width="140dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="5dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:background="@drawable/bg_edittext"/>
+</LinearLayout>

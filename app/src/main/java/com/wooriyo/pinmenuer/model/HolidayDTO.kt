@@ -9,4 +9,6 @@ data class HolidayDTO(
     var fri_buse : String,
     var sat_buse : String,
     var sun_buse : String
-)
+) {
+    constructor() : this("N", "N", "N","N", "N", "N", "N", "N")
+}

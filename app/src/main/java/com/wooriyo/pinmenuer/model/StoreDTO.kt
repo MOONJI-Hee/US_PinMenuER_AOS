@@ -21,7 +21,19 @@ data class StoreDTO(
     @SerializedName("sns") var sns : String?,
     @SerializedName("delivery") var delivery : String?="N",
     @SerializedName("parking") var parking : String?="N",
-    @SerializedName("parkingadr") var parkingAddr : String?
+    @SerializedName("parkingadr") var parkingAddr : String?,
+    @SerializedName("hbuse") var hbuse : String,
+    @SerializedName("mon_buse") var mon_buse : String,
+    @SerializedName("tue_buse") var tue_buse : String,
+    @SerializedName("wed_buse") var wed_buse : String,
+    @SerializedName("thu_buse") var thu_buse : String,
+    @SerializedName("fri_buse") var fri_buse : String,
+    @SerializedName("sat_buse") var sat_buse : String,
+    @SerializedName("sun_buse") var sun_buse : String,
+    @SerializedName("workList")  var opentime: OpenTimeDTO?,
+    @SerializedName("breakList")  var breaktime: BrkTimeDTO?,
+    @SerializedName("holidayList")  var spcHoliday: ArrayList<SpcHolidayDTO>?
 ):Serializable {
-    constructor(useridx: Int) :  this(0, useridx, "", "", "", "", "", "", "", "", "", "", "", null, null, null, null, null)
+    constructor(useridx: Int) :  this(0, useridx, "", "", "", "", "", "", "", "", "", "", "", null, null, null, null, null,
+        "N", "N", "N", "N", "N", "N", "N", "N" ,null, null, null)
 }

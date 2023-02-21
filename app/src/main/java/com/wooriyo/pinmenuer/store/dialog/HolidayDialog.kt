@@ -9,9 +9,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.DialogHolidayBinding
+import com.wooriyo.pinmenuer.listener.DialogListener
 import com.wooriyo.pinmenuer.model.ResultDTO
+import com.wooriyo.pinmenuer.model.SpcHolidayDTO
 import com.wooriyo.pinmenuer.util.ApiClient
 import com.wooriyo.pinmenuer.util.AppHelper
 import com.wooriyo.pinmenuer.util.Encoder
@@ -19,12 +22,19 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HolidayDialog(context: Context, val type : Int, val useridx : Int, val idx : Int): Dialog(context), View.OnClickListener {
+class HolidayDialog(context: Context, val type : Int, val useridx : Int, val storeidx : Int, val spcHoliday : SpcHolidayDTO?): Dialog(context), View.OnClickListener {
     lateinit var binding : DialogHolidayBinding
+    lateinit var dialogListener: DialogListener
     val TAG = "HolidayDialog"
 
-    var storeidx = 0
     var holidayidx = 0
+    var title = ""
+    var month = ""
+    var day = ""
+
+    fun setOnHolidaySetListener (dialogListener: DialogListener) {
+        this.dialogListener = dialogListener
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,14 +43,23 @@ class HolidayDialog(context: Context, val type : Int, val useridx : Int, val idx
         setContentView(binding.root)
 
         when(type) {
-            1 -> {  // 저장
-                storeidx = idx
-            }
             2 -> {  // 수정
                 binding.save.visibility = View.GONE
                 binding.llUdt.visibility = View.VISIBLE
 
-                holidayidx = idx
+                if(spcHoliday != null) {
+                    holidayidx = spcHoliday.idx
+                    title = spcHoliday.title
+                    month = spcHoliday.month
+                    day = spcHoliday.day
+
+                    if(title != "")
+                        binding.etName.setText(title)
+                    if(month != "")
+                        binding.etMonth.setText(AppHelper.mkDouble(month))
+                    if(day != "")
+                        binding.etDay.setText(AppHelper.mkDouble(day))
+                }
             }
         }
 
@@ -61,14 +80,22 @@ class HolidayDialog(context: Context, val type : Int, val useridx : Int, val idx
         }
     }
 
+    fun check() {
+        title = binding.etName.text.toString()
+        month = binding.etMonth.text.toString()
+        day = binding.etDay.text.toString()
+
+        if(title.isEmpty()) {
+            Toast.makeText(context, R.string.msg_no_name, Toast.LENGTH_SHORT).show()
+            return
+        }else if(day.isEmpty()) {
+            Toast.makeText(context, R.string.msg_no_date, Toast.LENGTH_SHORT).show()
+            return
+        }
+    }
+
     private fun save() {
-        val title = "지희 생일"
-        val month = "10"
-        val day = "22"
-
-        Log.d(TAG, "title : $title, month : $month, day : $day")
-        Log.d(TAG, "title 인코딩 했을 때 뭔데 >> ${Encoder.encodeUTF8(title)}")
-
+        check()
         ApiClient.service.insHoliday(useridx, storeidx, title, month, day)
             .enqueue(object : Callback<ResultDTO> {
                 override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
@@ -79,6 +106,7 @@ class HolidayDialog(context: Context, val type : Int, val useridx : Int, val idx
                             when(resultDTO.status) {
                                 1-> {
                                     Toast.makeText(context, resultDTO.msg, Toast.LENGTH_SHORT).show()
+//                                    dialogListener.onHolidaySet()
                                     dismiss()
                                 }
                                 else -> Toast.makeText(context, resultDTO.msg, Toast.LENGTH_SHORT).show()
@@ -94,9 +122,7 @@ class HolidayDialog(context: Context, val type : Int, val useridx : Int, val idx
     }
 
     private fun modify() {
-        val title = "특별 휴일"
-        val month = "00"
-        val day = "15"
+        check()
         ApiClient.service.udtHoliday(useridx, holidayidx, title, month, day)
             .enqueue(object : Callback<ResultDTO>{
                 override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {

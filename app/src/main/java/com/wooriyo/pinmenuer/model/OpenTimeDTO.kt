@@ -1,5 +1,7 @@
 package com.wooriyo.pinmenuer.model
 
+import java.io.Serializable
+
 data class OpenTimeDTO (    //영업시간
     var buse : String,   // Y : 매일 동일한 영업시간, N : 매일 다른 영업시간
     var starttm : String,
@@ -32,8 +34,8 @@ data class OpenTimeDTO (    //영업시간
     var sun_buse : String,
     var sun_starttm : String,
     var sun_endtm : String
-) {
+):Serializable {
     constructor() : this(
-        "","","","","","","","","","","","",
-        "","","","","","","","","","","","")
+        "Y","","","N","","","N","","","N","","",
+        "N","","","N","","","N","","","N","","")
 }

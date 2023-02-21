@@ -51,9 +51,13 @@ class AppHelper {
             return nformat.format(n)
         }
 
-        // 한자리 수 n > 0n 형식으로 변환하기
+        // 한자리 수 n > 0n 형식으로 변환하기 + 빈 문자열 > 00으로 변환
         fun mkDouble(n: String): String {
-            return dec.format(n)
+            return if(n == "") {
+                "00"
+            } else {
+                dec.format(n.toInt())
+            }
         }
 
         fun osVersion(): Int = Build.VERSION.SDK_INT    // 안드로이드 버전

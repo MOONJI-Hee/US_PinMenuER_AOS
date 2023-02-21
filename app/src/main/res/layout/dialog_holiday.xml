@@ -39,7 +39,7 @@
             style="@style/edittext_main"
             android:id="@+id/et_name"
             android:layout_marginTop="32dp"
-            android:hint="@string/store_name_hint"
+            android:hint="@string/store_holiday_name_hint"
             android:inputType="text"
             app:layout_constraintTop_toBottomOf="@+id/title"
             app:layout_constraintStart_toStartOf="parent"

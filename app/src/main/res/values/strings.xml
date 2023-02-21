@@ -43,6 +43,8 @@
     <string name="zero2">00</string>
     <string name="min">분</string>
 
+    <string name="zeroClock"><font color="#B4B4B4">00</font>:<font color="#B4B4B4">00</font></string>
+
     <string name="monday">월요일</string>
     <string name="tuesday">화요일</string>
     <string name="wednesday">수요일</string>
@@ -254,6 +256,7 @@
     <string name="msg_no_addr">주소를 입력해주세요.</string>
     <string name="msg_reg_store_first">매장 등록을 완료한 후 이용해주시기 바랍니다.</string>
     <string name="msg_no_endtm">시간을 확인해주세요.</string>
+    <string name="msg_no_date">날짜를 확인해주세요.</string>
     <string name="msg_no_img">이미지를 등록해주세요.</string>
     <string name="msg_no_name">명칭을 입력해주세요.</string>
     <string name="backpress">뒤로 가기 버튼을 한 번 더 누르시면 종료됩니다.</string>

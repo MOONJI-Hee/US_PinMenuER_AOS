@@ -88,7 +88,7 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
             binding.save -> save()
             binding.delete -> delete()
             binding.modify -> modify()
-            binding.btnDetail -> {
+            binding.btnDetail-> {
                 if(type == 2)
                     startActivity(Intent(this@StoreSetActivity, StoreSetDetailActivity::class.java).putExtra("store", store))
                 else if (type == 1)
@@ -96,13 +96,13 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
             }
             binding.btnHour -> {
                 if(type == 2)
-                    startActivity(Intent(this@StoreSetActivity, StoreSetTimeActivity::class.java))
+                    startActivity(Intent(this@StoreSetActivity, StoreSetTimeActivity::class.java).putExtra("store", store))
                 else if (type == 1)
                     Toast.makeText(this@StoreSetActivity, R.string.msg_reg_store_first, Toast.LENGTH_SHORT).show()
             }
             binding.btnImg -> {
                 if(type == 2)
-                    startActivity(Intent(this@StoreSetActivity, StoreSetImgActivity::class.java))
+                    startActivity(Intent(this@StoreSetActivity, StoreSetImgActivity::class.java).putExtra("store", store))
                 else if (type == 1)
                     Toast.makeText(this@StoreSetActivity, R.string.msg_reg_store_first, Toast.LENGTH_SHORT).show()
             }

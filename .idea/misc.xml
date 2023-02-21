@@ -46,7 +46,7 @@
         <entry key="app/src/main/res/layout/activity_store_set_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_store_set_hour.xml" value="0.484375" />
         <entry key="app/src/main/res/layout/activity_store_set_img.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_store_set_time.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/activity_store_set_time.xml" value="0.335" />
         <entry key="app/src/main/res/layout/dialog_bg.xml" value="0.335" />
         <entry key="app/src/main/res/layout/dialog_category.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/dialog_choice.xml" value="0.20333333333333334" />
@@ -63,6 +63,7 @@
         <entry key="app/src/main/res/layout/list_opt_edit.xml" value="0.375" />
         <entry key="app/src/main/res/layout/list_order.xml" value="0.375" />
         <entry key="app/src/main/res/layout/list_order_detail.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/list_special_holiday.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/list_store.xml" value="0.29583333333333334" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.1814814814814815" />
       </map>

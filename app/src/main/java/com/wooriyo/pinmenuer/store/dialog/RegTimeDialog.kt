@@ -5,13 +5,17 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.DialogRegtimeBinding
+import com.wooriyo.pinmenuer.listener.DialogListener
 import com.wooriyo.pinmenuer.util.AppHelper
+import com.wooriyo.pinmenuer.util.AppHelper.Companion.mkDouble
 
-class RegTimeDialog(context: Context): Dialog(context) {
+class RegTimeDialog(context: Context, var start: String, var end: String): Dialog(context) {
     lateinit var binding : DialogRegtimeBinding
+    lateinit var dialogListener: DialogListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,8 +23,21 @@ class RegTimeDialog(context: Context): Dialog(context) {
         binding = DialogRegtimeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if(start != "00:00") {
+            binding.etStartHour.setText(start.substring(0, 2))
+            binding.etStartMin.setText(start.substring(3))
+        }
+        if(end != "00:00") {
+            binding.etEndHour.setText(end.substring(0, 2))
+            binding.etEndMin.setText(end.substring(3))
+        }
+
         binding.close.setOnClickListener { dismiss() }
         binding.save.setOnClickListener { save() }
+    }
+
+    fun setOnTimeSetListener(dialogListener: DialogListener) {
+        this.dialogListener = dialogListener
     }
 
     fun save() {
@@ -29,18 +46,15 @@ class RegTimeDialog(context: Context): Dialog(context) {
         val end_hour = binding.etEndHour.text ?: "00"
         val end_min = binding.etEndMin.text ?: "00"
 
-        val starttm = "${AppHelper.mkDouble(start_hour.toString())} : ${AppHelper.mkDouble(start_min.toString())}"
-        val endtm = "${AppHelper.mkDouble(end_hour.toString())} : ${AppHelper.mkDouble(end_min.toString())}"
+        start = "${mkDouble(start_hour.toString())}:${mkDouble(start_min.toString())}"
+        end = "${mkDouble(end_hour.toString())}:${mkDouble(end_min.toString())}"
 
-        // 끝나는 시간이 00:00일 때 리턴
-        // 끝나는 시간이 시작시간보다 전일 때 리턴
-
-        if(endtm == "00 : 00") {
+        if(start == "00:00" && end == "00:00") {
             Toast.makeText(context, R.string.msg_no_endtm, Toast.LENGTH_SHORT).show()
             return
         }
 
-
+        dialogListener.onTimeSet(start, end)
     }
 
 }

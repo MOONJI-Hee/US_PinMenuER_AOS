@@ -1,5 +1,7 @@
 package com.wooriyo.pinmenuer.model
 
+import java.io.Serializable
+
 data class BrkTimeDTO(
     var buse : String,   // Y : 매일 동일한 브레이크 타임, N : 매일 다른 브레이크 타임
     var starttm : String,
@@ -32,4 +34,9 @@ data class BrkTimeDTO(
     var sun_buse : String,
     var sun_starttm : String,
     var sun_endtm : String
-)
+): Serializable {
+    constructor() : this(
+        "Y","","","N","","","N","","","N","","",
+        "N","","","N","","","N","","","N","","")
+}
+

@@ -50,7 +50,6 @@
             android:inputType="time"
             android:maxLength="2"
             app:layout_constraintEnd_toStartOf="@+id/et_start_min"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title" />
@@ -74,7 +73,6 @@
             android:maxLength="2"
             app:layout_constraintBottom_toBottomOf="@+id/et_start_hour"
             app:layout_constraintEnd_toStartOf="@+id/et_end_hour"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/et_start_hour"
             app:layout_constraintTop_toTopOf="@+id/et_start_hour" />
 
@@ -97,7 +95,6 @@
             android:maxLength="2"
             app:layout_constraintBottom_toBottomOf="@+id/et_start_min"
             app:layout_constraintEnd_toStartOf="@+id/et_end_min"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/et_start_min"
             app:layout_constraintTop_toTopOf="@+id/et_start_min" />
 
@@ -120,7 +117,6 @@
             android:maxLength="2"
             app:layout_constraintBottom_toBottomOf="@+id/et_end_hour"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/et_end_hour"
             app:layout_constraintTop_toTopOf="@+id/et_end_hour" />
 
