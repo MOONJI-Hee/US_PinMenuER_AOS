@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">PinMenu 관리자</string>
 
+    <string name="kakao_appKey">398d9c3d6b47f73780e5413b1f4b167f</string>
+    <string name="kakao_apiKey">0a9047a6f0f9b350e4fca5168f2c5ef8</string>
+
     <string name="login">로그인</string>
     <string name="id">아이디</string>
     <string name="password">비밀번호</string>

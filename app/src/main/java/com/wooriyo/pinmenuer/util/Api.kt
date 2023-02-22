@@ -58,7 +58,8 @@ interface Api {
     @FormUrlEncoded
     @POST("/api/m/store.list.php")
     fun getStoreList(
-        @Field("useridx") useridx: Int
+        @Field("useridx") useridx: Int,
+        @Field("storeidx") storeidx: String?="" // null일 때 처리를 위해서 여기만 String
     ): Call<StoreListDTO>
 
     //매장 등록
@@ -67,7 +68,8 @@ interface Api {
         @Query("useridx") useridx: Int,
         @Query("storenm") storenm: String,
         @Query("addr") addr: String,                // 주소
-        @Query("zip") zip: String                   // 우편번호
+        @Query("lclong") lclong: String,           // 매장 경도
+        @Query("lclat") lclat: String                  // 매장 위도
     ): Call<ResultDTO>
 
     //매장 정보 수정
@@ -77,7 +79,8 @@ interface Api {
         @Query("idx") storeidx: Int,
         @Query("storenm") storenm: String,
         @Query("addr") addr: String,                // 주소
-        @Query("zip") zip: String                   // 우편번호
+        @Query("lclong") lclong: String,           // 매장 경도
+        @Query("lclat") lclat: String                  // 매장 위도
     ): Call<ResultDTO>
 
     //매장 삭제
@@ -96,7 +99,9 @@ interface Api {
         @Query("sns") sns : String,
         @Query("delivery") delivery : String,
         @Query("parking") parking : String,
-        @Query("parkingadr") parkingAddr : String
+        @Query("parkingadr") parkingAddr : String,
+        @Query("p_long") p_long: String,                    // 주차장 경도
+        @Query("p_lat") p_lat: String                           // 주차장 위도
     ): Call<ResultDTO>
 
     // 매장 대표 이미지 설정

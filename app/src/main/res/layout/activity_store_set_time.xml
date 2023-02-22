@@ -88,7 +88,7 @@
                     android:id="@+id/close"/>
             </LinearLayout>
             <View
-                style="@style/disable"
+                style="@style/disable_square"
                 android:id="@+id/dis_open_same"
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/ll_open_same"
@@ -151,8 +151,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="3dp"
                 android:gravity="center_vertical"
-                app:layout_constraintTop_toBottomOf="@+id/ll_open_mon">
-                <CheckBox
+                app:layout_constraintTop_toBottomOf="@+id/ll_open_mon"
+                app:layout_constraintBottom_toTopOf="@+id/ll_open_wed">
+            <CheckBox
                     style="@style/check"
                     android:id="@+id/check_open_tue"
                     android:text="@string/tuesday" />
@@ -175,7 +176,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                app:layout_constraintTop_toBottomOf="@+id/ll_open_tue">
+                app:layout_constraintTop_toBottomOf="@+id/ll_open_tue"
+                app:layout_constraintBottom_toTopOf="@+id/ll_open_thu">
                 <CheckBox
                     style="@style/check"
                     android:id="@+id/check_open_wed"
@@ -200,8 +202,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="3dp"
                 android:gravity="center_vertical"
-                app:layout_constraintTop_toBottomOf="@+id/ll_open_wed">
-                <CheckBox
+                app:layout_constraintTop_toBottomOf="@+id/ll_open_wed"
+                app:layout_constraintBottom_toTopOf="@+id/ll_open_fri">
+            <CheckBox
                     style="@style/check"
                     android:id="@+id/check_open_thu"
                     android:text="@string/thursday" />
@@ -223,7 +226,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                app:layout_constraintTop_toBottomOf="@+id/ll_open_thu">
+                app:layout_constraintTop_toBottomOf="@+id/ll_open_thu"
+                app:layout_constraintBottom_toTopOf="@+id/ll_open_sat">
+
                 <CheckBox
                     style="@style/check"
                     android:id="@+id/check_open_fri"
@@ -245,7 +250,7 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="3dp"
+                android:layout_marginTop="3dp"
                 android:gravity="center_vertical"
                 app:layout_constraintTop_toBottomOf="@+id/ll_open_fri">
                 <CheckBox
@@ -269,9 +274,10 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
                 android:gravity="center_vertical"
                 app:layout_constraintTop_toBottomOf="@+id/ll_open_sat">
-                <CheckBox
+            <CheckBox
                     style="@style/check"
                     android:id="@+id/check_open_sun"
                     android:text="@string/sunday" />
@@ -287,6 +293,13 @@
                     style="@style/btnTime"
                     android:id="@+id/close_sun"/>
             </LinearLayout>
+            <View
+                style="@style/disable_square"
+                android:id="@+id/dis_open_diff"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="@+id/ll_open_mon"
+                app:layout_constraintTop_toTopOf="@+id/ll_open_mon"
+                app:layout_constraintBottom_toBottomOf="@+id/ll_open_sun"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <View
             android:layout_width="2dp"
@@ -294,17 +307,19 @@
             android:layout_marginTop="10dp"
             android:layout_marginHorizontal="40dp"
             android:background="#F9F9F9"/>
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="5dp">
-        <LinearLayout
+            <LinearLayout
+                android:id="@+id/ll3"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                app:layout_constraintTop_toTopOf="parent">
                 <TextView
                     style="@style/text20"
                     android:layout_width="0dp"
@@ -318,7 +333,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="11dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/ll3">
                 <TextView
                     style="@style/text20"
                     android:layout_width="0dp"
@@ -336,13 +352,22 @@
                     style="@style/btnTime"
                     android:id="@+id/brk_end"/>
             </LinearLayout>
+            <View
+                style="@style/disable_square"
+                android:id="@+id/dis_brk_same"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/ll_brk"
+                app:layout_constraintTop_toTopOf="@+id/ll_brk"
+                app:layout_constraintBottom_toBottomOf="@+id/ll_brk"/>
             <LinearLayout
+                android:id="@+id/ll4"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="61dp"
                 android:layout_marginBottom="6dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/ll_brk">
                 <TextView
                     style="@style/text20"
                     android:layout_width="0dp"
@@ -350,13 +375,14 @@
                     android:text="@string/store_diff_break" />
                 <RadioButton style="@style/toggle" android:id="@+id/toggle_brk_diff"/>
             </LinearLayout>
-
             <LinearLayout
                 android:id="@+id/ll_brk_mon"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/ll4"
+                app:layout_constraintBottom_toTopOf="@+id/ll_brk_tue">
                 <CheckBox
                     style="@style/check"
                     android:id="@+id/check_brk_mon"
@@ -380,7 +406,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="3dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/ll_brk_mon"
+                app:layout_constraintBottom_toTopOf="@+id/ll_brk_wed">
                 <CheckBox
                     style="@style/check"
                     android:id="@+id/check_brk_tue"
@@ -403,7 +431,9 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/ll_brk_tue"
+                app:layout_constraintBottom_toTopOf="@+id/ll_brk_thu">
                 <CheckBox
                     style="@style/check"
                     android:id="@+id/check_brk_wed"
@@ -427,7 +457,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="3dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/ll_brk_wed"
+                app:layout_constraintBottom_toTopOf="@+id/ll_brk_fri">
                 <CheckBox
                     style="@style/check"
                     android:id="@+id/check_brk_thu"
@@ -449,7 +481,9 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/ll_brk_thu"
+                app:layout_constraintBottom_toTopOf="@+id/ll_brk_sat">
                 <CheckBox
                     style="@style/check"
                     android:id="@+id/check_brk_fri"
@@ -471,8 +505,9 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="3dp"
-                android:gravity="center_vertical">
+                android:layout_marginTop="3dp"
+                android:gravity="center_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/ll_brk_fri">
                 <CheckBox
                     style="@style/check"
                     android:id="@+id/check_brk_sat"
@@ -494,7 +529,9 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:layout_marginTop="3dp"
+                android:gravity="center_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/ll_brk_sat">
                 <CheckBox
                     style="@style/check"
                     android:id="@+id/check_brk_sun"
@@ -511,7 +548,14 @@
                     style="@style/btnTime"
                     android:id="@+id/brk_end_sun"/>
             </LinearLayout>
-        </LinearLayout>
+            <View
+                style="@style/disable_square"
+                android:id="@+id/dis_brk_diff"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="@+id/ll_brk_mon"
+                app:layout_constraintTop_toTopOf="@+id/ll_brk_mon"
+                app:layout_constraintBottom_toBottomOf="@+id/ll_brk_sun"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
             android:layout_width="2dp"
@@ -614,6 +658,17 @@
                     app:layout_constraintStart_toEndOf="@+id/holiday_sat"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/holiday_sat" />
+
+                <View
+                    style="@style/disable_square"
+                    android:id="@+id/dis_holiday_same"
+                    android:layout_width="0dp"
+                    android:visibility="visible"
+                    android:elevation="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

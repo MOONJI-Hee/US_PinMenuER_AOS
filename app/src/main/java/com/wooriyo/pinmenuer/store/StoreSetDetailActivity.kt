@@ -35,6 +35,8 @@ class StoreSetDetailActivity : AppCompatActivity(), View.OnClickListener {
     var delivery = ""
     var parking = ""
     var parkingAddr = ""
+    var parkingLong = ""
+    var parkingLat = ""
 
     // 바깥화면 터치하면 키보드 내리기
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
@@ -106,7 +108,7 @@ class StoreSetDetailActivity : AppCompatActivity(), View.OnClickListener {
             binding.parkingN.id -> parking = "N"
         }
 
-        ApiClient.service.udtStoreDetail(useridx, storeidx, storeTel, storeInsta, delivery, parking, parkingAddr)
+        ApiClient.service.udtStoreDetail(useridx, storeidx, storeTel, storeInsta, delivery, parking, parkingAddr, parkingLong, parkingLat)
             .enqueue(object: Callback<ResultDTO>{
                 override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                     Log.d(TAG, "매장 상세정보 저장 url : $response")
@@ -114,6 +116,7 @@ class StoreSetDetailActivity : AppCompatActivity(), View.OnClickListener {
                     if(resultDTO != null) {
                         if(resultDTO.status == 1) {
                             Toast.makeText(this@StoreSetDetailActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                            setResult(RESULT_OK)
                         }else {
                             Toast.makeText(this@StoreSetDetailActivity, resultDTO.msg, Toast.LENGTH_SHORT).show()
                         }

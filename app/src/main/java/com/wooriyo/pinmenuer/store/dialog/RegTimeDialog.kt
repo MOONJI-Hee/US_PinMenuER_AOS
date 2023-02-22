@@ -23,11 +23,11 @@ class RegTimeDialog(context: Context, var start: String, var end: String): Dialo
         binding = DialogRegtimeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if(start != "00:00") {
+        if(start != "" && start != "00:00") {
             binding.etStartHour.setText(start.substring(0, 2))
             binding.etStartMin.setText(start.substring(3))
         }
-        if(end != "00:00") {
+        if(end !="" && end != "00:00") {
             binding.etEndHour.setText(end.substring(0, 2))
             binding.etEndMin.setText(end.substring(3))
         }

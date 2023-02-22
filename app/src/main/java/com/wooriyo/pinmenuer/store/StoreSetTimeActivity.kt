@@ -1,5 +1,6 @@
 package com.wooriyo.pinmenuer.store
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -75,11 +76,6 @@ class StoreSetTimeActivity : AppCompatActivity(), View.OnClickListener {
             spcHoliday.addAll(store.spcHoliday!!)
         }
 
-        setView()
-
-        binding.back.setOnClickListener(this)
-        binding.save.setOnClickListener(this)
-        binding.addHoliday.setOnClickListener(this)
         // 클릭 이벤트
         binding.run {
             llOpenSame.setOnClickListener{timeDialog(open, close)}
@@ -100,19 +96,46 @@ class StoreSetTimeActivity : AppCompatActivity(), View.OnClickListener {
             llBrkSun.setOnClickListener{timeDialog(brkStartSun, brkEndSun)}
 
             toggleOpenSame.setOnCheckedChangeListener { _, isChecked ->
-                if(isChecked) toggleOpenDiff.isChecked = false
+                if(isChecked) {
+                    toggleOpenDiff.isChecked = false
+                    disOpenSame.visibility = View.GONE
+                    disOpenDiff.visibility = View.VISIBLE
+                }
             }
             toggleOpenDiff.setOnCheckedChangeListener { _, isChecked ->
-                if(isChecked) toggleOpenSame.isChecked = false
+                if(isChecked) {
+                    toggleOpenSame.isChecked = false
+                    disOpenSame.visibility = View.VISIBLE
+                    disOpenDiff.visibility = View.GONE
+                }
             }
             toggleBrkSame.setOnCheckedChangeListener { _, isChecked ->
-                if(isChecked) toggleBrkDiff.isChecked = false
+                if(isChecked) {
+                    toggleBrkDiff.isChecked = false
+                    disBrkSame.visibility = View.GONE
+                    disBrkDiff.visibility = View.VISIBLE
+                }
             }
             toggleBrkDiff.setOnCheckedChangeListener { _, isChecked ->
-                if(isChecked) toggleBrkSame.isChecked = false
+                if(isChecked) {
+                    toggleBrkSame.isChecked = false
+                    disBrkSame.visibility = View.VISIBLE
+                    disBrkDiff.visibility = View.GONE
+                }
+            }
+            toggleHolidaySame.setOnCheckedChangeListener { _, isChecked ->
+                if(isChecked)
+                    disHolidaySame.visibility = View.GONE
+                else
+                    disHolidaySame.visibility = View.VISIBLE
             }
         }
 
+        binding.back.setOnClickListener(this)
+        binding.save.setOnClickListener(this)
+        binding.addHoliday.setOnClickListener(this)
+
+        setView()
     }
 
     override fun onResume() {
@@ -143,29 +166,29 @@ class StoreSetTimeActivity : AppCompatActivity(), View.OnClickListener {
                 checkOpenSat.isChecked = it.sat_buse == y
                 checkOpenSun.isChecked = it.sun_buse == y
 
-                open.text = it.starttm
-                close.text = it.endtm
+                if(it.starttm!="") open.text = it.starttm
+                if(it.endtm!="") close.text = it.endtm
 
-                openMon.text = it.mon_starttm
-                closeMon.text = it.mon_endtm
+                if(it.mon_starttm!="") openMon.text=it.mon_starttm
+                if(it.mon_endtm!="") closeMon.text = it.mon_endtm
 
-                openTue.text = it.tue_starttm
-                closeTue.text = it.tue_endtm
+                if(it.tue_starttm!="") openTue.text = it.tue_starttm
+                if(it.tue_endtm!="") closeTue.text = it.tue_endtm
 
-                openWed.text = it.wed_starttm
-                closeWed.text = it.wed_endtm
+                if(it.wed_starttm!="") openWed.text = it.wed_starttm
+                if(it.wed_endtm!="")closeWed.text = it.wed_endtm
 
-                openThu.text = it.thu_starttm
-                closeThu.text = it.thu_endtm
+                if(it.thu_starttm!="") openThu.text = it.thu_starttm
+                if(it.thu_endtm!="") closeThu.text = it.thu_endtm
 
-                openFri.text = it.fri_starttm
-                closeFri.text = it.fri_endtm
+                if(it.fri_starttm!="") openFri.text = it.fri_starttm
+                if(it.fri_endtm!="") closeFri.text = it.fri_endtm
 
-                openSat.text = it.sat_starttm
-                closeSat.text = it.sat_endtm
+                if(it.sat_starttm!="") openSat.text = it.sat_starttm
+                if(it.sat_endtm!="") closeSat.text = it.sat_endtm
 
-                openSun.text = it.sun_starttm
-                closeSun.text = it.sun_endtm
+                if(it.sun_starttm!="") openSun.text = it.sun_starttm
+                if(it.sun_endtm!="") closeSun.text = it.sun_endtm
             }
             breakTime.let {
                 if(it.buse == y) toggleBrkSame.isChecked = true else toggleBrkDiff.isChecked = true
@@ -177,29 +200,29 @@ class StoreSetTimeActivity : AppCompatActivity(), View.OnClickListener {
                 checkBrkSat.isChecked = it.sat_buse == y
                 checkBrkSun.isChecked = it.sun_buse == y
 
-                brkStart.text = it.starttm
-                brkEnd.text = it.endtm
+                if(it.starttm!="") brkStart.text = it.starttm
+                if(it.endtm!="") brkEnd.text = it.endtm
 
-                brkStartMon.text = it.mon_starttm
-                brkEndMon.text = it.mon_endtm
+                if(it.mon_starttm!="") brkStartMon.text = it.mon_starttm
+                if(it.mon_endtm!="") brkEndMon.text = it.mon_endtm
 
-                brkStartTue.text = it.tue_starttm
-                brkEndTue.text = it.tue_endtm
+                if(it.tue_starttm!="") brkStartTue.text = it.tue_starttm
+                if(it.tue_endtm!="") brkEndTue.text = it.tue_endtm
 
-                brkStartWed.text = it.wed_starttm
-                brkEndWed.text = it.wed_endtm
+                if(it.wed_starttm!="") brkStartWed.text = it.wed_starttm
+                if(it.wed_endtm!="") brkEndWed.text = it.wed_endtm
 
-                brkStartThu.text = it.thu_starttm
-                brkEndThu.text = it.thu_endtm
+                if(it.thu_starttm!="") brkStartThu.text = it.thu_starttm
+                if(it.thu_endtm!="") brkEndThu.text = it.thu_endtm
 
-                brkStartFri.text = it.fri_starttm
-                brkEndFri.text = it.fri_endtm
+                if(it.fri_starttm!="") brkStartFri.text = it.fri_starttm
+                if(it.fri_endtm!="") brkEndFri.text = it.fri_endtm
 
-                brkStartSat.text = it.sat_starttm
-                brkEndSat.text = it.sat_endtm
+                if(it.sat_starttm!="") brkStartSat.text = it.sat_starttm
+                if(it.sat_endtm!="") brkEndSat.text = it.sat_endtm
 
-                brkStartSun.text = it.sun_starttm
-                brkEndSun.text = it.sun_endtm
+                if(it.sun_starttm!="") brkStartSun.text = it.sun_starttm
+                if(it.sun_endtm!="") brkEndSun.text = it.sun_endtm
             }
             toggleHolidaySame.isChecked = store.hbuse == y
             holidayMon.isChecked = store.mon_buse == y
@@ -318,7 +341,7 @@ class StoreSetTimeActivity : AppCompatActivity(), View.OnClickListener {
                             when(resultDTO.status) {
                                 1 -> {
                                     Toast.makeText(this@StoreSetTimeActivity, resultDTO.msg, Toast.LENGTH_SHORT).show()
-                                    finish()
+                                    setResult(RESULT_OK)
                                 }
                                 else -> Toast.makeText(this@StoreSetTimeActivity, resultDTO.msg, Toast.LENGTH_SHORT).show()
                             }
@@ -350,7 +373,7 @@ class StoreSetTimeActivity : AppCompatActivity(), View.OnClickListener {
         val dialog = HolidayDialog(this@StoreSetTimeActivity, type, useridx, storeidx, spcHolidayDTO)
         dialog.setOnHolidaySetListener(object : DialogListener{
             override fun onHolidaySet(data: SpcHolidayDTO) {
-
+                setResult(RESULT_OK)
             }
         })
         dialog.show()

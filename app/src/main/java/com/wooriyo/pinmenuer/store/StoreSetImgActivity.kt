@@ -17,12 +17,15 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityStoreSetImgBinding
 import com.wooriyo.pinmenuer.model.ResultDTO
+import com.wooriyo.pinmenuer.model.StoreDTO
 import com.wooriyo.pinmenuer.util.ApiClient
 import com.wooriyo.pinmenuer.util.AppHelper
 import okhttp3.MediaType
@@ -39,8 +42,9 @@ class StoreSetImgActivity : AppCompatActivity(), View.OnClickListener {
 
     var imgUri: Uri ?= null
 
-    var useridx = 11
-    var storeidx = 2
+    var useridx = 0
+    var storeidx = 0
+    lateinit var store: StoreDTO
 
     //registerForActivityResult
     val chooseImg = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -56,6 +60,16 @@ class StoreSetImgActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityStoreSetImgBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        useridx = MyApplication.pref.getUserIdx()
+
+        store = intent.getSerializableExtra("store") as StoreDTO
+        storeidx = store.idx
+
+        if(store.img.isNotEmpty()) {
+            imgUri = store.img.toUri()
+            setImage()
+        }
 
         binding.back.setOnClickListener(this)
         binding.save.setOnClickListener(this)
@@ -117,7 +131,7 @@ class StoreSetImgActivity : AppCompatActivity(), View.OnClickListener {
                             when(resultDTO.status) {
                                 1 -> {
                                     Toast.makeText(this@StoreSetImgActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
-                                    finish()
+                                    setResult(RESULT_OK)
                                 }
                                 else -> Toast.makeText(this@StoreSetImgActivity, resultDTO.msg, Toast.LENGTH_SHORT).show()
                             }

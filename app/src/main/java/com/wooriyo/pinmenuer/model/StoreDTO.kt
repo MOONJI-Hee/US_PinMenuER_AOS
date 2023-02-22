@@ -1,6 +1,7 @@
 package com.wooriyo.pinmenuer.model
 
 import com.google.gson.annotations.SerializedName
+import retrofit2.http.Query
 import java.io.Serializable
 
 data class StoreDTO(
@@ -10,9 +11,8 @@ data class StoreDTO(
     @SerializedName("buse") var buse : String,
     @SerializedName("paydt") var paydt : String,
     @SerializedName("address") var address : String,
-    @SerializedName("zipcode") var zipcode : String,
-    @SerializedName("lat") var lat : String,
-    @SerializedName("long") var long : String,
+    @SerializedName("lclat") var lat : String,
+    @SerializedName("lclong") var long : String,
     @SerializedName("img") var img : String,
     @SerializedName("regdt") var regdt : String,
     @SerializedName("status") var status : String,
@@ -22,6 +22,8 @@ data class StoreDTO(
     @SerializedName("delivery") var delivery : String?="N",
     @SerializedName("parking") var parking : String?="N",
     @SerializedName("parkingadr") var parkingAddr : String?,
+    @SerializedName("p_lat") var p_lat : String?,
+    @SerializedName("p_long") var p_long : String?,
     @SerializedName("hbuse") var hbuse : String,
     @SerializedName("mon_buse") var mon_buse : String,
     @SerializedName("tue_buse") var tue_buse : String,
@@ -34,6 +36,6 @@ data class StoreDTO(
     @SerializedName("breakList")  var breaktime: BrkTimeDTO?,
     @SerializedName("holidayList")  var spcHoliday: ArrayList<SpcHolidayDTO>?
 ):Serializable {
-    constructor(useridx: Int) :  this(0, useridx, "", "", "", "", "", "", "", "", "", "", "", null, null, null, null, null,
+    constructor(useridx: Int) :  this(0, useridx, "", "", "", "", "", "", "", "", "", "", null, null, null, null, null, null, null,
         "N", "N", "N", "N", "N", "N", "N", "N" ,null, null, null)
 }

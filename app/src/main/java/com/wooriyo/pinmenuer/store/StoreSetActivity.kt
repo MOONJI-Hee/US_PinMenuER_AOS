@@ -1,13 +1,16 @@
 package com.wooriyo.pinmenuer.store
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
@@ -16,6 +19,7 @@ import com.wooriyo.pinmenuer.databinding.ActivityStoreSetBinding
 import com.wooriyo.pinmenuer.db.entity.Store
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.model.StoreDTO
+import com.wooriyo.pinmenuer.model.StoreListDTO
 import com.wooriyo.pinmenuer.util.ApiClient
 import com.wooriyo.pinmenuer.util.AppHelper
 import retrofit2.Call
@@ -31,9 +35,17 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
     var useridx : Int = 0
     var storeidx : Int = 0
     var storeNm : String = ""
-    var storeZip : String = "" // 우편번호
+    var storeLong : String = ""
+    var storeLat : String = ""
 
     lateinit var store : StoreDTO
+
+    //registerForActivityResult
+    val setStore = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if(it.resultCode == RESULT_OK) {
+            getStore()
+        }
+    }
 
     // 바깥화면 터치하면 키보드 내리기
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
@@ -90,19 +102,19 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
             binding.modify -> modify()
             binding.btnDetail-> {
                 if(type == 2)
-                    startActivity(Intent(this@StoreSetActivity, StoreSetDetailActivity::class.java).putExtra("store", store))
+                    setStore.launch(Intent(this@StoreSetActivity, StoreSetDetailActivity::class.java).putExtra("store", store))
                 else if (type == 1)
                     Toast.makeText(this@StoreSetActivity, R.string.msg_reg_store_first, Toast.LENGTH_SHORT).show()
             }
             binding.btnHour -> {
                 if(type == 2)
-                    startActivity(Intent(this@StoreSetActivity, StoreSetTimeActivity::class.java).putExtra("store", store))
+                    setStore.launch(Intent(this@StoreSetActivity, StoreSetTimeActivity::class.java).putExtra("store", store))
                 else if (type == 1)
                     Toast.makeText(this@StoreSetActivity, R.string.msg_reg_store_first, Toast.LENGTH_SHORT).show()
             }
             binding.btnImg -> {
                 if(type == 2)
-                    startActivity(Intent(this@StoreSetActivity, StoreSetImgActivity::class.java).putExtra("store", store))
+                    setStore.launch(Intent(this@StoreSetActivity, StoreSetImgActivity::class.java).putExtra("store", store))
                 else if (type == 1)
                     Toast.makeText(this@StoreSetActivity, R.string.msg_reg_store_first, Toast.LENGTH_SHORT).show()
             }
@@ -118,14 +130,13 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
     fun save() {
         storeNm = binding.etName.text.toString()
         val storeAddr =binding.etAddr.text.toString()
-        storeZip = "00000"
 
         if(storeNm.isEmpty()) {
             Toast.makeText(this@StoreSetActivity, R.string.store_name_hint, Toast.LENGTH_SHORT).show()
         }else if (storeAddr.isEmpty()) {
             Toast.makeText(this@StoreSetActivity, R.string.msg_no_addr, Toast.LENGTH_SHORT).show()
         } else {
-            ApiClient.service.regStore(useridx, storeNm, storeAddr, storeZip)
+            ApiClient.service.regStore(useridx, storeNm, storeAddr, storeLong, storeLat)
                 .enqueue(object : Callback<ResultDTO>{
                     override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                         Log.d(TAG, "매장 등록 / 수정 url : $response")
@@ -175,14 +186,12 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
     private fun modify() {
         storeNm = binding.etName.text.toString()
         val storeAddr =binding.etAddr.text.toString()
-        storeZip = "12345"
-
         if(storeNm.isEmpty()) {
             Toast.makeText(this@StoreSetActivity, R.string.store_name_hint, Toast.LENGTH_SHORT).show()
         }else if (storeAddr.isEmpty()) {
             Toast.makeText(this@StoreSetActivity, R.string.msg_no_addr, Toast.LENGTH_SHORT).show()
         } else {
-            ApiClient.service.udtStore(useridx, storeidx, storeNm, storeAddr, storeZip)
+            ApiClient.service.udtStore(useridx, storeidx, storeNm, storeAddr, storeLong, storeLat)
                 .enqueue(object : Callback<ResultDTO>{
                     override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                         Log.d(TAG, "매장 수정 url : $response")
@@ -203,5 +212,34 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
                     }
                 })
         }
+    }
+
+    fun getStore() {
+        ApiClient.service.getStoreList(useridx, storeidx.toString())
+            .enqueue(object: Callback<StoreListDTO>{
+                override fun onResponse(call: Call<StoreListDTO>, response: Response<StoreListDTO>) {
+                    Log.d(TAG, "한 매장 조회 url : $response")
+                    if(!response.isSuccessful) return
+                    val result = response.body()
+                    if(result != null) {
+                        when(result.status) {
+                            1-> {
+                                if(result.storeList.isNotEmpty()) {
+                                    store = result.storeList[0]
+                                    Log.d(TAG, "새로운 스토어~! >>> $store")
+                                    binding.etName.setText(store.name)
+                                    binding.etAddr.setText(store.address)
+                                }
+                            }
+                            else -> Toast.makeText(this@StoreSetActivity, result.msg, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<StoreListDTO>, t: Throwable) {
+                    Toast.makeText(this@StoreSetActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "한 매장 조회 오류 > $t")
+                }
+            })
     }
 }

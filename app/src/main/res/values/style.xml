@@ -91,7 +91,7 @@
         <item name="android:layout_width">88dp</item>
         <item name="android:layout_height">38dp</item>
         <item name="android:gravity">center</item>
-        <item name="android:text">@string/zeroClock</item>
+        <item name="android:hint">@string/zeroClock</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">20sp</item>
         <item name="android:letterSpacing">0.08</item>
@@ -241,11 +241,13 @@
         <item name="android:layout_height">124dp</item>
         <item name="android:background">@drawable/bg_r6w</item>
     </style>
-    <style name="disable">
+    <style name="disable_square">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0dp</item>
         <item name="android:background">#CCFFFFFF</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:outlineProvider">none</item>
     </style>
 </resources>
