@@ -39,20 +39,35 @@
         android:layout_width="500dp"
         android:layout_height="48dp"
         android:layout_marginTop="20dp"
-        android:paddingHorizontal="15dp"
-        android:drawablePadding="10dp"
-        android:drawableEnd="@drawable/btn_search"
+        android:paddingStart="15dp"
+        android:paddingEnd="60dp"
         android:maxLines="1"
         android:ellipsize="end"
         android:inputType="text"
         android:hint="@string/map_hint"
-        android:textSize="16sp"
+        android:textSize="17sp"
         android:textColor="@color/black"
         android:textColorHint="@color/hint"
         android:background="@drawable/bg_r6w75"
         app:layout_constraintTop_toTopOf="@+id/map"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/search"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="@+id/et_addr"
+        app:layout_constraintBottom_toBottomOf="@+id/et_addr"
+        app:layout_constraintEnd_toEndOf="@id/et_addr">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/btn_search" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

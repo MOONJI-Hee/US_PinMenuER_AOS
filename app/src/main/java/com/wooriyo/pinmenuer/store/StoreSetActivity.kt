@@ -35,6 +35,7 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
     var useridx : Int = 0
     var storeidx : Int = 0
     var storeNm : String = ""
+    var storeAddr : String = ""
     var storeLong : String = ""
     var storeLat : String = ""
 
@@ -44,6 +45,21 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
     val setStore = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if(it.resultCode == RESULT_OK) {
             getStore()
+        }
+    }
+
+    val setAddr = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if(it.resultCode == RESULT_OK) {
+            storeAddr = it.data?.getStringExtra("address").toString()
+            storeLong = it.data?.getStringExtra("long").toString()
+            storeLat = it.data?.getStringExtra("lat").toString()
+
+            Log.d(TAG, "매장 주소 >> $storeAddr")
+            Log.d(TAG, "매장 경도 >> $storeLong")
+            Log.d(TAG, "매장 위도 >> $storeLat")
+
+            if(storeAddr.isNotEmpty())
+                binding.etAddr.setText(storeAddr)
         }
     }
 
@@ -68,6 +84,8 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
 
             store = intent.getSerializableExtra("store") as StoreDTO
             storeidx = store.idx
+            storeLat = store.lat
+            storeLong = store.long
 
             binding.etName.setText(store.name)
             binding.etAddr.setText(store.address)
@@ -120,16 +138,17 @@ class StoreSetActivity : AppCompatActivity(), View.OnClickListener {
             }
             binding.btnMap -> {
                 val intent = Intent(this@StoreSetActivity, MapActivity::class.java)
-                intent.putExtra("lat", store.lat) // 위도 (latitude)
-                intent.putExtra("long", store.long) // 경도 (longitude)
-                startActivity(intent)
+                intent.putExtra("lat", storeLat) // 위도 (latitude)
+                intent.putExtra("long", storeLong) // 경도 (longitude)
+                intent.putExtra("address", storeAddr)
+                setAddr.launch(intent)
             }
         }
     }
 
     fun save() {
         storeNm = binding.etName.text.toString()
-        val storeAddr =binding.etAddr.text.toString()
+        storeAddr =binding.etAddr.text.toString()
 
         if(storeNm.isEmpty()) {
             Toast.makeText(this@StoreSetActivity, R.string.store_name_hint, Toast.LENGTH_SHORT).show()

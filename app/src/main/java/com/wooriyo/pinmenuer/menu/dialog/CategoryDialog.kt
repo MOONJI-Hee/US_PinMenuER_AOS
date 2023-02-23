@@ -26,13 +26,13 @@ class CategoryDialog(context: Context, val type: Int): Dialog(context) {
     lateinit var binding : DialogCategoryBinding
 
     val TAG = "CategoryDialog"
-    var useridx = 11
-    var storeidx = 2
-    var cateidx = 1
-    var code = "001"
-    var name = "커피"
-    var subName = "Coffee"
-    var buse = "Y"
+    var useridx = 0
+    var storeidx = 0
+    var cateidx = 0
+    var code = ""
+    var name = ""
+    var subName = ""
+    var buse = ""
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         AppHelper.hideKeyboard(context, currentFocus, ev)

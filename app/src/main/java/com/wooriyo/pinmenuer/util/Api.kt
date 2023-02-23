@@ -256,4 +256,12 @@ interface Api {
         @Query("useridx") useridx: Int,
         @Query("idx") callidx: Int
     ): Call<ResultDTO>
+
+
+    // 카카오 지도 관련 api
+    @GET("/v2/local/search/address.json")
+    fun kakaoSearch(
+        @Header("Authorization") key : String,
+        @Query("query") query : String
+    ): Call<KakaoResultDTO>
 }

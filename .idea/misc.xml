@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v23/ic_plus.xml" value="0.487" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.569" />
         <entry key="app/src/main/res/drawable/bg_border_dash.xml" value="0.5665" />
         <entry key="app/src/main/res/drawable/bg_btn_plus.xml" value="0.487" />
         <entry key="app/src/main/res/drawable/bg_btn_r6.xml" value="0.158" />
@@ -19,8 +20,10 @@
         <entry key="app/src/main/res/drawable/bg_r6w75.xml" value="0.569" />
         <entry key="app/src/main/res/drawable/gradient_main.xml" value="0.487" />
         <entry key="app/src/main/res/drawable/gradient_main_90.xml" value="0.487" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.569" />
         <entry key="app/src/main/res/drawable/ic_plus.xml" value="0.487" />
         <entry key="app/src/main/res/drawable/ic_plus_b.xml" value="0.205" />
+        <entry key="app/src/main/res/drawable/ic_plus_g.xml" value="0.569" />
         <entry key="app/src/main/res/drawable/line_dash22.xml" value="0.5665" />
         <entry key="app/src/main/res/drawable/line_dash2g.xml" value="0.5665" />
         <entry key="app/src/main/res/drawable/selector_btn.xml" value="0.487" />

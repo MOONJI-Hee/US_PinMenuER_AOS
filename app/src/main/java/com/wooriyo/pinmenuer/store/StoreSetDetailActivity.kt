@@ -9,6 +9,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.common.MapActivity
@@ -37,6 +38,16 @@ class StoreSetDetailActivity : AppCompatActivity(), View.OnClickListener {
     var parkingAddr = ""
     var parkingLong = ""
     var parkingLat = ""
+
+    val setAddr = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if(it.resultCode == RESULT_OK) {
+            parkingAddr = it.data?.getStringExtra("address").toString()
+            parkingLong = it.data?.getStringExtra("long").toString()
+            parkingLat = it.data?.getStringExtra("lat").toString()
+            if(parkingAddr.isNotEmpty())
+                binding.etParkingAddr.setText(parkingAddr)
+        }
+    }
 
     // 바깥화면 터치하면 키보드 내리기
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
@@ -71,8 +82,11 @@ class StoreSetDetailActivity : AppCompatActivity(), View.OnClickListener {
                     "N" -> parkingN.isChecked = true
                 }
             }
-            if(store.parkingAddr != null)
+            if(store.parkingAddr != null) {
                 etParkingAddr.setText(store.parkingAddr)
+                parkingLong = store.p_long.toString()
+                parkingLat = store.p_lat.toString()
+            }
         }
 
         binding.back.setOnClickListener(this)
@@ -88,7 +102,13 @@ class StoreSetDetailActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when(p0) {
             binding.back -> finish()
-            binding.btnMap -> {startActivity(Intent(this@StoreSetDetailActivity, MapActivity::class.java))}
+            binding.btnMap -> {
+                val intent = Intent(this@StoreSetDetailActivity, MapActivity::class.java)
+                intent.putExtra("lat", parkingLat)
+                intent.putExtra("long", parkingLong)
+                intent.putExtra("address", parkingAddr)
+                setAddr.launch(intent)
+            }
             binding.save -> save()
         }
     }

@@ -3,8 +3,11 @@ package com.wooriyo.pinmenuer.menu
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wooriyo.pinmenuer.databinding.ActivityCategorySetBinding
+import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.menu.adpter.CateAdapter
 import com.wooriyo.pinmenuer.menu.adpter.CateEditAdapter
 import com.wooriyo.pinmenuer.menu.dialog.CategoryDialog
@@ -52,6 +55,13 @@ class CategorySetActivity : AppCompatActivity() {
     fun setView() {
         cateAdapter = CateAdapter(allCateList)
         cateEditAdapter = CateEditAdapter(allCateList)
+
+        cateEditAdapter.setOnMoveListener(object : ItemClickListener {
+            override fun onItemMove(fromPos: Int, toPos: Int) {
+                super.onItemMove(fromPos, toPos)
+                cateEditAdapter.notifyItemMoved(fromPos, toPos)
+            }
+        })
 
         binding.run {
             rvCate.layoutManager = LinearLayoutManager(this@CategorySetActivity, LinearLayoutManager.HORIZONTAL, false)

@@ -8,10 +8,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
     val service: Api = initService()
+    val kakaoService: Api = kakaoService()
 
     private fun initService() : Api =
         Retrofit.Builder()
             .baseUrl(AppProperties.SERVER)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(Api::class.java)
+
+    fun kakaoService() : Api =
+        Retrofit.Builder()
+            .baseUrl(AppProperties.KAKAO_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(Api::class.java)
