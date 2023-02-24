@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.widget.Toast
+import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityLoginBinding
@@ -20,7 +21,7 @@ import com.wooriyo.pinmenuer.util.Encoder
 import retrofit2.Call
 import retrofit2.Response
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
     lateinit var binding: ActivityLoginBinding
     val TAG = "LoginActivity"
     var waitTime = 0L
@@ -40,11 +41,6 @@ class LoginActivity : AppCompatActivity() {
         } else {
             finishAffinity()
         }
-    }
-    // 바깥화면 터치하면 키보드 내리기
-    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        AppHelper.hideKeyboard(this, currentFocus, ev)
-        return super.dispatchTouchEvent(ev)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,11 +66,6 @@ class LoginActivity : AppCompatActivity() {
         binding.signup.setOnClickListener {     // 회원가입 버튼 클릭
             startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        AppHelper.hideInset(this)   // 네비게이션바 숨기기
     }
 
     private fun loginWithApi()  {   // Api로 로그인

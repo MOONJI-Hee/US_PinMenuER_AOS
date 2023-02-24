@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.databinding.ActivityCategorySetBinding
 import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.menu.adpter.CateAdapter
@@ -14,7 +15,7 @@ import com.wooriyo.pinmenuer.menu.dialog.CategoryDialog
 import com.wooriyo.pinmenuer.model.CategoryDTO
 import com.wooriyo.pinmenuer.util.AppHelper
 
-class CategorySetActivity : AppCompatActivity() {
+class CategorySetActivity : BaseActivity() {
     lateinit var binding : ActivityCategorySetBinding
 
     lateinit var allCateList : ArrayList<CategoryDTO>
@@ -45,11 +46,6 @@ class CategorySetActivity : AppCompatActivity() {
             arrowRight.setOnClickListener {  }
             btnCateAdd.setOnClickListener { addDialog() }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        AppHelper.hideInset(this)
     }
 
     fun setView() {

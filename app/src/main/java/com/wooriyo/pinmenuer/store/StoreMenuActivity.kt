@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.Toast
+import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.call.CallListActivity
 import com.wooriyo.pinmenuer.databinding.ActivityStoreMenuBinding
@@ -21,7 +22,7 @@ import com.wooriyo.pinmenuer.util.AppHelper
 import retrofit2.Call
 import retrofit2.Response
 
-class StoreMenuActivity : AppCompatActivity(), OnClickListener {
+class StoreMenuActivity : BaseActivity(), OnClickListener {
     lateinit var binding: ActivityStoreMenuBinding
 
     val TAG = "StoreMenuActivity"

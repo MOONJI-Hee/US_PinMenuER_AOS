@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityMapBinding
 import com.wooriyo.pinmenuer.model.KakaoResultDTO
@@ -16,7 +17,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MapActivity : AppCompatActivity() {
+class MapActivity : BaseActivity() {
     lateinit var binding: ActivityMapBinding
 
     val TAG = "MapActivity"

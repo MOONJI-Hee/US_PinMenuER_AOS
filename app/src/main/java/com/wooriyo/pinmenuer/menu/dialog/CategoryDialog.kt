@@ -5,13 +5,16 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.Rect
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.wooriyo.pinmenuer.BaseDialog
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.DialogCategoryBinding
@@ -22,7 +25,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CategoryDialog(context: Context, val type: Int): Dialog(context) {
+class CategoryDialog(context: Context, val type: Int): BaseDialog(context) {
     lateinit var binding : DialogCategoryBinding
 
     val TAG = "CategoryDialog"
@@ -33,11 +36,6 @@ class CategoryDialog(context: Context, val type: Int): Dialog(context) {
     var name = ""
     var subName = ""
     var buse = ""
-
-    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        AppHelper.hideKeyboard(context, currentFocus, ev)
-        return super.dispatchTouchEvent(ev)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

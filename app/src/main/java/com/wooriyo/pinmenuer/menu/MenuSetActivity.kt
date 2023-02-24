@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.databinding.ActivityMenuSetBinding
 import com.wooriyo.pinmenuer.menu.adpter.CateAdapter
 import com.wooriyo.pinmenuer.menu.adpter.CateEditAdapter
@@ -17,7 +18,7 @@ import com.wooriyo.pinmenuer.model.CategoryDTO
 import com.wooriyo.pinmenuer.model.GoodsDTO
 import com.wooriyo.pinmenuer.util.AppHelper
 
-class MenuSetActivity : AppCompatActivity(), View.OnClickListener {
+class MenuSetActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding: ActivityMenuSetBinding
     lateinit var cateList: ArrayList<CategoryDTO>
     lateinit var cateAdapter : CateAdapter

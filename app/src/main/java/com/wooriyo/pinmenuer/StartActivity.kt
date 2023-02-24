@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
 
-class StartActivity: AppCompatActivity() {
+class StartActivity: BaseActivity() {
     val TAG = "StartActivity"
     var idx = 0
     var id = ""
@@ -30,12 +30,7 @@ class StartActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        resources.displayMetrics.density = MyApplication.density
-        resources.displayMetrics.densityDpi = MyApplication.dpi
-        resources.displayMetrics.scaledDensity = MyApplication.density
         setContentView(R.layout.activity_start)
-
-        AppHelper.hideInset(this)
     }
 
     override fun onResume() {

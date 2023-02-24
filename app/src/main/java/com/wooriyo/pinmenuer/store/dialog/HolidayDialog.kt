@@ -1,6 +1,5 @@
 package com.wooriyo.pinmenuer.store.dialog
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
@@ -9,7 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.wooriyo.pinmenuer.MyApplication
+import com.wooriyo.pinmenuer.BaseDialog
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.DialogHolidayBinding
 import com.wooriyo.pinmenuer.listener.DialogListener
@@ -17,12 +16,11 @@ import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.model.SpcHolidayDTO
 import com.wooriyo.pinmenuer.util.ApiClient
 import com.wooriyo.pinmenuer.util.AppHelper
-import com.wooriyo.pinmenuer.util.Encoder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HolidayDialog(context: Context, val type : Int, val useridx : Int, val storeidx : Int, val spcHoliday : SpcHolidayDTO?): Dialog(context), View.OnClickListener {
+class HolidayDialog(context: Context, val type : Int, val useridx : Int, val storeidx : Int, val spcHoliday : SpcHolidayDTO?): BaseDialog(context), View.OnClickListener {
     lateinit var binding : DialogHolidayBinding
     lateinit var dialogListener: DialogListener
     val TAG = "HolidayDialog"

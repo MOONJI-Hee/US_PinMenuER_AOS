@@ -3,11 +3,12 @@ package com.wooriyo.pinmenuer.menu.dialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import com.wooriyo.pinmenuer.BaseDialog
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.DialogOptionBinding
 import com.wooriyo.pinmenuer.model.OptionDTO
 
-class OptionDialog(context: Context, val type: Int, val option : OptionDTO?): Dialog(context) {
+class OptionDialog(context: Context, val type: Int, val option : OptionDTO?): BaseDialog(context) {
     lateinit var binding:DialogOptionBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

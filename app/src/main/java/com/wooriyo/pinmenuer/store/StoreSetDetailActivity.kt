@@ -10,6 +10,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.common.MapActivity
@@ -22,7 +23,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class StoreSetDetailActivity : AppCompatActivity(), View.OnClickListener {
+class StoreSetDetailActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding : ActivityStoreSetDetailBinding
 
     val TAG = "StoreSetDetailActivity"

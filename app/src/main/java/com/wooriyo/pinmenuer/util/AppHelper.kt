@@ -6,6 +6,7 @@ import android.graphics.Rect
 import android.os.Build
 import android.view.MotionEvent
 import android.view.View
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatActivity.INPUT_METHOD_SERVICE

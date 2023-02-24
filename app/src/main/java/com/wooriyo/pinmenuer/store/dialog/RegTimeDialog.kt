@@ -7,13 +7,14 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.wooriyo.pinmenuer.BaseDialog
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.DialogRegtimeBinding
 import com.wooriyo.pinmenuer.listener.DialogListener
 import com.wooriyo.pinmenuer.util.AppHelper
 import com.wooriyo.pinmenuer.util.AppHelper.Companion.mkDouble
 
-class RegTimeDialog(context: Context, var start: String, var end: String): Dialog(context) {
+class RegTimeDialog(context: Context, var start: String, var end: String): BaseDialog(context) {
     lateinit var binding : DialogRegtimeBinding
     lateinit var dialogListener: DialogListener
 

@@ -21,6 +21,7 @@ import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityStoreSetImgBinding
@@ -35,7 +36,7 @@ import retrofit2.Call
 import retrofit2.Response
 import java.io.*
 
-class StoreSetImgActivity : AppCompatActivity(), View.OnClickListener {
+class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding : ActivityStoreSetImgBinding
     val TAG = "StoreSetImgActivity"
     val REQUEST_R_STORAGE = 1

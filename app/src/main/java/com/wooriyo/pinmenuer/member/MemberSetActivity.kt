@@ -7,6 +7,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivitySignUpBinding
@@ -18,7 +19,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MemberSetActivity: AppCompatActivity(), View.OnClickListener {
+class MemberSetActivity: BaseActivity(), View.OnClickListener {
     val TAG = "MemberSetActivity"
     lateinit var binding : ActivitySignUpBinding
 

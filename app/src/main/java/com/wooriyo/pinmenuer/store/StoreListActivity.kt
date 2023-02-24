@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityStoreListBinding
@@ -19,7 +20,7 @@ import com.wooriyo.pinmenuer.util.AppHelper
 import retrofit2.Call
 import retrofit2.Response
 
-class StoreListActivity : AppCompatActivity(), View.OnClickListener {
+class StoreListActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding : ActivityStoreListBinding
 
     val TAG = "StoreListActivity"
@@ -41,7 +42,6 @@ class StoreListActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        AppHelper.hideInset(this)
         getStoreList()
     }
 
