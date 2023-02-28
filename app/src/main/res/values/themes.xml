@@ -10,7 +10,7 @@
         <item name="colorSecondaryVariant">@color/sub</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="android:windowAnimationStyle">@null</item>
         <item name="android:windowFullscreen">true</item>
@@ -26,4 +26,13 @@
         <item name="android:backgroundDimEnabled">false</item>
         <!-- true - 반투명 검정 /  false - 완전 투명 -->
     </style>
+
+    <style name="Theme.PinMenuER.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.PinMenuER.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.PinMenuER.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

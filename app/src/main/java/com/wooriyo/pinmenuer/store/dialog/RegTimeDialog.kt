@@ -20,7 +20,6 @@ class RegTimeDialog(context: Context, var start: String, var end: String): BaseD
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         binding = DialogRegtimeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

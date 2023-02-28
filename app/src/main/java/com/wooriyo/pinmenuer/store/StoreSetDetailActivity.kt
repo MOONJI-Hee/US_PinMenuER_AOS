@@ -1,8 +1,6 @@
 package com.wooriyo.pinmenuer.store
 
 import android.content.Intent
-import android.graphics.Rect
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
@@ -28,8 +26,6 @@ class StoreSetDetailActivity : BaseActivity(), View.OnClickListener {
 
     val TAG = "StoreSetDetailActivity"
 
-    var useridx = 0
-    var storeidx = 0
     lateinit var store : StoreDTO
 
     var storeTel = ""
@@ -73,14 +69,14 @@ class StoreSetDetailActivity : BaseActivity(), View.OnClickListener {
                 etInsta.setText(store.sns)
             if(store.delivery != null) {
                 when(store.delivery) {
-                    "Y" -> deliveryY.isChecked = true
-                    "N" -> deliveryN.isChecked = true
+                    y -> deliveryY.isChecked = true
+                    n -> deliveryN.isChecked = true
                 }
             }
             if(store.parking != null) {
                 when(store.parking) {
-                    "Y" -> parkingY.isChecked = true
-                    "N" -> parkingN.isChecked = true
+                    y -> parkingY.isChecked = true
+                    n -> parkingN.isChecked = true
                 }
             }
             if(store.parkingAddr != null) {
@@ -120,13 +116,13 @@ class StoreSetDetailActivity : BaseActivity(), View.OnClickListener {
         parkingAddr = binding.etParkingAddr.text.toString()
 
         when(binding.groupDelivery.checkedRadioButtonId) {
-            binding.deliveryY.id -> delivery = "Y"
-            binding.deliveryN.id -> delivery = "N"
+            binding.deliveryY.id -> delivery = y
+            binding.deliveryN.id -> delivery = n
         }
 
         when(binding.groupParking.checkedRadioButtonId) {
-            binding.parkingY.id -> parking = "Y"
-            binding.parkingN.id -> parking = "N"
+            binding.parkingY.id -> parking = y
+            binding.parkingN.id -> parking = n
         }
 
         ApiClient.service.udtStoreDetail(useridx, storeidx, storeTel, storeInsta, delivery, parking, parkingAddr, parkingLong, parkingLat)

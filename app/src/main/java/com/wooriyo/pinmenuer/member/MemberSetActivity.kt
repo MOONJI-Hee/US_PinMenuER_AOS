@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
@@ -26,8 +25,6 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
     var memberDTO: MemberDTO? = null
     var userid : String = ""
     var arpayoId : String = ""
-
-    var useridx : Int = 0
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         AppHelper.hideKeyboard(this, currentFocus, ev)
@@ -79,7 +76,7 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
         val pass : String = binding.etPwd.text.toString()
         arpayoId = binding.etArpayo.text.toString()
         ApiClient.service.udtMbr(useridx, pass, arpayoId)
-            .enqueue(object : retrofit2.Callback<ResultDTO> {
+            .enqueue(object : Callback<ResultDTO> {
                 override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                     Log.d(TAG, "회원정보 수정 url : $response")
                     if(response.body()?.status == 1) {

@@ -1,7 +1,6 @@
 package com.wooriyo.pinmenuer.menu
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -38,7 +37,11 @@ class CategorySetActivity : BaseActivity() {
             back.setOnClickListener { finish() }
             confirm.setOnClickListener {
                 when(flag) {
-                    0 -> startActivity(Intent(this@CategorySetActivity, MenuSetActivity::class.java))
+                    0 -> {
+                        intent = Intent(this@CategorySetActivity, MenuSetActivity::class.java)
+                        intent.putExtra("cateList", allCateList)
+                        startActivity(intent)
+                    }
                     1 -> seqSave()
                 }
             }

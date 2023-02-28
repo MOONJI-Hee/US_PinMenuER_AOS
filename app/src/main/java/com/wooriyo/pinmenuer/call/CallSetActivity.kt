@@ -1,11 +1,11 @@
 package com.wooriyo.pinmenuer.call
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
+import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.call.adapter.CallSetAdapter
@@ -17,7 +17,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CallSetActivity : AppCompatActivity() {
+class CallSetActivity : BaseActivity() {
     val TAG = "CallSetActivity"
     lateinit var binding: ActivityCallListBinding
 

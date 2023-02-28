@@ -6,8 +6,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -43,8 +41,6 @@ class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
 
     var imgUri: Uri ?= null
 
-    var useridx = 0
-    var storeidx = 0
     lateinit var store: StoreDTO
 
     //registerForActivityResult

@@ -1,17 +1,17 @@
 package com.wooriyo.pinmenuer.call
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.call.adapter.CallListAdapter
 import com.wooriyo.pinmenuer.databinding.ActivityCallListBinding
 import com.wooriyo.pinmenuer.model.CallDTO
 import com.wooriyo.pinmenuer.model.CallListDTO
 import com.wooriyo.pinmenuer.store.StoreMenuActivity
 
-class CallListActivity : AppCompatActivity(), View.OnClickListener {
+class CallListActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding: ActivityCallListBinding
 
     var callList = ArrayList<CallListDTO>()

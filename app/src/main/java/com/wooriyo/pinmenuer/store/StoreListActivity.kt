@@ -1,7 +1,6 @@
 package com.wooriyo.pinmenuer.store
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -25,7 +24,6 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
 
     val TAG = "StoreListActivity"
     val mActivity = this@StoreListActivity
-    var useridx = 0
 
     var storeList = ArrayList<StoreDTO>()
     var storeAdapter = StoreAdapter(storeList)

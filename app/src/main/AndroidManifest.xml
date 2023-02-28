@@ -5,8 +5,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28"
@@ -24,9 +24,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PinMenuER"
         tools:targetApi="31">
+        <activity
+            android:name=".ItemDetailHostActivity"
+            android:exported="false"
+            android:label="@string/title_activity_item_detail_host"
+            android:resizeableActivity="true"
+            tools:targetApi="24" />
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_appKey"/>
+            android:value="@string/kakao_appKey" />
+
         <activity
             android:name=".call.CallSetActivity"
             android:exported="false">
@@ -89,8 +97,10 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

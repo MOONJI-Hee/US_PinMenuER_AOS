@@ -4,6 +4,7 @@ import com.wooriyo.pinmenuer.model.*
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
+import java.io.File
 
 interface Api {
     @FormUrlEncoded
@@ -205,6 +206,39 @@ interface Api {
         @Query("idx") cateidx: Int,
         @Query("code") code: String,
         @Query("seq") seq: Int
+    ): Call<ResultDTO>
+
+    // 메뉴 등록
+//    @Multipart
+//    @POST("m/ins_goods.php")
+//    fun insGoods(
+//        @Part("useridx") useridx: Int,
+//        @Part("gidx") storeidx: Int,
+//        @Part("code") code: String,
+//        @Part("name") name : String,
+//        @Part("content") content : String,
+//        @Part("cooking_time") cooking_time : Int,
+//        @Part("price") price : Int,
+//        @Part img1: MultipartBody.Part?,
+//        @Part img2: MultipartBody.Part?,
+//        @Part img3: MultipartBody.Part?,
+//        @Part("adDisplay") adDisplay : String,
+//        @Part("icon") icon : Int,
+//        @Part("boption") boption : String
+//    ): Call<ResultDTO>
+
+    @GET("m/ins_goods.php")
+    fun insGoods(
+        @Query("useridx") useridx: Int,
+        @Query("gidx") storeidx: Int,
+        @Query("code") code: String,
+        @Query("name") name : String,
+        @Query("content") content : String,
+        @Query("cooking_time") cooking_time : Int,
+        @Query("price") price : Int,
+        @Query("adDisplay") adDisplay : String,
+        @Query("icon") icon : Int,
+        @Query("boption") boption : String
     ): Call<ResultDTO>
 
     // 테이블 비밀번호 변경

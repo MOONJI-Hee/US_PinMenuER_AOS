@@ -7,6 +7,11 @@ import com.wooriyo.pinmenuer.MyApplication.Companion.pref
 import com.wooriyo.pinmenuer.util.AppHelper
 
 open class BaseActivity: AppCompatActivity() {
+    val y = "Y"
+    val n = "N"
+
+    var useridx = 0
+    var storeidx = 0
 
     override fun onBackPressed() {
     }
@@ -22,6 +27,8 @@ open class BaseActivity: AppCompatActivity() {
         resources.displayMetrics.densityDpi = MyApplication.dpi
         resources.displayMetrics.scaledDensity = MyApplication.density
         super.onCreate(savedInstanceState)
+
+        useridx = pref.getUserIdx()
     }
 
     override fun onResume() {

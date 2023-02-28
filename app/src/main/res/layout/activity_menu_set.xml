@@ -204,6 +204,7 @@
             android:paddingHorizontal="20dp">
             <EditText
                 style="@style/edittext_menu18b"
+                android:id="@+id/etName"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:hint="@string/menu_name_hint"
@@ -268,6 +269,7 @@
                         android:paddingEnd="37dp"
                         android:inputType="number"
                         android:hint="@string/zero"
+                        android:maxLength="11"
                         android:textSize="20sp"
                         android:textAlignment="viewEnd"
                         app:layout_constraintTop_toTopOf="parent"

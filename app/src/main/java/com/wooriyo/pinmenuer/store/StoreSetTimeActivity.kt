@@ -1,7 +1,5 @@
 package com.wooriyo.pinmenuer.store
 
-import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -31,8 +29,6 @@ import retrofit2.Response
 class StoreSetTimeActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding : ActivityStoreSetTimeBinding
 
-    var useridx = 0
-    var storeidx = 0
     lateinit var store : StoreDTO
     var openTime = OpenTimeDTO()
     var breakTime = BrkTimeDTO()
@@ -43,8 +39,6 @@ class StoreSetTimeActivity : BaseActivity(), View.OnClickListener {
 
     val gson = Gson()
     val TAG = "StoreSetTimeActivity"
-    val y = "Y"
-    val n = "N"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -371,7 +365,7 @@ class StoreSetTimeActivity : BaseActivity(), View.OnClickListener {
 
     // 특별 휴일 다이얼로그
     fun spcHolidayDialog(type: Int, spcHolidayDTO: SpcHolidayDTO?) { // type 1: 추가 2: 수정
-        val dialog = HolidayDialog(this@StoreSetTimeActivity, type, useridx, storeidx, spcHolidayDTO)
+        val dialog = HolidayDialog(this@StoreSetTimeActivity, type, storeidx, spcHolidayDTO)
         dialog.setOnHolidaySetListener(object : DialogListener{
             override fun onHolidaySet(data: SpcHolidayDTO) {
                 setResult(RESULT_OK)

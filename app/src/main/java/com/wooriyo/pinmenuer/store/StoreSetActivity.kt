@@ -11,7 +11,6 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
@@ -33,8 +32,6 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
     val TAG = "StoreSetActivity"
 
     var type : Int = 0            // 1 : 등록, 2 : 수정
-    var useridx : Int = 0
-    var storeidx : Int = 0
     var storeNm : String = ""
     var storeAddr : String = ""
     var storeLong : String = ""

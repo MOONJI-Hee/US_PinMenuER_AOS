@@ -37,7 +37,7 @@ class OptEditAdapter(val opt: OptionDTO): RecyclerView.Adapter<OptEditAdapter.Vi
 
                 val pay = opt.optpay
                 if(pay != null) {
-                    etPrice.setText(AppHelper.price(pay[position]))
+                    etPrice.setText(AppHelper.price(pay[position].toInt()))
                 }
                 // TODO + / - 스피너 초기화
             }

@@ -20,7 +20,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HolidayDialog(context: Context, val type : Int, val useridx : Int, val storeidx : Int, val spcHoliday : SpcHolidayDTO?): BaseDialog(context), View.OnClickListener {
+class HolidayDialog(context: Context, val type : Int, val storeidx : Int, val spcHoliday : SpcHolidayDTO?): BaseDialog(context), View.OnClickListener {
     lateinit var binding : DialogHolidayBinding
     lateinit var dialogListener: DialogListener
     val TAG = "HolidayDialog"
@@ -36,7 +36,6 @@ class HolidayDialog(context: Context, val type : Int, val useridx : Int, val sto
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         binding = DialogHolidayBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

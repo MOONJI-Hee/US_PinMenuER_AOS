@@ -1,7 +1,6 @@
 package com.wooriyo.pinmenuer.store
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,6 +15,7 @@ import com.wooriyo.pinmenuer.menu.CategorySetActivity
 import com.wooriyo.pinmenuer.menu.MenuSetActivity
 import com.wooriyo.pinmenuer.model.CateListDTO
 import com.wooriyo.pinmenuer.model.CategoryDTO
+import com.wooriyo.pinmenuer.model.StoreDTO
 import com.wooriyo.pinmenuer.order.OrderListActivity
 import com.wooriyo.pinmenuer.util.ApiClient
 import com.wooriyo.pinmenuer.util.AppHelper
@@ -24,17 +24,19 @@ import retrofit2.Response
 
 class StoreMenuActivity : BaseActivity(), OnClickListener {
     lateinit var binding: ActivityStoreMenuBinding
+    lateinit var store : StoreDTO
 
     val TAG = "StoreMenuActivity"
 
-    var useridx = 11
-    var storeidx = 2
     var cateList = ArrayList<CategoryDTO>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStoreMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        store = intent.getSerializableExtra("store") as StoreDTO
+        storeidx = store.idx
 
         getCategory()
 

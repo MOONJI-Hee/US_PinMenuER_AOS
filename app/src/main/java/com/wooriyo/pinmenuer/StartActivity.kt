@@ -1,10 +1,8 @@
 package com.wooriyo.pinmenuer
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.wooriyo.pinmenuer.MyApplication.Companion.db
 import com.wooriyo.pinmenuer.db.entity.Member
 import com.wooriyo.pinmenuer.member.LoginActivity
 import com.wooriyo.pinmenuer.model.MemberDTO

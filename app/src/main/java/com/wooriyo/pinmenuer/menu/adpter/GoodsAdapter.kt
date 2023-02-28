@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wooriyo.pinmenuer.databinding.ListMenuBinding
 import com.wooriyo.pinmenuer.model.GoodsDTO
+import com.wooriyo.pinmenuer.util.AppHelper
 
 class GoodsAdapter(val dataSet: ArrayList<GoodsDTO>): RecyclerView.Adapter<GoodsAdapter.ViewHolder>() {
 
@@ -25,7 +26,7 @@ class GoodsAdapter(val dataSet: ArrayList<GoodsDTO>): RecyclerView.Adapter<Goods
         fun bind(data: GoodsDTO) {
             binding.run {
                 name.text = data.name
-                price.text = data.price
+                price.text = AppHelper.price(data.price)
             }
         }
 
