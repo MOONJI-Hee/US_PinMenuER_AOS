@@ -208,38 +208,75 @@ interface Api {
         @Query("seq") seq: Int
     ): Call<ResultDTO>
 
+    // 메뉴 조회
+    @GET("m/goods.list.php")
+    fun getGoods(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int
+    ): Call<GoodsListDTO>
+
     // 메뉴 등록
-//    @Multipart
-//    @POST("m/ins_goods.php")
+    @Multipart
+    @POST("m/ins_goods.php")
+    fun insGoods(
+        @Part("useridx") useridx: Int,
+        @Part("gidx") storeidx: Int,
+        @Part("code") code: String,
+        @Part("name") name : String,
+        @Part("content") content : String,
+        @Part("cooking_time") cooking_time : Int,
+        @Part("price") price : Int,
+        @Part img1: MultipartBody.Part?,
+        @Part img2: MultipartBody.Part?,
+        @Part img3: MultipartBody.Part?,
+        @Part("adDisplay") adDisplay : String,
+        @Part("icon") icon : Int,
+        @Part("boption") boption : String
+    ): Call<ResultDTO>
+
+//    @GET("m/ins_goods.php")
 //    fun insGoods(
-//        @Part("useridx") useridx: Int,
-//        @Part("gidx") storeidx: Int,
-//        @Part("code") code: String,
-//        @Part("name") name : String,
-//        @Part("content") content : String,
-//        @Part("cooking_time") cooking_time : Int,
-//        @Part("price") price : Int,
-//        @Part img1: MultipartBody.Part?,
-//        @Part img2: MultipartBody.Part?,
-//        @Part img3: MultipartBody.Part?,
-//        @Part("adDisplay") adDisplay : String,
-//        @Part("icon") icon : Int,
-//        @Part("boption") boption : String
+//        @Query("useridx") useridx: Int,
+//        @Query("gidx") storeidx: Int,
+//        @Query("code") code: String,
+//        @Query("name") name : String,
+//        @Query("content") content : String,
+//        @Query("cooking_time") cooking_time : Int,
+//        @Query("price") price : Int,
+//        @Query("adDisplay") adDisplay : String,
+//        @Query("icon") icon : Int,
+//        @Query("boption") boption : String
 //    ): Call<ResultDTO>
 
-    @GET("m/ins_goods.php")
-    fun insGoods(
-        @Query("useridx") useridx: Int,
-        @Query("gidx") storeidx: Int,
-        @Query("code") code: String,
-        @Query("name") name : String,
-        @Query("content") content : String,
-        @Query("cooking_time") cooking_time : Int,
-        @Query("price") price : Int,
-        @Query("adDisplay") adDisplay : String,
-        @Query("icon") icon : Int,
-        @Query("boption") boption : String
+    // 메뉴 수정
+    @Multipart
+    @POST("m/udt_goods.php")
+    fun udtGoods(
+        @Part("useridx") useridx: Int,
+        @Part("gidx") gidx: Int,
+        @Part("code") code: String,
+        @Part("name") name : String,
+        @Part("content") content : String,
+        @Part("cooking_time") cooking_time : Int,
+        @Part("price") price : Int,
+        @Part img1: MultipartBody.Part?,
+        @Part img2: MultipartBody.Part?,
+        @Part img3: MultipartBody.Part?,
+        @Part("adDisplay") adDisplay : String,
+        @Part("icon") icon : Int,
+        @Part("boption") boption : String
     ): Call<ResultDTO>
+
+    // 메뉴 삭제
+    @GET("m/del_goods.php")
+    fun delGoods(
+        @Query("useridx") useridx: Int,
+        @Query("idx") storeidx: Int,
+        @Query("gidx") gidx: Int
+    ): Call<ResultDTO>
+
+    // 메뉴 순서 변경
+
 
     // 테이블 비밀번호 변경
     @GET("m/udt_tablepwd.php")

@@ -34,7 +34,6 @@ class SignUpActivity : BaseActivity(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        AppHelper.hideInset(this)
     }
 
     override fun onClick(p0: View?) {

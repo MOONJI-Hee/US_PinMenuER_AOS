@@ -20,6 +20,7 @@ import com.wooriyo.pinmenuer.menu.dialog.OptionDialog
 import com.wooriyo.pinmenuer.menu.dialog.ViewModeDialog
 import com.wooriyo.pinmenuer.model.CategoryDTO
 import com.wooriyo.pinmenuer.model.GoodsDTO
+import com.wooriyo.pinmenuer.model.GoodsListDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.util.Api
 import com.wooriyo.pinmenuer.util.ApiClient
@@ -43,6 +44,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     val goods = GoodsDTO()
 
     val TAG = "MenuSetActivity"
+    val mActivity = this@MenuSetActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,26 +63,22 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         binding.optChoice.setOnClickListener(this)
 
         setView()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        AppHelper.hideInset(this)
+        getMenu()
     }
 
     override fun onClick(v: View?) {
         when(v) {
             binding.back -> finish()
             binding.btnCateUdt -> {     // 카테고리 수정 버튼 > 카테고리 설정 페이지로 이동
-                val intent = Intent(this@MenuSetActivity, CategorySetActivity::class.java)
+                val intent = Intent(mActivity, CategorySetActivity::class.java)
                 intent.putExtra("cateList", cateList)
                 startActivity(intent)
             }
-            binding.setTablePass -> {}
-            binding.setBg -> { BgDialog(this@MenuSetActivity).show() }
-            binding.setViewMode -> { ViewModeDialog(this@MenuSetActivity).show() }
-            binding.optRequire -> { OptionDialog(this@MenuSetActivity, 1, null).show() }
-            binding.optChoice -> { OptionDialog(this@MenuSetActivity, 2, null).show() }
+            binding.setTablePass -> {setTablePass()}
+            binding.setBg -> { BgDialog(mActivity).show() }
+            binding.setViewMode -> { ViewModeDialog(mActivity).show() }
+            binding.optRequire -> { OptionDialog(mActivity, 1, null).show() }
+            binding.optChoice -> { OptionDialog(mActivity, 2, null).show() }
         }
     }
 
@@ -88,15 +86,40 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         cateAdapter = CateAdapter(cateList)
 
         binding.run {
-            rvCate.layoutManager = LinearLayoutManager(this@MenuSetActivity, LinearLayoutManager.HORIZONTAL, false)
+            rvCate.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false)
             rvCate.adapter = cateAdapter
 
-            rvMenu.layoutManager = LinearLayoutManager(this@MenuSetActivity, LinearLayoutManager.VERTICAL, false)
+            rvMenu.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false)
             rvMenu.adapter = goodsAdapter
-
 
             etPrice.addTextChangedListener(textWatcher)
         }
+    }
+
+    fun getMenu() {
+        ApiClient.service.getGoods(useridx, storeidx).enqueue(object : Callback<GoodsListDTO>{
+            override fun onResponse(call: Call<GoodsListDTO>, response: Response<GoodsListDTO>) {
+                Log.d(TAG, "메뉴 리스트 조회 url : $response")
+                if(!response.isSuccessful) return
+
+                val result = response.body()
+                if(result != null) {
+                    when(result.status){
+                        1 -> {
+                            goodsList.clear()
+                            goodsList.addAll(result.glist)
+                            goodsAdapter.notifyDataSetChanged()
+                        }
+                        else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<GoodsListDTO>, t: Throwable) {
+                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "메뉴 리스트 조회 실패 > $t")
+            }
+        })
     }
 
     fun save() {
@@ -140,8 +163,8 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         }
 
         goods.let {
-//            ApiClient.service.insGoods(useridx, storeidx, "001", it.name, it.content?:"", it.cooking_time, it.price, media1, media2, media3, it.adDisplay, it.icon, it.boption)
-            ApiClient.service.insGoods(useridx, storeidx, "001", it.name, it.content?:"", it.cooking_time, it.price, it.adDisplay, it.icon, it.boption)
+            ApiClient.service.insGoods(useridx, storeidx, "001", it.name, it.content?:"", it.cooking_time, it.price, null, null, null, it.adDisplay, it.icon, it.boption)
+//            ApiClient.service.insGoods(useridx, storeidx, "001", it.name, it.content?:"", it.cooking_time, it.price, it.adDisplay, it.icon, it.boption)
                 .enqueue(object : Callback<ResultDTO> {
                     override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                         Log.d(TAG, "메뉴 등록 url : $response")
@@ -151,21 +174,48 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
                         if(result != null) {
                             when(result.status){
-                                1 -> Toast.makeText(this@MenuSetActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
-                                else -> Toast.makeText(this@MenuSetActivity, result.msg, Toast.LENGTH_SHORT).show()
+                                1 -> Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                                else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                             }
                         }
 
                     }
 
                     override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
-                        Toast.makeText(this@MenuSetActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                         Log.d(TAG, "메뉴 등록 실패 > $t")
                     }
                 })
         }
     }
 
+    fun setTablePass() {
+        val pass = binding.etTablePass.text.toString()
+
+        if(pass.isEmpty()) {
+            Toast.makeText(mActivity, R.string.msg_no_pw, Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        ApiClient.service.udtTablePwd(useridx, storeidx, pass).enqueue(object : Callback<ResultDTO> {
+            override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                Log.d(TAG, "테이블 비밀번호 설정 url : $response")
+                if(!response.isSuccessful) return
+                val result = response.body()
+                if(result != null) {
+                    when(result.status){
+                        1 -> Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                        else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "테이블 비밀번호 설정 오류 > $t")
+            }
+        })
+    }
 
     val textWatcher = object : TextWatcher {
         var result = ""

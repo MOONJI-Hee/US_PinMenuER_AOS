@@ -152,7 +152,7 @@
             android:text="@string/save2"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
-        <TextView
+        <EditText
             style="@style/edittext"
             android:id="@+id/etTablePass"
             android:layout_width="match_parent"

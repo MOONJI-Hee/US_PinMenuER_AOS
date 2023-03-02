@@ -91,11 +91,6 @@ class StoreSetDetailActivity : BaseActivity(), View.OnClickListener {
         binding.save.setOnClickListener(this)
     }
 
-    override fun onResume() {
-        super.onResume()
-        AppHelper.hideInset(this)
-    }
-
     override fun onClick(p0: View?) {
         when(p0) {
             binding.back -> finish()

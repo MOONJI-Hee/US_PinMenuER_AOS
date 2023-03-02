@@ -73,11 +73,6 @@ class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
         binding.regImg.setOnClickListener(this)
     }
 
-    override fun onResume() {
-        super.onResume()
-        AppHelper.hideInset(this)
-    }
-
     override fun onClick(p0: View?) {
         when(p0) {
             binding.back -> finish()
