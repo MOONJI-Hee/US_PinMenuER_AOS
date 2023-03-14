@@ -57,7 +57,7 @@ interface Api {
 
     // 매장 목록 조회
     @FormUrlEncoded
-    @POST("/api/m/store.list.php")
+    @POST("m/store.list.php")
     fun getStoreList(
         @Field("useridx") useridx: Int,
         @Field("storeidx") storeidx: String?="" // null일 때 처리를 위해서 여기만 String
@@ -163,7 +163,7 @@ interface Api {
     ): Call<ResultDTO>
 
     // 카테고리 목록 조희
-    @GET("/api/m/getcategory.php")
+    @GET("m/getcategory.php")
     fun getCateList(
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int,
