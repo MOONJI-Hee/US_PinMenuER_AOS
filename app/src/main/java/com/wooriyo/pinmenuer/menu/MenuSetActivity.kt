@@ -184,6 +184,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                     override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
                         Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                         Log.d(TAG, "메뉴 등록 실패 > $t")
+                        Log.d(TAG, "메뉴 등록 실패 > ${call.request()}")
                     }
                 })
         }
