@@ -7,6 +7,7 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.widget.Toast
 import com.wooriyo.pinmenuer.BaseActivity
+import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.call.CallListActivity
 import com.wooriyo.pinmenuer.databinding.ActivityStoreMenuBinding
@@ -36,7 +37,6 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
         setContentView(binding.root)
 
         store = intent.getSerializableExtra("store") as StoreDTO
-        storeidx = store.idx
 
         getCategory()
 

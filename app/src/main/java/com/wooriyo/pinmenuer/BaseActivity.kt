@@ -29,6 +29,7 @@ open class BaseActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         useridx = pref.getUserIdx()
+        storeidx = MyApplication.storeidx
     }
 
     override fun onResume() {

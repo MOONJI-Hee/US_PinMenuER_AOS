@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.databinding.ListStoreBinding
 import com.wooriyo.pinmenuer.model.StoreDTO
 import com.wooriyo.pinmenuer.store.StoreMenuActivity
@@ -33,6 +34,7 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Store
                 storePayDt.text = data.paydt.split(" ")[0].replace("-", ".")
 
                 storeName.setOnClickListener {
+                    MyApplication.storeidx = data.idx
                     val intent = Intent(context, StoreMenuActivity::class.java)
                     intent.putExtra("store", data)
                     context.startActivity(intent)

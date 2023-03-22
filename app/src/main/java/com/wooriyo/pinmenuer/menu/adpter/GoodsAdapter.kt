@@ -29,6 +29,5 @@ class GoodsAdapter(val dataSet: ArrayList<GoodsDTO>): RecyclerView.Adapter<Goods
                 price.text = AppHelper.price(data.price)
             }
         }
-
     }
 }

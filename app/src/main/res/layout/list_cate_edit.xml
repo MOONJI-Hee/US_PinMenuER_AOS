@@ -38,13 +38,13 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_marginEnd="6dp"
-            android:text="@string/sequence"/>
+            android:text="@string/btn_sequence2"/>
     <TextView
         style="@style/btn_small"
         android:id="@+id/udt"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:text="@string/update"/>
+        android:text="@string/btn_update2"/>
     </LinearLayout>
 
     <ImageView

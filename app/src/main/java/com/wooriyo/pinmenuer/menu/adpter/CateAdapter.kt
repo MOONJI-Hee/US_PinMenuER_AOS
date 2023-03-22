@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wooriyo.pinmenuer.databinding.ListCateBinding
+import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.model.CategoryDTO
 
 class CateAdapter(val dataSet: ArrayList<CategoryDTO>) : RecyclerView.Adapter<CateAdapter.ViewHolder>() {
+    lateinit var itemClickListener: ItemClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ListCateBinding.inflate(LayoutInflater.from(parent.context), parent, false)

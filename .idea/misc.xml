@@ -62,6 +62,7 @@
         <entry key="app/src/main/res/layout/dialog_viewmode.xml" value="0.20333333333333334" />
         <entry key="app/src/main/res/layout/fragment_item_detail.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_item_list.xml" value="3.075" />
+        <entry key="app/src/main/res/layout/fragment_menu.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_list_content.xml" value="0.28828125" />
         <entry key="app/src/main/res/layout/list_call.xml" value="0.29583333333333334" />
         <entry key="app/src/main/res/layout/list_call_detail.xml" value="0.2877604166666667" />

@@ -1,14 +1,27 @@
 package com.wooriyo.pinmenuer.menu
 
+import android.Manifest
+import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Path
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityMenuSetBinding
@@ -46,6 +59,21 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     val TAG = "MenuSetActivity"
     val mActivity = this@MenuSetActivity
 
+    var selCate = "001"
+
+    var bisStorage: Boolean = false
+    val REQUEST_R_STORAGE = 1
+    var selThum: ImageView ?= null
+
+    //registerForActivityResult
+    val chooseImg = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if(it.resultCode == Activity.RESULT_OK) {
+            val imgUri = it.data?.data
+            if(imgUri != null)
+                setImage(imgUri)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMenuSetBinding.inflate(layoutInflater)
@@ -54,13 +82,18 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         cateList = (intent.getSerializableExtra("cateList")?: ArrayList<CategoryDTO>()) as ArrayList<CategoryDTO>
 
         binding.back.setOnClickListener(this)
-        binding.btnCateUdt.setOnClickListener(this)      // 카테고리 수정 버튼
+        binding.btnCateUdt.setOnClickListener(this)     // 카테고리 수정 버튼
         binding.setTablePass.setOnClickListener(this)   // 테이블 비밀번호 저장
-        binding.setBg.setOnClickListener(this)              // 배경 선택
-        binding.setViewMode.setOnClickListener(this)  // 뷰어 모드 선택
+        binding.setBg.setOnClickListener(this)          // 배경 선택
+        binding.setViewMode.setOnClickListener(this)    // 뷰어 모드 선택
+
+        // 중앙 메뉴 상세 관련
         binding.menuSave.setOnClickListener{save()}
         binding.optRequire.setOnClickListener(this)
         binding.optChoice.setOnClickListener(this)
+        binding.thum1.setOnClickListener(this)
+        binding.thum2.setOnClickListener(this)
+        binding.thum3.setOnClickListener(this)
 
         setView()
         getMenu()
@@ -77,8 +110,17 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             binding.setTablePass -> {setTablePass()}
             binding.setBg -> { BgDialog(mActivity).show() }
             binding.setViewMode -> { ViewModeDialog(mActivity).show() }
+
+            // 중앙 메뉴 상세 관련
             binding.optRequire -> { OptionDialog(mActivity, 1, null).show() }
             binding.optChoice -> { OptionDialog(mActivity, 2, null).show() }
+            binding.thum1, binding.thum2, binding.thum3-> {
+                selThum = v as ImageView
+                if(bisStorage)
+                    getMedia()
+                else
+                    checkPms()
+            }
         }
     }
 
@@ -124,27 +166,41 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
     fun save() {
         val mmtp = MediaType.parse("image/*") // 임시
-        var body : RequestBody?= null
         var media1: MultipartBody.Part? = null
         var media2: MultipartBody.Part? = null
         var media3: MultipartBody.Part? = null
 
         binding.run {
-            goods.name = etName.text.toString()
-            goods.content = etName.text.toString()
-            goods.cooking_time = (etCookingTime.text ?: "0").toString().toInt()
-            goods.price = etPrice.text.toString().replace(",", "").toInt()
+            val strName = etName.text.toString()
+            var strCookTime = etCookingTime.text.toString()
+            var strPrice = etPrice.text.toString().replace(",", "")
+
+            if(strName.isEmpty()){
+                Toast.makeText(mActivity, R.string.msg_no_goods_name, Toast.LENGTH_SHORT).show()
+                return
+            }
+
+            if(strCookTime.isEmpty())
+                strCookTime = "0"
+
+            if(strPrice.isEmpty())
+                strPrice = "0"
+
+            goods.name = strName                            // 상품명
+            goods.content = etName.text.toString()          // 상품설명
+            goods.cooking_time = strCookTime.toInt()        // 조리시간
+            goods.price = strPrice.toInt()                  // 가격
 
             if(goods.file1 != null) {
-                body = RequestBody.create(mmtp, goods.file1!!)
+                val body = RequestBody.create(mmtp, goods.file1!!)
                 media1 = MultipartBody.Part.createFormData("img1", goods.file1!!.name, body)
             }
             if(goods.file2 != null) {
-                body = RequestBody.create(mmtp, goods.file2!!)
+                val body = RequestBody.create(mmtp, goods.file2!!)
                 media2 = MultipartBody.Part.createFormData("img2", goods.file2!!.name, body)
             }
             if(goods.file3 != null) {
-                body = RequestBody.create(mmtp, goods.file3!!)
+                val body = RequestBody.create(mmtp, goods.file3!!)
                 media3 = MultipartBody.Part.createFormData("img3", goods.file3!!.name, body)
             }
 
@@ -163,22 +219,23 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         }
 
         goods.let {
-            ApiClient.service.insGoods(useridx, storeidx, "001", it.name, it.content?:"", it.cooking_time, it.price, null, null, null, it.adDisplay, it.icon, it.boption)
-//            ApiClient.service.insGoods(useridx, storeidx, "001", it.name, it.content?:"", it.cooking_time, it.price, it.adDisplay, it.icon, it.boption)
+            ApiClient.service.insGoods(useridx, storeidx, selCate, it.name, it.content?:"", it.cooking_time, it.price, it.adDisplay, it.icon, it.boption)
                 .enqueue(object : Callback<ResultDTO> {
                     override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                         Log.d(TAG, "메뉴 등록 url : $response")
                         if(!response.isSuccessful) return
 
                         val result = response.body()
-
                         if(result != null) {
                             when(result.status){
-                                1 -> Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                                1 -> {
+//                                    Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                                    val gidx = result.gidx
+                                    uploadImage(gidx, media1, media2, media3)
+                                }
                                 else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                             }
                         }
-
                     }
 
                     override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
@@ -188,6 +245,29 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                     }
                 })
         }
+    }
+
+    fun uploadImage(gidx: Int, media1: MultipartBody.Part?, media2: MultipartBody.Part?, media3: MultipartBody.Part?) {
+        ApiClient.imgService.uploadImg(useridx, gidx, media1, media2, media3)
+            .enqueue(object : Callback<ResultDTO>{
+                override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                    Log.d(TAG, "이미지 등록 url : $response")
+                    if(!response.isSuccessful) return
+
+                    val result = response.body()
+                    if(result != null) {
+                        when(result.status){
+                            1 -> { Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show() }
+                            else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                    Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "이미지 등록 실패 > $t")
+                    Log.d(TAG, "이미지 등록 실패 > ${call.request()}")
+                }
+            })
     }
 
     fun setTablePass() {
@@ -229,6 +309,87 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             }
         }
         override fun afterTextChanged(s: Editable?) {}
+    }
+
+    //이미지 권한 설정 및 가져오기
+    // 외부저장소 권한 확인
+    fun checkPms() {
+//        if(MyApplication.osver >= Build.VERSION_CODES.Q) {
+//
+//        }else {
+//
+//        }
+        when {
+            ContextCompat.checkSelfPermission(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED -> {
+                bisStorage = true
+                getMedia()
+            }
+            ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE) -> {
+                AlertDialog.Builder(mActivity)
+                    .setTitle(R.string.pms_storage_title)
+                    .setMessage(R.string.pms_storage_content)
+                    .setPositiveButton(R.string.confirm) { dialog, _ ->
+                        dialog.dismiss()
+                        getPms()
+                    }
+                    .setNegativeButton(R.string.cancel) {dialog, _ -> dialog.dismiss()}
+                    .show()
+            }
+            else -> getPms()
+        }
+    }
+
+    // 외부저장소 권한 받아오기
+    fun getPms() {
+        ActivityCompat.requestPermissions(mActivity, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_R_STORAGE)
+    }
+
+    fun getMedia() {
+        if(selThum == binding.thum1)
+            chooseImg.launch(Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI))
+        else
+            chooseImg.launch(Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI))
+    }
+
+    fun setImage(imgUri: Uri) {
+        var path = ""
+        var name = ""
+
+        contentResolver.query(imgUri, null, null, null, null)?.use { cursor ->
+            // Cache column indices.
+            val dataColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            val nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME)
+
+            while (cursor.moveToNext()) {
+                path = cursor.getString(dataColumn)
+                name = cursor.getString(nameColumn)
+                Log.d(TAG, "name >>>>> $name")
+                Log.d(TAG, "path >>>>> $path")
+            }
+        }
+        val file = File(path)
+
+        if(selThum != null) {
+            Glide.with(mActivity)
+                .load(imgUri)
+                .transform(CenterCrop(), RoundedCorners(6))
+                .into(selThum!!)
+        }
+
+        when(selThum) {
+            binding.thum1 -> {
+                goods.file1 = file
+                binding.imgHint1.visibility = View.GONE
+            }
+            binding.thum2 -> {
+                goods.file2 = file
+                binding.imgHint2.visibility = View.GONE
+            }
+            binding.thum3 -> {
+                goods.file3 = file
+                binding.imgHint3.visibility = View.GONE
+            }
+        }
     }
 
 }

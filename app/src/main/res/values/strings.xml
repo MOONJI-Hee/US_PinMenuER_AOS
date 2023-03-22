@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PinMenu 관리자</string>
+    <string name="app_name">핀메뉴 관리자</string>
 
     <string name="kakao_appKey">398d9c3d6b47f73780e5413b1f4b167f</string>
     <string name="kakao_apiKey">0a9047a6f0f9b350e4fca5168f2c5ef8</string>
@@ -24,16 +24,31 @@
     <string name="tableno">테이블 번호</string>
     <string name="tablepass">테이블 비밀번호</string>
 
-    <string name="confirm">확&#160;&#160;인</string>
-    <string name="cancel">취&#160;&#160;소</string>
-    <string name="cancel2">취소</string>
-    <string name="save">저&#160;&#160;장</string>
-    <string name="save2">저&#160;장</string>
-    <string name="delete">삭&#160;&#160;제</string>
-    <string name="delete2">삭제</string>
-    <string name="update">수&#160;정</string>
-    <string name="sequence">순&#160;서</string>
     <string name="essential">필수</string>
+
+    <string name="confirm">확인</string>
+    <string name="cancel">취소</string>
+    <string name="save">저장</string>
+    <string name="delete">삭제</string>
+    <string name="update">수정</string>
+    <string name="sequence">순서</string>
+    <string name="call">호출</string>
+
+    <!--  버튼 텍스트  -->
+    <string name="btn_login">로&#160;그&#160;인</string>
+    <string name="btn_confirm">확&#160;&#160;인</string>
+    <string name="btn_cancel">취&#160;&#160;소</string>
+    <string name="btn_save">저&#160;&#160;장</string>
+    <string name="btn_save2">저&#160;장</string>
+    <string name="btn_delete">삭&#160;&#160;제</string>
+    <string name="btn_update">수&#160;&#160;정</string>
+    <string name="btn_update2">수&#160;정</string>
+    <string name="btn_sequence">순&#160;&#160;서</string>
+    <string name="btn_sequence2">순&#160;서</string>
+    <string name="btn_call">호&#160;&#160;출</string>
+    <string name="btn_call2">호&#160;출</string>
+    <string name="btn_complete">완&#160;&#160;료</string>
+
 
     <string name="udt_info">정보변경</string>
 
@@ -149,17 +164,18 @@
     <string name="event_mgmt_sub">재방문 이벤트 관리</string>
 
     <!--  카테고리 설정  -->
-    <string name="category_info1"><b>카테고리 순서 변경이 필요한 경우</b> 에는\n변경하고자하는 카테고리 하단에 있는 [ 순서 ] 버튼을 누른 후 좌우 버튼을 눌러 순서를 변경합니다.\n변경 후에는 [ 저장 ] 버튼을 눌러주셔야 변경된 내용이 적용됩니다.</string>
-    <string name="category_info2"><b>카테고리 [ 수정 ] [ 삭제 ] [ 숨기기 ] 를 할 경우</b> 에는\n변경하고자하는 카테고리 하단에 있는 [ 수정 ] 버튼을 누른 후\n변경 팝업창이 나오면 텍스트 수정, 삭제, 카테고리 숨김을 진행하실 수 있습니다.</string>
+    <string name="category_info_seq"><b>카테고리 순서 변경</b>은\n변경하고자하는 카테고리를 누른 후 좌우 버튼을 눌러 순서를 변경합니다.\n변경 후에는 [ 저장 ] 버튼을 눌러주셔야 변경된 내용이 적용됩니다.</string>
+    <string name="category_info_udt"><b>카테고리 [ 수정 ] [ 삭제 ] [ 숨기기 ]를 할 경우</b> 에는\n변경하고자하는 카테고리를 누른 후 변경 팝업창이 나오면 텍스트 수정, 삭제, 카테고리 숨김을 진행하실 수 있습니다.</string>
     <string name="category_name">카테고리 명칭</string>
     <string name="category_name_hint">명칭을 입력해주세요.</string>
     <string name="category_exp">카테고리 설명</string>
     <string name="category_exp_hint">설명 혹은 영문을 입력해주세요.</string>
-    <string name="category_dialog_info1"><b>카테고리 순서 변경이 필요한 경우</b>에는\n우측 상단 [ 카테고리 수정 ] 버튼을 누른 후\n변경하고자하는 카테고리를 선택하여 좌우로 이동시켜 순서를 변경합니다.\n변경 후에는 [ 저장 ] 버튼을 눌러주셔야 변경된 내용이 적용됩니다.</string>
+    <string name="category_dialog_info1"><b>카테고리 순서 변경이 필요한 경우</b>에는\n우측 상단 [ 카테고리 순서 변경 ] 버튼을 누른 후\n변경하고자하는 카테고리를 선택하여 좌우로 이동시켜 순서를 변경합니다.\n변경 후에는 [ 저장 ] 버튼을 눌러주셔야 변경된 내용이 적용됩니다.</string>
     <string name="category_dialog_info2"><b>카테고리 [ 숨김 ] 필요한 경우</b>에는\n우측 상단에 있는 [ 숨기기 ] 옆 Off 버튼을 On으로 변경 후 저장을 눌러주세요.\n삭제는 카테고리에 입력된 모든 메뉴 정보가 삭제되지만,\n[ 숨기기 ]는 고객에게 보여지지 않도록 설정됩니다.</string>
     <string name="category_hide">숨기기</string>
-    <string name="category_udt">카테고리\n수정</string>
-    <string name="category_add">카테고리\n추가</string>
+    <string name="category_set">카테고리\n설정</string>
+    <string name="category_add">카테고리 추가</string>
+    <string name="category_seq">카테고리 순서 변경</string>
 
     <!--  메뉴 설정  -->
     <string name="change_seq">순서변경</string>
@@ -262,9 +278,12 @@
     <string name="msg_no_date">날짜를 확인해주세요.</string>
     <string name="msg_no_img">이미지를 등록해주세요.</string>
     <string name="msg_no_name">명칭을 입력해주세요.</string>
+    <string name="msg_no_goods_name">상품명을 입력해주세요.</string>
     <string name="backpress">뒤로 가기 버튼을 한 번 더 누르시면 종료됩니다.</string>
     <string name="msg_no_search_result">검색 결과가 없습니다.</string>
     <string name="title_activity_item_detail_host">ItemDetailHostActivity</string>
     <string name="title_item_list">Items</string>
     <string name="title_item_detail">Item Detail</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

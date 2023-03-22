@@ -21,6 +21,8 @@ class MyApplication: Application() {
         var osver = 0
         lateinit var appver : String
         lateinit var md : String
+
+        var storeidx = 0
     }
 
     override fun onCreate() {

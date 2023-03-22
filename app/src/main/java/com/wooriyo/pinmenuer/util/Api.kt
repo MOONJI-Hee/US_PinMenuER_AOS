@@ -216,37 +216,30 @@ interface Api {
     ): Call<GoodsListDTO>
 
     // 메뉴 등록
-    @Multipart
-    @POST("m/ins_goods.php")
+    @GET("m/ins_goods.php")
     fun insGoods(
-        @Part("useridx") useridx: Int,
-        @Part("gidx") storeidx: Int,
-        @Part("code") code: String,
-        @Part("name") name : String,
-        @Part("content") content : String,
-        @Part("cooking_time") cooking_time : Int,
-        @Part("price") price : Int,
-        @Part img1: MultipartBody.Part?,
-        @Part img2: MultipartBody.Part?,
-        @Part img3: MultipartBody.Part?,
-        @Part("adDisplay") adDisplay : String,
-        @Part("icon") icon : Int,
-        @Part("boption") boption : String
+        @Query("useridx") useridx: Int,
+        @Query("gidx") storeidx: Int,
+        @Query("code") code: String,
+        @Query("name") name : String,
+        @Query("content") content : String,
+        @Query("cooking_time") cooking_time : Int,
+        @Query("price") price : Int,
+        @Query("adDisplay") adDisplay : String,
+        @Query("icon") icon : Int,
+        @Query("boption") boption : String
     ): Call<ResultDTO>
 
-//    @GET("m/ins_goods.php")
-//    fun insGoods(
-//        @Query("useridx") useridx: Int,
-//        @Query("gidx") storeidx: Int,
-//        @Query("code") code: String,
-//        @Query("name") name : String,
-//        @Query("content") content : String,
-//        @Query("cooking_time") cooking_time : Int,
-//        @Query("price") price : Int,
-//        @Query("adDisplay") adDisplay : String,
-//        @Query("icon") icon : Int,
-//        @Query("boption") boption : String
-//    ): Call<ResultDTO>
+    // 메뉴 이미지 등록
+    @Multipart
+    @POST("upload_image.php")
+    fun uploadImg(
+        @Part("useridx") useridx: Int,
+        @Part("gidx") gidx: Int,
+        @Part img1: MultipartBody.Part?,
+        @Part img2: MultipartBody.Part?,
+        @Part img3: MultipartBody.Part?
+    ): Call<ResultDTO>
 
     // 메뉴 수정
     @Multipart

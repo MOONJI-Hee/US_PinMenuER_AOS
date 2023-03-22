@@ -184,7 +184,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_marginEnd="20dp"
-            android:text="@string/delete" />
+            android:text="@string/btn_delete" />
         <TextView
             style="@style/btn"
             android:id="@+id/modify"

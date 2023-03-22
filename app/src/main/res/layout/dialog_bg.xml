@@ -8,6 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="822dp"
         android:layout_height="490dp"
+        android:background="@drawable/bg_r11w"
         android:paddingHorizontal="30dp"
         android:paddingVertical="40dp">
 

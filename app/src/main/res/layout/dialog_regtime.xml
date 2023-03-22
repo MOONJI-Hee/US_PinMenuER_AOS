@@ -124,7 +124,7 @@
             style="@style/btn_main"
             android:id="@+id/save"
             android:layout_marginVertical="40dp"
-            android:text="@string/confirm"
+            android:text="@string/btn_confirm"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

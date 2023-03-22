@@ -57,7 +57,7 @@
             style="@style/text18"
             android:id="@+id/tv_del"
             android:textColor="#FF0000"
-            android:text="@string/delete2" />
+            android:text="@string/delete" />
     </LinearLayout>
     <ImageView
         style="@style/btn_plus"
