@@ -8,13 +8,14 @@ import android.widget.Toast
 import com.wooriyo.pinmenuer.BaseDialog
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.DialogCategoryBinding
+import com.wooriyo.pinmenuer.model.CategoryDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.util.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CategoryDialog(context: Context, val type: Int): BaseDialog(context) {
+class CategoryDialog(context: Context, val type: Int, val category: CategoryDTO?): BaseDialog(context) {
     lateinit var binding : DialogCategoryBinding
 
     val TAG = "CategoryDialog"

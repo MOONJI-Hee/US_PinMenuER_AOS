@@ -68,7 +68,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ll_cate"
         android:layout_width="match_parent"
-        android:layout_height="194dp"
+        android:layout_height="140dp"
         android:layout_marginTop="144dp"
         android:paddingVertical="20dp"
         android:background="@color/f9"
@@ -160,18 +160,21 @@
 
     <TextView
         style="@style/subtext"
-        android:id="@+id/subtext1"
-        android:text="@string/category_info1"
-        android:layout_marginTop="32dp"
+        android:id="@+id/subtext_udt"
+        android:text="@string/category_info_udt"
+        android:layout_marginTop="23dp"
         android:layout_marginStart="129dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/confirm" />
 
     <TextView
         style="@style/subtext"
-        android:text="@string/category_info2"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="@+id/subtext1"
-        app:layout_constraintTop_toBottomOf="@+id/subtext1" />
+        android:id="@+id/subtext_seq"
+        android:text="@string/category_info_seq"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="67dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirm" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

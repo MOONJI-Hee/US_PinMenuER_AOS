@@ -36,18 +36,13 @@ class CategorySetActivity : BaseActivity() {
         binding.run {
             back.setOnClickListener { finish() }
             confirm.setOnClickListener {
-                when(flag) {
-                    0 -> {
-                        intent = Intent(this@CategorySetActivity, MenuSetActivity::class.java)
-                        intent.putExtra("cateList", allCateList)
-                        startActivity(intent)
-                    }
-                    1 -> seqSave()
-                }
+                intent = Intent(this@CategorySetActivity, MenuSetActivity::class.java)
+                intent.putExtra("cateList", allCateList)
+                startActivity(intent)
             }
             arrowLeft.setOnClickListener {  }
             arrowRight.setOnClickListener {  }
-            btnCateAdd.setOnClickListener { addDialog() }
+            btnAdd.setOnClickListener { addDialog() }
         }
     }
 
@@ -72,7 +67,7 @@ class CategorySetActivity : BaseActivity() {
     }
 
     fun addDialog() {
-        CategoryDialog(this@CategorySetActivity, 0).show()
+        CategoryDialog(this@CategorySetActivity, 0, null).show()
     }
 
     fun seqSave() {
