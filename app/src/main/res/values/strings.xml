@@ -241,7 +241,7 @@
     <string name="merge">합치기</string>
 
     <!-- 직원 호출 -->
-    <string name="call">직원호출</string>
+    <string name="call_emp">직원호출</string>
     <string name="call_manage">호출목록 관리</string>
     <string name="call_info"><b>호출 목록 추가</b>는 [ + ]버튼을 누른 후 목록을 추가합니다.\n수정이 필요한 경우 추가한 목록을 선택하면 수정이 가능합니다.</string>
     <string name="call_add">호출목록 추가</string>

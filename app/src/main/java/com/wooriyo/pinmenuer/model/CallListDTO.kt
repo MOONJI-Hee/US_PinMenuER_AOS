@@ -3,9 +3,9 @@ package com.wooriyo.pinmenuer.model
 import com.google.gson.annotations.SerializedName
 
 data class CallListDTO(
-    var status: Int,
-    var msg: String,
+    @SerializedName("status") var status: Int,
+    @SerializedName("msg") var msg: String,
+    @SerializedName("callList") var callList: ArrayList<CallSetDTO>,
     var tableNo: String,
-    @SerializedName("callList") var callList: ArrayList<CallDTO>,
     var regdt: String
 )

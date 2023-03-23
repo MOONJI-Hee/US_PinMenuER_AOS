@@ -46,7 +46,7 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v) {
             binding.udtMbr -> {
-                startActivity(Intent(this@StoreListActivity, MemberSetActivity::class.java))
+                startActivity(Intent(mActivity, MemberSetActivity::class.java))
             }
         }
     }
@@ -63,20 +63,20 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
                             storeList.addAll(storeListDTO.storeList)
                             setStoreList()
                         }else {
-                            Toast.makeText(this@StoreListActivity, storeListDTO.msg, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mActivity, storeListDTO.msg, Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<StoreListDTO>, t: Throwable) {
-                    Toast.makeText(this@StoreListActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "매장 리스트 조회 오류 > $t")
                 }
             })
     }
 
     fun setStoreList() {
-        binding.rvStore.layoutManager = LinearLayoutManager(this@StoreListActivity, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvStore.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false)
         binding.rvStore.adapter = storeAdapter
 
         storeAdapter.notifyDataSetChanged()

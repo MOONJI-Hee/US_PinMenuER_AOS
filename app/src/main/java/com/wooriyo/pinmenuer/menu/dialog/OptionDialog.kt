@@ -32,5 +32,7 @@ class OptionDialog(context: Context, val type: Int, val option : OptionDTO?): Ba
         if(option == null) {
 
         }
+
+        binding.close.setOnClickListener { dismiss() }
     }
 }

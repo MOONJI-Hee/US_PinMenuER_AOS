@@ -19,6 +19,7 @@ import retrofit2.Response
 
 class CallSetActivity : BaseActivity() {
     val TAG = "CallSetActivity"
+    val mActivity = this@CallSetActivity
     lateinit var binding: ActivityCallListBinding
 
     var setList = ArrayList<CallSetDTO>()
@@ -32,6 +33,8 @@ class CallSetActivity : BaseActivity() {
         binding.btnSet.setBackgroundResource(R.drawable.bg_btn_r6_grd)
         binding.rvCall.visibility = View.GONE
         binding.callSetArea.visibility = View.VISIBLE
+
+        binding.back.setOnClickListener{finish()}
 
         getCallList()
     }
@@ -51,13 +54,13 @@ class CallSetActivity : BaseActivity() {
                                 setList.addAll(callSetList.callList)
                                 setView()
                             }
-                            else -> Toast.makeText(this@CallSetActivity, callSetList.msg, Toast.LENGTH_SHORT).show()
+                            else -> Toast.makeText(mActivity, callSetList.msg, Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<CallSetListDTO>, t: Throwable) {
-                    Toast.makeText(this@CallSetActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "직원호출 전체 목록 조회 오류 > $t")
                 }
             })
@@ -69,7 +72,7 @@ class CallSetActivity : BaseActivity() {
 
         val callSetAdapter = CallSetAdapter(setList)
         // 리사이클러뷰 초기화
-        binding.rvCallSet.layoutManager = GridLayoutManager(this@CallSetActivity, 4)
+        binding.rvCallSet.layoutManager = GridLayoutManager(mActivity, 4)
         binding.rvCallSet.adapter = callSetAdapter
     }
 }

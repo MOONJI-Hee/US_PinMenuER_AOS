@@ -13,8 +13,7 @@ open class BaseActivity: AppCompatActivity() {
     var useridx = 0
     var storeidx = 0
 
-    override fun onBackPressed() {
-    }
+    override fun onBackPressed() {}
 
     // 바깥화면 터치하면 키보드 내리기
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {

@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.wooriyo.pinmenuer.BaseDialog
+import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.DialogCategoryBinding
 import com.wooriyo.pinmenuer.model.CategoryDTO
@@ -31,11 +32,23 @@ class CategoryDialog(context: Context, val type: Int, val category: CategoryDTO?
         binding = DialogCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (type == 1) {  // 수정
-            binding.llUse.visibility = View.VISIBLE
-            binding.llUdt.visibility = View.VISIBLE
-            binding.save.visibility = View.INVISIBLE
-            binding.cateInfo.text = context.getString(R.string.category_dialog_info2)
+        storeidx = MyApplication.storeidx
+
+        if (type == 1 && category != null) {  // 수정
+            binding.run {
+                margin.visibility = View.VISIBLE        // 수정모드일 때 margin 변화 > LayoutParams 대신 View visibility로 조정
+                llUse.visibility = View.VISIBLE
+                llUdt.visibility = View.VISIBLE
+                save.visibility = View.INVISIBLE
+                cateInfo.text = context.getString(R.string.category_dialog_info2)
+
+                etName.setText(category.name)
+                etExp.setText(category.subname)
+
+                if(category.buse == n) cateUse.isChecked = true
+            }
+            cateidx = category.idx
+            code = category.code
         }
 
         binding.run {
@@ -50,7 +63,7 @@ class CategoryDialog(context: Context, val type: Int, val category: CategoryDTO?
         name = binding.etName.text.toString()
         subName = binding.etExp.text.toString()
 
-        buse = if(binding.cateUse.isChecked) "Y" else "N"
+        buse = if(binding.cateUse.isChecked) n else y           // 버튼은 '숨기기' & buse는 사용여부이기 떄문에 체크가 되어있을 때 '사용안함' = n
 
         return if(name.isEmpty()) {
             Toast.makeText(context, R.string.msg_no_name, Toast.LENGTH_SHORT).show()
@@ -84,6 +97,8 @@ class CategoryDialog(context: Context, val type: Int, val category: CategoryDTO?
     }
 
     private fun modify() {
+        if(!check()) { return }
+
         ApiClient.service.udtCate(useridx, storeidx, cateidx, name, subName, buse)
             .enqueue(object: Callback<ResultDTO>{
                 override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {

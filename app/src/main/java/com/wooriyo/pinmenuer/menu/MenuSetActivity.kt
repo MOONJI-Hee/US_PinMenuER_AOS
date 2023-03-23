@@ -2,6 +2,7 @@ package com.wooriyo.pinmenuer.menu
 
 import android.Manifest
 import android.app.Activity
+import android.content.ClipData
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Path
@@ -25,6 +26,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityMenuSetBinding
+import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.menu.adpter.CateAdapter
 import com.wooriyo.pinmenuer.menu.adpter.CateEditAdapter
 import com.wooriyo.pinmenuer.menu.adpter.GoodsAdapter
@@ -47,19 +49,19 @@ import retrofit2.Response
 import java.io.File
 
 class MenuSetActivity : BaseActivity(), View.OnClickListener {
+    val TAG = "MenuSetActivity"
+    val mActivity = this@MenuSetActivity
+
     lateinit var binding: ActivityMenuSetBinding
     lateinit var cateList: ArrayList<CategoryDTO>
     lateinit var cateAdapter : CateAdapter
 
-    val goodsList = ArrayList<GoodsDTO>()
-    val goodsAdapter = GoodsAdapter(goodsList)
-
-    val goods = GoodsDTO()
-
-    val TAG = "MenuSetActivity"
-    val mActivity = this@MenuSetActivity
+    val allGoodsList = ArrayList<GoodsDTO>()
+    val selGoodsList = ArrayList<GoodsDTO>()
+    val goodsAdapter = GoodsAdapter(selGoodsList)
 
     var selCate = "001"
+    var goods = GoodsDTO()
 
     var bisStorage: Boolean = false
     val REQUEST_R_STORAGE = 1
@@ -80,9 +82,19 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         cateList = (intent.getSerializableExtra("cateList")?: ArrayList<CategoryDTO>()) as ArrayList<CategoryDTO>
+        if(cateList.isNotEmpty())
+            setCateAdapter()
+
+        binding.etPrice.addTextChangedListener(textWatcher)
 
         binding.back.setOnClickListener(this)
         binding.btnCateUdt.setOnClickListener(this)     // 카테고리 수정 버튼
+
+        // 좌측 메뉴 리스트 관련
+        binding.btnPlus.setOnClickListener(this)
+        binding.btnSeq.setOnClickListener(this)
+        binding.btnDel.setOnClickListener(this)
+
         binding.setTablePass.setOnClickListener(this)   // 테이블 비밀번호 저장
         binding.setBg.setOnClickListener(this)          // 배경 선택
         binding.setViewMode.setOnClickListener(this)    // 뷰어 모드 선택
@@ -95,7 +107,6 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         binding.thum2.setOnClickListener(this)
         binding.thum3.setOnClickListener(this)
 
-        setView()
         getMenu()
     }
 
@@ -107,6 +118,13 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                 intent.putExtra("cateList", cateList)
                 startActivity(intent)
             }
+            binding.btnPlus -> {
+                clearDetail()
+                goods = GoodsDTO()
+                v.setBackgroundResource(R.drawable.gradient_main)
+            }
+
+
             binding.setTablePass -> {setTablePass()}
             binding.setBg -> { BgDialog(mActivity).show() }
             binding.setViewMode -> { ViewModeDialog(mActivity).show() }
@@ -124,8 +142,16 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    fun setView() {
-        cateAdapter = CateAdapter(cateList)
+    fun setCateAdapter() {
+        selCate = cateList[0].code
+
+        cateAdapter = CateAdapter(cateList, 1)
+        cateAdapter.setOnItemClickListener(object: ItemClickListener {
+            override fun onItemClick(position: Int) {
+                selCate = cateList[position].code
+                setMenuList()
+            }
+        })
 
         binding.run {
             rvCate.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false)
@@ -134,7 +160,33 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             rvMenu.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false)
             rvMenu.adapter = goodsAdapter
 
-            etPrice.addTextChangedListener(textWatcher)
+        }
+    }
+
+    fun setGoodsAdapter() {
+        goodsAdapter.setOnItemClickListener(object : ItemClickListener{
+            override fun onItemClick(position: Int) {
+                goods = selGoodsList[position]
+                setDetail()
+            }
+        })
+        setMenuList()
+    }
+
+    fun setMenuList() {
+        selGoodsList.clear()
+        allGoodsList.forEach {
+            if(it.category == selCate)
+                selGoodsList.add(it)
+        }
+        goodsAdapter.notifyDataSetChanged()
+
+        if(selGoodsList.isEmpty()) {
+            goods = GoodsDTO()
+            clearDetail()
+        }else {
+            goods = selGoodsList[0]
+            setDetail()
         }
     }
 
@@ -148,9 +200,10 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                 if(result != null) {
                     when(result.status){
                         1 -> {
-                            goodsList.clear()
-                            goodsList.addAll(result.glist)
-                            goodsAdapter.notifyDataSetChanged()
+                            allGoodsList.clear()
+                            allGoodsList.addAll(result.glist)
+                            if(allGoodsList.isNotEmpty())
+                                setGoodsAdapter()
                         }
                         else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                     }
@@ -162,6 +215,71 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                 Log.d(TAG, "메뉴 리스트 조회 실패 > $t")
             }
         })
+    }
+
+    fun setDetail() {
+        binding.run {
+            etName.setText(goods.name)
+            etContent.setText(goods.content)
+            etCookingTime.setText(goods.cooking_time_max)
+            etPrice.setText(goods.price.toString())
+
+            val img1 = goods.img1
+            val img2 = goods.img2
+            val img3 = goods.img3
+
+            if(!(img1.isNullOrEmpty() || img1.contains("default_img.png"))) {
+                Glide.with(mActivity)
+                    .load(goods.img1)
+                    .transform(CenterCrop(), RoundedCorners(6))
+                    .into(thum1)
+                imgHint1.visibility = View.GONE
+            }
+
+            if(!(img2.isNullOrEmpty() || img2.contains("default_img.png"))) {
+                Glide.with(mActivity)
+                    .load(goods.img2)
+                    .transform(CenterCrop(), RoundedCorners(6))
+                    .into(thum2)
+                imgHint2.visibility = View.GONE
+            }
+
+            if(!(img3.isNullOrEmpty() || img3.contains("default_img.png"))) {
+                Glide.with(mActivity)
+                    .load(goods.img3)
+                    .transform(CenterCrop(), RoundedCorners(6))
+                    .into(thum3)
+                imgHint3.visibility = View.GONE
+            }
+
+            if(goods.adDisplay == y)
+                toggleSleep.isChecked = true
+
+            when(goods.icon) {
+                1 -> rbNone.isChecked = true
+                2 -> rbHide.isChecked = true
+                3 -> rbBest.isChecked = true
+                4 -> rbSoldout.isChecked = true
+                5 -> rbNew.isChecked = true
+            }
+
+            if(goods.boption == y)
+                toggleOption.isChecked = true
+        }
+    }
+
+    fun clearDetail() {
+        goods = GoodsDTO()
+        binding.run {
+            etName.text.clear()
+            etContent.text.clear()
+            etCookingTime.text.clear()
+            etPrice.text.clear()
+
+            toggleSleep.isChecked = false
+            rbNone.isChecked = true
+            toggleOption.isChecked = false
+        }
     }
 
     fun save() {
@@ -188,7 +306,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
             goods.name = strName                            // 상품명
             goods.content = etName.text.toString()          // 상품설명
-            goods.cooking_time = strCookTime.toInt()        // 조리시간
+            goods.cooking_time_max = strCookTime            // 조리시간
             goods.price = strPrice.toInt()                  // 가격
 
             if(goods.file1 != null) {
@@ -219,7 +337,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         }
 
         goods.let {
-            ApiClient.service.insGoods(useridx, storeidx, selCate, it.name, it.content?:"", it.cooking_time, it.price, it.adDisplay, it.icon, it.boption)
+            ApiClient.service.insGoods(useridx, storeidx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption)
                 .enqueue(object : Callback<ResultDTO> {
                     override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                         Log.d(TAG, "메뉴 등록 url : $response")

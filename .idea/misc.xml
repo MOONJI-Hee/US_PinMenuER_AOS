@@ -54,7 +54,7 @@
         <entry key="app/src/main/res/layout/activity_store_set_img.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_store_set_time.xml" value="0.335" />
         <entry key="app/src/main/res/layout/dialog_bg.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/dialog_category.xml" value="0.2078125" />
+        <entry key="app/src/main/res/layout/dialog_category.xml" value="0.45" />
         <entry key="app/src/main/res/layout/dialog_choice.xml" value="0.20333333333333334" />
         <entry key="app/src/main/res/layout/dialog_holiday.xml" value="0.2877604166666667" />
         <entry key="app/src/main/res/layout/dialog_option.xml" value="0.25" />
@@ -69,7 +69,7 @@
         <entry key="app/src/main/res/layout/list_call_set.xml" value="0.2877604166666667" />
         <entry key="app/src/main/res/layout/list_cate.xml" value="0.375" />
         <entry key="app/src/main/res/layout/list_cate_edit.xml" value="0.45" />
-        <entry key="app/src/main/res/layout/list_menu.xml" value="0.20333333333333334" />
+        <entry key="app/src/main/res/layout/list_menu.xml" value="0.375" />
         <entry key="app/src/main/res/layout/list_opt_edit.xml" value="0.375" />
         <entry key="app/src/main/res/layout/list_order.xml" value="0.375" />
         <entry key="app/src/main/res/layout/list_order_detail.xml" value="0.5" />

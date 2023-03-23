@@ -38,10 +38,10 @@
         <EditText
             style="@style/edittext_main"
             android:id="@+id/et_name"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="33dp"
             android:hint="@string/category_name_hint"
             android:inputType="text"
-            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintTop_toBottomOf="@+id/margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
         <TextView
@@ -123,9 +123,17 @@
                 android:text="@string/category_hide"/>
             <CheckBox
                 style="@style/toggle"
-                android:id="@+id/cate_use"
-                android:checked="true"/>
+                android:id="@+id/cate_use"/>
         </LinearLayout>
+
+        <View
+            android:id="@+id/margin"
+            android:layout_width="1dp"
+            android:layout_height="22dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

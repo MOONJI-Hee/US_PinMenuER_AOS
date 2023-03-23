@@ -28,6 +28,7 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
     lateinit var store : StoreDTO
 
     val TAG = "StoreMenuActivity"
+    val mActivity = this@StoreMenuActivity
 
     var cateList = ArrayList<CategoryDTO>()
 
@@ -41,13 +42,15 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
         getCategory()
 
         binding.run {
-            back.setOnClickListener(this@StoreMenuActivity)
-            udtMbr.setOnClickListener(this@StoreMenuActivity)
-            order.setOnClickListener(this@StoreMenuActivity)
-            call.setOnClickListener(this@StoreMenuActivity)
-            menu.setOnClickListener(this@StoreMenuActivity)
-            event.setOnClickListener(this@StoreMenuActivity)
-            findMenu.setOnClickListener(this@StoreMenuActivity)
+            title.text = store.name
+
+            back.setOnClickListener(mActivity)
+            udtMbr.setOnClickListener(mActivity)
+            order.setOnClickListener(mActivity)
+            call.setOnClickListener(mActivity)
+            menu.setOnClickListener(mActivity)
+            event.setOnClickListener(mActivity)
+            findMenu.setOnClickListener(mActivity)
         }
     }
 
@@ -57,17 +60,17 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
 
     override fun onClick(p0: View?) {
         when(p0) {
-            binding.back -> startActivity(Intent(this@StoreMenuActivity, StoreListActivity::class.java))
-            binding.udtMbr -> startActivity(Intent(this@StoreMenuActivity, MemberSetActivity::class.java))
-            binding.order -> startActivity(Intent(this@StoreMenuActivity, OrderListActivity::class.java))
-            binding.call -> startActivity(Intent(this@StoreMenuActivity, CallListActivity::class.java))
+            binding.back -> startActivity(Intent(mActivity, StoreListActivity::class.java))
+            binding.udtMbr -> startActivity(Intent(mActivity, MemberSetActivity::class.java))
+            binding.order -> startActivity(Intent(mActivity, OrderListActivity::class.java))
+            binding.call -> startActivity(Intent(mActivity, CallListActivity::class.java))
             binding.menu -> {
                 if(cateList.isEmpty()) {
-                    val intent = Intent(this@StoreMenuActivity, CategorySetActivity::class.java)
+                    val intent = Intent(mActivity, CategorySetActivity::class.java)
                     intent.putExtra("cateList", cateList)
                     startActivity(intent)
                 }else {
-                    val intent = Intent(this@StoreMenuActivity, MenuSetActivity::class.java)
+                    val intent = Intent(mActivity, MenuSetActivity::class.java)
                     intent.putExtra("cateList", cateList)
                     startActivity(intent)
                 }
@@ -87,12 +90,12 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                     if(result != null) {
                         when(result.status) {
                             1 -> cateList.addAll(result.cateList)
-                            else -> Toast.makeText(this@StoreMenuActivity, result.msg, Toast.LENGTH_SHORT).show()
+                            else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
                 override fun onFailure(call: Call<CateListDTO>, t: Throwable) {
-                    Toast.makeText(this@StoreMenuActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "카테고리 조회 실패 > $t")
                 }
             })

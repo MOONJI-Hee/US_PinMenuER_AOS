@@ -42,7 +42,7 @@ class CateEditAdapter(val dataSet: ArrayList<CategoryDTO>): RecyclerView.Adapter
         holder.bind(dataSet[position])
 
         if(flag == 1) {
-            holder.seqBind(itemCount-1, itemMoveListener)
+            holder.seqBind(selPos, itemCount-1, itemMoveListener)
             holder.binding.run {
                 llCate.setOnClickListener {
                     val beforePos = selPos
@@ -61,7 +61,7 @@ class CateEditAdapter(val dataSet: ArrayList<CategoryDTO>): RecyclerView.Adapter
                     }
                 }
             }
-        }
+        }else holder.binding.llCate.setOnClickListener { itemClickListener.onItemClick(position) }
     }
 
     override fun getItemCount(): Int {
@@ -87,12 +87,14 @@ class CateEditAdapter(val dataSet: ArrayList<CategoryDTO>): RecyclerView.Adapter
                 }
             }
         }
-        fun seqBind(lastIndex: Int, itemMoveListener: ItemClickListener) {
-            val position = adapterPosition
+        fun seqBind(selPos: Int, lastIndex: Int, itemMoveListener: ItemClickListener) {
+            val position = bindingAdapterPosition
             binding.run {
-                llCate.setBackgroundResource(R.drawable.bg_r6w)
-                left.visibility = View.GONE
-                right.visibility = View.GONE
+                if(position != selPos){
+                    llCate.setBackgroundResource(R.drawable.bg_r6w)
+                    left.visibility = View.GONE
+                    right.visibility = View.GONE
+                }
 
                 left.setOnClickListener {
                     if(position != 0) {

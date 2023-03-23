@@ -47,8 +47,15 @@ class CategorySetActivity : BaseActivity() {
     }
 
     fun setView() {
-        cateAdapter = CateAdapter(allCateList)
+        cateAdapter = CateAdapter(allCateList, 0)
         cateEditAdapter = CateEditAdapter(allCateList)
+
+        cateEditAdapter.setOnItemClickListener(object: ItemClickListener{
+            override fun onItemClick(position: Int) {
+                super.onItemClick(position)
+                CategoryDialog(this@CategorySetActivity, 1, allCateList[position]).show()
+            }
+        })
 
         cateEditAdapter.setOnMoveListener(object : ItemClickListener {
             override fun onItemMove(fromPos: Int, toPos: Int) {

@@ -10,5 +10,7 @@ class OrderListActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityOrderListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.back.setOnClickListener { finish() }
     }
 }

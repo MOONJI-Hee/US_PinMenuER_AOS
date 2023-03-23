@@ -223,7 +223,8 @@ interface Api {
         @Query("code") code: String,
         @Query("name") name : String,
         @Query("content") content : String,
-        @Query("cooking_time") cooking_time : Int,
+        @Query("cooking_time_min") cooking_time_min : String,
+        @Query("cooking_time") cooking_time_max : String,
         @Query("price") price : Int,
         @Query("adDisplay") adDisplay : String,
         @Query("icon") icon : Int,
@@ -283,6 +284,7 @@ interface Api {
     @GET("m/setbg.php")
     fun setBgColor(
         @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
         @Query("thema_color") color: String // d : 어두운 배경, g : 은색 배경, l : 밝은 배경, 디폴트
     ): Call<ResultDTO>
 
@@ -290,19 +292,38 @@ interface Api {
     @GET("m/setviewmode.php")
     fun setViewMode(
         @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
         @Query("viewmode") viewmode: String // b : 기본, p: 3x3
     ): Call<ResultDTO>
 
-    // 직원 호출 목록 조회
+
+
+    // 직원 호출 갱신 여부 확인
+    @GET("m/udtCallStatus.php")
+    fun getCallStatus(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int
+    )
+
+    // 직원 호출 확인
+    @GET("m/udtCallUpdate.php")
+    fun udtCallStatus(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int
+    )
+
+    // 직원 호출 등록된 목록 조회 >> (고객이 호출한 내역 아님!! 관리자가 등록했던 리스트 전체)
     @GET("m/call.list.php")
     fun getCallList(
-        @Query("useridx") useridx: Int
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int
     ): Call<CallSetListDTO>
 
     // 직원 호출 등록
     @GET("m/ins_call.php")
     fun insCall(
         @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
         @Query("name") callName : String
     ): Call<ResultDTO>
 

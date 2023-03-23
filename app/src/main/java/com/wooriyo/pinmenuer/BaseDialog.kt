@@ -11,6 +11,9 @@ import android.view.WindowManager
 import com.wooriyo.pinmenuer.util.AppHelper
 
 open class BaseDialog(context: Context) : Dialog(context) {
+    val y = "Y"
+    val n = "N"
+
     var useridx = 0
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {

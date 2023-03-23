@@ -7,8 +7,8 @@
         android:state_checked="true">
         <shape>
             <gradient
-                android:startColor="@color/main"
-                android:endColor="@color/sub"   />
+                android:startColor="@color/start"
+                android:endColor="@color/end"   />
             <corners android:radius="6dp"/>
         </shape>
     </item>

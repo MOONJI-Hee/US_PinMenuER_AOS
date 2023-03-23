@@ -24,6 +24,8 @@ data class StoreDTO(
     @SerializedName("parkingadr") var parkingAddr : String?,
     @SerializedName("p_lat") var p_lat : String?,
     @SerializedName("p_long") var p_long : String?,
+    @SerializedName("thema_color") var bgcolor : String,
+    @SerializedName("thema_mode") var viewmode : String,
     @SerializedName("hbuse") var hbuse : String,
     @SerializedName("mon_buse") var mon_buse : String,
     @SerializedName("tue_buse") var tue_buse : String,
@@ -37,5 +39,5 @@ data class StoreDTO(
     @SerializedName("holidayList")  var spcHoliday: ArrayList<SpcHolidayDTO>?
 ):Serializable {
     constructor(useridx: Int) :  this(0, useridx, "", "", "", "", "", "", "", "", "", "", null, null, null, null, null, null, null,
-        "N", "N", "N", "N", "N", "N", "N", "N" ,null, null, null)
+        "d", "b", "N", "N", "N", "N", "N", "N", "N", "N" ,null, null, null)
 }
