@@ -20,17 +20,29 @@ interface Api {
     ): Call<MemberDTO>
 
     //회원가입
-    @FormUrlEncoded
-    @POST("m/regmbr.php")
+//    @FormUrlEncoded
+//    @POST("m/regmbr.php")
+//    fun regMember(
+//        @Field("userid") userid: String,
+//        @Field("alpha_userid") arpayo_id: String,
+//        @Field("user_pwd") pw: String,
+//        @Field("push_token") push_token: String,
+//        @Field("os") os: String,
+//        @Field("osvs") osver: Int,
+//        @Field("appvs") appver: String,
+//        @Field("md") model: String
+//    ): Call<MemberDTO>
+
+    @GET("m/regmbr.php")
     fun regMember(
-        @Field("userid") userid: String,
-        @Field("alpha_userid") arpayo_id: String,
-        @Field("user_pwd") pw: String,
-        @Field("push_token") push_token: String,
-        @Field("os") os: String,
-        @Field("osvs") osver: Int,
-        @Field("appvs") appver: String,
-        @Field("md") model: String
+        @Query("userid") userid: String,
+        @Query("alpha_userid") arpayo_id: String,
+        @Query("user_pwd") pw: String,
+        @Query("push_token") push_token: String,
+        @Query("os") os: String,
+        @Query("osvs") osver: Int,
+        @Query("appvs") appver: String,
+        @Query("md") model: String
     ): Call<MemberDTO>
 
     //아이디 중복 체크

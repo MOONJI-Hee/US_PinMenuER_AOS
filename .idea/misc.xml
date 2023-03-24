@@ -76,6 +76,8 @@
         <entry key="app/src/main/res/layout/list_order_detail.xml" value="0.5" />
         <entry key="app/src/main/res/layout/list_special_holiday.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/list_store.xml" value="0.29583333333333334" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.5245" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.5245" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.1814814814814815" />
       </map>
     </option>

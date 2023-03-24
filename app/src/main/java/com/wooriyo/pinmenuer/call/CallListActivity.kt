@@ -72,7 +72,7 @@ class CallListActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v) {
-            binding.back -> startActivity(Intent(mActivity, StoreMenuActivity::class.java))
+            binding.back -> finish()
             binding.btnSet -> startActivity(Intent(mActivity, CallSetActivity::class.java))
         }
     }
