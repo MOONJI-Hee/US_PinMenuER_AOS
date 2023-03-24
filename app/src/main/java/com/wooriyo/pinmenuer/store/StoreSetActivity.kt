@@ -88,9 +88,12 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
             binding.etName.setText(store.name)
             binding.etAddr.setText(store.address)
         }else if(type == 1) {
-            binding.btnDetail.isEnabled = false
-            binding.btnHour.isEnabled = false
-            binding.btnImg.isEnabled = false
+//            binding.btnDetail.isEnabled = false
+//            binding.btnHour.isEnabled = false
+//            binding.btnImg.isEnabled = false
+            binding.llDetail.visibility = View.GONE
+            binding.llHour.visibility = View.GONE
+            binding.llImg.visibility = View.GONE
 
             store = StoreDTO(useridx)
         }
@@ -155,7 +158,7 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
             ApiClient.service.regStore(useridx, storeNm, storeAddr, storeLong, storeLat)
                 .enqueue(object : Callback<ResultDTO>{
                     override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
-                        Log.d(TAG, "매장 등록 / 수정 url : $response")
+                        Log.d(TAG, "매장 등록 url : $response")
                         val resultDTO = response.body()
                         if(resultDTO != null) {
                             if(resultDTO.status == 1) {
@@ -170,7 +173,8 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
                     }
                     override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
                         Toast.makeText(this@StoreSetActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
-                        Log.d(TAG, "매장 등록 / 수정 실패 > $t")
+                        Log.d(TAG, "매장 등록 실패 > $t")
+                        Log.d(TAG, "매장 등록 실패 > ${call.request()}")
                     }
                 })
         }
@@ -195,6 +199,7 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
                 override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
                     Toast.makeText(this@StoreSetActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "매장 삭제 실패 > $t")
+                    Log.d(TAG, "매장 삭제 실패 > ${call.request()}")
                 }
             })
     }
@@ -225,6 +230,7 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
                     override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
                         Toast.makeText(this@StoreSetActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                         Log.d(TAG, "매장 수정 실패 > $t")
+                        Log.d(TAG, "매장 수정 실패 > ${call.request()}")
                     }
                 })
         }

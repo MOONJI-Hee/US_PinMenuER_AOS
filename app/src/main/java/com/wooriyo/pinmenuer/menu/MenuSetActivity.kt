@@ -179,6 +179,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             if(it.category == selCate)
                 selGoodsList.add(it)
         }
+        goodsAdapter.selPos = 0
         goodsAdapter.notifyDataSetChanged()
 
         if(selGoodsList.isEmpty()) {
@@ -275,6 +276,24 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             etContent.text.clear()
             etCookingTime.text.clear()
             etPrice.text.clear()
+
+            Glide.with(mActivity)
+                .load(R.drawable.bg_r6w)
+                .transform(RoundedCorners(6))
+                .into(thum1)
+            imgHint1.visibility = View.VISIBLE
+
+            Glide.with(mActivity)
+                .load(R.drawable.bg_r6w)
+                .transform(RoundedCorners(6))
+                .into(thum2)
+            imgHint2.visibility = View.VISIBLE
+
+            Glide.with(mActivity)
+                .load(R.drawable.bg_r6w)
+                .transform(RoundedCorners(6))
+                .into(thum3)
+            imgHint3.visibility = View.VISIBLE
 
             toggleSleep.isChecked = false
             rbNone.isChecked = true

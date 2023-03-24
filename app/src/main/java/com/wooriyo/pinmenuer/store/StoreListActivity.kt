@@ -35,7 +35,11 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
 
         useridx = MyApplication.pref.getUserIdx()
 
+        binding.rvStore.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvStore.adapter = storeAdapter
+
         binding.udtMbr.setOnClickListener(this)
+        binding.btnPlus.setOnClickListener(this)
     }
 
     override fun onResume() {
@@ -45,8 +49,11 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v) {
-            binding.udtMbr -> {
-                startActivity(Intent(mActivity, MemberSetActivity::class.java))
+            binding.udtMbr -> startActivity(Intent(mActivity, MemberSetActivity::class.java))
+            binding.btnPlus -> {
+                val intent = Intent(mActivity, StoreSetActivity::class.java)
+                intent.putExtra("type", 1)
+                startActivity(intent)
             }
         }
     }
@@ -61,10 +68,13 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
                         if(storeListDTO.status == 1) {
                             storeList.clear()
                             storeList.addAll(storeListDTO.storeList)
-                            setStoreList()
-                        }else {
-                            Toast.makeText(mActivity, storeListDTO.msg, Toast.LENGTH_SHORT).show()
-                        }
+                            storeAdapter.notifyDataSetChanged()
+
+                            if(storeList.size >= 4) {
+                                binding.arrowLeft.visibility = View.VISIBLE
+                                binding.arrowRight.visibility = View.VISIBLE
+                            }
+                        }else Toast.makeText(mActivity, storeListDTO.msg, Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -73,12 +83,5 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
                     Log.d(TAG, "매장 리스트 조회 오류 > $t")
                 }
             })
-    }
-
-    fun setStoreList() {
-        binding.rvStore.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvStore.adapter = storeAdapter
-
-        storeAdapter.notifyDataSetChanged()
     }
 }

@@ -4,8 +4,6 @@ import java.io.Serializable
 
 data class CallDTO(
     var idx: Int,
-    var pidx: Int,
     var name: String,
-    var gea : Int,
-    var seq : Int,
-)
+    var gea : Int               // callHistory에서는 개수, callSetList에서는 seq
+){ constructor(): this(0, "", 0) }

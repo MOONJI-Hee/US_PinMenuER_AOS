@@ -123,6 +123,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_hour"
         android:orientation="vertical"
         android:layout_width="150dp"
         android:layout_height="wrap_content"

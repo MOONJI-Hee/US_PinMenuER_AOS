@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingHorizontal="15dp"
     android:orientation="vertical">
     
@@ -19,24 +20,36 @@
         android:layout_marginBottom="10dp"
         android:text="@string/store_udt"/>
 
-    <TextView
-        style="@style/text18"
-        android:text="@string/store_pay_info"/>
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/text18"
+            android:text="@string/store_pay_info"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
         <TextView
             style="@style/text18"
             android:id="@+id/storePayItem"
-            android:textColor="#FF6200" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp">
+        <TextView
+            style="@style/text18"
+            android:id="@+id/storePayInfo"
+            android:textColor="#FF6200"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
         <TextView
             style="@style/text18"
             android:id="@+id/storePayDt"
-            android:layout_weight="1"
             android:textColor="#FF6200"
-            android:textAlignment="viewEnd"/>
-    </LinearLayout>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

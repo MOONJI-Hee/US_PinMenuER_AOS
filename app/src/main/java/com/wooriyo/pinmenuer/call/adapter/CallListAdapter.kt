@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wooriyo.pinmenuer.call.adapter.CallListAdapter.ViewHolder
 import com.wooriyo.pinmenuer.databinding.ListCallBinding
 import com.wooriyo.pinmenuer.listener.ItemClickListener
+import com.wooriyo.pinmenuer.model.CallHistoryDTO
 import com.wooriyo.pinmenuer.model.CallListDTO
 
-class CallListAdapter(val dataSet: ArrayList<CallListDTO>): RecyclerView.Adapter<ViewHolder>() {
+class CallListAdapter(val dataSet: ArrayList<CallHistoryDTO>): RecyclerView.Adapter<ViewHolder>() {
     lateinit var itemClickListener: ItemClickListener
 
     fun setOnItemClickListener(itemClickListener: ItemClickListener) {
@@ -31,9 +32,9 @@ class CallListAdapter(val dataSet: ArrayList<CallListDTO>): RecyclerView.Adapter
     }
 
     class ViewHolder(val binding: ListCallBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind (data : CallListDTO, itemClickListener : ItemClickListener) {
+        fun bind (data : CallHistoryDTO, itemClickListener : ItemClickListener) {
 //            binding.rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            binding.rv.adapter = CallDetailAdapter(data.callList)
+            binding.rv.adapter = CallDetailAdapter(data.clist)
 
             binding.tableNo.text = data.tableNo
 

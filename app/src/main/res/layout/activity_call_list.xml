@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/title"
         style="@style/title"
-        android:text="@string/call"
+        android:text="@string/call_emp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -83,7 +83,6 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="80dp"
-        android:layout_marginBottom="20dp"
         android:layout_marginStart="166dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

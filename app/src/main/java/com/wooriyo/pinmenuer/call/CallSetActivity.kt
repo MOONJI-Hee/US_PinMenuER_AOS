@@ -10,7 +10,7 @@ import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.call.adapter.CallSetAdapter
 import com.wooriyo.pinmenuer.databinding.ActivityCallListBinding
-import com.wooriyo.pinmenuer.model.CallSetDTO
+import com.wooriyo.pinmenuer.model.CallDTO
 import com.wooriyo.pinmenuer.model.CallSetListDTO
 import com.wooriyo.pinmenuer.util.ApiClient
 import retrofit2.Call
@@ -22,7 +22,8 @@ class CallSetActivity : BaseActivity() {
     val mActivity = this@CallSetActivity
     lateinit var binding: ActivityCallListBinding
 
-    var setList = ArrayList<CallSetDTO>()
+    val setList = ArrayList<CallDTO>()
+    private val callSetAdapter = CallSetAdapter(setList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,12 +36,20 @@ class CallSetActivity : BaseActivity() {
         binding.callSetArea.visibility = View.VISIBLE
 
         binding.back.setOnClickListener{finish()}
+        binding.btnSet.setOnClickListener{finish()}
 
+        setView()
         getCallList()
     }
 
+    fun setView() {
+        // 리사이클러뷰 초기화
+        binding.rvCallSet.layoutManager = GridLayoutManager(mActivity, 4)
+        binding.rvCallSet.adapter = callSetAdapter
+    }
+
     private fun getCallList() {
-        ApiClient.service.getCallList(MyApplication.pref.getUserIdx())
+        ApiClient.service.getCallList(useridx, storeidx)
             .enqueue(object : Callback<CallSetListDTO> {
                 override fun onResponse(call: Call<CallSetListDTO>, response: Response<CallSetListDTO>) {
                     Log.d(TAG, "직원호출 전체 목록 조회 URL : $response")
@@ -51,28 +60,21 @@ class CallSetActivity : BaseActivity() {
                     if(callSetList != null) {
                         when(callSetList.status) {
                             1 -> {
+                                setList.clear()
                                 setList.addAll(callSetList.callList)
-                                setView()
+
+                                setList.add(CallDTO())
+
+                                callSetAdapter.notifyDataSetChanged()
                             }
                             else -> Toast.makeText(mActivity, callSetList.msg, Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
-
                 override fun onFailure(call: Call<CallSetListDTO>, t: Throwable) {
                     Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "직원호출 전체 목록 조회 오류 > $t")
                 }
             })
-    }
-
-    fun setView() {
-        if(setList.isEmpty())
-            setList.add(CallSetDTO())
-
-        val callSetAdapter = CallSetAdapter(setList)
-        // 리사이클러뷰 초기화
-        binding.rvCallSet.layoutManager = GridLayoutManager(mActivity, 4)
-        binding.rvCallSet.adapter = callSetAdapter
     }
 }

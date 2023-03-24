@@ -1,16 +1,18 @@
 package com.wooriyo.pinmenuer.call.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.wooriyo.pinmenuer.call.dialog.CallDialog
 import com.wooriyo.pinmenuer.databinding.ListCallSetBinding
-import com.wooriyo.pinmenuer.model.CallSetDTO
+import com.wooriyo.pinmenuer.model.CallDTO
 
-class CallSetAdapter(val dataSet: ArrayList<CallSetDTO>): RecyclerView.Adapter<CallSetAdapter.ViewHolder>() {
+class CallSetAdapter(val dataSet: ArrayList<CallDTO>): RecyclerView.Adapter<CallSetAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ListCallSetBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
+        return ViewHolder(binding, parent.context)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -28,9 +30,16 @@ class CallSetAdapter(val dataSet: ArrayList<CallSetDTO>): RecyclerView.Adapter<C
         return dataSet.size
     }
 
-    class ViewHolder(val binding:ListCallSetBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: CallSetDTO) {
+    class ViewHolder(val binding:ListCallSetBinding, val context: Context): RecyclerView.ViewHolder(binding.root) {
+        fun bind(data: CallDTO) {
             binding.name.text = data.name
+
+            binding.name.setOnClickListener {
+                CallDialog(context,1, data).show()
+            }
+            binding.plus.setOnClickListener{
+                CallDialog(context,0, null).show()
+            }
         }
     }
 }

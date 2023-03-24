@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wooriyo.pinmenuer.MyApplication
+import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ListStoreBinding
 import com.wooriyo.pinmenuer.model.StoreDTO
 import com.wooriyo.pinmenuer.store.StoreMenuActivity
@@ -31,6 +32,11 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Store
             binding.run {
                 storeName.text = data.name
                 // TODO PAY ITEM 넣기
+                if(data.paydt.isEmpty())
+                    storePayInfo.text = context.getText(R.string.store_pay_no)
+                else
+                    storePayInfo.text = context.getText(R.string.store_pay_date)
+
                 storePayDt.text = data.paydt.split(" ")[0].replace("-", ".")
 
                 storeName.setOnClickListener {
