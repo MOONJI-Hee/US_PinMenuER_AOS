@@ -8,14 +8,14 @@
     android:gravity="center_vertical">
     <TextView
         style="@style/text18"
-        android:text="@string/opt1"
+        android:text="@string/opt_num"
         android:layout_marginEnd="26dp" />
     <LinearLayout
         android:id="@+id/ll_edit"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone">
+        android:visibility="visible">
         <EditText
             style="@style/edittext"
             android:id="@+id/et_val"
@@ -25,7 +25,7 @@
             android:inputType="text"
             android:maxLength="1" />
         <Spinner
-            android:id="@+id/sp_mod"
+            android:id="@+id/sp_mark"
             android:layout_width="68dp"
             android:layout_height="match_parent"
             android:background="@color/f9"/>
@@ -63,5 +63,5 @@
         style="@style/btn_plus"
         android:id="@+id/btn_plus"
         android:layout_width="428dp"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
 </LinearLayout>

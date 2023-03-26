@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="20dp"
+    android:gravity="center_vertical">
+    <TextView
+        style="@style/text18"
+        android:text="@string/opt_num"
+        android:layout_marginEnd="26dp" />
+    <ImageView
+        style="@style/btn_plus"
+        android:id="@+id/btn_plus"
+        android:layout_width="428dp"/>
+</LinearLayout>
