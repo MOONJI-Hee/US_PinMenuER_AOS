@@ -80,10 +80,10 @@
     <string name="sun">일</string>
 
     <!-- 회원 가입 & 수정  -->
-    <string name="email">ID(이메일)</string>
+    <string name="email">아이디(이메일)</string>
     <string name="email_hint">이메일을 입력해주세요.</string>
     <string name="password_hint">8자리 이상 입력해주세요.</string>
-    <string name="arpayo_id">알파요 ID</string>
+    <string name="arpayo_id">알파요 아이디</string>
     <string name="arpayo_id_hint">알파요 ID(이메일) 입력해주세요.</string>
     <string name="signup_info">실시간 자동시급계산 앱 알파요를 이용중이신 사장님이시라면,\n핀메뉴 유료 결제에 따른 추가 보상을 알파요 앱으로 받아보실 수 있습니다.\n회원가입 이후에도 알파요 앱을 연동하여 추가 보상을 받으실 수 있습니다.</string>
     <string name="check_id">중복체크</string>
@@ -92,6 +92,7 @@
     <string name="link">연동</string>
     <string name="link_before">연동전</string>
     <string name="link_after">연동됨</string>
+    <string name="link_fail">연동불가</string>
     <string name="mbr_info">회원정보</string>
 
     <!-- 매장 리스트 -->

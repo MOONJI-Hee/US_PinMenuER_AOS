@@ -94,24 +94,31 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
             })
     }
 
+    // 알파요 아이디 연동
     fun regArpayoId () {
         arpayoId = binding.etArpayo.text.toString()
         ApiClient.service.checkArpayo(arpayoId)
             .enqueue(object : Callback<ResultDTO> {
                 override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                     Log.d(TAG, "알파요 아이디 연동 url : $response")
-                    if (response.isSuccessful) {
-                        if (response.body()?.status == 1) {
+                    if (!response.isSuccessful) return
+
+                    val result = response.body()
+                    if(result != null) {
+                        if (result.status == 1) {
                             binding.linkResult.text = getString(R.string.link_after)
                             binding.linkResult.setTextColor(Color.parseColor("#FF6200"))
                         } else {
-
+                            Toast.makeText(this@MemberSetActivity, result.status, Toast.LENGTH_SHORT).show()
+                            binding.linkResult.text = getString(R.string.link_fail)
+                            binding.linkResult.setTextColor(Color.parseColor("#5A5A5A"))
                         }
                     }
                 }
                 override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
                     Toast.makeText(this@MemberSetActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "알파요 아이디 연동 실패 > $t")
+                    Log.d(TAG, "알파요 아이디 연동 실패 > ${call.request()}")
                 }
             })
     }

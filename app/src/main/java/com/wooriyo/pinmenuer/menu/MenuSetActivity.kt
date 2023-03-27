@@ -33,10 +33,7 @@ import com.wooriyo.pinmenuer.menu.adpter.GoodsAdapter
 import com.wooriyo.pinmenuer.menu.dialog.BgDialog
 import com.wooriyo.pinmenuer.menu.dialog.OptionDialog
 import com.wooriyo.pinmenuer.menu.dialog.ViewModeDialog
-import com.wooriyo.pinmenuer.model.CategoryDTO
-import com.wooriyo.pinmenuer.model.GoodsDTO
-import com.wooriyo.pinmenuer.model.GoodsListDTO
-import com.wooriyo.pinmenuer.model.ResultDTO
+import com.wooriyo.pinmenuer.model.*
 import com.wooriyo.pinmenuer.util.Api
 import com.wooriyo.pinmenuer.util.ApiClient
 import com.wooriyo.pinmenuer.util.AppHelper
@@ -130,8 +127,8 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             binding.setViewMode -> { ViewModeDialog(mActivity).show() }
 
             // 중앙 메뉴 상세 관련
-            binding.optRequire -> { OptionDialog(mActivity, 1, null).show() }
-            binding.optChoice -> { OptionDialog(mActivity, 2, null).show() }
+            binding.optRequire -> { OptionDialog(mActivity, 1, OptionDTO(1)).show() }
+            binding.optChoice -> { OptionDialog(mActivity, 0, OptionDTO(0)).show() }
             binding.thum1, binding.thum2, binding.thum3-> {
                 selThum = v as ImageView
                 if(bisStorage)

@@ -57,6 +57,7 @@ class StartActivity: BaseActivity() {
         ApiClient.service.checkMbr(id, pw, token, "A", osvs, appvs, md)
             .enqueue(object: retrofit2.Callback<MemberDTO> {
                 override fun onResponse(call: Call<MemberDTO>, response: Response<MemberDTO>) {
+                    Log.d(TAG, "자동 로그인 url : $response")
                     if(response.isSuccessful) {
                         if(response.body()?.status == 1) {
                             val memberDTO = response.body()
@@ -74,7 +75,8 @@ class StartActivity: BaseActivity() {
                     }
                 }
                 override fun onFailure(call: Call<MemberDTO>, t: Throwable) {
-                    Log.d(TAG, t.toString())
+                    Log.d(TAG, "자동 로그인 실패 : $t")
+                    Log.d(TAG, "자동 로그인 실패 : ${call.request()}")
                     loginWithDB()
                 }
             })

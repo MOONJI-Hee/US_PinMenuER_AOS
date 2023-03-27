@@ -7,16 +7,27 @@ import retrofit2.http.*
 import java.io.File
 
 interface Api {
-    @FormUrlEncoded
-    @POST("checkmbr.php")
+//    @FormUrlEncoded
+//    @POST("checkmbr.php")
+//    fun checkMbr(
+//        @Field("userid") userid: String,
+//        @Field("pass") pass: String,
+//        @Field("push_token") push_token: String,
+//        @Field("os") os: String,
+//        @Field("osvs") osvs: Int,
+//        @Field("appvs") appvs: String,
+//        @Field("md") md: String
+//    ): Call<MemberDTO>
+
+    @GET("checkmbr.php")
     fun checkMbr(
-        @Field("userid") userid: String,
-        @Field("pass") pass: String,
-        @Field("push_token") push_token: String,
-        @Field("os") os: String,
-        @Field("osvs") osvs: Int,
-        @Field("appvs") appvs: String,
-        @Field("md") md: String
+        @Query("userid") userid: String,
+        @Query("pass") pass: String,
+        @Query("push_token") push_token: String,
+        @Query("os") os: String,
+        @Query("osvs") osvs: Int,
+        @Query("appvs") appvs: String,
+        @Query("md") md: String
     ): Call<MemberDTO>
 
     //회원가입

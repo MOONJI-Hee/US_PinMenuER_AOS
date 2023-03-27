@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "916492355785-29a11c4ne5va970qrd20po5g16bf0oov.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wooriyo.pinmenuer",
+            "certificate_hash": "5d86ba2b182a5876ac348d96f16cba10f2dcea54"
+          }
+        },
+        {
           "client_id": "916492355785-cosdbo193ff7n94h3aa4loeu9ifsqdrb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
