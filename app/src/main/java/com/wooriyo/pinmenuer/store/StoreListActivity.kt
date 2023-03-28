@@ -39,7 +39,6 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
         binding.rvStore.adapter = storeAdapter
 
         binding.udtMbr.setOnClickListener(this)
-        binding.btnPlus.setOnClickListener(this)
     }
 
     override fun onResume() {
@@ -50,11 +49,6 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v) {
             binding.udtMbr -> startActivity(Intent(mActivity, MemberSetActivity::class.java))
-            binding.btnPlus -> {
-                val intent = Intent(mActivity, StoreSetActivity::class.java)
-                intent.putExtra("type", 1)
-                startActivity(intent)
-            }
         }
     }
 

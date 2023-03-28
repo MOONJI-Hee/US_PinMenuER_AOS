@@ -22,7 +22,7 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
         val binding = ListStoreBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         val binding_add = ListStoreAddBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-        return if(viewType == VIEW_TYPE_ADD) AddViewHolder(binding_add) else ViewHolder(parent.context, binding)
+        return if(viewType == VIEW_TYPE_ADD) AddViewHolder(parent.context, binding_add) else ViewHolder(parent.context, binding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -72,9 +72,13 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
         }
     }
 
-    class AddViewHolder(val binding: ListStoreAddBinding): RecyclerView.ViewHolder(binding.root) {
+    class AddViewHolder(val context: Context, val binding: ListStoreAddBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind() {
-
+            binding.btnPlus.setOnClickListener{
+                val intent = Intent(context, StoreSetActivity::class.java)
+                intent.putExtra("type", 1)
+                context.startActivity(intent)
+            }
         }
     }
 }
