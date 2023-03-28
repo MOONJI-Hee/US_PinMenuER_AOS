@@ -33,6 +33,13 @@
             android:id="@+id/storePayItem"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+            style="@style/text18"
+            android:id="@+id/storePayNo"
+            android:text="@string/store_pay_no"
+            android:textColor="#FF6200"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,6 +49,7 @@
         <TextView
             style="@style/text18"
             android:id="@+id/storePayInfo"
+            android:text="@string/store_pay_date"
             android:textColor="#FF6200"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>

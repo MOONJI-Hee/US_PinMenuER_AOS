@@ -82,7 +82,7 @@ class SignUpActivity : BaseActivity(), View.OnClickListener {
 
     // 아이디 중복체크
     fun checkID() {
-        val userid = binding.etArpayo.text.toString()
+        val userid = binding.etId.text.toString()
 
         if(userid.isEmpty() || userid == "") {
             Toast.makeText(mActivity, R.string.msg_no_id, Toast.LENGTH_SHORT).show()
@@ -98,12 +98,12 @@ class SignUpActivity : BaseActivity(), View.OnClickListener {
                     val result = response.body()
                     if(result != null) {
                         if (result.status == 1) {
-                            binding.linkResult.text = getString(R.string.able)
-                            binding.linkResult.setTextColor(Color.parseColor("#FF6200"))
+                            binding.checkResult.text = getString(R.string.able)
+                            binding.checkResult.setTextColor(Color.parseColor("#FF6200"))
                         } else {
-                            Toast.makeText(mActivity, result.status, Toast.LENGTH_SHORT).show()
-                            binding.linkResult.text = getString(R.string.unable)
-                            binding.linkResult.setTextColor(Color.parseColor("#5A5A5A"))
+                            Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                            binding.checkResult.text = getString(R.string.unable)
+                            binding.checkResult.setTextColor(Color.parseColor("#5A5A5A"))
                         }
                     }
                 }
@@ -136,7 +136,7 @@ class SignUpActivity : BaseActivity(), View.OnClickListener {
                             binding.linkResult.text = getString(R.string.link_after)
                             binding.linkResult.setTextColor(Color.parseColor("#FF6200"))
                         } else {
-                            Toast.makeText(mActivity, result.status, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                             binding.linkResult.text = getString(R.string.link_fail)
                             binding.linkResult.setTextColor(Color.parseColor("#5A5A5A"))
                         }

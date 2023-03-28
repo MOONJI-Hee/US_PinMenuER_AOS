@@ -164,6 +164,7 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
                             if(resultDTO.status == 1) {
                                 Toast.makeText(this@StoreSetActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
                                 intent.putExtra("type", 2)
+                                intent.putExtra("store", store)
                                 finish()
                                 startActivity(intent)
                             }else {

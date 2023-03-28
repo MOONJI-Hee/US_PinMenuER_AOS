@@ -10,5 +10,10 @@ class AppProperties {
         const val IMG_SERVER: String = WEB_SERVER
 
         const val KAKAO_URL : String = "https://dapi.kakao.com"
+
+        // 리사이클러뷰 멀티뷰 사용시 타입
+        const val VIEW_TYPE_COM = 0
+        const val VIEW_TYPE_ADD = 1
+
     }
 }

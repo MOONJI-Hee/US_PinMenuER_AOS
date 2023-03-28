@@ -3,28 +3,41 @@ package com.wooriyo.pinmenuer.store.adpter
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
+import com.wooriyo.pinmenuer.config.AppProperties.Companion.VIEW_TYPE_ADD
+import com.wooriyo.pinmenuer.config.AppProperties.Companion.VIEW_TYPE_COM
+import com.wooriyo.pinmenuer.databinding.ListStoreAddBinding
 import com.wooriyo.pinmenuer.databinding.ListStoreBinding
 import com.wooriyo.pinmenuer.model.StoreDTO
 import com.wooriyo.pinmenuer.store.StoreMenuActivity
 import com.wooriyo.pinmenuer.store.StoreSetActivity
 
-class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<StoreAdapter.ViewHolder>() {
+class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding = ListStoreBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(parent.context, binding)
+        val binding_add = ListStoreAddBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return if(viewType == VIEW_TYPE_ADD) AddViewHolder(binding_add) else ViewHolder(parent.context, binding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(dataSet[position])
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if(getItemViewType(position) == VIEW_TYPE_COM)
+            (holder as ViewHolder).bind(dataSet[position])
+        else
+            (holder as AddViewHolder).bind()
     }
 
     override fun getItemCount(): Int {
-        return dataSet.size
+        return dataSet.size + 1
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if(position == itemCount -1) VIEW_TYPE_ADD else VIEW_TYPE_COM
     }
 
     class ViewHolder(val context: Context, val binding: ListStoreBinding): RecyclerView.ViewHolder(binding.root) {
@@ -32,10 +45,13 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Store
             binding.run {
                 storeName.text = data.name
                 // TODO PAY ITEM 넣기
-                if(data.paydt.isEmpty())
-                    storePayInfo.text = context.getText(R.string.store_pay_no)
-                else
-                    storePayInfo.text = context.getText(R.string.store_pay_date)
+                if(data.paydt.isEmpty()) {
+                    storePayInfo.visibility = View.INVISIBLE
+                    storePayNo.visibility = View.VISIBLE
+                }else{
+                    storePayInfo.visibility = View.VISIBLE
+                    storePayNo.visibility = View.GONE
+                }
 
                 storePayDt.text = data.paydt.split(" ")[0].replace("-", ".")
 
@@ -53,6 +69,12 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Store
                     context.startActivity(intent)
                 }
             }
+        }
+    }
+
+    class AddViewHolder(val binding: ListStoreAddBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind() {
+
         }
     }
 }
