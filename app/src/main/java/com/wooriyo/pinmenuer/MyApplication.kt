@@ -8,7 +8,9 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import com.wooriyo.pinmenuer.db.AppDatabase
+import com.wooriyo.pinmenuer.db.entity.Store
 import com.wooriyo.pinmenuer.model.SharedDTO
+import com.wooriyo.pinmenuer.model.StoreDTO
 
 class MyApplication: Application() {
     companion object {
@@ -18,11 +20,18 @@ class MyApplication: Application() {
         var density = 1.0F
         var dpi = 160
 
+        var os = "A"
         var osver = 0
         lateinit var appver : String
         lateinit var md : String
 
+        var useridx = 0
         var storeidx = 0
+        lateinit var store: StoreDTO
+
+        fun setStoreDTO() {
+            store = StoreDTO(useridx)
+        }
     }
 
     override fun onCreate() {
@@ -57,6 +66,8 @@ class MyApplication: Application() {
             density = 1.0F
             dpi = 160
         }
+
+        setStoreDTO()
 
         super.onCreate()
     }

@@ -24,6 +24,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.wooriyo.pinmenuer.BaseActivity
+import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
+import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityMenuSetBinding
 import com.wooriyo.pinmenuer.listener.ItemClickListener

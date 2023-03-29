@@ -11,6 +11,9 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
+import com.wooriyo.pinmenuer.MyApplication.Companion.store
+import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
+import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityStoreSetTimeBinding
 import com.wooriyo.pinmenuer.listener.DialogListener
@@ -28,8 +31,8 @@ import retrofit2.Response
 
 class StoreSetTimeActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding : ActivityStoreSetTimeBinding
+    val TAG = "StoreSetTimeActivity"
 
-    lateinit var store : StoreDTO
     var openTime = OpenTimeDTO()
     var breakTime = BrkTimeDTO()
     var holiday = HolidayDTO()
@@ -38,7 +41,6 @@ class StoreSetTimeActivity : BaseActivity(), View.OnClickListener {
     val spcHolidayAdapter = SpcHolidayAdapter(spcHoliday)
 
     val gson = Gson()
-    val TAG = "StoreSetTimeActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,11 +57,6 @@ class StoreSetTimeActivity : BaseActivity(), View.OnClickListener {
             layoutManager = LinearLayoutManager(this@StoreSetTimeActivity, LinearLayoutManager.VERTICAL, false)
             adapter = spcHolidayAdapter
         }
-
-        useridx = MyApplication.pref.getUserIdx()
-
-        store = intent.getSerializableExtra("store") as StoreDTO
-        storeidx = store.idx
 
         if(store.opentime != null) {
             openTime = store.opentime!!

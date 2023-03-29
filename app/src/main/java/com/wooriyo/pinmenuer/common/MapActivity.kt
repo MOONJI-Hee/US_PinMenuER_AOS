@@ -1,7 +1,12 @@
 package com.wooriyo.pinmenuer.common
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.R
@@ -24,8 +29,10 @@ class MapActivity : BaseActivity() {
     private lateinit var marker : MapPOIItem
 
     var lat : Double = 35.815982818603516               //우리요 위도
-    var long: Double = 127.11023712158203             //우리요 경도
+    var long: Double = 127.11023712158203               //우리요 경도
     var addr = ""
+
+    var check: Boolean = false                                   //주소 검색 여부 확인
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +63,22 @@ class MapActivity : BaseActivity() {
         binding.back.setOnClickListener { finish() }
         binding.search.setOnClickListener { getCoordinate() }
         binding.save.setOnClickListener { save() }
+
+        binding.etAddr.setOnEditorActionListener { v, actionId, _ ->
+            if(actionId == EditorInfo.IME_ACTION_SEARCH) {
+                val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(v.windowToken, 0)
+                getCoordinate()
+            }
+            true
+        }
+        binding.etAddr.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                if(check) check = false
+            }
+        })
     }
 
     // 좌표로 지도 중심, 마커 위치 설정
@@ -66,9 +89,12 @@ class MapActivity : BaseActivity() {
 
         if(addr.isNotEmpty()) binding.etAddr.setText(addr)
 
+        check = true
+
         val point = MapPoint.mapPointWithGeoCoord(lat, long)
         marker.mapPoint = point
 
+        mapView.removeAllPOIItems()
         mapView.setMapCenterPoint(point, false)
         mapView.addPOIItem(marker)
     }
@@ -108,10 +134,16 @@ class MapActivity : BaseActivity() {
     }
 
     fun save() {
-        intent.putExtra("lat", lat.toString())
-        intent.putExtra("long", long.toString())
-        intent.putExtra("address", addr)
-        setResult(RESULT_OK, intent)
-        finish()
+        if(addr.isEmpty())
+            Toast.makeText(this@MapActivity, R.string.msg_no_addr, Toast.LENGTH_SHORT).show()
+        else if(!check)
+            Toast.makeText(this@MapActivity, R.string.msg_check_addr, Toast.LENGTH_SHORT).show()
+        else {
+            intent.putExtra("lat", lat.toString())
+            intent.putExtra("long", long.toString())
+            intent.putExtra("address", addr)
+            setResult(RESULT_OK, intent)
+            finish()
+        }
     }
 }

@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
+import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityStoreListBinding
 import com.wooriyo.pinmenuer.member.MemberSetActivity
@@ -23,7 +24,7 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding : ActivityStoreListBinding
 
     val TAG = "StoreListActivity"
-    val mActivity = this@StoreListActivity
+    val mActivity = this
 
     var storeList = ArrayList<StoreDTO>()
     var storeAdapter = StoreAdapter(storeList)

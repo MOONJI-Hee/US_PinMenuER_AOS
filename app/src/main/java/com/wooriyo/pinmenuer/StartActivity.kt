@@ -3,6 +3,7 @@ package com.wooriyo.pinmenuer
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import com.wooriyo.pinmenuer.MyApplication.Companion.pref
 import com.wooriyo.pinmenuer.db.entity.Member
 import com.wooriyo.pinmenuer.member.LoginActivity
 import com.wooriyo.pinmenuer.model.MemberDTO
@@ -18,13 +19,10 @@ import retrofit2.Response
 
 class StartActivity: BaseActivity() {
     val TAG = "StartActivity"
-    var idx = 0
+
     var id = ""
     var pw = ""
     var token = ""
-    var osvs = 0
-    var appvs = ""
-    var md = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +31,7 @@ class StartActivity: BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        val mbrDTO = MyApplication.pref.getMbrDTO()
+        val mbrDTO = pref.getMbrDTO()
 
         if (mbrDTO == null) {
             startActivity(Intent(this@StartActivity, LoginActivity::class.java).also {
@@ -43,18 +41,15 @@ class StartActivity: BaseActivity() {
             })
         } else {
             id = mbrDTO.userid
-            pw = MyApplication.pref.getPw().toString()
-            token = MyApplication.pref.getToken().toString()
-            osvs = MyApplication.osver
-            appvs = MyApplication.appver
-            md = MyApplication.md
+            pw = pref.getPw().toString()
+            token = pref.getToken().toString()
 
             loginWithApi()
         }
     }
 
     fun loginWithApi()  {
-        ApiClient.service.checkMbr(id, pw, token, "A", osvs, appvs, md)
+        ApiClient.service.checkMbr(id, pw, token, MyApplication.os, MyApplication.osver, MyApplication.appver, MyApplication.md)
             .enqueue(object: retrofit2.Callback<MemberDTO> {
                 override fun onResponse(call: Call<MemberDTO>, response: Response<MemberDTO>) {
                     Log.d(TAG, "자동 로그인 url : $response")
@@ -62,7 +57,7 @@ class StartActivity: BaseActivity() {
                         if(response.body()?.status == 1) {
                             val memberDTO = response.body()
                             if(memberDTO != null) {
-                                MyApplication.pref.setMbrDTO(memberDTO)
+                                pref.setMbrDTO(memberDTO)
                             }
                             startActivity(Intent(this@StartActivity, StoreListActivity::class.java))
                         }else {

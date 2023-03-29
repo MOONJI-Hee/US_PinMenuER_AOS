@@ -10,6 +10,9 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
+import com.wooriyo.pinmenuer.MyApplication.Companion.store
+import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
+import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.common.MapActivity
 import com.wooriyo.pinmenuer.databinding.ActivityStoreSetDetailBinding
@@ -25,8 +28,7 @@ class StoreSetDetailActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding : ActivityStoreSetDetailBinding
 
     val TAG = "StoreSetDetailActivity"
-
-    lateinit var store : StoreDTO
+    val mActivity = this@StoreSetDetailActivity
 
     var storeTel = ""
     var storeInsta = ""
@@ -56,11 +58,6 @@ class StoreSetDetailActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityStoreSetDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        useridx = MyApplication.pref.getUserIdx()
-
-        store = intent.getSerializableExtra("store") as StoreDTO
-        storeidx = store.idx
 
         binding.run {
             if(store.tel != null)

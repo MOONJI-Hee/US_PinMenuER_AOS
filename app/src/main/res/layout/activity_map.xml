@@ -44,6 +44,7 @@
         android:maxLines="1"
         android:ellipsize="end"
         android:inputType="text"
+        android:imeOptions="actionSearch"
         android:hint="@string/map_hint"
         android:textSize="17sp"
         android:textColor="@color/black"

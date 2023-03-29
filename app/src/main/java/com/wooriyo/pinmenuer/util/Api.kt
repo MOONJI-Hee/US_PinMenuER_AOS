@@ -103,8 +103,8 @@ interface Api {
         @Query("idx") storeidx: Int,
         @Query("storenm") storenm: String,
         @Query("addr") addr: String,                // 주소
-        @Query("lclong") lclong: String,           // 매장 경도
-        @Query("lclat") lclat: String                  // 매장 위도
+        @Query("lclong") lclong: String,            // 매장 경도
+        @Query("lclat") lclat: String               // 매장 위도
     ): Call<ResultDTO>
 
     //매장 삭제

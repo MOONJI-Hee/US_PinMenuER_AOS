@@ -7,6 +7,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
+import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
+import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.call.adapter.CallSetAdapter
 import com.wooriyo.pinmenuer.databinding.ActivityCallListBinding

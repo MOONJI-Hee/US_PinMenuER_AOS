@@ -277,6 +277,7 @@
     <string name="msg_no_id">아이디를 입력해주세요.</string>
     <string name="msg_no_pw">비밀번호를 입력해주세요.</string>
     <string name="msg_no_addr">주소를 입력해주세요.</string>
+    <string name="msg_check_addr">주소를 확인해주세요.</string>
     <string name="msg_reg_store_first">매장 등록을 완료한 후 이용해주시기 바랍니다.</string>
     <string name="msg_no_endtm">시간을 확인해주세요.</string>
     <string name="msg_no_date">날짜를 확인해주세요.</string>

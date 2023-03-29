@@ -57,14 +57,14 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
 
                 storeName.setOnClickListener {
                     MyApplication.storeidx = data.idx
-                    val intent = Intent(context, StoreMenuActivity::class.java)
-                    intent.putExtra("store", data)
-                    context.startActivity(intent)
+                    MyApplication.store = data
+                    context.startActivity(Intent(context, StoreMenuActivity::class.java))
                 }
 
                 storeUdt.setOnClickListener{
+                    MyApplication.storeidx = data.idx
+                    MyApplication.store = data
                     val intent = Intent(context, StoreSetActivity::class.java)
-                    intent.putExtra("store", data)
                     intent.putExtra("type", 2)  // 매장 수정 > 2
                     context.startActivity(intent)
                 }
@@ -76,6 +76,7 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
         fun bind() {
             binding.btnPlus.setOnClickListener{
                 val intent = Intent(context, StoreSetActivity::class.java)
+                MyApplication.setStoreDTO()
                 intent.putExtra("type", 1)
                 context.startActivity(intent)
             }

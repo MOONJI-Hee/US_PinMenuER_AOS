@@ -10,9 +10,6 @@ open class BaseActivity: AppCompatActivity() {
     val y = "Y"
     val n = "N"
 
-    var useridx = 0
-    var storeidx = 0
-
     override fun onBackPressed() {}
 
     // 바깥화면 터치하면 키보드 내리기
@@ -26,9 +23,6 @@ open class BaseActivity: AppCompatActivity() {
         resources.displayMetrics.densityDpi = MyApplication.dpi
         resources.displayMetrics.scaledDensity = MyApplication.density
         super.onCreate(savedInstanceState)
-
-        useridx = pref.getUserIdx()
-        storeidx = MyApplication.storeidx
     }
 
     override fun onResume() {

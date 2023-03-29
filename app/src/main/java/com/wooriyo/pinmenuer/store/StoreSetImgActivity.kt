@@ -21,6 +21,9 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
+import com.wooriyo.pinmenuer.MyApplication.Companion.store
+import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
+import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityStoreSetImgBinding
 import com.wooriyo.pinmenuer.model.ResultDTO
@@ -41,8 +44,6 @@ class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
 
     var imgUri: Uri ?= null
 
-    lateinit var store: StoreDTO
-
     //registerForActivityResult
     val chooseImg = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
 //        imgUri = it
@@ -57,11 +58,6 @@ class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityStoreSetImgBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        useridx = MyApplication.pref.getUserIdx()
-
-        store = intent.getSerializableExtra("store") as StoreDTO
-        storeidx = store.idx
 
         if(store.img.isNotEmpty()) {
             imgUri = store.img.toUri()

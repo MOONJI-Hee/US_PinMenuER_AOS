@@ -28,9 +28,6 @@ class LoginActivity : BaseActivity() {
     var id = ""
     var pw = ""
     var token = ""
-    var osvs = 0
-    var appvs = ""
-    var md = ""
 
     // 뒤로가기 눌렀을 때 처리
     override fun onBackPressed() {
@@ -51,10 +48,6 @@ class LoginActivity : BaseActivity() {
             id = binding.etId.text.toString()
             pw = binding.etPwd.text.toString()
             token = MyApplication.pref.getToken().toString()
-            osvs = MyApplication.osver
-            appvs = MyApplication.appver
-            md = MyApplication.md
-
             when {
                 id.isEmpty() -> Toast.makeText(this@LoginActivity, R.string.msg_no_id, Toast.LENGTH_SHORT).show()
                 pw.isEmpty() -> Toast.makeText(this@LoginActivity, R.string.msg_no_pw, Toast.LENGTH_SHORT).show()
@@ -68,7 +61,7 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun loginWithApi()  {   // Api로 로그인
-        ApiClient.service.checkMbr(id, pw, token, "A", osvs, appvs, md)
+        ApiClient.service.checkMbr(id, pw, token, MyApplication.os, MyApplication.osver, MyApplication.appver, MyApplication.md)
             .enqueue(object: retrofit2.Callback<MemberDTO> {
                 override fun onResponse(call: Call<MemberDTO>, response: Response<MemberDTO>) {
                     Log.d(TAG, "로그인 url : $response")
@@ -82,9 +75,8 @@ class LoginActivity : BaseActivity() {
                                 MyApplication.pref.setPw(pw)
                                 Toast.makeText(this@LoginActivity, memberDTO.msg, Toast.LENGTH_SHORT).show()
                                 startActivity(Intent(this@LoginActivity, StoreListActivity::class.java))
-                            } else {
+                            } else
                                 Toast.makeText(this@LoginActivity, memberDTO.msg, Toast.LENGTH_SHORT).show()
-                            }
                         }
                     }
                 }

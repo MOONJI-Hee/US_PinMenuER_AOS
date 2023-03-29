@@ -8,6 +8,9 @@ import android.view.View.OnClickListener
 import android.widget.Toast
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
+import com.wooriyo.pinmenuer.MyApplication.Companion.store
+import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
+import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.call.CallListActivity
 import com.wooriyo.pinmenuer.databinding.ActivityStoreMenuBinding
@@ -25,7 +28,6 @@ import retrofit2.Response
 
 class StoreMenuActivity : BaseActivity(), OnClickListener {
     lateinit var binding: ActivityStoreMenuBinding
-    lateinit var store : StoreDTO
 
     val TAG = "StoreMenuActivity"
     val mActivity = this@StoreMenuActivity
@@ -36,8 +38,6 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityStoreMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        store = intent.getSerializableExtra("store") as StoreDTO
 
         getCategory()
 
@@ -97,6 +97,7 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                 override fun onFailure(call: Call<CateListDTO>, t: Throwable) {
                     Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "카테고리 조회 실패 > $t")
+                    Log.d(TAG, "카테고리 조회 실패 > ${call.request()}")
                 }
             })
     }

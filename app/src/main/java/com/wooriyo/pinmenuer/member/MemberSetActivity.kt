@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
+import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivitySignUpBinding
 import com.wooriyo.pinmenuer.model.MemberDTO
