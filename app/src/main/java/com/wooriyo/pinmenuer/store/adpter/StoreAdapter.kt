@@ -44,6 +44,14 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
         fun bind(data: StoreDTO) {
             binding.run {
                 storeName.text = data.name
+
+                if(data.name2.isNullOrEmpty())
+                    storeName2.visibility = View.GONE
+                else {
+                    storeName2.visibility = View.VISIBLE
+                    storeName2.text = data.name2
+                }
+
                 // TODO PAY ITEM 넣기
                 if(data.paydt.isEmpty()) {
                     storePayInfo.visibility = View.INVISIBLE
@@ -55,7 +63,7 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
 
                 storePayDt.text = data.paydt.split(" ")[0].replace("-", ".")
 
-                storeName.setOnClickListener {
+                storeMenu.setOnClickListener {
                     MyApplication.storeidx = data.idx
                     MyApplication.store = data
                     context.startActivity(Intent(context, StoreMenuActivity::class.java))

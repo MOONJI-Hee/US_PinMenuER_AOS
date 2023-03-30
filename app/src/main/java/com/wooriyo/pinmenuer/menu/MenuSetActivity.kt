@@ -366,7 +366,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                             when(result.status){
                                 1 -> {
 //                                    Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
-                                    val gidx = result.gidx
+                                    val gidx = result.idx
                                     uploadImage(gidx, media1, media2, media3)
                                 }
                                 else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()

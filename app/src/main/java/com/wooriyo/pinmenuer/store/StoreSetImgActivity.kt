@@ -50,8 +50,8 @@ class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
 
         if(it.resultCode == Activity.RESULT_OK) {
             imgUri = it.data?.data
+            setImage()
         }
-        setImage()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

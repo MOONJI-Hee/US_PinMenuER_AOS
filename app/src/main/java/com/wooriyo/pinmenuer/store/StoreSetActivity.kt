@@ -30,7 +30,7 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
     val TAG = "StoreSetActivity"
     val mActivity = this@StoreSetActivity
 
-    var type : Int = 0            // 1 : 등록, 2 : 수정=
+    var type : Int = 0            // 1 : 등록, 2 : 수정
 
     //registerForActivityResult
     val setStore = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -155,9 +155,11 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
                         if(resultDTO != null) {
                             if(resultDTO.status == 1) {
                                 Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                                store.idx = resultDTO.idx
+                                storeidx = resultDTO.idx
                                 intent.putExtra("type", 2)
-                                finish()
                                 startActivity(intent)
+                                finish()
                             }else {
                                 Toast.makeText(mActivity, resultDTO.msg, Toast.LENGTH_SHORT).show()
                             }

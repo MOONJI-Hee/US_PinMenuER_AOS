@@ -1,16 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingHorizontal="15dp"
     android:orientation="vertical">
-    
-    <TextView
-        style="@style/menu"
-        android:id="@+id/storeName"
+
+    <LinearLayout
+        android:id="@+id/storeMenu"
         android:layout_width="240dp"
-        android:layout_height="200dp" />
+        android:layout_height="200dp"
+        android:paddingHorizontal="10dp"
+        android:background="@drawable/bg_btn_r6"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/storeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:maxLines="1"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="28sp"/>
+        <TextView
+            android:id="@+id/storeName2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:maxLines="1"
+            android:visibility="gone"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="28sp"/>
+    </LinearLayout>
+
+
 
     <TextView
         style="@style/btn"

@@ -64,10 +64,9 @@ interface Api {
     ): Call<ResultDTO>
 
     //알파요 ID 연동
-    @FormUrlEncoded
-    @POST("m/checkalpha.php")
+    @GET("m/checkalpha.php")
     fun checkArpayo(
-        @Field("userid") arpayoId: String
+        @Query("userid") arpayoId: String
     ): Call<ResultDTO>
 
     //회원정보 수정
