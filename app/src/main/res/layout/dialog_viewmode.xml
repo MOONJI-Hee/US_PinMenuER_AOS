@@ -36,7 +36,6 @@
             app:layout_constraintEnd_toEndOf="@+id/iv_3x3"
             app:layout_constraintBottom_toTopOf="@+id/iv_3x3"/>
 
-
         <ImageView
             android:id="@+id/iv_basic"
             android:layout_width="wrap_content"
@@ -59,15 +58,14 @@
             app:layout_constraintTop_toTopOf="@+id/iv_basic"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-
-        <CheckBox style="@style/toggle"
+        <RadioButton style="@style/toggle"
             android:id="@+id/check_basic"
             android:layout_marginTop="6dp"
             app:layout_constraintStart_toStartOf="@+id/iv_basic"
             app:layout_constraintEnd_toEndOf="@+id/iv_basic"
             app:layout_constraintTop_toBottomOf="@id/iv_basic" />
 
-        <CheckBox style="@style/toggle"
+        <RadioButton style="@style/toggle"
             android:id="@+id/check_3x3"
             android:layout_marginTop="6dp"
             app:layout_constraintStart_toStartOf="@+id/iv_3x3"

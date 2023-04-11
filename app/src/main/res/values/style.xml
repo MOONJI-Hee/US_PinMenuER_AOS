@@ -63,6 +63,8 @@
         <item name="android:background">@drawable/bg_btn_plus</item>
     </style>
     <style name="btn_circle">
+        <item name="android:fontFamily">@font/notosans_demilight</item>
+        <item name="android:fontWeight">300</item>
         <item name="android:layout_width">36dp</item>
         <item name="android:layout_height">36dp</item>
         <item name="android:textSize">17dp</item>
@@ -99,7 +101,8 @@
     </style>
     <style name="edittext">
         <item name="android:layout_height">48dp</item>
-        <item name="android:paddingHorizontal">15dp</item>
+        <item name="android:paddingStart">15dp</item>
+        <item name="android:paddingEnd">15dp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/black</item>
@@ -109,7 +112,8 @@
     <style name="edittext_main">
         <item name="android:layout_width">500dp</item>
         <item name="android:layout_height">48dp</item>
-        <item name="android:paddingHorizontal">15dp</item>
+        <item name="android:paddingStart">15dp</item>
+        <item name="android:paddingEnd">15dp</item>
         <item name="android:maxLines">1</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/black</item>
@@ -119,7 +123,8 @@
     <style name="edittext_login">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">60dp</item>
-        <item name="android:paddingHorizontal">15dp</item>
+        <item name="android:paddingStart">15dp</item>
+        <item name="android:paddingEnd">15dp</item>
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textColorHint">@color/hint</item>
@@ -127,7 +132,8 @@
     </style>
     <style name="edittext_menu18b">
         <item name="android:layout_height">48dp</item>
-        <item name="android:paddingHorizontal">15dp</item>
+        <item name="android:paddingStart">15dp</item>
+        <item name="android:paddingEnd">15dp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
@@ -199,6 +205,14 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
+    <style name="text20d">
+        <item name="android:fontFamily">@font/notosans_demilight</item>
+        <item name="android:fontWeight">300</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
     <style name="text22b">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -249,5 +263,26 @@
         <item name="android:focusable">true</item>
         <item name="android:stateListAnimator">@null</item>
         <item name="android:outlineProvider">none</item>
+    </style>
+
+    <!-- Custom font 적용 -->
+    <style name="customTextViewFontStyle" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/custom_font_family</item>
+    </style>
+
+    <style name="customButtonFontStyle" parent="@android:style/Widget.DeviceDefault.Button.Borderless">
+        <item name="android:fontFamily">@font/custom_font_family</item>
+    </style>
+
+    <style name="customEditTextFontStyle" parent="@android:style/Widget.DeviceDefault.EditText">
+        <item name="android:fontFamily">@font/custom_font_family</item>
+    </style>
+
+    <style name="customRadioButtonFontStyle" parent="@android:style/Widget.DeviceDefault.CompoundButton.RadioButton">
+        <item name="android:fontFamily">@font/custom_font_family</item>
+    </style>
+
+    <style name="customCheckboxFontStyle" parent="@android:style/Widget.DeviceDefault.CompoundButton.CheckBox">
+        <item name="android:fontFamily">@font/custom_font_family</item>
     </style>
 </resources>

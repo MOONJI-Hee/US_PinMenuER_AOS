@@ -75,8 +75,8 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                     startActivity(intent)
                 }
             }
-            binding.event -> {}
-            binding.findMenu -> {}
+            binding.event -> Toast.makeText(mActivity, R.string.msg_prepare, Toast.LENGTH_SHORT).show()
+            binding.findMenu -> Toast.makeText(mActivity, R.string.msg_prepare, Toast.LENGTH_SHORT).show()
         }
     }
 

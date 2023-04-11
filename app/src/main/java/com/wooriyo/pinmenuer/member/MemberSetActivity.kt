@@ -1,5 +1,6 @@
 package com.wooriyo.pinmenuer.member
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
+import com.wooriyo.pinmenuer.common.ConfirmDialog
 import com.wooriyo.pinmenuer.databinding.ActivitySignUpBinding
 import com.wooriyo.pinmenuer.model.MemberDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
@@ -21,6 +23,7 @@ import retrofit2.Response
 
 class MemberSetActivity: BaseActivity(), View.OnClickListener {
     val TAG = "MemberSetActivity"
+    val mActivity = this@MemberSetActivity
     lateinit var binding : ActivitySignUpBinding
 
     var memberDTO: MemberDTO? = null
@@ -53,10 +56,14 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
         binding.etId.visibility = View.INVISIBLE
         binding.btnCheckId.visibility = View.INVISIBLE
         binding.checkResult.visibility = View.INVISIBLE
+
         binding.tvId.visibility = View.VISIBLE
+        binding.llUdt.visibility = View.VISIBLE
 
         binding.back.setOnClickListener(this)
         binding.save.setOnClickListener(this)
+        binding.drop.setOnClickListener(this)
+        binding.logout.setOnClickListener(this)
         binding.btnArpayo.setOnClickListener(this)
     }
 
@@ -65,10 +72,18 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
-        when(p0?.id) {
-            binding.back.id -> finish()
-            binding.save.id -> save()
-            binding.btnArpayo.id -> regArpayoId()
+        when(p0) {
+            binding.back -> finish()
+            binding.save -> save()
+            binding.btnArpayo -> regArpayoId()
+            binding.drop -> {
+                val onClickListener = View.OnClickListener { drop() }
+                ConfirmDialog(getString(R.string.dialog_drop), getString(R.string.btn_confirm), onClickListener).show(supportFragmentManager, "DropDialog")
+            }
+            binding.logout -> {
+                val onClickListener = View.OnClickListener {logout()}
+                ConfirmDialog(getString(R.string.dialog_logout), getString(R.string.btn_confirm), onClickListener).show(supportFragmentManager, "LogoutDialog")
+            }
         }
     }
 
@@ -110,7 +125,7 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
                             binding.linkResult.text = getString(R.string.link_after)
                             binding.linkResult.setTextColor(Color.parseColor("#FF6200"))
                         } else {
-                            Toast.makeText(this@MemberSetActivity, result.status, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MemberSetActivity, result.msg, Toast.LENGTH_SHORT).show()
                             binding.linkResult.text = getString(R.string.link_fail)
                             binding.linkResult.setTextColor(Color.parseColor("#5A5A5A"))
                         }
@@ -122,5 +137,39 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
                     Log.d(TAG, "알파요 아이디 연동 실패 > ${call.request()}")
                 }
             })
+    }
+
+    // 회원 탈퇴
+    fun drop() {
+        ApiClient.service.dropMbr(MyApplication.useridx).enqueue(object : Callback<ResultDTO>{
+            override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                Log.d(TAG, "회원 탈퇴 url : $response")
+                if(!response.isSuccessful) return
+
+                val result = response.body() ?: return
+                when(result.status) {
+                    1 -> {
+                        Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                        logout()
+                    }
+                    else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "회원 탈퇴 실패 >> $t")
+                Log.d(TAG, "회원 탈퇴 실패 >> ${call.request()}")
+            }
+        })
+    }
+
+    fun logout() {
+        MyApplication.pref.logout()
+        val intent = Intent(mActivity, LoginActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 }

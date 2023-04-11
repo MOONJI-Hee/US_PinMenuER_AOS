@@ -77,6 +77,12 @@ interface Api {
         @Query("alpha_userid") arpayo_id: String
     ): Call<ResultDTO>
 
+    // 탈퇴
+    @GET("m/leave.php")
+    fun dropMbr(
+        @Query("useridx") useridx: Int
+    ): Call<ResultDTO>
+
     // 매장 목록 조회
     @FormUrlEncoded
     @POST("m/store.list.php")

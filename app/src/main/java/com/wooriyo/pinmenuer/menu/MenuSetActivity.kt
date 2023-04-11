@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.wooriyo.pinmenuer.BaseActivity
+import com.wooriyo.pinmenuer.MyApplication.Companion.store
 import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
@@ -83,6 +84,21 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         cateList = (intent.getSerializableExtra("cateList")?: ArrayList<CategoryDTO>()) as ArrayList<CategoryDTO>
         if(cateList.isNotEmpty())
             setCateAdapter()
+
+        var selBg = ""
+        when(store.bgcolor) {
+            "d" -> selBg = getString(R.string.bg_dark)
+            "s" -> selBg = getString(R.string.bg_silver)
+            "l" -> selBg = getString(R.string.bg_light)
+        }
+        binding.setBg.text = getString(R.string.bg).format(selBg)
+
+        var selMode = ""
+        when(store.viewmode) {
+            "b" -> selMode = "기본"
+            "p" -> selMode = "사진"
+        }
+        binding.setViewMode.text = getString(R.string.viewmode).format(selMode)
 
         binding.etPrice.addTextChangedListener(textWatcher)
 

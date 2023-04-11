@@ -77,21 +77,22 @@
             app:layout_constraintStart_toEndOf="@+id/iv_silver"
             app:layout_constraintTop_toTopOf="@+id/iv_silver" />
 
-        <CheckBox style="@style/toggle"
+        <RadioButton style="@style/toggle"
             android:id="@+id/check_black"
             android:layout_marginTop="6dp"
+            android:checked="true"
             app:layout_constraintStart_toStartOf="@+id/iv_black"
             app:layout_constraintEnd_toEndOf="@+id/iv_black"
             app:layout_constraintTop_toBottomOf="@id/iv_black" />
 
-        <CheckBox style="@style/toggle"
+        <RadioButton style="@style/toggle"
             android:id="@+id/check_silver"
             android:layout_marginTop="6dp"
             app:layout_constraintStart_toStartOf="@+id/iv_silver"
             app:layout_constraintEnd_toEndOf="@+id/iv_silver"
             app:layout_constraintTop_toBottomOf="@id/iv_silver" />
 
-        <CheckBox style="@style/toggle"
+        <RadioButton style="@style/toggle"
             android:id="@+id/check_light"
             android:layout_marginTop="6dp"
             app:layout_constraintStart_toStartOf="@+id/iv_light"

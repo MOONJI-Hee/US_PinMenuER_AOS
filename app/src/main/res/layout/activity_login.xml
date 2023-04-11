@@ -44,7 +44,7 @@
             style="@style/edittext"
             android:id="@+id/et_id"
             android:layout_width="match_parent"
-            android:layout_marginTop="11dp"
+            android:layout_marginTop="17dp"
             android:hint="@string/id"
             android:maxLines="1"
             android:inputType="text"
@@ -62,15 +62,37 @@
             android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_marginTop="40dp"
-            android:background="@drawable/bg_btn_r6"
-            android:gravity="center"
             android:text="@string/btn_login"/>
-        <TextView
-            style="@style/text20"
-            android:id="@+id/signup"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="30dp"
-            android:gravity="center"
-            android:text="@string/signup"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+            <TextView
+                style="@style/text20d"
+                android:id="@+id/signup"
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
+                android:text="@string/signup"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/line"/>
+            <TextView
+                style="@style/text20d"
+                android:id="@+id/line"
+                android:text="|"
+                app:layout_constraintHorizontal_bias="0.45"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                style="@style/text20d"
+                android:id="@+id/findPw"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="20dp"
+                android:gravity="center"
+                android:text="@string/find_pwd"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/line"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,4 +41,11 @@ class SharedDTO(context: Context) {
     fun setToken(push_token: String) {
         pref.edit().putString("push_token", push_token).apply()
     }
+
+    fun logout() {
+        pref.edit().remove("mbrData").apply()
+        pref.edit().remove("useridx").apply()
+        pref.edit().remove("pw").apply()
+        pref.edit().remove("storeData").apply()
+    }
 }

@@ -1,14 +1,18 @@
 <resources>
-    <string name="app_name">핀메뉴 관리자</string>
+    <string name="app_name">핀메뉴 관리</string>
 
     <string name="kakao_appKey">398d9c3d6b47f73780e5413b1f4b167f</string>
     <string name="kakao_apiKey">0a9047a6f0f9b350e4fca5168f2c5ef8</string>
 
     <string name="login">로그인</string>
     <string name="id">아이디</string>
+    <string name="logout">로그아웃</string>
+
     <string name="password">비밀번호</string>
 
     <string name="signup">회원가입</string>
+    <string name="find_pwd">비밀번호 찾기</string>
+    <string name="drop">탈퇴</string>
 
     <string name="won">원</string>
     <string name="gea">개</string>
@@ -48,6 +52,8 @@
     <string name="btn_call">호&#160;&#160;출</string>
     <string name="btn_call2">호&#160;출</string>
     <string name="btn_complete">완&#160;&#160;료</string>
+    <string name="btn_drop">탈&#160;&#160;퇴</string>
+
 
 
     <string name="udt_info">정보변경</string>
@@ -94,6 +100,11 @@
     <string name="link_after">연동됨</string>
     <string name="link_fail">연동불가</string>
     <string name="mbr_info">회원정보</string>
+
+    <!--  비밀번호 찾기  -->
+    <string name="find_pwd_info1">회원 아이디(이메일)를 입력해 주세요.\n작성하신 아이디로 새로운 비밀번호가 전송됩니다.</string>
+    <string name="find_pwd_info2">가입되지 않은 아이디는 이메일이 발송되지 않습니다.</string>
+    <string name="send_pwd">새로운 비밀번호 전송</string>
 
     <!-- 매장 리스트 -->
     <string name="store_udt">정보수정</string>
@@ -271,6 +282,10 @@
     <string name="pms_storage_title">외부 저장소 권한 요청</string>
     <string name="pms_storage_content">원활한 서비스 이용을 위해서는 외부 저장소 권한이 필요합니다.</string>
 
+    <!--  확인 다이얼로그  -->
+    <string name="dialog_logout">로그아웃 하시겠습니까?</string>
+    <string name="dialog_drop">탈퇴 하시겠습니까?</string>
+
     <!--  토스트 메세지  -->
     <string name="msg_retry">다시 시도해주세요.</string>
     <string name="msg_complete">완료되었습니다.</string>
@@ -287,4 +302,5 @@
     <string name="msg_no_goods_name">상품명을 입력해주세요.</string>
     <string name="backpress">뒤로 가기 버튼을 한 번 더 누르시면 종료됩니다.</string>
     <string name="msg_no_search_result">검색 결과가 없습니다.</string>
+    <string name="msg_prepare">준비중입니다.</string>
 </resources>

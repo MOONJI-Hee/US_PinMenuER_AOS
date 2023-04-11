@@ -38,8 +38,8 @@ class CallListAdapter(val dataSet: ArrayList<CallHistoryDTO>): RecyclerView.Adap
 
             binding.tableNo.text = data.tableNo
 
-            val date = data.regdt.split(" ")[0].replace("-", ".")
-            val time = data.regdt.split(" ")[1].substring(0, 5)
+            val date = data.regDt.split(" ")[0].replace("-", ".")
+            val time = data.regDt.split(" ")[1].substring(0, 5)
 
             binding.date.text = date
             binding.time.text = time

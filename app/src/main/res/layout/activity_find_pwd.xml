@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        style="@style/title"
+        android:id="@+id/title"
+        android:text="@string/find_pwd"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <LinearLayout
+        android:id="@+id/back"
+        android:layout_width="72dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_title_back" />
+    </LinearLayout>
+
+    <TextView
+        style="@style/text18"
+        android:layout_marginEnd="16dp"
+        android:text="@string/email"
+        app:layout_constraintEnd_toStartOf="@+id/et_id"
+        app:layout_constraintTop_toTopOf="@+id/et_id"
+        app:layout_constraintBottom_toBottomOf="@+id/et_id" />
+
+    <EditText
+        style="@style/edittext_main"
+        android:id="@+id/et_id"
+        android:layout_width="500dp"
+        android:layout_marginTop="80dp"
+        android:hint="@string/email_hint"
+        android:inputType="textEmailAddress"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        style="@style/subtext"
+        android:id="@+id/find_pwd_info1"
+        android:text="@string/find_pwd_info1"
+        android:lineSpacingExtra="4dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="@+id/et_id"
+        app:layout_constraintTop_toBottomOf="@+id/et_id"/>
+
+    <TextView
+        style="@style/subtext"
+        android:id="@+id/signup_info"
+        android:text="@string/find_pwd_info2"
+        android:lineSpacingExtra="5dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/find_pwd_info1"
+        app:layout_constraintTop_toBottomOf="@+id/find_pwd_info1"/>
+
+    <TextView
+        style="@style/btn"
+        android:id="@+id/save"
+        android:layout_width="500dp"
+        android:layout_marginTop="182dp"
+        android:text="@string/send_pwd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_info" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
