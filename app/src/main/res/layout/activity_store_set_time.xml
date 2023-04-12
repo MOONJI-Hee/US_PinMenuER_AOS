@@ -60,7 +60,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:text="@string/store_same_hour" />
-                <RadioButton style="@style/toggle" android:id="@+id/toggle_open_same" android:checked="true"/>
+                <CheckBox style="@style/toggle" android:id="@+id/toggle_open_same"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/ll_open_same"
@@ -90,7 +90,7 @@
             <View
                 style="@style/disable_square"
                 android:id="@+id/dis_open_same"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintStart_toStartOf="@+id/ll_open_same"
                 app:layout_constraintTop_toTopOf="@+id/ll_open_same"
                 app:layout_constraintBottom_toBottomOf="@+id/ll_open_same"/>
@@ -117,7 +117,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:text="@string/store_diff_hour" />
-                <RadioButton style="@style/toggle" android:id="@+id/toggle_open_diff"/>
+                <CheckBox style="@style/toggle" android:id="@+id/toggle_open_diff"/>
             </LinearLayout>
 
             <LinearLayout
@@ -325,7 +325,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:text="@string/store_same_break" />
-                <RadioButton style="@style/toggle" android:id="@+id/toggle_brk_same" android:checked="true"/>
+                <CheckBox style="@style/toggle" android:id="@+id/toggle_brk_same"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/ll_brk"
@@ -355,7 +355,7 @@
             <View
                 style="@style/disable_square"
                 android:id="@+id/dis_brk_same"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintStart_toStartOf="@+id/ll_brk"
                 app:layout_constraintTop_toTopOf="@+id/ll_brk"
                 app:layout_constraintBottom_toBottomOf="@+id/ll_brk"/>
@@ -373,7 +373,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:text="@string/store_diff_break" />
-                <RadioButton style="@style/toggle" android:id="@+id/toggle_brk_diff"/>
+                <CheckBox style="@style/toggle" android:id="@+id/toggle_brk_diff"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/ll_brk_mon"

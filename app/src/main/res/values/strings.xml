@@ -54,8 +54,7 @@
     <string name="btn_complete">완&#160;&#160;료</string>
     <string name="btn_drop">탈&#160;&#160;퇴</string>
 
-
-
+    
     <string name="udt_info">정보변경</string>
 
     <string name="date">날짜</string>
@@ -295,6 +294,8 @@
     <string name="msg_check_addr">주소를 확인해주세요.</string>
     <string name="msg_reg_store_first">매장 등록을 완료한 후 이용해주시기 바랍니다.</string>
     <string name="msg_no_endtm">시간을 확인해주세요.</string>
+    <string name="msg_no_worktm">영업시간을 입력해주시기 바랍니다.</string>
+    <string name="msg_no_brktm">브레이크 타임을 입력해주시기 바랍니다.</string>
     <string name="msg_no_date">날짜를 확인해주세요.</string>
     <string name="msg_no_img">이미지를 등록해주세요.</string>
     <string name="msg_no_name">명칭을 입력해주세요.</string>

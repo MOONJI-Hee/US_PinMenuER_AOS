@@ -20,15 +20,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HolidayDialog(context: Context, val type : Int, val storeidx : Int, val spcHoliday : SpcHolidayDTO?): BaseDialog(context), View.OnClickListener {
+class HolidayDialog(context: Context, val storeidx : Int, val position : Int, val spcHoliday : SpcHolidayDTO): BaseDialog(context), View.OnClickListener {
     lateinit var binding : DialogHolidayBinding
     lateinit var dialogListener: DialogListener
     val TAG = "HolidayDialog"
 
     var holidayidx = 0
-    var title = ""
-    var month = ""
-    var day = ""
 
     fun setOnHolidaySetListener (dialogListener: DialogListener) {
         this.dialogListener = dialogListener
@@ -39,24 +36,19 @@ class HolidayDialog(context: Context, val type : Int, val storeidx : Int, val sp
         binding = DialogHolidayBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        when(type) {
-            2 -> {  // 수정
-                binding.save.visibility = View.GONE
-                binding.llUdt.visibility = View.VISIBLE
+        if(position > -1) { // 수정
+            binding.save.visibility = View.GONE
+            binding.llUdt.visibility = View.VISIBLE
 
-                if(spcHoliday != null) {
-                    holidayidx = spcHoliday.idx
-                    title = spcHoliday.title
-                    month = spcHoliday.month
-                    day = spcHoliday.day
+            spcHoliday.run {
+                holidayidx = idx
 
-                    if(title != "")
-                        binding.etName.setText(title)
-                    if(month != "")
-                        binding.etMonth.setText(AppHelper.mkDouble(month))
-                    if(day != "")
-                        binding.etDay.setText(AppHelper.mkDouble(day))
-                }
+                if(title != "")
+                    binding.etName.setText(title)
+                if(month != "")
+                    binding.etMonth.setText(AppHelper.mkDouble(month))
+                if(day != "")
+                    binding.etDay.setText(AppHelper.mkDouble(day))
             }
         }
 
@@ -78,22 +70,24 @@ class HolidayDialog(context: Context, val type : Int, val storeidx : Int, val sp
     }
 
     fun check() {
-        title = binding.etName.text.toString()
-        month = binding.etMonth.text.toString()
-        day = binding.etDay.text.toString()
+        spcHoliday.run {
+            title = binding.etName.text.toString()
+            month = binding.etMonth.text.toString()
+            day = binding.etDay.text.toString()
 
-        if(title.isEmpty()) {
-            Toast.makeText(context, R.string.msg_no_name, Toast.LENGTH_SHORT).show()
-            return
-        }else if(day.isEmpty()) {
-            Toast.makeText(context, R.string.msg_no_date, Toast.LENGTH_SHORT).show()
-            return
+            if(title.isEmpty()) {
+                Toast.makeText(context, R.string.msg_no_name, Toast.LENGTH_SHORT).show()
+                return
+            }else if(day.isEmpty()) {
+                Toast.makeText(context, R.string.msg_no_date, Toast.LENGTH_SHORT).show()
+                return
+            }
         }
     }
 
     private fun save() {
         check()
-        ApiClient.service.insHoliday(useridx, storeidx, title, month, day)
+        ApiClient.service.insHoliday(useridx, storeidx, spcHoliday.title, spcHoliday.month, spcHoliday.day)
             .enqueue(object : Callback<ResultDTO> {
                 override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                     Log.d(TAG, "특별 휴일 등록 url : $response")
@@ -103,7 +97,8 @@ class HolidayDialog(context: Context, val type : Int, val storeidx : Int, val sp
                             when(resultDTO.status) {
                                 1-> {
                                     Toast.makeText(context, resultDTO.msg, Toast.LENGTH_SHORT).show()
-//                                    dialogListener.onHolidaySet()
+                                    spcHoliday.idx = resultDTO.idx
+                                    dialogListener.onHolidaySet(position, spcHoliday)
                                     dismiss()
                                 }
                                 else -> Toast.makeText(context, resultDTO.msg, Toast.LENGTH_SHORT).show()
@@ -120,7 +115,7 @@ class HolidayDialog(context: Context, val type : Int, val storeidx : Int, val sp
 
     private fun modify() {
         check()
-        ApiClient.service.udtHoliday(useridx, holidayidx, title, month, day)
+        ApiClient.service.udtHoliday(useridx, holidayidx, spcHoliday.title, spcHoliday.month, spcHoliday.day)
             .enqueue(object : Callback<ResultDTO>{
                 override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                     Log.d(TAG, "특별 휴일 수정 url : $response")
@@ -130,6 +125,7 @@ class HolidayDialog(context: Context, val type : Int, val storeidx : Int, val sp
                             when(resultDTO.status) {
                                 1-> {
                                     Toast.makeText(context, resultDTO.msg, Toast.LENGTH_SHORT).show()
+                                    dialogListener.onHolidaySet(position, spcHoliday)
                                     dismiss()
                                 }
                                 else -> Toast.makeText(context, resultDTO.msg, Toast.LENGTH_SHORT).show()
@@ -156,6 +152,7 @@ class HolidayDialog(context: Context, val type : Int, val storeidx : Int, val sp
                             when(resultDTO.status) {
                                 1-> {
                                     Toast.makeText(context, resultDTO.msg, Toast.LENGTH_SHORT).show()
+                                    dialogListener.onItemDelete(position)
                                     dismiss()
                                 }
                                 else -> Toast.makeText(context, resultDTO.msg, Toast.LENGTH_SHORT).show()

@@ -33,33 +33,34 @@
         android:id="@+id/btn_set"
         android:layout_width="128dp"
         android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
         android:gravity="center"
         android:text="@string/call_manage"
         app:layout_constraintTop_toTopOf="@+id/title"
         app:layout_constraintBottom_toBottomOf="@+id/title"
-        app:layout_constraintEnd_toStartOf="@+id/refresh"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <LinearLayout
-        android:id="@+id/refresh"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="@+id/title"
-        app:layout_constraintEnd_toEndOf="@+id/title">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:src="@drawable/btn_refresh"/>
-        <TextView
-            style="@style/num_badge18"
-            android:id="@+id/badge"
-            android:layout_marginStart="-38dp"
-            android:layout_marginBottom="10dp"
-            android:visibility="invisible"
-            app:layout_constraintStart_toEndOf="@+id/call"
-            app:layout_constraintBottom_toTopOf="@+id/call" />
-    </LinearLayout>
+<!--    <LinearLayout-->
+<!--        android:id="@+id/refresh"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:gravity="center"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/title"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/title">-->
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginHorizontal="20dp"-->
+<!--            android:src="@drawable/btn_refresh"/>-->
+<!--        <TextView-->
+<!--            style="@style/num_badge18"-->
+<!--            android:id="@+id/badge"-->
+<!--            android:layout_marginStart="-38dp"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:visibility="invisible"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/call"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/call" />-->
+<!--    </LinearLayout>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_call"

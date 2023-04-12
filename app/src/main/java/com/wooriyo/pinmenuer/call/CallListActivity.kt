@@ -156,6 +156,30 @@ class CallListActivity : BaseActivity(), View.OnClickListener {
 
     // 호출 완료 처리
     fun setComplete(position: Int) {
+        ApiClient.service.completeCall(storeidx, callHistory[position].idx, "Y").enqueue(object:Callback<ResultDTO>{
+            override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                Log.d(TAG, "호출 완료 url : $response")
+                if(!response.isSuccessful) return
 
+                val result = response.body() ?: return
+                when(result.status){
+                    1 -> {
+                        callHistory[position].iscompleted = 1
+                        callHistory.sortBy {
+                            it.iscompleted
+                            it.regDt
+                        }
+                        callListAdapter.notifyItemChanged(position)
+                    }
+                    else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "호출 완료 실패 > $t")
+                Log.d(TAG, "호출 완료 실패 오류 > ${call.request()}")
+            }
+        })
     }
 }

@@ -25,18 +25,8 @@
         android:theme="@style/Theme.PinMenuER"
         tools:targetApi="31">
         <activity
-            android:name=".FindPwdActivity"
+            android:name=".member.FindPwdActivity"
             android:exported="false" />
-        <!-- <activity -->
-        <!-- android:name=".ItemDetailHostActivity" -->
-        <!-- android:exported="false" -->
-        <!-- android:label="@string/title_activity_item_detail_host" -->
-        <!-- android:resizeableActivity="true" -->
-        <!-- tools:targetApi="24" /> -->
-        <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_appKey" />
-
         <activity
             android:name=".call.CallSetActivity"
             android:exported="false">
@@ -107,7 +97,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_appKey" />
         <service
             android:name="com.wooriyo.pinmenuer.util.MyFirebaseService"
             android:exported="false">

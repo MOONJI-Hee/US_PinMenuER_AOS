@@ -8,4 +8,6 @@ data class SpcHolidayDTO(
     @SerializedName("title") var title: String,
     @SerializedName("month") var month: String,
     @SerializedName("day") var day: String
-): Serializable
+): Serializable {
+    constructor(): this(0, "", "", "")
+}

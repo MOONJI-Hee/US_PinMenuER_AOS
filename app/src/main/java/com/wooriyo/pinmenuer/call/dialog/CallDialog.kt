@@ -9,6 +9,7 @@ import com.wooriyo.pinmenuer.BaseDialog
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.DialogCallBinding
+import com.wooriyo.pinmenuer.listener.DialogListener
 import com.wooriyo.pinmenuer.model.CallDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.util.ApiClient
@@ -16,13 +17,17 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CallDialog(context: Context, val type: Int, val call: CallDTO?): BaseDialog(context) {
+class CallDialog(context: Context, val position: Int, val callDTO: CallDTO): BaseDialog(context) {
     lateinit var binding: DialogCallBinding
+    lateinit var dialogListener: DialogListener
 
     val TAG = "CallDialog"
 
-    var name = ""
     var idx = 0             // 추가 : storeidx, 수정 : callidx
+
+    fun setOnHolidaySetListener (dialogListener: DialogListener) {
+        this.dialogListener = dialogListener
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,12 +36,12 @@ class CallDialog(context: Context, val type: Int, val call: CallDTO?): BaseDialo
 
         idx = MyApplication.storeidx
 
-        if(type == 1 && call != null) { //수정
+        if(position > -1) { //수정
             binding.title.text = context.getString(R.string.call_udt)
-            binding.etName.setText(call.name)
+            binding.etName.setText(callDTO.name)
             binding.save.visibility = View.GONE
             binding.llUdt.visibility = View.VISIBLE
-            idx = call.idx
+            idx = callDTO.idx
         }
 
         binding.close.setOnClickListener{dismiss()}
@@ -46,9 +51,9 @@ class CallDialog(context: Context, val type: Int, val call: CallDTO?): BaseDialo
     }
 
     fun check(): Boolean {
-        name = binding.etName.text.toString()
+        callDTO.name = binding.etName.text.toString()
 
-        return if(name.isEmpty()) {
+        return if(callDTO.name.isEmpty()) {
             Toast.makeText(context, R.string.msg_no_item_name, Toast.LENGTH_SHORT).show()
             false
         }else { true }
@@ -57,7 +62,7 @@ class CallDialog(context: Context, val type: Int, val call: CallDTO?): BaseDialo
     fun save() {
         if(!check()) return
 
-        ApiClient.service.insCall(useridx, idx, name).enqueue(object : Callback<ResultDTO>{
+        ApiClient.service.insCall(useridx, idx, callDTO.name).enqueue(object : Callback<ResultDTO>{
             override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                 Log.d(TAG, "호출 목록 등록 url : $response")
                 if(!response.isSuccessful) return
@@ -66,13 +71,14 @@ class CallDialog(context: Context, val type: Int, val call: CallDTO?): BaseDialo
                 if(result != null) {
                     when(result.status) {
                         1 -> {
+                            callDTO.idx = result.idx
                             Toast.makeText(context, R.string.complete, Toast.LENGTH_SHORT).show()
+                            dialogListener.onCallSet(position, callDTO)
                             dismiss()
                         }
                         else -> Toast.makeText(context, result.msg, Toast.LENGTH_SHORT).show()
                     }
                 }
-
             }
 
             override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
@@ -86,7 +92,7 @@ class CallDialog(context: Context, val type: Int, val call: CallDTO?): BaseDialo
     fun modify() {
         if(!check()) return
 
-        ApiClient.service.udtCall(useridx, idx, name).enqueue(object : Callback<ResultDTO>{
+        ApiClient.service.udtCall(useridx, idx, callDTO.name).enqueue(object : Callback<ResultDTO>{
             override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                 Log.d(TAG, "호출 목록 수정 url : $response")
                 if(!response.isSuccessful) return
@@ -96,6 +102,7 @@ class CallDialog(context: Context, val type: Int, val call: CallDTO?): BaseDialo
                     when(result.status) {
                         1 -> {
                             Toast.makeText(context, R.string.complete, Toast.LENGTH_SHORT).show()
+                            dialogListener.onCallSet(position, callDTO)
                             dismiss()
                         }
                         else -> Toast.makeText(context, result.msg, Toast.LENGTH_SHORT).show()
@@ -123,6 +130,7 @@ class CallDialog(context: Context, val type: Int, val call: CallDTO?): BaseDialo
                     when(result.status) {
                         1 -> {
                             Toast.makeText(context, R.string.complete, Toast.LENGTH_SHORT).show()
+                            dialogListener.onItemDelete(position)
                             dismiss()
                         }
                         else -> Toast.makeText(context, result.msg, Toast.LENGTH_SHORT).show()

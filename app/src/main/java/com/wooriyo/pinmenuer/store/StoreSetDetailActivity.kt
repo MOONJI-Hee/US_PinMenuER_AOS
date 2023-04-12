@@ -134,6 +134,7 @@ class StoreSetDetailActivity : BaseActivity(), View.OnClickListener {
                 override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
                     Toast.makeText(this@StoreSetDetailActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "매장 상세정보 저장 실패 > $t")
+                    Log.d(TAG, "매장 상세정보 저장 실패 > ${call.request()}")
                 }
             })
     }

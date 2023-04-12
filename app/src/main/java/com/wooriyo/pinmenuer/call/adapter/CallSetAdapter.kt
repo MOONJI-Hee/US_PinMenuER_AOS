@@ -35,10 +35,10 @@ class CallSetAdapter(val dataSet: ArrayList<CallDTO>): RecyclerView.Adapter<Call
             binding.name.text = data.name
 
             binding.name.setOnClickListener {
-                CallDialog(context,1, data).show()
+                CallDialog(context, absoluteAdapterPosition, data).show()
             }
             binding.plus.setOnClickListener{
-                CallDialog(context,0, null).show()
+                CallDialog(context,-1, data).show()
             }
         }
     }

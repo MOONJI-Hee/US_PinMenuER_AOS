@@ -3,7 +3,7 @@ package com.wooriyo.pinmenuer.model
 import java.io.Serializable
 
 data class BrkTimeDTO(
-    var buse : String,   // Y : 매일 동일한 브레이크 타임, N : 매일 다른 브레이크 타임
+    var buse : String,   // D: 설정 안함, Y : 매일 동일한 브레이크 타임, N : 매일 다른 브레이크 타임
     var starttm : String,
     var endtm : String,
 

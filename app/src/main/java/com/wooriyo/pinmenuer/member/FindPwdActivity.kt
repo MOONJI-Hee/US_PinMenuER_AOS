@@ -1,12 +1,12 @@
 package com.wooriyo.pinmenuer.member
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityFindPwdBinding
 
-class FindPwdActivity : AppCompatActivity() {
+class FindPwdActivity : BaseActivity() {
     lateinit var binding: ActivityFindPwdBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

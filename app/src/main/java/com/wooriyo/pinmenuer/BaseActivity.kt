@@ -9,6 +9,7 @@ import com.wooriyo.pinmenuer.util.AppHelper
 open class BaseActivity: AppCompatActivity() {
     val y = "Y"
     val n = "N"
+    val d = "D"
 
     override fun onBackPressed() {}
 

@@ -32,6 +32,7 @@ import retrofit2.Response
 class StoreSetTimeActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding : ActivityStoreSetTimeBinding
     val TAG = "StoreSetTimeActivity"
+    val mActivity = this@StoreSetTimeActivity
 
     var openTime = OpenTimeDTO()
     var breakTime = BrkTimeDTO()
@@ -49,12 +50,12 @@ class StoreSetTimeActivity : BaseActivity(), View.OnClickListener {
 
         spcHolidayAdapter.setOnItemClick(object : ItemClickListener {
             override fun onItemClick(position: Int) {
-                spcHolidayDialog(2, spcHoliday[position])
+                spcHolidayDialog(position, spcHoliday[position])
             }
         })
 
         binding.rvSpecial.apply {
-            layoutManager = LinearLayoutManager(this@StoreSetTimeActivity, LinearLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false)
             adapter = spcHolidayAdapter
         }
 
@@ -92,28 +93,32 @@ class StoreSetTimeActivity : BaseActivity(), View.OnClickListener {
                     toggleOpenDiff.isChecked = false
                     disOpenSame.visibility = View.GONE
                     disOpenDiff.visibility = View.VISIBLE
-                }
+                }else
+                    disOpenSame.visibility = View.VISIBLE
             }
             toggleOpenDiff.setOnCheckedChangeListener { _, isChecked ->
                 if(isChecked) {
                     toggleOpenSame.isChecked = false
                     disOpenSame.visibility = View.VISIBLE
                     disOpenDiff.visibility = View.GONE
-                }
+                }else
+                    disOpenDiff.visibility = View.VISIBLE
             }
             toggleBrkSame.setOnCheckedChangeListener { _, isChecked ->
                 if(isChecked) {
                     toggleBrkDiff.isChecked = false
                     disBrkSame.visibility = View.GONE
                     disBrkDiff.visibility = View.VISIBLE
-                }
+                }else
+                    disBrkSame.visibility = View.VISIBLE
             }
             toggleBrkDiff.setOnCheckedChangeListener { _, isChecked ->
                 if(isChecked) {
                     toggleBrkSame.isChecked = false
                     disBrkSame.visibility = View.VISIBLE
                     disBrkDiff.visibility = View.GONE
-                }
+                }else
+                    disBrkDiff.visibility = View.VISIBLE
             }
             toggleHolidaySame.setOnCheckedChangeListener { _, isChecked ->
                 if(isChecked)
@@ -138,7 +143,7 @@ class StoreSetTimeActivity : BaseActivity(), View.OnClickListener {
         when(p0) {
             binding.back -> finish()
             binding.save -> save()
-            binding.addHoliday -> spcHolidayDialog(1, null)
+            binding.addHoliday -> spcHolidayDialog(-1, SpcHolidayDTO())
         }
     }
 
@@ -148,7 +153,7 @@ class StoreSetTimeActivity : BaseActivity(), View.OnClickListener {
 
         binding.run {
             openTime.let {
-                if(it.buse == y) toggleOpenSame.isChecked = true else toggleOpenDiff.isChecked = true
+                if(it.buse == y) toggleOpenSame.isChecked = true else if(it.buse == n) toggleOpenDiff.isChecked = true
                 checkOpenMon.isChecked = it.mon_buse == y
                 checkOpenTue.isChecked = it.tue_buse == y
                 checkOpenWed.isChecked = it.wed_buse == y
@@ -182,7 +187,7 @@ class StoreSetTimeActivity : BaseActivity(), View.OnClickListener {
                 if(it.sun_endtm!="") closeSun.text = it.sun_endtm
             }
             breakTime.let {
-                if(it.buse == y) toggleBrkSame.isChecked = true else toggleBrkDiff.isChecked = true
+                if(it.buse == y) toggleBrkSame.isChecked = true else if(it.buse == n) toggleBrkDiff.isChecked = true
                 checkBrkMon.isChecked = it.mon_buse == y
                 checkBrkTue.isChecked = it.tue_buse == y
                 checkBrkWed.isChecked = it.wed_buse == y
@@ -229,7 +234,8 @@ class StoreSetTimeActivity : BaseActivity(), View.OnClickListener {
     private fun save () {   // 저장
         binding.run {
             openTime.let {
-                when {
+                it.buse = d // 디폴트 D로 설정
+                when {  // 체크 여부로 값 변경
                     toggleOpenSame.isChecked -> it.buse = y
                     toggleOpenDiff.isChecked -> it.buse = n
                 }
@@ -264,43 +270,54 @@ class StoreSetTimeActivity : BaseActivity(), View.OnClickListener {
 
                 it.sun_starttm = openSun.text.toString()
                 it.sun_endtm = closeSun.text.toString()
+
+                if(it.buse == y && it.starttm.isEmpty() && it.endtm.isEmpty()) {
+                    Toast.makeText(mActivity, R.string.msg_no_worktm, Toast.LENGTH_SHORT).show()
+                    return
+                }
             }
             breakTime.let {
+                it.buse = d
                 when{
                     toggleBrkSame.isChecked -> it.buse = y
                     toggleBrkDiff.isChecked -> it.buse = n
                 }
-            if(checkBrkMon.isChecked) it.mon_buse = y else it.mon_buse = n
-            if(checkBrkTue.isChecked) it.tue_buse = y else it.tue_buse = n
-            if(checkBrkWed.isChecked) it.wed_buse = y else it.wed_buse = n
-            if(checkBrkThu.isChecked) it.thu_buse = y else it.thu_buse = n
-            if(checkBrkFri.isChecked) it.fri_buse = y else it.fri_buse = n
-            if(checkBrkSat.isChecked) it.sat_buse = y else it.sat_buse = n
-            if(checkBrkSun.isChecked) it.sun_buse = y else it.sun_buse = n
+                if(checkBrkMon.isChecked) it.mon_buse = y else it.mon_buse = n
+                if(checkBrkTue.isChecked) it.tue_buse = y else it.tue_buse = n
+                if(checkBrkWed.isChecked) it.wed_buse = y else it.wed_buse = n
+                if(checkBrkThu.isChecked) it.thu_buse = y else it.thu_buse = n
+                if(checkBrkFri.isChecked) it.fri_buse = y else it.fri_buse = n
+                if(checkBrkSat.isChecked) it.sat_buse = y else it.sat_buse = n
+                if(checkBrkSun.isChecked) it.sun_buse = y else it.sun_buse = n
 
-            it.starttm = brkStart.text.toString()
-            it.endtm = brkEnd.text.toString()
+                it.starttm = brkStart.text.toString()
+                it.endtm = brkEnd.text.toString()
 
-            it.mon_starttm = brkStartMon.text.toString()
-            it.mon_endtm = brkEndMon.text.toString()
+                it.mon_starttm = brkStartMon.text.toString()
+                it.mon_endtm = brkEndMon.text.toString()
 
-            it.tue_starttm = brkStartTue.text.toString()
-            it.tue_endtm = brkEndTue.text.toString()
+                it.tue_starttm = brkStartTue.text.toString()
+                it.tue_endtm = brkEndTue.text.toString()
 
-            it.wed_starttm = brkStartWed.text.toString()
-            it.wed_endtm = brkEndWed.text.toString()
+                it.wed_starttm = brkStartWed.text.toString()
+                it.wed_endtm = brkEndWed.text.toString()
 
-            it.thu_starttm = brkStartThu.text.toString()
-            it.thu_endtm = brkEndThu.text.toString()
+                it.thu_starttm = brkStartThu.text.toString()
+                it.thu_endtm = brkEndThu.text.toString()
 
-            it.fri_starttm = brkStartFri.text.toString()
-            it.fri_endtm = brkEndFri.text.toString()
+                it.fri_starttm = brkStartFri.text.toString()
+                it.fri_endtm = brkEndFri.text.toString()
 
-            it.sat_starttm = brkStartSat.text.toString()
-            it.sat_endtm = brkEndSat.text.toString()
+                it.sat_starttm = brkStartSat.text.toString()
+                it.sat_endtm = brkEndSat.text.toString()
 
-            it.sun_starttm = brkStartSun.text.toString()
-            it.sun_endtm = brkEndSun.text.toString()
+                it.sun_starttm = brkStartSun.text.toString()
+                it.sun_endtm = brkEndSun.text.toString()
+
+                if(it.buse == y && it.starttm.isEmpty() && it.endtm.isEmpty()) {
+                    Toast.makeText(mActivity, R.string.msg_no_brktm, Toast.LENGTH_SHORT).show()
+                    return
+                }
             }
             holiday.let {
                 if(toggleHolidaySame.isChecked) it.buse = y else it.buse = n
@@ -331,16 +348,16 @@ class StoreSetTimeActivity : BaseActivity(), View.OnClickListener {
                         if(resultDTO != null) {
                             when(resultDTO.status) {
                                 1 -> {
-                                    Toast.makeText(this@StoreSetTimeActivity, resultDTO.msg, Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(mActivity, resultDTO.msg, Toast.LENGTH_SHORT).show()
                                     setResult(RESULT_OK)
                                 }
-                                else -> Toast.makeText(this@StoreSetTimeActivity, resultDTO.msg, Toast.LENGTH_SHORT).show()
+                                else -> Toast.makeText(mActivity, resultDTO.msg, Toast.LENGTH_SHORT).show()
                             }
                         }
                     }
                 }
                 override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
-                    Toast.makeText(this@StoreSetTimeActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "매장 영업시간 저장 실패 > $t")
                 }
             })
@@ -348,7 +365,7 @@ class StoreSetTimeActivity : BaseActivity(), View.OnClickListener {
 
     // 시간 설정 다이얼로그
     fun timeDialog(tvStart : TextView, tvEnd: TextView) {
-        val dialog = RegTimeDialog(this@StoreSetTimeActivity, tvStart.text.toString(), tvEnd.text.toString())
+        val dialog = RegTimeDialog(mActivity, tvStart.text.toString(), tvEnd.text.toString())
         dialog.setOnTimeSetListener(object: DialogListener{
             override fun onTimeSet(start: String, end: String) {
                 tvStart.text = start
@@ -360,11 +377,22 @@ class StoreSetTimeActivity : BaseActivity(), View.OnClickListener {
     }
 
     // 특별 휴일 다이얼로그
-    fun spcHolidayDialog(type: Int, spcHolidayDTO: SpcHolidayDTO?) { // type 1: 추가 2: 수정
-        val dialog = HolidayDialog(this@StoreSetTimeActivity, type, storeidx, spcHolidayDTO)
+    fun spcHolidayDialog(position: Int, spcHolidayDTO: SpcHolidayDTO) { // type 1: 추가 2: 수정
+        val dialog = HolidayDialog(mActivity, storeidx, position, spcHolidayDTO)
         dialog.setOnHolidaySetListener(object : DialogListener{
-            override fun onHolidaySet(data: SpcHolidayDTO) {
+            override fun onHolidaySet(position: Int, data: SpcHolidayDTO) {
+                super.onHolidaySet(position, data)
                 setResult(RESULT_OK)
+                if(position == -1) {    // 추가일 때
+                    spcHoliday.add(data)
+                    spcHolidayAdapter.notifyItemInserted(spcHoliday.size-1)     // notifyDataSetChanged() 호출하면 코드 길이는 줄어들지만, 성능이 떨어질 수 있으므로 추가일 때는 inserted를 호출
+                }else
+                    spcHolidayAdapter.notifyItemChanged(position)
+            }
+
+            override fun onItemDelete(position: Int) {
+                spcHoliday.removeAt(position)
+                spcHolidayAdapter.notifyItemRemoved(position)
             }
         })
         dialog.show()
