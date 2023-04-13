@@ -6,12 +6,12 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.wooriyo.pinmenuer.BaseActivity
-import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.call.adapter.CallSetAdapter
 import com.wooriyo.pinmenuer.databinding.ActivityCallListBinding
+import com.wooriyo.pinmenuer.listener.DialogListener
 import com.wooriyo.pinmenuer.model.CallDTO
 import com.wooriyo.pinmenuer.model.CallSetListDTO
 import com.wooriyo.pinmenuer.util.ApiClient
@@ -19,7 +19,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CallSetActivity : BaseActivity() {
+class CallSetActivity : BaseActivity(), DialogListener {
     val TAG = "CallSetActivity"
     val mActivity = this@CallSetActivity
     lateinit var binding: ActivityCallListBinding
@@ -44,6 +44,21 @@ class CallSetActivity : BaseActivity() {
         getCallList()
     }
 
+    override fun onCallSet(position: Int, data: CallDTO) {
+        if(position == -1) {
+            setList.add(data)
+            data.gea = setList.size     // 여기서는 seq
+            callSetAdapter.notifyItemInserted(setList.size-1)
+        } else
+            callSetAdapter.notifyItemChanged(position)
+    }
+
+    override fun onItemDelete(position: Int) {
+        super.onItemDelete(position)
+        setList.removeAt(position)
+        callSetAdapter.notifyItemRemoved(position)
+    }
+
     fun setView() {
         // 리사이클러뷰 초기화
         binding.rvCallSet.layoutManager = GridLayoutManager(mActivity, 4)
@@ -64,9 +79,6 @@ class CallSetActivity : BaseActivity() {
                             1 -> {
                                 setList.clear()
                                 setList.addAll(callSetList.callList)
-
-                                setList.add(CallDTO())
-
                                 callSetAdapter.notifyDataSetChanged()
                             }
                             else -> Toast.makeText(mActivity, callSetList.msg, Toast.LENGTH_SHORT).show()

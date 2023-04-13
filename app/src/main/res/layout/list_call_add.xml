@@ -5,9 +5,8 @@
     android:layout_marginBottom="20dp"
     android:layout_marginEnd="23dp"
     android:orientation="horizontal">
-    <TextView
-        style="@style/edittext"
-        android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:gravity="center"/>
+    <ImageView
+        style="@style/btn_plus"
+        android:id="@+id/plus"
+        android:layout_width="match_parent"/>
 </LinearLayout>

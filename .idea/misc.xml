@@ -70,6 +70,7 @@
         <entry key="app/src/main/res/layout/fragment_menu.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_list_content.xml" value="0.28828125" />
         <entry key="app/src/main/res/layout/list_call.xml" value="0.29583333333333334" />
+        <entry key="app/src/main/res/layout/list_call_add.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/list_call_detail.xml" value="0.2877604166666667" />
         <entry key="app/src/main/res/layout/list_call_set.xml" value="0.2877604166666667" />
         <entry key="app/src/main/res/layout/list_cate.xml" value="0.375" />

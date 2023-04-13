@@ -25,7 +25,7 @@ class CallDialog(context: Context, val position: Int, val callDTO: CallDTO): Bas
 
     var idx = 0             // 추가 : storeidx, 수정 : callidx
 
-    fun setOnHolidaySetListener (dialogListener: DialogListener) {
+    fun setOnDialogListener(dialogListener: DialogListener) {
         this.dialogListener = dialogListener
     }
 
