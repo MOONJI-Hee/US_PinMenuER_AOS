@@ -10,8 +10,10 @@ import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.call.adapter.CallSetAdapter
+import com.wooriyo.pinmenuer.call.dialog.CallDialog
 import com.wooriyo.pinmenuer.databinding.ActivityCallListBinding
 import com.wooriyo.pinmenuer.listener.DialogListener
+import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.model.CallDTO
 import com.wooriyo.pinmenuer.model.CallSetListDTO
 import com.wooriyo.pinmenuer.util.ApiClient
@@ -60,6 +62,13 @@ class CallSetActivity : BaseActivity(), DialogListener {
     }
 
     fun setView() {
+        callSetAdapter.setOnItemClickListener(object : ItemClickListener{
+            override fun onCallClick(position: Int, data: CallDTO) {
+                val callDialog = CallDialog(mActivity, position, data)
+                callDialog.setOnDialogListener(this@CallSetActivity)
+                callDialog.show()
+            }
+        })
         // 리사이클러뷰 초기화
         binding.rvCallSet.layoutManager = GridLayoutManager(mActivity, 4)
         binding.rvCallSet.adapter = callSetAdapter
