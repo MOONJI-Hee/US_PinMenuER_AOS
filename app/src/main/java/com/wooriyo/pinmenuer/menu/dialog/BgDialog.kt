@@ -49,7 +49,7 @@ class BgDialog(context: Context): BaseDialog(context) {
 
             when(store.bgcolor) {
                 "d" -> checkBlack.isChecked = true
-                "s" -> checkSilver.isChecked = true
+                "g" -> checkSilver.isChecked = true
                 "l" -> checkLight.isChecked = true
             }
         }
@@ -59,8 +59,8 @@ class BgDialog(context: Context): BaseDialog(context) {
         var selColor = ""
 
         when {
-            binding.checkBlack.isChecked -> selColor = "b"
-            binding.checkSilver.isChecked -> selColor = "s"
+            binding.checkBlack.isChecked -> selColor = "d"
+            binding.checkSilver.isChecked -> selColor = "g"
             binding.checkLight.isChecked -> selColor = "l"
         }
 
