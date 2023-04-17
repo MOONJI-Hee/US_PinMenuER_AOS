@@ -1,11 +1,14 @@
 package com.wooriyo.pinmenuer.listener
 
 import com.wooriyo.pinmenuer.model.CallDTO
+import com.wooriyo.pinmenuer.model.CategoryDTO
 import com.wooriyo.pinmenuer.model.SpcHolidayDTO
 
 interface DialogListener {
     fun onTimeSet(start: String, end: String) {}
     fun onHolidaySet(position: Int, data: SpcHolidayDTO) {}
     fun onCallSet(position: Int, data: CallDTO) {}
+    fun onCateAdd(cateList: ArrayList<CategoryDTO>) {}
+    fun onCateSet(position: Int, data: CategoryDTO) {}
     fun onItemDelete(position: Int) {}
 }

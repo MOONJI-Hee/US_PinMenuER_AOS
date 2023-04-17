@@ -163,7 +163,7 @@
         android:id="@+id/subtext_udt"
         android:text="@string/category_info_udt"
         android:layout_marginTop="23dp"
-        android:layout_marginStart="129dp"
+        android:layout_marginStart="136.5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/confirm" />
 
@@ -175,6 +175,6 @@
         android:layout_marginStart="67dp"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirm" />
+        app:layout_constraintTop_toBottomOf="@+id/ll_seq" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

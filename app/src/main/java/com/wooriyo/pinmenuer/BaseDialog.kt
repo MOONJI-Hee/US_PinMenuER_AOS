@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
+import com.wooriyo.pinmenuer.listener.DialogListener
 import com.wooriyo.pinmenuer.util.AppHelper
 
 open class BaseDialog(context: Context) : Dialog(context) {

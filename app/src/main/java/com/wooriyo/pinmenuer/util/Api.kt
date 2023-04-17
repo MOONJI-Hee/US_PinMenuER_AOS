@@ -205,7 +205,7 @@ interface Api {
         @Query("name") name : String,
         @Query("memo") subName : String,
         @Query("buse") buse : String
-    ): Call<ResultDTO>
+    ): Call<CateListDTO>
 
     // 카테고리 수정
     @GET("m/udtcate.php")

@@ -297,6 +297,7 @@
     <string name="msg_no_worktm">영업시간을 입력해주시기 바랍니다.</string>
     <string name="msg_no_brktm">브레이크 타임을 입력해주시기 바랍니다.</string>
     <string name="msg_no_date">날짜를 확인해주세요.</string>
+    <string name="msg_no_category">카테고리는 하나 이상 등록해주시기 바랍니다.</string>
     <string name="msg_no_img">이미지를 등록해주세요.</string>
     <string name="msg_no_name">명칭을 입력해주세요.</string>
     <string name="msg_no_item_name">목록명을 입력해주세요.</string>

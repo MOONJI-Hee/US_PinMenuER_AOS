@@ -1,6 +1,7 @@
 package com.wooriyo.pinmenuer.menu.dialog
 
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,6 +10,8 @@ import com.wooriyo.pinmenuer.BaseDialog
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.DialogCategoryBinding
+import com.wooriyo.pinmenuer.listener.DialogListener
+import com.wooriyo.pinmenuer.model.CateListDTO
 import com.wooriyo.pinmenuer.model.CategoryDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.util.ApiClient
@@ -16,8 +19,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CategoryDialog(context: Context, val type: Int, val category: CategoryDTO?): BaseDialog(context) {
+class CategoryDialog(context: Context, val position: Int, val category: CategoryDTO?): BaseDialog(context) {
     lateinit var binding : DialogCategoryBinding
+    lateinit var dialogListener: DialogListener
 
     val TAG = "CategoryDialog"
     var storeidx = 0
@@ -34,7 +38,7 @@ class CategoryDialog(context: Context, val type: Int, val category: CategoryDTO?
 
         storeidx = MyApplication.storeidx
 
-        if (type == 1 && category != null) {  // 수정
+        if (position > -1 && category != null) {  // 수정
             binding.run {
                 margin.visibility = View.VISIBLE        // 수정모드일 때 margin 변화 > LayoutParams 대신 View visibility로 조정
                 llUse.visibility = View.VISIBLE
@@ -59,6 +63,10 @@ class CategoryDialog(context: Context, val type: Int, val category: CategoryDTO?
         }
     }
 
+    fun setOnDialogListener(dialogListener: DialogListener) {
+        this.dialogListener = dialogListener
+    }
+
     fun check(): Boolean {
         name = binding.etName.text.toString()
         subName = binding.etExp.text.toString()
@@ -75,8 +83,8 @@ class CategoryDialog(context: Context, val type: Int, val category: CategoryDTO?
         if(!check()) { return }
 
         ApiClient.service.insCate(useridx, storeidx, name, subName, buse)
-            .enqueue(object: Callback<ResultDTO>{
-                override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+            .enqueue(object: Callback<CateListDTO>{
+                override fun onResponse(call: Call<CateListDTO>, response: Response<CateListDTO>) {
                     Log.d(TAG, "카테고리 등록 url : $response")
                     if(!response.isSuccessful) {return}
                     val resultDTO = response.body()
@@ -84,13 +92,14 @@ class CategoryDialog(context: Context, val type: Int, val category: CategoryDTO?
                         when(resultDTO.status) {
                             1 -> {
                                 Toast.makeText(context, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                                dialogListener.onCateAdd(resultDTO.cateList)
                                 dismiss()
                             }
                             else -> Toast.makeText(context, resultDTO.msg, Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
-                override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                override fun onFailure(call: Call<CateListDTO>, t: Throwable) {
                     Log.d(TAG, "카테고리 등록 실패 > $t")
                 }
             })
@@ -109,6 +118,12 @@ class CategoryDialog(context: Context, val type: Int, val category: CategoryDTO?
                         when(resultDTO.status) {
                             1 -> {
                                 Toast.makeText(context, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                                if(category != null) {
+                                    category.name = name
+                                    category.subname = subName
+                                    category.buse = buse
+                                    dialogListener.onCateSet(position, category)
+                                }
                                 dismiss()
                             }
                             else -> Toast.makeText(context, resultDTO.msg, Toast.LENGTH_SHORT).show()
@@ -131,6 +146,7 @@ class CategoryDialog(context: Context, val type: Int, val category: CategoryDTO?
                     when(resultDTO.status) {
                         1 -> {
                             Toast.makeText(context, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                            dialogListener.onItemDelete(position)
                             dismiss()
                         }
                         else -> Toast.makeText(context, resultDTO.msg, Toast.LENGTH_SHORT).show()

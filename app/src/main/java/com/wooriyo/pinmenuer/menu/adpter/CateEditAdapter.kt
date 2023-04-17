@@ -61,7 +61,17 @@ class CateEditAdapter(val dataSet: ArrayList<CategoryDTO>): RecyclerView.Adapter
                     }
                 }
             }
-        }else holder.binding.llCate.setOnClickListener { itemClickListener.onItemClick(position) }
+        }else {
+            holder.binding.run {
+                if(position == selPos) {    // 수정 중에 취소를 누르면 이전에 선택되어있던 카테고리를 초기화 하기 위한 코드
+                    selPos = -1
+                    llCate.setBackgroundResource(R.drawable.bg_r6w)
+                    left.visibility = View.GONE
+                    right.visibility = View.GONE
+                }
+                llCate.setOnClickListener { itemClickListener.onItemClick(position) }
+            }
+        }
     }
 
     override fun getItemCount(): Int {
