@@ -86,34 +86,15 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:scrollbars="none"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/left_bottom_area">
-            <LinearLayout
-                android:orientation="vertical"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_menu"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_menu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/f9"
-                    tools:listitem="@layout/list_menu"/>
-                <LinearLayout
-                    android:id="@+id/btn_plus"
-                    android:layout_width="match_parent"
-                    android:layout_height="88dp"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/img_menu_plus"/>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:background="@color/f9" />
-            </LinearLayout>
+                android:layout_height="wrap_content"
+                android:background="@color/f9"
+                tools:listitem="@layout/list_menu"/>
         </ScrollView>
         <LinearLayout
             android:id="@+id/left_bottom_area"
