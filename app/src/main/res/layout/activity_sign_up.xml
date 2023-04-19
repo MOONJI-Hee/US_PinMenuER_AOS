@@ -88,6 +88,7 @@
         android:layout_marginTop="32dp"
         android:hint="@string/password_hint"
         android:inputType="text"
+        android:digits="0123456789qwertyuiopasdfghjklzxcvbnm"
         app:layout_constraintTop_toBottomOf="@+id/et_id"
         app:layout_constraintStart_toStartOf="@+id/et_id"
         app:layout_constraintEnd_toEndOf="@+id/et_id"/>

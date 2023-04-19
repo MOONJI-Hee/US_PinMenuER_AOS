@@ -36,28 +36,26 @@ class GoodsAdapter(val dataSet: ArrayList<GoodsDTO>): Adapter<RecyclerView.ViewH
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if(getItemViewType(position) == AppProperties.VIEW_TYPE_COM) {
-            holder as ViewHolder
             (holder as ViewHolder).bind(dataSet[position])
         } else {
-            holder as AddViewHolder
             (holder as AddViewHolder).bind()
         }
-
-        if(selPos == position)
-            holder.bin.menu.setBackgroundResource(R.drawable.gradient_main)
-        else
-            holder.binding.menu.setBackgroundColor(Color.WHITE)
-
-        holder.binding.menu.setOnClickListener{
-            val beforePos = selPos
-            selPos = position
-
-            if(selPos != beforePos) {
-                notifyItemChanged(selPos)
-                notifyItemChanged(beforePos)
-                itemClickListener.onItemClick(position)
-            }
-        }
+//
+//        if(selPos == position)
+//            holder.bin.menu.setBackgroundResource(R.drawable.gradient_main)
+//        else
+//            holder.binding.menu.setBackgroundColor(Color.WHITE)
+//
+//        holder.binding.menu.setOnClickListener{
+//            val beforePos = selPos
+//            selPos = position
+//
+//            if(selPos != beforePos) {
+//                notifyItemChanged(selPos)
+//                notifyItemChanged(beforePos)
+//                itemClickListener.onItemClick(position)
+//            }
+//        }
     }
 
     override fun getItemCount(): Int {

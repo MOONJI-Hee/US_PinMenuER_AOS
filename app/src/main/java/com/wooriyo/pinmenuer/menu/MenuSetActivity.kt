@@ -106,7 +106,6 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         binding.btnCateUdt.setOnClickListener(this)     // 카테고리 수정 버튼
 
         // 좌측 메뉴 리스트 관련
-        binding.btnPlus.setOnClickListener(this)
         binding.btnSeq.setOnClickListener(this)
         binding.btnDel.setOnClickListener(this)
 
@@ -133,11 +132,11 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                 intent.putExtra("cateList", cateList)
                 startActivity(intent)
             }
-            binding.btnPlus -> {
-                clearDetail()
-                goods = GoodsDTO()
-                v.setBackgroundResource(R.drawable.gradient_main)
-            }
+//            binding.btnPlus -> {
+//                clearDetail()
+//                goods = GoodsDTO()
+//                v.setBackgroundResource(R.drawable.gradient_main)
+//            }
 
 
             binding.setTablePass -> {setTablePass()}

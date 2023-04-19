@@ -49,7 +49,7 @@
         android:textSize="17sp"
         android:textColor="@color/black"
         android:textColorHint="@color/hint"
-        android:background="@drawable/bg_r6w75"
+        android:background="@drawable/bg_r6w90"
         app:layout_constraintTop_toTopOf="@+id/map"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
