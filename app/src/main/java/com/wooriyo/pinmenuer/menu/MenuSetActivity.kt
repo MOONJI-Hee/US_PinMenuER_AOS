@@ -2,10 +2,8 @@ package com.wooriyo.pinmenuer.menu
 
 import android.Manifest
 import android.app.Activity
-import android.content.ClipData
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Path
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -31,22 +29,20 @@ import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityMenuSetBinding
 import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.menu.adpter.CateAdapter
-import com.wooriyo.pinmenuer.menu.adpter.CateEditAdapter
 import com.wooriyo.pinmenuer.menu.adpter.GoodsAdapter
 import com.wooriyo.pinmenuer.menu.dialog.BgDialog
 import com.wooriyo.pinmenuer.menu.dialog.OptionDialog
 import com.wooriyo.pinmenuer.menu.dialog.ViewModeDialog
 import com.wooriyo.pinmenuer.model.*
-import com.wooriyo.pinmenuer.util.Api
 import com.wooriyo.pinmenuer.util.ApiClient
 import com.wooriyo.pinmenuer.util.AppHelper
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
+import retrofit2.Call
 
 class MenuSetActivity : BaseActivity(), View.OnClickListener {
     val TAG = "MenuSetActivity"
@@ -60,12 +56,18 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     val selGoodsList = ArrayList<GoodsDTO>()
     val goodsAdapter = GoodsAdapter(selGoodsList)
 
+    var mode : Int = 0      // 0: 저장, 1: 모드, 3: 순서변경, 4: 삭제
     var selCate = "001"
     var goods = GoodsDTO()
 
-    var bisStorage: Boolean = false
     val REQUEST_R_STORAGE = 1
+    var bisStorage: Boolean = false
     var selThum: ImageView ?= null
+
+    val mmtp = MediaType.parse("image/*") // 임시
+    var media1: MultipartBody.Part? = null
+    var media2: MultipartBody.Part? = null
+    var media3: MultipartBody.Part? = null
 
     //registerForActivityResult
     val chooseImg = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -132,13 +134,6 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                 intent.putExtra("cateList", cateList)
                 startActivity(intent)
             }
-//            binding.btnPlus -> {
-//                clearDetail()
-//                goods = GoodsDTO()
-//                v.setBackgroundResource(R.drawable.gradient_main)
-//            }
-
-
             binding.setTablePass -> {setTablePass()}
             binding.setBg -> { BgDialog(mActivity).show() }
             binding.setViewMode -> { ViewModeDialog(mActivity).show() }
@@ -166,6 +161,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                 setMenuList()
             }
         })
+        setAdapter()
 
         binding.run {
             rvCate.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false)
@@ -173,18 +169,20 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
             rvMenu.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false)
             rvMenu.adapter = goodsAdapter
-
         }
     }
 
-    fun setGoodsAdapter() {
+    fun setAdapter() {
         goodsAdapter.setOnItemClickListener(object : ItemClickListener{
             override fun onItemClick(position: Int) {
+                clearDetail()
                 goods = selGoodsList[position]
-                setDetail()
+                if(position < selGoodsList.size-1) {
+                    mode = 1
+                    setDetail()
+                }
             }
         })
-        setMenuList()
     }
 
     fun setMenuList() {
@@ -193,14 +191,15 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             if(it.category == selCate)
                 selGoodsList.add(it)
         }
+        selGoodsList.add(GoodsDTO())
         goodsAdapter.selPos = 0
         goodsAdapter.notifyDataSetChanged()
 
-        if(selGoodsList.isEmpty()) {
-            goods = GoodsDTO()
-            clearDetail()
-        }else {
-            goods = selGoodsList[0]
+        goods = selGoodsList[0]
+
+        clearDetail()
+        if(selGoodsList.size > 1) {
+            mode = 1
             setDetail()
         }
     }
@@ -218,7 +217,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                             allGoodsList.clear()
                             allGoodsList.addAll(result.glist)
                             if(allGoodsList.isNotEmpty())
-                                setGoodsAdapter()
+                                setMenuList()
                         }
                         else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                     }
@@ -284,7 +283,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun clearDetail() {
-        goods = GoodsDTO()
+        mode = 0
         binding.run {
             etName.text.clear()
             etContent.text.clear()
@@ -316,10 +315,9 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun save() {
-        val mmtp = MediaType.parse("image/*") // 임시
-        var media1: MultipartBody.Part? = null
-        var media2: MultipartBody.Part? = null
-        var media3: MultipartBody.Part? = null
+        media1 = null
+        media2 = null
+        media3 = null
 
         binding.run {
             val strName = etName.text.toString()
@@ -365,10 +363,16 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                 rbNew.isChecked -> 5
                 else -> 0
             }
-
             goods.boption = if(toggleOption.isChecked) y else n
         }
 
+        if(mode == 0)
+            insGoods()
+        else if(mode == 1)
+            udtGoods()
+    }
+
+    fun insGoods() {
         goods.let {
             ApiClient.service.insGoods(useridx, storeidx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption)
                 .enqueue(object : Callback<ResultDTO> {
@@ -380,7 +384,6 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                         if(result != null) {
                             when(result.status){
                                 1 -> {
-//                                    Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
                                     val gidx = result.idx
                                     uploadImage(gidx, media1, media2, media3)
                                 }
@@ -388,11 +391,39 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                             }
                         }
                     }
-
                     override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
                         Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                         Log.d(TAG, "메뉴 등록 실패 > $t")
                         Log.d(TAG, "메뉴 등록 실패 > ${call.request()}")
+                    }
+                })
+        }
+    }
+
+    fun udtGoods() {
+        goods.let {
+            ApiClient.service.udtGoods(useridx, storeidx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption)
+                .enqueue(object : Callback<ResultDTO> {
+                    override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                        Log.d(TAG, "메뉴 수정 url : $response")
+                        if(!response.isSuccessful) return
+
+                        val result = response.body()
+                        if(result != null) {
+                            when(result.status){
+                                1 -> {
+                                    val gidx = result.idx
+                                    uploadImage(gidx, media1, media2, media3)
+                                    // TODO 등록된 사진 중 삭제할 것 태우기
+                                }
+                                else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                    override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                        Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                        Log.d(TAG, "메뉴 수정 실패 > $t")
+                        Log.d(TAG, "메뉴 수정 실패 > ${call.request()}")
                     }
                 })
         }
@@ -419,6 +450,36 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                     Log.d(TAG, "이미지 등록 실패 > ${call.request()}")
                 }
             })
+    }
+
+    fun delGoods(gidx: Int, position: Int) {
+        ApiClient.service.delGoods(useridx, storeidx, gidx).enqueue(object : Callback<ResultDTO>{
+            override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                Log.d(TAG, "메뉴 수정 url : $response")
+                if(!response.isSuccessful) return
+
+                val result = response.body() ?: return
+                when(result.status) {
+                    1 -> {
+                        Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                        allGoodsList.remove(selGoodsList[position])
+                        selGoodsList.removeAt(position)
+                        goodsAdapter.notifyItemRemoved(position)
+                    }
+                    else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "메뉴 삭제 실패 > $t")
+                Log.d(TAG, "메뉴 삭제 실패 > ${call.request()}")
+            }
+        })
+    }
+
+    fun udtSequence() {
+
     }
 
     fun setTablePass() {
@@ -542,5 +603,4 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             }
         }
     }
-
 }

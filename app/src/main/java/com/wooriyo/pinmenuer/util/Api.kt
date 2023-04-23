@@ -271,22 +271,19 @@ interface Api {
     ): Call<ResultDTO>
 
     // 메뉴 수정
-    @Multipart
-    @POST("m/udt_goods.php")
+    @GET("m/udt_goods.php")
     fun udtGoods(
-        @Part("useridx") useridx: Int,
-        @Part("gidx") gidx: Int,
-        @Part("code") code: String,
-        @Part("name") name : String,
-        @Part("content") content : String,
-        @Part("cooking_time") cooking_time : Int,
-        @Part("price") price : Int,
-        @Part img1: MultipartBody.Part?,
-        @Part img2: MultipartBody.Part?,
-        @Part img3: MultipartBody.Part?,
-        @Part("adDisplay") adDisplay : String,
-        @Part("icon") icon : Int,
-        @Part("boption") boption : String
+        @Query("useridx") useridx: Int,
+        @Query("gidx") gidx: Int,
+        @Query("code") code: String,
+        @Query("name") name : String,
+        @Query("content") content : String,
+        @Query("cooking_time_min") cooking_time_min : String,
+        @Query("cooking_time") cooking_time_max : String,
+        @Query("price") price : Int,
+        @Query("adDisplay") adDisplay : String,
+        @Query("icon") icon : Int,
+        @Query("boption") boption : String
     ): Call<ResultDTO>
 
     // 메뉴 삭제
