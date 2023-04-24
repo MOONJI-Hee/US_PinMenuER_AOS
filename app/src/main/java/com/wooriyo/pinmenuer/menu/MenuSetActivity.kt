@@ -336,7 +336,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                 strPrice = "0"
 
             goods.name = strName                            // 상품명
-            goods.content = etName.text.toString()          // 상품설명
+            goods.content = etContent.text.toString()          // 상품설명
             goods.cooking_time_max = strCookTime            // 조리시간
             goods.price = strPrice.toInt()                  // 가격
 
@@ -402,7 +402,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
     fun udtGoods() {
         goods.let {
-            ApiClient.service.udtGoods(useridx, storeidx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption)
+            ApiClient.service.udtGoods(useridx, it.idx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption)
                 .enqueue(object : Callback<ResultDTO> {
                     override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                         Log.d(TAG, "메뉴 수정 url : $response")
@@ -412,8 +412,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                         if(result != null) {
                             when(result.status){
                                 1 -> {
-                                    val gidx = result.idx
-                                    uploadImage(gidx, media1, media2, media3)
+                                    uploadImage(it.idx, media1, media2, media3)
                                     // TODO 등록된 사진 중 삭제할 것 태우기
                                 }
                                 else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()

@@ -42,7 +42,7 @@ class GoodsAdapter(val dataSet: ArrayList<GoodsDTO>): Adapter<RecyclerView.ViewH
             holder.binding.ivPlus.setImageResource(R.drawable.ic_plus_g)
         }
 
-        holder.binding.menu.setOnClickListener {
+        holder.binding.layout.setOnClickListener {
             val beforePos = selPos
             selPos = position
 
