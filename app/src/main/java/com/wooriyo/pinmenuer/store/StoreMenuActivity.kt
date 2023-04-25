@@ -11,6 +11,7 @@ import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.MyApplication.Companion.store
 import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
+import com.wooriyo.pinmenuer.MyApplication.Companion.allCateList
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.call.CallListActivity
 import com.wooriyo.pinmenuer.databinding.ActivityStoreMenuBinding
@@ -21,6 +22,8 @@ import com.wooriyo.pinmenuer.model.CateListDTO
 import com.wooriyo.pinmenuer.model.CategoryDTO
 import com.wooriyo.pinmenuer.model.StoreDTO
 import com.wooriyo.pinmenuer.order.OrderListActivity
+import com.wooriyo.pinmenuer.setting.MenuUiActivity
+import com.wooriyo.pinmenuer.setting.TablePassActivity
 import com.wooriyo.pinmenuer.util.ApiClient
 import com.wooriyo.pinmenuer.util.AppHelper
 import retrofit2.Call
@@ -31,8 +34,6 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
 
     val TAG = "StoreMenuActivity"
     val mActivity = this@StoreMenuActivity
-
-    var cateList = ArrayList<CategoryDTO>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,8 +50,8 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
             order.setOnClickListener(mActivity)
             call.setOnClickListener(mActivity)
             menu.setOnClickListener(mActivity)
-            event.setOnClickListener(mActivity)
-            findMenu.setOnClickListener(mActivity)
+            tablePass.setOnClickListener(mActivity)
+            menuUi.setOnClickListener(mActivity)
         }
     }
 
@@ -65,18 +66,16 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
             binding.order -> startActivity(Intent(mActivity, OrderListActivity::class.java))
             binding.call -> startActivity(Intent(mActivity, CallListActivity::class.java))
             binding.menu -> {
-                if(cateList.isEmpty()) {
+                if(allCateList.isEmpty()) {
                     val intent = Intent(mActivity, CategorySetActivity::class.java)
-                    intent.putExtra("cateList", cateList)
                     startActivity(intent)
                 }else {
                     val intent = Intent(mActivity, MenuSetActivity::class.java)
-                    intent.putExtra("cateList", cateList)
                     startActivity(intent)
                 }
             }
-            binding.event -> Toast.makeText(mActivity, R.string.msg_prepare, Toast.LENGTH_SHORT).show()
-            binding.findMenu -> Toast.makeText(mActivity, R.string.msg_prepare, Toast.LENGTH_SHORT).show()
+            binding.tablePass -> startActivity(Intent(mActivity, TablePassActivity::class.java))
+            binding.menuUi -> startActivity(Intent(mActivity, MenuUiActivity::class.java))
         }
     }
 
@@ -89,7 +88,7 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                     val result = response.body()
                     if(result != null) {
                         when(result.status) {
-                            1 -> cateList.addAll(result.cateList)
+                            1 -> allCateList.addAll(result.cateList)
                             else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                         }
                     }

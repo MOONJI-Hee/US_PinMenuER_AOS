@@ -247,12 +247,12 @@ interface Api {
     @GET("m/ins_goods.php")
     fun insGoods(
         @Query("useridx") useridx: Int,
-        @Query("gidx") storeidx: Int,
+        @Query("storeidx") storeidx: Int,
         @Query("code") code: String,
         @Query("name") name : String,
         @Query("content") content : String,
         @Query("cooking_time_min") cooking_time_min : String,
-        @Query("cooking_time") cooking_time_max : String,
+        @Query("cooking_time_max") cooking_time_max : String,
         @Query("price") price : Int,
         @Query("adDisplay") adDisplay : String,
         @Query("icon") icon : Int,
@@ -279,7 +279,7 @@ interface Api {
         @Query("name") name : String,
         @Query("content") content : String,
         @Query("cooking_time_min") cooking_time_min : String,
-        @Query("cooking_time") cooking_time_max : String,
+        @Query("cooking_time_max") cooking_time_max : String,
         @Query("price") price : Int,
         @Query("adDisplay") adDisplay : String,
         @Query("icon") icon : Int,

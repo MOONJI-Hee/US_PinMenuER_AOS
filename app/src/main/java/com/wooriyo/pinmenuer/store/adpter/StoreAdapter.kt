@@ -64,6 +64,7 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
                 storePayDt.text = data.paydt.split(" ")[0].replace("-", ".")
 
                 storeMenu.setOnClickListener {
+                    MyApplication.allCateList.clear()
                     MyApplication.storeidx = data.idx
                     MyApplication.store = data
                     context.startActivity(Intent(context, StoreMenuActivity::class.java))

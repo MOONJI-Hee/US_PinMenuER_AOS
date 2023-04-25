@@ -37,7 +37,7 @@ class ViewModeDialog(context: Context): BaseDialog(context) {   // 메뉴판 뷰
                 if(isChecked) checkBasic.isChecked = false
             }
 
-            save.setOnClickListener { save() }
+//            save.setOnClickListener { save() }
         }
     }
 

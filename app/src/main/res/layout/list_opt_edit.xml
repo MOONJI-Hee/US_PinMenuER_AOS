@@ -8,6 +8,7 @@
     android:gravity="center_vertical">
     <TextView
         style="@style/text18"
+        android:id="@+id/num"
         android:text="@string/opt_num"
         android:layout_marginEnd="26dp" />
     <LinearLayout
@@ -59,9 +60,9 @@
             android:textColor="#FF0000"
             android:text="@string/delete" />
     </LinearLayout>
-    <ImageView
-        style="@style/btn_plus"
-        android:id="@+id/btn_plus"
-        android:layout_width="428dp"
-        android:visibility="gone"/>
+<!--    <ImageView-->
+<!--        style="@style/btn_plus"-->
+<!--        android:id="@+id/btn_plus"-->
+<!--        android:layout_width="428dp"-->
+<!--        android:visibility="gone"/>-->
 </LinearLayout>

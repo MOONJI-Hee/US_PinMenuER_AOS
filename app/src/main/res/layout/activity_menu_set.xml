@@ -128,54 +128,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView
-            style="@style/text20"
-            android:text="@string/table_pass"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/setTablePass"
-            app:layout_constraintBottom_toBottomOf="@+id/setTablePass"/>
-        <TextView
-            style="@style/btn_small"
-            android:id="@+id/setTablePass"
-            android:layout_width="65dp"
-            android:text="@string/btn_save2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-        <EditText
-            style="@style/edittext"
-            android:id="@+id/etTablePass"
-            android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
-            android:hint="@string/table_pass_hint"
-            android:inputType="text"
-            android:maxLines="1"
-            android:digits="0123456789qwertyuiopasdfghjklzxcvbnm"
-            android:imeOptions="actionDone"
-            app:layout_constraintTop_toBottomOf="@+id/setTablePass"/>
-        <TextView
-            style="@style/subtext"
-            android:layout_marginTop="20dp"
-            android:text="@string/table_pass_info"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etTablePass"/>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent">
-            <TextView
-                style="@style/btn"
-                android:id="@+id/setBg"
-                android:layout_width="match_parent"
-                android:text="@string/bg"/>
-            <TextView
-                style="@style/btn"
-                android:id="@+id/setViewMode"
-                android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                android:text="@string/viewmode"/>
-        </LinearLayout>
         
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -237,8 +189,8 @@
                         app:layout_constraintStart_toStartOf="parent"/>
                     <EditText
                         style="@style/edittext_menu18b"
-                        android:id="@+id/et_cookingTime"
-                        android:layout_width="100dp"
+                        android:id="@+id/et_cookingTime_min"
+                        android:layout_width="91dp"
                         android:layout_marginStart="16dp"
                         android:paddingEnd="37dp"
                         android:inputType="number"
@@ -252,9 +204,36 @@
                         style="@style/text18"
                         android:text="@string/min"
                         android:layout_marginEnd="15dp"
-                        app:layout_constraintEnd_toEndOf="@+id/et_cookingTime"
-                        app:layout_constraintTop_toTopOf="@+id/et_cookingTime"
-                        app:layout_constraintBottom_toBottomOf="@+id/et_cookingTime"/>
+                        app:layout_constraintEnd_toEndOf="@+id/et_cookingTime_min"
+                        app:layout_constraintTop_toTopOf="@+id/et_cookingTime_min"
+                        app:layout_constraintBottom_toBottomOf="@+id/et_cookingTime_min"/>
+                    <TextView
+                        style="@style/text18"
+                        android:text="@string/tilde"
+                        app:layout_constraintTop_toTopOf="@+id/et_cookingTime_max"
+                        app:layout_constraintBottom_toBottomOf="@+id/et_cookingTime_min"
+                        app:layout_constraintStart_toEndOf="@+id/et_cookingTime_min"
+                        app:layout_constraintEnd_toStartOf="@+id/et_cookingTime_max"/>
+                    <EditText
+                        style="@style/edittext_menu18b"
+                        android:id="@+id/et_cookingTime_max"
+                        android:layout_width="91dp"
+                        android:layout_marginStart="30dp"
+                        android:paddingEnd="37dp"
+                        android:inputType="number"
+                        android:hint="@string/zero"
+                        android:textSize="20sp"
+                        android:textAlignment="viewEnd"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/et_cookingTime_min"
+                        tools:ignore="RtlSymmetry" />
+                    <TextView
+                        style="@style/text18"
+                        android:text="@string/min"
+                        android:layout_marginEnd="15dp"
+                        app:layout_constraintEnd_toEndOf="@+id/et_cookingTime_max"
+                        app:layout_constraintTop_toTopOf="@+id/et_cookingTime_max"
+                        app:layout_constraintBottom_toBottomOf="@+id/et_cookingTime_max"/>
                     <EditText
                         style="@style/edittext_menu18b"
                         android:id="@+id/et_price"

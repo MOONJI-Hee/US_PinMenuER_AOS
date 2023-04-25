@@ -3,6 +3,7 @@ package com.wooriyo.pinmenuer.menu.dialog
 import android.content.Context
 import android.hardware.lights.LightsManager
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wooriyo.pinmenuer.BaseDialog
 import com.wooriyo.pinmenuer.R
@@ -17,6 +18,12 @@ class OptionDialog(context: Context, val type: Int, val option : OptionDTO): Bas
         super.onCreate(savedInstanceState)
         binding = DialogOptionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val window = window ?: return
+        val params = window.attributes
+        params.width = WindowManager.LayoutParams.WRAP_CONTENT
+        params.height = WindowManager.LayoutParams.MATCH_PARENT
+        window.attributes = params
 
         when(type) {    // 0: 선택 옵션, 1: 필수 옵션
             1 -> {

@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.wooriyo.pinmenuer.BaseActivity
+import com.wooriyo.pinmenuer.MyApplication.Companion.allCateList
 import com.wooriyo.pinmenuer.MyApplication.Companion.store
 import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
@@ -49,7 +50,6 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     val mActivity = this@MenuSetActivity
 
     lateinit var binding: ActivityMenuSetBinding
-    lateinit var cateList: ArrayList<CategoryDTO>
     lateinit var cateAdapter : CateAdapter
 
     val allGoodsList = ArrayList<GoodsDTO>()
@@ -83,9 +83,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         binding = ActivityMenuSetBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        cateList = (intent.getSerializableExtra("cateList")?: ArrayList<CategoryDTO>()) as ArrayList<CategoryDTO>
-        if(cateList.isNotEmpty())
-            setCateAdapter()
+        setCateAdapter()
 
         var selBg = ""
         when(store.bgcolor) {
@@ -93,14 +91,12 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             "s" -> selBg = getString(R.string.bg_silver)
             "l" -> selBg = getString(R.string.bg_light)
         }
-        binding.setBg.text = getString(R.string.bg).format(selBg)
 
         var selMode = ""
         when(store.viewmode) {
             "b" -> selMode = "기본"
             "p" -> selMode = "사진"
         }
-        binding.setViewMode.text = getString(R.string.viewmode).format(selMode)
 
         binding.etPrice.addTextChangedListener(textWatcher)
 
@@ -110,10 +106,6 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         // 좌측 메뉴 리스트 관련
         binding.btnSeq.setOnClickListener(this)
         binding.btnDel.setOnClickListener(this)
-
-        binding.setTablePass.setOnClickListener(this)   // 테이블 비밀번호 저장
-        binding.setBg.setOnClickListener(this)          // 배경 선택
-        binding.setViewMode.setOnClickListener(this)    // 뷰어 모드 선택
 
         // 중앙 메뉴 상세 관련
         binding.menuSave.setOnClickListener{save()}
@@ -126,17 +118,21 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         getMenu()
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(allCateList.isNotEmpty()) {
+            selCate = allCateList[0].code
+            cateAdapter.notifyDataSetChanged()
+        }
+    }
+
     override fun onClick(v: View?) {
         when(v) {
             binding.back -> finish()
             binding.btnCateUdt -> {     // 카테고리 수정 버튼 > 카테고리 설정 페이지로 이동
                 val intent = Intent(mActivity, CategorySetActivity::class.java)
-                intent.putExtra("cateList", cateList)
                 startActivity(intent)
             }
-            binding.setTablePass -> {setTablePass()}
-            binding.setBg -> { BgDialog(mActivity).show() }
-            binding.setViewMode -> { ViewModeDialog(mActivity).show() }
 
             // 중앙 메뉴 상세 관련
             binding.optRequire -> { OptionDialog(mActivity, 1, OptionDTO(1)).show() }
@@ -152,12 +148,10 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun setCateAdapter() {
-        selCate = cateList[0].code
-
-        cateAdapter = CateAdapter(cateList, 1)
+        cateAdapter = CateAdapter(allCateList, 1)
         cateAdapter.setOnItemClickListener(object: ItemClickListener {
             override fun onItemClick(position: Int) {
-                selCate = cateList[position].code
+                selCate = allCateList[position].code
                 setMenuList()
             }
         })
@@ -235,7 +229,8 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         binding.run {
             etName.setText(goods.name)
             etContent.setText(goods.content)
-            etCookingTime.setText(goods.cooking_time_max)
+            etCookingTimeMin.setText(goods.cooking_time_min)
+            etCookingTimeMax.setText(goods.cooking_time_max)
             etPrice.setText(goods.price.toString())
 
             val img1 = goods.img1
@@ -287,7 +282,8 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         binding.run {
             etName.text.clear()
             etContent.text.clear()
-            etCookingTime.text.clear()
+            etCookingTimeMin.text.clear()
+            etCookingTimeMax.text.clear()
             etPrice.text.clear()
 
             Glide.with(mActivity)
@@ -321,7 +317,8 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
         binding.run {
             val strName = etName.text.toString()
-            var strCookTime = etCookingTime.text.toString()
+            var strCookTimeMin = etCookingTimeMin.text.toString()
+            var strCookTimeMax = etCookingTimeMax.text.toString()
             var strPrice = etPrice.text.toString().replace(",", "")
 
             if(strName.isEmpty()){
@@ -329,15 +326,19 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                 return
             }
 
-            if(strCookTime.isEmpty())
-                strCookTime = "0"
+            if(strCookTimeMin.isEmpty())
+                strCookTimeMin = "0"
+
+            if(strCookTimeMax.isEmpty())
+                strCookTimeMax = "0"
 
             if(strPrice.isEmpty())
                 strPrice = "0"
 
             goods.name = strName                            // 상품명
-            goods.content = etContent.text.toString()          // 상품설명
-            goods.cooking_time_max = strCookTime            // 조리시간
+            goods.content = etContent.text.toString()       // 상품설명
+            goods.cooking_time_min = strCookTimeMin         // 조리시간 최소
+            goods.cooking_time_max = strCookTimeMax         // 조리시간 최대
             goods.price = strPrice.toInt()                  // 가격
 
             if(goods.file1 != null) {
@@ -385,6 +386,9 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                             when(result.status){
                                 1 -> {
                                     val gidx = result.idx
+                                    it.idx = gidx
+                                    selGoodsList.add(GoodsDTO())
+                                    goodsAdapter.notifyItemRangeChanged(selGoodsList.size-2, 2)
                                     uploadImage(gidx, media1, media2, media3)
                                 }
                                 else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
@@ -412,6 +416,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                         if(result != null) {
                             when(result.status){
                                 1 -> {
+                                    goodsAdapter.notifyItemChanged(goodsAdapter.selPos)
                                     uploadImage(it.idx, media1, media2, media3)
                                     // TODO 등록된 사진 중 삭제할 것 태우기
                                 }
@@ -438,7 +443,12 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                     val result = response.body()
                     if(result != null) {
                         when(result.status){
-                            1 -> { Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show() }
+                            1 -> {
+                                Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                                goods.img1 = result.img1
+                                goods.img2 = result.img2
+                                goods.img3 = result.img3
+                            }
                             else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                         }
                     }
@@ -479,34 +489,6 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
     fun udtSequence() {
 
-    }
-
-    fun setTablePass() {
-        val pass = binding.etTablePass.text.toString()
-
-        if(pass.isEmpty()) {
-            Toast.makeText(mActivity, R.string.msg_no_pw, Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        ApiClient.service.udtTablePwd(useridx, storeidx, pass).enqueue(object : Callback<ResultDTO> {
-            override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
-                Log.d(TAG, "테이블 비밀번호 설정 url : $response")
-                if(!response.isSuccessful) return
-                val result = response.body()
-                if(result != null) {
-                    when(result.status){
-                        1 -> Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
-                        else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
-                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
-                Log.d(TAG, "테이블 비밀번호 설정 오류 > $t")
-            }
-        })
     }
 
     val textWatcher = object : TextWatcher {

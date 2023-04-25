@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wooriyo.pinmenuer.BaseActivity
+import com.wooriyo.pinmenuer.MyApplication.Companion.allCateList
 import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityCategorySetBinding
@@ -29,7 +30,6 @@ class CategorySetActivity : BaseActivity(), DialogListener {
 
     val TAG = "CategorySetActivity"
 
-    lateinit var allCateList : ArrayList<CategoryDTO>
     lateinit var cateAdapter : CateAdapter
     lateinit var cateEditAdapter : CateEditAdapter
 
@@ -42,7 +42,6 @@ class CategorySetActivity : BaseActivity(), DialogListener {
         binding = ActivityCategorySetBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        allCateList = (intent.getSerializableExtra("cateList") ?: ArrayList<CategoryDTO>()) as ArrayList<CategoryDTO>
         if(allCateList.isEmpty()) { showCateDialog(-1, null) }
 
         setView()
@@ -55,7 +54,6 @@ class CategorySetActivity : BaseActivity(), DialogListener {
                     return@setOnClickListener
                 }
                 intent = Intent(this@CategorySetActivity, MenuSetActivity::class.java)
-                intent.putExtra("cateList", allCateList)
                 startActivity(intent)
             }
             arrowLeft.setOnClickListener {  }
@@ -76,6 +74,7 @@ class CategorySetActivity : BaseActivity(), DialogListener {
         allCateList.clear()
         allCateList.addAll(cateList)
         cateAdapter.notifyItemInserted(allCateList.size-1)
+        cateAdapter.notifyItemChanged(allCateList.size-2)  // 추가한 카테고리 바로 앞 카테고리의 오른쪽 실선을 숨기기 위해서...
         cateEditAdapter.notifyItemInserted(allCateList.size-1)
     }
 

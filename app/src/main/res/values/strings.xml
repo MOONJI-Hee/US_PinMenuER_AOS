@@ -9,6 +9,7 @@
     <string name="logout">로그아웃</string>
 
     <string name="password">비밀번호</string>
+    <string name="set_password">비밀번호 설정</string>
 
     <string name="signup">회원가입</string>
     <string name="find_pwd">비밀번호 찾기</string>
@@ -24,7 +25,6 @@
     <string name="order">주문하기</string>
     <string name="delete_order">주문삭제</string>
 
-    <string name="set_tableno">테이블 번호 설정</string>
     <string name="tableno">테이블 번호</string>
     <string name="tablepass">테이블 비밀번호</string>
 
@@ -54,7 +54,7 @@
     <string name="btn_complete">완&#160;&#160;료</string>
     <string name="btn_drop">탈&#160;&#160;퇴</string>
 
-    
+
     <string name="udt_info">정보변경</string>
 
     <string name="date">날짜</string>
@@ -166,7 +166,7 @@
 
     <!--  메뉴 선택 (메인)  -->
     <string name="order_mgmt">주문 정보</string>
-    <string name="call_mgmt">직원 호출</string>보
+    <string name="call_mgmt">직원 호출</string>
     <string name="menu_mgmt">메뉴판 설정</string>
     <string name="event_mgmt">이벤트 관리</string>
     <string name="find_menu">메뉴판 찾기</string>
@@ -178,7 +178,7 @@
 
     <!--  카테고리 설정  -->
     <string name="category_info_seq"><b>카테고리 순서 변경</b>은\n변경하고자하는 카테고리를 누른 후 좌우 버튼을 눌러 순서를 변경합니다.\n변경 후에는 [ 저장 ] 버튼을 눌러주셔야 변경된 내용이 적용됩니다.</string>
-    <string name="category_info_udt"><b>카테고리 [ 수정 ] [ 삭제 ] [ 숨기기 ]를 할 경우</b> 에는\n변경하고자하는 카테고리를 누른 후 변경 팝업창이 나오면 텍스트 수정, 삭제, 카테고리 숨김을 진행하실 수 있습니다.</string>
+    <string name="category_info_udt"><b>카테고리 [ 수정 ] [ 삭제 ] [ 숨기기 ]를 할 경우</b>에는\n변경하고자하는 카테고리를 누른 후 변경 팝업창이 나오면 텍스트 수정, 삭제, 카테고리 숨김을 진행하실 수 있습니다.</string>
     <string name="category_name">카테고리 명칭</string>
     <string name="category_name_hint">명칭을 입력해주세요.</string>
     <string name="category_exp">카테고리 설명</string>
@@ -225,21 +225,25 @@
     <string name="opt_chc_info1"><b>선택 옵션</b>은 사용자가 옵션을 다중 선택할 수 있습니다.</string>
     <string name="opt_chc_info2"><b>한가지 선택</b>만 가능한 옵션이 필요하면 팝업을 닫고, [ + 필수 옵션 ] 버튼으로 옵션을 추가해주세요.</string>
 
-    <!--  메뉴판 설정  -->
-    <string name="table_pass">테이블 비밀번호 설정</string>
+    <!--  테이블 비밀번호 설정  -->
+    <string name="table_pass">테이블 번호\n비밀번호 설정</string>
+    <string name="table_pass_sub">테이블 비밀번호 설정</string>
     <string name="table_pass_hint">예) 1234</string>
-    <string name="table_pass_info">비밀번호를 설정하지 않으시면\n누구나 테이블 번호를 변경할 수 있습니다.</string>
-    <string name="bg">배경 : %s</string>
-    <string name="sel_bg">배경 선택</string>
+    <string name="table_pass_info">고객이 사용하는 메뉴판 앱 우측 상단에 있는 테이블 번호는 터치를 통해\n수정할 수 있습니다.\n직원이 메뉴판을 손님에게 전달하러 이동하는 중에 빠르게 테이블 번호를\n바꿀 수 있도록 하기 위함입니다.\n하지만, 이는 고객도 쉽게 테이블 번호를 변경할 수 있기 때문에 비밀번호를\n알고 있는 직원만 테이블번호를 변경할 수 있도록 비밀번호를 설정할 수 있습니다.\n테이블 비밀번호를 설정하면 모든 고객용 메뉴판에 일괄 적용이됩니다.\n비밀번호를 설정하지 않을 경우 누구나 테이블 번호를 바꿀 수 있습니다.</string>
+    <string name="table_pass_info2">비밀번호 설정을 하지 않으시려면, 비밀번호를 삭제하시고 저장하시면 됩니다.</string>
+
+    <!--  메뉴판 디자인 설정  -->
+    <string name="menu_ui">메뉴판\n디자인 설정</string>
+    <string name="menu_ui_sub">메뉴판 디자인 설정</string>
+    <string name="menu_ui_info">선택된 매장에서 사용되는 고객용 태블릿PC 메뉴판에 선택한 디자인이 일괄 적용됩니다.\n단, 스마트폰 메뉴판에는 적용이 되지 않습니다.</string>
+    <string name="sel_bg">배경선택</string>
     <string name="bg_dark">어두운 배경</string>
     <string name="bg_silver">은색 배경</string>
     <string name="bg_light">밝은 배경</string>
-    <string name="set_bg">배경 적용</string>
-    <string name="viewmode">뷰어 모드 : %s</string>
-    <string name="sel_viewmode">뷰어 모드 선택</string>
+    <string name="sel_viewmode">뷰어모드선택</string>
     <string name="viewmode_basic">기본 모드</string>
     <string name="viewmode_pic">사진 모드</string>
-    <string name="set_viewmode">뷰어 모드 적용</string>
+    <string name="save_ui">디자인 적용</string>
 
     <!-- 주문 정보 -->
     <string name="order_btn_merge">주문 합치기</string>
@@ -276,6 +280,7 @@
     <string name="title_cate_udt">카테고리 수정</string>
     <string name="title_map">지도 검색</string>
     <string name="title_order">주문정보</string>
+    <string name="title_table_pass">테이블 번호 수정 비밀번호 설정</string>
 
     <!--  권한 다이얼로그  -->
     <string name="pms_storage_title">외부 저장소 권한 요청</string>

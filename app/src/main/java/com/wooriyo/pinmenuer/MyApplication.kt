@@ -9,6 +9,7 @@ import android.view.Window
 import android.view.WindowManager
 import com.wooriyo.pinmenuer.db.AppDatabase
 import com.wooriyo.pinmenuer.db.entity.Store
+import com.wooriyo.pinmenuer.model.CategoryDTO
 import com.wooriyo.pinmenuer.model.SharedDTO
 import com.wooriyo.pinmenuer.model.StoreDTO
 
@@ -28,6 +29,7 @@ class MyApplication: Application() {
         var useridx = 0
         var storeidx = 0
         lateinit var store: StoreDTO
+        lateinit var allCateList : ArrayList<CategoryDTO>
 
         fun setStoreDTO() {
             store = StoreDTO(useridx)
@@ -68,6 +70,7 @@ class MyApplication: Application() {
         }
 
         setStoreDTO()
+        allCateList = ArrayList<CategoryDTO>()
 
         super.onCreate()
     }

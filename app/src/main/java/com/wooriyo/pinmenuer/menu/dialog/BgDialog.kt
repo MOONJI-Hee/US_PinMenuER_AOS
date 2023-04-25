@@ -45,7 +45,7 @@ class BgDialog(context: Context): BaseDialog(context) {
                 }
             }
 
-            save.setOnClickListener { save() }
+//            save.setOnClickListener { save() }
 
             when(store.bgcolor) {
                 "d" -> checkBlack.isChecked = true
