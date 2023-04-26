@@ -1,11 +1,14 @@
 package com.wooriyo.pinmenuer.menu.adpter
 
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.call.adapter.CallSetAdapter
@@ -40,6 +43,14 @@ class OptEditAdapter(val opt: OptionDTO): RecyclerView.Adapter<RecyclerView.View
             }
         } else {
             (holder as ViewHolder).bind(opt)
+            holder.binding.tvDel.setOnClickListener {
+                opt.optval.removeAt(position)
+                opt.optpay.removeAt(position)
+                opt.optmark.removeAt(position)
+                notifyItemRemoved(position)     // 아이템 삭제
+                notifyItemRangeChanged(position, opt.optval.size - position)    // 삭제한 아이템 뒤의 모든 아이템 수정 (포지션 재배치 및 옵션 번호 다시 출력)
+                notifyItemChanged(opt.optval.size)  // 플러스 버튼
+            }
         }
     }
 
@@ -55,23 +66,27 @@ class OptEditAdapter(val opt: OptionDTO): RecyclerView.Adapter<RecyclerView.View
         fun bind(opt: OptionDTO) {
             binding.run {
                 num.text = "옵션${absoluteAdapterPosition + 1}"
-                etVal.setText(opt.optval[adapterPosition])
+                etVal.setText(opt.optval[absoluteAdapterPosition])
+                etVal.addTextChangedListener {
+                    opt.optval[absoluteAdapterPosition] = it.toString()
+                }
 
-                val pay = opt.optpay[adapterPosition]
+                val pay = opt.optpay[absoluteAdapterPosition]
                 if(pay.isNotEmpty() || pay != "0") {
                     etPrice.setText(pay)
+                }
+                etPrice.addTextChangedListener {
+                    opt.optpay[absoluteAdapterPosition] = it.toString()
                 }
 
                 spMark.adapter = arrayAdapter
                 spMark.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                        opt.optmark[adapterPosition] = p0?.selectedItem.toString()
+                        opt.optmark[absoluteAdapterPosition] = p0?.selectedItem.toString()
                     }
-                    override fun onNothingSelected(p0: AdapterView<*>?) {
-//                        p0?.setSelection(0)
-                    }
+                    override fun onNothingSelected(p0: AdapterView<*>?) {}
                 }
-                if (opt.optmark[adapterPosition] == "+")
+                if (opt.optmark[absoluteAdapterPosition] == "-")
                     spMark.setSelection(1)
                 else
                     spMark.setSelection(0)
