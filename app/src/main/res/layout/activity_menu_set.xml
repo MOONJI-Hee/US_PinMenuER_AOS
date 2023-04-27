@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/f9"
     tools:context=".menu.MenuSetActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -93,7 +94,6 @@
                 android:id="@+id/rv_menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/f9"
                 tools:listitem="@layout/list_menu"/>
         </ScrollView>
         <LinearLayout
@@ -123,19 +123,31 @@
         android:id="@+id/right_area"
         android:layout_width="320dp"
         android:layout_height="0dp"
-        android:padding="20dp"
         app:layout_constraintTop_toBottomOf="@+id/header"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
-
-        
+        <TextView
+            style="@style/text18b"
+            android:id="@+id/opt_title"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:text="@string/opt_list"
+            android:padding="20dp"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_option"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="4dp"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@+id/opt_title"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/f9"
         app:layout_constraintStart_toEndOf="@+id/left_area"
         app:layout_constraintEnd_toStartOf="@+id/right_area"
         app:layout_constraintTop_toBottomOf="@+id/header"
@@ -161,318 +173,296 @@
                 android:layout_marginStart="20dp"
                 android:text="@string/btn_save2"/>
         </LinearLayout>
-        <ScrollView
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp">
+            <EditText
+                style="@style/edittext_menu18"
+                android:id="@+id/etContent"
+                android:layout_width="match_parent"
+                android:layout_height="117dp"
+                android:layout_marginBottom="22dp"
+                android:hint="@string/menu_exp_hint" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    style="@style/text20"
+                    android:id="@+id/tv_cookimgTime"
+                    android:text="@string/cookingTime"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+                <EditText
+                    style="@style/edittext_menu18b"
+                    android:id="@+id/et_cookingTime_min"
+                    android:layout_width="91dp"
+                    android:layout_marginStart="16dp"
+                    android:paddingEnd="37dp"
+                    android:inputType="number"
+                    android:hint="@string/zero"
+                    android:textSize="20sp"
+                    android:textAlignment="viewEnd"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_cookimgTime"
+                    tools:ignore="RtlSymmetry" />
+                <TextView
+                    style="@style/text18"
+                    android:text="@string/min"
+                    android:layout_marginEnd="15dp"
+                    app:layout_constraintEnd_toEndOf="@+id/et_cookingTime_min"
+                    app:layout_constraintTop_toTopOf="@+id/et_cookingTime_min"
+                    app:layout_constraintBottom_toBottomOf="@+id/et_cookingTime_min"/>
+                <TextView
+                    style="@style/text18"
+                    android:text="@string/tilde"
+                    app:layout_constraintTop_toTopOf="@+id/et_cookingTime_max"
+                    app:layout_constraintBottom_toBottomOf="@+id/et_cookingTime_min"
+                    app:layout_constraintStart_toEndOf="@+id/et_cookingTime_min"
+                    app:layout_constraintEnd_toStartOf="@+id/et_cookingTime_max"/>
+                <EditText
+                    style="@style/edittext_menu18b"
+                    android:id="@+id/et_cookingTime_max"
+                    android:layout_width="91dp"
+                    android:layout_marginStart="30dp"
+                    android:paddingEnd="37dp"
+                    android:inputType="number"
+                    android:hint="@string/zero"
+                    android:textSize="20sp"
+                    android:textAlignment="viewEnd"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/et_cookingTime_min"
+                    tools:ignore="RtlSymmetry" />
+                <TextView
+                    style="@style/text18"
+                    android:text="@string/min"
+                    android:layout_marginEnd="15dp"
+                    app:layout_constraintEnd_toEndOf="@+id/et_cookingTime_max"
+                    app:layout_constraintTop_toTopOf="@+id/et_cookingTime_max"
+                    app:layout_constraintBottom_toBottomOf="@+id/et_cookingTime_max"/>
+                <EditText
+                    style="@style/edittext_menu18b"
+                    android:id="@+id/et_price"
+                    android:layout_width="200dp"
+                    android:paddingEnd="37dp"
+                    android:inputType="number"
+                    android:hint="@string/zero"
+                    android:maxLength="11"
+                    android:textSize="20sp"
+                    android:textAlignment="viewEnd"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:ignore="RtlSymmetry"/>
+                <TextView
+                    style="@style/text18"
+                    android:text="@string/won"
+                    android:layout_marginEnd="15dp"
+                    app:layout_constraintEnd_toEndOf="@+id/et_price"
+                    app:layout_constraintTop_toTopOf="@+id/et_price"
+                    app:layout_constraintBottom_toBottomOf="@+id/et_price"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                style="@style/text16"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/menu_img_reg_info"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    style="@style/thum"
+                    android:id="@+id/thum1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/thum2"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+
+                <ImageView
+                    style="@style/thum"
+                    android:id="@+id/thum2"
+                    app:layout_constraintTop_toTopOf="@+id/thum1"
+                    app:layout_constraintEnd_toStartOf="@+id/thum3"
+                    app:layout_constraintStart_toEndOf="@+id/thum1" />
+
+                <ImageView
+                    style="@style/thum"
+                    android:id="@+id/thum3"
+                    app:layout_constraintTop_toTopOf="@id/thum2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/thum2" />
+
+                <TextView
+                    style="@style/text18"
+                    android:id="@+id/img_hint1"
+                    android:text="@string/menu_vid_reg_hint"
+                    android:textStyle="bold"
+                    android:textColor="@color/hint"
+                    app:layout_constraintStart_toStartOf="@+id/thum1"
+                    app:layout_constraintEnd_toEndOf="@+id/thum1"
+                    app:layout_constraintTop_toTopOf="@+id/thum1"
+                    app:layout_constraintBottom_toBottomOf="@+id/thum1"/>
+                <TextView
+                    style="@style/text18"
+                    android:id="@+id/img_hint2"
+                    android:text="@string/menu_img_reg_hint"
+                    android:textStyle="bold"
+                    android:textColor="@color/hint"
+                    app:layout_constraintStart_toStartOf="@+id/thum2"
+                    app:layout_constraintEnd_toEndOf="@+id/thum2"
+                    app:layout_constraintTop_toTopOf="@+id/thum2"
+                    app:layout_constraintBottom_toBottomOf="@+id/thum2"/>
+                <TextView
+                    style="@style/text18"
+                    android:id="@+id/img_hint3"
+                    android:text="@string/menu_img_reg_hint"
+                    android:textStyle="bold"
+                    android:textColor="@color/hint"
+                    app:layout_constraintStart_toStartOf="@+id/thum3"
+                    app:layout_constraintEnd_toEndOf="@+id/thum3"
+                    app:layout_constraintTop_toTopOf="@+id/thum3"
+                    app:layout_constraintBottom_toBottomOf="@+id/thum3"/>
+
+                <TextView
+                    style="@style/btn_regimg"
+                    android:id="@+id/regImg1"
+                    android:text="@string/menu_vid_reg"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="@+id/thum1"
+                    app:layout_constraintTop_toBottomOf="@+id/thum1"/>
+
+                <TextView
+                    style="@style/btn_regimg"
+                    android:id="@+id/regImg2"
+                    android:text="@string/menu_img_reg"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="@+id/thum2"
+                    app:layout_constraintTop_toBottomOf="@+id/thum2"/>
+
+                <TextView
+                    style="@style/btn_regimg"
+                    android:id="@+id/regImg3"
+                    android:text="@string/menu_img_reg"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="@+id/thum3"
+                    app:layout_constraintTop_toBottomOf="@+id/thum3"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="20dp">
-                <EditText
-                    style="@style/edittext_menu18"
-                    android:id="@+id/etContent"
-                    android:layout_width="match_parent"
-                    android:layout_height="117dp"
-                    android:layout_marginBottom="22dp"
-                    android:hint="@string/menu_exp_hint" />
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        style="@style/text20"
-                        android:id="@+id/tv_cookimgTime"
-                        android:text="@string/cookingTime"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"/>
-                    <EditText
-                        style="@style/edittext_menu18b"
-                        android:id="@+id/et_cookingTime_min"
-                        android:layout_width="91dp"
-                        android:layout_marginStart="16dp"
-                        android:paddingEnd="37dp"
-                        android:inputType="number"
-                        android:hint="@string/zero"
-                        android:textSize="20sp"
-                        android:textAlignment="viewEnd"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/tv_cookimgTime"
-                        tools:ignore="RtlSymmetry" />
-                    <TextView
-                        style="@style/text18"
-                        android:text="@string/min"
-                        android:layout_marginEnd="15dp"
-                        app:layout_constraintEnd_toEndOf="@+id/et_cookingTime_min"
-                        app:layout_constraintTop_toTopOf="@+id/et_cookingTime_min"
-                        app:layout_constraintBottom_toBottomOf="@+id/et_cookingTime_min"/>
-                    <TextView
-                        style="@style/text18"
-                        android:text="@string/tilde"
-                        app:layout_constraintTop_toTopOf="@+id/et_cookingTime_max"
-                        app:layout_constraintBottom_toBottomOf="@+id/et_cookingTime_min"
-                        app:layout_constraintStart_toEndOf="@+id/et_cookingTime_min"
-                        app:layout_constraintEnd_toStartOf="@+id/et_cookingTime_max"/>
-                    <EditText
-                        style="@style/edittext_menu18b"
-                        android:id="@+id/et_cookingTime_max"
-                        android:layout_width="91dp"
-                        android:layout_marginStart="30dp"
-                        android:paddingEnd="37dp"
-                        android:inputType="number"
-                        android:hint="@string/zero"
-                        android:textSize="20sp"
-                        android:textAlignment="viewEnd"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/et_cookingTime_min"
-                        tools:ignore="RtlSymmetry" />
-                    <TextView
-                        style="@style/text18"
-                        android:text="@string/min"
-                        android:layout_marginEnd="15dp"
-                        app:layout_constraintEnd_toEndOf="@+id/et_cookingTime_max"
-                        app:layout_constraintTop_toTopOf="@+id/et_cookingTime_max"
-                        app:layout_constraintBottom_toBottomOf="@+id/et_cookingTime_max"/>
-                    <EditText
-                        style="@style/edittext_menu18b"
-                        android:id="@+id/et_price"
-                        android:layout_width="200dp"
-                        android:paddingEnd="37dp"
-                        android:inputType="number"
-                        android:hint="@string/zero"
-                        android:maxLength="11"
-                        android:textSize="20sp"
-                        android:textAlignment="viewEnd"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        tools:ignore="RtlSymmetry"/>
-                    <TextView
-                        style="@style/text18"
-                        android:text="@string/won"
-                        android:layout_marginEnd="15dp"
-                        app:layout_constraintEnd_toEndOf="@+id/et_price"
-                        app:layout_constraintTop_toTopOf="@+id/et_price"
-                        app:layout_constraintBottom_toBottomOf="@+id/et_price"/>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_marginVertical="17dp"
+                android:gravity="center_vertical">
                 <TextView
-                    style="@style/text16"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="@string/menu_img_reg_info"/>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        style="@style/thum"
-                        android:id="@+id/thum1"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/thum2"
-                        app:layout_constraintHorizontal_chainStyle="spread_inside"/>
-
-                    <ImageView
-                        style="@style/thum"
-                        android:id="@+id/thum2"
-                        app:layout_constraintTop_toTopOf="@+id/thum1"
-                        app:layout_constraintEnd_toStartOf="@+id/thum3"
-                        app:layout_constraintStart_toEndOf="@+id/thum1" />
-
-                    <ImageView
-                        style="@style/thum"
-                        android:id="@+id/thum3"
-                        app:layout_constraintTop_toTopOf="@id/thum2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/thum2" />
-
-                    <TextView
-                        style="@style/text18"
-                        android:id="@+id/img_hint1"
-                        android:text="@string/menu_vid_reg_hint"
-                        android:textStyle="bold"
-                        android:textColor="@color/hint"
-                        app:layout_constraintStart_toStartOf="@+id/thum1"
-                        app:layout_constraintEnd_toEndOf="@+id/thum1"
-                        app:layout_constraintTop_toTopOf="@+id/thum1"
-                        app:layout_constraintBottom_toBottomOf="@+id/thum1"/>
-                    <TextView
-                        style="@style/text18"
-                        android:id="@+id/img_hint2"
-                        android:text="@string/menu_img_reg_hint"
-                        android:textStyle="bold"
-                        android:textColor="@color/hint"
-                        app:layout_constraintStart_toStartOf="@+id/thum2"
-                        app:layout_constraintEnd_toEndOf="@+id/thum2"
-                        app:layout_constraintTop_toTopOf="@+id/thum2"
-                        app:layout_constraintBottom_toBottomOf="@+id/thum2"/>
-                    <TextView
-                        style="@style/text18"
-                        android:id="@+id/img_hint3"
-                        android:text="@string/menu_img_reg_hint"
-                        android:textStyle="bold"
-                        android:textColor="@color/hint"
-                        app:layout_constraintStart_toStartOf="@+id/thum3"
-                        app:layout_constraintEnd_toEndOf="@+id/thum3"
-                        app:layout_constraintTop_toTopOf="@+id/thum3"
-                        app:layout_constraintBottom_toBottomOf="@+id/thum3"/>
-
-                    <TextView
-                        style="@style/btn_regimg"
-                        android:id="@+id/regImg1"
-                        android:text="@string/menu_vid_reg"
-                        android:layout_marginTop="5dp"
-                        app:layout_constraintStart_toStartOf="@+id/thum1"
-                        app:layout_constraintTop_toBottomOf="@+id/thum1"/>
-
-                    <TextView
-                        style="@style/btn_regimg"
-                        android:id="@+id/regImg2"
-                        android:text="@string/menu_img_reg"
-                        android:layout_marginTop="5dp"
-                        app:layout_constraintStart_toStartOf="@+id/thum2"
-                        app:layout_constraintTop_toBottomOf="@+id/thum2"/>
-
-                    <TextView
-                        style="@style/btn_regimg"
-                        android:id="@+id/regImg3"
-                        android:text="@string/menu_img_reg"
-                        android:layout_marginTop="5dp"
-                        app:layout_constraintStart_toStartOf="@+id/thum3"
-                        app:layout_constraintTop_toBottomOf="@+id/thum3"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="17dp"
-                    android:gravity="center_vertical">
-                    <TextView
-                        style="@style/text18"
-                        android:layout_marginEnd="16dp"
-                        android:text="@string/menu_sleep"
-                        android:textStyle="bold"/>
-                    <CheckBox
-                        android:id="@+id/toggle_sleep"
-                        style="@style/toggle"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
-                    <TextView
-                        style="@style/text18"
-                        android:layout_marginEnd="20dp"
-                        android:text="@string/menu_status"
-                        android:textStyle="bold"/>
-                    <RadioGroup
-                        android:orientation="horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <RadioButton
-                            style="@style/btn_status"
-                            android:id="@+id/rb_none"
-                            android:text="@string/none"
-                            android:checked="true"/>
-                        <RadioButton
-                            style="@style/btn_status"
-                            android:id="@+id/rb_hide"
-                            android:layout_marginHorizontal="10dp"
-                            android:text="@string/hide"/>
-                        <RadioButton
-                            style="@style/btn_status"
-                            android:id="@+id/rb_best"
-                            android:text="@string/best"/>
-                        <RadioButton
-                            style="@style/btn_status"
-                            android:id="@+id/rb_soldout"
-                            android:layout_marginHorizontal="10dp"
-                            android:text="@string/soldout"/>
-                        <RadioButton
-                            style="@style/btn_status"
-                            android:id="@+id/rb_new"
-                            android:text="@string/New"/>
-                    </RadioGroup>
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="17dp"
-                    android:gravity="center_vertical">
-                    <TextView
-                        style="@style/text18"
-                        android:layout_marginEnd="16dp"
-                        android:text="@string/option"
-                        android:textStyle="bold"/>
-                    <CheckBox
-                        android:id="@+id/toggle_option"
-                        style="@style/toggle"/>
-                </LinearLayout>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_option"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"/>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="72dp"
-                    android:layout_marginTop="4dp"
-                    android:background="@color/white"
-                    android:paddingTop="16dp">
-                    <LinearLayout
-                        style="@style/btn_small"
-                        android:id="@+id/opt_require"
-                        android:layout_width="278dp"
-                        android:layout_marginStart="16dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent">
-                        <ImageView
-                            android:id="@+id/plus1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_plus_b" />
-                        <TextView
-                            style="@style/text18"
-                            android:layout_marginStart="10dp"
-                            android:text="@string/option_require" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        style="@style/btn_small"
-                        android:id="@+id/opt_choice"
-                        android:layout_width="278dp"
-                        android:layout_marginStart="12dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/opt_require">
-                        <ImageView
-                            android:id="@+id/plus2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_plus_b" />
-                        <TextView
-                            style="@style/text18"
-                            android:layout_marginStart="10dp"
-                            android:text="@string/option_choice" />
-                    </LinearLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    style="@style/text18"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/menu_sleep"
+                    android:textStyle="bold"/>
+                <CheckBox
+                    android:id="@+id/toggle_sleep"
+                    style="@style/toggle"/>
             </LinearLayout>
-        </ScrollView>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <TextView
+                    style="@style/text18"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/menu_status"
+                    android:textStyle="bold"/>
+                <RadioGroup
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        style="@style/btn_status"
+                        android:id="@+id/rb_none"
+                        android:text="@string/none"
+                        android:checked="true"/>
+                    <RadioButton
+                        style="@style/btn_status"
+                        android:id="@+id/rb_hide"
+                        android:layout_marginHorizontal="10dp"
+                        android:text="@string/hide"/>
+                    <RadioButton
+                        style="@style/btn_status"
+                        android:id="@+id/rb_best"
+                        android:text="@string/best"/>
+                    <RadioButton
+                        style="@style/btn_status"
+                        android:id="@+id/rb_soldout"
+                        android:layout_marginHorizontal="10dp"
+                        android:text="@string/soldout"/>
+                    <RadioButton
+                        style="@style/btn_status"
+                        android:id="@+id/rb_new"
+                        android:text="@string/New"/>
+                </RadioGroup>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:gravity="center_vertical">
+                <TextView
+                    style="@style/text18"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/option"
+                    android:textStyle="bold"/>
+                <CheckBox
+                    android:id="@+id/toggle_option"
+                    style="@style/toggle"/>
+            </LinearLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/white"
+                android:paddingTop="16dp">
+                <LinearLayout
+                    style="@style/btn_small"
+                    android:id="@+id/opt_require"
+                    android:layout_width="278dp"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+                    <ImageView
+                        android:id="@+id/plus1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_plus_b" />
+                    <TextView
+                        style="@style/text18"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/option_require" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/btn_small"
+                    android:id="@+id/opt_choice"
+                    android:layout_width="278dp"
+                    android:layout_marginStart="12dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/opt_require">
+                    <ImageView
+                        android:id="@+id/plus2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_plus_b" />
+                    <TextView
+                        style="@style/text18"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/option_choice" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </LinearLayout>
-
-    <!--    <androidx.fragment.app.FragmentContainerView-->
-<!--        android:id="@+id/fragment_menu"-->
-<!--        android:name="com.wooriyo.pinmenuer.menu.fragment.MenuFragment"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/left_area"-->
-<!--        app:layout_constraintEnd_toStartOf="@+id/right_area"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/header"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"/>-->
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -215,6 +215,7 @@
     <string name="option_choice">선택 옵션</string>
 
     <!--  옵션 설정  -->
+    <string name="opt_list">입력된 옵션</string>
     <string name="opt_num">옵션 %d</string>
     <string name="opt_req_name">필수옵션명</string>
     <string name="opt_chc_name">선택옵션명</string>
