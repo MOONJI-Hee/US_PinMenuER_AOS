@@ -28,9 +28,11 @@ import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityMenuSetBinding
+import com.wooriyo.pinmenuer.listener.DialogListener
 import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.menu.adpter.CateAdapter
 import com.wooriyo.pinmenuer.menu.adpter.GoodsAdapter
+import com.wooriyo.pinmenuer.menu.adpter.OptAdapter
 import com.wooriyo.pinmenuer.menu.dialog.BgDialog
 import com.wooriyo.pinmenuer.menu.dialog.OptionDialog
 import com.wooriyo.pinmenuer.menu.dialog.ViewModeDialog
@@ -56,6 +58,9 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     val selGoodsList = ArrayList<GoodsDTO>()
     val goodsAdapter = GoodsAdapter(selGoodsList)
 
+    val optList = ArrayList<OptionDTO>()
+    val optAdapter = OptAdapter(optList)
+
     var mode : Int = 0      // 0: 저장, 1: 모드, 3: 순서변경, 4: 삭제
     var selCate = "001"
     var goods = GoodsDTO()
@@ -75,6 +80,15 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             val imgUri = it.data?.data
             if(imgUri != null)
                 setImage(imgUri)
+        }
+    }
+
+    val setCate = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if(it.resultCode == Activity.RESULT_OK) {
+            if(allCateList.isNotEmpty()) {
+//                selCate = allCateList[0].code
+                cateAdapter.notifyDataSetChanged()
+            }
         }
     }
 
@@ -120,10 +134,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        if(allCateList.isNotEmpty()) {
-            selCate = allCateList[0].code
-            cateAdapter.notifyDataSetChanged()
-        }
+
     }
 
     override fun onClick(v: View?) {
@@ -131,12 +142,11 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             binding.back -> finish()
             binding.btnCateUdt -> {     // 카테고리 수정 버튼 > 카테고리 설정 페이지로 이동
                 val intent = Intent(mActivity, CategorySetActivity::class.java)
-                startActivity(intent)
+                setCate.launch(intent)
             }
-
             // 중앙 메뉴 상세 관련
-            binding.optRequire -> { OptionDialog(mActivity, 1, OptionDTO(1)).show() }
-            binding.optChoice -> { OptionDialog(mActivity, 0, OptionDTO(0)).show() }
+            binding.optRequire -> { showOptDialog(1) }
+            binding.optChoice -> { showOptDialog(0) }
             binding.thum1, binding.thum2, binding.thum3-> {
                 selThum = v as ImageView
                 if(bisStorage)
@@ -152,6 +162,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         cateAdapter.setOnItemClickListener(object: ItemClickListener {
             override fun onItemClick(position: Int) {
                 selCate = allCateList[position].code
+                Log.d(TAG, "selCate11111 >>> $selCate")
                 setMenuList()
             }
         })
@@ -163,7 +174,13 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
             rvMenu.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false)
             rvMenu.adapter = goodsAdapter
+
+            rvOption.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false)
+            rvOption.adapter = optAdapter
         }
+
+        if(allCateList.isNotEmpty())
+            selCate = allCateList[0].code
     }
 
     fun setAdapter() {
@@ -196,6 +213,31 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             mode = 1
             setDetail()
         }
+        Log.d(TAG, "selCate222222 >>> $selCate")
+    }
+
+    fun showOptDialog(type: Int) {
+        val optDialog = OptionDialog(mActivity, type, OptionDTO(type))
+        optDialog.setOnDialogListener(object : DialogListener{
+            override fun onOptAdd(option: OptionDTO) {
+                super.onOptAdd(option)
+                if(goods.opt == null) {
+                    goods.opt = ArrayList<OptionDTO>()
+                }
+//                goods.opt?.add(option)
+                optList.add(option)
+                // 얕은 복사이기 때문에 optList에에만 추가해도 goods.opt에 추가됨
+                optAdapter.notifyItemInserted((goods.opt?.size?: 1) - 1)
+
+                binding.rvOption.visibility = View.VISIBLE
+                binding.optionEmpty.visibility = View.GONE
+
+                if(optList.size == 1) {
+
+                }
+            }
+        })
+        optDialog.show()
     }
 
     fun getMenu() {
@@ -274,11 +316,19 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
             if(goods.boption == y)
                 toggleOption.isChecked = true
+
+            if(!goods.opt.isNullOrEmpty()) {
+                optList.addAll(goods.opt!!)
+                optAdapter.notifyDataSetChanged()
+                rvOption.visibility = View.VISIBLE
+                optionEmpty.visibility = View.GONE
+            }
         }
     }
 
     fun clearDetail() {
         mode = 0
+        optList.clear()
         binding.run {
             etName.text.clear()
             etContent.text.clear()
@@ -307,7 +357,10 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             toggleSleep.isChecked = false
             rbNone.isChecked = true
             toggleOption.isChecked = false
+
+            optionEmpty.visibility = View.VISIBLE
         }
+        Log.d(TAG, "selCate33333 >>> $selCate")
     }
 
     fun save() {
@@ -371,9 +424,15 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             insGoods()
         else if(mode == 1)
             udtGoods()
+
+
+        Log.d(TAG, "selCate44444 >>> $selCate")
+
     }
 
     fun insGoods() {
+        Log.d(TAG, "selCate5555 >>> $selCate")
+
         goods.let {
             ApiClient.service.insGoods(useridx, storeidx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption)
                 .enqueue(object : Callback<ResultDTO> {
@@ -387,9 +446,12 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                                 1 -> {
                                     val gidx = result.idx
                                     it.idx = gidx
+                                    it.category = selCate
                                     selGoodsList.add(GoodsDTO())
                                     goodsAdapter.notifyItemRangeChanged(selGoodsList.size-2, 2)
                                     uploadImage(gidx, media1, media2, media3)
+                                    // 저장되었으니 수정모드로 변경
+                                    mode = 1
                                 }
                                 else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                             }
@@ -405,6 +467,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun udtGoods() {
+        Log.d(TAG, "selCae666666 >>> $selCate")
         goods.let {
             ApiClient.service.udtGoods(useridx, it.idx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption)
                 .enqueue(object : Callback<ResultDTO> {

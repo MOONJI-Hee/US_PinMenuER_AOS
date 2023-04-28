@@ -29,6 +29,7 @@
     <string name="tablepass">테이블 비밀번호</string>
 
     <string name="essential">필수</string>
+    <string name="optional">선택</string>
 
     <string name="confirm">확인</string>
     <string name="cancel">취소</string>
@@ -216,6 +217,7 @@
 
     <!--  옵션 설정  -->
     <string name="opt_list">입력된 옵션</string>
+    <string name="opt_list_empty">입력된 옵션 없음</string>
     <string name="opt_num">옵션 %d</string>
     <string name="opt_req_name">필수옵션명</string>
     <string name="opt_chc_name">선택옵션명</string>

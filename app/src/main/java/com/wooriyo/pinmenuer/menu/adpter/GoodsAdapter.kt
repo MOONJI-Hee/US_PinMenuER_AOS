@@ -36,10 +36,10 @@ class GoodsAdapter(val dataSet: ArrayList<GoodsDTO>): Adapter<RecyclerView.ViewH
 
         if(selPos == position) {
             holder.binding.layout.setBackgroundResource(R.drawable.gradient_main)
-            holder.binding.ivPlus.setImageResource(R.drawable.ic_plus_b)
+            holder.binding.ivPlus.setImageResource(R.drawable.img_menu_plus_s)
         } else {
             holder.binding.layout.setBackgroundColor(Color.WHITE)
-            holder.binding.ivPlus.setImageResource(R.drawable.ic_plus_g)
+            holder.binding.ivPlus.setImageResource(R.drawable.img_menu_plus)
         }
 
         holder.binding.layout.setOnClickListener {
@@ -79,12 +79,17 @@ class GoodsAdapter(val dataSet: ArrayList<GoodsDTO>): Adapter<RecyclerView.ViewH
                     when(data.icon) {
                         3 -> status = R.drawable.img_best
                         5 -> status = R.drawable.img_new
-                        4 -> status = R.drawable.img_soldout
                         else -> binding.icon.visibility = View.GONE
                     }
-                    if(status != 0) {
-                        icon.setImageResource(status)
-                        icon.visibility = View.VISIBLE
+
+                    if(data.icon == 4) {
+                        soldout.visibility = View.VISIBLE
+                    }else {
+                        soldout.visibility = View.GONE
+                        if(status != 0) {
+                            icon.setImageResource(status)
+                            icon.visibility = View.VISIBLE
+                        }
                     }
                 }
             }

@@ -76,6 +76,7 @@ class CategorySetActivity : BaseActivity(), DialogListener {
         cateAdapter.notifyItemInserted(allCateList.size-1)
         cateAdapter.notifyItemChanged(allCateList.size-2)  // 추가한 카테고리 바로 앞 카테고리의 오른쪽 실선을 숨기기 위해서...
         cateEditAdapter.notifyItemInserted(allCateList.size-1)
+        setResult(RESULT_OK, intent)
     }
 
     override fun onCateSet(position: Int, data: CategoryDTO) {
@@ -83,6 +84,7 @@ class CategorySetActivity : BaseActivity(), DialogListener {
         allCateList[position] = data
         cateAdapter.notifyItemChanged(position)
         cateEditAdapter.notifyItemChanged(position)
+        setResult(RESULT_OK, intent)
     }
 
     override fun onItemDelete(position: Int) {
@@ -90,6 +92,7 @@ class CategorySetActivity : BaseActivity(), DialogListener {
         allCateList.removeAt(position)
         cateAdapter.notifyItemRemoved(position)
         cateEditAdapter.notifyItemRemoved(position)
+        setResult(RESULT_OK, intent)
     }
 
     fun setView() {
@@ -181,6 +184,7 @@ class CategorySetActivity : BaseActivity(), DialogListener {
                 when(resultDTO.status) {
                     1 -> {
                         Toast.makeText(this@CategorySetActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                        setResult(RESULT_OK, intent)
                     }
                     else -> Toast.makeText(this@CategorySetActivity, resultDTO.msg, Toast.LENGTH_SHORT).show()
                 }

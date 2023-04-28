@@ -19,7 +19,8 @@ data class GoodsDTO (
     var file3 : File?,
     @SerializedName("adDisplay") var adDisplay : String,
     @SerializedName("icon") var icon: Int,                          // 메뉴 상태 > 1: None, 2: Hide, 3: Best, 4: Sold Out, 5: New
-    @SerializedName("boption") var boption : String
+    @SerializedName("boption") var boption : String,
+    @SerializedName("stropt") var opt : ArrayList<OptionDTO>?
 ) {
-    constructor():this(0, "", "", "", "0", "0", 0, "", "", "", null, null, null, "N", 1, "N")
+    constructor():this(0, "", "", "", "0", "0", 0, "", "", "", null, null, null, "N", 1, "N", ArrayList<OptionDTO>())
 }
