@@ -44,11 +44,11 @@
         <entry key="app/src/main/res/layout/activity_item_detail.xml" value="0.28828125" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.45" />
         <entry key="app/src/main/res/layout/activity_map.xml" value="0.4068181818181818" />
-        <entry key="app/src/main/res/layout/activity_menu_set.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_menu_set.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_menu_ui.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_order_list.xml" value="0.28828125" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.24666666666666667" />
-        <entry key="app/src/main/res/layout/activity_start.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_start.xml" value="0.26875" />
         <entry key="app/src/main/res/layout/activity_store_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_store_menu.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_store_reg.xml" value="0.25" />

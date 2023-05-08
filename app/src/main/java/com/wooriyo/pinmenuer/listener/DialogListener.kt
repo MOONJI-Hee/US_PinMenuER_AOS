@@ -12,5 +12,6 @@ interface DialogListener {
     fun onCateAdd(cateList: ArrayList<CategoryDTO>) {}
     fun onCateSet(position: Int, data: CategoryDTO) {}
     fun onOptAdd(option: OptionDTO) {}
+    fun onOptSet(position: Int, option: OptionDTO) {}
     fun onItemDelete(position: Int) {}
 }

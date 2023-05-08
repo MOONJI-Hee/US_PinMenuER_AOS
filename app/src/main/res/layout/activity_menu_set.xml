@@ -81,6 +81,7 @@
         android:id="@+id/left_area"
         android:layout_width="320dp"
         android:layout_height="0dp"
+        android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/header"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -94,7 +95,9 @@
                 android:id="@+id/rv_menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/list_menu"/>
+                android:background="@color/f9"
+                tools:listitem="@layout/list_menu"
+                tools:itemCount="3"/>
         </ScrollView>
         <LinearLayout
             android:id="@+id/left_bottom_area"

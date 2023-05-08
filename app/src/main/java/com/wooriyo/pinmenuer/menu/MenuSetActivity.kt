@@ -132,11 +132,6 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         getMenu()
     }
 
-    override fun onResume() {
-        super.onResume()
-
-    }
-
     override fun onClick(v: View?) {
         when(v) {
             binding.back -> finish()
@@ -145,8 +140,8 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                 setCate.launch(intent)
             }
             // 중앙 메뉴 상세 관련
-            binding.optRequire -> { showOptDialog(1) }
-            binding.optChoice -> { showOptDialog(0) }
+            binding.optRequire -> { showOptDialog(-1, OptionDTO(1)) }
+            binding.optChoice -> { showOptDialog(-1, OptionDTO(0)) }
             binding.thum1, binding.thum2, binding.thum3-> {
                 selThum = v as ImageView
                 if(bisStorage)
@@ -162,7 +157,6 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         cateAdapter.setOnItemClickListener(object: ItemClickListener {
             override fun onItemClick(position: Int) {
                 selCate = allCateList[position].code
-                Log.d(TAG, "selCate11111 >>> $selCate")
                 setMenuList()
             }
         })
@@ -194,6 +188,10 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                 }
             }
         })
+
+        optAdapter.setOnItemClickListener(object : ItemClickListener {
+
+        })
     }
 
     fun setMenuList() {
@@ -213,27 +211,42 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             mode = 1
             setDetail()
         }
-        Log.d(TAG, "selCate222222 >>> $selCate")
     }
 
-    fun showOptDialog(type: Int) {
-        val optDialog = OptionDialog(mActivity, type, OptionDTO(type))
+    fun showOptDialog(position: Int, optionDTO: OptionDTO) {
+        val optDialog = OptionDialog(mActivity, position, optionDTO)
         optDialog.setOnDialogListener(object : DialogListener{
             override fun onOptAdd(option: OptionDTO) {
                 super.onOptAdd(option)
                 if(goods.opt == null) {
                     goods.opt = ArrayList<OptionDTO>()
                 }
-//                goods.opt?.add(option)
+                goods.opt?.add(option)
                 optList.add(option)
-                // 얕은 복사이기 때문에 optList에에만 추가해도 goods.opt에 추가됨
                 optAdapter.notifyItemInserted((goods.opt?.size?: 1) - 1)
 
-                binding.rvOption.visibility = View.VISIBLE
-                binding.optionEmpty.visibility = View.GONE
+                if(optList.size == 1) { // 옵션 리스트 크기가 1일 때 == 처음 옵션이 등록되었을 때 > 리사이클러뷰 보이도록
+                    binding.rvOption.visibility = View.VISIBLE
+                    binding.optionEmpty.visibility = View.GONE
+                }
+            }
 
-                if(optList.size == 1) {
+            override fun onOptSet(position: Int, option: OptionDTO) {
+                super.onOptSet(position, option)
+                goods.opt?.set(position, option)
+                optList[position] = option
+                optAdapter.notifyItemChanged(position)
+            }
 
+            override fun onItemDelete(position: Int) {
+                super.onItemDelete(position)
+                goods.opt?.removeAt(position)
+                optList.removeAt(position)
+                optAdapter.notifyItemRemoved(position)
+
+                if(optList.size == 0) {
+                    binding.rvOption.visibility = View.GONE
+                    binding.optionEmpty.visibility = View.VISIBLE
                 }
             }
         })
@@ -252,8 +265,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                         1 -> {
                             allGoodsList.clear()
                             allGoodsList.addAll(result.glist)
-                            if(allGoodsList.isNotEmpty())
-                                setMenuList()
+                            setMenuList()
                         }
                         else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                     }
@@ -424,15 +436,9 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             insGoods()
         else if(mode == 1)
             udtGoods()
-
-
-        Log.d(TAG, "selCate44444 >>> $selCate")
-
     }
 
     fun insGoods() {
-        Log.d(TAG, "selCate5555 >>> $selCate")
-
         goods.let {
             ApiClient.service.insGoods(useridx, storeidx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption)
                 .enqueue(object : Callback<ResultDTO> {
@@ -447,6 +453,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                                     val gidx = result.idx
                                     it.idx = gidx
                                     it.category = selCate
+                                    allGoodsList.add(goods)
                                     selGoodsList.add(GoodsDTO())
                                     goodsAdapter.notifyItemRangeChanged(selGoodsList.size-2, 2)
                                     uploadImage(gidx, media1, media2, media3)
@@ -467,7 +474,6 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun udtGoods() {
-        Log.d(TAG, "selCae666666 >>> $selCate")
         goods.let {
             ApiClient.service.udtGoods(useridx, it.idx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption)
                 .enqueue(object : Callback<ResultDTO> {
@@ -528,6 +534,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         ApiClient.service.delGoods(useridx, storeidx, gidx).enqueue(object : Callback<ResultDTO>{
             override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                 Log.d(TAG, "메뉴 수정 url : $response")
+                if(!response.isSuccessful) return
                 if(!response.isSuccessful) return
 
                 val result = response.body() ?: return
