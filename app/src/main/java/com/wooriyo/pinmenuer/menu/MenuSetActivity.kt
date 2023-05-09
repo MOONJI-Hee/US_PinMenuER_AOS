@@ -12,6 +12,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -134,10 +135,35 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v) {
-            binding.back -> finish()
+            binding.back -> finish()    // 백 버튼
             binding.btnCateUdt -> {     // 카테고리 수정 버튼 > 카테고리 설정 페이지로 이동
                 val intent = Intent(mActivity, CategorySetActivity::class.java)
                 setCate.launch(intent)
+            }
+            // 좌측 메뉴 리스트 관련
+            binding.btnSeq -> {
+                v as TextView
+                if(mode == 3) { // 순서변경모드일 때 > 완료 수정모드로 변경
+                    v.setBackgroundResource(R.drawable.bg_btn_r6)
+                    v.text = getString(R.string.change_seq)
+                    mode = 1
+                }else {         // 순서변경모드 아닐 때 > 순서변경모드로 변경
+                    v.setBackgroundResource(R.drawable.bg_btn_r6_grd)
+                    v.text = getString(R.string.change_seq_cmplt)
+                    mode = 3
+                }
+            }
+            binding.btnDel -> {
+                v as TextView
+                if(mode == 4) { // 삭제모드일 때 > 완료 수정모드로 변경
+                    v.setBackgroundResource(R.drawable.bg_btn_r6)
+                    v.text = getString(R.string.menu_delete)
+                    mode = 1
+                }else {         // 삭제모드 아닐 때 > 삭제모드로 변경
+                    v.setBackgroundResource(R.drawable.bg_btn_r6_grd)
+                    v.text = getString(R.string.menu_delete_cmplt)
+                    mode = 4
+                }
             }
             // 중앙 메뉴 상세 관련
             binding.optRequire -> { showOptDialog(-1, OptionDTO(1)) }
@@ -190,7 +216,10 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         })
 
         optAdapter.setOnItemClickListener(object : ItemClickListener {
-
+            override fun onItemClick(position: Int) {
+                val copyOpt = optList[position].copy()  // 옵션 수정 사항 저장하지 않을수도 있기 때문에 깊은 복사 진행
+                showOptDialog(position, copyOpt)
+            }
         })
     }
 
@@ -376,6 +405,8 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun save() {
+        Log.d(TAG, "옵션 확인 >> ${goods.opt}")
+
         media1 = null
         media2 = null
         media3 = null
@@ -440,7 +471,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
     fun insGoods() {
         goods.let {
-            ApiClient.service.insGoods(useridx, storeidx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption)
+            ApiClient.service.insGoods(useridx, storeidx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption, it.opt.toString())
                 .enqueue(object : Callback<ResultDTO> {
                     override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                         Log.d(TAG, "메뉴 등록 url : $response")
@@ -475,7 +506,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
     fun udtGoods() {
         goods.let {
-            ApiClient.service.udtGoods(useridx, it.idx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption)
+            ApiClient.service.udtGoods(useridx, it.idx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption, it.opt.toString())
                 .enqueue(object : Callback<ResultDTO> {
                     override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                         Log.d(TAG, "메뉴 수정 url : $response")

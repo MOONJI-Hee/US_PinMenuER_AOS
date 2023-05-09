@@ -11,4 +11,8 @@ data class OptionDTO (
     @SerializedName("optmark") var optmark : ArrayList<String>,
 ) {
     constructor(type: Int) : this(0, "", type, ArrayList<String>(), ArrayList<String>(), ArrayList<String>())
+
+    fun copy(): OptionDTO {
+        return OptionDTO(idx, name, optreq, optval, optpay, optmark)
+    }
 }

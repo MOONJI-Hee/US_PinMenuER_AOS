@@ -256,7 +256,8 @@ interface Api {
         @Query("price") price : Int,
         @Query("adDisplay") adDisplay : String,
         @Query("icon") icon : Int,
-        @Query("boption") boption : String
+        @Query("boption") boption : String,
+        @Query("stropt") opt : String
     ): Call<ResultDTO>
 
     // 메뉴 이미지 등록
@@ -283,7 +284,8 @@ interface Api {
         @Query("price") price : Int,
         @Query("adDisplay") adDisplay : String,
         @Query("icon") icon : Int,
-        @Query("boption") boption : String
+        @Query("boption") boption : String,
+        @Query("stropt") opt : String
     ): Call<ResultDTO>
 
     // 메뉴 삭제
