@@ -34,19 +34,18 @@ import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.menu.adpter.CateAdapter
 import com.wooriyo.pinmenuer.menu.adpter.GoodsAdapter
 import com.wooriyo.pinmenuer.menu.adpter.OptAdapter
-import com.wooriyo.pinmenuer.menu.dialog.BgDialog
 import com.wooriyo.pinmenuer.menu.dialog.OptionDialog
-import com.wooriyo.pinmenuer.menu.dialog.ViewModeDialog
 import com.wooriyo.pinmenuer.model.*
 import com.wooriyo.pinmenuer.util.ApiClient
 import com.wooriyo.pinmenuer.util.AppHelper
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
-import retrofit2.Call
+
 
 class MenuSetActivity : BaseActivity(), View.OnClickListener {
     val TAG = "MenuSetActivity"
@@ -147,10 +146,18 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                     v.setBackgroundResource(R.drawable.bg_btn_r6)
                     v.text = getString(R.string.change_seq)
                     mode = 1
+
+                    binding.rightArea.visibility = View.GONE
+                    binding.btnDel.isEnabled = true
                 }else {         // 순서변경모드 아닐 때 > 순서변경모드로 변경
                     v.setBackgroundResource(R.drawable.bg_btn_r6_grd)
                     v.text = getString(R.string.change_seq_cmplt)
                     mode = 3
+
+                    binding.rightArea.visibility = View.VISIBLE
+                    binding.seqInfo.visibility = View.VISIBLE
+                    binding.delConfirm.visibility = View.GONE
+                    binding.btnDel.isEnabled = false
                 }
             }
             binding.btnDel -> {
@@ -159,10 +166,18 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                     v.setBackgroundResource(R.drawable.bg_btn_r6)
                     v.text = getString(R.string.menu_delete)
                     mode = 1
+
+                    binding.rightArea.visibility = View.GONE
+                    binding.btnSeq.isEnabled = true
                 }else {         // 삭제모드 아닐 때 > 삭제모드로 변경
                     v.setBackgroundResource(R.drawable.bg_btn_r6_grd)
                     v.text = getString(R.string.menu_delete_cmplt)
                     mode = 4
+
+                    binding.rightArea.visibility = View.VISIBLE
+                    binding.seqInfo.visibility = View.GONE
+                    binding.delConfirm.visibility = View.VISIBLE
+                    binding.btnSeq.isEnabled = false
                 }
             }
             // 중앙 메뉴 상세 관련

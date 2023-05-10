@@ -103,11 +103,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_appKey" />
-
         <service
             android:name="com.wooriyo.pinmenuer.util.MyFirebaseService"
             android:exported="false">

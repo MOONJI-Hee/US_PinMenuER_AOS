@@ -4,7 +4,7 @@
     android:layout_width="560dp"
     android:layout_height="336dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/bg_r6w"
+    android:background="@drawable/bg_r11w"
     android:paddingTop="30dp"
     android:paddingBottom="40dp"
     android:paddingHorizontal="30dp">

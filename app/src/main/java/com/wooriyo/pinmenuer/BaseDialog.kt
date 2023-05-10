@@ -22,18 +22,18 @@ open class BaseDialog(context: Context) : Dialog(context) {
         return super.dispatchTouchEvent(ev)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        useridx = MyApplication.pref.getUserIdx()
+    }
+
     override fun show() {
         window?.decorView?.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                 or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
         super.show()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        useridx = MyApplication.pref.getUserIdx()
     }
 }

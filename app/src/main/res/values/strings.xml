@@ -193,10 +193,14 @@
 
     <!--  메뉴 설정  -->
     <string name="change_seq">순서변경</string>
-    <string name="menu_delete">메뉴삭제</string>
     <string name="change_seq_cmplt">변경완료</string>
+    <string name="change_seq_way">메뉴 순서 변경 방법</string>
+    <string name="change_seq_way_info1">1. [ 순서변경 ] 버튼을 누른다.\n2. 좌측 항목에서 순서를 변경할 메뉴를 선택 후\n\t변경하고자 하는 위치로 드래그하여 이동 시킵니다.\n3. 순서 변경이 완료되면, 하단에 있는 [ 변경완료 ] 버튼을 누릅니다.</string>
+    <string name="change_seq_way_info2">※ 이 팝업창은 변경 완료가 되면 자동으로 닫힙니다.</string>
+    <string name="menu_delete">메뉴삭제</string>
     <string name="menu_delete_cmplt">삭제완료</string>
-    <string name="menu_delete_info">[ %s ]\n메뉴를 삭제하시겠습니까?\n삭제를 누르시면 입력한 모든 정보가 삭제되며,\n삭제 이후에는 복원하실 수 없습니다.</string>
+    <string name="menu_delete_name">[ %s ]</string>
+    <string name="menu_delete_info">메뉴를 삭제하시겠습니까?\n삭제를 누르시면 입력한 모든 정보가 삭제되며,\n삭제 이후에는 복원하실 수 없습니다.</string>
     <string name="menu_name_hint">상품명을 입력해주세요.</string>
     <string name="menu_exp_hint">상품 설명을 입력해주세요.\n두 줄 이상으로 상품 설명을 입력하실 수 있습니다.\n외국어 설명이 필요한 경우 줄을 바꿔 입력하여 사용할 수 있습니다.</string>
     <string name="cookingTime">조리시간</string>

@@ -63,7 +63,9 @@
         <entry key="app/src/main/res/layout/dialog_category.xml" value="0.45" />
         <entry key="app/src/main/res/layout/dialog_choice.xml" value="0.20333333333333334" />
         <entry key="app/src/main/res/layout/dialog_confirm.xml" value="0.2877604166666667" />
+        <entry key="app/src/main/res/layout/dialog_delete.xml" value="0.2877604166666667" />
         <entry key="app/src/main/res/layout/dialog_holiday.xml" value="0.2877604166666667" />
+        <entry key="app/src/main/res/layout/dialog_menuset_info.xml" value="0.28552971576227393" />
         <entry key="app/src/main/res/layout/dialog_option.xml" value="0.25" />
         <entry key="app/src/main/res/layout/dialog_regtime.xml" value="0.28828125" />
         <entry key="app/src/main/res/layout/dialog_viewmode.xml" value="0.20333333333333334" />
