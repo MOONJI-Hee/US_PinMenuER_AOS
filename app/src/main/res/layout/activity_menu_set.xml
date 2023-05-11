@@ -481,12 +481,15 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/right_area"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#80000000"
         android:gravity="center"
+        android:focusable="true"
+        android:clickable="true"
         android:visibility="gone"
         app:layout_constraintStart_toEndOf="@id/left_area"
         app:layout_constraintEnd_toEndOf="parent"
@@ -581,4 +584,15 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
+
+    <View
+        android:id="@+id/header_area"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#80000000"
+        android:focusable="true"
+        android:clickable="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@+id/header"
+        app:layout_constraintBottom_toBottomOf="@+id/header"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

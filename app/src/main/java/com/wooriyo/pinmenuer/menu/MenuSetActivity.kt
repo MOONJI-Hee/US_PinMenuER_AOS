@@ -147,6 +147,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                     v.text = getString(R.string.change_seq)
                     mode = 1
 
+                    binding.headerArea.visibility = View.GONE
                     binding.rightArea.visibility = View.GONE
                     binding.btnDel.isEnabled = true
                 }else {         // 순서변경모드 아닐 때 > 순서변경모드로 변경
@@ -154,6 +155,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                     v.text = getString(R.string.change_seq_cmplt)
                     mode = 3
 
+                    binding.headerArea.visibility = View.VISIBLE
                     binding.rightArea.visibility = View.VISIBLE
                     binding.seqInfo.visibility = View.VISIBLE
                     binding.delConfirm.visibility = View.GONE
@@ -167,6 +169,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                     v.text = getString(R.string.menu_delete)
                     mode = 1
 
+                    binding.headerArea.visibility = View.GONE
                     binding.rightArea.visibility = View.GONE
                     binding.btnSeq.isEnabled = true
                 }else {         // 삭제모드 아닐 때 > 삭제모드로 변경
@@ -174,9 +177,10 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                     v.text = getString(R.string.menu_delete_cmplt)
                     mode = 4
 
+                    binding.headerArea.visibility = View.VISIBLE
                     binding.rightArea.visibility = View.VISIBLE
                     binding.seqInfo.visibility = View.GONE
-                    binding.delConfirm.visibility = View.VISIBLE
+                    binding.delConfirm.visibility = View.GONE
                     binding.btnSeq.isEnabled = false
                 }
             }
