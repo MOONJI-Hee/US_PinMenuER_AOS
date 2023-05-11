@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity.INPUT_METHOD_SERVICE
 import java.text.DecimalFormat
 import java.text.NumberFormat
+import java.time.LocalDateTime
 
 // 자주 쓰는 메소드 모음 - 문지희 (2022.10 갱신)
 class AppHelper {
@@ -56,6 +57,22 @@ class AppHelper {
                 "00"
             } else {
                 dec.format(n.toInt())
+            }
+        }
+
+        // 현재 날짜와 비교
+        fun dateNowCompare(dt: String?): Boolean {    // 과거 : false, 현재 혹은 미래 : true
+            return if(dt.isNullOrEmpty()) {
+                false
+            }else {
+                val strDt = dt.replace(" ", "T")
+
+                val now = LocalDateTime.now()
+                val day = LocalDateTime.parse(strDt)
+
+                val cmp = day.compareTo(now)
+
+                cmp >= 0
             }
         }
 
