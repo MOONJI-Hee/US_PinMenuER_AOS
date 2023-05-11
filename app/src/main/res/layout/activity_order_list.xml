@@ -13,7 +13,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:id="@+id/back"
         android:layout_width="72dp"
@@ -29,6 +28,26 @@
     </LinearLayout>
 
     <TextView
+        style="@style/text18"
+        android:id="@+id/tv"
+        android:text="@string/today"
+        android:textColor="@color/white"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/today"
+        app:layout_constraintTop_toTopOf="@+id/today"
+        app:layout_constraintBottom_toBottomOf="@+id/today"/>
+
+    <TextView
+        style="@style/text18b"
+        android:id="@+id/today"
+        android:text="@string/zero"
+        android:textColor="@color/white"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintTop_toTopOf="@+id/title"
+        app:layout_constraintBottom_toBottomOf="@+id/title"/>
+
+    <TextView
         style="@style/btn_small"
         android:id="@+id/btn_merge"
         android:layout_width="120dp"
@@ -39,28 +58,6 @@
         app:layout_constraintTop_toTopOf="@+id/title"
         app:layout_constraintBottom_toBottomOf="@+id/title"
         app:layout_constraintEnd_toEndOf="parent"/>
-    
-<!--    <LinearLayout-->
-<!--        android:id="@+id/refresh"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="60dp"-->
-<!--        android:gravity="center"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/title"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/title">-->
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginHorizontal="20dp"-->
-<!--            android:src="@drawable/btn_refresh"/>-->
-<!--        <TextView-->
-<!--            style="@style/num_badge18"-->
-<!--            android:id="@+id/badge"-->
-<!--            android:layout_marginStart="-38dp"-->
-<!--            android:layout_marginBottom="10dp"-->
-<!--            android:visibility="invisible"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/call"-->
-<!--            app:layout_constraintBottom_toTopOf="@+id/call" />-->
-<!--    </LinearLayout>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
@@ -69,5 +66,14 @@
         android:background="@color/btn_cancel"
         app:layout_constraintTop_toBottomOf="@+id/title"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        style="@style/text20"
+        android:id="@+id/empty"
+        android:text="@string/no_order_list"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

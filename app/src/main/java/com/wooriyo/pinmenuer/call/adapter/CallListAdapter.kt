@@ -1,9 +1,12 @@
 package com.wooriyo.pinmenuer.call.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.call.adapter.CallListAdapter.ViewHolder
 import com.wooriyo.pinmenuer.databinding.ListCallBinding
 import com.wooriyo.pinmenuer.listener.ItemClickListener
@@ -33,18 +36,26 @@ class CallListAdapter(val dataSet: ArrayList<CallHistoryDTO>): RecyclerView.Adap
 
     class ViewHolder(val binding: ListCallBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind (data : CallHistoryDTO, itemClickListener : ItemClickListener) {
-//            binding.rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            binding.rv.adapter = CallDetailAdapter(data.clist)
+            binding.run {
+                rv.adapter = CallDetailAdapter(data.clist)
 
-            binding.tableNo.text = data.tableNo
+                tableNo.text = data.tableNo
+                regdt.text = data.regDt
 
-            val date = data.regDt.split(" ")[0].replace("-", ".")
-            val time = data.regDt.split(" ")[1].substring(0, 5)
+                if(data.iscompleted == 1) {
+                    tableNo.setBackgroundColor(Color.parseColor("#E0E0E0"))
+                    done.visibility = View.VISIBLE
+                    ivDone.visibility = View.VISIBLE
+                    complete.isEnabled = false
+                }else {
+                    tableNo.setBackgroundResource(R.color.main)
+                    done.visibility = View.GONE
+                    ivDone.visibility = View.GONE
+                    complete.isEnabled = true
+                }
 
-            binding.date.text = date
-            binding.time.text = time
-
-            binding.complete.setOnClickListener { itemClickListener.onItemClick(absoluteAdapterPosition) }
+                complete.setOnClickListener { itemClickListener.onItemClick(absoluteAdapterPosition) }
+            }
         }
 
     }

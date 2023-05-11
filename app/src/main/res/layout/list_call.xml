@@ -1,82 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
     android:layout_height="match_parent"
-    android:layout_marginEnd="16dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_marginEnd="10dp"
+    android:background="@color/white">
+
+    <TextView
+        style="@style/text20"
+        android:id="@+id/tableNo"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:paddingHorizontal="10dp"
+        android:background="@color/main"
+        android:gravity="center_vertical"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="185" />
+
+    <TextView
+        style="@style/text18"
+        android:id="@+id/regdt"
+        android:layout_marginEnd="10dp"
+        tools:text="2022.07.28.18:08"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tableNo"
+        app:layout_constraintBottom_toBottomOf="@+id/tableNo"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginVertical="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/tableNo"
+        app:layout_constraintBottom_toTopOf="@+id/complete" />
+
+    <TextView
+        style="@style/btn"
+        android:id="@+id/complete"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:text="@string/btn_complete"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <View
+        android:id="@+id/done"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#B3FFFFFF"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/tableNo"
+        app:layout_constraintBottom_toTopOf="@+id/complete"/>
+
+    <ImageView
+        android:id="@+id/ivDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-29dp"
+        android:src="@drawable/img_complete"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/done"/>
+
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="300dp"
-        android:layout_height="match_parent"
+        android:id="@+id/arrowUp"
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
         android:background="@color/white"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="69dp"
-            android:background="#5A5A5A"
-            android:paddingHorizontal="20dp">
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tableno"
-                android:textSize="14sp"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toTopOf="@+id/tableNo"
-                app:layout_constraintStart_toStartOf="@+id/tableNo"
-                app:layout_constraintEnd_toEndOf="@+id/tableNo"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed" />
-
-            <TextView
-                android:id="@+id/tableNo"
-                android:layout_width="86dp"
-                android:layout_height="34dp"
-                android:layout_marginTop="4dp"
-                android:gravity="center"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:background="@drawable/bg_r4b"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-            <TextView
-                style="@style/text18"
-                android:id="@+id/date"
-                android:textColor="@color/white"
-                app:layout_constraintTop_toTopOf="@+id/textView"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-            <TextView
-                style="@style/text22b"
-                android:id="@+id/time"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tableNo"
-                app:layout_constraintBottom_toBottomOf="@+id/tableNo" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="4dp" />
-
-        <TextView
-            style="@style/btn"
-            android:id="@+id/complete"
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="25dp"
-            android:layout_marginHorizontal="20dp"
-            android:text="@string/complete"/>
-
+        android:gravity="center"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@+id/tableNo">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_up"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/arrowDown"
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/complete">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_down"/>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

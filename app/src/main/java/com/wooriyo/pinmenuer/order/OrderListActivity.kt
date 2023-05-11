@@ -2,6 +2,7 @@ package com.wooriyo.pinmenuer.order
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wooriyo.pinmenuer.BaseActivity
@@ -36,8 +37,12 @@ class OrderListActivity : BaseActivity() {
         binding = ActivityOrderListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        orderAdapter.setOnCmpltClickListener(object:ItemClickListener{
-            override fun onItemClick(position: Int) {setComplete(position)}
+        orderAdapter.setOnPayClickListener(object:ItemClickListener{
+            override fun onItemClick(position: Int) {payOrder(position)}
+        })
+
+        orderAdapter.setOnDeleteListener(object:ItemClickListener{
+            override fun onItemClick(position: Int) {delete(position)}
         })
 
         binding.rv.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false)
@@ -125,7 +130,15 @@ class OrderListActivity : BaseActivity() {
                         1 -> {
                             orderList.clear()
                             orderList.addAll(result.orderlist)
-                            orderAdapter.notifyDataSetChanged()
+
+                            if(orderList.isEmpty()) {
+                                binding.empty.visibility = View.VISIBLE
+                            }else {
+                                binding.empty.visibility = View.GONE
+                                binding.today.text = orderList.size.toString()
+                                orderList.sortBy { it.iscompleted }
+                                orderAdapter.notifyDataSetChanged()
+                            }
                         }
                         else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                     }
@@ -141,7 +154,7 @@ class OrderListActivity : BaseActivity() {
     }
 
     // 주문 완료 처리 (결제)
-    fun setComplete(position: Int) {
+    fun payOrder(position: Int) {
         ApiClient.service.payOrder(storeidx, orderList[position].idx ,"Y").enqueue(object:Callback<ResultDTO>{
             override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                 Log.d(TAG, "주문 완료 url : $response")
@@ -151,10 +164,7 @@ class OrderListActivity : BaseActivity() {
                 when(result.status){
                     1 -> {
                         orderList[position].iscompleted = 1
-                        orderList.sortBy {
-                            it.iscompleted
-                            it.regdt
-                        }
+                        orderList.sortBy { it.iscompleted }
                         orderAdapter.notifyItemChanged(position)
                     }
                     else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()

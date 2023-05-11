@@ -27,10 +27,15 @@ class CateAdapter(val dataSet: ArrayList<CategoryDTO>, val type: Int) : Recycler
         holder.bind(dataSet[position])
 
         if(type == 1) {
-            if(selPos == position)
+            if(selPos == position) {
                 holder.binding.selected.visibility = View.VISIBLE
-            else
+                holder.binding.subName.isSelected = true
+//                binding.subName.setTextColor(Color.WHITE)
+            } else {
                 holder.binding.selected.visibility = View.GONE
+                holder.binding.subName.isSelected = false
+//                binding.subName.setTextColor(Color.parseColor("#C4C4C4"))
+            }
 
             holder.binding.layout.setOnClickListener{
                 val beforePos = selPos
@@ -56,10 +61,12 @@ class CateAdapter(val dataSet: ArrayList<CategoryDTO>, val type: Int) : Recycler
 
             if (data.buse == "N") {
                 binding.name.setTextColor(Color.parseColor("#696969"))
-                binding.subName.setTextColor(Color.parseColor("#696969"))
+//                binding.subName.setTextColor(Color.parseColor("#696969"))
+                binding.subName.isEnabled = false
             } else {
                 binding.name.setTextColor(Color.WHITE)
-                binding.subName.setTextColor(Color.WHITE)
+//                binding.subName.setTextColor(Color.parseColor("#C4C4C4"))
+                binding.subName.isEnabled = true
             }
 
             if(absoluteAdapterPosition == lastPos)

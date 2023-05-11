@@ -140,7 +140,14 @@ class CallListActivity : BaseActivity(), View.OnClickListener {
                         1 -> {
                             callHistory.clear()
                             callHistory.addAll(result.callList)
-                            callListAdapter.notifyDataSetChanged()
+
+                            if(callHistory.isEmpty()) {
+                                binding.empty.visibility = View.VISIBLE
+                            }else {
+                                binding.empty.visibility = View.GONE
+                                callHistory.sortBy { it.iscompleted }
+                                callListAdapter.notifyDataSetChanged()
+                            }
                         }
                         else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                     }
@@ -165,10 +172,7 @@ class CallListActivity : BaseActivity(), View.OnClickListener {
                 when(result.status){
                     1 -> {
                         callHistory[position].iscompleted = 1
-                        callHistory.sortBy {
-                            it.iscompleted
-                            it.regDt
-                        }
+                        callHistory.sortBy { it.iscompleted }
                         callListAdapter.notifyItemChanged(position)
                     }
                     else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
