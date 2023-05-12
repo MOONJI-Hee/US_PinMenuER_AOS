@@ -14,6 +14,7 @@ import com.wooriyo.pinmenuer.util.AppHelper
 
 class GoodsAdapter(val dataSet: ArrayList<GoodsDTO>): Adapter<RecyclerView.ViewHolder>() {
     lateinit var itemClickListener: ItemClickListener
+    lateinit var deleteListener: ItemClickListener
 
     var selPos = 0
     var mode = 0
@@ -22,8 +23,13 @@ class GoodsAdapter(val dataSet: ArrayList<GoodsDTO>): Adapter<RecyclerView.ViewH
         this.itemClickListener = itemClickListener
     }
 
+    fun setOnDeleteListener(deleteListener: ItemClickListener) {
+        this.deleteListener = deleteListener
+    }
+
     fun setMenuMode(mode: Int) {
         this.mode = mode
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -32,7 +38,7 @@ class GoodsAdapter(val dataSet: ArrayList<GoodsDTO>): Adapter<RecyclerView.ViewH
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ViewHolder).bind(dataSet[position], dataSet.size-1)
+        (holder as ViewHolder).bind(dataSet[position], mode, dataSet.size-1)
 
         if(selPos == position) {
             holder.binding.layout.setBackgroundResource(R.drawable.gradient_main)
@@ -50,20 +56,20 @@ class GoodsAdapter(val dataSet: ArrayList<GoodsDTO>): Adapter<RecyclerView.ViewH
                 notifyItemChanged(selPos)
                 notifyItemChanged(beforePos)
 
-                if(mode == 3) {
-                    // 드래그 할 수 있도록 설정
-                } else
+                if(mode == 4) { // 삭제모드일 때
+                    deleteListener.onItemClick(position)
+                } else  // 그 외 추가, 수정모드일 때
                     itemClickListener.onItemClick(position)
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return dataSet.size
+        return if(mode == 4) dataSet.size-1 else dataSet.size
     }
 
     class ViewHolder(val binding:ListMenuBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: GoodsDTO, lastIndex: Int) {
+        fun bind(data: GoodsDTO, mode: Int, lastIndex: Int) {
             binding.run {
                 if(absoluteAdapterPosition == lastIndex) {
                     menu.visibility = View.GONE

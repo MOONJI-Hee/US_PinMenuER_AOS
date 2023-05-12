@@ -15,6 +15,7 @@ import com.wooriyo.pinmenuer.databinding.ListStoreBinding
 import com.wooriyo.pinmenuer.model.StoreDTO
 import com.wooriyo.pinmenuer.store.StoreMenuActivity
 import com.wooriyo.pinmenuer.store.StoreSetActivity
+import com.wooriyo.pinmenuer.util.AppHelper.Companion.dateNowCompare
 
 class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -52,13 +53,20 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
                     storeName2.text = data.name2
                 }
 
-                // TODO PAY ITEM 넣기
-                if(data.paydate.isEmpty()) {
-                    storePayInfo.visibility = View.INVISIBLE
-                    storePayNo.visibility = View.VISIBLE
-                }else{
+                if(data.payuse == "Y" && dateNowCompare(data.paydate)) {
+                    storeMenu.isEnabled = true
+                    storeName.isEnabled = true
+                    storeUdt.isEnabled = true
                     storePayInfo.visibility = View.VISIBLE
+                    storePayDt.visibility = View.VISIBLE
                     storePayNo.visibility = View.GONE
+                }else {
+                    storeMenu.isEnabled = false
+                    storeName.isEnabled = false
+                    storeUdt.isEnabled = false
+                    storePayInfo.visibility = View.INVISIBLE
+                    storePayDt.visibility = View.INVISIBLE
+                    storePayNo.visibility = View.VISIBLE
                 }
 
                 storePayDt.text = data.paydate.split(" ")[0].replace("-", ".")

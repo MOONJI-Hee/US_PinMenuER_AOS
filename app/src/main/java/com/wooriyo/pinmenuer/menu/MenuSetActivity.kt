@@ -129,6 +129,10 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         binding.thum2.setOnClickListener(this)
         binding.thum3.setOnClickListener(this)
 
+        // 우측 메뉴 삭제 확인창 관련
+        binding.delCancel.setOnClickListener(this)
+        binding.delSave.setOnClickListener(this)
+
         getMenu()
     }
 
@@ -172,6 +176,15 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                     binding.headerArea.visibility = View.GONE
                     binding.rightArea.visibility = View.GONE
                     binding.btnSeq.isEnabled = true
+
+                    goods = selGoodsList[0]
+                    if(selGoodsList.size > 1) {
+                        mode = 1
+                        setDetail()
+                    }else
+                        mode = 0
+                    goodsAdapter.selPos = 0
+                    goodsAdapter.setMenuMode(mode)
                 }else {         // 삭제모드 아닐 때 > 삭제모드로 변경
                     v.setBackgroundResource(R.drawable.bg_btn_r6_grd)
                     v.text = getString(R.string.menu_delete_cmplt)
@@ -182,8 +195,26 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                     binding.seqInfo.visibility = View.GONE
                     binding.delConfirm.visibility = View.GONE
                     binding.btnSeq.isEnabled = false
+
+                    clearDetail()
+                    goodsAdapter.selPos = -1
+                    goodsAdapter.setMenuMode(mode)
                 }
             }
+            // 우측 메뉴 삭제 확인창 관련
+            binding.delCancel -> {
+                binding.delConfirm.visibility = View.GONE
+
+                val delPos = goodsAdapter.selPos
+                goodsAdapter.selPos = -1
+                goodsAdapter.notifyItemChanged(delPos)
+            }
+
+            binding.delSave -> {
+                val delPos = goodsAdapter.selPos
+                delGoods(selGoodsList[delPos].idx, delPos)
+            }
+
             // 중앙 메뉴 상세 관련
             binding.optRequire -> { showOptDialog(-1, OptionDTO(1)) }
             binding.optChoice -> { showOptDialog(-1, OptionDTO(0)) }
@@ -230,7 +261,15 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                 if(position < selGoodsList.size-1) {
                     mode = 1
                     setDetail()
-                }
+                }else
+                    mode = 0
+            }
+        })
+
+        goodsAdapter.setOnDeleteListener(object : ItemClickListener{
+            override fun onItemClick(position: Int) {
+                binding.delConfirm.visibility = View.VISIBLE
+                binding.delName.text = getString(R.string.menu_delete_name).format(selGoodsList[position].name)
             }
         })
 
@@ -258,7 +297,8 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         if(selGoodsList.size > 1) {
             mode = 1
             setDetail()
-        }
+        }else
+            mode = 0
     }
 
     fun showOptDialog(position: Int, optionDTO: OptionDTO) {
@@ -387,7 +427,6 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun clearDetail() {
-        mode = 0
         optList.clear()
         binding.run {
             etName.text.clear()
@@ -585,7 +624,6 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                 Log.d(TAG, "메뉴 수정 url : $response")
                 if(!response.isSuccessful) return
-                if(!response.isSuccessful) return
 
                 val result = response.body() ?: return
                 when(result.status) {
@@ -593,7 +631,10 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                         Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
                         allGoodsList.remove(selGoodsList[position])
                         selGoodsList.removeAt(position)
+                        goodsAdapter.selPos = -1
                         goodsAdapter.notifyItemRemoved(position)
+
+                        binding.delConfirm.visibility = View.GONE
                     }
                     else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                 }

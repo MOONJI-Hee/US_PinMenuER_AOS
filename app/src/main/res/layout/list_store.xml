@@ -12,14 +12,14 @@
         android:layout_width="240dp"
         android:layout_height="200dp"
         android:paddingHorizontal="10dp"
-        android:background="@drawable/bg_btn_r6"
+        android:background="@drawable/bg_r6_btn_ns"
         android:orientation="vertical"
         android:gravity="center">
         <TextView
             android:id="@+id/storeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/selector_text"
             android:textStyle="bold"
             android:textSize="28sp"
             android:maxLines="1"
@@ -39,14 +39,13 @@
             android:autoSizeMaxTextSize="28sp"/>
     </LinearLayout>
 
-
-
     <TextView
         style="@style/btn"
         android:id="@+id/storeUdt"
         android:layout_width="240dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_r6_btn_ns"
         android:text="@string/store_udt"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout

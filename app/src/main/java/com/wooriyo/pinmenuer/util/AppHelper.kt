@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity.INPUT_METHOD_SERVICE
 import java.text.DecimalFormat
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 
 // 자주 쓰는 메소드 모음 - 문지희 (2022.10 갱신)
@@ -65,18 +66,23 @@ class AppHelper {
             return if(dt.isNullOrEmpty()) {
                 false
             }else {
-                val strDt = dt.replace(" ", "T")
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val strDt = dt.replace(" ", "T")
 
-                val now = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    LocalDateTime.now()
-                } else {
-                    TODO("VERSION.SDK_INT < O")
+                    val now = LocalDateTime.now()
+                    val day = LocalDateTime.parse(strDt)
+
+                    val cmp = day.compareTo(now)
+
+                    cmp >= 0
+                }else {
+                    val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+
+                    val now = System.currentTimeMillis()
+                    val day: Long = dateFormat.parse(dt)?.time ?: 0L
+
+                    day - now >= 0
                 }
-                val day = LocalDateTime.parse(strDt)
-
-                val cmp = day.compareTo(now)
-
-                cmp >= 0
             }
         }
 
