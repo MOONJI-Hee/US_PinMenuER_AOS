@@ -73,7 +73,7 @@ class BgDialog(context: Context): BaseDialog(context) {
                 when(result.status) {
                     1 -> {
                         store.bgcolor = selColor
-                        Toast.makeText(context, R.string.complete, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, R.string.msg_complete, Toast.LENGTH_SHORT).show()
                         dismiss()
                     }
                     else -> Toast.makeText(context, result.msg, Toast.LENGTH_SHORT).show()

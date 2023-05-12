@@ -58,7 +58,7 @@ class ViewModeDialog(context: Context): BaseDialog(context) {   // 메뉴판 뷰
                 when(result.status) {
                     1 -> {
                         store.viewmode = selMode
-                        Toast.makeText(context, R.string.complete, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, R.string.msg_complete, Toast.LENGTH_SHORT).show()
                         dismiss()
                     }
                     else -> Toast.makeText(context, result.msg, Toast.LENGTH_SHORT).show()

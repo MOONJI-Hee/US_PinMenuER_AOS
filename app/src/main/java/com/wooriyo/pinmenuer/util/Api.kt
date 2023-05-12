@@ -323,6 +323,15 @@ interface Api {
         @Query("viewmode") viewmode: String // b : 기본, p: 3x3
     ): Call<ResultDTO>
 
+    // 메뉴판 디자인(테마) 설정
+    @GET("m/set_thema.php")
+    fun setThema(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("thema_color") color: String, // d : 어두운 배경(디폴트), g : 은색 배경, l : 밝은 배경
+        @Query("viewmode") viewmode: String // b : 기본, p: 3x3
+    ): Call<ResultDTO>
+
     // 새로운 주문 유무 확인
     @GET("m/udtOrdStatus.php")
     fun getOrdStatus(

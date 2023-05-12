@@ -67,7 +67,11 @@ class AppHelper {
             }else {
                 val strDt = dt.replace(" ", "T")
 
-                val now = LocalDateTime.now()
+                val now = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    LocalDateTime.now()
+                } else {
+                    TODO("VERSION.SDK_INT < O")
+                }
                 val day = LocalDateTime.parse(strDt)
 
                 val cmp = day.compareTo(now)

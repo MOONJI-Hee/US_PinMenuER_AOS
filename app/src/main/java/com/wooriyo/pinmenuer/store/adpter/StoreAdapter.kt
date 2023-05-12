@@ -53,7 +53,7 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
                 }
 
                 // TODO PAY ITEM 넣기
-                if(data.paydt.isEmpty()) {
+                if(data.paydate.isEmpty()) {
                     storePayInfo.visibility = View.INVISIBLE
                     storePayNo.visibility = View.VISIBLE
                 }else{
@@ -61,7 +61,7 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
                     storePayNo.visibility = View.GONE
                 }
 
-                storePayDt.text = data.paydt.split(" ")[0].replace("-", ".")
+                storePayDt.text = data.paydate.split(" ")[0].replace("-", ".")
 
                 storeMenu.setOnClickListener {
                     MyApplication.allCateList.clear()

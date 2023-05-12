@@ -88,10 +88,10 @@
 
     <!-- 회원 가입 & 수정  -->
     <string name="email">아이디(이메일)</string>
-    <string name="email_hint">이메일을 입력해주세요.</string>
-    <string name="password_hint">8자리 이상 입력해주세요.</string>
+    <string name="email_hint">이메일을 입력해 주세요.</string>
+    <string name="password_hint">8자리 이상 입력해 주세요.</string>
     <string name="arpayo_id">알파요 아이디</string>
-    <string name="arpayo_id_hint">알파요 ID(이메일) 입력해주세요.</string>
+    <string name="arpayo_id_hint">알파요 ID(이메일) 입력해 주세요.</string>
     <string name="signup_info">실시간 자동시급계산 앱 알파요를 이용중이신 사장님이시라면,\n핀메뉴 유료 결제에 따른 추가 보상을 알파요 앱으로 받아보실 수 있습니다.\n회원가입 이후에도 알파요 앱을 연동하여 추가 보상을 받으실 수 있습니다.</string>
     <string name="check_id">중복체크</string>
     <string name="unable">사용불가</string>
@@ -116,9 +116,9 @@
 
     <!--  매장 등록 & 수정  -->
     <string name="store_name">매장명</string>
-    <string name="store_name_hint">매장명을 입력해주세요.</string>
+    <string name="store_name_hint">매장명을 입력해 주세요.</string>
     <string name="store_addr">매장 주소</string>
-    <string name="store_addr_hint">우측 지도 검색을 눌러 주소를 입력해주세요.</string>
+    <string name="store_addr_hint">우측 지도 검색을 눌러 주소를 입력해 주세요.</string>
     <string name="store_map">지도검색</string>
     <string name="map_hint">주소를 입력하세요.</string>
     <string name="store_addr_info">매장 주소는 매우 중요한 정보입니다.\n매장 주소를 토대로 주변 고객분들께 재방문, 신규방문 이벤트가 진행됩니다.\n매장 주소는 지도에서 정확하게 선택해 주십시요.</string>
@@ -131,7 +131,7 @@
     <string name="store_tel_hint">예) 1688-2315</string>
     <string name="store_insta">인스타그램 계정</string>
     <string name="at"><![CDATA[@]]></string>
-    <string name="store_insta_hint">계정을 입력해주세요</string>
+    <string name="store_insta_hint">계정을 입력해 주세요</string>
     <string name="store_delivery">배달 가능 여부</string>
     <string name="store_delivery_y">배달 가능</string>
     <string name="store_delivery_n">배달 없음</string>
@@ -157,13 +157,13 @@
     <string name="store_break_set">브레이크타임 설정</string>
     <string name="store_holiday_set">휴일 설정</string>
     <string name="store_holiday_name">휴일 명칭</string>
-    <string name="store_holiday_name_hint">명칭을 입력해주세요.</string>
+    <string name="store_holiday_name_hint">명칭을 입력해 주세요.</string>
     <string name="store_holiday_set_info">‘월’을 입력하지 않으면 ‘매월’로 표시합니다.</string>
     <!--  매장 대표 사진 -->
     <string name="store_img">매장사진</string>
     <string name="store_rep_img">대표 사진</string>
     <string name="store_img_reg">등록 및 관리</string>
-    <string name="store_img_reg_hint">[ 등록 및 관리 ] 버튼으로\n이미지를 등록해주세요</string>
+    <string name="store_img_reg_hint">[ 등록 및 관리 ] 버튼으로\n이미지를 등록해 주세요</string>
     <string name="store_img_info"><b>매장 대표 사진</b>\n매장을 대표할 이미지를 올려주세요.\n음식 사진 혹은 매장 내부 혹은 외부 사진을 올려주세요.</string>
 
     <!--  메뉴 선택 (메인)  -->
@@ -182,9 +182,9 @@
     <string name="category_info_seq"><b>카테고리 순서 변경</b>은\n변경하고자하는 카테고리를 누른 후 좌우 버튼을 눌러 순서를 변경합니다.\n변경 후에는 [ 저장 ] 버튼을 눌러주셔야 변경된 내용이 적용됩니다.</string>
     <string name="category_info_udt"><b>카테고리 [ 수정 ] [ 삭제 ] [ 숨기기 ]를 할 경우</b>에는\n변경하고자하는 카테고리를 누른 후 변경 팝업창이 나오면 텍스트 수정, 삭제, 카테고리 숨김을 진행하실 수 있습니다.</string>
     <string name="category_name">카테고리 명칭</string>
-    <string name="category_name_hint">명칭을 입력해주세요.</string>
+    <string name="category_name_hint">명칭을 입력해 주세요.</string>
     <string name="category_exp">카테고리 설명</string>
-    <string name="category_exp_hint">설명 혹은 영문을 입력해주세요.</string>
+    <string name="category_exp_hint">설명 혹은 영문을 입력해 주세요.</string>
     <string name="category_dialog_info1"><b>카테고리 순서 변경이 필요한 경우</b>에는\n우측 상단 [ 카테고리 순서 변경 ] 버튼을 누른 후\n변경하고자하는 카테고리를 선택하여 좌우로 이동시켜 순서를 변경합니다.\n변경 후에는 [ 저장 ] 버튼을 눌러주셔야 변경된 내용이 적용됩니다.</string>
     <string name="category_dialog_info2"><b>카테고리 [ 숨김 ] 필요한 경우</b>에는\n우측 상단에 있는 [ 숨기기 ] 옆 Off 버튼을 On으로 변경 후 저장을 눌러주세요.\n삭제는 카테고리에 입력된 모든 메뉴 정보가 삭제되지만,\n[ 숨기기 ]는 고객에게 보여지지 않도록 설정됩니다.</string>
     <string name="category_hide">숨기기</string>
@@ -202,8 +202,8 @@
     <string name="menu_delete_cmplt">삭제완료</string>
     <string name="menu_delete_name">[ %s ]</string>
     <string name="menu_delete_info">메뉴를 삭제하시겠습니까?\n삭제를 누르시면 입력한 모든 정보가 삭제되며,\n삭제 이후에는 복원하실 수 없습니다.</string>
-    <string name="menu_name_hint">상품명을 입력해주세요.</string>
-    <string name="menu_exp_hint">상품 설명을 입력해주세요.\n두 줄 이상으로 상품 설명을 입력하실 수 있습니다.\n외국어 설명이 필요한 경우 줄을 바꿔 입력하여 사용할 수 있습니다.</string>
+    <string name="menu_name_hint">상품명을 입력해 주세요.</string>
+    <string name="menu_exp_hint">상품 설명을 입력해 주세요.\n두 줄 이상으로 상품 설명을 입력하실 수 있습니다.\n외국어 설명이 필요한 경우 줄을 바꿔 입력하여 사용할 수 있습니다.</string>
     <string name="cookingTime">조리시간</string>
     <string name="menu_img_reg_info">동영상은 첫번째 사진등록에 해주십시오. (사진 크기 최대 5BM / 동영상 최대 10MB)</string>
     <string name="menu_vid_reg">동영상 / 사진 등록</string>
@@ -230,12 +230,12 @@
     <string name="opt_udt_chc">선택옵션 변경</string>
     <string name="opt_req_name">필수옵션명</string>
     <string name="opt_chc_name">선택옵션명</string>
-    <string name="opt_name_hint">옵션 이름을 입력해주세요.</string>
-    <string name="opt_hint">옵션을 입력해주세요.</string>
+    <string name="opt_name_hint">옵션 이름을 입력해 주세요.</string>
+    <string name="opt_hint">옵션을 입력해 주세요.</string>
     <string name="opt_req_info1"><b>필수 옵션</b>은 사용자가 옵션을 하나만 선택할 수 있습니다.</string>
-    <string name="opt_req_info2"><b>다중 선택 옵션</b>이 필요하면 팝업을 닫고, [ + 선택 옵션 ] 버튼으로 옵션을 추가해주세요.</string>
+    <string name="opt_req_info2"><b>다중 선택 옵션</b>이 필요하면 팝업을 닫고, [ + 선택 옵션 ] 버튼으로 옵션을 추가해 주세요.</string>
     <string name="opt_chc_info1"><b>선택 옵션</b>은 사용자가 옵션을 다중 선택할 수 있습니다.</string>
-    <string name="opt_chc_info2"><b>한가지 선택</b>만 가능한 옵션이 필요하면 팝업을 닫고, [ + 필수 옵션 ] 버튼으로 옵션을 추가해주세요.</string>
+    <string name="opt_chc_info2"><b>한가지 선택</b>만 가능한 옵션이 필요하면 팝업을 닫고, [ + 필수 옵션 ] 버튼으로 옵션을 추가해 주세요.</string>
     <string name="opt_udt_info1">붉은색 글씨 [삭제]를 누르시면 <b>해당 옵션</b>이 <b>삭제</b>됩니다.</string>
     <string name="opt_udt_info2">하단에 [삭제]버튼은 <b>옵션 전체</b>가 <b>삭제</b>됩니다.</string>
 
@@ -278,7 +278,7 @@
     <string name="call_add">호출목록 추가</string>
     <string name="call_udt">호출목록 수정</string>
     <string name="call_name">목록명</string>
-    <string name="call_name_hint">목록명을 입력해주세요.</string>
+    <string name="call_name_hint">목록명을 입력해 주세요.</string>
 
     <!--  타이틀  -->
     <string name="title_login">핀메뉴 로그인</string>
@@ -309,22 +309,22 @@
     <string name="no_call_list">호출정보가 없습니다.</string>
 
     <!--  토스트 메세지  -->
-    <string name="msg_retry">다시 시도해주세요.</string>
+    <string name="msg_retry">다시 시도해 주세요.</string>
     <string name="msg_complete">완료되었습니다.</string>
-    <string name="msg_no_id">아이디를 입력해주세요.</string>
-    <string name="msg_no_pw">비밀번호를 입력해주세요.</string>
-    <string name="msg_no_addr">주소를 입력해주세요.</string>
-    <string name="msg_check_addr">주소를 확인해주세요.</string>
+    <string name="msg_no_id">아이디를 입력해 주세요.</string>
+    <string name="msg_no_pw">비밀번호를 입력해 주세요.</string>
+    <string name="msg_no_addr">주소를 입력해 주세요.</string>
+    <string name="msg_check_addr">주소를 확인해 주세요.</string>
     <string name="msg_reg_store_first">매장 등록을 완료한 후 이용해주시기 바랍니다.</string>
-    <string name="msg_no_endtm">시간을 확인해주세요.</string>
+    <string name="msg_no_endtm">시간을 확인해 주세요.</string>
     <string name="msg_no_worktm">영업시간을 입력해주시기 바랍니다.</string>
     <string name="msg_no_brktm">브레이크 타임을 입력해주시기 바랍니다.</string>
-    <string name="msg_no_date">날짜를 확인해주세요.</string>
+    <string name="msg_no_date">날짜를 확인해 주세요.</string>
     <string name="msg_no_category">카테고리는 하나 이상 등록해주시기 바랍니다.</string>
-    <string name="msg_no_img">이미지를 등록해주세요.</string>
-    <string name="msg_no_name">명칭을 입력해주세요.</string>
-    <string name="msg_no_item_name">목록명을 입력해주세요.</string>
-    <string name="msg_no_goods_name">상품명을 입력해주세요.</string>
+    <string name="msg_no_img">이미지를 등록해 주세요.</string>
+    <string name="msg_no_name">명칭을 입력해 주세요.</string>
+    <string name="msg_no_item_name">목록명을 입력해 주세요.</string>
+    <string name="msg_no_goods_name">상품명을 입력해 주세요.</string>
     <string name="backpress">뒤로 가기 버튼을 한 번 더 누르시면 종료됩니다.</string>
     <string name="msg_no_search_result">검색 결과가 없습니다.</string>
     <string name="msg_prepare">준비중입니다.</string>

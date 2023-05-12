@@ -72,7 +72,7 @@ class CallDialog(context: Context, val position: Int, val callDTO: CallDTO): Bas
                     when(result.status) {
                         1 -> {
                             callDTO.idx = result.idx
-                            Toast.makeText(context, R.string.complete, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, R.string.msg_complete, Toast.LENGTH_SHORT).show()
                             dialogListener.onCallSet(position, callDTO)
                             dismiss()
                         }
@@ -101,7 +101,7 @@ class CallDialog(context: Context, val position: Int, val callDTO: CallDTO): Bas
                 if(result != null) {
                     when(result.status) {
                         1 -> {
-                            Toast.makeText(context, R.string.complete, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, R.string.msg_complete, Toast.LENGTH_SHORT).show()
                             dialogListener.onCallSet(position, callDTO)
                             dismiss()
                         }
@@ -129,7 +129,7 @@ class CallDialog(context: Context, val position: Int, val callDTO: CallDTO): Bas
                 if(result != null) {
                     when(result.status) {
                         1 -> {
-                            Toast.makeText(context, R.string.complete, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, R.string.msg_complete, Toast.LENGTH_SHORT).show()
                             dialogListener.onItemDelete(position)
                             dismiss()
                         }
