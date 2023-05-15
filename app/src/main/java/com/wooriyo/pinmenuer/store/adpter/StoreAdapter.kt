@@ -56,6 +56,7 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
                 if(data.payuse == "Y" && dateNowCompare(data.paydate)) {
                     storeMenu.isEnabled = true
                     storeName.isEnabled = true
+                    storeName2.isEnabled = true
                     storeUdt.isEnabled = true
                     storePayInfo.visibility = View.VISIBLE
                     storePayDt.visibility = View.VISIBLE
@@ -63,6 +64,7 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
                 }else {
                     storeMenu.isEnabled = false
                     storeName.isEnabled = false
+                    storeName2.isEnabled = false
                     storeUdt.isEnabled = false
                     storePayInfo.visibility = View.INVISIBLE
                     storePayDt.visibility = View.INVISIBLE
