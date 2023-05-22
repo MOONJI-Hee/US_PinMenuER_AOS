@@ -22,6 +22,7 @@
         <entry key="app/src/main/res/drawable/bg_r6_btn_ns.xml" value="0.5045" />
         <entry key="app/src/main/res/drawable/bg_r6w.xml" value="0.565" />
         <entry key="app/src/main/res/drawable/bg_r6w75.xml" value="0.569" />
+        <entry key="app/src/main/res/drawable/bg_r6w90.xml" value="0.501" />
         <entry key="app/src/main/res/drawable/gradient_main.xml" value="0.487" />
         <entry key="app/src/main/res/drawable/gradient_main_90.xml" value="0.487" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.569" />
@@ -45,7 +46,7 @@
         <entry key="app/src/main/res/layout/activity_category_set.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_find_pwd.xml" value="0.28828125" />
         <entry key="app/src/main/res/layout/activity_item_detail.xml" value="0.28828125" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_map.xml" value="0.4068181818181818" />
         <entry key="app/src/main/res/layout/activity_menu_set.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_menu_ui.xml" value="0.25" />

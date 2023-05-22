@@ -54,12 +54,6 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    // 바깥화면 터치하면 키보드 내리기
-    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        AppHelper.hideKeyboard(this, currentFocus, ev)
-        return super.dispatchTouchEvent(ev)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStoreSetBinding.inflate(layoutInflater)
@@ -92,10 +86,6 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
         binding.btnHour.setOnClickListener(this)
         binding.btnImg.setOnClickListener(this)
         binding.btnMap.setOnClickListener(this)
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     override fun onClick(p0: View?) {
