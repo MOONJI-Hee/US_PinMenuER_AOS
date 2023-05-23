@@ -3,6 +3,8 @@ package com.wooriyo.pinmenuer.member
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -14,6 +16,7 @@ import com.wooriyo.pinmenuer.model.MemberDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.util.ApiClient
 import com.wooriyo.pinmenuer.util.AppHelper
+import com.wooriyo.pinmenuer.util.AppHelper.Companion.verifyEmail
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,19 +26,40 @@ class SignUpActivity : BaseActivity(), View.OnClickListener {
     val mActivity = this@SignUpActivity
     lateinit var binding : ActivitySignUpBinding
 
+    var idChecked = false
+    var arpaLinked = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.etId.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                if(idChecked) {
+                    idChecked = false
+                    binding.checkResult.text = ""
+                }
+            }
+        })
+
+        binding.etArpayo.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                binding.linkResult.text = ""
+                if(arpaLinked) {
+                    arpaLinked = false
+                }
+            }
+        })
+
         binding.back.setOnClickListener(this)
         binding.save.setOnClickListener(this)
         binding.btnCheckId.setOnClickListener(this)
         binding.btnArpayo.setOnClickListener(this)
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     override fun onClick(p0: View?) {
@@ -56,6 +80,26 @@ class SignUpActivity : BaseActivity(), View.OnClickListener {
         val osvs = MyApplication.osver
         val appvs = MyApplication.appver
         val md = MyApplication.md
+
+        if(userid.isEmpty() || userid == "") {
+            Toast.makeText(mActivity, R.string.msg_no_id, Toast.LENGTH_SHORT).show()
+            return
+        }else if (!verifyEmail(userid)) {
+            Toast.makeText(mActivity, R.string.msg_typemiss_id, Toast.LENGTH_SHORT).show()
+            return
+        }else if(!idChecked) {
+            Toast.makeText(mActivity, R.string.msg_no_checked, Toast.LENGTH_SHORT).show()
+            return
+        }else if(pass.isEmpty() || pass == "") {
+            Toast.makeText(mActivity, R.string.msg_no_pw, Toast.LENGTH_SHORT).show()
+            return
+        }else if(!AppHelper.verifyPw(pass)) {
+            Toast.makeText(mActivity, R.string.msg_typemiss_pw, Toast.LENGTH_SHORT).show()
+            return
+        }else if ((arpayoId.isNotEmpty() && arpayoId != "") && !arpaLinked) {
+            Toast.makeText(mActivity, R.string.msg_no_linked, Toast.LENGTH_SHORT).show()
+            return
+        }
 
         ApiClient.service.regMember(userid, arpayoId, pass, token, os, osvs, appvs, md)
             .enqueue(object : Callback<MemberDTO>{
@@ -87,6 +131,9 @@ class SignUpActivity : BaseActivity(), View.OnClickListener {
         if(userid.isEmpty() || userid == "") {
             Toast.makeText(mActivity, R.string.msg_no_id, Toast.LENGTH_SHORT).show()
             return
+        }else if (!verifyEmail(userid)) {
+            Toast.makeText(mActivity, R.string.msg_typemiss_id, Toast.LENGTH_SHORT).show()
+            return
         }
 
         ApiClient.service.checkId(userid)
@@ -100,10 +147,12 @@ class SignUpActivity : BaseActivity(), View.OnClickListener {
                         if (result.status == 1) {
                             binding.checkResult.text = getString(R.string.able)
                             binding.checkResult.setTextColor(Color.parseColor("#FF6200"))
+                            idChecked = true
                         } else {
                             Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                             binding.checkResult.text = getString(R.string.unable)
                             binding.checkResult.setTextColor(Color.parseColor("#5A5A5A"))
+                            idChecked = false
                         }
                     }
                 }
@@ -135,10 +184,12 @@ class SignUpActivity : BaseActivity(), View.OnClickListener {
                         if (result.status == 1) {
                             binding.linkResult.text = getString(R.string.link_after)
                             binding.linkResult.setTextColor(Color.parseColor("#FF6200"))
+                            arpaLinked = true
                         } else {
                             Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                             binding.linkResult.text = getString(R.string.link_fail)
                             binding.linkResult.setTextColor(Color.parseColor("#5A5A5A"))
+                            arpaLinked = false
                         }
                     }
                 }

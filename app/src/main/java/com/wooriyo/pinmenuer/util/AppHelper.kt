@@ -16,6 +16,8 @@ import java.time.LocalDateTime
 // 자주 쓰는 메소드 모음 - 문지희 (2022.10 갱신)
 class AppHelper {
     companion object {
+        private val emailReg = "^[_a-zA-Z0-9-\\.]+@[\\.a-zA-Z0-9-]+\\.[a-zA-Z]+$".toRegex()
+        private val pwReg = "^(?=.*[a-zA-Z0-9]).{8,}$".toRegex()
 
         // 네비게이션바 숨기기
         fun hideInset(activity: Activity) {
@@ -42,6 +44,14 @@ class AppHelper {
                     focusView.clearFocus()
                 }
             }
+        }
+
+        fun verifyEmail(email: String):Boolean {
+            return email.matches(emailReg)
+        }
+
+        fun verifyPw(pw: String): Boolean {
+            return pw.matches(pwReg)
         }
 
         val dec = DecimalFormat("00")

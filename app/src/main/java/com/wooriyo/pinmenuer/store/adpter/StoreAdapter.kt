@@ -12,18 +12,24 @@ import com.wooriyo.pinmenuer.config.AppProperties.Companion.VIEW_TYPE_ADD
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.VIEW_TYPE_COM
 import com.wooriyo.pinmenuer.databinding.ListStoreAddBinding
 import com.wooriyo.pinmenuer.databinding.ListStoreBinding
+import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.model.StoreDTO
 import com.wooriyo.pinmenuer.store.StoreMenuActivity
 import com.wooriyo.pinmenuer.store.StoreSetActivity
 import com.wooriyo.pinmenuer.util.AppHelper.Companion.dateNowCompare
 
 class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    lateinit var itemClickListener: ItemClickListener
+
+    fun setOnItemClickListener(itemClickListener: ItemClickListener) {
+        this.itemClickListener = itemClickListener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding = ListStoreBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         val binding_add = ListStoreAddBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-        return if(viewType == VIEW_TYPE_ADD) AddViewHolder(parent.context, binding_add) else ViewHolder(parent.context, binding)
+        return if(viewType == VIEW_TYPE_ADD) AddViewHolder(parent.context, binding_add) else ViewHolder(parent.context, binding, itemClickListener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -41,7 +47,7 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
         return if(position == itemCount -1) VIEW_TYPE_ADD else VIEW_TYPE_COM
     }
 
-    class ViewHolder(val context: Context, val binding: ListStoreBinding): RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val context: Context, val binding: ListStoreBinding, val itemClickListener: ItemClickListener): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: StoreDTO) {
             binding.run {
                 storeName.text = data.name
@@ -74,10 +80,7 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
                 storePayDt.text = data.paydate.split(" ")[0].replace("-", ".")
 
                 storeMenu.setOnClickListener {
-                    MyApplication.allCateList.clear()
-                    MyApplication.storeidx = data.idx
-                    MyApplication.store = data
-                    context.startActivity(Intent(context, StoreMenuActivity::class.java))
+                    itemClickListener.onStoreClick(data,Intent(context, StoreMenuActivity::class.java))
                 }
 
                 storeUdt.setOnClickListener{

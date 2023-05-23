@@ -313,6 +313,10 @@
     <string name="msg_complete">완료되었습니다.</string>
     <string name="msg_no_id">아이디를 입력해 주세요.</string>
     <string name="msg_no_pw">비밀번호를 입력해 주세요.</string>
+    <string name="msg_typemiss_pw">비밀번호는 8자리 이상 영문, 숫자만 입력해 주세요.</string>
+    <string name="msg_typemiss_id">이메일 형식이 아닙니다.</string>
+    <string name="msg_no_checked">아이디 중복체크클 해주세요.</string>
+    <string name="msg_no_linked">알파요 아이디를 연동해 주세요.</string>
     <string name="msg_no_addr">주소를 입력해 주세요.</string>
     <string name="msg_check_addr">주소를 확인해 주세요.</string>
     <string name="msg_reg_store_first">매장 등록을 완료한 후 이용해주시기 바랍니다.</string>

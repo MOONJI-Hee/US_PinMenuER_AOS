@@ -1,5 +1,6 @@
 package com.wooriyo.pinmenuer.store
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +21,7 @@ import com.wooriyo.pinmenuer.menu.CategorySetActivity
 import com.wooriyo.pinmenuer.menu.MenuSetActivity
 import com.wooriyo.pinmenuer.model.CateListDTO
 import com.wooriyo.pinmenuer.model.CategoryDTO
+import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.model.StoreDTO
 import com.wooriyo.pinmenuer.order.OrderListActivity
 import com.wooriyo.pinmenuer.setting.MenuUiActivity
@@ -27,6 +29,7 @@ import com.wooriyo.pinmenuer.setting.TablePassActivity
 import com.wooriyo.pinmenuer.util.ApiClient
 import com.wooriyo.pinmenuer.util.AppHelper
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 
 class StoreMenuActivity : BaseActivity(), OnClickListener {
@@ -61,7 +64,7 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
 
     override fun onClick(p0: View?) {
         when(p0) {
-            binding.back -> startActivity(Intent(mActivity, StoreListActivity::class.java))
+            binding.back -> leaveStore()
             binding.udtMbr -> startActivity(Intent(mActivity, MemberSetActivity::class.java))
             binding.order -> startActivity(Intent(mActivity, OrderListActivity::class.java))
             binding.call -> startActivity(Intent(mActivity, CallListActivity::class.java))
@@ -81,7 +84,7 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
 
     fun getCategory() {
         ApiClient.service.getCateList(useridx, storeidx)
-            .enqueue(object: retrofit2.Callback<CateListDTO>{
+            .enqueue(object: Callback<CateListDTO>{
                 override fun onResponse(call: Call<CateListDTO>, response: Response<CateListDTO>) {
                     Log.d(TAG, "카테고리 조회 url : $response")
                     if(!response.isSuccessful) {return}
@@ -97,6 +100,29 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                     Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "카테고리 조회 실패 > $t")
                     Log.d(TAG, "카테고리 조회 실패 > ${call.request()}")
+                }
+            })
+    }
+
+    fun leaveStore() {
+        ApiClient.service.leaveStore(useridx, storeidx, MyApplication.androidId)
+            .enqueue(object : Callback<ResultDTO> {
+                override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                    Log.d(TAG, "매장 나가기 url : $response")
+                    if(!response.isSuccessful) return
+
+                    val result = response.body() ?: return
+                    if(result.status == 1){
+                        storeidx = 0
+                        startActivity(Intent(mActivity, StoreListActivity::class.java))
+                    }else
+                        Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                    Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "매장 나가기 오류 > $t")
+                    Log.d(TAG, "매장 나가기 오류 > ${call.request()}")
                 }
             })
     }

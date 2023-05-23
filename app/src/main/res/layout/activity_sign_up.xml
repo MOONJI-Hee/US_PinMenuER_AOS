@@ -68,7 +68,6 @@
         style="@style/disable"
         android:id="@+id/check_result"
         android:layout_marginStart="16dp"
-        android:text="@string/unable"
         android:visibility="visible"
         app:layout_constraintStart_toEndOf="@+id/btn_check_id"
         app:layout_constraintTop_toTopOf="@+id/et_id"
@@ -88,7 +87,6 @@
         android:layout_marginTop="32dp"
         android:hint="@string/password_hint"
         android:inputType="text"
-        android:digits="0123456789qwertyuiopasdfghjklzxcvbnm"
         app:layout_constraintTop_toBottomOf="@+id/et_id"
         app:layout_constraintStart_toStartOf="@+id/et_id"
         app:layout_constraintEnd_toEndOf="@+id/et_id"/>
@@ -124,7 +122,6 @@
     <TextView
         style="@style/disable"
         android:id="@+id/link_result"
-        android:text="@string/link_before"
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toEndOf="@+id/btn_arpayo"
         app:layout_constraintTop_toTopOf="@+id/btn_arpayo"

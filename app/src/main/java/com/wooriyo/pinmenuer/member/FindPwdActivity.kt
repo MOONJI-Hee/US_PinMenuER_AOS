@@ -5,6 +5,7 @@ import android.widget.Toast
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityFindPwdBinding
+import com.wooriyo.pinmenuer.util.AppHelper
 
 class FindPwdActivity : BaseActivity() {
     lateinit var binding: ActivityFindPwdBinding
@@ -19,6 +20,8 @@ class FindPwdActivity : BaseActivity() {
             val email = binding.etId.text.toString()
             if(email.isEmpty()) {
                 Toast.makeText(this@FindPwdActivity, R.string.email_hint, Toast.LENGTH_SHORT).show()
+            }else if (!AppHelper.verifyEmail(email)) {
+                Toast.makeText(this@FindPwdActivity, R.string.msg_typemiss_id, Toast.LENGTH_SHORT).show()
             }else {
 
             }

@@ -74,7 +74,7 @@ interface Api {
     fun udtMbr (
         @Query("useridx") useridx : Int,
         @Query("pass") pass : String,
-        @Query("alpha_userid") arpayo_id: String
+        @Query("emplyr_id") arpayo_id: String
     ): Call<ResultDTO>
 
     // 탈퇴
@@ -188,6 +188,22 @@ interface Api {
     fun delHoliday (
         @Query("useridx") useridx: Int,
         @Query("idx") holidayidx : Int
+    ): Call<ResultDTO>
+
+    // 매장 이용자수 체크
+    @GET("m/checkLimitedDevice.php")
+    fun checkDeviceLimit(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("uuid") androidId : String
+    ): Call<ResultDTO>
+
+    // 매장 나갈 때 이용자수 차감
+    @GET("m/leaveStore.php")
+    fun leaveStore(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("uuid") androidId : String
     ): Call<ResultDTO>
 
     // 카테고리 목록 조희

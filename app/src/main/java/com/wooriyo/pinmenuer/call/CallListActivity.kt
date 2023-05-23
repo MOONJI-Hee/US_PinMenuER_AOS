@@ -28,7 +28,7 @@ import kotlin.collections.ArrayList
 
 class CallListActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding: ActivityCallListBinding
-    lateinit var timer: Timer
+//    lateinit var timer: Timer
 
     val TAG = "CallListActivity"
     val mActivity = this@CallListActivity
@@ -58,18 +58,18 @@ class CallListActivity : BaseActivity(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        timer = Timer()
-        val timerTask: TimerTask = object : TimerTask() {
-            override fun run() {
-                getCallStatus()
-            }
-        }
-        timer.schedule(timerTask, 0, 3000)
+//        timer = Timer()
+//        val timerTask: TimerTask = object : TimerTask() {
+//            override fun run() {
+//                getCallStatus()
+//            }
+//        }
+//        timer.schedule(timerTask, 0, 3000)
     }
 
     override fun onPause() {
         super.onPause()
-        timer.cancel()
+//        timer.cancel()
     }
 
     override fun onClick(v: View?) {

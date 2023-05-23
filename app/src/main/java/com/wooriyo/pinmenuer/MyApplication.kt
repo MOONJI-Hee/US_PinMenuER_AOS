@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.graphics.Point
 import android.os.Build
+import android.provider.Settings
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -31,12 +32,16 @@ class MyApplication: Application() {
         lateinit var store: StoreDTO
         lateinit var allCateList : ArrayList<CategoryDTO>
 
+        lateinit var androidId : String
+
         fun setStoreDTO() {
             store = StoreDTO(useridx)
         }
     }
 
     override fun onCreate() {
+        androidId = Settings.Secure.getString(applicationContext.contentResolver, Settings.Secure.ANDROID_ID)
+
         pref = SharedDTO(applicationContext)
         db = AppDatabase.getInstance(applicationContext)
 

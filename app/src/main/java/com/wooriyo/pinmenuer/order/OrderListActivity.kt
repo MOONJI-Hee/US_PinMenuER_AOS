@@ -24,7 +24,7 @@ import kotlin.collections.ArrayList
 
 class OrderListActivity : BaseActivity() {
     lateinit var binding: ActivityOrderListBinding
-    lateinit var timer: Timer
+//    lateinit var timer: Timer
 
     val TAG = "OrderListActivity"
     val mActivity = this@OrderListActivity
@@ -55,18 +55,18 @@ class OrderListActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        timer = Timer()
-        val timerTask = object : TimerTask(){
-            override fun run() {
-                getOrdStatus()
-            }
-        }
-        timer.schedule(timerTask, 0, 3000)
+//        timer = Timer()
+//        val timerTask = object : TimerTask(){
+//            override fun run() {
+//                getOrdStatus()
+//            }
+//        }
+//        timer.schedule(timerTask, 0, 3000)
     }
 
     override fun onPause() {
         super.onPause()
-        timer.cancel()
+//        timer.cancel()
     }
 
     // 새로운 호출 유무 확인 > 3초마다 한번씩 태우기

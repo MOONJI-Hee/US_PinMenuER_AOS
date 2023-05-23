@@ -3,6 +3,8 @@ package com.wooriyo.pinmenuer.member
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -30,6 +32,8 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
     var userid : String = ""
     var arpayoId : String = ""
 
+    var arpaLinked = false
+
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         AppHelper.hideKeyboard(this, currentFocus, ev)
         return super.dispatchTouchEvent(ev)
@@ -49,6 +53,9 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
         binding.tvId.text = userid
         if(arpayoId.isNotEmpty()) {
             binding.etArpayo.setText(arpayoId)
+            arpaLinked = true
+            binding.linkResult.text = getString(R.string.link_after)
+            binding.linkResult.setTextColor(Color.parseColor("#FF6200"))
         }
         binding.title.text = getString(R.string.title_udt_mbr)
         binding.save.text = getString(R.string.udt_info)
@@ -59,6 +66,17 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
 
         binding.tvId.visibility = View.VISIBLE
         binding.llUdt.visibility = View.VISIBLE
+
+        binding.etArpayo.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                binding.linkResult.text = ""
+                if(arpaLinked) {
+                    arpaLinked = false
+                }
+            }
+        })
 
         binding.back.setOnClickListener(this)
         binding.save.setOnClickListener(this)
@@ -90,6 +108,18 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
     private fun save() {
         val pass : String = binding.etPwd.text.toString()
         arpayoId = binding.etArpayo.text.toString()
+
+        if(pass.isEmpty() || pass == "") {
+            Toast.makeText(mActivity, R.string.msg_no_pw, Toast.LENGTH_SHORT).show()
+            return
+        }else if(!AppHelper.verifyPw(pass)) {
+            Toast.makeText(mActivity, R.string.msg_typemiss_pw, Toast.LENGTH_SHORT).show()
+            return
+        }else if ((arpayoId.isNotEmpty() && arpayoId != "") && !arpaLinked) {
+            Toast.makeText(mActivity, R.string.msg_no_linked, Toast.LENGTH_SHORT).show()
+            return
+        }
+
         ApiClient.service.udtMbr(useridx, pass, arpayoId)
             .enqueue(object : Callback<ResultDTO> {
                 override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
@@ -113,6 +143,12 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
     // 알파요 아이디 연동
     fun regArpayoId () {
         arpayoId = binding.etArpayo.text.toString()
+
+        if(arpayoId.isEmpty() || arpayoId == "") {
+            Toast.makeText(mActivity, R.string.arpayo_id_hint, Toast.LENGTH_SHORT).show()
+            return
+        }
+
         ApiClient.service.checkArpayo(arpayoId)
             .enqueue(object : Callback<ResultDTO> {
                 override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
@@ -122,10 +158,12 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
                     val result = response.body()
                     if(result != null) {
                         if (result.status == 1) {
+                            arpaLinked = true
                             binding.linkResult.text = getString(R.string.link_after)
                             binding.linkResult.setTextColor(Color.parseColor("#FF6200"))
                         } else {
                             Toast.makeText(this@MemberSetActivity, result.msg, Toast.LENGTH_SHORT).show()
+                            arpaLinked = false
                             binding.linkResult.text = getString(R.string.link_fail)
                             binding.linkResult.setTextColor(Color.parseColor("#5A5A5A"))
                         }
