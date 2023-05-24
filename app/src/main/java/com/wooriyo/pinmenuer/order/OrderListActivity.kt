@@ -1,10 +1,22 @@
 package com.wooriyo.pinmenuer.order
 
+import android.Manifest
+import android.app.Activity
+import android.app.AlertDialog
+import android.app.ProgressDialog
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
+import android.content.*
+import android.content.pm.PackageManager
+import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sewoo.port.android.BluetoothPort
+import com.sewoo.request.android.RequestHandler
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
@@ -19,8 +31,8 @@ import com.wooriyo.pinmenuer.util.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.IOException
 import java.util.*
-import kotlin.collections.ArrayList
 
 class OrderListActivity : BaseActivity() {
     lateinit var binding: ActivityOrderListBinding

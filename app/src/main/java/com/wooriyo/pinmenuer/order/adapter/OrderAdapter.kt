@@ -1,11 +1,14 @@
 package com.wooriyo.pinmenuer.order.adapter
 
 import android.graphics.Color
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.sewoo.jpos.command.ESCPOSConst
+import com.sewoo.jpos.printer.ESCPOSPrinter
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ListCallBinding
 import com.wooriyo.pinmenuer.databinding.ListOrderBinding
@@ -60,9 +63,15 @@ class OrderAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adapte
                 }
 
                 delete.setOnClickListener { deleteListener.onItemClick(absoluteAdapterPosition) }
-                print.setOnClickListener {  }
+                print.setOnClickListener {
+                    printTest()
+                }
                 payment.setOnClickListener { payClickListener.onItemClick(absoluteAdapterPosition) }
             }
+        }
+
+        fun printTest() {
+            ESCPOSPrinter().printAndroidFont(Typeface.DEFAULT, "안녕하세요~!", 512, 18, ESCPOSConst.LK_ALIGNMENT_CENTER)
         }
     }
 }
