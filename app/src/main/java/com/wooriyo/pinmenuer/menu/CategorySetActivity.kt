@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication.Companion.allCateList
+import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityCategorySetBinding
@@ -17,6 +18,7 @@ import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.menu.adpter.CateAdapter
 import com.wooriyo.pinmenuer.menu.adpter.CateEditAdapter
 import com.wooriyo.pinmenuer.menu.dialog.CategoryDialog
+import com.wooriyo.pinmenuer.model.CateListDTO
 import com.wooriyo.pinmenuer.model.CategoryDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.util.ApiClient
@@ -175,8 +177,8 @@ class CategorySetActivity : BaseActivity(), DialogListener {
     }
 
     fun seqSave() {
-        ApiClient.service.udtCateSeq(useridx, 0, "", 0).enqueue(object : Callback<ResultDTO> {
-            override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+        ApiClient.service.udtCateSeq(useridx, storeidx, "").enqueue(object : Callback<CateListDTO> {
+            override fun onResponse(call: Call<CateListDTO>, response: Response<CateListDTO>) {
                 Log.d(TAG, "카테고리 순서변경 url : $response")
                 if(!response.isSuccessful) {return}
 
@@ -185,11 +187,15 @@ class CategorySetActivity : BaseActivity(), DialogListener {
                     1 -> {
                         Toast.makeText(this@CategorySetActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
                         setResult(RESULT_OK, intent)
+                        allCateList.clear()
+                        allCateList.addAll(resultDTO.cateList)
+                        backList.clear()
+                        cateAdapter.notifyDataSetChanged()
                     }
                     else -> Toast.makeText(this@CategorySetActivity, resultDTO.msg, Toast.LENGTH_SHORT).show()
                 }
             }
-            override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+            override fun onFailure(call: Call<CateListDTO>, t: Throwable) {
                 Log.d(TAG, "카테고리 순서변경 실패 > $t")
                 Log.d(TAG, "카테고리 순서변경 실패 > ${call.request()}")
             }

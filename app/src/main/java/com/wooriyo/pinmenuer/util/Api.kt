@@ -247,10 +247,9 @@ interface Api {
     @GET("m/udtseq.php")
     fun udtCateSeq(
         @Query("useridx") useridx: Int,
-        @Query("idx") cateidx: Int,
-        @Query("code") code: String,
-        @Query("seq") seq: Int
-    ): Call<ResultDTO>
+        @Query("storeidx") storeidx: Int,
+        @Query("JSON") JSON: String
+    ): Call<CateListDTO>
 
     // 메뉴 조회
     @GET("m/goods.list.php")
