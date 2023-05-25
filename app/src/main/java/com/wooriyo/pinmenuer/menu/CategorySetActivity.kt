@@ -23,6 +23,8 @@ import com.wooriyo.pinmenuer.model.CategoryDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.util.ApiClient
 import com.wooriyo.pinmenuer.util.AppHelper
+import org.json.JSONArray
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -177,7 +179,16 @@ class CategorySetActivity : BaseActivity(), DialogListener {
     }
 
     fun seqSave() {
-        ApiClient.service.udtCateSeq(useridx, storeidx, "").enqueue(object : Callback<CateListDTO> {
+        val JSON = JSONArray()
+        allCateList.forEach {
+            val json = JSONObject()
+            json.put("idx", it.idx)
+            json.put("seq", it.seq)
+
+            JSON.put(json)
+        }
+
+        ApiClient.service.udtCateSeq(useridx, storeidx, JSON.toString()).enqueue(object : Callback<CateListDTO> {
             override fun onResponse(call: Call<CateListDTO>, response: Response<CateListDTO>) {
                 Log.d(TAG, "카테고리 순서변경 url : $response")
                 if(!response.isSuccessful) {return}
@@ -187,10 +198,10 @@ class CategorySetActivity : BaseActivity(), DialogListener {
                     1 -> {
                         Toast.makeText(this@CategorySetActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
                         setResult(RESULT_OK, intent)
-                        allCateList.clear()
-                        allCateList.addAll(resultDTO.cateList)
+
                         backList.clear()
-                        cateAdapter.notifyDataSetChanged()
+                        backList.addAll(resultDTO.cateList)
+                        setUdtMode()
                     }
                     else -> Toast.makeText(this@CategorySetActivity, resultDTO.msg, Toast.LENGTH_SHORT).show()
                 }
