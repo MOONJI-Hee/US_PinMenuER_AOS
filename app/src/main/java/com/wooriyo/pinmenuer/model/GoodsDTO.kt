@@ -5,6 +5,7 @@ import java.io.File
 
 data class GoodsDTO (
     @SerializedName("gidx") var idx: Int,
+    @SerializedName("seq") var seq : Int,
     @SerializedName("gname") var name : String,
     @SerializedName("simple") var content : String?="",
     @SerializedName("category") var category : String,
@@ -22,5 +23,5 @@ data class GoodsDTO (
     @SerializedName("boption") var boption : String,
     @SerializedName("stropt") var opt : ArrayList<OptionDTO>?
 ) {
-    constructor():this(0, "", "", "", "0", "0", 0, "", "", "", null, null, null, "N", 1, "N", ArrayList<OptionDTO>())
+    constructor():this(0, 0,"", "", "", "0", "0", 0, "", "", "", null, null, null, "N", 1, "N", ArrayList<OptionDTO>())
 }

@@ -63,7 +63,6 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
                     storeMenu.isEnabled = true
                     storeName.isEnabled = true
                     storeName2.isEnabled = true
-                    storeUdt.isEnabled = true
                     storePayInfo.visibility = View.VISIBLE
                     storePayDt.visibility = View.VISIBLE
                     storePayNo.visibility = View.GONE
@@ -71,7 +70,6 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
                     storeMenu.isEnabled = false
                     storeName.isEnabled = false
                     storeName2.isEnabled = false
-                    storeUdt.isEnabled = false
                     storePayInfo.visibility = View.INVISIBLE
                     storePayDt.visibility = View.INVISIBLE
                     storePayNo.visibility = View.VISIBLE

@@ -41,6 +41,8 @@ import com.wooriyo.pinmenuer.util.AppHelper
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import org.json.JSONArray
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -649,7 +651,37 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun udtSequence() {
+        val JSON = JSONArray()
+        selGoodsList.forEach {
+            val json = JSONObject()
+            json.put("idx", it.idx)
+            json.put("seq", it.seq)
 
+            JSON.put(json)
+        }
+
+        ApiClient.service.udtGoodSeq(useridx, storeidx, JSON.toString()).enqueue(object: Callback<ResultDTO>{
+            override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                Log.d(TAG, "메뉴 순서변경 url : $response")
+                if(!response.isSuccessful) return
+
+                val result = response.body() ?: return
+                when(result.status) {
+                    1 -> {
+                        Toast.makeText(this@MenuSetActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+
+                    }
+                    else -> Toast.makeText(this@MenuSetActivity, result.msg, Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+            override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "메뉴 순서변경 실패 > $t")
+                Log.d(TAG, "메뉴 순서변경 실패 > ${call.request()}")
+            }
+        })
     }
 
     val textWatcher = object : TextWatcher {

@@ -39,7 +39,7 @@ class CategorySetActivity : BaseActivity(), DialogListener {
 
     var flag = 0 // 순서 수정 모드 구분 > 0 : 수정모드 X, 1 : 수정모드 O
 
-    val backList = ArrayList<CategoryDTO>()
+    var backList = ArrayList<CategoryDTO>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -116,11 +116,18 @@ class CategorySetActivity : BaseActivity(), DialogListener {
                 Log.d(TAG, "fromPos >> $fromPos")
                 Log.d(TAG, "toPos >> $toPos")
                 Log.d(TAG, "순서변경 전 allCateList >> $allCateList")
+
+                val fromSeq = allCateList[fromPos].seq
+                val toSeq = allCateList[toPos].seq
+
+                allCateList[fromPos].seq = toSeq
+                allCateList[toPos].seq = fromSeq
+
                 val moveCate = allCateList[fromPos]
                 allCateList.removeAt(fromPos)
                 allCateList.add(toPos, moveCate)
                 Log.d(TAG, "순서변경 후 allCateList >> $allCateList")
-
+                Log.d(TAG, "순서변경 후 backList >> $backList")
                 cateEditAdapter.notifyItemMoved(fromPos, toPos)
 
                 cateEditAdapter.notifyItemChanged(fromPos)
@@ -159,6 +166,7 @@ class CategorySetActivity : BaseActivity(), DialogListener {
         // 취소할 경우를 대비하여 백업 리스트 생성
         backList.clear()
         backList.addAll(allCateList)
+        //TODO 시퀀스 바뀌지 않게 깊은 복사하기
 
         flag = 1    // 순서 수정 모드로 변경
         binding.run {
@@ -207,6 +215,7 @@ class CategorySetActivity : BaseActivity(), DialogListener {
                 }
             }
             override fun onFailure(call: Call<CateListDTO>, t: Throwable) {
+                Toast.makeText(this@CategorySetActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "카테고리 순서변경 실패 > $t")
                 Log.d(TAG, "카테고리 순서변경 실패 > ${call.request()}")
             }

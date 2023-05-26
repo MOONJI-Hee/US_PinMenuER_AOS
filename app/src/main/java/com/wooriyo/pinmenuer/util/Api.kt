@@ -312,7 +312,12 @@ interface Api {
     ): Call<ResultDTO>
 
     // 메뉴 순서 변경
-
+    @GET("m/udt_goodseq.php")
+    fun udtGoodSeq(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("JSON") JSON: String
+    ): Call<ResultDTO>
 
     // 테이블 비밀번호 변경
     @GET("m/udt_tablepwd.php")
