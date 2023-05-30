@@ -18,7 +18,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -156,6 +158,17 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                     binding.headerArea.visibility = View.GONE
                     binding.rightArea.visibility = View.GONE
                     binding.btnDel.isEnabled = true
+
+                    goods = selGoodsList[0]
+                    if(selGoodsList.size > 1) {
+                        mode = 1
+                        setDetail()
+                    }else
+                        mode = 0
+                    goodsAdapter.selPos = 0
+                    goodsAdapter.setMenuMode(mode)
+
+                    itemTouchHelper.setDefaultDragDirs(0)
                 }else {         // 순서변경모드 아닐 때 > 순서변경모드로 변경
                     v.setBackgroundResource(R.drawable.bg_btn_r6_grd)
                     v.text = getString(R.string.change_seq_cmplt)
@@ -166,6 +179,12 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                     binding.seqInfo.visibility = View.VISIBLE
                     binding.delConfirm.visibility = View.GONE
                     binding.btnDel.isEnabled = false
+
+                    clearDetail()
+                    goodsAdapter.selPos = -1
+                    goodsAdapter.setMenuMode(3)
+
+                    itemTouchHelper.setDefaultDragDirs(ItemTouchHelper.UP or ItemTouchHelper.DOWN)
                 }
             }
             binding.btnDel -> {
@@ -256,6 +275,8 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun setAdapter() {
+        ItemTouchHelper(itemTouchHelper).attachToRecyclerView(binding.rvMenu)
+
         goodsAdapter.setOnItemClickListener(object : ItemClickListener{
             override fun onItemClick(position: Int) {
                 clearDetail()
@@ -272,6 +293,12 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             override fun onItemClick(position: Int) {
                 binding.delConfirm.visibility = View.VISIBLE
                 binding.delName.text = getString(R.string.menu_delete_name).format(selGoodsList[position].name)
+            }
+        })
+
+        goodsAdapter.setOnMoveListener(object : ItemClickListener{
+            override fun onItemClick(position: Int) {
+                itemTouchHelper.setDefaultDragDirs(ItemTouchHelper.UP or ItemTouchHelper.DOWN)
             }
         })
 
@@ -695,6 +722,19 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             }
         }
         override fun afterTextChanged(s: Editable?) {}
+    }
+
+    val itemTouchHelper = object : ItemTouchHelper.SimpleCallback(0, 0) {
+        override fun setDefaultDragDirs(defaultDragDirs: Int) {
+            super.setDefaultDragDirs(defaultDragDirs)
+        }
+        override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+            val fromPos = viewHolder.absoluteAdapterPosition
+            val toPos = target.absoluteAdapterPosition
+            goodsAdapter.swapData(fromPos, toPos)
+            return true
+        }
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {}
     }
 
     //이미지 권한 설정 및 가져오기

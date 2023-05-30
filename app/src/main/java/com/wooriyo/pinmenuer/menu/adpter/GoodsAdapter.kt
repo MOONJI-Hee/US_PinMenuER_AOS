@@ -11,10 +11,13 @@ import com.wooriyo.pinmenuer.databinding.ListMenuBinding
 import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.model.GoodsDTO
 import com.wooriyo.pinmenuer.util.AppHelper
+import java.util.*
+import kotlin.collections.ArrayList
 
 class GoodsAdapter(val dataSet: ArrayList<GoodsDTO>): Adapter<RecyclerView.ViewHolder>() {
     lateinit var itemClickListener: ItemClickListener
     lateinit var deleteListener: ItemClickListener
+    lateinit var moveListener: ItemClickListener
 
     var selPos = 0
     var mode = 0
@@ -27,9 +30,18 @@ class GoodsAdapter(val dataSet: ArrayList<GoodsDTO>): Adapter<RecyclerView.ViewH
         this.deleteListener = deleteListener
     }
 
+    fun setOnMoveListener(moveListener: ItemClickListener) {
+        this.moveListener = moveListener
+    }
+
     fun setMenuMode(mode: Int) {
         this.mode = mode
         notifyDataSetChanged()
+    }
+
+    fun swapData(fromPos: Int, toPos: Int) {
+        Collections.swap(dataSet, fromPos, toPos)
+        notifyItemMoved(fromPos, toPos)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -58,14 +70,16 @@ class GoodsAdapter(val dataSet: ArrayList<GoodsDTO>): Adapter<RecyclerView.ViewH
 
                 if(mode == 4) { // 삭제모드일 때
                     deleteListener.onItemClick(position)
-                } else  // 그 외 추가, 수정모드일 때
+                }else if(mode == 3)  // 추가, 수정모드일 때
+                    moveListener.onItemClick(position)
+                else
                     itemClickListener.onItemClick(position)
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return if(mode == 4) dataSet.size-1 else dataSet.size
+        return if(mode == 4 || mode == 3) dataSet.size-1 else dataSet.size
     }
 
     class ViewHolder(val binding:ListMenuBinding): RecyclerView.ViewHolder(binding.root) {
