@@ -195,7 +195,8 @@ interface Api {
     fun checkDeviceLimit(
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int,
-        @Query("uuid") androidId : String
+        @Query("uuid") androidId : String,
+        @Query("token") token : String
     ): Call<ResultDTO>
 
     // 매장 나갈 때 이용자수 차감
