@@ -20,6 +20,8 @@ import com.wooriyo.pinmenuer.config.AppProperties.Companion.HANGUL_SIZE_BIG
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.HANGUL_SIZE_SMALL
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.ONE_LINE_BIG
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.ONE_LINE_SMALL
+import com.wooriyo.pinmenuer.config.AppProperties.Companion.SPACE_BIG
+import com.wooriyo.pinmenuer.config.AppProperties.Companion.SPACE_SMALL
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.TITLE_MENU
 import com.wooriyo.pinmenuer.databinding.ActivityOrderListBinding
 import com.wooriyo.pinmenuer.listener.ItemClickListener
@@ -52,6 +54,7 @@ class OrderListActivity : BaseActivity() {
     var font_size = 0
     var hangul_size = 0.0
     var one_line = 0
+    var space = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,11 +67,13 @@ class OrderListActivity : BaseActivity() {
             font_size = FONT_SMALL
             hangul_size = HANGUL_SIZE_SMALL
             one_line = ONE_LINE_SMALL
+            space = SPACE_SMALL
         }else {
             hyphen_num = AppProperties.HYPHEN_NUM_BIG
             font_size = FONT_BIG
             hangul_size = HANGUL_SIZE_BIG
             one_line = ONE_LINE_BIG
+            space = SPACE_BIG
         }
         for (i in 1..hyphen_num) {
             hyphen.append("-")
@@ -263,7 +268,6 @@ class OrderListActivity : BaseActivity() {
 
     fun getPrint(ord: OrderDTO) : String {
         var total = 0.0
-        var diff = 0
 
         val result: StringBuilder = StringBuilder()
         val underline1 = StringBuilder()
@@ -283,21 +287,35 @@ class OrderListActivity : BaseActivity() {
                 total += hangul_size
         }
 
-        diff = (one_line - total).toInt()
+        val mlength = result.toString().length
+        val mHangul = result.toString().replace(" ", "").length
+        val mSpace = mlength - mHangul
+        val mLine = mHangul * hangul_size + mSpace
 
-        if(diff < 0) diff = 0
+        var diff = (one_line - mLine + 0.5).toInt()
 
-        if(ord.gea < 10)
-            diff += 3
-        else if(ord.gea < 100)
-            diff += 2
+        if(print_size == "b") {
+            if(ord.gea < 10) {
+                diff += 1
+                space = 4
+            } else if (ord.gea >= 100) {
+                space = 1
+            }
+        }else if(print_size == "s") {
+            if(ord.gea < 10) {
+                diff += 1
+                space += 2
+            } else if (ord.gea < 100) {
+                space += 1
+            }
+        }
 
-        for(i in 1..diff) {
+            for(i in 1..diff) {
             result.append(" ")
         }
         result.append(ord.gea.toString())
 
-        for (i in 1..3) {
+        for (i in 1..space) {
             result.append(" ")
         }
 
