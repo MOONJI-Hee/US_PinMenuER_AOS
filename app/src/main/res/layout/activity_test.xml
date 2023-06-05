@@ -8,6 +8,7 @@
 
     <TextView
         style="@style/btn"
+        android:id="@+id/connect"
         android:layout_width="300dp"
         android:text="Connect"
         app:layout_constraintTop_toTopOf="parent"
