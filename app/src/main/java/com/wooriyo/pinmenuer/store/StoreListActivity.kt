@@ -72,12 +72,21 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
                         if(storeListDTO.status == 1) {
                             storeList.clear()
                             storeList.addAll(storeListDTO.storeList)
-                            storeAdapter.notifyDataSetChanged()
 
-                            if(storeList.size >= 4) {
+                            val size = storeList.size
+
+                            if(size >= 4) {
                                 binding.arrowLeft.visibility = View.VISIBLE
                                 binding.arrowRight.visibility = View.VISIBLE
                             }
+
+                            if(size < 20) {
+                                val remain = size % 4
+                                val empty = 4 - remain
+                                storeAdapter.setEmptyBox(empty)
+                            }
+
+                            storeAdapter.notifyDataSetChanged()
                         }else Toast.makeText(mActivity, storeListDTO.msg, Toast.LENGTH_SHORT).show()
                     }
                 }

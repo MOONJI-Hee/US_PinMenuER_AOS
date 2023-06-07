@@ -10,8 +10,10 @@ import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.VIEW_TYPE_ADD
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.VIEW_TYPE_COM
+import com.wooriyo.pinmenuer.config.AppProperties.Companion.VIEW_TYPE_EMPTY
 import com.wooriyo.pinmenuer.databinding.ListStoreAddBinding
 import com.wooriyo.pinmenuer.databinding.ListStoreBinding
+import com.wooriyo.pinmenuer.databinding.ListStoreEmptyBinding
 import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.model.StoreDTO
 import com.wooriyo.pinmenuer.store.StoreMenuActivity
@@ -21,30 +23,36 @@ import com.wooriyo.pinmenuer.util.AppHelper.Companion.dateNowCompare
 class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     lateinit var itemClickListener: ItemClickListener
 
+    var empty = 0
+
     fun setOnItemClickListener(itemClickListener: ItemClickListener) {
         this.itemClickListener = itemClickListener
+    }
+
+    fun setEmptyBox(empty : Int) {
+        this.empty = empty
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding = ListStoreBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         val binding_add = ListStoreAddBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
-        return if(viewType == VIEW_TYPE_ADD) AddViewHolder(parent.context, binding_add) else ViewHolder(parent.context, binding, itemClickListener)
+        val binding_empty = ListStoreEmptyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return if(viewType == VIEW_TYPE_ADD) AddViewHolder(parent.context, binding_add) else if(viewType == VIEW_TYPE_EMPTY) EmptyViewHolder(binding_empty) else ViewHolder(parent.context, binding, itemClickListener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if(getItemViewType(position) == VIEW_TYPE_COM)
             (holder as ViewHolder).bind(dataSet[position])
-        else
+        else if (getItemViewType(position) == VIEW_TYPE_ADD)
             (holder as AddViewHolder).bind()
     }
 
     override fun getItemCount(): Int {
-        return dataSet.size + 1
+        return dataSet.size + empty
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if(position == itemCount -1) VIEW_TYPE_ADD else VIEW_TYPE_COM
+        return if(position == dataSet.size) VIEW_TYPE_ADD else if(position > dataSet.size) VIEW_TYPE_EMPTY else VIEW_TYPE_COM
     }
 
     class ViewHolder(val context: Context, val binding: ListStoreBinding, val itemClickListener: ItemClickListener): RecyclerView.ViewHolder(binding.root) {
@@ -102,4 +110,6 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
             }
         }
     }
+
+    class EmptyViewHolder(val binding: ListStoreEmptyBinding): RecyclerView.ViewHolder(binding.root) {}
 }

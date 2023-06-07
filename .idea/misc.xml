@@ -20,6 +20,7 @@
         <entry key="app/src/main/res/drawable/bg_r6.xml" value="0.3305" />
         <entry key="app/src/main/res/drawable/bg_r6_btn_noselector.xml" value="0.3315" />
         <entry key="app/src/main/res/drawable/bg_r6_btn_ns.xml" value="0.5045" />
+        <entry key="app/src/main/res/drawable/bg_r6_f9.xml" value="0.503" />
         <entry key="app/src/main/res/drawable/bg_r6w.xml" value="0.565" />
         <entry key="app/src/main/res/drawable/bg_r6w75.xml" value="0.569" />
         <entry key="app/src/main/res/drawable/bg_r6w90.xml" value="0.501" />
@@ -95,6 +96,7 @@
         <entry key="app/src/main/res/layout/list_special_holiday.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/list_store.xml" value="0.29583333333333334" />
         <entry key="app/src/main/res/layout/list_store_add.xml" value="0.28828125" />
+        <entry key="app/src/main/res/layout/list_store_empty.xml" value="0.2877604166666667" />
         <entry key="app/src/main/res/layout/list_value.xml" value="0.2877604166666667" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.5245" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.5245" />

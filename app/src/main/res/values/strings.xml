@@ -167,8 +167,8 @@
     <string name="store_img_info"><b>매장 대표 사진</b>\n매장을 대표할 이미지를 올려주세요.\n음식 사진 혹은 매장 내부 혹은 외부 사진을 올려주세요.</string>
 
     <!--  메뉴 선택 (메인)  -->
-    <string name="order_mgmt">주문 정보</string>
-    <string name="call_mgmt">직원 호출</string>
+    <string name="order_mgmt">주문정보</string>
+    <string name="call_mgmt">직원호출</string>
     <string name="menu_mgmt">메뉴판 설정</string>
     <string name="event_mgmt">이벤트 관리</string>
     <string name="find_menu">메뉴판 찾기</string>
@@ -284,7 +284,7 @@
     <string name="title_login">핀메뉴 로그인</string>
     <string name="title_signup">핀메뉴 회원가입</string>
     <string name="title_udt_mbr">회원정보 수정</string>
-    <string name="title_set_store">매장 설정</string>
+    <string name="title_set_store">매장설정</string>
     <string name="title_reg_store">매장 등록</string>
     <string name="title_udt_store">매장 정보 수정</string>
     <string name="title_store_detail">매장 정보 : 세부정보</string>

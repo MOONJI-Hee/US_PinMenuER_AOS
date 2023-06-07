@@ -36,6 +36,7 @@ class CallSetActivity : BaseActivity(), DialogListener {
 
         // CallList와 레이아웃 같이 쓰기 때문에, SetActivity에 맞게 뷰 변경
         binding.btnSet.setBackgroundResource(R.drawable.bg_btn_r6_grd)
+        binding.btnSet.text = getString(R.string.btn_complete)
         binding.rvCall.visibility = View.GONE
         binding.callSetArea.visibility = View.VISIBLE
 

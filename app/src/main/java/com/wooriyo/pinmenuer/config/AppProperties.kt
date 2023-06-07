@@ -14,6 +14,7 @@ class AppProperties {
         // 리사이클러뷰 멀티뷰 사용시 타입
         const val VIEW_TYPE_COM = 0
         const val VIEW_TYPE_ADD = 1
+        const val VIEW_TYPE_EMPTY = 2
 
         //프린트 관련
         const val FONT_BIG = 37

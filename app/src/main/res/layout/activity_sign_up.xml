@@ -159,7 +159,7 @@
             android:id="@+id/drop"
             android:layout_width="240dp"
             android:layout_marginEnd="20dp"
-            android:text="@string/drop"/>
+            android:text="@string/btn_drop"/>
         <TextView
             style="@style/btn"
             android:id="@+id/logout"
