@@ -41,7 +41,6 @@ class TestActivity : AppCompatActivity() {
 
     val turnOnBluetoothResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if(it.resultCode == RESULT_OK) {
-            Log.d(TAG, "블루투스 켰다...!")
             getPairedDevice()
             searchDevice()
         }
@@ -130,11 +129,7 @@ class TestActivity : AppCompatActivity() {
         bluetoothPort.SetMacFilter(false) //not using mac address filtering
 
         // 권한 확인
-        if(!checkPermissions()) getLocationPms()
-
-        if (osver >= Build.VERSION_CODES.S) {
-            checkBluetoothPermission()
-        }
+        checkPermissions()
 
         binding.connect.setOnClickListener {
             connDevice()
@@ -207,40 +202,56 @@ class TestActivity : AppCompatActivity() {
     }
 
     // 권한 확인하기
-    fun checkPermissions(): Boolean {
+    fun checkPermissions() {
         for (pms in permissions) {
-            if(ActivityCompat.checkSelfPermission(this@TestActivity, pms) != PackageManager.PERMISSION_GRANTED) {
-                if(ActivityCompat.shouldShowRequestPermissionRationale(this@TestActivity, pms)) {
+            Log.d(TAG, "권한 확인 시작~! >> $pms")
+            when{
+                ActivityCompat.checkSelfPermission(this@TestActivity, pms) != PackageManager.PERMISSION_GRANTED ->  {
+                    Log.d(TAG, "권한 Granted 아님")
+
+                    getLocationPms()
+                }
+                ActivityCompat.shouldShowRequestPermissionRationale(this@TestActivity, pms) -> {
+                    Log.d(TAG, "메세지 띄워줘야함")
+
+
                     AlertDialog.Builder(this@TestActivity)
-                        .setTitle(R.string.pms_bluetooth_title)
-                        .setMessage(R.string.pms_bluetooth_content)
+                        .setTitle(R.string.pms_location_content)
+                        .setMessage(R.string.pms_location_content)
                         .setPositiveButton(R.string.confirm) { dialog, _ ->
                             dialog.dismiss()
-                            getBluetoothPms()
+                            getLocationPms()
                         }
                         .setNegativeButton(R.string.cancel) {dialog, _ -> dialog.dismiss()}
                         .show()
                 }
-                return false
+                else -> {
+                    Log.d(TAG, "권한 있음~!")
+
+                    if (osver >= Build.VERSION_CODES.S)
+                        checkBluetoothPermission()
+                    else
+                        checkBluetooth()
+                }
             }
+            Log.d(TAG, "권한 확인 끝~! >> $pms")
         }
-        return true
     }
 
     fun checkBluetoothPermission() {
         when {
             ActivityCompat.checkSelfPermission(this@TestActivity, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED -> getBluetoothPms()
-            ActivityCompat.shouldShowRequestPermissionRationale(this@TestActivity, Manifest.permission.BLUETOOTH_CONNECT) -> {
-                AlertDialog.Builder(this@TestActivity)
-                    .setTitle(R.string.pms_bluetooth_title)
-                    .setMessage(R.string.pms_bluetooth_content)
-                    .setPositiveButton(R.string.confirm) { dialog, _ ->
-                        dialog.dismiss()
-                        getBluetoothPms()
-                    }
-                    .setNegativeButton(R.string.cancel) {dialog, _ -> dialog.dismiss()}
-                    .show()
-            }
+//            ActivityCompat.shouldShowRequestPermissionRationale(this@TestActivity, Manifest.permission.BLUETOOTH_CONNECT) -> {
+//                AlertDialog.Builder(this@TestActivity)
+//                    .setTitle(R.string.pms_bluetooth_title)
+//                    .setMessage(R.string.pms_bluetooth_content)
+//                    .setPositiveButton(R.string.confirm) { dialog, _ ->
+//                        dialog.dismiss()
+//                        getBluetoothPms()
+//                    }
+//                    .setNegativeButton(R.string.cancel) {dialog, _ -> dialog.dismiss()}
+//                    .show()
+//            }
             else -> checkBluetooth()
         }
     }
