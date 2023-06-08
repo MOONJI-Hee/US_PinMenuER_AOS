@@ -32,6 +32,7 @@
         <entry key="app/src/main/res/drawable/ic_plus_g.xml" value="0.569" />
         <entry key="app/src/main/res/drawable/line_dash22.xml" value="0.5665" />
         <entry key="app/src/main/res/drawable/line_dash2g.xml" value="0.5665" />
+        <entry key="app/src/main/res/drawable/list_test.xml" value="0.503" />
         <entry key="app/src/main/res/drawable/selector_btn.xml" value="0.487" />
         <entry key="app/src/main/res/drawable/selector_btn_grd.xml" value="0.1725" />
         <entry key="app/src/main/res/drawable/selector_check.xml" value="0.175" />
@@ -97,6 +98,7 @@
         <entry key="app/src/main/res/layout/list_store.xml" value="0.29583333333333334" />
         <entry key="app/src/main/res/layout/list_store_add.xml" value="0.28828125" />
         <entry key="app/src/main/res/layout/list_store_empty.xml" value="0.2877604166666667" />
+        <entry key="app/src/main/res/layout/list_test.xml" value="0.2877604166666667" />
         <entry key="app/src/main/res/layout/list_value.xml" value="0.2877604166666667" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.5245" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.5245" />
