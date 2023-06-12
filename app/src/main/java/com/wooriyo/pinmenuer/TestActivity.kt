@@ -19,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.sewoo.jpos.command.ESCPOSConst
+import com.sewoo.jpos.printer.ESCPOSPrinter
 import com.sewoo.port.android.BluetoothPort
 import com.sewoo.request.android.RequestHandler
 import com.wooriyo.pinmenuer.MyApplication.Companion.osver
@@ -172,6 +174,10 @@ class TestActivity : AppCompatActivity() {
 
         binding.connect.setOnClickListener {
             connDevice()
+        }
+
+        binding.print.setOnClickListener {
+            print()
         }
     }
 
@@ -364,6 +370,24 @@ class TestActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.S)
     fun getBluetoothPms() {
         ActivityCompat.requestPermissions(this@TestActivity, arrayOf(Manifest.permission.BLUETOOTH_CONNECT), REQUEST_ENABLE_BT)
+    }
+
+    fun print() {
+        val escposPrinter = ESCPOSPrinter()
+        var rtn = 0
+
+        try {
+            rtn = escposPrinter.printerSts()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        try {
+            escposPrinter.printAndroidFont("나는 문지희다~! 하하하하", 512, 27, ESCPOSConst.LK_ALIGNMENT_LEFT)
+            escposPrinter.lineFeed(2)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
     }
 
     class Adapter(val dataSet : ArrayList<String>): RecyclerView.Adapter<Adapter.ViewHolder>() {

@@ -16,6 +16,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <TextView
+        style="@style/btn"
+        android:id="@+id/print"
+        android:layout_width="300dp"
+        android:layout_marginTop="30dp"
+        android:text="Print"
+        app:layout_constraintTop_toBottomOf="@+id/connect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
         android:layout_width="match_parent"
