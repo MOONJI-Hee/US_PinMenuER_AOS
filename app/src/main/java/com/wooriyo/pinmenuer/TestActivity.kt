@@ -58,9 +58,6 @@ class TestActivity : AppCompatActivity() {
         }
     }
 
-
-
-
     // 브로드 리시버 시작
     val connectDevice =
     object : BroadcastReceiver() {
@@ -189,10 +186,8 @@ class TestActivity : AppCompatActivity() {
                 unregisterReceiver(connectDevice)
             }
         } catch (e: IOException) {
-            // TODO Auto-generated catch block
             e.printStackTrace()
         } catch (e: InterruptedException) {
-            // TODO Auto-generated catch block
             e.printStackTrace()
         }
 
@@ -260,13 +255,21 @@ class TestActivity : AppCompatActivity() {
 
             val connDvc = remoteDevices[0]
 
+            Log.d(TAG, "connDvc >> $connDvc")
+
+
             var retVal: Int = 0
             var str_temp = ""
 
             try {
+
+                Log.d(TAG, "여기도 들어왔지렁")
+
                 bluetoothPort.connect(connDvc)
                 str_temp = connDvc.address
                 retVal = Integer.valueOf(0)
+
+                Log.d(TAG, "retVal >> $retVal")
             } catch (e: IOException) {
                 e.printStackTrace()
                 retVal = Integer.valueOf(-1)
@@ -274,6 +277,8 @@ class TestActivity : AppCompatActivity() {
 
             if (retVal == 0) // Connection success.
             {
+                Log.d(TAG, "retVal 0이면 성공이야....")
+
                 val rh = RequestHandler()
                 btThread = Thread(rh)
                 btThread!!.start()
@@ -283,6 +288,8 @@ class TestActivity : AppCompatActivity() {
                 registerReceiver(connectDevice, IntentFilter(BluetoothDevice.ACTION_ACL_DISCONNECTED))
             } else  // Connection failed.
             {
+                Log.d(TAG, "retVal 0 아니면 실패야....")
+
                 AlertDialog.Builder(this@TestActivity)
                     .setTitle("Error")
                     .setMessage("Failed to connect Bluetooth device.")
