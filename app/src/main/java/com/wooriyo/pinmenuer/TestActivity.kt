@@ -53,7 +53,7 @@ class TestActivity : AppCompatActivity() {
 
     private val turnOnBluetoothResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if(it.resultCode == RESULT_OK) {
-            getPairedDevice()
+//            getPairedDevice()
             searchDevice()
         }
     }
@@ -359,7 +359,7 @@ class TestActivity : AppCompatActivity() {
             turnOnBluetooth()
         }else {
             // TODO 블루투스 검색으로
-            getPairedDevice()
+//            getPairedDevice()
             searchDevice()
         }
     }

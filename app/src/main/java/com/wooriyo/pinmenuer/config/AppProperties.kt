@@ -16,6 +16,10 @@ class AppProperties {
         const val VIEW_TYPE_ADD = 1
         const val VIEW_TYPE_EMPTY = 2
 
+        // 권한 관련
+        const val REQUEST_LOCATION = 0
+        const val REQUEST_ENABLE_BT = 1
+
         //프린트 관련
         const val FONT_BIG = 37
         const val FONT_SMALL = 28

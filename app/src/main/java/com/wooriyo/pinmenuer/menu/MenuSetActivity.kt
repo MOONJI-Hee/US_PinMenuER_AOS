@@ -629,6 +629,9 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
                     val result = response.body()
                     if(result != null) {
+                        Toast.makeText(mActivity, "gidx >>>>> ${result.idx}", Toast.LENGTH_SHORT).show()
+
+
                         when(result.status){
                             1 -> {
                                 Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
