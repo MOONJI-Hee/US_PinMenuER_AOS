@@ -24,6 +24,7 @@ import com.wooriyo.pinmenuer.model.CategoryDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.model.StoreDTO
 import com.wooriyo.pinmenuer.order.OrderListActivity
+import com.wooriyo.pinmenuer.printer.PrinterMenuActivity
 import com.wooriyo.pinmenuer.setting.MenuUiActivity
 import com.wooriyo.pinmenuer.setting.TablePassActivity
 import com.wooriyo.pinmenuer.util.ApiClient
@@ -55,6 +56,9 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
             menu.setOnClickListener(mActivity)
             tablePass.setOnClickListener(mActivity)
             menuUi.setOnClickListener(mActivity)
+            printer.setOnClickListener(mActivity)
+            payment.setOnClickListener(mActivity)
+            mirroring.setOnClickListener(mActivity)
         }
     }
 
@@ -79,6 +83,7 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
             }
             binding.tablePass -> startActivity(Intent(mActivity, TablePassActivity::class.java))
             binding.menuUi -> startActivity(Intent(mActivity, MenuUiActivity::class.java))
+            binding.printer -> startActivity(Intent(mActivity, PrinterMenuActivity::class.java))
         }
     }
 

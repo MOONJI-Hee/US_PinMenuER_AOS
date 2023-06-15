@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:layout_marginBottom="4dp"
+    android:paddingHorizontal="20dp">
+
+    <ImageView
+        android:id="@+id/ivPrinter"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/skl_ts400b"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/model"
+        style="@style/text20"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivPrinter"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="세우테크 SKL_TS400B" />
+
+    <TextView
+        android:id="@+id/tv_nick"
+        style="@style/text18"
+        android:text="@string/printer_nick"
+        app:layout_constraintBottom_toBottomOf="@+id/nick"
+        app:layout_constraintStart_toStartOf="@+id/model"
+        app:layout_constraintTop_toTopOf="@+id/nick" />
+
+    <TextView
+        android:id="@+id/nick"
+        style="@style/btn_cancel"
+        android:layout_width="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical"
+        android:hint="@string/printer_nick_hint"
+        android:paddingHorizontal="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnTest"
+        app:layout_constraintStart_toEndOf="@+id/tv_nick" />
+
+    <TextView
+        android:id="@+id/btnTest"
+        style="@style/btn"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="@string/print_test"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/line"
+        app:layout_constraintStart_toEndOf="@+id/nick"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="10dp"
+        android:background="@color/f9"
+        app:layout_constraintEnd_toStartOf="@+id/btnConn"
+        app:layout_constraintStart_toEndOf="@+id/btnTest" />
+
+    <TextView
+        android:id="@+id/connNo"
+        style="@style/text20"
+        android:layout_marginTop="16dp"
+        android:text="@string/printer_not_conn"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/btnConn"
+        app:layout_constraintStart_toStartOf="@+id/btnConn"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/btnConn"
+        style="@style/btn"
+        android:layout_width="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_btn_r6_grd"
+        android:text="@string/printer_conn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/line" />
+
+    <ImageView
+        android:id="@+id/connDot"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:background="@drawable/bg_circle"
+        android:backgroundTint="#49D300"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/connStatus"
+        app:layout_constraintEnd_toStartOf="@+id/connStatus"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@+id/btnConn"
+        app:layout_constraintTop_toTopOf="@+id/connStatus" />
+
+    <TextView
+        android:id="@+id/connStatus"
+        style="@style/text20"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="10dp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/btnConn"
+        app:layout_constraintStart_toEndOf="@+id/connDot"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/good" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

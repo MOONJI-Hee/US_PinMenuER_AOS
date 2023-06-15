@@ -621,7 +621,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun uploadImage(gidx: Int, media1: MultipartBody.Part?, media2: MultipartBody.Part?, media3: MultipartBody.Part?) {
-        ApiClient.imgService.uploadImg(useridx, gidx, media1, media2, media3)
+        ApiClient.service.uploadImg(useridx, gidx, media1, media2, media3)
             .enqueue(object : Callback<ResultDTO>{
                 override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                     Log.d(TAG, "이미지 등록 url : $response")
@@ -629,9 +629,6 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
                     val result = response.body()
                     if(result != null) {
-                        Toast.makeText(mActivity, "gidx >>>>> ${result.idx}", Toast.LENGTH_SHORT).show()
-
-
                         when(result.status){
                             1 -> {
                                 Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()

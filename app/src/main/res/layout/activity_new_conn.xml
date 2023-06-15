@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/f9"
+    tools:context=".printer.NewConnActivity">
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/title"
+        android:text="@string/printer_title_new"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/back"
+        android:layout_width="72dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_title_back" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/imgTablet"
+        android:layout_width="320dp"
+        android:layout_height="220dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/bg_r6w"
+        android:gravity="center"
+        app:layout_constraintEnd_toStartOf="@+id/btnPlus"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_tablet_anroid_smal" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/device"
+        style="@style/text20"
+        android:layout_marginTop="20dp"
+        android:text="@string/android_smartphone"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/imgTablet"
+        app:layout_constraintStart_toStartOf="@+id/imgTablet"
+        app:layout_constraintEnd_toEndOf="@+id/imgTablet"/>
+
+    <TextView
+        android:id="@+id/tv_nick"
+        style="@style/text18"
+        android:layout_marginTop="30dp"
+        android:text="@string/printer_nick"
+        app:layout_constraintTop_toBottomOf="@+id/device"
+        app:layout_constraintStart_toStartOf="@+id/imgTablet" />
+
+    <TextView
+        android:id="@+id/nickDevice"
+        style="@style/nick"
+        android:layout_marginStart="16dp"
+        android:hint="@string/printer_nick_hint"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_nick"
+        app:layout_constraintEnd_toEndOf="@+id/imgTablet"
+        app:layout_constraintStart_toEndOf="@+id/tv_nick"
+        app:layout_constraintTop_toTopOf="@+id/tv_nick" />
+
+    <TextView
+        android:id="@+id/tvStatus"
+        style="@style/text20"
+        android:text="@string/before_conn"
+        android:textColor="@color/hint"
+        android:layout_marginBottom="9dp"
+        app:layout_constraintStart_toEndOf="@+id/imgTablet"
+        app:layout_constraintEnd_toStartOf="@+id/btnPlus"
+        app:layout_constraintBottom_toTopOf="@+id/ivStatus" />
+
+    <ImageView
+        android:id="@+id/ivStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_print_connection_off"
+        app:layout_constraintTop_toTopOf="@+id/imgTablet"
+        app:layout_constraintBottom_toBottomOf="@+id/imgTablet"
+        app:layout_constraintStart_toEndOf="@+id/imgTablet"
+        app:layout_constraintEnd_toStartOf="@+id/btnPlus"/>
+
+    <LinearLayout
+        android:id="@+id/btnRetry"
+        style="@style/btn_small"
+        android:layout_width="0dp"
+        android:visibility="gone"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnPlus"
+        app:layout_constraintEnd_toStartOf="@+id/btnPlus"
+        app:layout_constraintStart_toEndOf="@+id/imgTablet">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_print_refresh" />
+        <TextView
+            style="@style/text20"
+            android:layout_marginStart="10dp"
+            android:text="@string/retry_conn" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnPlus"
+        android:layout_width="320dp"
+        android:layout_height="220dp"
+        android:background="@drawable/bg_r6w"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgTablet"
+        app:layout_constraintTop_toTopOf="@+id/imgTablet">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_store_plus" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnPrinter"
+        android:layout_width="140dp"
+        android:layout_height="125dp"
+        android:background="@drawable/bg_r6w"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/btnPlus"
+        app:layout_constraintStart_toStartOf="@+id/btnPlus"
+        app:layout_constraintTop_toTopOf="@+id/btnPlus">
+
+        <ImageView
+            android:id="@+id/ivPrinter"
+            android:layout_width="140dp"
+            android:layout_height="125dp"
+            app:layout_constraintBottom_toBottomOf="@id/btnPlus"
+            app:layout_constraintStart_toStartOf="@+id/btnPlus"
+            app:layout_constraintTop_toTopOf="@+id/btnPlus" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/printer"
+        style="@style/text20"
+        android:layout_marginTop="20dp"
+        android:text="@string/store_pay_no"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/btnPlus"
+        app:layout_constraintStart_toStartOf="@+id/btnPlus"
+        app:layout_constraintEnd_toEndOf="@+id/btnPlus"/>
+
+    <TextView
+        android:id="@+id/tv_nick_print"
+        style="@style/text18"
+        android:layout_marginTop="30dp"
+        android:text="@string/printer_nick"
+        android:enabled="false"
+        app:layout_constraintTop_toBottomOf="@+id/printer"
+        app:layout_constraintStart_toStartOf="@+id/btnPlus" />
+
+    <TextView
+        android:id="@+id/nickPrinter"
+        style="@style/nick"
+        android:layout_marginStart="16dp"
+        android:hint="@string/printer_nick_hint"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_nick_print"
+        app:layout_constraintEnd_toEndOf="@+id/btnPlus"
+        app:layout_constraintStart_toEndOf="@+id/tv_nick_print"
+        app:layout_constraintTop_toTopOf="@+id/tv_nick_print" />
+
+
+    <TextView
+        style="@style/subtext"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/printer_conn_info"
+        app:layout_constraintStart_toStartOf="@+id/imgTablet"
+        app:layout_constraintTop_toBottomOf="@+id/nickDevice" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -54,6 +54,7 @@
     <string name="btn_call2">호&#160;출</string>
     <string name="btn_complete">완&#160;&#160;료</string>
     <string name="btn_drop">탈&#160;&#160;퇴</string>
+    <string name="btn_select">선&#160;&#160;택</string>
 
     <string name="udt_info">정보변경</string>
 
@@ -169,13 +170,12 @@
     <!--  메뉴 선택 (메인)  -->
     <string name="order_mgmt">주문정보</string>
     <string name="call_mgmt">직원호출</string>
-    <string name="menu_mgmt">메뉴판 설정</string>
+    <string name="menu_mgmt">메뉴 정보 입력</string>
     <string name="event_mgmt">이벤트 관리</string>
     <string name="find_menu">메뉴판 찾기</string>
-    <string name="order_info_sub">주문 내역 확인</string>
-    <string name="call_mgmt_sub">호출 내역 확인</string>
-    <string name="menu_mgmt_sub">메뉴 정보 입력</string>
-    <string name="menu_mgmt_sub2">메뉴판 색상 설정</string>
+    <string name="order_info_sub">・주문 내역 확인\n・결제</string>
+    <string name="call_mgmt_sub">・호출 내역 확인\n・호출 목록 관리</string>
+    <string name="menu_mgmt_sub">・카테고리\n・메뉴, 가격, 사진, 설명</string>
     <string name="event_mgmt_sub">재방문 이벤트 관리</string>
 
     <!--  카테고리 설정  -->
@@ -240,7 +240,7 @@
     <string name="opt_udt_info2">하단에 [삭제]버튼은 <b>옵션 전체</b>가 <b>삭제</b>됩니다.</string>
 
     <!--  테이블 비밀번호 설정  -->
-    <string name="table_pass">테이블 번호\n비밀번호 설정</string>
+    <string name="table_pass">주문앱\n테이블 번호\n비밀번호 설정</string>
     <string name="table_pass_sub">테이블 비밀번호 설정</string>
     <string name="table_pass_hint">예) 1234</string>
     <string name="table_pass_info">고객이 사용하는 메뉴판 앱 우측 상단에 있는 테이블 번호는 터치를 통해\n수정할 수 있습니다.\n직원이 메뉴판을 손님에게 전달하러 이동하는 중에 빠르게 테이블 번호를\n바꿀 수 있도록 하기 위함입니다.\n하지만, 이는 고객도 쉽게 테이블 번호를 변경할 수 있기 때문에 비밀번호를\n알고 있는 직원만 테이블번호를 변경할 수 있도록 비밀번호를 설정할 수 있습니다.\n테이블 비밀번호를 설정하면 모든 고객용 메뉴판에 일괄 적용이됩니다.\n비밀번호를 설정하지 않을 경우 누구나 테이블 번호를 바꿀 수 있습니다.</string>
@@ -248,7 +248,7 @@
 
     <!--  메뉴판 디자인 설정  -->
     <string name="menu_ui">메뉴판\n디자인 설정</string>
-    <string name="menu_ui_sub">메뉴판 디자인 설정</string>
+    <string name="menu_ui_sub">・모드 : 기본/사진\n・색상 : 블랙/실버/화이트</string>
     <string name="menu_ui_info">선택된 매장에서 사용되는 고객용 태블릿PC 메뉴판에 선택한 디자인이 일괄 적용됩니다.\n단, 스마트폰 메뉴판에는 적용이 되지 않습니다.</string>
     <string name="sel_bg">배경선택</string>
     <string name="bg_dark">어두운 배경</string>
@@ -279,6 +279,76 @@
     <string name="call_udt">호출목록 수정</string>
     <string name="call_name">목록명</string>
     <string name="call_name_hint">목록명을 입력해 주세요.</string>
+
+    <!--  프린터 설정  -->
+    <string name="printer">프린터</string>
+    <string name="printer_set">프린터 설정</string>
+    <string name="printer_set_sub">・프린터 연결 및 변경</string>
+    <string name="printer_title_set">프린터 설정</string>
+    <string name="printer_menu_conn">프린터\n연결 관리</string>
+    <string name="printer_menu_support">연결 가능\n프린터 보기</string>
+    <string name="printer_menu_contents">출력 내용\n설정</string>
+    <string name="printer_menu_info">핀메뉴에서는 ‘출력 내용 설정’을 통해 주방과 음료부가 나누어져 있는 경우 이를 분리하여 출력할 수 있으며,\n카테고리 출력을 설정하여 편리하게 이용할 수 있습니다.</string>
+
+    <string name="printer_title_new">신규 프린터 연결</string>
+    <string name="android_smartphone">안드로이드 스마트폰</string>
+    <string name="android_tablepc">안드로이드 태블릿 PC</string>
+    <string name="printer_conn_info">스마트 기기 한대에 하나의 프린터만 연결하여 이용할 수 있으며,\n연결된 블루투스 프린터는 반드시 관리앱이 실행중인 기기와 근거리에 프린터를 배치해 주세요.\n프린터와 연결할 기기(디바이스) 및 연결된 프린터는 별명을 부여하여 관리할 수 있습니다.</string>
+    <string name="before_conn">연결전</string>
+    <string name="after_conn">연결완료</string>
+    <string name="retry_conn">다시연결</string>
+    <string name="printer_nick">별명</string>
+    <string name="printer_nick_title">별명 입력</string>
+    <string name="printer_nick_hint">예) 주방</string>
+
+    <string name="printer_title_sel_model">프린터 선택</string>
+    <string name="printer_device">선택된 기기</string>
+    <string name="printer_nick_info">별명은 반드시 구별 할 수 있는 명칭을 사용해 주세요.</string>
+
+    <string name="sewoo_tech">세우테크</string>
+    <string name="skl_ts400b">SKL-TS400B</string>
+    <string name="skl_te202">SKL-TE202</string>
+    <string name="sewoo_recommend">세우테크(추천)</string>
+    <string name="gcube">GCUBE</string>
+    <string name="sam4s">Sam4S</string>
+    <string name="printer_support_info">핀메뉴에서는 프린터를 제공하지 않습니다. 핀메뉴와 연동이 가능한 프린터를 보유하고 있다\n직접 연결을 통해 바로 이용이 가능하며, 연동이 가능한 프린터가 없다면 구매 후 연동하여 이용이 가능합니다.</string>
+
+    <string name="printer_title_conn_mng">연결 프린터 관리</string>
+    <string name="printer_available">연결 가능한 프린터</string>
+    <string name="print_test">시&#160;&#160;험\n인&#160;&#160;쇄</string>
+    <string name="good">좋음</string>
+    <string name="unrest">불안</string>
+    <string name="printer_conn">연&#160;&#160;결</string>
+    <string name="printer_clear">연결해제</string>
+    <string name="printer_not_conn">연결안됨</string>
+
+    <string name="printer_choose">선택된 프린터</string>
+    <string name="printer_nick_change_info">별명 변경 후 반드시 저장을 눌러주세요.\n삭제를 누르면 해당 프린터는 삭제됩니다.</string>
+
+    <string name="printer_title_support">연결 가능 프린터 보기</string>
+
+    <string name="printer_title_contents">출력 내용 설정</string>
+    <string name="printer_nick_format">별명 : %s</string>
+    <string name="font">폰트</string>
+    <string name="big">크게</string>
+    <string name="small">작게</string>
+    <string name="printer_kitchen">주방 영수증</string>
+    <string name="printer_kitchen_format">선택된 카테고리 : %d개</string>
+    <string name="printer_kitchen_info">선택된 카테고리만 출력가능 (최대 10개)\n선택하지 않으면 모든 카테고리가 출력됩니다.</string>
+    <string name="printer_customer">고객 영수증</string>
+    <string name="printer_customer_info">결제된 고객용 영수증을 출력할 수 있습니다.</string>
+    <string name="printer_order_no">주문 번호</string>
+    <string name="printer_order_no_info">핀메뉴에서 생성된 주문 번호를 출력합니다.</string>
+    <string name="printer_title_category_set">카테고리 선택하기(%d/10)</string>
+    <string name="printer_category_info">최대 10개까지 선택이 가능합니다.</string>
+
+    <!--  결제설정  -->
+    <string name="payment_set">결제설정</string>
+    <string name="payment_set_sub">・QR코드 결제\n・카드리더기 결제</string>
+
+    <!--  QR코드 결제 미러링 사용  -->
+    <string name="mirroring_menu">QR코드 결제\n미러링 사용</string>
+    <string name="mirroring_menu_sub">・미러링 : 화면 공유</string>
 
     <!--  타이틀  -->
     <string name="title_login">핀메뉴 로그인</string>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".printer.PrinterMenuActivity">
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/title"
+        android:text="@string/printer_set"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/back"
+        android:layout_width="72dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_title_back" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/setConn"
+        style="@style/menu"
+        android:layout_width="208dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/printer_menu_conn"
+        app:layout_constraintEnd_toStartOf="@+id/model"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/model"
+        style="@style/menu"
+        android:layout_width="208dp"
+        android:layout_height="180dp"
+        android:layout_marginHorizontal="80dp"
+        android:text="@string/printer_menu_support"
+        app:layout_constraintEnd_toStartOf="@+id/setContents"
+        app:layout_constraintStart_toEndOf="@+id/setConn"
+        app:layout_constraintTop_toTopOf="@+id/setConn" />
+
+    <TextView
+        android:id="@+id/setContents"
+        style="@style/menu"
+        android:layout_width="208dp"
+        android:layout_height="180dp"
+        android:text="@string/printer_menu_contents"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/model"
+        app:layout_constraintTop_toTopOf="@+id/model" />
+
+    <TextView
+        style="@style/subtext"
+        android:layout_marginTop="30dp"
+        android:text="@string/printer_menu_info"
+        app:layout_constraintStart_toStartOf="@+id/setConn"
+        app:layout_constraintTop_toBottomOf="@+id/setConn"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/f9">
 
     <TextView
         android:id="@+id/title"
@@ -54,7 +55,7 @@
         style="@style/menu"
         android:layout_width="208dp"
         android:layout_height="180dp"
-        android:layout_marginTop="165dp"
+        android:layout_marginTop="100dp"
         android:text="@string/order_mgmt"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintEnd_toStartOf="@+id/call"
@@ -63,9 +64,9 @@
 
     <TextView
         style="@style/subtext"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
         android:text="@string/order_info_sub"
-        app:layout_constraintEnd_toEndOf="@+id/order"
         app:layout_constraintStart_toStartOf="@+id/order"
         app:layout_constraintTop_toBottomOf="@+id/order" />
 
@@ -101,9 +102,9 @@
 
     <TextView
         style="@style/subtext"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
         android:text="@string/call_mgmt_sub"
-        app:layout_constraintEnd_toEndOf="@+id/call"
         app:layout_constraintStart_toStartOf="@+id/call"
         app:layout_constraintTop_toBottomOf="@+id/call" />
 
@@ -120,19 +121,11 @@
 
     <TextView
         style="@style/subtext"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
         android:text="@string/menu_mgmt_sub"
-        app:layout_constraintEnd_toEndOf="@+id/menu"
         app:layout_constraintStart_toStartOf="@+id/menu"
         app:layout_constraintTop_toBottomOf="@+id/menu" />
-
-<!--    <TextView-->
-<!--        style="@style/subtext"-->
-<!--        android:layout_marginTop="40dp"-->
-<!--        android:text="@string/menu_mgmt_sub2"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/menu"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/menu"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/menu" />-->
 
     <TextView
         android:id="@+id/tablePass"
@@ -140,7 +133,6 @@
         android:layout_width="208dp"
         android:layout_height="180dp"
         android:layout_marginHorizontal="30dp"
-        android:lineSpacingExtra="6dp"
         android:text="@string/table_pass"
         app:layout_constraintBottom_toBottomOf="@+id/menu"
         app:layout_constraintEnd_toStartOf="@+id/menuUi"
@@ -148,20 +140,11 @@
         app:layout_constraintTop_toTopOf="@+id/menu" />
 
     <TextView
-        style="@style/subtext"
-        android:layout_marginTop="16dp"
-        android:text="@string/set_password"
-        app:layout_constraintEnd_toEndOf="@+id/tablePass"
-        app:layout_constraintStart_toStartOf="@+id/tablePass"
-        app:layout_constraintTop_toBottomOf="@+id/tablePass" />
-
-    <TextView
         android:id="@+id/menuUi"
         style="@style/menu"
         android:layout_width="208dp"
         android:layout_height="180dp"
         android:text="@string/menu_ui"
-        android:lineSpacingExtra="6dp"
         app:layout_constraintStart_toEndOf="@+id/tablePass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tablePass"
@@ -169,11 +152,62 @@
 
     <TextView
         style="@style/subtext"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
         android:text="@string/menu_ui_sub"
-        app:layout_constraintEnd_toEndOf="@+id/menuUi"
         app:layout_constraintStart_toStartOf="@+id/menuUi"
         app:layout_constraintTop_toBottomOf="@+id/menuUi" />
 
+    <TextView
+        android:id="@+id/printer"
+        style="@style/menu"
+        android:layout_width="208dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/printer_set"
+        app:layout_constraintStart_toStartOf="@+id/order"
+        app:layout_constraintTop_toBottomOf="@+id/order"/>
+
+    <TextView
+        style="@style/subtext"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:text="@string/printer_set_sub"
+        app:layout_constraintStart_toStartOf="@+id/printer"
+        app:layout_constraintTop_toBottomOf="@+id/printer" />
+
+    <TextView
+        android:id="@+id/payment"
+        style="@style/menu"
+        android:layout_width="208dp"
+        android:layout_height="180dp"
+        android:text="@string/payment_set"
+        app:layout_constraintStart_toStartOf="@+id/call"
+        app:layout_constraintTop_toTopOf="@+id/printer"/>
+
+    <TextView
+        style="@style/subtext"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:text="@string/payment_set_sub"
+        app:layout_constraintStart_toStartOf="@+id/payment"
+        app:layout_constraintTop_toBottomOf="@+id/payment" />
+
+    <TextView
+        android:id="@+id/mirroring"
+        style="@style/menu"
+        android:layout_width="208dp"
+        android:layout_height="180dp"
+        android:text="@string/mirroring_menu"
+        app:layout_constraintTop_toTopOf="@+id/payment"
+        app:layout_constraintStart_toStartOf="@+id/menu"/>
+
+    <TextView
+        style="@style/subtext"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:text="@string/mirroring_menu_sub"
+        app:layout_constraintStart_toStartOf="@+id/mirroring"
+        app:layout_constraintTop_toBottomOf="@+id/mirroring" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
