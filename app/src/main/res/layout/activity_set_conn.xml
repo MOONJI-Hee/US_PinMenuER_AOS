@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/f9"
-    tools:context=".printer.setConnActivity">
+    tools:context=".printer.SetConnActivity">
 
     <TextView
         android:id="@+id/title"
@@ -27,5 +27,68 @@
             android:layout_height="wrap_content"
             android:src="@drawable/btn_title_back" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/imgTablet"
+        android:layout_width="400dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="60dp"
+        android:background="@drawable/bg_r6w"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_tablet_anroid_big" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/device"
+        style="@style/text20"
+        android:layout_marginTop="20dp"
+        android:text="@string/android_smartphone"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/imgTablet"
+        app:layout_constraintStart_toStartOf="@+id/imgTablet"/>
+
+    <TextView
+        android:id="@+id/tv_nick"
+        style="@style/text18"
+        android:text="@string/printer_nick"
+        app:layout_constraintTop_toTopOf="@+id/nickDevice"
+        app:layout_constraintBottom_toBottomOf="@+id/nickDevice"
+        app:layout_constraintStart_toStartOf="@+id/imgTablet" />
+
+    <TextView
+        android:id="@+id/nickDevice"
+        style="@style/nick"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:hint="@string/printer_nick_hint"
+        app:layout_constraintTop_toBottomOf="@+id/device"
+        app:layout_constraintEnd_toEndOf="@+id/imgTablet"
+        app:layout_constraintStart_toEndOf="@+id/tv_nick"/>
+
+    <TextView
+        style="@style/subtext"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/printer_conn_mng_info"
+        app:layout_constraintStart_toStartOf="@+id/imgTablet"
+        app:layout_constraintTop_toBottomOf="@+id/nickDevice" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPrinter"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imgTablet"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgTablet"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

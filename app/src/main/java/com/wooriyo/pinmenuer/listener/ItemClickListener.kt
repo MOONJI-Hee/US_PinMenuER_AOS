@@ -1,6 +1,7 @@
 package com.wooriyo.pinmenuer.listener
 
 import android.content.Intent
+import android.widget.CheckBox
 import com.wooriyo.pinmenuer.model.CallDTO
 import com.wooriyo.pinmenuer.model.StoreDTO
 
@@ -9,4 +10,5 @@ interface ItemClickListener {
     fun onItemMove(fromPos: Int, toPos: Int) {}
     fun onStoreClick(storeDTO: StoreDTO, intent: Intent) {}
     fun onCallClick(position: Int, data: CallDTO) {}
+    fun onCheckClick(position: Int, v: CheckBox, isChecked : Boolean) {}
 }

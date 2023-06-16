@@ -456,6 +456,65 @@ interface Api {
         @Query("idx") callidx: Int
     ): Call<ResultDTO>
 
+    // 영수증 프린터 관련 Api
+    // 프린터 설정 최조 진입 시
+    @GET("m/ins_print_setting.php")
+    fun insPrintSetting(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("uuid") androidId : String
+    ): Call<ResultDTO>
+
+    // 등록한 프린터 목록
+    @GET("m/connect_print_list.php")
+    fun connPrintList(
+        @Query("useridx") useridx: Int
+    ): Call<PrintListDTO>
+
+    // 프린터 별명 설정
+    @GET("m/print_nick.php")
+    fun setPrintNick(
+        @Query("storeidx") storeidx: Int,
+        @Query("nick") nick: String,
+        @Query("type") type: Int        // 1 : 관리자 기기, 2 : 프린트 기기
+    ): Call<ResultDTO>
+
+    // 사용가능한 프린터 목록
+    @GET("m/print_model_list.php")
+    fun getSupportList(): Call<PrintModelListDTO>
+
+    // 프린터 삭제
+    @GET("m/del_print.php")
+    fun delPrint(
+        @Query("idx") idx: Int,
+        @Query("storeidx") storeidx: Int
+    ): Call<ResultDTO>
+
+    // 프린터 기기 선택
+    @GET("m/udt_print_kind.php")
+    fun udtPrintModel(
+        @Query("storeidx") storeidx: Int,
+        @Query("uuid") androidId : String,
+        @Query("printType") printType: Int
+    ): Call<ResultDTO>
+
+    // 프린터 출력 설정 불러오기
+    @GET("m/getprintinfo.php")
+    fun getPrintContentSet(
+        @Query("storeidx") storeidx: Int
+    ): Call<PrintContentDTO>
+
+    // 프린터 출력 설정 하기
+    @GET("m/udt_print_setting.php")
+    fun setPrintContent(
+        @Query("idx") idx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("fontSize") fontSize: Int,   // 1: 크게 , 2 : 작게
+        @Query("kitchen") kitchen: String,  // 주방영수증 사용 여부 (Y: 사용, N: 미사용)
+        @Query("receipt") receipt: String,  // 주방영수증 사용 여부 (Y: 사용, N: 미사용)
+        @Query("ordcode") ordcode: String,  // 주방영수증 사용 여부 (Y: 사용, N: 미사용)
+        @Query("category") category: String
+    ): Call<PrintContentDTO>
 
     // 카카오 지도 관련 api
     @GET("/v2/local/search/address.json")

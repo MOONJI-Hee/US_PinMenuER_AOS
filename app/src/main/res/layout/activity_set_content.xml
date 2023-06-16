@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/f9"
+    tools:context=".printer.SetContentActivity">
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/title"
+        android:text="@string/printer_title_contents"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/back"
+        android:layout_width="72dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_title_back" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/imgTablet"
+        android:layout_width="400dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="60dp"
+        android:background="@drawable/bg_r6w"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_tablet_anroid_big" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/device"
+        style="@style/text20"
+        android:layout_marginTop="20dp"
+        android:text="@string/android_smartphone"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/imgTablet"
+        app:layout_constraintStart_toStartOf="@+id/imgTablet"/>
+
+    <TextView
+        android:id="@+id/nick"
+        style="@style/text18"
+        android:text="@string/printer_nick_format"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/device"
+        app:layout_constraintStart_toStartOf="@+id/imgTablet" />
+
+    <TextView
+        style="@style/text18"
+        android:id="@+id/tvfont"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/font"
+        app:layout_constraintStart_toStartOf="@+id/nick"
+        app:layout_constraintTop_toBottomOf="@+id/nick"/>
+
+    <RadioGroup
+        android:id="@+id/radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="@+id/tvfont"
+        app:layout_constraintBottom_toBottomOf="@+id/tvfont"
+        app:layout_constraintStart_toEndOf="@+id/tvfont">
+
+        <RadioButton
+            style="@style/text18"
+            android:id="@+id/rdBig"
+            android:layout_height="32dp"
+            android:text="@string/big"
+            android:textStyle="bold"
+            android:button="@null"
+            android:checked="true"
+            android:drawableStart="@drawable/selector_check" />
+
+        <RadioButton
+            style="@style/text18"
+            android:id="@+id/rdSmall"
+            android:layout_height="32dp"
+            android:layout_marginStart="24dp"
+            android:text="@string/small"
+            android:textStyle="bold"
+            android:button="@null"
+            android:drawableStart="@drawable/selector_check"/>
+
+    </RadioGroup>
+
+    <TextView
+        style="@style/subtext"
+        android:layout_marginTop="32dp"
+        android:text="@string/printer_contents_info"
+        app:layout_constraintTop_toBottomOf="@+id/tvfont"
+        app:layout_constraintStart_toStartOf="@+id/tvfont"/>
+
+    <TextView
+        style="@style/text20"
+        android:id="@+id/tv_kitchen"
+        android:text="@string/printer_kitchen"
+        android:textStyle="bold"
+        android:layout_marginStart="40dp"
+        app:layout_constraintStart_toEndOf="@+id/imgTablet"
+        app:layout_constraintTop_toTopOf="@+id/imgTablet"/>
+
+    <CheckBox
+        style="@style/toggle"
+        android:id="@+id/kitchen"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintTop_toTopOf="@+id/tv_kitchen"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_kitchen"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_cate"
+        android:layout_width="0dp"
+        android:layout_height="313dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="60dp"
+        android:padding="20dp"
+        android:background="@drawable/bg_r6w"
+        app:layout_constraintStart_toStartOf="@+id/tv_kitchen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_kitchen">
+
+        <TextView
+            style="@style/text20"
+            android:id="@+id/cateCnt"
+            android:fontFamily="@font/notosans_demilight"
+            android:text="@string/printer_kitchen_format"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/cateSet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_set"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/cateCnt"/>
+
+        <TextView
+            style="@style/subtext"
+            android:text="@string/printer_kitchen_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
+    <View
+        android:id="@+id/line"
+        android:layout_width="2dp"
+        android:layout_height="72dp"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/cl_cate"
+        app:layout_constraintEnd_toEndOf="@+id/cl_cate"
+        app:layout_constraintTop_toTopOf="@+id/customer"/>
+
+    <TextView
+        style="@style/text20b"
+        android:id="@+id/tv_customer"
+        android:text="@string/printer_customer"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="@+id/tv_kitchen"
+        app:layout_constraintTop_toBottomOf="@+id/cl_cate"/>
+
+    <CheckBox
+        style="@style/toggle"
+        android:id="@+id/customer"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toStartOf="@+id/line"
+        app:layout_constraintTop_toTopOf="@+id/tv_customer"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_customer"/>
+
+    <TextView
+        style="@style/subtext"
+        android:layout_marginTop="11dp"
+        android:text="@string/printer_customer_info"
+        app:layout_constraintStart_toStartOf="@+id/tv_customer"
+        app:layout_constraintTop_toBottomOf="@+id/customer"/>
+
+    <TextView
+        style="@style/text20b"
+        android:id="@+id/tv_orderno"
+        android:text="@string/printer_order_no"
+        android:layout_marginStart="30dp"
+        app:layout_constraintStart_toEndOf="@+id/line"
+        app:layout_constraintTop_toTopOf="@+id/tv_customer"/>
+
+    <CheckBox
+        style="@style/toggle"
+        android:id="@+id/orderNo"
+        app:layout_constraintTop_toTopOf="@+id/tv_orderno"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_orderno"
+        app:layout_constraintEnd_toEndOf="@+id/kitchen"/>
+
+    <TextView
+        style="@style/subtext"
+        android:layout_marginTop="11dp"
+        android:text="@string/printer_order_no_info"
+        app:layout_constraintStart_toStartOf="@+id/tv_orderno"
+        app:layout_constraintTop_toBottomOf="@+id/orderNo"/>
+
+    <TextView
+        style="@style/btn_main"
+        android:id="@+id/save"
+        android:text="@string/btn_save"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/bg_btn_r6_grd"
+        app:layout_constraintBottom_toTopOf="@+id/info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        style="@style/subtext"
+        android:id="@+id/info"
+        android:layout_marginBottom="50dp"
+        android:text="@string/printer_order_no_info"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/save" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,16 +28,22 @@
         android:theme="@style/Theme.PinMenuER"
         tools:targetApi="31">
         <activity
-            android:name=".setConnActivity"
+            android:name=".printer.SelCateActivity"
             android:exported="false" />
         <activity
-            android:name=".PrinterModelList"
+            android:name=".printer.SetContentActivity"
             android:exported="false" />
         <activity
-            android:name=".NewConnActivity"
+            android:name=".printer.SetConnActivity"
             android:exported="false" />
         <activity
-            android:name=".PrinterMenuActivity"
+            android:name=".printer.PrinterModelList"
+            android:exported="false" />
+        <activity
+            android:name=".printer.NewConnActivity"
+            android:exported="false" />
+        <activity
+            android:name=".printer.PrinterMenuActivity"
             android:exported="false" />
         <activity
             android:name=".TestActivity"

@@ -33,7 +33,9 @@
         <entry key="app/src/main/res/drawable/ic_plus_g.xml" value="0.569" />
         <entry key="app/src/main/res/drawable/line_dash22.xml" value="0.5665" />
         <entry key="app/src/main/res/drawable/line_dash2g.xml" value="0.5665" />
+        <entry key="app/src/main/res/drawable/list_sel_cate.xml" value="0.5245" />
         <entry key="app/src/main/res/drawable/list_test.xml" value="0.503" />
+        <entry key="app/src/main/res/drawable/selector_box.xml" value="0.5245" />
         <entry key="app/src/main/res/drawable/selector_btn.xml" value="0.487" />
         <entry key="app/src/main/res/drawable/selector_btn_grd.xml" value="0.1725" />
         <entry key="app/src/main/res/drawable/selector_check.xml" value="0.175" />
@@ -55,13 +57,15 @@
         <entry key="app/src/main/res/layout/activity_menu_ui.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_new_conn.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_order_list.xml" value="0.28828125" />
-        <entry key="app/src/main/res/layout/activity_printer_menu.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_printer_menu.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_printer_model_list.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/activity_set_conn.xml" value="0.28151041666666665" />
+        <entry key="app/src/main/res/layout/activity_sel_cate.xml" value="0.28828125" />
+        <entry key="app/src/main/res/layout/activity_set_conn.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_set_content.xml" value="0.28828125" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.24666666666666667" />
         <entry key="app/src/main/res/layout/activity_start.xml" value="0.26875" />
         <entry key="app/src/main/res/layout/activity_store_list.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_store_menu.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_store_menu.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_store_reg.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_store_set.xml" value="0.2841666666666667" />
         <entry key="app/src/main/res/layout/activity_store_set_detail.xml" value="0.25" />
@@ -79,6 +83,7 @@
         <entry key="app/src/main/res/layout/dialog_holiday.xml" value="0.2877604166666667" />
         <entry key="app/src/main/res/layout/dialog_menuset_info.xml" value="0.28552971576227393" />
         <entry key="app/src/main/res/layout/dialog_option.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/dialog_ptrinter.xml" value="0.29583333333333334" />
         <entry key="app/src/main/res/layout/dialog_regtime.xml" value="0.28828125" />
         <entry key="app/src/main/res/layout/dialog_set_nick.xml" value="0.2877604166666667" />
         <entry key="app/src/main/res/layout/dialog_viewmode.xml" value="0.20333333333333334" />
@@ -102,6 +107,8 @@
         <entry key="app/src/main/res/layout/list_order_detail.xml" value="0.3105263157894737" />
         <entry key="app/src/main/res/layout/list_printer.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/list_printer_add.xml" value="0.2877604166666667" />
+        <entry key="app/src/main/res/layout/list_printer_cate.xml" value="0.1640625" />
+        <entry key="app/src/main/res/layout/list_sel_cate.xml" value="0.2877604166666667" />
         <entry key="app/src/main/res/layout/list_special_holiday.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/list_store.xml" value="0.29583333333333334" />
         <entry key="app/src/main/res/layout/list_store_add.xml" value="0.28828125" />

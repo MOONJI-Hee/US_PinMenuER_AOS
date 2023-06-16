@@ -31,6 +31,7 @@ class MyApplication: Application() {
         var storeidx = 0
         lateinit var store: StoreDTO
         lateinit var allCateList : ArrayList<CategoryDTO>
+        var bidx = 0    //프린터 설정 시 부여되는 idx (기기별 매장 하나 당 한개씩 부여)
 
         lateinit var androidId : String
 
