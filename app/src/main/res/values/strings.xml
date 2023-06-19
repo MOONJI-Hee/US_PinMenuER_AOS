@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">핀메뉴 관리</string>
+    <string name="app_name">핀메뉴 관리 (태블릿 PC)</string>
 
     <string name="kakao_appKey">398d9c3d6b47f73780e5413b1f4b167f</string>
     <string name="kakao_apiKey">0a9047a6f0f9b350e4fca5168f2c5ef8</string>
@@ -316,7 +316,7 @@
 
     <string name="printer_title_conn_mng">연결 프린터 관리</string>
     <string name="print_test">시&#160;&#160;험\n인&#160;&#160;쇄</string>
-    <string name="good">좋음</string>
+    <string name="good">양호</string>
     <string name="unrest">불안</string>
     <string name="btn_conn">연&#160;&#160;결</string>
     <string name="printer_clear">연결해제</string>

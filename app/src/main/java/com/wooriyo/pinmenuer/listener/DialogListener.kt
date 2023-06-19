@@ -14,4 +14,5 @@ interface DialogListener {
     fun onOptAdd(option: OptionDTO) {}
     fun onOptSet(position: Int, option: OptionDTO) {}
     fun onItemDelete(position: Int) {}
+    fun onNickSet(nick: String) {}
 }

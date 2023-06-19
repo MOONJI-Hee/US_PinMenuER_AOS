@@ -1,12 +1,10 @@
 package com.wooriyo.pinmenuer.printer
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.databinding.ActivityPrinterMenuBinding
 import com.wooriyo.pinmenuer.databinding.ActivityPrinterModelListBinding
 import com.wooriyo.pinmenuer.model.PrintModelDTO
 import com.wooriyo.pinmenuer.model.PrintModelListDTO
@@ -15,11 +13,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PrinterModelList : BaseActivity() {
+class PrinterModelListActivity : BaseActivity() {
     lateinit var binding: ActivityPrinterModelListBinding
 
     val TAG = "PrintModelList"
-    val mActivity = this@PrinterModelList
+    val mActivity = this@PrinterModelListActivity
 
     val modelList = ArrayList<PrintModelDTO>()
 

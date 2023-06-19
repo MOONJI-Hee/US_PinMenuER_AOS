@@ -1,18 +1,21 @@
 package com.wooriyo.pinmenuer
 
 import android.app.Application
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.graphics.Point
 import android.os.Build
 import android.provider.Settings
-import android.view.View
-import android.view.Window
 import android.view.WindowManager
+import com.sewoo.port.android.BluetoothPort
 import com.wooriyo.pinmenuer.db.AppDatabase
-import com.wooriyo.pinmenuer.db.entity.Store
 import com.wooriyo.pinmenuer.model.CategoryDTO
 import com.wooriyo.pinmenuer.model.SharedDTO
 import com.wooriyo.pinmenuer.model.StoreDTO
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MyApplication: Application() {
     companion object {
@@ -30,10 +33,22 @@ class MyApplication: Application() {
         var useridx = 0
         var storeidx = 0
         lateinit var store: StoreDTO
+        lateinit var androidId : String
         lateinit var allCateList : ArrayList<CategoryDTO>
+
+        // 블루투스 관련 변수
+        lateinit var bluetoothManager: BluetoothManager
+        lateinit var bluetoothAdapter: BluetoothAdapter
+        lateinit var remoteDevices: Vector<BluetoothDevice>
+        lateinit var arrRemoteDevice : ArrayList<String>
+
+
         var bidx = 0    //프린터 설정 시 부여되는 idx (기기별 매장 하나 당 한개씩 부여)
 
-        lateinit var androidId : String
+        //세우전자 프린터 관련
+        lateinit var bluetoothPort: BluetoothPort
+        val BT_PRINTER = 1536
+        var btThread: Thread? = null
 
         fun setStoreDTO() {
             store = StoreDTO(useridx)
@@ -77,6 +92,16 @@ class MyApplication: Application() {
 
         setStoreDTO()
         allCateList = ArrayList<CategoryDTO>()
+
+        //블루투스
+        bluetoothManager = this.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+        bluetoothAdapter = bluetoothManager.adapter
+        remoteDevices = Vector<BluetoothDevice>()
+        arrRemoteDevice = ArrayList<String>()
+
+        //세우전자
+        bluetoothPort = BluetoothPort.getInstance()
+        bluetoothPort.SetMacFilter(false)
 
         super.onCreate()
     }

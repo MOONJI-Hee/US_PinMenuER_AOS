@@ -1,5 +1,6 @@
 package com.wooriyo.pinmenuer.printer
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -36,6 +37,7 @@ class SelectPrinterActivity : BaseActivity() {
             ckTe202.visibility = View.VISIBLE
             ckSam4s.visibility = View.VISIBLE
             select.visibility = View.VISIBLE
+            supportInfo.visibility = View.GONE
 
             ts400b.setOnClickListener {
                 ckTs400b.isChecked = true

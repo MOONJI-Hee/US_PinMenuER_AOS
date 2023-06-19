@@ -48,7 +48,7 @@
         android:id="@+id/device"
         style="@style/text20"
         android:layout_marginTop="20dp"
-        android:text="@string/android_smartphone"
+        android:text="@string/android_tablepc"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/imgTablet"
         app:layout_constraintStart_toStartOf="@+id/imgTablet"/>

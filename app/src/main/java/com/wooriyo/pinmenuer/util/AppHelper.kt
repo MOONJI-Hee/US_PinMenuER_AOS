@@ -1,13 +1,21 @@
 package com.wooriyo.pinmenuer.util
 
 import android.app.Activity
+import android.bluetooth.BluetoothDevice
 import android.content.Context
+import android.content.DialogInterface
+import android.content.IntentFilter
 import android.graphics.Rect
 import android.os.Build
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity.INPUT_METHOD_SERVICE
+import com.sewoo.request.android.RequestHandler
+import com.wooriyo.pinmenuer.MyApplication
+import java.io.IOException
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -100,5 +108,31 @@ class AppHelper {
         fun versionName(context: Context): String = context.packageManager.getPackageInfo(context.packageName, 0).versionName
         fun getPhoneModel(): String = Build.MODEL       // 디바이스 모델명
 
+        // 블루투스 & 프린터기 연결 관련 메소드
+        fun searchDevice() {
+            MyApplication.bluetoothAdapter.startDiscovery()
+        }
+
+        fun connDevice(): Int {
+            var retVal: Int = 0
+
+            Log.d("AppHelper", "블루투스 기기 커넥트")
+            Log.d("AppHelper", "remote 기기 > ${MyApplication.remoteDevices}")
+            if(MyApplication.remoteDevices.isNotEmpty()) {
+                Log.d("AppHelper", "remote 기기 있음")
+
+                val connDvc = MyApplication.remoteDevices[0]
+                Log.d("AppHelper", "connDvc >> $connDvc")
+
+                try {
+                    MyApplication.bluetoothPort.connect(connDvc)
+                    retVal = Integer.valueOf(0)
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                    retVal = Integer.valueOf(-1)
+                }
+            }
+            return retVal
+        }
     }
 }

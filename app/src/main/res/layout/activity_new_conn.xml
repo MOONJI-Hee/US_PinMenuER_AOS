@@ -132,8 +132,8 @@
 
     <LinearLayout
         android:id="@+id/btnPrinter"
-        android:layout_width="140dp"
-        android:layout_height="125dp"
+        android:layout_width="320dp"
+        android:layout_height="220dp"
         android:background="@drawable/bg_r6w"
         android:gravity="center"
         android:visibility="gone"
@@ -143,8 +143,8 @@
 
         <ImageView
             android:id="@+id/ivPrinter"
-            android:layout_width="140dp"
-            android:layout_height="125dp"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
             app:layout_constraintBottom_toBottomOf="@id/btnPlus"
             app:layout_constraintStart_toStartOf="@+id/btnPlus"
             app:layout_constraintTop_toTopOf="@+id/btnPlus" />

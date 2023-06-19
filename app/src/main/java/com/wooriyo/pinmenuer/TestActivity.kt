@@ -3,7 +3,6 @@ package com.wooriyo.pinmenuer
 import android.Manifest
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
-import android.bluetooth.BluetoothManager
 import android.content.*
 import android.content.pm.PackageManager
 import android.os.Build
@@ -11,7 +10,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -21,32 +19,29 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sewoo.jpos.command.ESCPOSConst
 import com.sewoo.jpos.printer.ESCPOSPrinter
-import com.sewoo.port.android.BluetoothPort
 import com.sewoo.request.android.RequestHandler
+import com.wooriyo.pinmenuer.MyApplication.Companion.BT_PRINTER
+import com.wooriyo.pinmenuer.MyApplication.Companion.arrRemoteDevice
+import com.wooriyo.pinmenuer.MyApplication.Companion.bluetoothAdapter
+import com.wooriyo.pinmenuer.MyApplication.Companion.bluetoothPort
+import com.wooriyo.pinmenuer.MyApplication.Companion.btThread
 import com.wooriyo.pinmenuer.MyApplication.Companion.osver
+import com.wooriyo.pinmenuer.MyApplication.Companion.remoteDevices
+import com.wooriyo.pinmenuer.broadcast.BtConnectReceiver
+import com.wooriyo.pinmenuer.broadcast.BtDiscoveryReceiver
+import com.wooriyo.pinmenuer.config.AppProperties.Companion.REQUEST_ENABLE_BT
+import com.wooriyo.pinmenuer.config.AppProperties.Companion.REQUEST_LOCATION
 import com.wooriyo.pinmenuer.databinding.ActivityTestBinding
 import com.wooriyo.pinmenuer.databinding.ListTestBinding
+import com.wooriyo.pinmenuer.util.AppHelper
 import java.io.IOException
 import java.util.*
 
 class TestActivity : AppCompatActivity() {
     lateinit var binding: ActivityTestBinding
 
-    lateinit var bluetoothManager: BluetoothManager
-    lateinit var bluetoothAdapter: BluetoothAdapter
-    lateinit var remoteDevices: Vector<BluetoothDevice>
-
-    //세우전자 Lib
-    lateinit var bluetoothPort: BluetoothPort
-    private val BT_PRINTER = 1536
-    private var btThread: Thread? = null
-
-    val REQUEST_LOCATION = 0
-    val REQUEST_ENABLE_BT = 1
-
     val TAG = "TestActivity"
 
-    val arrRemoteDevice = ArrayList<String>()
     val adapter = Adapter(arrRemoteDevice)
 
     var searchflags = false
@@ -59,69 +54,8 @@ class TestActivity : AppCompatActivity() {
     }
 
     // 브로드 리시버 시작
-    val connectDevice =
-    object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            val action = intent.action
-            if (BluetoothDevice.ACTION_ACL_CONNECTED == action) {
-                Toast.makeText(getApplicationContext(), "BlueTooth Connect", Toast.LENGTH_SHORT).show();
-            } else if (BluetoothDevice.ACTION_ACL_DISCONNECTED == action) {
-                try {
-                    if (bluetoothPort.isConnected()) bluetoothPort.disconnect()
-                } catch (e: IOException) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace()
-                } catch (e: InterruptedException) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace()
-                }
-                if (btThread != null) {
-                    if(btThread!!.isAlive()) {
-                        btThread!!.interrupt()
-                        btThread = null
-                    }
-                }
-//                ConnectionFailedDevice()
-
-                Toast.makeText(getApplicationContext(), "BlueTooth Disconnect", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    val discoveryResult =
-    object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            val key: String
-            var bFlag = true
-            var btDev: BluetoothDevice
-            val remoteDevice =
-                intent.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
-            if (remoteDevice != null) {
-                val devNum = remoteDevice.bluetoothClass.majorDeviceClass
-                if (devNum != BT_PRINTER) return
-                key = if (remoteDevice.bondState != BluetoothDevice.BOND_BONDED) {
-                    """${remoteDevice.name}[${remoteDevice.address}]""".trimIndent()
-                } else {
-                    """${remoteDevice.name}[${remoteDevice.address}] [Paired]""".trimIndent()
-                }
-                if (bluetoothPort.isValidAddress(remoteDevice.address)) {
-                    for (i in remoteDevices.indices) {
-                        btDev = remoteDevices.elementAt(i)
-                        if (remoteDevice.address == btDev.address) {
-                            bFlag = false
-                            break
-                        }
-                    }
-                    if (bFlag) {
-                        remoteDevices.add(remoteDevice)
-                        arrRemoteDevice.add(key)
-                    }
-                    adapter.notifyDataSetChanged()
-                }
-            }
-        }
-    }
-
+    val connectDevice = BtConnectReceiver()
+    val discoveryResult = BtDiscoveryReceiver()
 
     val searchStart =
     object : BroadcastReceiver() {
@@ -130,11 +64,10 @@ class TestActivity : AppCompatActivity() {
         }
     }
 
-
     val searchFinish =
     object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            searchflags = true
+//            searchflags = true
         }
     }
 
@@ -151,20 +84,10 @@ class TestActivity : AppCompatActivity() {
         binding.rv.layoutManager = LinearLayoutManager(this@TestActivity, LinearLayoutManager.VERTICAL, false)
         binding.rv.adapter = adapter
 
-        bluetoothManager = this.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
-        bluetoothAdapter = bluetoothManager.adapter
-
         // BroadCast Receiver > 여기서 선언하는게 맞을지는 아직 모름
         registerReceiver(discoveryResult, IntentFilter(BluetoothDevice.ACTION_FOUND))
         registerReceiver(searchStart, IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_STARTED))
         registerReceiver(searchFinish, IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED))
-
-
-        remoteDevices = Vector<BluetoothDevice>()
-
-        //세우전자 Lib
-        bluetoothPort = BluetoothPort.getInstance()
-        bluetoothPort.SetMacFilter(false) //not using mac address filtering
 
         // 권한 확인
         checkPermissions()
@@ -248,58 +171,30 @@ class TestActivity : AppCompatActivity() {
     }
 
     fun connDevice() {
-        Log.d(TAG, "블루투스 기기 커넥트")
-        Log.d(TAG, "remote 기기 > $remoteDevices")
-        if(remoteDevices.isNotEmpty()) {
-            Log.d(TAG, "remote 기기 있음")
+        val retVal = AppHelper.connDevice()
 
-            val connDvc = remoteDevices[0]
+        if (retVal == 0) { // Connection success.
+            Log.d("AppHelper", "retVal 0이면 성공이야....")
 
-            Log.d(TAG, "connDvc >> $connDvc")
-
-
-            var retVal: Int = 0
-            var str_temp = ""
-
-            try {
-
-                Log.d(TAG, "여기도 들어왔지렁")
-
-                bluetoothPort.connect(connDvc)
-                str_temp = connDvc.address
-                retVal = Integer.valueOf(0)
-
-                Log.d(TAG, "retVal >> $retVal")
-            } catch (e: IOException) {
-                e.printStackTrace()
-                retVal = Integer.valueOf(-1)
-            }
-
-            if (retVal == 0) // Connection success.
-            {
-                Log.d(TAG, "retVal 0이면 성공이야....")
-
-                val rh = RequestHandler()
-                btThread = Thread(rh)
-                btThread!!.start()
+            val rh = RequestHandler()
+            btThread = Thread(rh)
+            btThread!!.start()
 
 //                saveSettingFile()
-                registerReceiver(connectDevice, IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED))
-                registerReceiver(connectDevice, IntentFilter(BluetoothDevice.ACTION_ACL_DISCONNECTED))
-            } else  // Connection failed.
-            {
-                Log.d(TAG, "retVal 0 아니면 실패야....")
-
-                AlertDialog.Builder(this@TestActivity)
-                    .setTitle("Error")
-                    .setMessage("Failed to connect Bluetooth device.")
-                    .setNegativeButton(
-                        "CANCEL",
-                        DialogInterface.OnClickListener { dialog, which -> // TODO Auto-generated method stub
-                            dialog.dismiss()
-                        })
-                    .show()
-            }
+            registerReceiver(connectDevice, IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED))
+            registerReceiver(connectDevice, IntentFilter(BluetoothDevice.ACTION_ACL_DISCONNECTED))
+        } else { // Connection failed.
+            Log.d("AppHelper", "retVal 0 아니면 실패야....")
+//
+//            AlertDialog.Builder()
+//                .setTitle("Error")
+//                .setMessage("Failed to connect Bluetooth device.")
+//                .setNegativeButton(
+//                    "CANCEL",
+//                    DialogInterface.OnClickListener { dialog, which -> // TODO Auto-generated method stub
+//                        dialog.dismiss()
+//                    })
+//                .show()
         }
     }
 
