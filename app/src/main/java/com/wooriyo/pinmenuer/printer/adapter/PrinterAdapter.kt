@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sewoo.jpos.command.ESCPOSConst
 import com.sewoo.jpos.printer.ESCPOSPrinter
+import com.wooriyo.pinmenuer.MyApplication.Companion.escposPrinter
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.FONT_BIG
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.FONT_SMALL
@@ -15,9 +16,12 @@ import com.wooriyo.pinmenuer.config.AppProperties.Companion.VIEW_TYPE_ADD
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.VIEW_TYPE_COM
 import com.wooriyo.pinmenuer.databinding.ListPrinterAddBinding
 import com.wooriyo.pinmenuer.databinding.ListPrinterBinding
+import com.wooriyo.pinmenuer.listener.DialogListener
 import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.model.PrintDTO
 import com.wooriyo.pinmenuer.printer.NewConnActivity
+import com.wooriyo.pinmenuer.printer.dialog.DetailPrinterDialog
+import com.wooriyo.pinmenuer.printer.dialog.SetNickDialog
 import java.io.IOException
 
 class PrinterAdapter(val dataSet: ArrayList<PrintDTO>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -55,7 +59,6 @@ class PrinterAdapter(val dataSet: ArrayList<PrintDTO>): RecyclerView.Adapter<Rec
     }
 
     class ViewHolder(val binding: ListPrinterBinding, val context: Context, val itemClickListener: ItemClickListener): RecyclerView.ViewHolder(binding.root) {
-        val escposPrinter = ESCPOSPrinter()
         fun bind(data: PrintDTO) {
             var cmp = ""
             var img = 0
@@ -83,6 +86,10 @@ class PrinterAdapter(val dataSet: ArrayList<PrintDTO>): RecyclerView.Adapter<Rec
 
             //TODO 연결된 프린터 목록과 비교해서 연결 상태 표시
 
+            binding.layout.setOnClickListener {
+                DetailPrinterDialog(context, data).show()
+            }
+
             binding.btnTest.setOnClickListener {
                 var rtn = 0
 
@@ -103,7 +110,13 @@ class PrinterAdapter(val dataSet: ArrayList<PrintDTO>): RecyclerView.Adapter<Rec
             }
 
             binding.nick.setOnClickListener {
-
+                val nickDialog = SetNickDialog(context, data.nick, 2, data.model)
+                nickDialog.setOnNickChangeListener(object : DialogListener {
+                    override fun onNickSet(nick: String) {
+                        data.nick = nick
+                    }
+                })
+                nickDialog.show()
             }
 
             binding.btnConn.setOnClickListener {

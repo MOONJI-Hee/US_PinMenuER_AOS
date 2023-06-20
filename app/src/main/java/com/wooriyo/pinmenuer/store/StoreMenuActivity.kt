@@ -13,6 +13,7 @@ import com.wooriyo.pinmenuer.MyApplication.Companion.store
 import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.MyApplication.Companion.allCateList
+import com.wooriyo.pinmenuer.MyApplication.Companion.androidId
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.call.CallListActivity
 import com.wooriyo.pinmenuer.databinding.ActivityStoreMenuBinding
@@ -83,7 +84,7 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
             }
             binding.tablePass -> startActivity(Intent(mActivity, TablePassActivity::class.java))
             binding.menuUi -> startActivity(Intent(mActivity, MenuUiActivity::class.java))
-            binding.printer -> startActivity(Intent(mActivity, PrinterMenuActivity::class.java))
+            binding.printer -> insPrintSetting()
         }
     }
 
@@ -132,4 +133,26 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
             })
     }
 
+    fun insPrintSetting() {
+        ApiClient.service.insPrintSetting(useridx, storeidx, androidId)
+            .enqueue(object : Callback<ResultDTO>{
+                override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                    Log.d(TAG, "프린터 설정 최초 진입 시 row 추가 url : $response")
+                    if(!response.isSuccessful) return
+
+                    val result = response.body() ?: return
+
+                    if(result.status == 1){
+                        MyApplication.bidx = result.idx
+                        startActivity(Intent(mActivity, PrinterMenuActivity::class.java))
+                    }else
+                        Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                }
+                override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                    Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "프린터 설정 최초 진입 시 row 추가 오류 >> $t")
+                    Log.d(TAG, "프린터 설정 최초 진입 시 row 추가 오류 >> ${call.request()}")
+                }
+            })
+    }
 }

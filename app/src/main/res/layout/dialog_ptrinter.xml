@@ -11,7 +11,7 @@
         <TextView
             style="@style/text22b"
             android:id="@+id/title"
-            android:text="@string/printer_conn"
+            android:text="@string/printer_choose"
             android:layout_marginTop="40dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
             android:layout_height="160dp"
             android:layout_marginTop="40dp"
             android:src="@drawable/skl_ts400b"
-            app:layout_constraintStart_toStartOf="@+id/connect"
+            app:layout_constraintStart_toStartOf="@+id/cl_udt"
             app:layout_constraintTop_toBottomOf="@+id/title"/>
 
         <TextView
@@ -67,7 +67,7 @@
             android:hint="@string/printer_nick_hint"
             app:layout_constraintBottom_toBottomOf="@+id/ivPrinter"
             app:layout_constraintStart_toEndOf="@+id/tvNick"
-            app:layout_constraintEnd_toEndOf="@+id/connect"/>
+            app:layout_constraintEnd_toEndOf="@+id/cl_udt"/>
 
         <TextView
             style="@style/btn_main"
@@ -75,6 +75,7 @@
             android:layout_marginTop="20dp"
             android:text="@string/btn_conn"
             android:background="@drawable/bg_btn_r6_grd"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@+id/ivPrinter"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -84,7 +85,6 @@
             android:layout_width="500dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@+id/ivPrinter"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" >
@@ -97,7 +97,7 @@
                 app:layout_constraintTop_toTopOf="parent"/>
             <TextView
                 style="@style/btn"
-                android:id="@+id/modify"
+                android:id="@+id/save"
                 android:layout_width="0dp"
                 android:layout_marginStart="20dp"
                 android:background="@drawable/bg_btn_r6_grd"
@@ -112,8 +112,8 @@
             android:layout_marginTop="32dp"
             android:layout_marginBottom="60dp"
             android:text="@string/printer_nick_change_info"
-            app:layout_constraintStart_toStartOf="@+id/connect"
-            app:layout_constraintTop_toBottomOf="@+id/connect"
+            app:layout_constraintStart_toStartOf="@+id/cl_udt"
+            app:layout_constraintTop_toBottomOf="@+id/cl_udt"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

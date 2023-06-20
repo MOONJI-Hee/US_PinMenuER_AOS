@@ -9,6 +9,7 @@ import android.graphics.Point
 import android.os.Build
 import android.provider.Settings
 import android.view.WindowManager
+import com.sewoo.jpos.printer.ESCPOSPrinter
 import com.sewoo.port.android.BluetoothPort
 import com.wooriyo.pinmenuer.db.AppDatabase
 import com.wooriyo.pinmenuer.model.CategoryDTO
@@ -39,7 +40,7 @@ class MyApplication: Application() {
         // 블루투스 관련 변수
         lateinit var bluetoothManager: BluetoothManager
         lateinit var bluetoothAdapter: BluetoothAdapter
-        lateinit var remoteDevices: Vector<BluetoothDevice>
+        lateinit var remoteDevices: ArrayList<BluetoothDevice>
         lateinit var arrRemoteDevice : ArrayList<String>
 
 
@@ -47,6 +48,7 @@ class MyApplication: Application() {
 
         //세우전자 프린터 관련
         lateinit var bluetoothPort: BluetoothPort
+        val escposPrinter = ESCPOSPrinter()
         val BT_PRINTER = 1536
         var btThread: Thread? = null
 
@@ -96,7 +98,7 @@ class MyApplication: Application() {
         //블루투스
         bluetoothManager = this.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
         bluetoothAdapter = bluetoothManager.adapter
-        remoteDevices = Vector<BluetoothDevice>()
+        remoteDevices = ArrayList<BluetoothDevice>()
         arrRemoteDevice = ArrayList<String>()
 
         //세우전자

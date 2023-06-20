@@ -14,7 +14,7 @@ class BtConnectReceiver: BroadcastReceiver() {
 
         val action = intent.action
         if (BluetoothDevice.ACTION_ACL_CONNECTED == action) {
-            Toast.makeText(context, "BlueTooth Connect", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "BlueTooth Connect", Toast.LENGTH_SHORT).show()
         } else if (BluetoothDevice.ACTION_ACL_DISCONNECTED == action) {
             try {
                 if (MyApplication.bluetoothPort.isConnected) MyApplication.bluetoothPort.disconnect()
@@ -30,7 +30,7 @@ class BtConnectReceiver: BroadcastReceiver() {
                 }
             }
 //                ConnectionFailedDevice()
-            Toast.makeText(context, "BlueTooth Disconnect", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "BlueTooth Disconnect", Toast.LENGTH_SHORT).show()
         }
     }
 }

@@ -254,7 +254,7 @@ class TestActivity : AppCompatActivity() {
             turnOnBluetooth()
         }else {
             // TODO 블루투스 검색으로
-//            getPairedDevice()
+            getPairedDevice()
             searchDevice()
         }
     }

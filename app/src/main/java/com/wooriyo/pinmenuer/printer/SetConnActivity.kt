@@ -1,6 +1,5 @@
 package com.wooriyo.pinmenuer.printer
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -17,6 +16,7 @@ import com.wooriyo.pinmenuer.model.PrintListDTO
 import com.wooriyo.pinmenuer.printer.adapter.PrinterAdapter
 import com.wooriyo.pinmenuer.printer.dialog.SetNickDialog
 import com.wooriyo.pinmenuer.util.ApiClient
+import com.wooriyo.pinmenuer.util.AppHelper.Companion.getPairedDevice
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,13 +38,15 @@ class SetConnActivity : BaseActivity() {
         // 연결 프린터 리스트 조회 api
         getConnPrintList()
 
+        // 페어링된 프린터 리스트 조회
+        getPairedDevice()
+
         // 연결 프린트 리사이클러뷰
         printerAdapter.setConnClickListener(object : ItemClickListener {
             override fun onItemClick(position: Int) {
                 val selType = printerList[position].printType
 
                 //TODO selType으로 구분하여 프린트 연결
-//                searchDevice()
             }
         })
 

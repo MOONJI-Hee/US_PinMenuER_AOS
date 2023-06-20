@@ -3,19 +3,18 @@ package com.wooriyo.pinmenuer.util
 import android.app.Activity
 import android.bluetooth.BluetoothDevice
 import android.content.Context
-import android.content.DialogInterface
-import android.content.IntentFilter
 import android.graphics.Rect
 import android.os.Build
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity.INPUT_METHOD_SERVICE
-import com.sewoo.request.android.RequestHandler
 import com.wooriyo.pinmenuer.MyApplication
+import com.wooriyo.pinmenuer.MyApplication.Companion.bluetoothAdapter
+import com.wooriyo.pinmenuer.MyApplication.Companion.remoteDevices
 import java.io.IOException
+import java.lang.reflect.Method
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -117,10 +116,8 @@ class AppHelper {
             var retVal: Int = 0
 
             Log.d("AppHelper", "블루투스 기기 커넥트")
-            Log.d("AppHelper", "remote 기기 > ${MyApplication.remoteDevices}")
-            if(MyApplication.remoteDevices.isNotEmpty()) {
-                Log.d("AppHelper", "remote 기기 있음")
-
+            Log.d("AppHelper", "remote 기기 > $remoteDevices")
+            if(remoteDevices.isNotEmpty()) {
                 val connDvc = MyApplication.remoteDevices[0]
                 Log.d("AppHelper", "connDvc >> $connDvc")
 
@@ -133,6 +130,42 @@ class AppHelper {
                 }
             }
             return retVal
+        }
+
+        fun getPairedDevice() {
+            remoteDevices.clear()
+
+            val pairedDevices: Set<BluetoothDevice>? = bluetoothAdapter.bondedDevices
+            pairedDevices?.forEach { device ->
+//            val deviceName = device.name
+                val deviceHardwareAddress = device.address // MAC address
+
+                if(MyApplication.bluetoothPort.isValidAddress(deviceHardwareAddress)) {
+                    val deviceNum = device.bluetoothClass.majorDeviceClass
+
+                    if(deviceNum == MyApplication.BT_PRINTER) {
+                        remoteDevices.add(device)
+                    }
+                }
+            }
+            Log.d("AppHelper", "페어링된 기기 목록 >>$remoteDevices")
+
+        }
+
+        fun checkPrinterConn() {
+            remoteDevices.forEach {
+                val m: Method = it.javaClass.getMethod("isConnected", null as Class<*>)
+                val connected = m.invoke(it, null as Array<Any?>?) as Boolean
+
+                if(connected) {
+                    val deviceHardwareAddress = it.address // MAC address
+
+                    if(MyApplication.bluetoothPort.isValidAddress(deviceHardwareAddress)) {
+                        val deviceNum = it.bluetoothClass.majorDeviceClass
+
+                    }
+                }
+            }
         }
     }
 }

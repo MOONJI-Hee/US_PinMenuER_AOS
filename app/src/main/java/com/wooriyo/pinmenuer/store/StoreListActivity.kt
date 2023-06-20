@@ -17,6 +17,7 @@ import com.wooriyo.pinmenuer.member.MemberSetActivity
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.model.StoreDTO
 import com.wooriyo.pinmenuer.model.StoreListDTO
+import com.wooriyo.pinmenuer.printer.PrinterMenuActivity
 import com.wooriyo.pinmenuer.store.adpter.StoreAdapter
 import com.wooriyo.pinmenuer.util.ApiClient
 import com.wooriyo.pinmenuer.util.AppHelper

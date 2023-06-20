@@ -4,6 +4,8 @@ import android.bluetooth.BluetoothDevice
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.widget.Toast
+import com.sewoo.request.android.RequestHandler
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.MyApplication.Companion.arrRemoteDevice
 import com.wooriyo.pinmenuer.MyApplication.Companion.remoteDevices
@@ -13,19 +15,12 @@ class BtDiscoveryReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         if (intent == null) return
 
-//        val key: String
         var bFlag = true
         var btDev: BluetoothDevice
         val remoteDevice = intent.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
         if (remoteDevice != null) {
             val devNum = remoteDevice.bluetoothClass.majorDeviceClass
             if (devNum != MyApplication.BT_PRINTER) return
-
-//            key = if (remoteDevice.bondState != BluetoothDevice.BOND_BONDED) {
-//                """${remoteDevice.name}[${remoteDevice.address}]""".trimIndent()
-//            } else {
-//                """${remoteDevice.name}[${remoteDevice.address}] [Paired]""".trimIndent()
-//            }
 
             if (MyApplication.bluetoothPort.isValidAddress(remoteDevice.address)) {
                 for (i in remoteDevices.indices) {
@@ -37,10 +32,16 @@ class BtDiscoveryReceiver: BroadcastReceiver() {
                 }
                 if (bFlag) {
                     remoteDevices.add(remoteDevice)
-//                    arrRemoteDevice.add(key)
                 }
             }
-            AppHelper.connDevice()
+            val retVal = AppHelper.connDevice()
+
+            if (retVal == 0) { // Connection success.
+                val rh = RequestHandler()
+                MyApplication.btThread = Thread(rh)
+                MyApplication.btThread!!.start()
+            } else // Connection failed.
+                Toast.makeText(context, "블루투스 연결 실패", Toast.LENGTH_SHORT).show()
         }
     }
 }

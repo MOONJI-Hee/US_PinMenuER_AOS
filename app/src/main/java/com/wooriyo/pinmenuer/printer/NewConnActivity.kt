@@ -2,6 +2,8 @@ package com.wooriyo.pinmenuer.printer
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Color
@@ -21,6 +23,7 @@ import com.wooriyo.pinmenuer.listener.DialogListener
 import com.wooriyo.pinmenuer.printer.dialog.SetNickDialog
 import com.wooriyo.pinmenuer.util.AppHelper
 import com.wooriyo.pinmenuer.util.AppHelper.Companion.searchDevice
+import java.io.IOException
 
 class NewConnActivity : BaseActivity() {
     lateinit var binding: ActivityNewConnBinding
@@ -33,7 +36,44 @@ class NewConnActivity : BaseActivity() {
     var printType = 0
 
     // Broadcast Receiver
-    val connectDevice = BtConnectReceiver()
+    val connectDevice = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent == null) return
+
+            val action = intent.action
+            if (BluetoothDevice.ACTION_ACL_CONNECTED == action) {
+                binding.ivStatus.setImageResource(R.drawable.icon_print_connection_on)
+                binding.tvStatus.setTextColor(Color.BLACK)
+                binding.tvStatus.text = getString(R.string.after_conn)
+                binding.tvNickPrint.setTextColor(Color.BLACK)
+                binding.nickPrinter.isEnabled = true
+                binding.btnRetry.visibility = View.GONE
+
+                Toast.makeText(context, "BlueTooth Connect", Toast.LENGTH_SHORT).show()
+            } else if (BluetoothDevice.ACTION_ACL_DISCONNECTED == action) {
+                try {
+                    if (MyApplication.bluetoothPort.isConnected) MyApplication.bluetoothPort.disconnect()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                } catch (e: InterruptedException) {
+                    e.printStackTrace()
+                }
+                if (MyApplication.btThread != null) {
+                    if(MyApplication.btThread!!.isAlive) {
+                        MyApplication.btThread!!.interrupt()
+                        MyApplication.btThread = null
+                    }
+                }
+                binding.ivStatus.setImageResource(R.drawable.icon_print_connection_off)
+                binding.tvStatus.setTextColor(Color.parseColor("#B4B4B4"))
+                binding.tvStatus.text = getString(R.string.before_conn)
+                binding.tvNickPrint.setTextColor(Color.parseColor("#B4B4B4"))
+                binding.nickPrinter.isEnabled = false
+                binding.btnRetry.visibility = View.VISIBLE
+                Toast.makeText(context, "BlueTooth Disconnect", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
     val discoveryResult = BtDiscoveryReceiver()
 
     private val choosePrinterModel = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -52,7 +92,7 @@ class NewConnActivity : BaseActivity() {
         binding = ActivityNewConnBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // BroadCast Receiver > 여기서 선언하는게 맞을지는 아직 모름
+        // BroadCast Receiver
         registerReceiver(discoveryResult, IntentFilter(BluetoothDevice.ACTION_FOUND))
         registerReceiver(connectDevice, IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED))
         registerReceiver(connectDevice, IntentFilter(BluetoothDevice.ACTION_ACL_DISCONNECTED))
@@ -70,6 +110,16 @@ class NewConnActivity : BaseActivity() {
         binding.btnPlus.setOnClickListener {
             val intent = Intent(mActivity, SelectPrinterActivity::class.java)
             choosePrinterModel.launch(intent)
+        }
+        binding.btnRetry.setOnClickListener {
+            val rtnVal = AppHelper.connDevice()
+
+            if (rtnVal == 0) { // Connection success.
+                val rh = RequestHandler()
+                MyApplication.btThread = Thread(rh)
+                MyApplication.btThread!!.start()
+            } else // Connection failed.
+                Toast.makeText(mActivity, "블루투스 연결 실패", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -99,28 +149,6 @@ class NewConnActivity : BaseActivity() {
         binding.nickPrinter.isEnabled = true
     }
 
-    fun connDevice() {
-        val retVal = AppHelper.connDevice()
-
-        if (retVal == 0) { // Connection success.
-            val rh = RequestHandler()
-            MyApplication.btThread = Thread(rh)
-            MyApplication.btThread!!.start()
-
-        } else { // Connection failed.
-            Toast.makeText(mActivity, "블루투스 연결 실패", Toast.LENGTH_SHORT).show()
-//            AlertDialog.Builder()
-//                .setTitle("Error")
-//                .setMessage("Failed to connect Bluetooth device.")
-//                .setNegativeButton(
-//                    "CANCEL",
-//                    DialogInterface.OnClickListener { dialog, which -> // TODO Auto-generated method stub
-//                        dialog.dismiss()
-//                    })
-//                .show()
-        }
-    }
-
     fun showSetNickDialog(type: Int) {
         var nick = ""
         var model = ""
@@ -143,5 +171,6 @@ class NewConnActivity : BaseActivity() {
                 view.text = nick
             }
         })
+        nickDialog.show()
     }
 }
