@@ -17,7 +17,6 @@ import com.sewoo.request.android.RequestHandler
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.broadcast.BtConnectReceiver
 import com.wooriyo.pinmenuer.broadcast.BtDiscoveryReceiver
 import com.wooriyo.pinmenuer.databinding.ActivityNewConnBinding
 import com.wooriyo.pinmenuer.listener.DialogListener
@@ -57,7 +56,8 @@ class NewConnActivity : BaseActivity() {
                 binding.btnRetry.visibility = View.GONE
                 binding.save.visibility = View.VISIBLE
 
-                Toast.makeText(context, "BlueTooth Connect", Toast.LENGTH_SHORT).show()
+//                MyApplication.btConn = true
+//                Toast.makeText(context, "BlueTooth Connect", Toast.LENGTH_SHORT).show()
             } else if (BluetoothDevice.ACTION_ACL_DISCONNECTED == action) {
                 try {
                     if (MyApplication.bluetoothPort.isConnected) MyApplication.bluetoothPort.disconnect()
@@ -78,7 +78,9 @@ class NewConnActivity : BaseActivity() {
                 binding.tvNickPrint.setTextColor(Color.parseColor("#B4B4B4"))
                 binding.nickPrinter.isEnabled = false
                 binding.btnRetry.visibility = View.VISIBLE
-                Toast.makeText(context, "BlueTooth Disconnect", Toast.LENGTH_SHORT).show()
+
+//                MyApplication.btConn = false
+//                Toast.makeText(context, "BlueTooth Disconnect", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -89,6 +91,12 @@ class NewConnActivity : BaseActivity() {
             val data = it.data ?: return@registerForActivityResult
 
             printType = data.getIntExtra("printType", 0)
+
+            // 프린터 새로 등록 전에 이미 연결되어있으면 연결 끊기
+            if (MyApplication.bluetoothPort.isConnected) {
+                MyApplication.bluetoothPort.disconnect()
+//                MyApplication.btConn = false
+            }
 
             setPrintInfo()
             searchDevice()

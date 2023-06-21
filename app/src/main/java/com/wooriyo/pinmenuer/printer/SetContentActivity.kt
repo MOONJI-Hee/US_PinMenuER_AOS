@@ -56,7 +56,7 @@ class SetContentActivity : BaseActivity() {
 
     fun setView(setting: PrintContentDTO) {
         binding.run {
-            if(!setting.admnick.isNullOrEmpty())
+            if(setting.admnick != null)
                 nick.text = getString(R.string.printer_nick_format).format(setting.admnick)
 
             if(setting.fontSize == 1)

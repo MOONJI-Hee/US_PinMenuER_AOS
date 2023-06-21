@@ -528,6 +528,16 @@ interface Api {
         @Query("cate") category: String
     ): Call<PrintContentDTO>
 
+    // 프린터 연결 상태값 저장
+    @GET("m/udt_print_connect_status.php")
+    fun setPrintConnStatus (
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("uuid") androidId : String,
+        @Query("idx") idx: Int,
+        @Query("blstatus") blstatus: String
+    ): Call<ResultDTO>
+
     // 카카오 지도 관련 api
     @GET("/v2/local/search/address.json")
     fun kakaoSearch(

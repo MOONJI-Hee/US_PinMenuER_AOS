@@ -384,6 +384,10 @@
     <string name="dialog_logout">로그아웃 하시겠습니까?</string>
     <string name="dialog_drop">탈퇴 하시겠습니까?</string>
 
+    <!--  알림 다이얼로그  -->
+    <string name="dialog_no_printer">연결된 프린트 기기가 없습니다.</string>
+    <string name="dialog_check_conn">프린터 연결 상태를 확인해주세요.</string>
+
     <!--  비어있는 목록  -->
     <string name="no_order_list">주문정보가 없습니다.</string>
     <string name="no_call_list">호출정보가 없습니다.</string>

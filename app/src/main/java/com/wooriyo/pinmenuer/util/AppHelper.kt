@@ -113,12 +113,12 @@ class AppHelper {
         }
 
         fun connDevice(): Int {
-            var retVal: Int = 0
+            var retVal: Int = -1
 
             Log.d("AppHelper", "블루투스 기기 커넥트")
             Log.d("AppHelper", "remote 기기 > $remoteDevices")
             if(remoteDevices.isNotEmpty()) {
-                val connDvc = MyApplication.remoteDevices[0]
+                val connDvc = remoteDevices[0]
                 Log.d("AppHelper", "connDvc >> $connDvc")
 
                 try {
@@ -128,6 +128,8 @@ class AppHelper {
                     e.printStackTrace()
                     retVal = Integer.valueOf(-1)
                 }
+            }else {
+                retVal = -2
             }
             return retVal
         }

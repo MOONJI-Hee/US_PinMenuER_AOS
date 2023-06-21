@@ -3,6 +3,7 @@ package com.wooriyo.pinmenuer.listener
 import android.content.Intent
 import android.widget.CheckBox
 import com.wooriyo.pinmenuer.model.CallDTO
+import com.wooriyo.pinmenuer.model.PrintDTO
 import com.wooriyo.pinmenuer.model.StoreDTO
 
 interface ItemClickListener {

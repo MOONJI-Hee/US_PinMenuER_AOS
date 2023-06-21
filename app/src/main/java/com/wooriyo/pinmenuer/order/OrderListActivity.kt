@@ -1,5 +1,6 @@
 package com.wooriyo.pinmenuer.order
 
+import android.content.ClipData
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -48,7 +49,6 @@ class OrderListActivity : BaseActivity() {
     // 프린트 관련 변수
     val escposPrinter = ESCPOSPrinter()
 
-    var print_size = "s"            // 프린터 폰트 설정  b: 큰 폰트, s: 작은 폰트
     var hyphen = StringBuilder()    // 하이픈
     var hyphen_num = 0              // 하이픈 개수
     var font_size = 0
@@ -62,13 +62,13 @@ class OrderListActivity : BaseActivity() {
         setContentView(binding.root)
 
         // 영수증에 들어가는 하이픈 문자열 초기화, 설정값 초기화
-        if(print_size == "s") {
+        if(store.fontsize == 2) {
             hyphen_num = AppProperties.HYPHEN_NUM_SMALL
             font_size = FONT_SMALL
             hangul_size = HANGUL_SIZE_SMALL
             one_line = ONE_LINE_SMALL
             space = SPACE_SMALL
-        }else {
+        }else if(store.fontsize == 1) {
             hyphen_num = AppProperties.HYPHEN_NUM_BIG
             font_size = FONT_BIG
             hangul_size = HANGUL_SIZE_BIG
@@ -85,6 +85,10 @@ class OrderListActivity : BaseActivity() {
 
         orderAdapter.setOnDeleteListener(object:ItemClickListener{
             override fun onItemClick(position: Int) {delete(position)}
+        })
+
+        orderAdapter.setOnPrintClickListener(object:ItemClickListener{
+            override fun onItemClick(position: Int) {print(position)}
         })
 
         binding.rv.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false)
@@ -254,9 +258,9 @@ class OrderListActivity : BaseActivity() {
         val pOrderNo = orderList[position].ordcode
 
         escposPrinter.printAndroidFont(store.name, FONT_WIDTH, FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
-        escposPrinter.printAndroidFont(pOrderDt, FONT_WIDTH, FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
-        escposPrinter.printAndroidFont(pTableNo, FONT_WIDTH, FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
-        escposPrinter.printAndroidFont(pOrderNo, FONT_WIDTH, FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+        escposPrinter.printAndroidFont("주문날짜 : $pOrderDt", FONT_WIDTH, FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+        escposPrinter.printAndroidFont("주문번호 : $pOrderNo", FONT_WIDTH, FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+        escposPrinter.printAndroidFont("테이블번호 : $pTableNo", FONT_WIDTH, FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
         escposPrinter.printAndroidFont(TITLE_MENU, FONT_WIDTH, font_size, ESCPOSConst.LK_ALIGNMENT_LEFT)
         escposPrinter.printAndroidFont(hyphen.toString(), FONT_WIDTH, font_size, ESCPOSConst.LK_ALIGNMENT_LEFT)
 
@@ -264,6 +268,8 @@ class OrderListActivity : BaseActivity() {
             val pOrder = getPrint(it)
             escposPrinter.printAndroidFont(pOrder, FONT_WIDTH, font_size, ESCPOSConst.LK_ALIGNMENT_LEFT)
         }
+        escposPrinter.lineFeed(4)
+        escposPrinter.cutPaper()
     }
 
     fun getPrint(ord: OrderDTO) : String {
@@ -294,14 +300,14 @@ class OrderListActivity : BaseActivity() {
 
         var diff = (one_line - mLine + 0.5).toInt()
 
-        if(print_size == "b") {
+        if(store.fontsize == 1) {
             if(ord.gea < 10) {
                 diff += 1
                 space = 4
             } else if (ord.gea >= 100) {
                 space = 1
             }
-        }else if(print_size == "s") {
+        }else if(store.fontsize == 2) {
             if(ord.gea < 10) {
                 diff += 1
                 space += 2

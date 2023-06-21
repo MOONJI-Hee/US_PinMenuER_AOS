@@ -43,7 +43,6 @@ class MyApplication: Application() {
         lateinit var remoteDevices: ArrayList<BluetoothDevice>
         lateinit var arrRemoteDevice : ArrayList<String>
 
-
         var bidx = 0    //프린터 설정 시 부여되는 idx (기기별 매장 하나 당 한개씩 부여)
 
         //세우전자 프린터 관련
@@ -51,6 +50,9 @@ class MyApplication: Application() {
         val escposPrinter = ESCPOSPrinter()
         val BT_PRINTER = 1536
         var btThread: Thread? = null
+
+        // 영수증 프린터 연결 여부(추후 변경 가능성 높음)
+//        var btConn = false
 
         fun setStoreDTO() {
             store = StoreDTO(useridx)
