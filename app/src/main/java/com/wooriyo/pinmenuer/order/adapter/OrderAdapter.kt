@@ -77,7 +77,7 @@ class OrderAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adapte
                     if(MyApplication.bluetoothPort.isConnected) {
                         printClickListener.onItemClick(absoluteAdapterPosition)
                     }else
-                        NoticeDialog(context, context.getString(R.string.dialog_check_conn)).show()
+                        NoticeDialog(context, context.getString(R.string.dialog_no_printer)).show()
                 }
                 payment.setOnClickListener { payClickListener.onItemClick(absoluteAdapterPosition) }
             }

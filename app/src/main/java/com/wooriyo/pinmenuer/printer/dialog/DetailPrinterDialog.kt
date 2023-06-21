@@ -20,7 +20,7 @@ import retrofit2.Response
 
 class DetailPrinterDialog(context: Context, val printer: PrintDTO): BaseDialog(context) {
     lateinit var binding: DialogPtrinterBinding
-    lateinit var dialogListener: DialogListener
+//    lateinit var dialogListener: DialogListener
 
     val TAG = "DetailPrinterDialog"
 
@@ -110,7 +110,7 @@ class DetailPrinterDialog(context: Context, val printer: PrintDTO): BaseDialog(c
         })
     }
 
-    fun setOnDialogListener(dialogListener: DialogListener) {
-        this.dialogListener = dialogListener
-    }
+//    fun setOnDialogListener(dialogListener: DialogListener) {
+//        this.dialogListener = dialogListener
+//    }
 }

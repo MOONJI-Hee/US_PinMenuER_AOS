@@ -27,7 +27,8 @@ interface Api {
         @Query("os") os: String,
         @Query("osvs") osvs: Int,
         @Query("appvs") appvs: String,
-        @Query("md") md: String
+        @Query("md") md: String,
+        @Query("uuid") androidId : String
     ): Call<MemberDTO>
 
     //회원가입
@@ -139,7 +140,7 @@ interface Api {
     fun udtStoreImg (
         @Part("useridx") useridx: Int,
         @Part("idx") storeidx: Int,
-        @Part img: MultipartBody.Part?,
+        @Part img: MultipartBody.Part?
     ): Call<ResultDTO>
 
     // 매장 영업시간 설정
@@ -374,7 +375,13 @@ interface Api {
         @Query("storeidx") storeidx: Int
     ): Call<OrderListDTO>
 
-    // 주문 결제
+    // 단건 주문 조회 (푸시)
+    @GET("m/get.receipt.php")
+    fun getReceipt(
+        @Query("ordcode") ordcode: String,  // 주문 코드
+    ): Call<ReceiptDTO>
+
+    // 주문 완료
     @GET("m/udtCompletedOrder.php")
     fun payOrder(
         @Query("storeidx") storeidx: Int,
@@ -387,12 +394,6 @@ interface Api {
     fun deleteOrder(
         @Query("storeidx") storeidx: Int,
         @Query("ordidx") ordidx: Int
-    ): Call<ResultDTO>
-
-    // 주문 프린트
-    @GET()
-    fun printOrder(
-
     ): Call<ResultDTO>
 
     // 새로운 직원 호출 유무 확인

@@ -3,6 +3,7 @@ package com.wooriyo.pinmenuer
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import com.wooriyo.pinmenuer.MyApplication.Companion.androidId
 import com.wooriyo.pinmenuer.MyApplication.Companion.pref
 import com.wooriyo.pinmenuer.db.entity.Member
 import com.wooriyo.pinmenuer.member.LoginActivity
@@ -49,7 +50,7 @@ class StartActivity: BaseActivity() {
     }
 
     fun loginWithApi()  {
-        ApiClient.service.checkMbr(id, pw, token, MyApplication.os, MyApplication.osver, MyApplication.appver, MyApplication.md)
+        ApiClient.service.checkMbr(id, pw, token, MyApplication.os, MyApplication.osver, MyApplication.appver, MyApplication.md, androidId)
             .enqueue(object: retrofit2.Callback<MemberDTO> {
                 override fun onResponse(call: Call<MemberDTO>, response: Response<MemberDTO>) {
                     Log.d(TAG, "자동 로그인 url : $response")

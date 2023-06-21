@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity.INPUT_METHOD_SERVICE
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.MyApplication.Companion.bluetoothAdapter
 import com.wooriyo.pinmenuer.MyApplication.Companion.remoteDevices
+import com.wooriyo.pinmenuer.config.AppProperties
+import com.wooriyo.pinmenuer.model.OrderDTO
 import java.io.IOException
 import java.lang.reflect.Method
 import java.text.DecimalFormat
@@ -170,6 +172,79 @@ class AppHelper {
                     }
                 }
             }
+        }
+
+        fun getPrint(ord: OrderDTO) : String {
+            var hangul_size = AppProperties.HANGUL_SIZE_BIG
+            var one_line = AppProperties.ONE_LINE_BIG
+            var space = AppProperties.SPACE_BIG
+
+            var total = 0.0
+
+            val result: StringBuilder = StringBuilder()
+            val underline1 = StringBuilder()
+            val underline2 = StringBuilder()
+
+            ord.name.forEach {
+                if(total < one_line)
+                    result.append(it)
+                else if(total < (one_line * 2))
+                    underline1.append(it)
+                else
+                    underline2.append(it)
+
+                if(it == ' ') {
+                    total++
+                }else
+                    total += hangul_size
+            }
+
+            val mlength = result.toString().length
+            val mHangul = result.toString().replace(" ", "").length
+            val mSpace = mlength - mHangul
+            val mLine = mHangul * hangul_size + mSpace
+
+            var diff = (one_line - mLine + 0.5).toInt()
+
+            if(MyApplication.store.fontsize == 1) {
+                if(ord.gea < 10) {
+                    diff += 1
+                    space = 4
+                } else if (ord.gea >= 100) {
+                    space = 1
+                }
+            }else if(MyApplication.store.fontsize == 2) {
+                if(ord.gea < 10) {
+                    diff += 1
+                    space += 2
+                } else if (ord.gea < 100) {
+                    space += 1
+                }
+            }
+
+            for(i in 1..diff) {
+                result.append(" ")
+            }
+            result.append(ord.gea.toString())
+
+            for (i in 1..space) {
+                result.append(" ")
+            }
+
+            var togo = ""
+            when(ord.togotype) {
+                1-> togo = "신규"
+                2-> togo = "포장"
+            }
+            result.append(togo)
+
+            if(underline1.toString() != "")
+                result.append("\n$underline1")
+
+            if(underline2.toString() != "")
+                result.append("\n$underline2")
+
+            return result.toString()
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.wooriyo.pinmenuer.order
 
-import android.content.ClipData
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -38,7 +37,6 @@ import retrofit2.Response
 
 class OrderListActivity : BaseActivity() {
     lateinit var binding: ActivityOrderListBinding
-//    lateinit var timer: Timer
 
     val TAG = "OrderListActivity"
     val mActivity = this@OrderListActivity
@@ -97,22 +95,6 @@ class OrderListActivity : BaseActivity() {
         binding.back.setOnClickListener { finish() }
 
         getOrderList()
-    }
-
-    override fun onResume() {
-        super.onResume()
-//        timer = Timer()
-//        val timerTask = object : TimerTask(){
-//            override fun run() {
-//                getOrdStatus()
-//            }
-//        }
-//        timer.schedule(timerTask, 0, 3000)
-    }
-
-    override fun onPause() {
-        super.onPause()
-//        timer.cancel()
     }
 
     // 새로운 호출 유무 확인 > 3초마다 한번씩 태우기
@@ -199,8 +181,34 @@ class OrderListActivity : BaseActivity() {
         })
     }
 
-    // 주문 완료 처리 (결제)
+    // 결제 처리
     fun payOrder(position: Int) {
+        ApiClient.service.payOrder(storeidx, orderList[position].idx ,"Y").enqueue(object:Callback<ResultDTO>{
+            override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                Log.d(TAG, "주문 완료 url : $response")
+                if(!response.isSuccessful) return
+
+                val result = response.body() ?: return
+                when(result.status){
+                    1 -> {
+                        orderList[position].iscompleted = 1
+                        orderList.sortBy { it.iscompleted }
+                        orderAdapter.notifyItemChanged(position)
+                    }
+                    else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "주문 완료 실패 > $t")
+                Log.d(TAG, "주문 완료 실패 > ${call.request()}")
+            }
+        })
+    }
+
+    // 주문 완료 처리
+    fun complete(position: Int) {
         ApiClient.service.payOrder(storeidx, orderList[position].idx ,"Y").enqueue(object:Callback<ResultDTO>{
             override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                 Log.d(TAG, "주문 완료 url : $response")
@@ -261,7 +269,7 @@ class OrderListActivity : BaseActivity() {
         escposPrinter.printAndroidFont("주문날짜 : $pOrderDt", FONT_WIDTH, FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
         escposPrinter.printAndroidFont("주문번호 : $pOrderNo", FONT_WIDTH, FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
         escposPrinter.printAndroidFont("테이블번호 : $pTableNo", FONT_WIDTH, FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
-        escposPrinter.printAndroidFont(TITLE_MENU, FONT_WIDTH, font_size, ESCPOSConst.LK_ALIGNMENT_LEFT)
+        escposPrinter.printAndroidFont(TITLE_MENU, FONT_WIDTH, FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
         escposPrinter.printAndroidFont(hyphen.toString(), FONT_WIDTH, font_size, ESCPOSConst.LK_ALIGNMENT_LEFT)
 
         orderList[position].olist.forEach {

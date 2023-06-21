@@ -75,30 +75,4 @@ class SelCateActivity : BaseActivity() {
         setResult(RESULT_OK, intent)
         finish()
     }
-
-
-//    fun getCategory() {
-//        ApiClient.service.getCateList(MyApplication.useridx, MyApplication.storeidx)
-//            .enqueue(object: Callback<CateListDTO> {
-//                override fun onResponse(call: Call<CateListDTO>, response: Response<CateListDTO>) {
-//                    Log.d(TAG, "카테고리 조회 url : $response")
-//                    if(!response.isSuccessful) {return}
-//                    val result = response.body()
-//                    if(result != null) {
-//                        when(result.status) {
-//                            1 -> {
-//                                allCateList.addAll(result.cateList)
-//                                cateAdapter.notifyDataSetChanged()
-//                            }
-//                            else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
-//                        }
-//                    }
-//                }
-//                override fun onFailure(call: Call<CateListDTO>, t: Throwable) {
-//                    Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
-//                    Log.d(TAG, "카테고리 조회 실패 > $t")
-//                    Log.d(TAG, "카테고리 조회 실패 > ${call.request()}")
-//                }
-//            })
-//    }
 }

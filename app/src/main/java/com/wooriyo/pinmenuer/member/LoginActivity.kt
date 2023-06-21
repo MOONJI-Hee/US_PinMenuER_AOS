@@ -7,6 +7,7 @@ import android.view.MotionEvent
 import android.widget.Toast
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
+import com.wooriyo.pinmenuer.MyApplication.Companion.androidId
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityLoginBinding
 import com.wooriyo.pinmenuer.menu.CategorySetActivity
@@ -69,7 +70,7 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun loginWithApi()  {   // Api로 로그인
-        ApiClient.service.checkMbr(id, pw, token, MyApplication.os, MyApplication.osver, MyApplication.appver, MyApplication.md)
+        ApiClient.service.checkMbr(id, pw, token, MyApplication.os, MyApplication.osver, MyApplication.appver, MyApplication.md, androidId)
             .enqueue(object: retrofit2.Callback<MemberDTO> {
                 override fun onResponse(call: Call<MemberDTO>, response: Response<MemberDTO>) {
                     Log.d(TAG, "로그인 url : $response")
