@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="560dp"
+        android:layout_height="336dp"
+        android:background="@drawable/bg_r6w">
+        <TextView
+            android:id="@+id/content"
+            style="@style/text20"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="30dp"
+            android:gravity="center"
+            android:lineSpacingExtra="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/confirm"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            style="@style/btn_dialog"
+            android:id="@+id/confirm"
+            android:layout_width="match_parent"
+            android:text="@string/btn_confirm"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

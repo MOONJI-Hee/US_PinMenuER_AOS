@@ -468,13 +468,17 @@ interface Api {
     // 등록한 프린터 목록
     @GET("m/connect_print_list.php")
     fun connPrintList(
-        @Query("useridx") useridx: Int
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("uuid") androidId : String
     ): Call<PrintListDTO>
 
     // 프린터 별명 설정
     @GET("m/print_nick.php")
     fun setPrintNick(
+        @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int,
+        @Query("uuid") androidId : String,
         @Query("nick") nick: String,
         @Query("type") type: Int        // 1 : 관리자 기기, 2 : 프린트 기기
     ): Call<ResultDTO>
@@ -486,34 +490,42 @@ interface Api {
     // 프린터 삭제
     @GET("m/del_print.php")
     fun delPrint(
-        @Query("idx") idx: Int,
-        @Query("storeidx") storeidx: Int
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("uuid") androidId : String,
+        @Query("idx") idx: Int
     ): Call<ResultDTO>
 
     // 프린터 기기 선택
     @GET("m/udt_print_kind.php")
     fun udtPrintModel(
+        @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int,
         @Query("uuid") androidId : String,
-        @Query("printType") printType: Int
+        @Query("printType") printType: Int,
+        @Query("blstatus") blstatus : String
     ): Call<ResultDTO>
 
     // 프린터 출력 설정 불러오기
     @GET("m/getprintinfo.php")
     fun getPrintContentSet(
-        @Query("storeidx") storeidx: Int
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("uuid") androidId : String
     ): Call<PrintContentDTO>
 
     // 프린터 출력 설정 하기
     @GET("m/udt_print_setting.php")
     fun setPrintContent(
-        @Query("idx") idx: Int,
+        @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int,
+        @Query("uuid") androidId : String,
+        @Query("idx") idx: Int,
         @Query("fontSize") fontSize: Int,   // 1: 크게 , 2 : 작게
         @Query("kitchen") kitchen: String,  // 주방영수증 사용 여부 (Y: 사용, N: 미사용)
-        @Query("receipt") receipt: String,  // 주방영수증 사용 여부 (Y: 사용, N: 미사용)
-        @Query("ordcode") ordcode: String,  // 주방영수증 사용 여부 (Y: 사용, N: 미사용)
-        @Query("category") category: String
+        @Query("receipt") receipt: String,  // 고객영수증 사용 여부 (Y: 사용, N: 미사용)
+        @Query("ordcode") ordcode: String,  // 주문번호 사용 여부 (Y: 사용, N: 미사용)
+        @Query("cate") category: String
     ): Call<PrintContentDTO>
 
     // 카카오 지도 관련 api

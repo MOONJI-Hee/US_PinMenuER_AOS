@@ -125,26 +125,17 @@
         app:layout_constraintTop_toTopOf="@+id/imgTablet">
 
         <ImageView
+            android:id="@+id/ivPlus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_store_plus" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/btnPrinter"
-        android:layout_width="320dp"
-        android:layout_height="220dp"
-        android:background="@drawable/bg_r6w"
-        android:gravity="center"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/btnPlus"
-        app:layout_constraintStart_toStartOf="@+id/btnPlus"
-        app:layout_constraintTop_toTopOf="@+id/btnPlus">
+            android:src="@drawable/ic_store_plus"
+            android:visibility="visible"/>
 
         <ImageView
             android:id="@+id/ivPrinter"
             android:layout_width="160dp"
             android:layout_height="160dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/btnPlus"
             app:layout_constraintStart_toStartOf="@+id/btnPlus"
             app:layout_constraintTop_toTopOf="@+id/btnPlus" />
@@ -182,10 +173,22 @@
 
     <TextView
         style="@style/subtext"
+        android:id="@+id/info"
         android:layout_width="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/printer_conn_info"
         app:layout_constraintStart_toStartOf="@+id/imgTablet"
         app:layout_constraintTop_toBottomOf="@+id/nickDevice" />
+
+    <TextView
+        style="@style/btn_main"
+        android:id="@+id/save"
+        android:layout_marginTop="40dp"
+        android:text="@string/btn_confirm"
+        android:visibility="gone"
+        android:background="@drawable/bg_btn_r6_grd"
+        app:layout_constraintTop_toBottomOf="@+id/info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

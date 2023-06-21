@@ -143,7 +143,7 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                     val result = response.body() ?: return
 
                     if(result.status == 1){
-                        MyApplication.bidx = result.idx
+                        MyApplication.bidx = result.bidx
                         startActivity(Intent(mActivity, PrinterMenuActivity::class.java))
                     }else
                         Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()

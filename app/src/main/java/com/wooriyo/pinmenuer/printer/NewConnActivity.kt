@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothDevice
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
 import android.content.IntentFilter
 import android.graphics.Color
 import android.os.Bundle
@@ -20,9 +21,15 @@ import com.wooriyo.pinmenuer.broadcast.BtConnectReceiver
 import com.wooriyo.pinmenuer.broadcast.BtDiscoveryReceiver
 import com.wooriyo.pinmenuer.databinding.ActivityNewConnBinding
 import com.wooriyo.pinmenuer.listener.DialogListener
+import com.wooriyo.pinmenuer.model.PrintContentDTO
+import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.printer.dialog.SetNickDialog
+import com.wooriyo.pinmenuer.util.ApiClient
 import com.wooriyo.pinmenuer.util.AppHelper
 import com.wooriyo.pinmenuer.util.AppHelper.Companion.searchDevice
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.IOException
 
 class NewConnActivity : BaseActivity() {
@@ -48,6 +55,7 @@ class NewConnActivity : BaseActivity() {
                 binding.tvNickPrint.setTextColor(Color.BLACK)
                 binding.nickPrinter.isEnabled = true
                 binding.btnRetry.visibility = View.GONE
+                binding.save.visibility = View.VISIBLE
 
                 Toast.makeText(context, "BlueTooth Connect", Toast.LENGTH_SHORT).show()
             } else if (BluetoothDevice.ACTION_ACL_DISCONNECTED == action) {
@@ -96,8 +104,8 @@ class NewConnActivity : BaseActivity() {
         registerReceiver(discoveryResult, IntentFilter(BluetoothDevice.ACTION_FOUND))
         registerReceiver(connectDevice, IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED))
         registerReceiver(connectDevice, IntentFilter(BluetoothDevice.ACTION_ACL_DISCONNECTED))
-//        registerReceiver(searchStart, IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_STARTED))
-//        registerReceiver(searchFinish, IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED))
+
+        getPrintSetting()
 
         binding.back.setOnClickListener { finish() }
 
@@ -121,6 +129,9 @@ class NewConnActivity : BaseActivity() {
             } else // Connection failed.
                 Toast.makeText(mActivity, "블루투스 연결 실패", Toast.LENGTH_SHORT).show()
         }
+        binding.save.setOnClickListener {
+            setPrinterModel()
+        }
     }
 
     fun setPrintInfo() {
@@ -141,12 +152,64 @@ class NewConnActivity : BaseActivity() {
         }
 
         binding.ivPrinter.setImageResource(img)
-        binding.btnPrinter.visibility = View.VISIBLE
-        binding.btnPlus.visibility = View.INVISIBLE
+        binding.ivPrinter.visibility = View.VISIBLE
+        binding.ivPlus.visibility = View.GONE
 
         binding.printer.text = printerModel
         binding.tvNickPrint.setTextColor(Color.BLACK)
         binding.nickPrinter.isEnabled = true
+    }
+
+    fun getPrintSetting() {
+        ApiClient.service.getPrintContentSet(
+            MyApplication.useridx, MyApplication.storeidx,
+            MyApplication.androidId
+        ).enqueue(object : Callback<PrintContentDTO> {
+            override fun onResponse(call: Call<PrintContentDTO>, response: Response<PrintContentDTO>) {
+                Log.d(TAG, "프린터 출력 내용 조회 url : $response")
+                if(!response.isSuccessful) return
+
+                val result = response.body() ?: return
+                when(result.status) {
+                    1 -> {
+                        if(result.admnick.isNotEmpty())
+                            binding.nickDevice.text = result.admnick
+                    }
+                    else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<PrintContentDTO>, t: Throwable) {
+                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "프린터 출력 내용 조회 오류 >> $t")
+                Log.d(TAG, "프린터 출력 내용 조회 오류 >> ${call.request()}")
+            }
+        })
+    }
+
+    fun setPrinterModel() {
+        ApiClient.service.udtPrintModel(MyApplication.useridx, MyApplication.storeidx, MyApplication.androidId, printType, "Y")
+            .enqueue(object : Callback<ResultDTO> {
+                override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                    Log.d(TAG, "신규 프린터 설정 url : $response")
+                    if(!response.isSuccessful) return
+
+                    val result = response.body() ?: return
+                    when(result.status) {
+                        1 -> {
+                            val intent = Intent(mActivity, SetConnActivity::class.java)
+                            intent.flags = FLAG_ACTIVITY_CLEAR_TOP
+                            startActivity(intent)
+                        }
+                        else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                    }
+                }
+                override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                    Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "신규 프린터 설정 오류 >> $t")
+                    Log.d(TAG, "신규 프린터 설정 오류 >> ${call.request()}")
+                }
+            })
     }
 
     fun showSetNickDialog(type: Int) {

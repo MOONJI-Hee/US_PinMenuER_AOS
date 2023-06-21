@@ -14,6 +14,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
+import com.wooriyo.pinmenuer.MyApplication.Companion.androidId
+import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.config.AppProperties
@@ -170,7 +172,7 @@ class PrinterMenuActivity : BaseActivity() {
     }
 
     fun getConnPrintList() {
-        ApiClient.service.connPrintList(useridx).enqueue(object : Callback<PrintListDTO> {
+        ApiClient.service.connPrintList(useridx, storeidx, androidId).enqueue(object : Callback<PrintListDTO> {
             override fun onResponse(call: Call<PrintListDTO>, response: Response<PrintListDTO>) {
                 Log.d(TAG, "등록된 프린터 리스트 조회 URL : $response")
                 if(!response.isSuccessful) return

@@ -149,19 +149,21 @@ class AppHelper {
                 }
             }
             Log.d("AppHelper", "페어링된 기기 목록 >>$remoteDevices")
-
+            checkPrinterConn()
         }
 
         fun checkPrinterConn() {
+            Log.d("AppHelper", "CheckPrintConnn~~!~!~!")
             remoteDevices.forEach {
-                val m: Method = it.javaClass.getMethod("isConnected", null as Class<*>)
-                val connected = m.invoke(it, null as Array<Any?>?) as Boolean
+                val m: Method = it.javaClass.getMethod("isConnected")
+                val connected = m.invoke(it) as Boolean
 
                 if(connected) {
                     val deviceHardwareAddress = it.address // MAC address
 
                     if(MyApplication.bluetoothPort.isValidAddress(deviceHardwareAddress)) {
                         val deviceNum = it.bluetoothClass.majorDeviceClass
+                        Log.d("AppHelper", "연결된 기기 == 세우테크 프린터 맞음")
 
                     }
                 }

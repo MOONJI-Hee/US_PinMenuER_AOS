@@ -9,6 +9,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.GridLayoutManager
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
+import com.wooriyo.pinmenuer.MyApplication.Companion.androidId
+import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivitySetContentBinding
 import com.wooriyo.pinmenuer.model.PrintContentDTO
@@ -26,12 +28,13 @@ class SetContentActivity : BaseActivity() {
     val mActivity = this@SetContentActivity
 
     var cnt = 0
+    var strCate = ""    // 주방영수증에 출력될 카테고리 리스트 (String형, 콤마로 구분)
 
     val selectCate = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == RESULT_OK) {
-            val strCate = it.data?.getStringExtra("strCate") ?: return@registerForActivityResult
+            strCate = it.data?.getStringExtra("strCate") ?: return@registerForActivityResult
             Log.d(TAG, "카테고리 설정 후 돌아옴 + strCate >>>  $strCate")
-            setCategory(strCate)
+            setCategory()
         }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +56,8 @@ class SetContentActivity : BaseActivity() {
 
     fun setView(setting: PrintContentDTO) {
         binding.run {
-            nick.text = getString(R.string.printer_nick_format).format(setting.nick)
+            if(!setting.admnick.isNullOrEmpty())
+                nick.text = getString(R.string.printer_nick_format).format(setting.admnick)
 
             if(setting.fontSize == 1)
                 rdBig.isChecked = true
@@ -64,11 +68,12 @@ class SetContentActivity : BaseActivity() {
             customer.isChecked = setting.receipt == "Y"
             orderNo.isChecked = setting.ordcode == "Y"
 
-            setCategory(setting.category?:"")
+            strCate = setting.category?:""
+            setCategory()
         }
     }
 
-    fun setCategory(strCate: String) {
+    fun setCategory() {
         val category = strCate.split(",")
         if(category.isNotEmpty()) {
             cnt = category.size
@@ -97,7 +102,7 @@ class SetContentActivity : BaseActivity() {
         if(binding.orderNo.isChecked)
             strOrdCode = "Y"
 
-        ApiClient.service.setPrintContent(MyApplication.bidx, MyApplication.storeidx, fontSize, strKitchen, strReceipt, strOrdCode, "")
+        ApiClient.service.setPrintContent(useridx,  MyApplication.storeidx, androidId, MyApplication.bidx, fontSize, strKitchen, strReceipt, strOrdCode, strCate)
             .enqueue(object : Callback<PrintContentDTO> {
                 override fun onResponse(call: Call<PrintContentDTO>, response: Response<PrintContentDTO>) {
                     Log.d(TAG, "프린터 출력 내용 설정 url : $response")
@@ -122,7 +127,7 @@ class SetContentActivity : BaseActivity() {
     }
 
     fun getPrintSetting() {
-        ApiClient.service.getPrintContentSet(MyApplication.storeidx).enqueue(object : Callback<PrintContentDTO>{
+        ApiClient.service.getPrintContentSet(useridx, MyApplication.storeidx, androidId).enqueue(object : Callback<PrintContentDTO>{
             override fun onResponse(call: Call<PrintContentDTO>, response: Response<PrintContentDTO>) {
                 Log.d(TAG, "프린터 출력 내용 조회 url : $response")
                 if(!response.isSuccessful) return

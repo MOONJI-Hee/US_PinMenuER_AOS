@@ -62,6 +62,30 @@
         <item name="android:background">@drawable/bg_btn_r6</item>
         <item name="android:includeFontPadding">false</item>
     </style>
+    <style name="btn_dialog">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:background">@drawable/bg_btn_rb6</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+    <style name="btn_dialog_cancel">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:background">@drawable/bg_rbl6g</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+    <style name="btn_dialog_right">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:background">@drawable/bg_btn_rbr6</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
     <style name="btn_plus">
         <item name="android:layout_height">48dp</item>
         <item name="android:gravity">center</item>

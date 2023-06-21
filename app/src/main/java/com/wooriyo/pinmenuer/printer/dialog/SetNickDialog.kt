@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.wooriyo.pinmenuer.BaseDialog
 import com.wooriyo.pinmenuer.MyApplication
+import com.wooriyo.pinmenuer.MyApplication.Companion.androidId
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.DialogSetNickBinding
 import com.wooriyo.pinmenuer.listener.DialogListener
@@ -40,7 +41,7 @@ class SetNickDialog(context: Context, var nick: String, val type: Int, val model
 
     fun save() {
         nick = binding.etNick.text.toString()
-        ApiClient.service.setPrintNick(MyApplication.storeidx, nick, type)
+        ApiClient.service.setPrintNick(useridx, MyApplication.storeidx, androidId, nick, type)
             .enqueue(object : Callback<ResultDTO> {
                 override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                     Log.d(TAG, "별명 설정 URL >> $response")

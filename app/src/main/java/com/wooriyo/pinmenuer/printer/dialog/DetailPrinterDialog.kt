@@ -6,6 +6,8 @@ import android.util.Log
 import android.widget.Toast
 import com.wooriyo.pinmenuer.BaseDialog
 import com.wooriyo.pinmenuer.MyApplication
+import com.wooriyo.pinmenuer.MyApplication.Companion.androidId
+import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.DialogPtrinterBinding
 import com.wooriyo.pinmenuer.listener.DialogListener
@@ -57,7 +59,7 @@ class DetailPrinterDialog(context: Context, val printer: PrintDTO): BaseDialog(c
 
     fun save() {
         val nick = binding.etNick.text.toString()
-        ApiClient.service.setPrintNick(MyApplication.storeidx, nick, 2)
+        ApiClient.service.setPrintNick(MyApplication.useridx, MyApplication.storeidx, androidId, nick, 2)
             .enqueue(object : Callback<ResultDTO> {
                 override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                     Log.d(TAG, "프린터 별명 설정 URL >> $response")
@@ -83,7 +85,7 @@ class DetailPrinterDialog(context: Context, val printer: PrintDTO): BaseDialog(c
     }
 
     fun delete() {
-        ApiClient.service.delPrint(printer.idx, printer.storeidx).enqueue(object :
+        ApiClient.service.delPrint(useridx, printer.storeidx, androidId, printer.idx).enqueue(object :
             Callback<ResultDTO> {
             override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                 Log.d(TAG, "프린터 삭제 URL : $response")
