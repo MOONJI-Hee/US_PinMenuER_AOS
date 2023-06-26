@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "916492355785-5blr6c2poeq234vqtju7b32j9f5d54tm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wooriyo.pinmenuer",
+            "certificate_hash": "1f47af064778b14c4c612013bbcf6b234aa5bc48"
+          }
+        },
+        {
           "client_id": "916492355785-cosdbo193ff7n94h3aa4loeu9ifsqdrb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -45,6 +53,13 @@
             {
               "client_id": "916492355785-u9gq1blt9p7bacb0l5j6drvaj72v6ik1.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "916492355785-d1bngmkctqcri8e8b8vbd9hr63vida1u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wooriyo.Pinmenu"
+              }
             }
           ]
         }
