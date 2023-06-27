@@ -28,7 +28,8 @@ interface Api {
         @Query("osvs") osvs: Int,
         @Query("appvs") appvs: String,
         @Query("md") md: String,
-        @Query("uuid") androidId : String
+        @Query("uuid") androidId : String,
+        @Query("device_type") device_type: Int  // 0 : 모바일, 1 : 태블릿 (default 0)
     ): Call<MemberDTO>
 
     //회원가입
@@ -197,7 +198,8 @@ interface Api {
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int,
         @Query("uuid") androidId : String,
-        @Query("token") token : String
+        @Query("token") token : String,
+        @Query("device_type") device_type: Int  // 0 : 모바일, 1 : 태블릿 (default 0)
     ): Call<ResultDTO>
 
     // 매장 나갈 때 이용자수 차감

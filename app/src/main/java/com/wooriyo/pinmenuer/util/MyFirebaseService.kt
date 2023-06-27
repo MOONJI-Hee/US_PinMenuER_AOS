@@ -1,15 +1,19 @@
 package com.wooriyo.pinmenuer.util
 
+import android.annotation.SuppressLint
 import android.app.*
+import android.app.ActivityManager.RunningAppProcessInfo
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
+import android.os.PowerManager
 import android.util.Log
+import android.view.Gravity
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.sewoo.jpos.command.ESCPOSConst
+import com.wooriyo.pinmenuer.BaseActivity.Companion.currentActivity
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.MyApplication.Companion.escposPrinter
 import com.wooriyo.pinmenuer.R
@@ -32,9 +36,42 @@ class MyFirebaseService : FirebaseMessagingService() {
         super.onMessageReceived(message)
 
         Log.d(TAG, "message.data >> ${message.data}")
-        Log.d(TAG, "message.notification >> ${message.notification}")
+        Log.d(TAG, "message.notification >> ${message.notification?.sound}")
 
-        createNotification(message)
+        // 스크린 깨우기
+        val pm = this.getSystemService(POWER_SERVICE) as PowerManager
+        if (pm != null) {
+            @SuppressLint("InvalidWakeLockTag") val sLock = pm.newWakeLock(
+                PowerManager.PARTIAL_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP,"pinmenuER"
+            )
+            sLock.acquire(5000)
+        }
+
+        val strPackage = "com.wooriyo.pinmenuer"
+        val am = getSystemService(ACTIVITY_SERVICE) as ActivityManager
+
+        val proceses = am.runningAppProcesses
+
+        var isForeground = false
+        for (process in proceses) {
+            if (process.importance == RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                if (process.processName == strPackage) {
+                    isForeground = true
+                }
+            }
+        }
+
+        if(isForeground) {
+            if (currentActivity != null) {
+                currentActivity.runOnUiThread(Runnable {
+                    val toast: Toast = Toast.makeText(applicationContext, message.notification!!.body, Toast.LENGTH_LONG)
+                    toast.setGravity(Gravity.TOP, 0, 0)
+                    toast.show()
+                })
+            }
+        }else {
+            createNotification(message)
+        }
 
         val ordCode = message.data["moredata"]
 
@@ -104,15 +141,15 @@ class MyFirebaseService : FirebaseMessagingService() {
 
     private fun createNotification(message: RemoteMessage) {
         val channelId = "pinmenu_noti"
-        val uri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/raw/customnoti.wav")
+//        val uri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/customnoti.wav")
         val builder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(Notification.DEFAULT_ALL)
             .setContentTitle(message.notification!!.title)
             .setContentText(message.notification!!.body)
-            .setSound(uri)
+//            .setSound(uri)
             .setVibrate(longArrayOf(100L, 100L, 100L)) //알림시 진동 설정 : 1초 진동, 1초 쉬고, 1초 진동
             .setContentIntent(createPendingIntent())
-            .setDefaults(Notification.DEFAULT_ALL)
+//            .setDefaults(Notification.DEFAULT_ALL)
 
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 

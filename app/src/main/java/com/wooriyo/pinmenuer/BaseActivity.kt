@@ -1,15 +1,19 @@
 package com.wooriyo.pinmenuer
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
-import com.wooriyo.pinmenuer.MyApplication.Companion.pref
 import com.wooriyo.pinmenuer.util.AppHelper
 
 open class BaseActivity: AppCompatActivity() {
     val y = "Y"
     val n = "N"
     val d = "D"
+
+    companion object {
+        lateinit var currentActivity: Activity
+    }
 
     override fun onBackPressed() {}
 
@@ -29,5 +33,6 @@ open class BaseActivity: AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         AppHelper.hideInset(this)
+        currentActivity = this
     }
 }
