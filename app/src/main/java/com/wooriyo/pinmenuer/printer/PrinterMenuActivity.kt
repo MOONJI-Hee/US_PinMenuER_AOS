@@ -44,6 +44,11 @@ class PrinterMenuActivity : BaseActivity() {
         Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
+    private val permissions_bt = arrayOf(
+        Manifest.permission.BLUETOOTH_CONNECT,
+        Manifest.permission.BLUETOOTH_SCAN
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPrinterMenuBinding.inflate(layoutInflater)
@@ -107,7 +112,7 @@ class PrinterMenuActivity : BaseActivity() {
                         .setMessage(R.string.pms_location_content)
                         .setPositiveButton(R.string.confirm) { dialog, _ ->
                             dialog.dismiss()
-                            deniedPms.add(pms)
+                            getLocationPms()
                         }
                         .setNegativeButton(R.string.cancel) {dialog, _ -> dialog.dismiss()}
                         .show()
@@ -128,20 +133,33 @@ class PrinterMenuActivity : BaseActivity() {
     }
 
     fun checkBluetoothPermission() {
-        if(ActivityCompat.checkSelfPermission(mActivity, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
+        val deniedPms = ArrayList<String>()
+
+        for (pms in permissions_bt) {
+            if(ActivityCompat.checkSelfPermission(mActivity, pms) != PackageManager.PERMISSION_GRANTED) {
+                if(ActivityCompat.shouldShowRequestPermissionRationale(mActivity, pms)) {
+                    AlertDialog.Builder(mActivity)
+                        .setTitle(R.string.pms_bluetooth_title)
+                        .setMessage(R.string.pms_bluetooth_content)
+                        .setPositiveButton(R.string.confirm) { dialog, _ ->
+                            dialog.dismiss()
+                            getBluetoothPms()
+                            return@setPositiveButton
+                        }
+                        .setNegativeButton(R.string.cancel) {dialog, _ ->
+                            dialog.dismiss()
+                            return@setNegativeButton
+                        }
+                        .show()
+                }else
+                    deniedPms.add(pms)
+            }
+        }
+
+        if(deniedPms.isEmpty() || deniedPms.size == 0) {
             checkBluetooth()
         }else {
-            if(ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.BLUETOOTH_CONNECT)) {
-                AlertDialog.Builder(mActivity)
-                    .setTitle(R.string.pms_bluetooth_title)
-                    .setMessage(R.string.pms_bluetooth_content)
-                    .setPositiveButton(R.string.confirm) { dialog, _ ->
-                        dialog.dismiss()
-                        getBluetoothPms()
-                    }
-                    .setNegativeButton(R.string.cancel) {dialog, _ -> dialog.dismiss()}
-                    .show()
-            }else getBluetoothPms()
+            getBluetoothPms()
         }
     }
 
