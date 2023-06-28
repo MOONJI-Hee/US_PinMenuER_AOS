@@ -30,6 +30,7 @@ import com.wooriyo.pinmenuer.model.OrderHistoryDTO
 import com.wooriyo.pinmenuer.model.OrderListDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.order.adapter.OrderAdapter
+import com.wooriyo.pinmenuer.order.dialog.SelectPayDialog
 import com.wooriyo.pinmenuer.util.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -78,7 +79,30 @@ class OrderListActivity : BaseActivity() {
         }
 
         orderAdapter.setOnPayClickListener(object:ItemClickListener{
-            override fun onItemClick(position: Int) {payOrder(position)}
+            override fun onItemClick(position: Int) {
+                val selectPayDialog = SelectPayDialog(mActivity, position)
+
+                selectPayDialog.setOnQrClickListener(object : ItemClickListener{
+                    override fun onItemClick(position: Int) {
+                        super.onItemClick(position)
+                    }
+                })
+
+                selectPayDialog.setOnCardClickListener(object : ItemClickListener{
+                    override fun onItemClick(position: Int) {
+                        super.onItemClick(position)
+                        payOrder(position)
+                    }
+                })
+
+                selectPayDialog.setOnCompleteClickListener(object : ItemClickListener{
+                    override fun onItemClick(position: Int) {
+                        super.onItemClick(position)
+                    }
+                })
+
+                selectPayDialog.show()
+            }
         })
 
         orderAdapter.setOnDeleteListener(object:ItemClickListener{

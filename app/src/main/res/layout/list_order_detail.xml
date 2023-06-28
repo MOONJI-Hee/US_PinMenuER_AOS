@@ -22,10 +22,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/gea"/>
         <TextView
-            style="@style/text20"
+            style="@style/text_num_b"
             android:id="@+id/gea"
-            android:textStyle="bold"
             android:layout_marginEnd="3dp"
+            android:textSize="20sp"
             tools:text="1"
             app:layout_constraintBottom_toBottomOf="@+id/name"
             app:layout_constraintEnd_toStartOf="@+id/tv_gea"/>
@@ -36,18 +36,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/name" />
         <TextView
-            style="@style/text16"
+            style="@style/text_num"
             android:id="@+id/price"
             android:layout_marginTop="7dp"
+            android:textSize="16sp"
             tools:text="5,000"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name"/>
         <TextView
             style="@style/text16"
             android:text="@string/won"
+            android:layout_marginTop="3dp"
             android:layout_marginStart="1dp"
             app:layout_constraintStart_toEndOf="@+id/price"
-            app:layout_constraintBottom_toBottomOf="@+id/price"/>
+            app:layout_constraintTop_toBottomOf="@+id/name"/>
         <TextView
             style="@style/subtext"
             android:id="@+id/option"

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_r6w"
+        android:paddingTop="40dp">
+
+        <TextView
+            style="@style/text22b"
+            android:id="@+id/title"
+            android:text="@string/dialog_information"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/content"
+            style="@style/text18"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="60dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/order_complete_info"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+        <CheckBox
+            style="@style/check"
+            android:id="@+id/visibility"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/sub_text"
+            android:text="@string/dialog_dont_show"
+            app:layout_constraintStart_toStartOf="@+id/content"
+            app:layout_constraintTop_toBottomOf="@+id/content"/>
+
+        <TextView
+            style="@style/btn_main"
+            android:layout_marginBottom="60dp"
+            android:text="@string/btn_change"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

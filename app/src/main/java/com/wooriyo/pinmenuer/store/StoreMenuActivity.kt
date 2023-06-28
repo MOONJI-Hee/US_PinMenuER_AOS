@@ -1,6 +1,5 @@
 package com.wooriyo.pinmenuer.store
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -21,15 +20,13 @@ import com.wooriyo.pinmenuer.member.MemberSetActivity
 import com.wooriyo.pinmenuer.menu.CategorySetActivity
 import com.wooriyo.pinmenuer.menu.MenuSetActivity
 import com.wooriyo.pinmenuer.model.CateListDTO
-import com.wooriyo.pinmenuer.model.CategoryDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
-import com.wooriyo.pinmenuer.model.StoreDTO
 import com.wooriyo.pinmenuer.order.OrderListActivity
+import com.wooriyo.pinmenuer.payment.SetPayActivity
 import com.wooriyo.pinmenuer.printer.PrinterMenuActivity
 import com.wooriyo.pinmenuer.setting.MenuUiActivity
 import com.wooriyo.pinmenuer.setting.TablePassActivity
 import com.wooriyo.pinmenuer.util.ApiClient
-import com.wooriyo.pinmenuer.util.AppHelper
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -85,6 +82,7 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
             binding.tablePass -> startActivity(Intent(mActivity, TablePassActivity::class.java))
             binding.menuUi -> startActivity(Intent(mActivity, MenuUiActivity::class.java))
             binding.printer -> insPrintSetting()
+            binding.payment -> insPaySetting()
         }
     }
 
@@ -152,6 +150,30 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                     Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "프린터 설정 최초 진입 시 row 추가 오류 >> $t")
                     Log.d(TAG, "프린터 설정 최초 진입 시 row 추가 오류 >> ${call.request()}")
+                }
+            })
+    }
+
+
+    fun insPaySetting() {
+        ApiClient.service.insPaySetting(useridx, storeidx, androidId)
+            .enqueue(object : Callback<ResultDTO> {
+                override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                    Log.d(TAG, "결제 설정 최초 진입 시 row 추가 url : $response")
+                    if(!response.isSuccessful) return
+
+                    val result = response.body() ?: return
+
+                    if(result.status == 1) {
+                        MyApplication.bidx = result.bidx
+                        startActivity(Intent(mActivity, SetPayActivity::class.java))
+                    }else
+                        Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                }
+                override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                    Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "결제 설정 최초 진입 시 row 추가 오류 >> $t")
+                    Log.d(TAG, "결제 설정 최초 진입 시 row 추가 오류 >> ${call.request()}")
                 }
             })
     }

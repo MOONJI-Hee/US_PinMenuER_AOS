@@ -6,13 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".order.OrderListActivity">
 
-    <TextView
-        android:id="@+id/title"
+    <LinearLayout
         style="@style/title"
-        android:text="@string/title_order"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/icNew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:visibility="gone"
+            android:src="@drawable/ic_pay_new"/>
+
+        <TextView
+            style="@style/text20b"
+            android:id="@+id/tvTitle"
+            android:textColor="@color/white"
+            android:text="@string/order_mgmt"/>
+
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/back"
         android:layout_width="72dp"
@@ -38,11 +53,23 @@
         app:layout_constraintBottom_toBottomOf="@+id/today"/>
 
     <TextView
-        style="@style/text18b"
+        style="@style/text_num_b"
         android:id="@+id/today"
         android:text="@string/zero"
+        android:textSize="18sp"
         android:textColor="@color/white"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/btnClear"
+        app:layout_constraintTop_toTopOf="@+id/btnClear"
+        app:layout_constraintBottom_toBottomOf="@+id/btnClear"/>
+
+    <ImageView
+        android:id="@+id/btnClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
+        android:src="@drawable/btn_orderlist_info"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/title"
         app:layout_constraintTop_toTopOf="@+id/title"
         app:layout_constraintBottom_toBottomOf="@+id/title"/>
