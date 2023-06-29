@@ -33,11 +33,24 @@ class SelectPayDialog(context: Context, val position: Int): BaseDialog(context) 
 
         getPayInfo()
 
-        binding.btnQR.setOnClickListener { qrClickListener.onItemClick(position) }
-        binding.btnCard.setOnClickListener { cardClickListener.onItemClick(position) }
-        binding.btnCard.setOnClickListener { completeClickListener.onItemClick(position) }
-        binding.unableQR.setOnClickListener {  }
-        binding.unableCard.setOnClickListener {  }
+        binding.close.setOnClickListener { dismiss() }
+        binding.btnQR.setOnClickListener {
+            qrClickListener.onItemClick(position)
+        }
+        binding.btnCard.setOnClickListener {
+            cardClickListener.onItemClick(position)
+        }
+        binding.btnComplete.setOnClickListener {
+            completeClickListener.onItemClick(position)
+        }
+        binding.unableQR.setOnClickListener {
+            dismiss()
+            NoPayDialog(context, 0).show()
+        }
+        binding.unableCard.setOnClickListener {
+            dismiss()
+            NoPayDialog(context, 1).show()
+        }
     }
 
     fun setOnQrClickListener(qrClickListener: ItemClickListener) {

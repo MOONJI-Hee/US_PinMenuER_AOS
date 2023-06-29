@@ -15,4 +15,5 @@ interface DialogListener {
     fun onOptSet(position: Int, option: OptionDTO) {}
     fun onItemDelete(position: Int) {}
     fun onNickSet(nick: String) {}
+    fun onComplete(popup: Int) {}
 }

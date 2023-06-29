@@ -1,9 +1,13 @@
 package com.wooriyo.pinmenuer.order
 
+import android.content.ComponentName
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sewoo.jpos.command.ESCPOSConst
 import com.sewoo.jpos.printer.ESCPOSPrinter
@@ -12,6 +16,7 @@ import com.wooriyo.pinmenuer.MyApplication.Companion.store
 import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
+import com.wooriyo.pinmenuer.broadcast.EasyCheckReceiver
 import com.wooriyo.pinmenuer.config.AppProperties
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.FONT_BIG
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.FONT_SMALL
@@ -24,14 +29,20 @@ import com.wooriyo.pinmenuer.config.AppProperties.Companion.SPACE_BIG
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.SPACE_SMALL
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.TITLE_MENU
 import com.wooriyo.pinmenuer.databinding.ActivityOrderListBinding
+import com.wooriyo.pinmenuer.listener.DialogListener
+import com.wooriyo.pinmenuer.listener.EasyCheckListener
 import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.model.OrderDTO
 import com.wooriyo.pinmenuer.model.OrderHistoryDTO
 import com.wooriyo.pinmenuer.model.OrderListDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.order.adapter.OrderAdapter
+import com.wooriyo.pinmenuer.order.dialog.CompleteDialog
 import com.wooriyo.pinmenuer.order.dialog.SelectPayDialog
+import com.wooriyo.pinmenuer.payment.QrActivity
+import com.wooriyo.pinmenuer.util.Api
 import com.wooriyo.pinmenuer.util.ApiClient
+import com.wooriyo.pinmenuer.util.AppHelper
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,6 +65,27 @@ class OrderListActivity : BaseActivity() {
     var hangul_size = 0.0
     var one_line = 0
     var space = 0
+
+    // 결제 관련 변수
+    lateinit var receiver : EasyCheckReceiver
+    var payPosition = -1
+    var tran_type = "credit"
+
+    val goKICC = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == RESULT_OK) {
+            Log.d(TAG, "결제 성공")
+            //직전거래에 대한 취소거래필요정보를 받음
+            val cancelInfo: Intent = it.data ?: return@registerForActivityResult
+
+            val rtn = it.data
+            if(rtn != null) {
+                val data = rtn.data
+                Log.d(TAG, "return 값 >> $data")
+
+                insPayCard(data.toString())
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,19 +117,42 @@ class OrderListActivity : BaseActivity() {
                 selectPayDialog.setOnQrClickListener(object : ItemClickListener{
                     override fun onItemClick(position: Int) {
                         super.onItemClick(position)
+                        val intent = Intent(mActivity, QrActivity::class.java)
+                        intent.putExtra("ordcode", orderList[position].ordcode)
+                        startActivity(intent)
                     }
                 })
 
                 selectPayDialog.setOnCardClickListener(object : ItemClickListener{
                     override fun onItemClick(position: Int) {
                         super.onItemClick(position)
-                        payOrder(position)
+                        selectPayDialog.dismiss()
+                        payPosition = position
+                        payOrder()
                     }
                 })
 
                 selectPayDialog.setOnCompleteClickListener(object : ItemClickListener{
                     override fun onItemClick(position: Int) {
                         super.onItemClick(position)
+                        when(store.popup) {
+                            0 -> {
+                                val dialog = CompleteDialog(mActivity)
+                                dialog.setOnCompleteListener(object : DialogListener{
+                                    override fun onComplete(popup: Int) {
+                                        super.onComplete(popup)
+                                        complete(position, popup)
+                                        dialog.dismiss()
+                                    }
+                                })
+                                selectPayDialog.dismiss()
+                                dialog.show()
+                            }
+                            1 ->  {
+                                complete(position, store.popup)
+                                selectPayDialog.dismiss()
+                            }
+                        }
                     }
                 })
 
@@ -119,6 +174,16 @@ class OrderListActivity : BaseActivity() {
         binding.back.setOnClickListener { finish() }
 
         getOrderList()
+
+        receiver = EasyCheckReceiver()
+        receiver.setOnEasyCheckListener(object : EasyCheckListener {
+            override fun getIntent(intent: Intent?) {
+                //로그확인
+                Log.e("heykyul", "broadcast 들어옴")
+            }
+        })
+        val filter = IntentFilter("kr.co.kicc.ectablet.broadcast")
+        this.registerReceiver(receiver, filter)
     }
 
     // 새로운 호출 유무 확인 > 3초마다 한번씩 태우기
@@ -205,19 +270,46 @@ class OrderListActivity : BaseActivity() {
         })
     }
 
-    // 결제 처리
-    fun payOrder(position: Int) {
-        ApiClient.service.payOrder(storeidx, orderList[position].idx ,"Y").enqueue(object:Callback<ResultDTO>{
+    // 카드 결제 처리 (KICC 앱으로 이동)
+    fun payOrder() {
+        val compName = ComponentName("kr.co.kicc.ectablet", "kr.co.kicc.ectablet.SmartCcmsMain")
+
+        val intent = Intent(Intent.ACTION_MAIN)
+
+        intent.putExtra("APPCALL_TRAN_NO", AppHelper.getAppCallNo())
+        intent.putExtra("TRAN_TYPE", tran_type)
+        intent.putExtra("TOTAL_AMOUNT", (orderList[payPosition].amount).toString())
+
+        val tax = (orderList[payPosition].amount * 0.1).toInt()
+        intent.putExtra("TAX", tax.toString())
+        intent.putExtra("TIP", "0")
+        intent.putExtra("INSTALLMENT", "0")
+        intent.putExtra("UI_SKIP_OPTION", "NNNNN")
+
+        intent.addCategory(Intent.CATEGORY_LAUNCHER)
+        intent.component = compName
+
+        try {
+            goKICC.launch(intent)
+        }catch (e: Exception) {
+            Toast.makeText(mActivity, R.string.msg_no_card_reader, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    // 카드 결제 후 결과 저장
+    fun insPayCard(data: String) {
+        ApiClient.service.insPayCard(storeidx, data).enqueue(object : Callback<ResultDTO>{
             override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
-                Log.d(TAG, "주문 완료 url : $response")
+                Log.d(TAG, "카드 결제 결과 저장 url : $response")
                 if(!response.isSuccessful) return
 
                 val result = response.body() ?: return
                 when(result.status){
                     1 -> {
-                        orderList[position].iscompleted = 1
+                        Toast.makeText(mActivity, R.string.complete, Toast.LENGTH_SHORT).show()
+                        orderList[payPosition].iscompleted = 1
                         orderList.sortBy { it.iscompleted }
-                        orderAdapter.notifyItemChanged(position)
+                        orderAdapter.notifyItemChanged(payPosition)
                     }
                     else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                 }
@@ -225,15 +317,15 @@ class OrderListActivity : BaseActivity() {
 
             override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
                 Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
-                Log.d(TAG, "주문 완료 실패 > $t")
-                Log.d(TAG, "주문 완료 실패 > ${call.request()}")
+                Log.d(TAG, "카드 결제 결과 저장 실패 > $t")
+                Log.d(TAG, "카드 결제 결과 저장 실패 > ${call.request()}")
             }
         })
     }
 
     // 주문 완료 처리
-    fun complete(position: Int) {
-        ApiClient.service.payOrder(storeidx, orderList[position].idx ,"Y").enqueue(object:Callback<ResultDTO>{
+    fun complete(position: Int, popup: Int) {
+        ApiClient.service.udtComplete(storeidx, orderList[position].idx ,"Y", popup).enqueue(object:Callback<ResultDTO>{
             override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                 Log.d(TAG, "주문 완료 url : $response")
                 if(!response.isSuccessful) return
@@ -241,6 +333,7 @@ class OrderListActivity : BaseActivity() {
                 val result = response.body() ?: return
                 when(result.status){
                     1 -> {
+                        Toast.makeText(mActivity, R.string.complete, Toast.LENGTH_SHORT).show()
                         orderList[position].iscompleted = 1
                         orderList.sortBy { it.iscompleted }
                         orderAdapter.notifyItemChanged(position)
@@ -267,7 +360,7 @@ class OrderListActivity : BaseActivity() {
                 val result = response.body() ?: return
                 when(result.status){
                     1 -> {
-                        Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(mActivity, R.string.complete, Toast.LENGTH_SHORT).show()
                         orderList.removeAt(position)
                         orderAdapter.notifyItemRemoved(position)
                     }

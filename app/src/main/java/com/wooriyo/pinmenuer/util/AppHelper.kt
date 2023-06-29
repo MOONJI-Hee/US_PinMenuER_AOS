@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity.INPUT_METHOD_SERVICE
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.MyApplication.Companion.bluetoothAdapter
@@ -17,10 +18,13 @@ import com.wooriyo.pinmenuer.config.AppProperties
 import com.wooriyo.pinmenuer.model.OrderDTO
 import java.io.IOException
 import java.lang.reflect.Method
+import java.text.DateFormat
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 // 자주 쓰는 메소드 모음 - 문지희 (2022.10 갱신)
 class AppHelper {
@@ -102,6 +106,17 @@ class AppHelper {
 
                     day - now >= 0
                 }
+            }
+        }
+
+        // APPCALL 거래번호 생성
+        fun getAppCallNo(): String {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val appCallFormatter = DateTimeFormatter.ofPattern("yyMMddHHmmss")
+                return appCallFormatter.format(LocalDateTime.now())
+            }else {
+                val appCallFormatter = SimpleDateFormat("yyMMddHHmmss")
+                return appCallFormatter.format(Date())
             }
         }
 

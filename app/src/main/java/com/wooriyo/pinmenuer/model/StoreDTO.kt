@@ -13,7 +13,7 @@ data class StoreDTO(
     @SerializedName("payuse") var payuse : String,
     @SerializedName("paydate") var paydate : String,
     @SerializedName("fontsize") var fontsize : Int, // 영수증 폰트 사이즈 1: 큰 폰트, 2: 작은 폰트
-    @SerializedName("popup") var popup : Int,       // 카드리더기 관련 팝업 출력 여부 0 : 안보여줌 , 1 : 보여줌
+    @SerializedName("popup") var popup : Int,       // 주문 완료 시에 팝업 출력 여부 0 : 보여줌 , 1 : 안보여줌
     @SerializedName("address") var address : String,
     @SerializedName("Lclat") var lat : String,
     @SerializedName("Lclong") var long : String,
