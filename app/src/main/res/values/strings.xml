@@ -24,6 +24,7 @@
     <string name="total">총</string>
     <string name="order">주문하기</string>
     <string name="delete_order">주문삭제</string>
+    <string name="total_gea">총 %d개</string>
 
     <string name="tableno">테이블 번호</string>
     <string name="tablepass">테이블 비밀번호</string>
@@ -57,6 +58,7 @@
     <string name="btn_drop">탈&#160;&#160;퇴</string>
     <string name="btn_select">선&#160;&#160;택</string>
     <string name="btn_change">변&#160;&#160;경</string>
+    <string name="btn_payment">결&#160;&#160;제</string>
 
     <string name="udt_info">정보변경</string>
 
@@ -312,13 +314,14 @@
     <string name="order_complete">완료처리</string>
     <string name="order_pay_once">일괄결제</string>
     <string name="order_pay_finish">결제종료</string>
-    <string name="order_pay_info1">‘결제’버튼을 누르면 KICC앱으로\n이동되어 카드결제가 진행됩니다.</string>
-    <string name="order_pay_info2">결제 중 미결제 항목이 있어도 우측상단\n‘결제종료’로 완료처리가 가능합니다.</string>
-    <string name="order_pay_info3">하단 ‘메뉴선택’버튼으로 체크박스를 해제하여 결제가\n필요없는 메뉴는 제외하고 결제가 가능합니다.\n체크하지 않은 메뉴는 따로 결제를 할 수 없습니다.\n메뉴별로 따로 결제를 원하신다면 상단의 ‘일괄결제’를\n누르고 ‘더치페이’를 선택하여 ‘주문 목록으로 나누기’를\n이용해 주시기 바랍니다.</string>
+    <string name="order_pay_info1">‘결제’버튼을 누르면 KICC앱으로 이동되어 카드결제가 진행됩니다.</string>
+    <string name="order_pay_info2">결제 중 미결제 항목이 있어도 우측상단 ‘결제종료’로 완료처리가 가능합니다.</string>
+    <string name="order_pay_info3">왼쪽 리스트에서 체크박스를 해제하여 결제가 필요없는 메뉴는 제외하고 결제가 가능합니다.\n체크하지 않은 메뉴는 따로 결제를 할 수 없습니다.\n메뉴별로 따로 결제를 원하신다면 오른쪽 ‘더치페이’버튼을 선택하여 ‘주문 목록으로 나누기’를\n이용해 주시기 바랍니다.</string>
     <string name="order_pay_charge">결제금액</string>
     <string name="order_pay_remain">잔액</string>
     <string name="order_pay_sel_menu">메뉴선택</string>
     <string name="order_pay_sel_done">선택완료</string>
+    <string name="order_dutchpay">더치페이</string>
 
     <string name="order_complete_info">결제 과정 없이 완료 상태로 변경합니다.\n완료 후 완료된 목록의 ‘복원’버튼을 누르면 다시 결제할 수 있는\n상태로 돌아갑니다.</string>
 

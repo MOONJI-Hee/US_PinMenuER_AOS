@@ -52,11 +52,9 @@
         </LinearLayout>
 
         <TextView
-            style="@style/text"
+            style="@style/text24b"
             android:id="@+id/tvQr"
             android:layout_marginTop="13dp"
-            android:textSize="24sp"
-            android:textStyle="bold"
             android:text="@string/order_pay_qr"
             app:layout_constraintStart_toStartOf="@+id/btnQR"
             app:layout_constraintEnd_toEndOf="@+id/btnQR"
@@ -91,12 +89,10 @@
         </LinearLayout>
 
         <TextView
-            style="@style/text"
+            style="@style/text24b"
             android:id="@+id/tvCard"
             android:layout_marginTop="13dp"
             android:text="@string/order_pay_card"
-            android:textSize="24sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/btnCard"
             app:layout_constraintStart_toStartOf="@+id/btnCard"
             app:layout_constraintTop_toBottomOf="@+id/btnCard" />
@@ -120,10 +116,8 @@
         </LinearLayout>
 
         <TextView
-            style="@style/text"
+            style="@style/text24b"
             android:layout_marginTop="13dp"
-            android:textSize="24sp"
-            android:textStyle="bold"
             android:text="@string/order_complete"
             app:layout_constraintStart_toStartOf="@+id/btnComplete"
             app:layout_constraintEnd_toEndOf="@+id/btnComplete"

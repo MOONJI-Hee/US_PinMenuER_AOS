@@ -39,6 +39,7 @@ import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.order.adapter.OrderAdapter
 import com.wooriyo.pinmenuer.order.dialog.CompleteDialog
 import com.wooriyo.pinmenuer.order.dialog.SelectPayDialog
+import com.wooriyo.pinmenuer.payment.PayCardActivity
 import com.wooriyo.pinmenuer.payment.QrActivity
 import com.wooriyo.pinmenuer.util.Api
 import com.wooriyo.pinmenuer.util.ApiClient
@@ -69,21 +70,12 @@ class OrderListActivity : BaseActivity() {
     // 결제 관련 변수
     lateinit var receiver : EasyCheckReceiver
     var payPosition = -1
-    var tran_type = "credit"
 
-    val goKICC = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if (it.resultCode == RESULT_OK) {
-            Log.d(TAG, "결제 성공")
-            //직전거래에 대한 취소거래필요정보를 받음
-            val cancelInfo: Intent = it.data ?: return@registerForActivityResult
-
-            val rtn = it.data
-            if(rtn != null) {
-                val data = rtn.data
-                Log.d(TAG, "return 값 >> $data")
-
-                insPayCard(data.toString())
-            }
+    val paymentCard = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if(result.resultCode == RESULT_OK) {
+            orderList[payPosition].iscompleted = 1
+            orderList.sortBy { it.iscompleted }
+            orderAdapter.notifyDataSetChanged()
         }
     }
 
@@ -128,7 +120,10 @@ class OrderListActivity : BaseActivity() {
                         super.onItemClick(position)
                         selectPayDialog.dismiss()
                         payPosition = position
-                        payOrder()
+
+                        val intent = Intent(mActivity, PayCardActivity::class.java)
+                        intent.putExtra("order", orderList[payPosition])
+                        paymentCard.launch(intent)
                     }
                 })
 
@@ -266,59 +261,6 @@ class OrderListActivity : BaseActivity() {
                 Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "주문 목록 조회 오류 > $t")
                 Log.d(TAG, "주문 목록 조회 오류 > ${call.request()}")
-            }
-        })
-    }
-
-    // 카드 결제 처리 (KICC 앱으로 이동)
-    fun payOrder() {
-        val compName = ComponentName("kr.co.kicc.ectablet", "kr.co.kicc.ectablet.SmartCcmsMain")
-
-        val intent = Intent(Intent.ACTION_MAIN)
-
-        intent.putExtra("APPCALL_TRAN_NO", AppHelper.getAppCallNo())
-        intent.putExtra("TRAN_TYPE", tran_type)
-        intent.putExtra("TOTAL_AMOUNT", (orderList[payPosition].amount).toString())
-
-        val tax = (orderList[payPosition].amount * 0.1).toInt()
-        intent.putExtra("TAX", tax.toString())
-        intent.putExtra("TIP", "0")
-        intent.putExtra("INSTALLMENT", "0")
-        intent.putExtra("UI_SKIP_OPTION", "NNNNN")
-
-        intent.addCategory(Intent.CATEGORY_LAUNCHER)
-        intent.component = compName
-
-        try {
-            goKICC.launch(intent)
-        }catch (e: Exception) {
-            Toast.makeText(mActivity, R.string.msg_no_card_reader, Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    // 카드 결제 후 결과 저장
-    fun insPayCard(data: String) {
-        ApiClient.service.insPayCard(storeidx, data).enqueue(object : Callback<ResultDTO>{
-            override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
-                Log.d(TAG, "카드 결제 결과 저장 url : $response")
-                if(!response.isSuccessful) return
-
-                val result = response.body() ?: return
-                when(result.status){
-                    1 -> {
-                        Toast.makeText(mActivity, R.string.complete, Toast.LENGTH_SHORT).show()
-                        orderList[payPosition].iscompleted = 1
-                        orderList.sortBy { it.iscompleted }
-                        orderAdapter.notifyItemChanged(payPosition)
-                    }
-                    else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
-                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
-                Log.d(TAG, "카드 결제 결과 저장 실패 > $t")
-                Log.d(TAG, "카드 결제 결과 저장 실패 > ${call.request()}")
             }
         })
     }

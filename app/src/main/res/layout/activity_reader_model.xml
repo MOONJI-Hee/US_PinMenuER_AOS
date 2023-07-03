@@ -47,11 +47,9 @@
     </LinearLayout>
 
     <TextView
-        style="@style/text"
+        style="@style/text24b"
         android:id="@+id/tv291"
         android:layout_marginTop="13dp"
-        android:textSize="24sp"
-        android:textStyle="bold"
         android:text="@string/et_291"
         app:layout_constraintStart_toStartOf="@+id/ll291"
         app:layout_constraintEnd_toEndOf="@+id/ll291"
@@ -83,13 +81,11 @@
     </LinearLayout>
 
     <TextView
-        style="@style/text"
+        style="@style/text24b"
         android:id="@+id/tv901"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="60dp"
         android:text="@string/et_901"
-        android:textSize="24sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/ll901"
         app:layout_constraintStart_toStartOf="@+id/ll901"
         app:layout_constraintTop_toBottomOf="@+id/ll901" />
@@ -121,11 +117,9 @@
     </LinearLayout>
 
     <TextView
-        style="@style/text"
+        style="@style/text24b"
         android:id="@+id/tv977"
         android:layout_marginTop="10dp"
-        android:textSize="24sp"
-        android:textStyle="bold"
         android:text="@string/et_977"
         app:layout_constraintStart_toStartOf="@+id/ll977"
         app:layout_constraintEnd_toEndOf="@+id/ll977"
