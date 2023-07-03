@@ -41,6 +41,7 @@
         <entry key="app/src/main/res/drawable/selector_btn_grd.xml" value="0.1725" />
         <entry key="app/src/main/res/drawable/selector_check.xml" value="0.175" />
         <entry key="app/src/main/res/drawable/selector_check_big.xml" value="0.5665" />
+        <entry key="app/src/main/res/drawable/selector_check_cart.xml" value="0.2515" />
         <entry key="app/src/main/res/drawable/selector_circle.xml" value="0.487" />
         <entry key="app/src/main/res/drawable/selector_text.xml" value="0.568" />
         <entry key="app/src/main/res/drawable/selector_toggle.xml" value="0.3015" />
@@ -53,12 +54,14 @@
         <entry key="app/src/main/res/layout/activity_find_pwd.xml" value="0.28828125" />
         <entry key="app/src/main/res/layout/activity_item_detail.xml" value="0.28828125" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.29583333333333334" />
         <entry key="app/src/main/res/layout/activity_map.xml" value="0.4068181818181818" />
         <entry key="app/src/main/res/layout/activity_menu_set.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_menu_ui.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_new_conn.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_nicepay_info.xml" value="0.28828125" />
         <entry key="app/src/main/res/layout/activity_order_list.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_pay_card.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_printer_menu.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_printer_model_list.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_qr.xml" value="0.28828125" />
@@ -116,8 +119,9 @@
         <entry key="app/src/main/res/layout/list_opt.xml" value="0.375" />
         <entry key="app/src/main/res/layout/list_opt_add.xml" value="0.16458333333333333" />
         <entry key="app/src/main/res/layout/list_opt_edit.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/list_order.xml" value="1.0" />
-        <entry key="app/src/main/res/layout/list_order_detail.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/list_order.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/list_order_detail.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/list_pay_order.xml" value="0.335" />
         <entry key="app/src/main/res/layout/list_printer.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/list_printer_add.xml" value="0.2877604166666667" />
         <entry key="app/src/main/res/layout/list_printer_cate.xml" value="0.1640625" />

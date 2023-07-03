@@ -621,7 +621,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun uploadImage(gidx: Int, media1: MultipartBody.Part?, media2: MultipartBody.Part?, media3: MultipartBody.Part?) {
-        ApiClient.service.uploadImg(useridx, gidx, media1, media2, media3)
+        ApiClient.imgService.uploadImg(useridx, gidx, media1, media2, media3)
             .enqueue(object : Callback<ResultDTO>{
                 override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                     Log.d(TAG, "이미지 등록 url : $response")
