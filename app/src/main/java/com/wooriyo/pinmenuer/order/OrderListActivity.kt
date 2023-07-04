@@ -169,16 +169,6 @@ class OrderListActivity : BaseActivity() {
         binding.back.setOnClickListener { finish() }
 
         getOrderList()
-
-        receiver = EasyCheckReceiver()
-        receiver.setOnEasyCheckListener(object : EasyCheckListener {
-            override fun getIntent(intent: Intent?) {
-                //로그확인
-                Log.e("heykyul", "broadcast 들어옴")
-            }
-        })
-        val filter = IntentFilter("kr.co.kicc.ectablet.broadcast")
-        this.registerReceiver(receiver, filter)
     }
 
     // 새로운 호출 유무 확인 > 3초마다 한번씩 태우기

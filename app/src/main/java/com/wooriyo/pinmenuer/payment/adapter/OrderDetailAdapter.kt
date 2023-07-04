@@ -13,7 +13,6 @@ import com.wooriyo.pinmenuer.util.AppHelper
 class OrderDetailAdapter(val dataSet: ArrayList<OrderDTO>): RecyclerView.Adapter<OrderDetailAdapter.ViewHolder>() {
     lateinit var onItemClickListener: ItemClickListener
 
-
     fun setOnCheckListener(onItemClickListener: ItemClickListener) {
         this.onItemClickListener = onItemClickListener
     }
@@ -48,6 +47,7 @@ class OrderDetailAdapter(val dataSet: ArrayList<OrderDTO>): RecyclerView.Adapter
                 }
 
                 select.visibility = View.VISIBLE
+                select.isChecked = data.isChecked
 
                 layout.setOnClickListener {
                     select.isChecked = !select.isChecked

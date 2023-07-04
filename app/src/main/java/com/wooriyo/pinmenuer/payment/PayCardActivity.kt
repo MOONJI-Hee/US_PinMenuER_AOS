@@ -3,6 +3,7 @@ package com.wooriyo.pinmenuer.payment
 import android.content.ClipData
 import android.content.ComponentName
 import android.content.Intent
+import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,7 +13,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
+import com.wooriyo.pinmenuer.broadcast.EasyCheckReceiver
 import com.wooriyo.pinmenuer.databinding.ActivityPayCardBinding
+import com.wooriyo.pinmenuer.listener.EasyCheckListener
 import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.model.OrderDTO
 import com.wooriyo.pinmenuer.model.OrderHistoryDTO
@@ -40,6 +43,8 @@ class PayCardActivity : AppCompatActivity() {
 
     var checkedAll = true
 
+    lateinit var receiver : EasyCheckReceiver
+
     val goKICC = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == RESULT_OK) {
             Log.d(TAG, "결제 성공")
@@ -63,11 +68,12 @@ class PayCardActivity : AppCompatActivity() {
 
         order = intent.getSerializableExtra("order") as OrderHistoryDTO
         olist = order.olist
+        olist.forEach { it.isChecked = true }
         adapter = OrderDetailAdapter(olist)
 
         adapter.setOnCheckListener(object : ItemClickListener{
             override fun onCheckClick(position: Int, v: CheckBox, isChecked: Boolean) {
-                val oPrice = charge + (olist[position].price * olist[position].gea)
+                val oPrice = olist[position].price * olist[position].gea
 
                 if(isChecked) {
                     charge += oPrice
@@ -75,11 +81,19 @@ class PayCardActivity : AppCompatActivity() {
                     charge -= oPrice
                 }
 
-                remain = totPrice - charge
                 olist[position].isChecked = isChecked
+                remain = totPrice - charge
 
                 binding.chargePrice.text = AppHelper.price(charge)
                 binding.remainPrice.text = AppHelper.price(remain)
+
+                Log.d(TAG, "totGea >> $totGea")
+                Log.d(TAG, "totPrice >> $totPrice")
+                Log.d(TAG, "chargePrice >> $charge")
+                Log.d(TAG, "remainPrice >> $remain")
+
+
+                Log.d(TAG, "oPrice >> $oPrice")
 
                 olist.forEach {
                     if(!it.isChecked) {
@@ -102,6 +116,11 @@ class PayCardActivity : AppCompatActivity() {
         binding.totPrice.text = AppHelper.price(totPrice)
         binding.chargePrice.text = AppHelper.price(charge)
 
+        Log.d(TAG, "totGea >> $totGea")
+        Log.d(TAG, "totPrice >> $totPrice")
+        Log.d(TAG, "chargePrice >> $charge")
+        Log.d(TAG, "remainPrice >> $remain")
+
         binding.tableNo.text = order.tableNo
         binding.regdt.text = order.regdt
 
@@ -115,26 +134,31 @@ class PayCardActivity : AppCompatActivity() {
             Toast.makeText(mActivity, R.string.msg_prepare, Toast.LENGTH_SHORT).show()
         }
 
-        binding.checkAll.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked) {
+        binding.checkAll.setOnClickListener {
+            it as CheckBox
+            if(it.isChecked) {
                 checkedAll = true
-                charge = totPrice
-                remain = 0
                 for (orderDTO in order.olist) {
                     orderDTO.isChecked = true
                 }
             }else {
                 checkedAll = false
-                charge = 0
-                remain = totPrice
                 for (orderDTO in order.olist) {
                     orderDTO.isChecked = false
                 }
             }
-            binding.chargePrice.text = AppHelper.price(charge)
-            binding.remainPrice.text = AppHelper.price(remain)
             adapter.notifyDataSetChanged()
         }
+
+        receiver = EasyCheckReceiver()
+        receiver.setOnEasyCheckListener(object : EasyCheckListener {
+            override fun getIntent(intent: Intent?) {
+                //로그확인
+                Log.e("heykyul", "broadcast 들어옴")
+            }
+        })
+        val filter = IntentFilter("kr.co.kicc.ectablet.broadcast")
+        this.registerReceiver(receiver, filter)
     }
 
 
@@ -190,5 +214,4 @@ class PayCardActivity : AppCompatActivity() {
             }
         })
     }
-
 }
