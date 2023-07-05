@@ -393,7 +393,7 @@ interface Api {
     ): Call<ResultDTO>
 
     // 주문 결제 완료
-    @GET("payCardReader.php")
+    @GET("m/payCardReader.php")
     fun insPayCard(
         @Query("storeidx") storeidx: Int,
         @Query("JSON") JSON: String
