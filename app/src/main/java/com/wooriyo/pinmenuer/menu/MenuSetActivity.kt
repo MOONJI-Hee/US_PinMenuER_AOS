@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.google.gson.annotations.SerializedName
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication.Companion.allCateList
 import com.wooriyo.pinmenuer.MyApplication.Companion.store
@@ -48,6 +49,7 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.http.Query
 import java.io.File
 
 
@@ -64,6 +66,18 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
     val optList = ArrayList<OptionDTO>()
     val optAdapter = OptAdapter(optList)
+
+    // Api 보낼 때 옵션
+    var optName = ""
+    var optValue = ""
+    var optMark = ""
+    var optPrice = ""
+    var optReq = ""
+//    val optName = ArrayList<String>()
+//    val optValue = ArrayList<ArrayList<String>>()
+//    val optMark = ArrayList<ArrayList<String>>()
+//    val optPrice = ArrayList<ArrayList<String>>()
+//    val optReq = ArrayList<Int>()
 
     var mode : Int = 0      // 0: 저장, 1: 모드, 3: 순서변경, 4: 삭제
     var selCate = "001"
@@ -492,8 +506,6 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun save() {
-        Log.d(TAG, "옵션 확인 >> ${goods.opt}")
-
         media1 = null
         media2 = null
         media3 = null
@@ -550,6 +562,70 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             goods.boption = if(toggleOption.isChecked) y else n
         }
 
+        optName = ""
+        optValue = ""
+        optMark = ""
+        optPrice = ""
+        optReq = ""
+
+        goods.opt?.forEach {
+            if(optName == "") {
+                optName = it.name
+            }else
+                optName += ",${it.name}"
+
+            if(optReq == "")
+                optReq = it.optreq.toString()
+            else
+                optReq += ",${it.optreq}"
+
+            var opt = ""
+            it.optval.forEach { i ->
+                if(opt == "")
+                    opt = i
+                else
+                    opt += ",$i"
+            }
+
+            if(optValue == "")
+                optValue = opt
+            else
+                optValue += "」「$opt"
+
+            var mark = ""
+            it.optmark.forEach { i ->
+                if(mark == "")
+                    mark = i
+                else
+                    mark += ",$i"
+            }
+
+            if(optMark == "")
+                optMark = mark
+            else
+                optMark += "」「$mark"
+
+            var pay = ""
+            it.optpay.forEach { i ->
+                if(pay == "")
+                    pay = i
+                else
+                    pay += ",$i"
+            }
+
+            if(optPrice == "")
+                optPrice = pay
+            else
+                optPrice += "」「$pay"
+        }
+
+        Log.d(TAG, "옵션 변환한 결과")
+        Log.d(TAG, "optName >> $optName")
+        Log.d(TAG, "optReq >> $optReq")
+        Log.d(TAG, "optValue >> $optValue")
+        Log.d(TAG, "optMark >> $optMark")
+        Log.d(TAG, "optPrice >> $optPrice")
+
         if(mode == 0)
             insGoods()
         else if(mode == 1)
@@ -558,7 +634,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
     fun insGoods() {
         goods.let {
-            ApiClient.service.insGoods(useridx, storeidx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption, it.opt.toString())
+            ApiClient.service.insGoods(useridx, storeidx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption, optName, optValue, optMark, optPrice, optReq)
                 .enqueue(object : Callback<ResultDTO> {
                     override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                         Log.d(TAG, "메뉴 등록 url : $response")
@@ -593,7 +669,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
     fun udtGoods() {
         goods.let {
-            ApiClient.service.udtGoods(useridx, it.idx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption, it.opt.toString())
+            ApiClient.service.udtGoods(useridx, it.idx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption, optName.toString(), optValue.toString(), optMark.toString(), optPrice.toString(), optReq.toString())
                 .enqueue(object : Callback<ResultDTO> {
                     override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                         Log.d(TAG, "메뉴 수정 url : $response")

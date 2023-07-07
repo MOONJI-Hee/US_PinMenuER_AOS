@@ -276,7 +276,11 @@ interface Api {
         @Query("adDisplay") adDisplay : String,
         @Query("icon") icon : Int,
         @Query("boption") boption : String,
-        @Query("stropt") opt : String
+        @Query("option_name") option_name: String,
+        @Query("option_value") option_value: String,
+        @Query("option_mark") option_mark: String,
+        @Query("option_price") option_price: String,
+        @Query("option_req") option_req: String
     ): Call<ResultDTO>
 
     // 메뉴 이미지 등록
@@ -304,7 +308,12 @@ interface Api {
         @Query("adDisplay") adDisplay : String,
         @Query("icon") icon : Int,
         @Query("boption") boption : String,
-        @Query("stropt") opt : String
+//        @Query("option_code") option_code: String,
+        @Query("option_name") option_name: String,
+        @Query("option_value") option_value: String,
+        @Query("option_mark") option_mark: String,
+        @Query("option_price") option_price: String,
+        @Query("option_req") option_req: String
     ): Call<ResultDTO>
 
     // 메뉴 삭제

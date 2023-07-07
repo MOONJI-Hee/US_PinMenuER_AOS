@@ -1,7 +1,6 @@
 package com.wooriyo.pinmenuer.menu.dialog
 
 import android.content.Context
-import android.hardware.lights.LightsManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -14,6 +13,7 @@ import com.wooriyo.pinmenuer.databinding.DialogOptionBinding
 import com.wooriyo.pinmenuer.listener.DialogListener
 import com.wooriyo.pinmenuer.menu.adpter.OptEditAdapter
 import com.wooriyo.pinmenuer.model.OptionDTO
+import java.util.*
 
 class OptionDialog(context: Context, val position: Int, private val option : OptionDTO): BaseDialog(context) {  // TODO 다이얼로그 생성할 때 수정은 깊은 복사 진행
     lateinit var binding:DialogOptionBinding
@@ -62,6 +62,8 @@ class OptionDialog(context: Context, val position: Int, private val option : Opt
         binding.close.setOnClickListener { dismiss() }
         binding.save.setOnClickListener {
             option.name = binding.optName.text.toString()
+            Collections.replaceAll(option.optpay, "", "0")
+
             Log.d("OptionDialog", "옵션 저장 ~!~!!~ >> $option")
 
             if(option.name.isEmpty()) {
