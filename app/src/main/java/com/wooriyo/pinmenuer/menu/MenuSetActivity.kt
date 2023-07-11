@@ -68,16 +68,12 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     val optAdapter = OptAdapter(optList)
 
     // Api 보낼 때 옵션
+    var optCode = ""
     var optName = ""
     var optValue = ""
     var optMark = ""
     var optPrice = ""
     var optReq = ""
-//    val optName = ArrayList<String>()
-//    val optValue = ArrayList<ArrayList<String>>()
-//    val optMark = ArrayList<ArrayList<String>>()
-//    val optPrice = ArrayList<ArrayList<String>>()
-//    val optReq = ArrayList<Int>()
 
     var mode : Int = 0      // 0: 저장, 1: 모드, 3: 순서변경, 4: 삭제
     var selCate = "001"
@@ -562,6 +558,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             goods.boption = if(toggleOption.isChecked) y else n
         }
 
+        optCode = ""
         optName = ""
         optValue = ""
         optMark = ""
@@ -617,14 +614,15 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                 optPrice = pay
             else
                 optPrice += "」「$pay"
-        }
 
-        Log.d(TAG, "옵션 변환한 결과")
-        Log.d(TAG, "optName >> $optName")
-        Log.d(TAG, "optReq >> $optReq")
-        Log.d(TAG, "optValue >> $optValue")
-        Log.d(TAG, "optMark >> $optMark")
-        Log.d(TAG, "optPrice >> $optPrice")
+            if(mode == 1) {
+                if(optCode == "") {
+                    optCode = it.optcd
+                }else {
+                    optCode += ",${it.optcd}"
+                }
+            }
+        }
 
         if(mode == 0)
             insGoods()
@@ -669,7 +667,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
     fun udtGoods() {
         goods.let {
-            ApiClient.service.udtGoods(useridx, it.idx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption, optName.toString(), optValue.toString(), optMark.toString(), optPrice.toString(), optReq.toString())
+            ApiClient.service.udtGoods(useridx, storeidx, it.idx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption, optCode, optName, optValue, optMark, optPrice, optReq)
                 .enqueue(object : Callback<ResultDTO> {
                     override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                         Log.d(TAG, "메뉴 수정 url : $response")

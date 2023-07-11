@@ -98,9 +98,9 @@ interface Api {
     fun regStore(
         @Query("useridx") useridx: Int,
         @Query("storenm") storenm: String,
-        @Query("addr") addr: String,                // 주소
+        @Query("addr") addr: String,               // 주소
         @Query("lclong") lclong: String,           // 매장 경도
-        @Query("lclat") lclat: String                  // 매장 위도
+        @Query("lclat") lclat: String              // 매장 위도
     ): Call<ResultDTO>
 
     //매장 정보 수정
@@ -298,6 +298,7 @@ interface Api {
     @GET("m/udt_goods.php")
     fun udtGoods(
         @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
         @Query("gidx") gidx: Int,
         @Query("code") code: String,
         @Query("name") name : String,
@@ -308,7 +309,7 @@ interface Api {
         @Query("adDisplay") adDisplay : String,
         @Query("icon") icon : Int,
         @Query("boption") boption : String,
-//        @Query("option_code") option_code: String,
+        @Query("option_code") option_code: String,
         @Query("option_name") option_name: String,
         @Query("option_value") option_value: String,
         @Query("option_mark") option_mark: String,

@@ -11,6 +11,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity.INPUT_METHOD_SERVICE
+import androidx.recyclerview.widget.RecyclerView
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.MyApplication.Companion.bluetoothAdapter
 import com.wooriyo.pinmenuer.MyApplication.Companion.remoteDevices
@@ -107,6 +108,15 @@ class AppHelper {
                     day - now >= 0
                 }
             }
+        }
+
+        // 코드에서 리사이클러뷰 높이 지정
+        fun setHeight(v: View, height: Int) {
+            val hpx = (height * MyApplication.density).toInt()
+
+            val params = v.layoutParams
+            params.height = hpx
+            v.layoutParams = params
         }
 
         // APPCALL 거래번호 생성
