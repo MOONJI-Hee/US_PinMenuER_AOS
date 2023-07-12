@@ -110,7 +110,6 @@ class AppHelper {
             }
         }
 
-        // 코드에서 리사이클러뷰 높이 지정
         fun setHeight(v: View, height: Int) {
             val hpx = (height * MyApplication.density).toInt()
 
