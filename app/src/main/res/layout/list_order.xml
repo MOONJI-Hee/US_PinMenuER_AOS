@@ -130,7 +130,7 @@
         </LinearLayout>
 
         <TextView
-            style="@style/btn"
+            style="@style/btn_sub"
             android:id="@+id/print"
             android:layout_width="0dp"
             android:layout_height="38dp"

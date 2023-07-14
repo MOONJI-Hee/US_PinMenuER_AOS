@@ -496,6 +496,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             rbNone.isChecked = true
             toggleOption.isChecked = false
 
+            rvOption.visibility = View.GONE
             optionEmpty.visibility = View.VISIBLE
         }
         Log.d(TAG, "selCate33333 >>> $selCate")
@@ -677,6 +678,10 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                         if(result != null) {
                             when(result.status){
                                 1 -> {
+                                    it.opt = result.opt
+                                    optList.clear()
+                                    optList.addAll(result.opt?:ArrayList<OptionDTO>())
+
                                     goodsAdapter.notifyItemChanged(goodsAdapter.selPos)
                                     uploadImage(it.idx, media1, media2, media3)
                                     // TODO 등록된 사진 중 삭제할 것 태우기
@@ -723,9 +728,9 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun delGoods(gidx: Int, position: Int) {
-        ApiClient.service.delGoods(useridx, storeidx, gidx).enqueue(object : Callback<ResultDTO>{
+        ApiClient.imgService.delGoods(useridx, storeidx, gidx).enqueue(object : Callback<ResultDTO>{
             override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
-                Log.d(TAG, "메뉴 수정 url : $response")
+                Log.d(TAG, "메뉴 삭제 url : $response")
                 if(!response.isSuccessful) return
 
                 val result = response.body() ?: return

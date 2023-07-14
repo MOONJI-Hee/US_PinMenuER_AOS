@@ -79,12 +79,12 @@
         app:layout_constraintBottom_toBottomOf="@+id/et_addr"
         app:layout_constraintStart_toEndOf="@+id/et_addr" />
 
-    <TextView
-        style="@style/essential"
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toEndOf="@+id/btn_map"
-        app:layout_constraintTop_toTopOf="@+id/btn_map"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_map"/>
+<!--    <TextView-->
+<!--        style="@style/essential"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/btn_map"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/btn_map"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/btn_map"/>-->
 
     <TextView
         style="@style/subtext"
@@ -105,7 +105,7 @@
         app:layout_constraintStart_toStartOf="@+id/addr_info"
         app:layout_constraintTop_toBottomOf="@+id/addr_info">
         <TextView
-            style="@style/btn"
+            style="@style/btn_sub"
             android:id="@+id/btn_detail"
             android:layout_width="match_parent"
             android:text="@string/store_detail" />
@@ -133,7 +133,7 @@
         app:layout_constraintEnd_toStartOf="@+id/ll_img"
         app:layout_constraintTop_toTopOf="@+id/ll_detail">
         <TextView
-            style="@style/btn"
+            style="@style/btn_sub"
             android:id="@+id/btn_hour"
             android:layout_width="match_parent"
             android:text="@string/store_open_hours" />
@@ -159,7 +159,7 @@
         app:layout_constraintTop_toTopOf="@+id/ll_detail"
         app:layout_constraintEnd_toEndOf="@+id/addr_info">
         <TextView
-            style="@style/btn"
+            style="@style/btn_sub"
             android:id="@+id/btn_img"
             android:layout_width="match_parent"
             android:text="@string/store_img" />

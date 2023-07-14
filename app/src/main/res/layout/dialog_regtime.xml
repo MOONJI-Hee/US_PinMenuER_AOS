@@ -7,13 +7,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="800dp"
-        android:layout_height="395dp"
+        android:layout_height="432dp"
         android:background="@drawable/bg_r11w">
 
         <TextView
             android:id="@+id/title"
             style="@style/text22b"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="60dp"
             android:text="@string/store_time_set"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
             style="@style/edittext"
             android:id="@+id/et_start_hour"
             android:layout_width="104dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="30dp"
             android:gravity="center"
             android:hint="@string/zero2"
             android:inputType="number"
@@ -123,9 +123,8 @@
         <TextView
             style="@style/btn_main"
             android:id="@+id/save"
-            android:layout_marginVertical="40dp"
+            android:layout_marginVertical="60dp"
             android:text="@string/btn_confirm"
-            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>

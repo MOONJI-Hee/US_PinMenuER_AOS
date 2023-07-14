@@ -13,9 +13,13 @@ class NicepayInfoActivity : BaseActivity() {
         binding = ActivityNicepayInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val fromOrder = intent.getStringExtra("fromOrder") ?: ""
+
         binding.back.setOnClickListener { finish() }
         binding.btnNicepay.setOnClickListener {
-            startActivity(Intent(this@NicepayInfoActivity, SetNicepayActivity::class.java))
+            val intent = Intent(this@NicepayInfoActivity, SetNicepayActivity::class.java)
+            intent.putExtra("fromOrder", fromOrder)
+            startActivity(intent)
         }
     }
 }

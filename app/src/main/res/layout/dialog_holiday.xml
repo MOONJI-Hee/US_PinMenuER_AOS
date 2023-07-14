@@ -12,7 +12,7 @@
             style="@style/text22b"
             android:id="@+id/title"
             android:text="@string/store_holiday_set"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="60dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -38,7 +38,7 @@
         <EditText
             style="@style/edittext_main"
             android:id="@+id/et_name"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="30dp"
             android:hint="@string/store_holiday_name_hint"
             android:inputType="text"
             app:layout_constraintTop_toBottomOf="@+id/title"
@@ -101,7 +101,8 @@
             android:id="@+id/ll_udt"
             android:layout_width="500dp"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="40dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="60dp"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -124,7 +125,8 @@
         <TextView
             style="@style/btn_main"
             android:id="@+id/save"
-            android:layout_marginVertical="40dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="60dp"
             android:text="@string/btn_confirm"
             android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"

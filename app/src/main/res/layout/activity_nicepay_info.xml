@@ -74,7 +74,7 @@
             app:layout_constraintEnd_toEndOf="@+id/table"/>
 
         <TextView
-            style="@style/btn_grd"
+            style="@style/btn"
             android:id="@+id/btnNicepay"
             android:layout_width="0dp"
             android:layout_margin="60dp"

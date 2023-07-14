@@ -97,7 +97,7 @@
         app:layout_constraintStart_toStartOf="@+id/tv3"/>
 
     <TextView
-        style="@style/btn_grd"
+        style="@style/btn"
         android:id="@+id/save"
         android:layout_width="500dp"
         android:layout_marginTop="40dp"

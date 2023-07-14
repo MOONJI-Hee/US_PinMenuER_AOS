@@ -40,8 +40,6 @@ class CategoryDialog(context: Context, val position: Int, val category: Category
 
         if (position > -1 && category != null) {  // 수정
             binding.run {
-                margin.visibility = View.VISIBLE        // 수정모드일 때 margin 변화 > LayoutParams 대신 View visibility로 조정
-                llUse.visibility = View.VISIBLE
                 llUdt.visibility = View.VISIBLE
                 save.visibility = View.INVISIBLE
                 cateInfo.text = context.getString(R.string.category_dialog_info2)

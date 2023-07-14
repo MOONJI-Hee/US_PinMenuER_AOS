@@ -9,5 +9,6 @@ data class ResultDTO(
     @SerializedName("bidx") var bidx : Int,
     @SerializedName("photo") var img1 : String?="",
     @SerializedName("photo2") var img2 : String?="",
-    @SerializedName("photo3") var img3 : String?=""
+    @SerializedName("photo3") var img3 : String?="",
+    @SerializedName("stropt") var opt : ArrayList<OptionDTO>?
 )

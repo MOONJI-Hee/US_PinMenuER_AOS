@@ -57,8 +57,12 @@ class SetPayActivity : BaseActivity() {
         binding.setQR.setOnClickListener {
             if(settingDTO.mid.isEmpty() || settingDTO.mid_key.isEmpty()) {
                 startActivity(Intent(mActivity, NicepayInfoActivity::class.java))
-            }else
-                startActivity(Intent(mActivity, SetNicepayActivity::class.java))
+            }else{
+                val intent = Intent(mActivity, SetNicepayActivity::class.java)
+                intent.putExtra("mid", settingDTO.mid)
+                intent.putExtra("mid_key", settingDTO.mid_key)
+                startActivity(intent)
+            }
         }
     }
 

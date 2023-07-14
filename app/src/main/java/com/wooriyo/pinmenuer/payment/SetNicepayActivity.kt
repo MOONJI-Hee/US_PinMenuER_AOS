@@ -19,10 +19,25 @@ class SetNicepayActivity : BaseActivity() {
     val TAG = "SetNicepayActivity"
     val mActivity = this@SetNicepayActivity
 
+    var fromOrder = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySetNicepayBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        fromOrder = intent.getStringExtra("fromOrder") ?: ""
+
+        val mid = intent.getStringExtra("mid")
+        val mid_key = intent.getStringExtra("mid_key")
+
+        if(mid != null) {
+            binding.etMid.setText(mid)
+        }
+
+        if(mid_key != null) {
+            binding.etKey.setText(mid_key)
+        }
 
         binding.back.setOnClickListener { finish() }
         binding.save.setOnClickListener { save() }

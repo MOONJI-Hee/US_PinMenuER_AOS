@@ -103,7 +103,7 @@
         style="@style/edittext_main"
         android:id="@+id/et_arpayo"
         android:layout_marginTop="32dp"
-        android:hint="@string/password_hint"
+        android:hint="@string/arpayo_id_hint"
         android:inputType="text"
         app:layout_constraintTop_toBottomOf="@+id/et_pwd"
         app:layout_constraintStart_toStartOf="@+id/et_pwd"
@@ -164,7 +164,6 @@
             style="@style/btn"
             android:id="@+id/logout"
             android:layout_width="240dp"
-            android:layout_marginEnd="20dp"
             android:text="@string/logout"/>
     </LinearLayout>
 

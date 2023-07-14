@@ -126,7 +126,7 @@
     <TextView
         style="@style/btn_main"
         android:id="@+id/confirm"
-        android:text="@string/btn_confirm"
+        android:text="@string/btn_complete"
         android:layout_marginTop="40dp"
         android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/ll_cate"

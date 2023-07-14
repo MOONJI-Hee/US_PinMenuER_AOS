@@ -52,8 +52,9 @@
         app:layout_constraintTop_toTopOf="@+id/img_default" />
 
     <TextView
-        style="@style/btn_main"
+        style="@style/btn_sub"
         android:id="@+id/reg_img"
+        android:layout_width="500dp"
         android:layout_marginTop="20dp"
         android:text="@string/store_img_reg"
         android:visibility="visible"
@@ -79,5 +80,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_udt"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <TextView
+            style="@style/btn_cancel"
+            android:id="@+id/delete"
+            android:layout_width="240dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/btn_delete"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            style="@style/btn"
+            android:id="@+id/modify"
+            android:layout_width="240dp"
+            android:text="@string/btn_save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/delete" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

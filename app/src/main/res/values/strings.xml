@@ -284,6 +284,7 @@
 
     <!--  메뉴판 디자인 설정  -->
     <string name="menu_ui">메뉴판\n디자인 설정</string>
+    <string name="title_menu_ui">메뉴판 디자인 설정</string>
     <string name="menu_ui_sub">・모드 : 기본/사진\n・색상 : 블랙/실버/화이트</string>
     <string name="menu_ui_info">선택된 매장에서 사용되는 고객용 태블릿PC 메뉴판에 선택한 디자인이 일괄 적용됩니다.\n단, 스마트폰 메뉴판에는 적용이 되지 않습니다.</string>
     <string name="sel_bg">배경선택</string>
@@ -477,7 +478,7 @@
     <string name="msg_no_pw">비밀번호를 입력해 주세요.</string>
     <string name="msg_typemiss_pw">비밀번호는 8자리 이상 영문, 숫자만 입력해 주세요.</string>
     <string name="msg_typemiss_id">이메일 형식이 아닙니다.</string>
-    <string name="msg_no_checked">아이디 중복체크클 해주세요.</string>
+    <string name="msg_no_checked">아이디 중복체크를 해주세요.</string>
     <string name="msg_no_linked">알파요 아이디를 연동해 주세요.</string>
     <string name="msg_no_addr">주소를 입력해 주세요.</string>
     <string name="msg_check_addr">주소를 확인해 주세요.</string>

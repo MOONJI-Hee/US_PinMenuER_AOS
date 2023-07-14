@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/title"
         style="@style/title"
-        android:text="@string/menu_ui_sub"
+        android:text="@string/title_menu_ui"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -54,6 +54,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:src="@drawable/img_skin_silver"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/iv_black"
         app:layout_constraintStart_toEndOf="@+id/iv_black"
         app:layout_constraintEnd_toStartOf="@+id/iv_light"
@@ -64,6 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/img_skin_white"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/iv_silver"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_silver"
@@ -80,6 +82,7 @@
         style="@style/text18"
         android:text="@string/bg_silver"
         android:layout_marginBottom="11dp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/iv_silver"
         app:layout_constraintBottom_toTopOf="@+id/iv_silver"/>
 
@@ -87,6 +90,7 @@
         style="@style/text18"
         android:text="@string/bg_light"
         android:layout_marginBottom="11dp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/iv_light"
         app:layout_constraintBottom_toTopOf="@+id/iv_light"/>
 
@@ -100,12 +104,14 @@
     <RadioButton style="@style/toggle"
         android:id="@+id/check_silver"
         android:layout_marginBottom="5dp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/iv_silver"
         app:layout_constraintBottom_toTopOf="@id/iv_silver" />
 
     <RadioButton style="@style/toggle"
         android:id="@+id/check_light"
         android:layout_marginBottom="5dp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/iv_light"
         app:layout_constraintBottom_toTopOf="@id/iv_light" />
 
