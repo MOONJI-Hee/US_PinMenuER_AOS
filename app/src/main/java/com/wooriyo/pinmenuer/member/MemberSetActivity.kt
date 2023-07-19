@@ -59,6 +59,7 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
         }
         binding.title.text = getString(R.string.title_udt_mbr)
         binding.save.text = getString(R.string.udt_info)
+        binding.save.setBackgroundResource(R.drawable.bg_btn_r6)
 
         binding.etId.visibility = View.INVISIBLE
         binding.btnCheckId.visibility = View.INVISIBLE
