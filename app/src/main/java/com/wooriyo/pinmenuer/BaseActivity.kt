@@ -10,10 +10,7 @@ open class BaseActivity: AppCompatActivity() {
     val y = "Y"
     val n = "N"
     val d = "D"
-
-    companion object {
-        lateinit var currentActivity: Activity
-    }
+    lateinit var currentActivity: Activity
 
     override fun onBackPressed() {}
 

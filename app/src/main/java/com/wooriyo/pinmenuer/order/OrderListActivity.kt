@@ -49,7 +49,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class OrderListActivity : BaseActivity() {
-    lateinit var binding: ActivityOrderListBinding
+    companion object {
+        lateinit var binding: ActivityOrderListBinding
+    }
 
     val TAG = "OrderListActivity"
     val mActivity = this@OrderListActivity
@@ -167,6 +169,7 @@ class OrderListActivity : BaseActivity() {
         binding.rv.adapter = orderAdapter
 
         binding.back.setOnClickListener { finish() }
+        binding.icNew.setOnClickListener {getOrderList()}
 
         getOrderList()
     }
