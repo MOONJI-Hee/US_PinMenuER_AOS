@@ -3,7 +3,6 @@ package com.wooriyo.pinmenuer.util
 import android.annotation.SuppressLint
 import android.app.*
 import android.app.ActivityManager.RunningAppProcessInfo
-import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.net.Uri
@@ -17,6 +16,7 @@ import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.sewoo.jpos.command.ESCPOSConst
+import com.wooriyo.pinmenuer.BaseActivity.Companion.currentActivity
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.MyApplication.Companion.escposPrinter
 import com.wooriyo.pinmenuer.R
@@ -72,29 +72,16 @@ class MyFirebaseService : FirebaseMessagingService() {
             val uri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/$sound")
             val ringtone = RingtoneManager.getRingtone(applicationContext, uri)
 
-            val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-            val info = manager.getRunningTasks(999)
-            val componentName = info[0].javaClass
-            val currentActivityName = componentName.name.substring(1)
-            Log.d("Notification", "currentActivityName >> $currentActivityName")
-
-
-
-            ringtone.play()
-            val toast: Toast = Toast.makeText(applicationContext, message.notification!!.body, Toast.LENGTH_LONG)
-            toast.setGravity(Gravity.TOP, 0, 0)
-            toast.show()
-
-//            currentActivity.runOnUiThread(Runnable {
-//                ringtone.play()
-//                val toast: Toast = Toast.makeText(applicationContext, message.notification!!.body, Toast.LENGTH_LONG)
-//                toast.setGravity(Gravity.TOP, 0, 0)
-//                toast.show()
-//            })
-//            if (currentActivity == OrderListActivity::class.java) run {
-//                Log.d("Notification", "여길 들어오는지 먼저 확인")
-//                OrderListActivity.binding.icNew.visibility = View.VISIBLE
-//            }
+            currentActivity.runOnUiThread(Runnable {
+                ringtone.play()
+                val toast: Toast = Toast.makeText(applicationContext, message.notification!!.body, Toast.LENGTH_LONG)
+                toast.setGravity(Gravity.TOP, 0, 0)
+                toast.show()
+            })
+            if (currentActivity == OrderListActivity::class.java) run {
+                Log.d("Notification", "여길 들어오는지 먼저 확인")
+                OrderListActivity.binding.icNew.visibility = View.VISIBLE
+            }
         }else {
             createNotification(message)
         }

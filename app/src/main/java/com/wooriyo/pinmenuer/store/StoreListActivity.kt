@@ -1,16 +1,22 @@
 package com.wooriyo.pinmenuer.store
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.MyApplication.Companion.androidId
 import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
+import com.wooriyo.pinmenuer.config.AppProperties
 import com.wooriyo.pinmenuer.databinding.ActivityStoreListBinding
 import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.member.MemberSetActivity
@@ -33,6 +39,9 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
     var storeList = ArrayList<StoreDTO>()
     var storeAdapter = StoreAdapter(storeList)
 
+    @RequiresApi(33)
+    val pms_noti : String = Manifest.permission.POST_NOTIFICATIONS
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStoreListBinding.inflate(layoutInflater)
@@ -50,6 +59,11 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
         binding.rvStore.adapter = storeAdapter
 
         binding.udtMbr.setOnClickListener(this)
+
+        // 알림 권한 확인
+        if(MyApplication.osver >= 33) {
+            checkNotiPms()
+        }
     }
 
     override fun onResume() {
@@ -61,6 +75,31 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
         when(v) {
             binding.udtMbr -> startActivity(Intent(mActivity, MemberSetActivity::class.java))
         }
+    }
+
+    // SDK 33 이상에서 알림 권한 확인
+    @RequiresApi(33)
+    fun checkNotiPms() {
+        when {
+            ActivityCompat.checkSelfPermission(mActivity, pms_noti) == PackageManager.PERMISSION_DENIED -> getNotiPms()
+
+            ActivityCompat.shouldShowRequestPermissionRationale(mActivity, pms_noti) -> {
+                AlertDialog.Builder(mActivity)
+                    .setTitle(R.string.pms_notification_title)
+                    .setMessage(R.string.pms_notification_content)
+                    .setPositiveButton(R.string.confirm) { dialog, _ ->
+                        dialog.dismiss()
+                        getNotiPms()
+                    }
+                    .setNegativeButton(R.string.cancel) {dialog, _ -> dialog.dismiss()}
+                    .show()
+            }
+        }
+    }
+
+    @RequiresApi(33)
+    fun getNotiPms() {
+        ActivityCompat.requestPermissions(mActivity, arrayOf(pms_noti), AppProperties.REQUEST_NOTIFICATION)
     }
 
     fun getStoreList() {

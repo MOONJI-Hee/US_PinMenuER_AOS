@@ -1,6 +1,7 @@
 package com.wooriyo.pinmenuer
 
 import android.app.Activity
+import android.app.ActivityManager
 import android.os.Bundle
 import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +11,10 @@ open class BaseActivity: AppCompatActivity() {
     val y = "Y"
     val n = "N"
     val d = "D"
-    lateinit var currentActivity: Activity
+
+    companion object {
+        lateinit var currentActivity: Activity
+    }
 
     override fun onBackPressed() {}
 

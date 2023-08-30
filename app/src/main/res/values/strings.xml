@@ -455,6 +455,8 @@
     <string name="pms_bluetooth_content">원활한 서비스 이용을 위해서는 블루투스 권한이 필요합니다.</string>
     <string name="pms_location_title">위치 권한 요청</string>
     <string name="pms_location_content">원활한 서비스 이용을 위해서는 위치 권한이 필요합니다.</string>
+    <string name="pms_notification_title">알림 권한 요청</string>
+    <string name="pms_notification_content">원활한 서비스 이용을 위해서는 알림 권한이 필요합니다.</string>
 
     <!--  확인 다이얼로그  -->
     <string name="dialog_logout">로그아웃 하시겠습니까?</string>
