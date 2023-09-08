@@ -67,6 +67,12 @@ class LoginActivity : BaseActivity() {
         binding.findPw.setOnClickListener {
             startActivity(Intent(this@LoginActivity, FindPwdActivity::class.java))
         }
+
+        // master login
+        binding.logo.setOnLongClickListener {
+            startActivity(Intent(this@LoginActivity, MasterLoginActivity::class.java))
+            return@setOnLongClickListener true
+        }
     }
 
     private fun loginWithApi()  {   // Api로 로그인

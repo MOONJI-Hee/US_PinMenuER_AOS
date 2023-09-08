@@ -9,7 +9,7 @@
     <TextView
         style="@style/title"
         android:id="@+id/title"
-        android:text="@string/title_login"
+        android:text="@string/title_master_login"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -28,7 +28,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <ImageView
-                android:id="@+id/logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
@@ -66,36 +65,36 @@
             android:layout_width="match_parent"
             android:layout_marginTop="40dp"
             android:text="@string/btn_login"/>
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp">
-            <TextView
-                style="@style/text20d"
-                android:id="@+id/signup"
-                android:layout_width="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:gravity="center"
-                android:text="@string/signup"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/line"/>
-            <TextView
-                style="@style/text20d"
-                android:id="@+id/line"
-                android:text="|"
-                app:layout_constraintHorizontal_bias="0.45"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-            <TextView
-                style="@style/text20d"
-                android:id="@+id/findPw"
-                android:layout_width="wrap_content"
-                android:layout_marginStart="20dp"
-                android:gravity="center"
-                android:text="@string/find_pwd"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/line"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="30dp">-->
+<!--            <TextView-->
+<!--                style="@style/text20d"-->
+<!--                android:id="@+id/signup"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_marginEnd="20dp"-->
+<!--                android:gravity="center"-->
+<!--                android:text="@string/signup"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/line"/>-->
+<!--            <TextView-->
+<!--                style="@style/text20d"-->
+<!--                android:id="@+id/line"-->
+<!--                android:text="|"-->
+<!--                app:layout_constraintHorizontal_bias="0.45"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"/>-->
+<!--            <TextView-->
+<!--                style="@style/text20d"-->
+<!--                android:id="@+id/findPw"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_marginStart="20dp"-->
+<!--                android:gravity="center"-->
+<!--                android:text="@string/find_pwd"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/line"/>-->
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

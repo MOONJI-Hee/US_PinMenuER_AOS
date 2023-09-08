@@ -32,6 +32,13 @@ interface Api {
         @Query("device_type") device_type: Int  // 0 : 모바일, 1 : 태블릿 (default 0)
     ): Call<MemberDTO>
 
+    // 마스터 로그인
+    @GET("masterLogin.php")
+    fun masterLogin(
+        @Query("userid") id:String,
+        @Query("pass") pass:String
+    ): Call<MemberDTO>
+
     //회원가입
 //    @FormUrlEncoded
 //    @POST("m/regmbr.php")
