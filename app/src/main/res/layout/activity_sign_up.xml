@@ -127,23 +127,127 @@
         app:layout_constraintTop_toTopOf="@+id/btn_arpayo"
         app:layout_constraintBottom_toBottomOf="@+id/btn_arpayo"/>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clTerms"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/et_arpayo"
+        app:layout_constraintStart_toStartOf="@id/et_arpayo"
+        app:layout_constraintEnd_toEndOf="@id/et_arpayo">
+
+        <TextView
+            style="@style/text18"
+            android:id="@+id/terms1"
+            android:text="@string/term1"
+            android:layout_marginTop="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_clause_arrow_right"
+            app:layout_constraintTop_toTopOf="@+id/terms1"
+            app:layout_constraintBottom_toBottomOf="@+id/terms1"
+            app:layout_constraintStart_toEndOf="@+id/terms1"/>
+
+        <CheckBox
+            android:id="@+id/check1"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:button="@null"
+            android:background="@drawable/selector_check_big"
+            app:layout_constraintTop_toTopOf="@+id/terms1"
+            app:layout_constraintBottom_toBottomOf="@+id/terms1"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            style="@style/text18"
+            android:id="@+id/terms2"
+            android:layout_marginTop="20dp"
+            android:text="@string/term2"
+            app:layout_constraintTop_toBottomOf="@+id/terms1"
+            app:layout_constraintStart_toStartOf="@id/terms1"/>
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_clause_arrow_right"
+            app:layout_constraintTop_toTopOf="@+id/terms2"
+            app:layout_constraintBottom_toBottomOf="@+id/terms2"
+            app:layout_constraintStart_toEndOf="@+id/terms2"/>
+
+        <CheckBox
+            android:id="@+id/check2"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:button="@null"
+            android:background="@drawable/selector_check_big"
+            app:layout_constraintEnd_toEndOf="@+id/check1"
+            app:layout_constraintTop_toTopOf="@+id/terms2"
+            app:layout_constraintBottom_toBottomOf="@+id/terms2"/>
+
+        <TextView
+            style="@style/text18"
+            android:id="@+id/terms3"
+            android:layout_marginTop="20dp"
+            android:text="@string/term3"
+            app:layout_constraintTop_toBottomOf="@+id/terms2"
+            app:layout_constraintStart_toStartOf="@id/terms2"/>
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_clause_arrow_right"
+            app:layout_constraintTop_toTopOf="@+id/terms3"
+            app:layout_constraintBottom_toBottomOf="@+id/terms3"
+            app:layout_constraintStart_toEndOf="@+id/terms3"/>
+
+        <CheckBox
+            android:id="@+id/check3"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:button="@null"
+            android:background="@drawable/selector_check_big"
+            app:layout_constraintEnd_toEndOf="@id/check2"
+            app:layout_constraintTop_toTopOf="@+id/terms3"
+            app:layout_constraintBottom_toBottomOf="@+id/terms3"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <TextView
         style="@style/subtext"
-        android:id="@+id/signup_info"
-        android:text="@string/signup_info"
-        android:lineSpacingExtra="5dp"
+        android:id="@+id/signup_info1"
+        android:text="@string/signup_info1"
+        android:lineSpacingExtra="0dp"
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="@+id/et_arpayo"
-        app:layout_constraintTop_toBottomOf="@+id/et_arpayo"/>
+        app:layout_constraintTop_toBottomOf="@+id/clTerms"/>
+
+    <TextView
+        style="@style/subtext"
+        android:id="@+id/signup_info2"
+        android:text="@string/signup_info2"
+        android:lineSpacingExtra="0dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="@+id/signup_info1"
+        app:layout_constraintTop_toBottomOf="@+id/signup_info1"/>
 
     <TextView
         style="@style/btn_main"
         android:id="@+id/save"
-        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
         android:text="@string/signup"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_info" />
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <LinearLayout
         android:id="@+id/ll_udt"

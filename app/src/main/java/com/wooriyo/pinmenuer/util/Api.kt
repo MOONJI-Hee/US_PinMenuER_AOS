@@ -86,6 +86,12 @@ interface Api {
         @Query("emplyr_id") arpayo_id: String
     ): Call<ResultDTO>
 
+    //비밀번호 찾기
+    @GET("u/find_pwd.php")
+    fun findPwd (
+        @Query("userid") userid: String
+    ): Call<ResultDTO>
+
     // 탈퇴
     @GET("m/leave.php")
     fun dropMbr(

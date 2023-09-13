@@ -48,7 +48,7 @@
             android:id="@+id/et_id"
             android:layout_width="match_parent"
             android:layout_marginTop="11dp"
-            android:hint="@string/id"
+            android:hint="@string/email"
             android:maxLines="1"
             android:inputType="text"
             android:imeOptions="actionNext" />

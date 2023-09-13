@@ -11,9 +11,15 @@ data class StoreDTO(
     @SerializedName("name2") var name2 : String,
     @SerializedName("buse") var buse : String,
     @SerializedName("payuse") var payuse : String,
+    @SerializedName("paydt") var paydt : String,
     @SerializedName("paydate") var paydate : String,
     @SerializedName("fontsize") var fontsize : Int, // 영수증 폰트 사이즈 1: 큰 폰트, 2: 작은 폰트
     @SerializedName("popup") var popup : Int,       // 주문 완료 시에 팝업 출력 여부 0 : 보여줌 , 1 : 안보여줌
+    @SerializedName("ordCnt") var ordCnt: Int,
+    @SerializedName("callCnt") var callCnt: Int,
+    @SerializedName("agree") var agree: String,     // QR오더 관련 이행보증보험 관련 동의 여부
+    @SerializedName("mid") var mid : String,
+    @SerializedName("mid_key") var mid_key : String,
     @SerializedName("address") var address : String,
     @SerializedName("Lclat") var lat : String,
     @SerializedName("Lclong") var long : String,
@@ -42,6 +48,6 @@ data class StoreDTO(
     @SerializedName("breakList")  var breaktime: BrkTimeDTO?,
     @SerializedName("holidayList")  var spcHoliday: ArrayList<SpcHolidayDTO>?
 ):Serializable {
-    constructor(useridx: Int) :  this(0, useridx, "", "", "", "N", "", 1, 1,"", "", "", "", "", "", "", null, null, null, null, null, null, null,
+    constructor(useridx: Int) :  this(0, useridx, "", "", "", "N", "", "", 1, 1, 0, 0, "", "", "", "", "", "", "", "", "", "", null, null, null, null, null, null, null,
         "d", "b", "N", "N", "N", "N", "N", "N", "N", "N" ,null, null, null)
 }
