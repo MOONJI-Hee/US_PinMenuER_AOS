@@ -97,7 +97,11 @@
     <string name="password_hint">8자리 이상 입력해 주세요.</string>
     <string name="arpayo_id">알파요 아이디</string>
     <string name="arpayo_id_hint">알파요 ID(이메일) 입력해 주세요.</string>
-    <string name="signup_info">실시간 자동시급계산 앱 알파요를 이용중이신 사장님이시라면,\n핀메뉴 유료 결제에 따른 추가 보상을 알파요 앱으로 받아보실 수 있습니다.\n회원가입 이후에도 알파요 앱을 연동하여 추가 보상을 받으실 수 있습니다.</string>
+    <string name="signup_info1">아이디(이메일)는 비밀번호 찾기를 할 때 필요한 정보입니다.\n사용 가능한 이메일로 가입해 주세요.</string>
+    <string name="signup_info2">알파요 앱 아이디를 연동해주시면 자동시급계산 앱 알파요를 사용\n중인 사장님들에게 추가 보상을 드립니다.</string>
+    <string name="term1">이용약관 동의(필수)</string>
+    <string name="term2">개인정보 취급방침 동의(필수)</string>
+    <string name="term3">마케팅 활용 동의(선택)</string>
     <string name="check_id">중복체크</string>
     <string name="unable">사용불가</string>
     <string name="able">사용가능</string>
@@ -461,7 +465,7 @@
 
     <!--  확인 다이얼로그  -->
     <string name="dialog_logout">로그아웃 하시겠습니까?</string>
-    <string name="dialog_drop">탈퇴 하시겠습니까?</string>
+    <string name="dialog_drop">탈퇴 시 등록한 모든 정보가 사라집니다.\n정말 탈퇴하시겠습니까?</string>
 
     <!--  알림 다이얼로그  -->
     <string name="dialog_no_printer">연결된 프린트 기기가 없습니다.</string>
@@ -483,6 +487,9 @@
     <string name="msg_typemiss_id">이메일 형식이 아닙니다.</string>
     <string name="msg_no_checked">아이디 중복체크를 해주세요.</string>
     <string name="msg_no_linked">알파요 아이디를 연동해 주세요.</string>
+    <string name="msg_agree_term1">이용약관에 동의해 주세요.</string>
+    <string name="msg_agree_term2">개인정보 취급방침에 동의해 주세요.</string>
+    <string name="msg_do_agree">이행보증보험 결제관리에 동의해주시기 바랍니다.</string>
     <string name="msg_no_addr">주소를 입력해 주세요.</string>
     <string name="msg_check_addr">주소를 확인해 주세요.</string>
     <string name="msg_reg_store_first">매장 등록을 완료한 후 이용해주시기 바랍니다.</string>
@@ -502,4 +509,5 @@
     <string name="msg_no_mid">MID를 입력해주세요.</string>
     <string name="msg_no_key">Key를 입력해주세요.</string>
     <string name="msg_payment_cancel">결제가 취소되었습니다.</string>
+    <string name="msg_find_pwd">임시 비밀번호가 이메일로 전송되었습니다.</string>
 </resources>

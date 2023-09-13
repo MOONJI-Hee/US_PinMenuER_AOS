@@ -195,9 +195,11 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
         store.address = binding.etAddr.text.toString()
         if(store.name.isEmpty()) {
             Toast.makeText(this@StoreSetActivity, R.string.store_name_hint, Toast.LENGTH_SHORT).show()
-        }else if (store.address.isEmpty()) {
-            Toast.makeText(this@StoreSetActivity, R.string.msg_no_addr, Toast.LENGTH_SHORT).show()
-        } else {
+        }
+//        else if (store.address.isEmpty()) {
+//            Toast.makeText(this@StoreSetActivity, R.string.msg_no_addr, Toast.LENGTH_SHORT).show()
+//        }
+        else {
             ApiClient.service.udtStore(useridx, storeidx, store.name, store.address, store.long, store.lat)
                 .enqueue(object : Callback<ResultDTO>{
                     override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {

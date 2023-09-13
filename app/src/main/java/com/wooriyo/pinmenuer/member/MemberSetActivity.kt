@@ -58,13 +58,13 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
             binding.linkResult.setTextColor(Color.parseColor("#FF6200"))
         }
         binding.title.text = getString(R.string.title_udt_mbr)
-        binding.save.text = getString(R.string.udt_info)
-        binding.save.setBackgroundResource(R.drawable.bg_btn_r6)
 
         binding.etId.visibility = View.INVISIBLE
         binding.btnCheckId.visibility = View.INVISIBLE
         binding.checkResult.visibility = View.INVISIBLE
 
+        binding.save.visibility = View.GONE
+        binding.clTerms.visibility = View.GONE
         binding.tvId.visibility = View.VISIBLE
         binding.llUdt.visibility = View.VISIBLE
 

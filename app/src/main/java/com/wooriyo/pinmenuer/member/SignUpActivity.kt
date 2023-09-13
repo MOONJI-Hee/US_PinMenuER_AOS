@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
+import com.wooriyo.pinmenuer.common.WebViewActivity
 import com.wooriyo.pinmenuer.databinding.ActivitySignUpBinding
 import com.wooriyo.pinmenuer.model.MemberDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
@@ -56,19 +57,42 @@ class SignUpActivity : BaseActivity(), View.OnClickListener {
             }
         })
 
-        binding.back.setOnClickListener(this)
-        binding.save.setOnClickListener(this)
-        binding.btnCheckId.setOnClickListener(this)
-        binding.btnArpayo.setOnClickListener(this)
+        binding.run {
+            back.setOnClickListener { finish() }
+            save.setOnClickListener { save() }
+            btnCheckId.setOnClickListener { checkID() }
+            btnArpayo.setOnClickListener { regArpayoId() }
+        }
+
+        binding.terms1.setOnClickListener(this)
+        binding.terms2.setOnClickListener(this)
+        binding.terms3.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
-        when(p0?.id) {
-            binding.back.id -> finish()
-            binding.save.id -> save()
-            binding.btnCheckId.id -> checkID()
-            binding.btnArpayo.id -> regArpayoId()
+        val termIntent = Intent(mActivity, WebViewActivity::class.java)
+        var title = ""
+        var url = ""
+
+        when(p0) {
+            binding.terms1 -> {
+                title = "핀메뉴 이용약관"
+                url = "https://pinmenu.biz/policy/agreement.php"
+            }
+            binding.terms2 -> {
+                title = "핀메뉴 개인정보 취급방침"
+                url = "https://pinmenu.biz/policy/app_service.php"
+            }
+            binding.terms3 -> {
+                title = "핀메뉴 마케팅 활용정보"
+                url = "https://pinmenu.biz/policy/marketing.php"
+            }
         }
+
+        termIntent.putExtra("title", title)
+        termIntent.putExtra("url", url)
+
+        startActivity(termIntent)
     }
 
     private fun save() {
@@ -83,45 +107,43 @@ class SignUpActivity : BaseActivity(), View.OnClickListener {
 
         if(userid.isEmpty() || userid == "") {
             Toast.makeText(mActivity, R.string.msg_no_id, Toast.LENGTH_SHORT).show()
-            return
         }else if (!verifyEmail(userid)) {
             Toast.makeText(mActivity, R.string.msg_typemiss_id, Toast.LENGTH_SHORT).show()
-            return
         }else if(!idChecked) {
             Toast.makeText(mActivity, R.string.msg_no_checked, Toast.LENGTH_SHORT).show()
-            return
         }else if(pass.isEmpty() || pass == "") {
             Toast.makeText(mActivity, R.string.msg_no_pw, Toast.LENGTH_SHORT).show()
-            return
         }else if(!AppHelper.verifyPw(pass)) {
             Toast.makeText(mActivity, R.string.msg_typemiss_pw, Toast.LENGTH_SHORT).show()
-            return
         }else if ((arpayoId.isNotEmpty() && arpayoId != "") && !arpaLinked) {
             Toast.makeText(mActivity, R.string.msg_no_linked, Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        ApiClient.service.regMember(userid, arpayoId, pass, token, os, osvs, appvs, md)
-            .enqueue(object : Callback<MemberDTO>{
-                override fun onResponse(call: Call<MemberDTO>, response: Response<MemberDTO>) {
-                    Log.d(TAG, "회원가입 url : $response")
-                    if(response.isSuccessful) {
-                        val memberDTO = response.body()
-                        if(memberDTO != null) {
-                            if(memberDTO.status == 1) {
-                                Toast.makeText(this@SignUpActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
-                                startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
-                            }else {
-                                Toast.makeText(this@SignUpActivity, memberDTO.msg, Toast.LENGTH_SHORT).show()
+        }else if(!binding.check1.isChecked) {
+            Toast.makeText(mActivity, R.string.msg_agree_term1, Toast.LENGTH_SHORT).show()
+        }else if(!binding.check2.isChecked) {
+            Toast.makeText(mActivity, R.string.msg_agree_term2, Toast.LENGTH_SHORT).show()
+        }else {
+            ApiClient.service.regMember(userid, arpayoId, pass, token, os, osvs, appvs, md)
+                .enqueue(object : Callback<MemberDTO>{
+                    override fun onResponse(call: Call<MemberDTO>, response: Response<MemberDTO>) {
+                        Log.d(TAG, "회원가입 url : $response")
+                        if(response.isSuccessful) {
+                            val memberDTO = response.body()
+                            if(memberDTO != null) {
+                                if(memberDTO.status == 1) {
+                                    Toast.makeText(this@SignUpActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                                    startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
+                                }else {
+                                    Toast.makeText(this@SignUpActivity, memberDTO.msg, Toast.LENGTH_SHORT).show()
+                                }
                             }
                         }
                     }
-                }
-                override fun onFailure(call: Call<MemberDTO>, t: Throwable) {
-                    Toast.makeText(this@SignUpActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
-                    Log.d(TAG, "회원가입 오류 > $t")
-                }
+                    override fun onFailure(call: Call<MemberDTO>, t: Throwable) {
+                        Toast.makeText(this@SignUpActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                        Log.d(TAG, "회원가입 오류 > $t")
+                    }
             })
+        }
     }
 
     // 아이디 중복체크
