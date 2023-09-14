@@ -65,7 +65,6 @@
     <string name="date">날짜</string>
     <string name="month">월</string>
     <string name="day">일</string>
-    <string name="today">TODAY</string>
 
     <string name="tilde">~</string>
     <string name="colon">:</string>
@@ -306,6 +305,7 @@
     <string name="tot_price">총 합계</string>
     <string name="print">프 린 트</string>
     <string name="complete">완 료</string>
+    <string name="order_total">TOTAL</string>
     <string name="order_sel_merge">이 항목으로 합치기</string>
     <string name="order_merge">주문항목 합치기</string>
     <string name="order_merge_info">해당 항목으로 선택된 주문 정보를 합칩니다.\n합쳐진 이후에는 복구가 불가능합니다.</string>

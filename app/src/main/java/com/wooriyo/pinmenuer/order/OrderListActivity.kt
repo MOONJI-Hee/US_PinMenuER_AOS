@@ -240,7 +240,7 @@ class OrderListActivity : BaseActivity() {
                                 binding.empty.visibility = View.VISIBLE
                             }else {
                                 binding.empty.visibility = View.GONE
-                                binding.today.text = store.ordCnt.toString()
+                                binding.total.text = result.totalCnt.toString()
                                 orderList.sortBy { it.iscompleted }
                                 orderAdapter.notifyDataSetChanged()
                             }
