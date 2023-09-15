@@ -2,16 +2,22 @@ package com.wooriyo.pinmenuer
 
 import android.app.Activity
 import android.app.Application
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.graphics.Point
+import android.media.AudioAttributes
+import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import android.view.WindowManager
+import androidx.annotation.RequiresApi
 import com.sewoo.jpos.printer.ESCPOSPrinter
 import com.sewoo.port.android.BluetoothPort
+import com.wooriyo.pinmenuer.config.AppProperties
 import com.wooriyo.pinmenuer.db.AppDatabase
 import com.wooriyo.pinmenuer.model.CategoryDTO
 import com.wooriyo.pinmenuer.model.SharedDTO
@@ -108,6 +114,32 @@ class MyApplication: Application() {
         bluetoothPort = BluetoothPort.getInstance()
         bluetoothPort.SetMacFilter(false)
 
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel()
+        }
+
         super.onCreate()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun createNotificationChannel() {
+        val sound = R.raw.customnoti
+        val uri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/$sound")
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+
+        val audioAttributes = AudioAttributes.Builder()
+            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+            .build()
+
+        notificationManager.deleteNotificationChannel("pinmenuer_notice")
+
+        // 알림 채널 생성
+        val ordChannel = NotificationChannel(AppProperties.CHANNEL_ID_ORDER, "새 주문 알림", NotificationManager.IMPORTANCE_DEFAULT)
+        ordChannel.enableLights(true)
+        ordChannel.enableVibration(true)
+        ordChannel.setSound(uri, audioAttributes)
+        notificationManager.createNotificationChannel(ordChannel)
+
     }
 }

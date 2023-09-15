@@ -39,6 +39,7 @@ import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.order.adapter.OrderAdapter
 import com.wooriyo.pinmenuer.order.dialog.CompleteDialog
 import com.wooriyo.pinmenuer.order.dialog.SelectPayDialog
+import com.wooriyo.pinmenuer.payment.NicepayInfoActivity
 import com.wooriyo.pinmenuer.payment.PayCardActivity
 import com.wooriyo.pinmenuer.payment.QrActivity
 import com.wooriyo.pinmenuer.util.Api
@@ -106,54 +107,50 @@ class OrderListActivity : BaseActivity() {
 
         orderAdapter.setOnPayClickListener(object:ItemClickListener{
             override fun onItemClick(position: Int) {
-                val selectPayDialog = SelectPayDialog(mActivity, position)
+                if(orderList[position].iscompleted == 1) {
+                    complete(position, 0, store.popup)
+                }else if(orderList[position].paytype == 3) {
+                    completeInfoDialog(position)
+                }else {
+                    val selectPayDialog = SelectPayDialog(mActivity, position)
 
-                selectPayDialog.setOnQrClickListener(object : ItemClickListener{
-                    override fun onItemClick(position: Int) {
-                        super.onItemClick(position)
-                        val intent = Intent(mActivity, QrActivity::class.java)
-                        intent.putExtra("ordcode", orderList[position].ordcode)
-                        startActivity(intent)
-                    }
-                })
-
-                selectPayDialog.setOnCardClickListener(object : ItemClickListener{
-                    override fun onItemClick(position: Int) {
-                        super.onItemClick(position)
-                        selectPayDialog.dismiss()
-                        payPosition = position
-
-                        val intent = Intent(mActivity, PayCardActivity::class.java)
-                        intent.putExtra("order", orderList[payPosition])
-                        paymentCard.launch(intent)
-                    }
-                })
-
-                selectPayDialog.setOnCompleteClickListener(object : ItemClickListener{
-                    override fun onItemClick(position: Int) {
-                        super.onItemClick(position)
-                        when(store.popup) {
-                            0 -> {
-                                val dialog = CompleteDialog(mActivity)
-                                dialog.setOnCompleteListener(object : DialogListener{
-                                    override fun onComplete(popup: Int) {
-                                        super.onComplete(popup)
-                                        complete(position, popup)
-                                        dialog.dismiss()
-                                    }
-                                })
-                                selectPayDialog.dismiss()
-                                dialog.show()
-                            }
-                            1 ->  {
-                                complete(position, store.popup)
-                                selectPayDialog.dismiss()
+                    selectPayDialog.setOnQrClickListener(object : ItemClickListener{
+                        override fun onQrClick(position: Int, status: Boolean) {
+                            super.onQrClick(position, status)
+                            if(status) {
+                                val intent = Intent(mActivity, QrActivity::class.java)
+                                intent.putExtra("ordcode", orderList[position].ordcode)
+                                startActivity(intent)
+                            }else {
+                                val intent = Intent(mActivity, NicepayInfoActivity::class.java)
+                                intent.putExtra("fromOrder", "Y")
+                                startActivity(intent)
                             }
                         }
-                    }
-                })
+                    })
 
-                selectPayDialog.show()
+                    selectPayDialog.setOnCardClickListener(object : ItemClickListener{
+                        override fun onItemClick(position: Int) {
+                            super.onItemClick(position)
+                            selectPayDialog.dismiss()
+                            payPosition = position
+
+                            val intent = Intent(mActivity, PayCardActivity::class.java)
+                            intent.putExtra("order", orderList[payPosition])
+                            paymentCard.launch(intent)
+                        }
+                    })
+
+                    selectPayDialog.setOnCompleteClickListener(object : ItemClickListener{
+                        override fun onItemClick(position: Int) {
+                            super.onItemClick(position)
+                            completeInfoDialog(position)
+                            selectPayDialog.dismiss()
+                        }
+                    })
+
+                    selectPayDialog.show()
+                }
             }
         })
 
@@ -170,56 +167,31 @@ class OrderListActivity : BaseActivity() {
 
         binding.back.setOnClickListener { finish() }
         binding.icNew.setOnClickListener {getOrderList()}
+    }
 
+    override fun onResume() {
+        super.onResume()
         getOrderList()
     }
 
-    // 새로운 호출 유무 확인 > 3초마다 한번씩 태우기
-    fun getOrdStatus() {
-        ApiClient.service.getOrdStatus(useridx, storeidx).enqueue(object : Callback<ResultDTO>{
-            override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
-                Log.d(TAG, "새로운 주문 유무 확인 url : $response")
-                if(!response.isSuccessful) return
-
-                val result = response.body()
-                if(result != null && result.status == 1) {
-                    getOrderList()
-                    // 음악 재생
-                }
-            }
-
-            override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
-                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
-                Log.d(TAG, "새로운 주문 유무 확인 실패 > $t")
-                Log.d(TAG, "새로운 주문 유무 확인 실패 > ${call.request()}")
-            }
-        })
-    }
-
-    // 호출 확인 처리 > 화면 터치하면
-    fun udtOrdStatus() {
-        ApiClient.service.udtOrdStatus(useridx, storeidx).enqueue(object: Callback<ResultDTO>{
-            override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
-                Log.d(TAG, "주문 확인 처리(상태 업데이트) url : $response")
-                if(!response.isSuccessful) return
-
-                val result = response.body()
-                if(result != null) {
-                    when(result.status) {
-                        1 -> {
-                            // 알림음 종료 등등
-                        }
-                        else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+    // 완료 처리 안내 다이얼로그
+    fun completeInfoDialog(position: Int) {
+        when(store.popup) {
+            0 -> {
+                val dialog = CompleteDialog(mActivity)
+                dialog.setOnCompleteListener(object : DialogListener {
+                    override fun onComplete(popup: Int) {
+                        super.onComplete(popup)
+                        complete(position, 1, popup)
+                        dialog.dismiss()
                     }
-                }
+                })
+                dialog.show()
             }
-
-            override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
-                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
-                Log.d(TAG, "주문 확인 처리(상태 업데이트) 실패 > $t")
-                Log.d(TAG, "주문 확인 처리(상태 업데이트) 실패 > ${call.request()}")
+            1 ->  {
+                complete(position, 1, store.popup)
             }
-        })
+        }
     }
 
     // 주문 목록 조회
@@ -238,10 +210,12 @@ class OrderListActivity : BaseActivity() {
 
                             if(orderList.isEmpty()) {
                                 binding.empty.visibility = View.VISIBLE
+                                binding.rv.visibility = View.GONE
                             }else {
-                                binding.empty.visibility = View.GONE
+//                                orderList.sortBy { it.iscompleted }
                                 binding.total.text = result.totalCnt.toString()
-                                orderList.sortBy { it.iscompleted }
+                                binding.empty.visibility = View.GONE
+                                binding.rv.visibility = View.VISIBLE
                                 orderAdapter.notifyDataSetChanged()
                             }
                         }
@@ -259,30 +233,33 @@ class OrderListActivity : BaseActivity() {
     }
 
     // 주문 완료 처리
-    fun complete(position: Int, popup: Int) {
-        ApiClient.service.udtComplete(storeidx, orderList[position].idx ,"Y", popup).enqueue(object:Callback<ResultDTO>{
-            override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
-                Log.d(TAG, "주문 완료 url : $response")
-                if(!response.isSuccessful) return
+    fun complete(position: Int, isCompleted: Int, popup: Int) {
+        val status = if(isCompleted == 1) "Y" else "N"
+        ApiClient.service.udtComplete(storeidx, orderList[position].idx, status, popup)
+            .enqueue(object:Callback<ResultDTO>{
+                override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                    Log.d(TAG, "주문 완료 url : $response")
+                    if(!response.isSuccessful) return
 
-                val result = response.body() ?: return
-                when(result.status){
-                    1 -> {
-                        Toast.makeText(mActivity, R.string.complete, Toast.LENGTH_SHORT).show()
-                        orderList[position].iscompleted = 1
-                        orderList.sortBy { it.iscompleted }
-                        orderAdapter.notifyItemChanged(position)
+                    val result = response.body() ?: return
+                    when(result.status){
+                        1 -> {
+                            Toast.makeText(mActivity, R.string.complete, Toast.LENGTH_SHORT).show()
+                            orderList[position].iscompleted = isCompleted
+                            //                        orderList.sortBy { it.iscompleted }
+                            orderAdapter.notifyItemChanged(position)
+                            store.popup = popup
+                        }
+                        else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                     }
-                    else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                 }
-            }
 
-            override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
-                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
-                Log.d(TAG, "주문 완료 실패 > $t")
-                Log.d(TAG, "주문 완료 실패 > ${call.request()}")
-            }
-        })
+                override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                    Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "주문 완료 실패 > $t")
+                    Log.d(TAG, "주문 완료 실패 > ${call.request()}")
+                }
+            })
     }
 
     // 주문 삭제

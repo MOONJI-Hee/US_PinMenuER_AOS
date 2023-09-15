@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.*
 import android.app.ActivityManager.RunningAppProcessInfo
 import android.content.Intent
+import android.media.AudioAttributes
+import android.media.AudioManager.STREAM_NOTIFICATION
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
@@ -13,6 +15,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.sewoo.jpos.command.ESCPOSConst
@@ -22,6 +25,8 @@ import com.wooriyo.pinmenuer.MyApplication.Companion.escposPrinter
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.StartActivity
 import com.wooriyo.pinmenuer.config.AppProperties
+import com.wooriyo.pinmenuer.config.AppProperties.Companion.CHANNEL_ID_ORDER
+import com.wooriyo.pinmenuer.config.AppProperties.Companion.NOTIFICATION_ID_ORDER
 import com.wooriyo.pinmenuer.model.ReceiptDTO
 import com.wooriyo.pinmenuer.order.OrderListActivity
 import retrofit2.Call
@@ -41,16 +46,9 @@ class MyFirebaseService : FirebaseMessagingService() {
         super.onMessageReceived(message)
 
         Log.d(TAG, "message.data >> ${message.data}")
-        Log.d(TAG, "message.notification >> ${message.notification?.sound}")
+        Log.d(TAG, "message.notification >> ${message.notification}")
 
-        // 스크린 깨우기
-        val pm = this.getSystemService(POWER_SERVICE) as PowerManager
-        if (pm != null) {
-            @SuppressLint("InvalidWakeLockTag") val sLock = pm.newWakeLock(
-                PowerManager.PARTIAL_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP,"pinmenuER"
-            )
-            sLock.acquire(5000)
-        }
+        createNotification(message)
 
         val strPackage = "com.wooriyo.pinmenuer"
         val am = getSystemService(ACTIVITY_SERVICE) as ActivityManager
@@ -66,25 +64,23 @@ class MyFirebaseService : FirebaseMessagingService() {
             }
         }
 
-        if(isForeground) {
-            //알림음 재생
-            val sound = R.raw.customnoti
-            val uri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/$sound")
-            val ringtone = RingtoneManager.getRingtone(applicationContext, uri)
-
-            currentActivity.runOnUiThread(Runnable {
-                ringtone.play()
-                val toast: Toast = Toast.makeText(applicationContext, message.notification!!.body, Toast.LENGTH_LONG)
-                toast.setGravity(Gravity.TOP, 0, 0)
-                toast.show()
-            })
-            if (currentActivity == OrderListActivity::class.java) run {
-                Log.d("Notification", "여길 들어오는지 먼저 확인")
-                OrderListActivity.binding.icNew.visibility = View.VISIBLE
-            }
-        }else {
-            createNotification(message)
-        }
+//        if(isForeground) {
+//            //알림음 재생
+//            val sound = R.raw.customnoti
+//            val uri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/$sound")
+//            val ringtone = RingtoneManager.getRingtone(applicationContext, uri)
+//
+//            currentActivity.runOnUiThread(Runnable {
+//                ringtone.play()
+//                val toast: Toast = Toast.makeText(applicationContext, message.notification!!.body, Toast.LENGTH_LONG)
+//                toast.setGravity(Gravity.TOP, 0, 0)
+//                toast.show()
+//            })
+//            if (currentActivity == OrderListActivity::class.java) run {
+//                Log.d("Notification", "여길 들어오는지 먼저 확인")
+//                OrderListActivity.binding.icNew.visibility = View.VISIBLE
+//            }
+//        }
 
         val ordCode = message.data["moredata"]
 //        val storeidx = message.data["storeidx"]
@@ -150,35 +146,28 @@ class MyFirebaseService : FirebaseMessagingService() {
                 Log.d(TAG, "단건 주문 조회 오류 >> ${call.request()}")
             }
         })
-
     }
 
     private fun createNotification(message: RemoteMessage) {
-        val channelId = "pinmenu_noti"
-//        val uri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/customnoti.wav")
-        val builder = NotificationCompat.Builder(this, channelId)
+        val sound = R.raw.customnoti
+        val uri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/$sound")
+
+        val builder = NotificationCompat.Builder(this, CHANNEL_ID_ORDER)
             .setSmallIcon(R.drawable.ic_noti)
-            .setContentTitle(message.notification!!.title)
-            .setContentText(message.notification!!.body)
-//            .setSound(uri)
-            .setVibrate(longArrayOf(100L, 100L, 100L)) //알림시 진동 설정 : 1초 진동, 1초 쉬고, 1초 진동
-            .setContentIntent(createPendingIntent())
-//            .setDefaults(Notification.DEFAULT_ALL)
+            .setContentTitle(message.notification?.title)
+            .setContentText(message.notification?.body)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setSound(uri, STREAM_NOTIFICATION)
+//            .setContentIntent(createPendingIntent())
+            .setAutoCancel(true)
 
-        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-
-        // 오레오 버전 이후에는 채널이 필요하다.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(channelId, "Notice", NotificationManager.IMPORTANCE_DEFAULT)
-            notificationManager.createNotificationChannel(channel)
-        }
         // 알림 생성
-        notificationManager.notify(1, builder.build())
+        val notificationManager = NotificationManagerCompat.from(this)
+        notificationManager.notify(NOTIFICATION_ID_ORDER, builder.build())
     }
 
     private fun createPendingIntent () : PendingIntent {
         val intent = Intent(this, StartActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
         val stackBuilder = TaskStackBuilder.create(this)
         stackBuilder.addParentStack(StartActivity::class.java)

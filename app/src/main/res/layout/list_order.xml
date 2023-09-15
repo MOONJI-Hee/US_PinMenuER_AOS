@@ -48,6 +48,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             style="@style/btn_y"
+            android:id="@+id/cl_price"
             android:layout_width="0dp"
             android:paddingBottom="11dp"
             android:paddingHorizontal="15dp"
@@ -143,7 +144,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/done"
+        android:id="@+id/complete"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="#B3FFFFFF"
@@ -157,6 +158,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/completeQr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_complete_qr"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottom"/>
 
     <LinearLayout
         android:id="@+id/arrowUp"
