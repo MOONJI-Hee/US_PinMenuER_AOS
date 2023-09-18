@@ -34,11 +34,6 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
 
     var arpaLinked = false
 
-    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        AppHelper.hideKeyboard(this, currentFocus, ev)
-        return super.dispatchTouchEvent(ev)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)

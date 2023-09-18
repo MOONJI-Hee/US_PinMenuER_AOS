@@ -17,6 +17,7 @@ import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.broadcast.EasyCheckReceiver
+import com.wooriyo.pinmenuer.common.ConfirmDialog
 import com.wooriyo.pinmenuer.config.AppProperties
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.FONT_BIG
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.FONT_SMALL
@@ -155,7 +156,10 @@ class OrderListActivity : BaseActivity() {
         })
 
         orderAdapter.setOnDeleteListener(object:ItemClickListener{
-            override fun onItemClick(position: Int) {delete(position)}
+            override fun onItemClick(position: Int) {
+                ConfirmDialog()
+                delete(position)
+            }
         })
 
         orderAdapter.setOnPrintClickListener(object:ItemClickListener{
