@@ -2,19 +2,14 @@ package com.wooriyo.pinmenuer.order.adapter
 
 import android.content.Context
 import android.graphics.Color
-import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sewoo.jpos.command.ESCPOSConst
-import com.sewoo.jpos.printer.ESCPOSPrinter
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.common.NoticeDialog
-import com.wooriyo.pinmenuer.config.AppProperties
-import com.wooriyo.pinmenuer.databinding.ListCallBinding
+import com.wooriyo.pinmenuer.common.InfoDialog
 import com.wooriyo.pinmenuer.databinding.ListOrderBinding
 import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.model.OrderHistoryDTO
@@ -90,7 +85,7 @@ class OrderAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adapte
                     if(MyApplication.bluetoothPort.isConnected) {
                         printClickListener.onItemClick(absoluteAdapterPosition)
                     }else
-                        NoticeDialog(context, context.getString(R.string.dialog_no_printer)).show()
+                        InfoDialog(context, "", context.getString(R.string.dialog_no_printer)).show()
                 }
                 payment.setOnClickListener { payClickListener.onItemClick(absoluteAdapterPosition) }
             }

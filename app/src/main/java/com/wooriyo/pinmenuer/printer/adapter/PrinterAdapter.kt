@@ -10,7 +10,7 @@ import com.sewoo.jpos.command.ESCPOSConst
 import com.wooriyo.pinmenuer.MyApplication.Companion.bluetoothPort
 import com.wooriyo.pinmenuer.MyApplication.Companion.escposPrinter
 import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.common.NoticeDialog
+import com.wooriyo.pinmenuer.common.InfoDialog
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.FONT_BIG
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.FONT_SMALL
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.FONT_WIDTH
@@ -115,7 +115,7 @@ class PrinterAdapter(val dataSet: ArrayList<PrintDTO>): RecyclerView.Adapter<Rec
                         e.printStackTrace()
                     }
                 }else
-                    NoticeDialog(context, context.getString(R.string.dialog_check_conn)).show()
+                    InfoDialog(context, "", context.getString(R.string.dialog_check_conn)).show()
             }
 
             binding.btnConn.setOnClickListener {

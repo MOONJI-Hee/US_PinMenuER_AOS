@@ -2,10 +2,12 @@ package com.wooriyo.pinmenuer.common
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
+import android.view.View.OnClickListener
 import com.wooriyo.pinmenuer.BaseDialog
 import com.wooriyo.pinmenuer.databinding.DialogNoticeBinding
 
-class NoticeDialog(context: Context, val content: String): BaseDialog(context) {
+class NoticeDialog(context: Context, val title: String, val content: String, private val onClickListener: OnClickListener): BaseDialog(context) {
     lateinit var binding: DialogNoticeBinding
     val TAG = "NoticeDialog"
 
@@ -14,7 +16,16 @@ class NoticeDialog(context: Context, val content: String): BaseDialog(context) {
         binding = DialogNoticeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if(title.isEmpty()) {
+            binding.title.visibility = View.GONE
+        }
+        binding.title.text = title
         binding.content.text = content
-        binding.confirm.setOnClickListener { dismiss() }
+
+        binding.close.setOnClickListener { dismiss() }
+        binding.confirm.setOnClickListener {
+            onClickListener.onClick(it)
+            dismiss()
+        }
     }
 }

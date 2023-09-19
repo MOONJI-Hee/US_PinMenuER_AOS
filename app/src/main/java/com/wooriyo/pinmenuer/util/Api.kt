@@ -429,6 +429,13 @@ interface Api {
         @Query("ordidx") ordidx: Int
     ): Call<ResultDTO>
 
+    // 주문 목록 초기화
+    @GET("m/del_order.php")
+    fun clearOrder(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int
+    ): Call<ResultDTO>
+
     // 새로운 직원 호출 유무 확인
     @GET("m/udtCallStatus.php")
     fun getCallStatus(

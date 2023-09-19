@@ -1,8 +1,6 @@
 package com.wooriyo.pinmenuer.order
 
-import android.content.ComponentName
 import android.content.Intent
-import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -18,6 +16,7 @@ import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.broadcast.EasyCheckReceiver
 import com.wooriyo.pinmenuer.common.ConfirmDialog
+import com.wooriyo.pinmenuer.common.NoticeDialog
 import com.wooriyo.pinmenuer.config.AppProperties
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.FONT_BIG
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.FONT_SMALL
@@ -31,7 +30,6 @@ import com.wooriyo.pinmenuer.config.AppProperties.Companion.SPACE_SMALL
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.TITLE_MENU
 import com.wooriyo.pinmenuer.databinding.ActivityOrderListBinding
 import com.wooriyo.pinmenuer.listener.DialogListener
-import com.wooriyo.pinmenuer.listener.EasyCheckListener
 import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.model.OrderDTO
 import com.wooriyo.pinmenuer.model.OrderHistoryDTO
@@ -43,17 +41,15 @@ import com.wooriyo.pinmenuer.order.dialog.SelectPayDialog
 import com.wooriyo.pinmenuer.payment.NicepayInfoActivity
 import com.wooriyo.pinmenuer.payment.PayCardActivity
 import com.wooriyo.pinmenuer.payment.QrActivity
-import com.wooriyo.pinmenuer.util.Api
 import com.wooriyo.pinmenuer.util.ApiClient
-import com.wooriyo.pinmenuer.util.AppHelper
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class OrderListActivity : BaseActivity() {
-    companion object {
-        lateinit var binding: ActivityOrderListBinding
-    }
+    lateinit var binding: ActivityOrderListBinding
+    lateinit var clearDialog: ClearDialog
+    lateinit var clearConfirmDialog: ConfirmDialog
 
     val TAG = "OrderListActivity"
     val mActivity = this@OrderListActivity
@@ -157,8 +153,11 @@ class OrderListActivity : BaseActivity() {
 
         orderAdapter.setOnDeleteListener(object:ItemClickListener{
             override fun onItemClick(position: Int) {
-                ConfirmDialog()
-                delete(position)
+                NoticeDialog(mActivity,
+                    getString(R.string.btn_delete),
+                    getString(R.string.dialog_delete_order),
+                    View.OnClickListener{ delete(position) }
+                ).show()
             }
         })
 
@@ -170,12 +169,33 @@ class OrderListActivity : BaseActivity() {
         binding.rv.adapter = orderAdapter
 
         binding.back.setOnClickListener { finish() }
-        binding.icNew.setOnClickListener {getOrderList()}
+        binding.icNew.setOnClickListener{
+            getOrderList()
+            it.visibility = View.GONE
+        }
+        binding.btnClear.setOnClickListener { clearDialog.show(supportFragmentManager, "ClearDialog") }
     }
 
     override fun onResume() {
         super.onResume()
         getOrderList()
+    }
+
+    // 초기화 / 초기화 확인 다이얼로그 초기화
+    fun setClearDialog() {
+        clearDialog = ClearDialog(View.OnClickListener {
+            clearDialog.dismiss()
+            clearConfirmDialog.show(supportFragmentManager, "ClearConfirmDialog")
+        })
+        clearConfirmDialog = ConfirmDialog(
+            getString(R.string.dialog_order_clear_title),
+            getString(R.string.dialog_confrim_clear),
+            getString(R.string.btn_confirm),
+            View.OnClickListener {
+                clearConfirmDialog.dismiss()
+                clear()
+            }
+        )
     }
 
     // 완료 처리 안내 다이얼로그
@@ -232,6 +252,27 @@ class OrderListActivity : BaseActivity() {
                 Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "주문 목록 조회 오류 > $t")
                 Log.d(TAG, "주문 목록 조회 오류 > ${call.request()}")
+            }
+        })
+    }
+
+    // 주문 초기화
+    fun clear() {
+        ApiClient.service.clearOrder(useridx, storeidx).enqueue(object:Callback<ResultDTO>{
+            override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                Log.d(TAG, "주문 초기화 url : $response")
+                if(!response.isSuccessful) return
+
+                val result = response.body() ?: return
+                Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                if(result.status == 1){
+                    getOrderList()
+                }
+            }
+            override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "주문 초기화 실패 > $t")
+                Log.d(TAG, "주문 초기화 실패 > ${call.request()}")
             }
         })
     }
