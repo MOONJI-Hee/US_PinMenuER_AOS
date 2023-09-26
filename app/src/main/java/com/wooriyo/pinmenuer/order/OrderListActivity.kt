@@ -36,6 +36,7 @@ import com.wooriyo.pinmenuer.model.OrderHistoryDTO
 import com.wooriyo.pinmenuer.model.OrderListDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.order.adapter.OrderAdapter
+import com.wooriyo.pinmenuer.order.dialog.ClearDialog
 import com.wooriyo.pinmenuer.order.dialog.CompleteDialog
 import com.wooriyo.pinmenuer.order.dialog.SelectPayDialog
 import com.wooriyo.pinmenuer.payment.NicepayInfoActivity
@@ -165,6 +166,8 @@ class OrderListActivity : BaseActivity() {
             override fun onItemClick(position: Int) {print(position)}
         })
 
+        setClearDialog()
+
         binding.rv.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false)
         binding.rv.adapter = orderAdapter
 
@@ -173,7 +176,7 @@ class OrderListActivity : BaseActivity() {
             getOrderList()
             it.visibility = View.GONE
         }
-        binding.btnClear.setOnClickListener { clearDialog.show(supportFragmentManager, "ClearDialog") }
+        binding.btnClear.setOnClickListener { clearDialog.show() }
     }
 
     override fun onResume() {
@@ -183,12 +186,14 @@ class OrderListActivity : BaseActivity() {
 
     // 초기화 / 초기화 확인 다이얼로그 초기화
     fun setClearDialog() {
-        clearDialog = ClearDialog(View.OnClickListener {
+        clearDialog = ClearDialog(
+            mActivity,
+            View.OnClickListener {
             clearDialog.dismiss()
-            clearConfirmDialog.show(supportFragmentManager, "ClearConfirmDialog")
+            clearConfirmDialog.show(supportFragmentManager, "ClearConfrimDialog")
         })
+
         clearConfirmDialog = ConfirmDialog(
-            getString(R.string.dialog_order_clear_title),
             getString(R.string.dialog_confrim_clear),
             getString(R.string.btn_confirm),
             View.OnClickListener {

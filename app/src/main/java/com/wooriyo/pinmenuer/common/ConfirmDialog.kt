@@ -23,7 +23,9 @@ class ConfirmDialog(val content: String, val btn: String, val onClickListener: V
         binding.confirm.text = btn
 
         binding.cancel.setOnClickListener { dismiss() }
-        binding.confirm.setOnClickListener(onClickListener)
+        binding.confirm.setOnClickListener {
+            onClickListener.onClick(it)
+        }
 
         return binding.root
     }
