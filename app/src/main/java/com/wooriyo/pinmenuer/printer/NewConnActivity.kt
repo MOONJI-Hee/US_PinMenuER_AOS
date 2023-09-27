@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.sewoo.request.android.RequestHandler
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
+import com.wooriyo.pinmenuer.MyApplication.Companion.bidx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.broadcast.BtDiscoveryReceiver
 import com.wooriyo.pinmenuer.databinding.ActivityNewConnBinding
@@ -243,5 +244,28 @@ class NewConnActivity : BaseActivity() {
             }
         })
         nickDialog.show()
+    }
+
+    fun setPrintConnStatus(status: String) {
+        ApiClient.service.setPrintConnStatus(MyApplication.useridx, MyApplication.storeidx, MyApplication.androidId, bidx, status)
+            .enqueue(object : Callback<ResultDTO>{
+                override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                    Log.d(TAG, "연결 프린터 상태 갱신 Url : $response")
+                    if(!response.isSuccessful) return
+
+                    val result = response.body() ?: return
+
+                    when(result.status) {
+                        1 -> {}
+                        else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                    Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "연결 프린터 상태 갱신 오류 >> $t")
+                    Log.d(TAG, "연결 프린터 상태 갱신 오류 >> ${call.request()}")
+                }
+            })
     }
 }
