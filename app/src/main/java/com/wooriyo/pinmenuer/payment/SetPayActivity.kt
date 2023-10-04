@@ -58,9 +58,7 @@ class SetPayActivity : BaseActivity() {
             if(settingDTO.mid.isEmpty() || settingDTO.mid_key.isEmpty()) {
                 startActivity(Intent(mActivity, NicepayInfoActivity::class.java))
             }else{
-                val intent = Intent(mActivity, SetNicepayActivity::class.java)
-                intent.putExtra("mid", settingDTO.mid)
-                intent.putExtra("mid_key", settingDTO.mid_key)
+                val intent = Intent(mActivity, SetPgInfoActivity::class.java)
                 startActivity(intent)
             }
         }

@@ -25,6 +25,8 @@ class SelectPayDialog(context: Context, val position: Int): BaseDialog(context) 
 
     val TAG = "SelectPayDialog"
 
+    var qrStatus = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DialogSelectPayBinding.inflate(layoutInflater)
@@ -34,7 +36,7 @@ class SelectPayDialog(context: Context, val position: Int): BaseDialog(context) 
 
         binding.close.setOnClickListener { dismiss() }
         binding.btnQR.setOnClickListener {
-            qrClickListener.onItemClick(position)
+            qrClickListener.onQrClick(position, qrStatus)
         }
         binding.btnCard.setOnClickListener {
             cardClickListener.onItemClick(position)
@@ -70,6 +72,8 @@ class SelectPayDialog(context: Context, val position: Int): BaseDialog(context) 
 
         if(settingDTO.cardbuse == "N")
             binding.unableCard.visibility = View.VISIBLE
+
+        qrStatus = !(settingDTO.mid.isEmpty() || settingDTO.mid_key.isEmpty())
     }
 
     fun getPayInfo() {

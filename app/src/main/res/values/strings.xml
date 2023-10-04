@@ -93,7 +93,7 @@
 
     <!-- 회원 가입 & 수정  -->
     <string name="email">아이디(이메일)</string>
-    <string name="email_hint">이메일을 입력해 주세요.</string>
+    <string name="email_hint">이메일을 입력해 주세요</string>
     <string name="password_hint">8자리 이상 입력해 주세요.</string>
     <string name="arpayo_id">알파요 아이디</string>
     <string name="arpayo_id_hint">알파요 ID(이메일) 입력해 주세요.</string>
@@ -217,6 +217,20 @@
     <string name="key_hint">Key값을 입력해 주세요.</string>
     <string name="btn_set_nicepay">Key설정 저장</string>
     <string name="payment_title_nicepay_info">QR코드 카드결제 가맹점 가입방법 및 나이스페이먼츠 Key설정</string>
+    <string name="payment_title_pg_info">PG 카드 심사 정보</string>
+    <string name="payment_set_pg_info">사업자등록증에 등록된 내용을 작성해 주세요.\n해당 내용은 PG 결제를 위한 카드사 심사에 사용되며 고객 주문 페이지\n하단에 노출됩니다.</string>
+    <string name="payment_set_pg_store_name">상호</string>
+    <string name="payment_set_pg_store_name_hint">사업자등록증의 상호를 작성해 주세요.</string>
+    <string name="payment_set_pg_store_addr">사업장주소</string>
+    <string name="payment_set_pg_store_addr_hint">사업자등록증의 주소를 작성해 주세요.</string>
+    <string name="payment_set_pg_store_tel">연락처</string>
+    <string name="payment_set_pg_store_tel_hint">‘-’ 포함해서 매장 전화번호를 작성해 주세요.</string>
+    <string name="payment_set_pg_reg_number">사업자번호</string>
+    <string name="payment_set_pg_reg_number_hint">사업자등록번호를 작성해 주세요.</string>
+    <string name="payment_set_pg_owner_name">대표자명</string>
+    <string name="payment_set_pg_owner_name_hint">사업자등록증의 대표자명을 작성해 주세요.</string>
+    <string name="payment_set_pg_dialog_blink">모든 정보가 입력되어야 합니다.\n하나의 정보도 누락없이 작성해 주세요.</string>
+    <string name="payment_dialog_back">돌아가기</string>
 
     <!--  카테고리 설정  -->
     <string name="category_info_seq"><b>카테고리 순서 변경</b>은\n변경하고자하는 카테고리를 누른 후 좌우 버튼을 눌러 순서를 변경합니다.\n변경 후에는 [ 저장 ] 버튼을 눌러주셔야 변경된 내용이 적용됩니다.</string>
@@ -336,17 +350,15 @@
     <string name="title_qr">QR코드 카드결제</string>
     <string name="qr_info">QR코드 카드결제를 이용하기 위해서는 다음의 절차가 필요합니다.</string>
     <string name="qr_nicepay_join_way">QR코드 카드결제 가맹점 가입방법</string>
-    <string name="qr_nicepay_setting">나이스페이 Key설정 바로가기</string>
+    <string name="qr_nicepay_setting">PG 카드 심사 정보 작성</string>
     <string name="qr_vat">수수료(VAT별도)</string>
     <string name="qr_join_way">가맹점 가입방법</string>
     <string name="qr_guide_title">QR코드 카드결제를 이용하기 위한 절차</string>
     <string name="qr_guide_fir">1. 나이스페이 가맹점 계약 신청 및 우편 발송</string>
     <string name="qr_guide_fir_1">・자세한 사항은 핀메뉴 웹사이트에 있습니다.\n&#160;&#160;&#160;&#160;<font color="#006CFF">(경로 : www.pinmenu.biz > 하단 QR결제 > 가맹점 계약)</font></string>
     <string name="qr_guide_fir_2">・ 나이스페이먼츠와 가맹점 계약을 통해 핀메뉴 결제 수수료가 정해집니다.\n&#160;&#160;&#160;&#160;(핀메뉴는 나이스페이의 정책에 따릅니다.)</string>
-    <string name="qr_guide_sec">2. 나이스페이 로그인 및 Key값 입력</string>
-    <string name="qr_guide_sec_1">・가맹점 계약이 완료된 후 핀메뉴에서 나이스페이먼츠 로그인을 해주셔야 합니다.\n&#160;&#160;&#160;&#160;(나이스페이 로그아웃이 된 경우에는 QA코드 카드결제를 이용할 수 없습니다.)</string>
-    <string name="qr_guide_sec_2">・PG상점 아이디(MID) 입력\n&#160;&#160;&#160;&#160;(나이스페이먼츠 웹사이트 > 로그인 > 가맹점정보(상단) > Key관리(좌측)\n&#160;&#160;&#160;&#160;> MID 옆에 있는 ID 복사)</string>
-    <string name="qr_guide_sec_3">・Key값 입력&#160;&#160;&#160;&#160;(나이스페이먼츠 > 로그인 > 가맹점정보(상단) > Key관리(좌측)\n&#160;&#160;&#160;&#160;> MID 아래 있는 긴 문장(key) 복사)</string>
+    <string name="qr_guide_sec">2. PG 카드 심사 정보 작성</string>
+    <string name="qr_guide_sec_1">・사업자번호, 상호, 대표자명, 연락처, 사업장주소를 누락없이 작성</string>
 
     <!--  결제 비활성화 다이얼로그  -->
     <string name="order_enable_qr">QR코드 결제를 사용하시려면 ‘결제방식 설정’에서 ‘후결제 사용’을\n활성화해 주시기 바랍니다.</string>

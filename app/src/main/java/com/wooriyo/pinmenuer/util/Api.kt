@@ -619,6 +619,18 @@ interface Api {
         @Query("sc_key") sc_key : String    // 키 값
     ): Call<ResultDTO>
 
+    //PG 심사용 사업자등록증 정보 입력
+    @GET("m/ins_pginfo.php")
+    fun insPgInfo(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("snum") snum: String,
+        @Query("storenm") storeName: String,
+        @Query("ceo") ceo: String,
+        @Query("tel") tel: String,
+        @Query("addr") addr: String,
+    ): Call<ResultDTO>
+
     // 카카오 지도 관련 api
     @GET("/v2/local/search/address.json")
     fun kakaoSearch(

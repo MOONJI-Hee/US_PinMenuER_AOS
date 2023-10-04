@@ -42,6 +42,7 @@ import com.wooriyo.pinmenuer.order.dialog.SelectPayDialog
 import com.wooriyo.pinmenuer.payment.NicepayInfoActivity
 import com.wooriyo.pinmenuer.payment.PayCardActivity
 import com.wooriyo.pinmenuer.payment.QrActivity
+import com.wooriyo.pinmenuer.payment.SetPgInfoActivity
 import com.wooriyo.pinmenuer.util.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -117,10 +118,10 @@ class OrderListActivity : BaseActivity() {
                             super.onQrClick(position, status)
                             if(status) {
                                 val intent = Intent(mActivity, QrActivity::class.java)
-                                intent.putExtra("ordcode", orderList[position].ordcode)
+                                intent.putExtra("ordcode_key", orderList[position].ordcode_key)
                                 startActivity(intent)
                             }else {
-                                val intent = Intent(mActivity, NicepayInfoActivity::class.java)
+                                val intent = Intent(mActivity, SetPgInfoActivity::class.java)
                                 intent.putExtra("fromOrder", "Y")
                                 startActivity(intent)
                             }

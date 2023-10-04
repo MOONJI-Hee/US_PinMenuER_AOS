@@ -17,7 +17,7 @@ class NicepayInfoActivity : BaseActivity() {
 
         binding.back.setOnClickListener { finish() }
         binding.btnNicepay.setOnClickListener {
-            val intent = Intent(this@NicepayInfoActivity, SetNicepayActivity::class.java)
+            val intent = Intent(this@NicepayInfoActivity, SetPgInfoActivity::class.java)
             intent.putExtra("fromOrder", fromOrder)
             startActivity(intent)
         }

@@ -23,7 +23,7 @@ class QrActivity : BaseActivity() {
         binding = ActivityQrBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val ordcode = intent.getStringExtra("ordcode")
+        val ordcode_key = intent.getStringExtra("ordcode_key")
 
         val uriData = intent.data
         val status = uriData?.getQueryParameter("status")?.toInt()
@@ -48,7 +48,7 @@ class QrActivity : BaseActivity() {
             settings.javaScriptCanOpenWindowsAutomatically = true
         }
 
-        binding.webview.loadUrl(AppProperties.SERVER + "m/pg.php?useridx=${MyApplication.useridx}&ordcode=$ordcode")
+        binding.webview.loadUrl(AppProperties.SERVER + "m/pg.php?useridx=${MyApplication.useridx}&ordcode=$ordcode_key")
 
         binding.back.setOnClickListener { finish() }
 
