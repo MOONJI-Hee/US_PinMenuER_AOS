@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        style="@style/title"
+        android:id="@+id/title"
+        android:text="@string/pg_cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/back"
+        android:layout_width="72dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_title_back" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="500dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/bg_r6_f9"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintBottom_toTopOf="@+id/btnCancel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_r6_fff6d8"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="15dp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp">
+
+            <TextView
+                android:id="@+id/cardInfo"
+                style="@style/text22b"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/regdt"
+                style="@style/text18"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardInfo" />
+
+            <TextView
+                android:id="@+id/price"
+                style="@style/text_num_b"
+                android:layout_marginEnd="3dp"
+                android:textSize="22dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardInfo"
+                app:layout_constraintEnd_toStartOf="@+id/won" />
+
+            <TextView
+                android:id="@+id/won"
+                style="@style/text18"
+                android:text="@string/won"
+                app:layout_constraintBottom_toBottomOf="@+id/cardInfo"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                style="@style/text_num"
+                android:text="Table "
+                android:textSize="18dp"
+                app:layout_constraintBottom_toBottomOf="@+id/regdt"
+                app:layout_constraintEnd_toStartOf="@+id/tableNo" />
+
+            <TextView
+                android:id="@+id/tableNo"
+                style="@style/text_num_b"
+                android:textSize="18dp"
+                app:layout_constraintBottom_toBottomOf="@+id/regdt"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvGoods"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingBottom="4dp"
+            app:layout_constraintTop_toBottomOf="@+id/info"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        style="@style/btn_main"
+        android:id="@+id/btnCancel"
+        android:layout_marginBottom="40dp"
+        android:text="@string/payment_cancel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

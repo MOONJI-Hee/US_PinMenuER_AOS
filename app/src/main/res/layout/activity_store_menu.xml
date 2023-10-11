@@ -194,11 +194,11 @@
         app:layout_constraintTop_toBottomOf="@+id/payment" />
 
     <TextView
-        android:id="@+id/mirroring"
+        android:id="@+id/pgCancel"
         style="@style/menu"
         android:layout_width="208dp"
         android:layout_height="180dp"
-        android:text="@string/mirroring_menu"
+        android:text="@string/pg_cancel_menu"
         app:layout_constraintTop_toTopOf="@+id/payment"
         app:layout_constraintStart_toStartOf="@+id/menu"/>
 
@@ -206,8 +206,25 @@
         style="@style/subtext"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
-        android:text="@string/mirroring_menu_sub"
-        app:layout_constraintStart_toStartOf="@+id/mirroring"
-        app:layout_constraintTop_toBottomOf="@+id/mirroring" />
+        android:text="@string/pg_cancel_menu_sub"
+        app:layout_constraintStart_toStartOf="@+id/pgCancel"
+        app:layout_constraintTop_toBottomOf="@+id/pgCancel" />
+
+    <TextView
+        android:id="@+id/qrCustomerInfo"
+        style="@style/menu"
+        android:layout_width="208dp"
+        android:layout_height="180dp"
+        android:text="@string/qr_customer_info_menu"
+        app:layout_constraintTop_toTopOf="@+id/pgCancel"
+        app:layout_constraintStart_toStartOf="@+id/tablePass"/>
+
+    <TextView
+        style="@style/subtext"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:text="@string/qr_customer_info_menu_sub"
+        app:layout_constraintStart_toStartOf="@+id/qrCustomerInfo"
+        app:layout_constraintTop_toBottomOf="@+id/qrCustomerInfo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

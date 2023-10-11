@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="380dp"
+    android:layout_height="136dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/bg_r6w"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/cardInfo"
+        style="@style/text20b"
+        app:layout_constraintBottom_toTopOf="@+id/regdt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        tools:text="현대 뒷자리 1234"/>
+
+    <TextView
+        android:id="@+id/regdt"
+        style="@style/text18"
+        app:layout_constraintBottom_toTopOf="@+id/goods"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardInfo"
+        tools:text="2023.10.05 12:34"/>
+
+    <TextView
+        android:id="@+id/goods"
+        style="@style/text18"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/regdt"
+        tools:text="맛있는 스테이크 1개"/>
+
+    <TextView
+        android:id="@+id/price"
+        style="@style/text_num_b"
+        android:layout_marginEnd="4dp"
+        android:textSize="22dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardInfo"
+        app:layout_constraintEnd_toStartOf="@+id/won"
+        app:layout_constraintTop_toTopOf="@+id/cardInfo"
+        tools:text="5,000" />
+
+    <TextView
+        android:id="@+id/won"
+        style="@style/text18"
+        android:text="@string/won"
+        app:layout_constraintBottom_toBottomOf="@+id/price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/price" />
+
+    <TextView
+        android:id="@+id/btnCancel"
+        style="@style/btn"
+        android:layout_width="wrap_content"
+        android:paddingHorizontal="15dp"
+        android:text="@string/payment_cancel"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cancelComplete"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#BFFFFFFF"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="96dp"
+            android:layout_height="68dp"
+            android:src="@drawable/img_pg_cancel_complete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

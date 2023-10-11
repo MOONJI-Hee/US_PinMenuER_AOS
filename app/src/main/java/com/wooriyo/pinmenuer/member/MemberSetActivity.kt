@@ -45,6 +45,7 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
             arpayoId = memberDTO!!.arpayoid?:""
         }
 
+        binding.title.text = getString(R.string.title_udt_mbr)
         binding.tvId.text = userid
         if(arpayoId.isNotEmpty()) {
             binding.etArpayo.setText(arpayoId)
@@ -52,7 +53,7 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
             binding.linkResult.text = getString(R.string.link_after)
             binding.linkResult.setTextColor(Color.parseColor("#FF6200"))
         }
-        binding.title.text = getString(R.string.title_udt_mbr)
+        binding.etPwd.setText(MyApplication.pref.getPw())
 
         binding.etId.visibility = View.INVISIBLE
         binding.btnCheckId.visibility = View.INVISIBLE

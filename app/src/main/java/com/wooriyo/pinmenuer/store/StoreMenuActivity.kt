@@ -23,6 +23,8 @@ import com.wooriyo.pinmenuer.model.CateListDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.order.OrderListActivity
 import com.wooriyo.pinmenuer.payment.SetPayActivity
+import com.wooriyo.pinmenuer.pg.PgHistoryActivity
+import com.wooriyo.pinmenuer.pg.dialog.NoPgInfoDialog
 import com.wooriyo.pinmenuer.printer.PrinterMenuActivity
 import com.wooriyo.pinmenuer.setting.MenuUiActivity
 import com.wooriyo.pinmenuer.setting.TablePassActivity
@@ -56,7 +58,8 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
             menuUi.setOnClickListener(mActivity)
             printer.setOnClickListener(mActivity)
             payment.setOnClickListener(mActivity)
-            mirroring.setOnClickListener(mActivity)
+            pgCancel.setOnClickListener(mActivity)
+            qrCustomerInfo.setOnClickListener(mActivity)
         }
     }
 
@@ -83,6 +86,13 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
             binding.menuUi -> startActivity(Intent(mActivity, MenuUiActivity::class.java))
             binding.printer -> insPrintSetting()
             binding.payment -> insPaySetting()
+            binding.pgCancel -> {
+                if(store.pg_storenm.isEmpty() || store.pg_snum.isEmpty()) {
+                    NoPgInfoDialog(mActivity).show()
+                }else {
+                    startActivity(Intent(mActivity, PgHistoryActivity::class.java))
+                }
+            }
         }
     }
 

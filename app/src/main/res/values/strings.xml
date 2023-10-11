@@ -216,7 +216,7 @@
     <string name="key_info">나이스페이먼츠 > 로그인 > 가맹점정보(상단)\n> Key관리(좌측) > MID 아래 있는 긴 문장(key) 복사</string>
     <string name="key_hint">Key값을 입력해 주세요.</string>
     <string name="btn_set_nicepay">Key설정 저장</string>
-    <string name="payment_title_nicepay_info">QR코드 카드결제 가맹점 가입방법 및 나이스페이먼츠 Key설정</string>
+    <string name="payment_title_nicepay_info">QR코드 카드결제 가맹점 가입방법 및 카드 심사 정보 작성</string>
     <string name="payment_title_pg_info">PG 카드 심사 정보</string>
     <string name="payment_set_pg_info">사업자등록증에 등록된 내용을 작성해 주세요.\n해당 내용은 PG 결제를 위한 카드사 심사에 사용되며 고객 주문 페이지\n하단에 노출됩니다.</string>
     <string name="payment_set_pg_store_name">상호</string>
@@ -354,7 +354,7 @@
     <string name="qr_vat">수수료(VAT별도)</string>
     <string name="qr_join_way">가맹점 가입방법</string>
     <string name="qr_guide_title">QR코드 카드결제를 이용하기 위한 절차</string>
-    <string name="qr_guide_fir">1. 나이스페이 가맹점 계약 신청 및 우편 발송</string>
+    <string name="qr_guide_fir">1. 나이스페이먼츠 가맹점 계약 신청 및 우편 발송</string>
     <string name="qr_guide_fir_1">・자세한 사항은 핀메뉴 웹사이트에 있습니다.\n&#160;&#160;&#160;&#160;<font color="#006CFF">(경로 : www.pinmenu.biz > 하단 QR결제 > 가맹점 계약)</font></string>
     <string name="qr_guide_fir_2">・ 나이스페이먼츠와 가맹점 계약을 통해 핀메뉴 결제 수수료가 정해집니다.\n&#160;&#160;&#160;&#160;(핀메뉴는 나이스페이의 정책에 따릅니다.)</string>
     <string name="qr_guide_sec">2. PG 카드 심사 정보 작성</string>
@@ -449,6 +449,28 @@
     <!--  QR코드 결제 미러링 사용  -->
     <string name="mirroring_menu">QR코드 결제\n미러링 사용</string>
     <string name="mirroring_menu_sub">・미러링 : 화면 공유</string>
+
+    <!--  PG 결제 취소  -->
+    <string name="pg_cancel_menu">PG결제취소\n(QR코드 결제)</string>
+    <string name="pg_cancel_menu_sub">・QR코드 결제내역\n・PG결제 취소</string>
+    <string name="dialog_no_pg_info1">핀메뉴 QR코드 주문&amp;결제가 활성화되지 않았습니다.</string>
+    <string name="dialog_no_pg_info2">신청방법</string>
+    <string name="dialog_no_pg_info3">핀메뉴 웹사이트 > 햄버거버튼</string>
+    <string name="dialog_no_pg_info4">\> PG(나이스페이먼츠) 신청/관리</string>
+
+    <string name="pg_history">PG결제 내역</string>
+
+
+    <string name="payment_history">결제내역</string>
+    <string name="payment_cancel">결제취소</string>
+    <string name="pg_cancel">PG결제 취소</string>
+    <string name="pg_history_search_hint">금액(원)</string>
+    <string name="dialog_pg_cancel_info">결제취소가 진행되면 복구할 수 없습니다.\n(취소처리는 카드사에 따라 다를 수 있음)</string>
+
+    <!--  QR코드 결제고객 정보  -->
+    <string name="qr_customer_info_menu">QR코드\n결제고객 정보</string>
+    <string name="qr_customer_info_menu_sub">・배송지 관련 정보\n&#160;&#160;&#160;&#160;입력 설정</string>
+
 
     <!--  타이틀  -->
     <string name="title_login">핀메뉴 로그인</string>
