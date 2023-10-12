@@ -15,6 +15,7 @@ import com.wooriyo.pinmenuer.MyApplication.Companion.allCateList
 import com.wooriyo.pinmenuer.MyApplication.Companion.androidId
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.call.CallListActivity
+import com.wooriyo.pinmenuer.common.NoticeDialog
 import com.wooriyo.pinmenuer.databinding.ActivityStoreMenuBinding
 import com.wooriyo.pinmenuer.member.MemberSetActivity
 import com.wooriyo.pinmenuer.menu.CategorySetActivity
@@ -24,6 +25,7 @@ import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.order.OrderListActivity
 import com.wooriyo.pinmenuer.payment.SetPayActivity
 import com.wooriyo.pinmenuer.pg.PgHistoryActivity
+import com.wooriyo.pinmenuer.pg.SetCustomerInfoActivity
 import com.wooriyo.pinmenuer.pg.dialog.NoPgInfoDialog
 import com.wooriyo.pinmenuer.printer.PrinterMenuActivity
 import com.wooriyo.pinmenuer.setting.MenuUiActivity
@@ -91,6 +93,13 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                     NoPgInfoDialog(mActivity).show()
                 }else {
                     startActivity(Intent(mActivity, PgHistoryActivity::class.java))
+                }
+            }
+            binding.qrCustomerInfo -> {
+                if(store.paytype == 2) {
+                    startActivity(Intent(mActivity, SetCustomerInfoActivity::class.java))
+                }else {
+                    NoticeDialog(mActivity, "", getString(R.string.dialog_no_business), View.OnClickListener{}).show()
                 }
             }
         }

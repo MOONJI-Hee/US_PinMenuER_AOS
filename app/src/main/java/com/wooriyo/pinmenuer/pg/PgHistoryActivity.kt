@@ -33,10 +33,7 @@ class PgHistoryActivity : BaseActivity() {
         binding.rvPgHistory.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false)
         binding.rvPgHistory.adapter = pgHistoryAdapter
 
-        binding.back.setOnClickListener {
-            storeidx = 0
-            finish()
-        }
+        binding.back.setOnClickListener { finish() }
         binding.icSearch.setOnClickListener { search() }
     }
 

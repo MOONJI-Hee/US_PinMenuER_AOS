@@ -24,8 +24,8 @@ class NoticeDialog(context: Context, val title: String, val content: String, pri
 
         binding.close.setOnClickListener { dismiss() }
         binding.confirm.setOnClickListener {
-            onClickListener.onClick(it)
             dismiss()
+            onClickListener.onClick(it)
         }
     }
 }
