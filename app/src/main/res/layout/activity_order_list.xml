@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".order.OrderListActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         style="@style/title"
         android:id="@+id/title"
         app:layout_constraintStart_toStartOf="parent"
@@ -14,33 +14,39 @@
 
         <ImageView
             android:id="@+id/icNew"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginEnd="6dp"
             android:visibility="invisible"
-            android:src="@drawable/ic_pay_new"/>
+            android:src="@drawable/ic_pay_new"
+            app:layout_constraintTop_toTopOf="@+id/tvTitle"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
+            app:layout_constraintEnd_toStartOf="@+id/tvTitle"/>
 
         <TextView
             style="@style/text20b"
             android:id="@+id/tvTitle"
             android:textColor="@color/white"
-            android:text="@string/order_mgmt"/>
+            android:text="@string/order_mgmt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/back"
+            android:layout_width="72dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/btn_title_back" />
+        </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/back"
-        android:layout_width="72dp"
-        android:layout_height="60dp"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/btn_title_back" />
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         style="@style/text18"

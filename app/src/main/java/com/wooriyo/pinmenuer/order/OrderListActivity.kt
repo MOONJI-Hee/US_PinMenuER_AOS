@@ -51,7 +51,7 @@ import retrofit2.Response
 class OrderListActivity : BaseActivity() {
     lateinit var binding: ActivityOrderListBinding
     lateinit var clearDialog: ClearDialog
-    lateinit var clearConfirmDialog: ConfirmDialog
+    lateinit var clearConfirmDialog: NoticeDialog
 
     val TAG = "OrderListActivity"
     val mActivity = this@OrderListActivity
@@ -189,18 +189,17 @@ class OrderListActivity : BaseActivity() {
     fun setClearDialog() {
         clearDialog = ClearDialog(
             mActivity,
+            "order",
             View.OnClickListener {
             clearDialog.dismiss()
-            clearConfirmDialog.show(supportFragmentManager, "ClearConfrimDialog")
+            clearConfirmDialog.show()
         })
 
-        clearConfirmDialog = ConfirmDialog(
+        clearConfirmDialog = NoticeDialog(
+            mActivity,
+            getString(R.string.dialog_order_clear_title),
             getString(R.string.dialog_confrim_clear),
-            getString(R.string.btn_confirm),
-            View.OnClickListener {
-                clearConfirmDialog.dismiss()
-                clear()
-            }
+            View.OnClickListener { clear() }
         )
     }
 
