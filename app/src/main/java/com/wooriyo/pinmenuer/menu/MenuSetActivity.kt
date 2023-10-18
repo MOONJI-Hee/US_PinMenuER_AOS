@@ -467,6 +467,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
     fun clearDetail() {
         optList.clear()
+        optAdapter.notifyDataSetChanged()
         binding.run {
             etName.text.clear()
             etContent.text.clear()

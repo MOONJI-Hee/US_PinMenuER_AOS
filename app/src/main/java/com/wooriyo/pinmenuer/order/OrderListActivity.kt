@@ -403,7 +403,7 @@ class OrderListActivity : BaseActivity() {
             }
         }
 
-            for(i in 1..diff) {
+        for(i in 1..diff) {
             result.append(" ")
         }
         result.append(ord.gea.toString())
