@@ -200,11 +200,29 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
     }
 
     fun logout() {
-        MyApplication.pref.logout()
-        val intent = Intent(mActivity, LoginActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
+        ApiClient.service.logout(useridx, MyApplication.pref.getToken().toString()).enqueue(object : Callback<ResultDTO> {
+            override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                Log.d(TAG, "로그아웃 url : $response")
+                if(!response.isSuccessful) return
+
+                val result = response.body() ?: return
+                when(result.status) {
+                    1 -> {
+                        MyApplication.pref.logout()
+                        val intent = Intent(mActivity, LoginActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(intent)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "로그아웃 실패 >> $t")
+                Log.d(TAG, "로그아웃 실패 >> ${call.request()}")
+            }
+        })
     }
 }
