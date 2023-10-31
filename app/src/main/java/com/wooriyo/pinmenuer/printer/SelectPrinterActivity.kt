@@ -38,6 +38,7 @@ class SelectPrinterActivity : BaseActivity() {
             ckTe202.visibility = View.VISIBLE
             ckSam4s.visibility = View.VISIBLE
             select.visibility = View.VISIBLE
+            printerInfo.visibility = View.GONE
             supportInfo.visibility = View.GONE
 
             ts400b.setOnClickListener {

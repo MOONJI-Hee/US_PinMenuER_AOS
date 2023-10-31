@@ -1,5 +1,6 @@
 package com.wooriyo.pinmenuer.printer
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -31,6 +32,19 @@ class PrinterModelListActivity : BaseActivity() {
         getSupportPrinter()
 
         binding.back.setOnClickListener { finish() }
+        binding.ts400b.setOnClickListener {
+            binding.connWay.text = getText(R.string.printer_bluetooth)
+            binding.etc.text = getText(R.string.printer_etc_ts400b)
+            binding.areaTs.setBackgroundResource(R.drawable.bg_r6w_b2_main)
+            binding.areaCube.setBackgroundColor(Color.WHITE)
+        }
+
+        binding.sam4s.setOnClickListener {
+            binding.connWay.text = getText(R.string.printer_wifi)
+            binding.etc.text = getText(R.string.printer_etc_gcube)
+            binding.areaTs.setBackgroundColor(Color.WHITE)
+            binding.areaCube.setBackgroundResource(R.drawable.bg_r6w_b2_main)
+        }
     }
 
     fun setView () {
