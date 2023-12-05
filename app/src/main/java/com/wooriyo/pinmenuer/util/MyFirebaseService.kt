@@ -24,6 +24,7 @@ import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.MyApplication.Companion.escposPrinter
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.StartActivity
+import com.wooriyo.pinmenuer.call.CallListActivity
 import com.wooriyo.pinmenuer.config.AppProperties
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.CHANNEL_ID_ORDER
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.NOTIFICATION_ID_ORDER
@@ -46,42 +47,25 @@ class MyFirebaseService : FirebaseMessagingService() {
         super.onMessageReceived(message)
 
         Log.d(TAG, "message.data >> ${message.data}")
-        Log.d(TAG, "message.notification >> ${message.notification}")
-        Log.d(TAG, "message.notification >> ${message.data}")
+        Log.d(TAG, "message.notification.body >> ${message.notification?.body}")
 
         createNotification(message)
 
-        val strPackage = "com.wooriyo.pinmenuer"
-        val am = getSystemService(ACTIVITY_SERVICE) as ActivityManager
+        //알림음 재생
+        val sound = R.raw.customnoti
+        val uri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/$sound")
+        val ringtone = RingtoneManager.getRingtone(applicationContext, uri)
 
-        val proceses = am.runningAppProcesses
+        if(currentActivity != null) {
+            Log.d(TAG, "currentActivity.localClassName >> ${currentActivity.localClassName}")
 
-        var isForeground = false
-        for (process in proceses) {
-            if (process.importance == RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
-                if (process.processName == strPackage) {
-                    isForeground = true
-                }
-            }
+            if (currentActivity.localClassName == "call.CallListActivity")
+                (currentActivity as CallListActivity).getCallList()
+            else if (currentActivity.localClassName == "order.OrderListActivity")
+                (currentActivity as OrderListActivity).getOrderList()
+        }else{
+            Log.d(TAG, "currentActivity == null")
         }
-
-//        if(isForeground) {
-//            //알림음 재생
-//            val sound = R.raw.customnoti
-//            val uri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/$sound")
-//            val ringtone = RingtoneManager.getRingtone(applicationContext, uri)
-//
-//            currentActivity.runOnUiThread(Runnable {
-//                ringtone.play()
-//                val toast: Toast = Toast.makeText(applicationContext, message.notification!!.body, Toast.LENGTH_LONG)
-//                toast.setGravity(Gravity.TOP, 0, 0)
-//                toast.show()
-//            })
-//            if (currentActivity == OrderListActivity::class.java) run {
-//                Log.d("Notification", "여길 들어오는지 먼저 확인")
-//                OrderListActivity.binding.icNew.visibility = View.VISIBLE
-//            }
-//        }
 
         if(message.data["moredata"] == "call") {
             // 호출
@@ -156,7 +140,7 @@ class MyFirebaseService : FirebaseMessagingService() {
     }
 
     private fun createNotification(message: RemoteMessage) {
-        val sound = R.raw.customnoti
+        val sound = R.raw.customcall
         val uri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/$sound")
 
         val builder = NotificationCompat.Builder(this, CHANNEL_ID_ORDER)
@@ -164,7 +148,7 @@ class MyFirebaseService : FirebaseMessagingService() {
             .setContentTitle(message.notification?.title)
             .setContentText(message.notification?.body)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setSound(uri, STREAM_NOTIFICATION)
+//            .setSound(uri, STREAM_NOTIFICATION)
 //            .setContentIntent(createPendingIntent())
             .setAutoCancel(true)
 

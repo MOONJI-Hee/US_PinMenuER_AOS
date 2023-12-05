@@ -2,6 +2,7 @@ package com.wooriyo.pinmenuer
 
 import android.app.Activity
 import android.app.ActivityManager
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +29,9 @@ open class BaseActivity: AppCompatActivity() {
         resources.displayMetrics.density = MyApplication.density
         resources.displayMetrics.densityDpi = MyApplication.dpi
         resources.displayMetrics.scaledDensity = MyApplication.density
+
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+
         super.onCreate(savedInstanceState)
     }
 

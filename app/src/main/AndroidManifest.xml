@@ -85,8 +85,7 @@
             android:exported="false" />
         <activity
             android:name=".printer.SelCateActivity"
-            android:exported="false"
-            android:screenOrientation="landscape" />
+            android:exported="false" />
         <activity
             android:name=".printer.SelectPrinterActivity"
             android:exported="false" />
@@ -116,25 +115,13 @@
             android:exported="false" />
         <activity
             android:name=".call.CallSetActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".call.CallListActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".order.OrderListActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".menu.MenuSetActivity"
             android:exported="false" />

@@ -102,54 +102,6 @@ class CallListActivity : BaseActivity() {
 //        timer.cancel()
     }
 
-    // 새로운 호출 유무 확인 > 3초마다 한번씩 태우기
-//    fun getCallStatus() {
-//        ApiClient.service.getCallStatus(useridx, storeidx).enqueue(object : Callback<ResultDTO>{
-//            override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
-//                Log.d(TAG, "새로운 호출 유무 확인 url : $response")
-//                if(!response.isSuccessful) return
-//
-//                val result = response.body()
-//                if(result != null && result.status == 1) {
-//                    getCallList()
-//                    // 음악 재생
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
-//                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
-//                Log.d(TAG, "새로운 호출 유무 확인 실패 > $t")
-//                Log.d(TAG, "새로운 호출 유무 확인 실패 > ${call.request()}")
-//            }
-//        })
-//    }
-
-    // 호출 확인 처리 > 화면 터치하면
-//    fun udtCallStatus() {
-//        ApiClient.service.udtCallStatus(useridx, storeidx).enqueue(object: Callback<ResultDTO>{
-//            override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
-//                Log.d(TAG, "호출 확인 처리(상태 업데이트) url : $response")
-//                if(!response.isSuccessful) return
-//
-//                val result = response.body()
-//                if(result != null) {
-//                    when(result.status) {
-//                        1 -> {
-//                            // 알림음 종료 등등
-//                        }
-//                        else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
-//                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
-//                Log.d(TAG, "호출 확인 처리(상태 업데이트) 실패 > $t")
-//                Log.d(TAG, "호출 확인 처리(상태 업데이트) 실패 > ${call.request()}")
-//            }
-//        })
-//    }
-
     // 호출 리스트 (히스토리) 조회
     fun getCallList() {
         ApiClient.service.getCallHistory(useridx, storeidx).enqueue(object: Callback<CallListDTO>{
@@ -197,7 +149,7 @@ class CallListActivity : BaseActivity() {
                 when(result.status){
                     1 -> {
                         callHistory[position].iscompleted = 1
-                        callHistory.sortBy { it.iscompleted }
+//                        callHistory.sortBy { it.iscompleted }
                         callListAdapter.notifyItemChanged(position)
                     }
                     else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
