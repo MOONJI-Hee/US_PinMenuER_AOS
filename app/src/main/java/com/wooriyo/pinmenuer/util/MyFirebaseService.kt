@@ -47,6 +47,7 @@ class MyFirebaseService : FirebaseMessagingService() {
 
         Log.d(TAG, "message.data >> ${message.data}")
         Log.d(TAG, "message.notification >> ${message.notification}")
+        Log.d(TAG, "message.notification >> ${message.data}")
 
         createNotification(message)
 
@@ -82,70 +83,76 @@ class MyFirebaseService : FirebaseMessagingService() {
 //            }
 //        }
 
-        val ordCode = message.data["moredata"]
+        if(message.data["moredata"] == "call") {
+            // 호출
+        }else {
+            val ordCode_key = message.data["moredata"]
+            val ordCode = message.data["moredata_ordcode"]
+
 //        val storeidx = message.data["storeidx"]
 
-        ApiClient.service.getReceipt(ordCode.toString()).enqueue(object : retrofit2.Callback<ReceiptDTO>{
-            override fun onResponse(call: Call<ReceiptDTO>, response: Response<ReceiptDTO>) {
-                Log.d(TAG, "단건 주문 조회 URL : $response")
-                if(!response.isSuccessful) return
+            ApiClient.service.getReceipt(ordCode_key.toString()).enqueue(object : retrofit2.Callback<ReceiptDTO>{
+                override fun onResponse(call: Call<ReceiptDTO>, response: Response<ReceiptDTO>) {
+                    Log.d(TAG, "단건 주문 조회 URL : $response")
+                    if(!response.isSuccessful) return
 
-                val result = response.body() ?: return
+                    val result = response.body() ?: return
 
-                when(result.status) {
-                    1 -> {
-                        if(MyApplication.bluetoothPort.isConnected) {
-                            val pOrderDt = result.regdt
-                            val pTableNo = result.tableNo
-                            val pOrderNo = ordCode
+                    when(result.status) {
+                        1 -> {
+                            if(MyApplication.bluetoothPort.isConnected) {
+                                val pOrderDt = result.regdt
+                                val pTableNo = result.tableNo
+                                val pOrderNo = ordCode
 
-                            val hyphen_num = AppProperties.HYPHEN_NUM_BIG
-                            val font_size = AppProperties.FONT_BIG
+                                val hyphen_num = AppProperties.HYPHEN_NUM_BIG
+                                val font_size = AppProperties.FONT_BIG
 
-                            val hyphen = StringBuilder()    // 하이픈
-                            for (i in 1..hyphen_num) {
-                                hyphen.append("-")
+                                val hyphen = StringBuilder()    // 하이픈
+                                for (i in 1..hyphen_num) {
+                                    hyphen.append("-")
+                                }
+
+                                escposPrinter.printAndroidFont(
+                                    result.storenm,
+                                    AppProperties.FONT_WIDTH,
+                                    AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+                                escposPrinter.printAndroidFont("주문날짜 : $pOrderDt",
+                                    AppProperties.FONT_WIDTH,
+                                    AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+                                escposPrinter.printAndroidFont("주문번호 : $pOrderNo",
+                                    AppProperties.FONT_WIDTH,
+                                    AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+                                escposPrinter.printAndroidFont("테이블번호 : $pTableNo",
+                                    AppProperties.FONT_WIDTH,
+                                    AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+                                escposPrinter.printAndroidFont(
+                                    AppProperties.TITLE_MENU,
+                                    AppProperties.FONT_WIDTH, AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+                                escposPrinter.printAndroidFont(hyphen.toString(),
+                                    AppProperties.FONT_WIDTH, font_size, ESCPOSConst.LK_ALIGNMENT_LEFT)
+
+                                result.orderdata.forEach {
+                                    val pOrder = AppHelper.getPrint(it)
+                                    escposPrinter.printAndroidFont(pOrder,AppProperties.FONT_WIDTH, font_size, ESCPOSConst.LK_ALIGNMENT_LEFT)
+                                }
+                                escposPrinter.lineFeed(4)
+                                escposPrinter.cutPaper()
+                            }else {
+                                Log.d(TAG, "프린트 연결 안됨")
                             }
-
-                            escposPrinter.printAndroidFont(
-                                result.storenm,
-                                AppProperties.FONT_WIDTH,
-                                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
-                            escposPrinter.printAndroidFont("주문날짜 : $pOrderDt",
-                                AppProperties.FONT_WIDTH,
-                                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
-                            escposPrinter.printAndroidFont("주문번호 : $pOrderNo",
-                                AppProperties.FONT_WIDTH,
-                                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
-                            escposPrinter.printAndroidFont("테이블번호 : $pTableNo",
-                                AppProperties.FONT_WIDTH,
-                                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
-                            escposPrinter.printAndroidFont(
-                                AppProperties.TITLE_MENU,
-                                AppProperties.FONT_WIDTH, AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
-                            escposPrinter.printAndroidFont(hyphen.toString(),
-                                AppProperties.FONT_WIDTH, font_size, ESCPOSConst.LK_ALIGNMENT_LEFT)
-
-                            result.orderdata.forEach {
-                                val pOrder = AppHelper.getPrint(it)
-                                escposPrinter.printAndroidFont(pOrder,AppProperties.FONT_WIDTH, font_size, ESCPOSConst.LK_ALIGNMENT_LEFT)
-                            }
-                            escposPrinter.lineFeed(4)
-                            escposPrinter.cutPaper()
-                        }else {
-                            Log.d(TAG, "프린트 연결 안됨")
                         }
+                        else -> Toast.makeText(applicationContext, result.msg, Toast.LENGTH_SHORT).show()
                     }
-                    else -> Toast.makeText(applicationContext, result.msg, Toast.LENGTH_SHORT).show()
                 }
-            }
 
-            override fun onFailure(call: Call<ReceiptDTO>, t: Throwable) {
-                Toast.makeText(applicationContext, R.string.msg_retry, Toast.LENGTH_SHORT).show()
-                Log.d(TAG, "단건 주문 조회 오류 >> $t")
-                Log.d(TAG, "단건 주문 조회 오류 >> ${call.request()}")
-            }
-        })
+                override fun onFailure(call: Call<ReceiptDTO>, t: Throwable) {
+                    Toast.makeText(applicationContext, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "단건 주문 조회 오류 >> $t")
+                    Log.d(TAG, "단건 주문 조회 오류 >> ${call.request()}")
+                }
+            })
+        }
     }
 
     private fun createNotification(message: RemoteMessage) {
@@ -156,7 +163,7 @@ class MyFirebaseService : FirebaseMessagingService() {
             .setSmallIcon(R.drawable.ic_noti)
             .setContentTitle(message.notification?.title)
             .setContentText(message.notification?.body)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setSound(uri, STREAM_NOTIFICATION)
 //            .setContentIntent(createPendingIntent())
             .setAutoCancel(true)

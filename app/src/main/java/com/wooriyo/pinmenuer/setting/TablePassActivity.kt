@@ -23,8 +23,6 @@ class TablePassActivity : BaseActivity() {
         binding = ActivityTablePassBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var pass = MyApplication.store.ta
-
         binding.back.setOnClickListener { finish() }
         binding.save.setOnClickListener { save() }
     }
