@@ -112,6 +112,19 @@ class AppHelper {
             }
         }
 
+        // 버전 비교
+        fun compareVer(curver: String): Boolean {
+            val arr_cur = curver.split(".")
+            val arr_app = MyApplication.appver.split(".")
+
+            for(i : Int in arr_app.indices) {
+                if(arr_app[i] < arr_cur[i]) {
+                    return false
+                }
+            }
+            return true
+        }
+
         fun setHeight(v: View, height: Int) {
             val hpx = (height * MyApplication.density).toInt()
 

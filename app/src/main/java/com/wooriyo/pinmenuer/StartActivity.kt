@@ -3,11 +3,15 @@ package com.wooriyo.pinmenuer
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.wooriyo.pinmenuer.MyApplication.Companion.androidId
+import com.wooriyo.pinmenuer.MyApplication.Companion.appver
 import com.wooriyo.pinmenuer.MyApplication.Companion.pref
+import com.wooriyo.pinmenuer.common.UpdateDialog
 import com.wooriyo.pinmenuer.db.entity.Member
 import com.wooriyo.pinmenuer.member.LoginActivity
 import com.wooriyo.pinmenuer.model.MemberDTO
+import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.store.StoreListActivity
 import com.wooriyo.pinmenuer.store.StoreSetActivity
 import com.wooriyo.pinmenuer.util.ApiClient
@@ -32,6 +36,10 @@ class StartActivity: BaseActivity() {
 
     override fun onResume() {
         super.onResume()
+        checkVersion()
+    }
+
+    fun getMbrInfo() {
         val mbrDTO = pref.getMbrDTO()
 
         if (mbrDTO == null) {
@@ -49,48 +57,66 @@ class StartActivity: BaseActivity() {
         }
     }
 
-    fun loginWithApi()  {
+    fun loginWithApi() {
         ApiClient.service.checkMbr(id, pw, token, MyApplication.os, MyApplication.osver, MyApplication.appver, MyApplication.md, androidId, 1)
-            .enqueue(object: retrofit2.Callback<MemberDTO> {
+            .enqueue(object : retrofit2.Callback<MemberDTO> {
                 override fun onResponse(call: Call<MemberDTO>, response: Response<MemberDTO>) {
                     Log.d(TAG, "자동 로그인 url : $response")
-                    if(response.isSuccessful) {
-                        if(response.body()?.status == 1) {
+                    if (response.isSuccessful) {
+                        if (response.body()?.status == 1) {
                             val memberDTO = response.body()
-                            if(memberDTO != null) {
+                            if (memberDTO != null) {
                                 pref.setMbrDTO(memberDTO)
                             }
                             startActivity(Intent(this@StartActivity, StoreListActivity::class.java))
-                        }else {
-                            startActivity(Intent(this@StartActivity, LoginActivity::class.java).also {
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            })
+                        } else {
+                            startActivity(
+                                Intent(
+                                    this@StartActivity,
+                                    LoginActivity::class.java
+                                ).also {
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                })
                         }
                     }
                 }
                 override fun onFailure(call: Call<MemberDTO>, t: Throwable) {
                     Log.d(TAG, "자동 로그인 실패 : $t")
                     Log.d(TAG, "자동 로그인 실패 : ${call.request()}")
-                    loginWithDB()
+//                    loginWithDB()
                 }
             })
     }
 
-    fun loginWithDB () {
+    fun checkVersion() {
+        ApiClient.service.checkVersion(1, appver, 2)
+            .enqueue(object : retrofit2.Callback<ResultDTO> {
+                override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                    Log.d(TAG, "버전 확인 url : $response")
+                    if (!response.isSuccessful) return
 
-    }
+                    val result = response.body() ?: return
 
-    fun findMbr (member: Member) {
-//        CoroutineScope(Dispatchers.IO).launch {
-//            val selUser =  db.userDao().findMbr(idx)
-//
-//            if(selUser == null) {
-//                db.userDao().insUser(user)
-//            }else {
-//                db.userDao().udtMbr(user)
-//            }
-//        }
+                    if (result.status == 1) {
+                        val curver = result.curver
+                        if (AppHelper.compareVer(curver)) {  // 최신버전 이상
+                            getMbrInfo()
+                        } else { // 최신버전 이하
+                            val dialog = UpdateDialog(result.update, result.updateMsg)
+                            dialog.setCancelClickListener { getMbrInfo() }
+                            dialog.show(supportFragmentManager, "UpdateDialog")
+                        }
+                    } else {
+                        Toast.makeText(this@StartActivity, result.msg, Toast.LENGTH_SHORT).show()
+                        Log.d(TAG, "버전 확인 status != 1")
+                    }
+                }
+
+                override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                    Log.d(TAG, "버전 확인 실패 >> $t")
+                }
+            })
     }
 }

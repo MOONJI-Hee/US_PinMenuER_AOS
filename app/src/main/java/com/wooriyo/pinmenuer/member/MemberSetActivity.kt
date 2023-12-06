@@ -93,11 +93,11 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
             binding.btnArpayo -> regArpayoId()
             binding.drop -> {
                 val onClickListener = View.OnClickListener { drop() }
-                ConfirmDialog(getString(R.string.dialog_drop), getString(R.string.btn_confirm), onClickListener).show(supportFragmentManager, "DropDialog")
+                ConfirmDialog(getString(R.string.dialog_drop), "", getString(R.string.btn_confirm), onClickListener).show(supportFragmentManager, "DropDialog")
             }
             binding.logout -> {
                 val onClickListener = View.OnClickListener {logout()}
-                ConfirmDialog(getString(R.string.dialog_logout), getString(R.string.btn_confirm), onClickListener).show(supportFragmentManager, "LogoutDialog")
+                ConfirmDialog("", getString(R.string.dialog_logout), getString(R.string.btn_confirm), onClickListener).show(supportFragmentManager, "LogoutDialog")
             }
         }
     }

@@ -7,17 +7,13 @@ import retrofit2.http.*
 import java.io.File
 
 interface Api {
-//    @FormUrlEncoded
-//    @POST("checkmbr.php")
-//    fun checkMbr(
-//        @Field("userid") userid: String,
-//        @Field("pass") pass: String,
-//        @Field("push_token") push_token: String,
-//        @Field("os") os: String,
-//        @Field("osvs") osvs: Int,
-//        @Field("appvs") appvs: String,
-//        @Field("md") md: String
-//    ): Call<MemberDTO>
+    // 버전 체크
+    @GET("check_version.php")
+    fun checkVersion(
+        @Query("MODE") MODE: Int,           // 0 : 주문, 1 : 관리
+        @Query("APPVS") APPVS: String,
+        @Query("TYPE") type: Int        // 1: 모바일, 2: 태블릿
+    ): Call<ResultDTO>
 
     @GET("checkmbr.php")
     fun checkMbr(
