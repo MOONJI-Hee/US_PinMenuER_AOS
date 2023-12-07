@@ -50,6 +50,7 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
 
         binding.run {
             title.text = store.name
+            version.text = "Ver ${MyApplication.appver}"
 
             back.setOnClickListener(mActivity)
             udtMbr.setOnClickListener(mActivity)

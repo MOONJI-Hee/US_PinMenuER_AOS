@@ -98,4 +98,11 @@
                 app:layout_constraintStart_toEndOf="@+id/line"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
+
+    <TextView
+        style="@style/subtext"
+        android:id="@+id/version"
+        android:layout_margin="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

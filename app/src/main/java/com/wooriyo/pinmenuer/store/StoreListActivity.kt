@@ -49,6 +49,8 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
 
         useridx = MyApplication.pref.getUserIdx()
 
+        binding.version.text = "Ver ${MyApplication.appver}"
+
         storeAdapter.setOnItemClickListener(object : ItemClickListener {
             override fun onStoreClick(storeDTO: StoreDTO, intent: Intent) {
                 checkDeviceLimit(storeDTO, intent)
