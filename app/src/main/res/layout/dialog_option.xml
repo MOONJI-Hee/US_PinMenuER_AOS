@@ -69,15 +69,15 @@
             app:layout_constraintBottom_toBottomOf="@+id/save"/>
 
         <TextView
-            style="@style/btn"
             android:id="@+id/save"
+            style="@style/btn"
             android:layout_width="0dp"
             android:layout_marginBottom="32dp"
-            android:text="@string/btn_save"
+            android:text="@string/btn_confirm"
             android:visibility="visible"
-            app:layout_constraintStart_toEndOf="@+id/delete"
+            app:layout_constraintBottom_toTopOf="@+id/opt_info1"
             app:layout_constraintEnd_toEndOf="@+id/opt_name"
-            app:layout_constraintBottom_toTopOf="@+id/opt_info1"/>
+            app:layout_constraintStart_toEndOf="@+id/delete" />
 
         <TextView
             style="@style/subtext"
