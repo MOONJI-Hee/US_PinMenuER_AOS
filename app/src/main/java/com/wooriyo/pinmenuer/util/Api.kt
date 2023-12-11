@@ -652,6 +652,13 @@ interface Api {
         @Query("memo") strMemo: String
     ): Call<ResultDTO>
 
+    // pg 결제 고객 정보 받기 - 테이블 리스트
+    @GET("m/custom.tablelist.php")
+    fun getTableList(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int
+    ): Call<PgResultDTO>
+
     // pg 결제 내역
     @GET("m/pg.list.php")
     fun getPgList(

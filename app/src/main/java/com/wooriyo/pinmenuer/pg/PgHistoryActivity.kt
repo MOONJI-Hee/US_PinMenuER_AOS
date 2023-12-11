@@ -57,8 +57,6 @@ class PgHistoryActivity : BaseActivity() {
 
                 when(result.status) {
                     1 -> {
-//                        result.pgHistoryList.removeIf { it.title.isEmpty() }
-
                         val removeList = ArrayList<PgHistoryDTO>()
                         result.pgHistoryList.forEach {
                             if(it.title.isEmpty())

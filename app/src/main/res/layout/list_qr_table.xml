@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="60dp"
+    android:id="@+id/layout"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
         style="@style/text20"
@@ -11,7 +12,7 @@
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <CheckBox style="@style/toggle"
-        android:id="@+id/isUsed"
+        android:id="@+id/use"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

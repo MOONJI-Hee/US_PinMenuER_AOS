@@ -64,6 +64,7 @@ class OrderAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adapte
                     payment.text = "복원"
                     complete.visibility = View.VISIBLE
                     completeQr.visibility = View.GONE
+                    completePos.visibility = View.GONE
                 } else if (data.paytype == 3) { // QR오더에서 들어온 주문 > 결제 완료
                     tableNo.setBackgroundResource(R.color.main)
                     clPrice.setBackgroundResource(R.drawable.bg_cancel_r6)
@@ -71,6 +72,15 @@ class OrderAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adapte
                     payment.text = "확인"
                     complete.visibility = View.GONE
                     completeQr.visibility = View.VISIBLE
+                    completePos.visibility = View.GONE
+                } else if (data.paytype == 4) {
+                    tableNo.setBackgroundResource(R.color.main)
+                    clPrice.setBackgroundResource(R.drawable.bg_cancel_r6)
+                    payment.setBackgroundResource(R.drawable.bg_r6y)
+                    payment.text = "확인"
+                    complete.visibility = View.GONE
+                    completeQr.visibility = View.GONE
+                    completePos.visibility = View.VISIBLE
                 } else {
                     tableNo.setBackgroundResource(R.color.main)
                     clPrice.setBackgroundResource(R.drawable.bg_r6y)

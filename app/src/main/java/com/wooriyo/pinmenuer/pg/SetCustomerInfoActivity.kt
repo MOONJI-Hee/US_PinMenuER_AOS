@@ -10,7 +10,10 @@ import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivitySetCustomerInfoBinding
+import com.wooriyo.pinmenuer.model.PgResultDTO
+import com.wooriyo.pinmenuer.model.PgTableDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
+import com.wooriyo.pinmenuer.pg.adapter.PgTableAdapter
 import com.wooriyo.pinmenuer.util.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,6 +23,14 @@ class SetCustomerInfoActivity : BaseActivity() {
     lateinit var binding: ActivitySetCustomerInfoBinding
     val mActivity = this@SetCustomerInfoActivity
     val TAG = "SetCustomerInfoActivity"
+
+    val tableList = ArrayList<PgTableDTO>()
+    val tableAdapter = PgTableAdapter(tableList)
+
+    var bisAll = true   // 테이블 전체 선택 여부
+    var tb_cnt = 0      // 테이블 개수
+    var sel_tb_cnt = 0  // 선택된 테이블 개수
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySetCustomerInfoBinding.inflate(layoutInflater)
@@ -71,6 +82,36 @@ class SetCustomerInfoActivity : BaseActivity() {
                 Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "결제고객 정보 설정 오류 > $t")
                 Log.d(TAG, "결제고객 정보 설정 오류 > ${call.request()}")
+            }
+        })
+    }
+
+    fun getTableList() {
+        ApiClient.service.getTableList(useridx, storeidx).enqueue(object:Callback<PgResultDTO>{
+            override fun onResponse(call: Call<PgResultDTO>, response: Response<PgResultDTO>) {
+                Log.d(TAG, "테이블 리스트 조회 URL : $response")
+                if(!response.isSuccessful) return
+
+                val result = response.body() ?: return
+                when(result.status) {
+                    1 -> {
+                        tableList.clear()
+                        tableList.addAll(result.tableList)
+                        tb_cnt = tableList.size
+
+                        bisAll = result.blAll == "Y"
+                        binding.allTable.isChecked = bisAll
+                        tableAdapter.checkAll(bisAll)
+                    }
+                    else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+            override fun onFailure(call: Call<PgResultDTO>, t: Throwable) {
+                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "테이블 리스트 조회 오류 > $t")
+                Log.d(TAG, "테이블 리스트 조회 오류 > ${call.request()}")
             }
         })
     }
