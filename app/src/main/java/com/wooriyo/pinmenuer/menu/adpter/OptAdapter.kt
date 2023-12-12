@@ -1,6 +1,7 @@
 package com.wooriyo.pinmenuer.menu.adpter
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,8 +42,14 @@ class OptAdapter(val dataSet: ArrayList<OptionDTO>): RecyclerView.Adapter<OptAda
             binding.name.text = data.name
 
             when(data.optreq) {
-                0 -> binding.type.text = context.getString(R.string.optional)
-                1 -> binding.type.text = context.getString(R.string.essential)
+                0 -> {
+                    binding.type.text = context.getString(R.string.optional)
+                    binding.type.setTextColor(Color.parseColor("#FFA701"))
+                }
+                1 -> {
+                    binding.type.text = context.getString(R.string.essential)
+                    binding.type.setTextColor(Color.parseColor("#FF0000"))
+                }
             }
             binding.rvVals.adapter = ValueAdapter(data)
 

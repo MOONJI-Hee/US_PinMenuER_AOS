@@ -19,7 +19,6 @@
     <TextView
         style="@style/text16"
         android:id="@+id/type"
-        android:textStyle="bold"
         android:textColor="@color/main"
         tools:text="필수"
         app:layout_constraintEnd_toEndOf="parent"
