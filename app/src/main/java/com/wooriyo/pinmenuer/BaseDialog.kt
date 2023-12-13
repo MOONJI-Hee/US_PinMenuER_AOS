@@ -24,8 +24,6 @@ open class BaseDialog(context: Context) : Dialog(context) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
         useridx = MyApplication.pref.getUserIdx()
     }
 
