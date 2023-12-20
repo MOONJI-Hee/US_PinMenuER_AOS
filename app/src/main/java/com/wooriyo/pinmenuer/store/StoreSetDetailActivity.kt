@@ -27,9 +27,6 @@ import retrofit2.Response
 class StoreSetDetailActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding : ActivityStoreSetDetailBinding
 
-    val TAG = "StoreSetDetailActivity"
-    val mActivity = this@StoreSetDetailActivity
-
     var storeTel = ""
     var storeInsta = ""
     var delivery = ""

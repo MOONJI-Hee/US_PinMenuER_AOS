@@ -39,7 +39,6 @@ import java.io.*
 
 class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding : ActivityStoreSetImgBinding
-    val TAG = "StoreSetImgActivity"
     val REQUEST_R_STORAGE = 1
 
     var imgUri: Uri ?= null

@@ -20,9 +20,6 @@ import retrofit2.Response
 class SetPayActivity : BaseActivity() {
     lateinit var binding: ActivitySetPayBinding
 
-    val mActivity = this@SetPayActivity
-    val TAG = "SetPayActivity"
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySetPayBinding.inflate(layoutInflater)

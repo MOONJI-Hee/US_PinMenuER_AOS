@@ -179,7 +179,7 @@
         app:layout_constraintTop_toTopOf="@+id/title"
         app:layout_constraintBottom_toBottomOf="@+id/title"
         app:layout_constraintEnd_toStartOf="@+id/tabPos"/>
-    
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/tabPos"
         android:layout_width="wrap_content"
@@ -199,14 +199,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
-        
+
         <View
             style="@style/new_badge"
             android:layout_marginStart="5dp"
             android:visibility="invisible"
             app:layout_constraintTop_toTopOf="@+id/tvPos"
             app:layout_constraintStart_toEndOf="@+id/tvPos" />
-        
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView

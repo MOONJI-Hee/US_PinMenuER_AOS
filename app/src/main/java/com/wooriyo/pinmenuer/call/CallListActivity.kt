@@ -32,10 +32,6 @@ class CallListActivity : BaseActivity() {
     lateinit var binding: ActivityCallListBinding
     lateinit var clearDialog: ClearDialog
     lateinit var clearConfirmDialog: NoticeDialog
-//    lateinit var timer: Timer
-
-    val TAG = "CallListActivity"
-    val mActivity = this@CallListActivity
 
     val callHistory = ArrayList<CallHistoryDTO>()
     val callListAdapter = CallListAdapter(callHistory)
@@ -58,11 +54,8 @@ class CallListActivity : BaseActivity() {
 
         // 클릭 이벤트
         binding.back.setOnClickListener { finish() }
-        binding.btnSet.setOnClickListener{ startActivity(Intent(mActivity, CallSetActivity::class.java)) }
-        binding.icNew.setOnClickListener{
-            getCallList()
-            it.visibility = View.GONE
-        }
+        binding.btnSet.setOnClickListener{  }
+
         binding.btnClear.setOnClickListener { clearDialog.show() }
 
         getCallList()
@@ -70,13 +63,6 @@ class CallListActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-//        timer = Timer()
-//        val timerTask: TimerTask = object : TimerTask() {
-//            override fun run() {
-//                getCallStatus()
-//            }
-//        }
-//        timer.schedule(timerTask, 0, 3000)
     }
 
     // 초기화 / 초기화 확인 다이얼로그 초기화

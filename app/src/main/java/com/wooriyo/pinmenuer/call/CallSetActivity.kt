@@ -22,11 +22,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class CallSetActivity : BaseActivity(), DialogListener {
-    val TAG = "CallSetActivity"
-    val mActivity = this@CallSetActivity
     lateinit var binding: ActivityCallListBinding
 
-    val setList = ArrayList<CallDTO>()
+    private val setList = ArrayList<CallDTO>()
     private val callSetAdapter = CallSetAdapter(setList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,14 +32,7 @@ class CallSetActivity : BaseActivity(), DialogListener {
         binding = ActivityCallListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // CallList와 레이아웃 같이 쓰기 때문에, SetActivity에 맞게 뷰 변경
-        binding.btnSet.setBackgroundResource(R.drawable.bg_btn_r6_grd)
-        binding.btnSet.text = getString(R.string.btn_complete)
-        binding.rvCall.visibility = View.GONE
-        binding.callSetArea.visibility = View.VISIBLE
-
-        binding.back.setOnClickListener{finish()}
-        binding.btnSet.setOnClickListener{finish()}
+        binding.back.setOnClickListener{ finish() }
 
         setView()
         getCallList()
@@ -80,8 +71,7 @@ class CallSetActivity : BaseActivity(), DialogListener {
             .enqueue(object : Callback<CallSetListDTO> {
                 override fun onResponse(call: Call<CallSetListDTO>, response: Response<CallSetListDTO>) {
                     Log.d(TAG, "직원호출 전체 목록 조회 URL : $response")
-                    if(!response.isSuccessful)
-                        return
+                    if(!response.isSuccessful) return
 
                     val callSetList = response.body()
                     if(callSetList != null) {

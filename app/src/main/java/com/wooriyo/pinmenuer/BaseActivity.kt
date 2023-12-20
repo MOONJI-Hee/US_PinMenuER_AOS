@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.wooriyo.pinmenuer.util.AppHelper
 
 open class BaseActivity: AppCompatActivity() {
+    open lateinit var mActivity: Activity
+    open lateinit var TAG: String
+
     val y = "Y"
     val n = "N"
     val d = "D"
@@ -31,6 +34,9 @@ open class BaseActivity: AppCompatActivity() {
         resources.displayMetrics.scaledDensity = MyApplication.density
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+
+        mActivity = this
+        TAG = mActivity.localClassName
 
         super.onCreate(savedInstanceState)
     }

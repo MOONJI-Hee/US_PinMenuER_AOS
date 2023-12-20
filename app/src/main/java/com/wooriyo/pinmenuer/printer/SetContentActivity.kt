@@ -24,9 +24,6 @@ import retrofit2.Response
 class SetContentActivity : BaseActivity() {
     lateinit var binding: ActivitySetContentBinding
 
-    val TAG = "SetContentActivity"
-    val mActivity = this@SetContentActivity
-
     var cnt = 0
     var strCate = ""    // 주방영수증에 출력될 카테고리 리스트 (String형, 콤마로 구분)
 
@@ -111,7 +108,7 @@ class SetContentActivity : BaseActivity() {
                     val result = response.body() ?: return
                     when(result.status) {
                         1 -> {
-                            Toast.makeText(mActivity, R.string.complete, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
                             setView(result)
                         }
                         else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()

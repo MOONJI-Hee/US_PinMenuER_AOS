@@ -17,9 +17,6 @@ import retrofit2.Response
 class PrinterModelListActivity : BaseActivity() {
     lateinit var binding: ActivityPrinterModelListBinding
 
-    val TAG = "PrintModelList"
-    val mActivity = this@PrinterModelListActivity
-
     val modelList = ArrayList<PrintModelDTO>()
 
     var selpos = 0

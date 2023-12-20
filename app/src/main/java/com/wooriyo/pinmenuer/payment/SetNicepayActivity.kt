@@ -16,9 +16,6 @@ import retrofit2.Response
 class SetNicepayActivity : BaseActivity() {
     lateinit var binding: ActivitySetNicepayBinding
 
-    val TAG = "SetNicepayActivity"
-    val mActivity = this@SetNicepayActivity
-
     var fromOrder = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {

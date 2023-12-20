@@ -31,8 +31,6 @@ import retrofit2.Response
 
 class StoreSetTimeActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding : ActivityStoreSetTimeBinding
-    val TAG = "StoreSetTimeActivity"
-    val mActivity = this@StoreSetTimeActivity
 
     var openTime = OpenTimeDTO()
     var breakTime = BrkTimeDTO()

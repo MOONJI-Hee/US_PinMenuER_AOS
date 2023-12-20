@@ -12,22 +12,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/icNew"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginEnd="6dp"
-            android:visibility="invisible"
-            android:src="@drawable/ic_pay_new"
-            app:layout_constraintTop_toTopOf="@+id/tvTitle"
-            app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
-            app:layout_constraintEnd_toStartOf="@+id/tvTitle"/>
-
         <TextView
             style="@style/text20b"
             android:id="@+id/tvTitle"
             android:textColor="@color/white"
-            android:text="@string/call_emp"
+            android:text="@string/call_manage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -54,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
         android:src="@drawable/btn_orderlist_info"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/btn_set"
         app:layout_constraintTop_toTopOf="@+id/title"
         app:layout_constraintBottom_toBottomOf="@+id/title"/>
@@ -67,6 +56,7 @@
         android:layout_marginEnd="20dp"
         android:gravity="center"
         android:text="@string/call_manage"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="@+id/title"
         app:layout_constraintBottom_toBottomOf="@+id/title"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -75,7 +65,7 @@
         android:id="@+id/rv_call"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:background="@color/btn_cancel"
         app:layout_constraintTop_toBottomOf="@+id/title"
         app:layout_constraintBottom_toBottomOf="parent" />
@@ -94,7 +84,6 @@
         android:id="@+id/call_set_area"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/title"
         app:layout_constraintBottom_toBottomOf="parent">
 

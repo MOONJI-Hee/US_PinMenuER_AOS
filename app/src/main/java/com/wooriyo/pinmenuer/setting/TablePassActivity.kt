@@ -15,8 +15,6 @@ import retrofit2.Response
 
 class TablePassActivity : BaseActivity() {
     lateinit var binding: ActivityTablePassBinding
-    val mActivity = this@TablePassActivity
-    val TAG = "TablePassActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

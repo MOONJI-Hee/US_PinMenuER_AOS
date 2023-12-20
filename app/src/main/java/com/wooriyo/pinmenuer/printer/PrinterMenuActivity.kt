@@ -30,9 +30,6 @@ import retrofit2.Response
 class PrinterMenuActivity : BaseActivity() {
     lateinit var binding: ActivityPrinterMenuBinding
 
-    val TAG = "PrinterMenuActivity"
-    val mActivity = this@PrinterMenuActivity
-
     val printerList = ArrayList<PrintDTO>()
 
     private val turnOnBluetoothResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {

@@ -9,7 +9,6 @@ import com.wooriyo.pinmenuer.databinding.DialogNoticeBinding
 
 class NoticeDialog(context: Context, val title: String, val content: String, private val onClickListener: OnClickListener): BaseDialog(context) {
     lateinit var binding: DialogNoticeBinding
-    val TAG = "NoticeDialog"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

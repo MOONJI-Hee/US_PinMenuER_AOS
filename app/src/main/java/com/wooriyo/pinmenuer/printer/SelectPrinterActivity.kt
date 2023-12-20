@@ -21,9 +21,6 @@ import retrofit2.Response
 class SelectPrinterActivity : BaseActivity() {
     lateinit var binding: ActivityPrinterModelListBinding
 
-    val TAG = "SelectPrinterActivity"
-    val mActivity = this@SelectPrinterActivity
-
     var type = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {

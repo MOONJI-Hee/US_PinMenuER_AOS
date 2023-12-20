@@ -24,8 +24,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MemberSetActivity: BaseActivity(), View.OnClickListener {
-    val TAG = "MemberSetActivity"
-    val mActivity = this@MemberSetActivity
     lateinit var binding : ActivitySignUpBinding
 
     var memberDTO: MemberDTO? = null

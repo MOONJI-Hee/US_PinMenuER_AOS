@@ -15,7 +15,7 @@ import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.broadcast.EasyCheckReceiver
-import com.wooriyo.pinmenuer.common.ConfirmDialog
+import com.wooriyo.pinmenuer.call.adapter.CallListAdapter
 import com.wooriyo.pinmenuer.common.NoticeDialog
 import com.wooriyo.pinmenuer.config.AppProperties
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.FONT_BIG
@@ -31,15 +31,17 @@ import com.wooriyo.pinmenuer.config.AppProperties.Companion.TITLE_MENU
 import com.wooriyo.pinmenuer.databinding.ActivityOrderListBinding
 import com.wooriyo.pinmenuer.listener.DialogListener
 import com.wooriyo.pinmenuer.listener.ItemClickListener
+import com.wooriyo.pinmenuer.model.CallHistoryDTO
+import com.wooriyo.pinmenuer.model.CallListDTO
 import com.wooriyo.pinmenuer.model.OrderDTO
 import com.wooriyo.pinmenuer.model.OrderHistoryDTO
 import com.wooriyo.pinmenuer.model.OrderListDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
+import com.wooriyo.pinmenuer.history.adapter.HistoryAdapter
 import com.wooriyo.pinmenuer.order.adapter.OrderAdapter
 import com.wooriyo.pinmenuer.order.dialog.ClearDialog
 import com.wooriyo.pinmenuer.order.dialog.CompleteDialog
 import com.wooriyo.pinmenuer.order.dialog.SelectPayDialog
-import com.wooriyo.pinmenuer.payment.NicepayInfoActivity
 import com.wooriyo.pinmenuer.payment.PayCardActivity
 import com.wooriyo.pinmenuer.payment.QrActivity
 import com.wooriyo.pinmenuer.payment.SetPgInfoActivity
@@ -53,11 +55,19 @@ class OrderListActivity : BaseActivity() {
     lateinit var clearDialog: ClearDialog
     lateinit var clearConfirmDialog: NoticeDialog
 
-    val TAG = "OrderListActivity"
-    val mActivity = this@OrderListActivity
+    private val totalList = ArrayList<OrderHistoryDTO>()
+    val totalAdapter = HistoryAdapter(totalList)
 
     val orderList = ArrayList<OrderHistoryDTO>()
     val orderAdapter = OrderAdapter(orderList)
+
+    val callList = ArrayList<CallHistoryDTO>()
+    val callAdapter = CallListAdapter(callList)
+
+    private val completeList = ArrayList<OrderHistoryDTO>()
+    val completeAdapter = HistoryAdapter(completeList)
+
+    // TODO 포스 에러 리스트
 
     // 프린트 관련 변수
     val escposPrinter = ESCPOSPrinter()
@@ -107,7 +117,7 @@ class OrderListActivity : BaseActivity() {
         orderAdapter.setOnPayClickListener(object:ItemClickListener{
             override fun onItemClick(position: Int) {
                 if(orderList[position].iscompleted == 1) {
-                    complete(position, 0, store.popup)
+                    completeOrder(position, 0, store.popup)
                 }else if(orderList[position].paytype == 3) {
                     completeInfoDialog(position)
                 }else {
@@ -158,7 +168,7 @@ class OrderListActivity : BaseActivity() {
                 NoticeDialog(mActivity,
                     getString(R.string.btn_delete),
                     getString(R.string.dialog_delete_order),
-                    View.OnClickListener{ delete(position) }
+                    View.OnClickListener{ deleteOrder(position) }
                 ).show()
             }
         })
@@ -173,16 +183,12 @@ class OrderListActivity : BaseActivity() {
         binding.rv.adapter = orderAdapter
 
         binding.back.setOnClickListener { finish() }
-        binding.icNew.setOnClickListener{
-            getOrderList()
-            it.visibility = View.GONE
-        }
         binding.btnClear.setOnClickListener { clearDialog.show() }
     }
 
     override fun onResume() {
         super.onResume()
-        getOrderList()
+        getTotalList()
     }
 
     // 초기화 / 초기화 확인 다이얼로그 초기화
@@ -199,7 +205,7 @@ class OrderListActivity : BaseActivity() {
             mActivity,
             getString(R.string.dialog_order_clear_title),
             getString(R.string.dialog_confrim_clear),
-            View.OnClickListener { clear() }
+            View.OnClickListener { clearOrder() }
         )
     }
 
@@ -211,21 +217,21 @@ class OrderListActivity : BaseActivity() {
                 dialog.setOnCompleteListener(object : DialogListener {
                     override fun onComplete(popup: Int) {
                         super.onComplete(popup)
-                        complete(position, 1, popup)
+                        completeOrder(position, 1, popup)
                         dialog.dismiss()
                     }
                 })
                 dialog.show()
             }
             1 ->  {
-                complete(position, 1, store.popup)
+                completeOrder(position, 1, store.popup)
             }
         }
     }
 
-    // 주문 목록 조회
-    fun getOrderList() {
-        ApiClient.service.getOrderList(useridx, storeidx).enqueue(object : Callback<OrderListDTO>{
+    // 전체 목록 조회
+    fun getTotalList() {
+        ApiClient.service.getTotalList(useridx, storeidx).enqueue(object : Callback<OrderListDTO>{
             override fun onResponse(call: Call<OrderListDTO>, response: Response<OrderListDTO>) {
                 Log.d(TAG, "주문 목록 조회 url : $response")
                 if(!response.isSuccessful) return
@@ -242,7 +248,6 @@ class OrderListActivity : BaseActivity() {
                                 binding.rv.visibility = View.GONE
                             }else {
 //                                orderList.sortBy { it.iscompleted }
-                                binding.total.text = result.totalCnt.toString()
                                 binding.empty.visibility = View.GONE
                                 binding.rv.visibility = View.VISIBLE
                                 orderAdapter.notifyDataSetChanged()
@@ -261,8 +266,13 @@ class OrderListActivity : BaseActivity() {
         })
     }
 
+    // 주문 목록 조회
+    fun getOrderList() {
+
+    }
+
     // 주문 초기화
-    fun clear() {
+    fun clearOrder() {
         ApiClient.service.clearOrder(useridx, storeidx).enqueue(object:Callback<ResultDTO>{
             override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                 Log.d(TAG, "주문 초기화 url : $response")
@@ -271,7 +281,7 @@ class OrderListActivity : BaseActivity() {
                 val result = response.body() ?: return
                 Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                 if(result.status == 1){
-                    getOrderList()
+                    getTotalList()
                 }
             }
             override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
@@ -283,7 +293,7 @@ class OrderListActivity : BaseActivity() {
     }
 
     // 주문 완료 처리
-    fun complete(position: Int, isCompleted: Int, popup: Int) {
+    fun completeOrder(position: Int, isCompleted: Int, popup: Int) {
         val status = if(isCompleted == 1) "Y" else "N"
         ApiClient.service.udtComplete(storeidx, orderList[position].idx, status, popup)
             .enqueue(object:Callback<ResultDTO>{
@@ -294,7 +304,7 @@ class OrderListActivity : BaseActivity() {
                     val result = response.body() ?: return
                     when(result.status){
                         1 -> {
-                            Toast.makeText(mActivity, R.string.complete, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
                             orderList[position].iscompleted = isCompleted
                             //                        orderList.sortBy { it.iscompleted }
                             orderAdapter.notifyItemChanged(position)
@@ -313,7 +323,7 @@ class OrderListActivity : BaseActivity() {
     }
 
     // 주문 삭제
-    fun delete(position: Int) {
+    fun deleteOrder(position: Int) {
         ApiClient.service.deleteOrder(storeidx, orderList[position].idx).enqueue(object:Callback<ResultDTO>{
             override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                 Log.d(TAG, "주문 삭제 url : $response")
@@ -322,7 +332,7 @@ class OrderListActivity : BaseActivity() {
                 val result = response.body() ?: return
                 when(result.status){
                     1 -> {
-                        Toast.makeText(mActivity, R.string.complete, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
                         orderList.removeAt(position)
                         orderAdapter.notifyItemRemoved(position)
                     }
@@ -334,6 +344,87 @@ class OrderListActivity : BaseActivity() {
                 Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "주문 삭제 실패 > $t")
                 Log.d(TAG, "주문 삭제 실패 > ${call.request()}")
+            }
+        })
+    }
+
+    // 호출 리스트 (히스토리) 조회
+    fun getCallList() {
+        ApiClient.service.getCallHistory(useridx, storeidx).enqueue(object: Callback<CallListDTO>{
+            override fun onResponse(call: Call<CallListDTO>, response: Response<CallListDTO>) {
+                Log.d(TAG, "호출 목록 조회 url : $response")
+                if(!response.isSuccessful) return
+
+                val result = response.body()
+                if(result != null) {
+                    when(result.status){
+                        1 -> {
+                            callList.clear()
+                            callList.addAll(result.callList)
+
+                            if(callList.isEmpty()) {
+                                binding.empty.visibility = View.VISIBLE
+//                                binding.rvCall.visibility = View.GONE
+                            }else {
+                                binding.empty.visibility = View.GONE
+//                                binding.rvCall.visibility = View.VISIBLE
+                                callAdapter.notifyDataSetChanged()
+                            }
+                        }
+                        else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            override fun onFailure(call: Call<CallListDTO>, t: Throwable) {
+                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "호출 목록 조회 오류 > $t")
+                Log.d(TAG, "호출 목록 조회 오류 > ${call.request()}")
+            }
+        })
+    }
+
+    // 호출 완료 처리
+    fun completeCall(position: Int) {
+        ApiClient.service.completeCall(storeidx, callList[position].idx, "Y").enqueue(object:Callback<ResultDTO>{
+            override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                Log.d(TAG, "호출 완료 url : $response")
+                if(!response.isSuccessful) return
+
+                val result = response.body() ?: return
+                when(result.status){
+                    1 -> {
+                        callList[position].iscompleted = 1
+                        callAdapter.notifyItemChanged(position)
+                    }
+                    else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "호출 완료 실패 > $t")
+                Log.d(TAG, "호출 완료 실패 오류 > ${call.request()}")
+            }
+        })
+    }
+
+    // 호출 초기화
+    fun clearCall() {
+        ApiClient.service.clearCall(useridx, storeidx).enqueue(object:Callback<ResultDTO>{
+            override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                Log.d(TAG, "직원호출 초기화 url : $response")
+                if(!response.isSuccessful) return
+
+                val result = response.body() ?: return
+                Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                if(result.status == 1){
+                    getCallList()
+                }
+            }
+            override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "직원호출 초기화 실패 > $t")
+                Log.d(TAG, "직원호출 초기화 실패 > ${call.request()}")
             }
         })
     }

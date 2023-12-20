@@ -33,9 +33,6 @@ import retrofit2.Response
 class StoreListActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding : ActivityStoreListBinding
 
-    val TAG = "StoreListActivity"
-    val mActivity = this
-
     var storeList = ArrayList<StoreDTO>()
     var storeAdapter = StoreAdapter(storeList)
 

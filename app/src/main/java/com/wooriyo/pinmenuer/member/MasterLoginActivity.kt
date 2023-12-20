@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ActivityMasterLoginBinding
@@ -15,11 +16,8 @@ import com.wooriyo.pinmenuer.util.AppHelper
 import retrofit2.Call
 import retrofit2.Response
 
-class MasterLoginActivity : AppCompatActivity() {
+class MasterLoginActivity : BaseActivity() {
     lateinit var binding: ActivityMasterLoginBinding
-
-    val mActivity = this@MasterLoginActivity
-    val TAG = "MasterLoginActivity"
 
     var id = ""
     var pw = ""

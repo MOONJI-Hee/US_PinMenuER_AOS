@@ -23,8 +23,6 @@ import retrofit2.Response
 class MapActivity : BaseActivity() {
     lateinit var binding: ActivityMapBinding
 
-    val TAG = "MapActivity"
-
     private lateinit var mapView : MapView
     private lateinit var marker : MapPOIItem
 

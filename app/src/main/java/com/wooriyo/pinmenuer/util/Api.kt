@@ -172,16 +172,6 @@ interface Api {
     ): Call<ResultDTO>
 
     // 매장 특별 휴일 저장
-//    @FormUrlEncoded
-//    @POST("m/ins_holiday.php")
-//    fun insHoliday (
-//        @Field("useridx") useridx: Int,
-//        @Field("idx") storeidx: Int,
-//        @Field("title") title : String,
-//        @Field("month") month : String,
-//        @Field("day") day : String
-//    ): Call<ResultDTO>
-
     @GET("m/ins_holiday.php")
     fun insHoliday (
         @Query("useridx") useridx: Int,
@@ -382,32 +372,26 @@ interface Api {
         @Query("viewmode") viewmode: String // b : 기본, p: 3x3
     ): Call<ResultDTO>
 
-    // 새로운 주문 유무 확인
-    @GET("m/udtOrdStatus.php")
-    fun getOrdStatus(
-        @Query("useridx") useridx: Int,
-        @Query("storeidx") storeidx: Int
-    ): Call<ResultDTO>
-
-    // 주문 확인 처리
-    @GET("m/udtOrdUpdate.php")
-    fun udtOrdStatus(
-        @Query("useridx") useridx: Int,
-        @Query("storeidx") storeidx: Int
-    ): Call<ResultDTO>
-
-    // 주문 목록(히스토리) 조회
-    @GET("m/order.list.php")
-    fun getOrderList(
-        @Query("useridx") useridx: Int,
-        @Query("storeidx") storeidx: Int
-    ): Call<OrderListDTO>
 
     // 단건 주문 조회 (푸시)
     @GET("m/get.receipt.php")
     fun getReceipt(
         @Query("ordcode") ordcode: String,  // 주문 코드
     ): Call<ReceiptDTO>
+
+    // 전체 목록(히스토리)(주문,호출) 조회
+    @GET("m/isorder.list.php")
+    fun getTotalList(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int
+    ): Call<OrderListDTO>
+
+    // 주문만 호출
+    @GET("m/order.list.php")
+    fun getOrderList(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int
+    ): Call<OrderListDTO>
 
     // 주문 완료
     @GET("m/udtCompletedOrder.php")
@@ -439,20 +423,6 @@ interface Api {
         @Query("storeidx") storeidx: Int
     ): Call<ResultDTO>
 
-//    // 새로운 직원 호출 유무 확인
-//    @GET("m/udtCallStatus.php")
-//    fun getCallStatus(
-//        @Query("useridx") useridx: Int,
-//        @Query("storeidx") storeidx: Int
-//    ): Call<ResultDTO>
-
-//    // 직원 호출 확인 처리
-//    @GET("m/udtCallUpdate.php")
-//    fun udtCallStatus(
-//        @Query("useridx") useridx: Int,
-//        @Query("storeidx") storeidx: Int
-//    ): Call<ResultDTO>
-
     // 직원 호출 히스토리 조회
     @GET("m/callHistory.php")
     fun getCallHistory(
@@ -474,6 +444,14 @@ interface Api {
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int
     ): Call<ResultDTO>
+
+    // 완료 목록 조회
+    @GET("m/orderCompleted.list.php")
+    fun getCompletedList(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int
+    ): Call<OrderListDTO>
+
 
     // 직원 호출 등록된 목록 조회 >> (고객이 호출한 내역 아님!! 관리자가 등록했던 리스트 전체)
     @GET("m/call.list.php")

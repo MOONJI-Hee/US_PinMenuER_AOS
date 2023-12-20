@@ -23,8 +23,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SignUpActivity : BaseActivity(), View.OnClickListener {
-    val TAG = "SignUpActivity"
-    val mActivity = this@SignUpActivity
     lateinit var binding : ActivitySignUpBinding
 
     var idChecked = false

@@ -15,8 +15,11 @@ import com.wooriyo.pinmenuer.MyApplication.Companion.allCateList
 import com.wooriyo.pinmenuer.MyApplication.Companion.androidId
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.call.CallListActivity
+import com.wooriyo.pinmenuer.call.CallSetActivity
 import com.wooriyo.pinmenuer.common.NoticeDialog
 import com.wooriyo.pinmenuer.databinding.ActivityStoreMenuBinding
+import com.wooriyo.pinmenuer.history.ByHistoryActivity
+import com.wooriyo.pinmenuer.history.ByTableActivity
 import com.wooriyo.pinmenuer.member.MemberSetActivity
 import com.wooriyo.pinmenuer.menu.CategorySetActivity
 import com.wooriyo.pinmenuer.menu.MenuSetActivity
@@ -38,9 +41,6 @@ import retrofit2.Response
 class StoreMenuActivity : BaseActivity(), OnClickListener {
     lateinit var binding: ActivityStoreMenuBinding
 
-    val TAG = "StoreMenuActivity"
-    val mActivity = this@StoreMenuActivity
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStoreMenuBinding.inflate(layoutInflater)
@@ -52,17 +52,21 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
             title.text = store.name
             version.text = "Ver ${MyApplication.appver}"
 
-            back.setOnClickListener(mActivity)
-            udtMbr.setOnClickListener(mActivity)
-            order.setOnClickListener(mActivity)
-            call.setOnClickListener(mActivity)
-            menu.setOnClickListener(mActivity)
-            tablePass.setOnClickListener(mActivity)
-            menuUi.setOnClickListener(mActivity)
-            printer.setOnClickListener(mActivity)
-            payment.setOnClickListener(mActivity)
-            pgCancel.setOnClickListener(mActivity)
-            qrCustomerInfo.setOnClickListener(mActivity)
+            back.setOnClickListener{ leaveStore() }
+            udtMbr.setOnClickListener(this@StoreMenuActivity)
+
+            // 주문 & 호출 내역
+            history.setOnClickListener{ startActivity(Intent(mActivity, ByHistoryActivity::class.java)) }
+            byTable.setOnClickListener{ startActivity(Intent(mActivity, ByTableActivity::class.java)) }
+            menu.setOnClickListener(this@StoreMenuActivity)
+            tablePass.setOnClickListener(this@StoreMenuActivity)
+            setCall.setOnClickListener { startActivity(Intent(mActivity, CallSetActivity::class.java)) }
+
+            printer.setOnClickListener{ insPrintSetting() }
+            payment.setOnClickListener{ insPaySetting() }
+            pgCancel.setOnClickListener(this@StoreMenuActivity)
+            design.setOnClickListener(this@StoreMenuActivity)
+//            qrCustomerInfo.setOnClickListener(this@StoreMenuActivity)
         }
     }
 
@@ -72,10 +76,8 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
 
     override fun onClick(p0: View?) {
         when(p0) {
-            binding.back -> leaveStore()
             binding.udtMbr -> startActivity(Intent(mActivity, MemberSetActivity::class.java))
-            binding.order -> startActivity(Intent(mActivity, OrderListActivity::class.java))
-            binding.call -> startActivity(Intent(mActivity, CallListActivity::class.java))
+
             binding.menu -> {
                 if(allCateList.isEmpty()) {
                     val intent = Intent(mActivity, CategorySetActivity::class.java)
@@ -86,9 +88,8 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                 }
             }
             binding.tablePass -> startActivity(Intent(mActivity, TablePassActivity::class.java))
-            binding.menuUi -> startActivity(Intent(mActivity, MenuUiActivity::class.java))
-            binding.printer -> insPrintSetting()
-            binding.payment -> insPaySetting()
+            binding.design -> startActivity(Intent(mActivity, MenuUiActivity::class.java))
+
             binding.pgCancel -> {
                 if(store.pg_storenm.isEmpty() || store.pg_snum.isEmpty()) {
                     NoPgInfoDialog(mActivity).show()
@@ -129,7 +130,7 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
     }
 
     fun leaveStore() {
-        ApiClient.service.leaveStore(useridx, storeidx, MyApplication.androidId)
+        ApiClient.service.leaveStore(useridx, storeidx, androidId)
             .enqueue(object : Callback<ResultDTO> {
                 override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                     Log.d(TAG, "매장 나가기 url : $response")

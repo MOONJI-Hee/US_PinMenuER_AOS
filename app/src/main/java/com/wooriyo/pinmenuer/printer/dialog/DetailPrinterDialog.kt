@@ -68,7 +68,7 @@ class DetailPrinterDialog(context: Context, val printer: PrintDTO): BaseDialog(c
                     val result = response.body() ?: return
                     when(result.status) {
                         1 -> {
-                            Toast.makeText(context, R.string.complete, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, R.string.msg_complete, Toast.LENGTH_SHORT).show()
                             printer.nick = nick
                             dismiss()
                         }
@@ -94,7 +94,7 @@ class DetailPrinterDialog(context: Context, val printer: PrintDTO): BaseDialog(c
                 val result = response.body() ?: return
                 when(result.status) {
                     1 -> {
-                        Toast.makeText(context, R.string.complete, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, R.string.msg_complete, Toast.LENGTH_SHORT).show()
 
                         dismiss()
                     }

@@ -15,9 +15,6 @@ import com.wooriyo.pinmenuer.printer.adapter.SelCateAdapter
 class SelCateActivity : BaseActivity() {
     lateinit var binding: ActivitySelCateBinding
 
-    val TAG = "SelCateActivity"
-    val mActivity = this@SelCateActivity
-
     var cnt = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {

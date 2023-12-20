@@ -16,7 +16,7 @@ import retrofit2.Response
 
 class MenuUiActivity : BaseActivity() {
     lateinit var binding: ActivityMenuUiBinding
-    val TAG = "MenuUIActivity"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMenuUiBinding.inflate(layoutInflater)

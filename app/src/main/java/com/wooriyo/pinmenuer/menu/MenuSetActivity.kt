@@ -54,9 +54,6 @@ import java.io.File
 
 
 class MenuSetActivity : BaseActivity(), View.OnClickListener {
-    val TAG = "MenuSetActivity"
-    val mActivity = this@MenuSetActivity
-
     lateinit var binding: ActivityMenuSetBinding
     lateinit var cateAdapter : CateAdapter
 
@@ -161,6 +158,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             binding.btnSeq -> {
                 v as TextView
                 if(mode == 3) { // 순서변경모드일 때 > 완료 수정모드로 변경
+                    udtSequence()
                     v.setBackgroundResource(R.drawable.bg_btn_r6)
                     v.text = getString(R.string.change_seq)
                     mode = 1
@@ -762,7 +760,6 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         selGoodsList.forEach {
             val json = JSONObject()
             json.put("idx", it.idx)
-            json.put("seq", it.seq)
 
             JSON.put(json)
         }

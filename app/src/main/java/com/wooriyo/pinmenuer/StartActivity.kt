@@ -23,8 +23,6 @@ import retrofit2.Call
 import retrofit2.Response
 
 class StartActivity: BaseActivity() {
-    val TAG = "StartActivity"
-
     var id = ""
     var pw = ""
     var token = ""

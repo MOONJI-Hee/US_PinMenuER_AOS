@@ -32,8 +32,6 @@ import retrofit2.Response
 class CategorySetActivity : BaseActivity(), DialogListener {
     lateinit var binding : ActivityCategorySetBinding
 
-    val TAG = "CategorySetActivity"
-
     lateinit var cateAdapter : CateAdapter
     lateinit var cateEditAdapter : CateEditAdapter
 

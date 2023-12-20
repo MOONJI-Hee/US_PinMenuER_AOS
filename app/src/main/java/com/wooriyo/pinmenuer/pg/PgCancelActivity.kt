@@ -21,8 +21,6 @@ import retrofit2.Response
 
 class PgCancelActivity : BaseActivity() {
     lateinit var binding: ActivityPgCancelBinding
-    val mActivity = this@PgCancelActivity
-    val TAG = "PgCancelActivity"
 
     val goodsList = ArrayList<PgDetailDTO>()
     val goodsAdapter = PgGoodsAdapter(goodsList)
@@ -94,7 +92,7 @@ class PgCancelActivity : BaseActivity() {
                 val result = response.body() ?: return
                 when (result.status) {
                     1 -> {
-                        Toast.makeText(mActivity, R.string.complete, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
                         finish()
                     }
                     else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()

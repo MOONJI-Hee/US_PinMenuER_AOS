@@ -11,6 +11,7 @@ import android.widget.CheckBox
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.broadcast.EasyCheckReceiver
@@ -27,10 +28,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PayCardActivity : AppCompatActivity() {
-    val TAG = "PayCardActivity"
-    val mActivity = this@PayCardActivity
-
+class PayCardActivity : BaseActivity() {
     lateinit var binding: ActivityPayCardBinding
     lateinit var order : OrderHistoryDTO
     lateinit var olist : ArrayList<OrderDTO>
@@ -199,7 +197,7 @@ class PayCardActivity : AppCompatActivity() {
                 val result = response.body() ?: return
                 when(result.status){
                     1 -> {
-//                        Toast.makeText(mActivity, R.string.complete, Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
                         setResult(RESULT_OK, intent)
                         finish()
                     }

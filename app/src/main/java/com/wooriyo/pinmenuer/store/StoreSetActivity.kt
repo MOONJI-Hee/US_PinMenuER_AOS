@@ -27,9 +27,6 @@ import retrofit2.Response
 class StoreSetActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding : ActivityStoreSetBinding
 
-    val TAG = "StoreSetActivity"
-    val mActivity = this@StoreSetActivity
-
     var type : Int = 0            // 1 : 등록, 2 : 수정
 
     //registerForActivityResult

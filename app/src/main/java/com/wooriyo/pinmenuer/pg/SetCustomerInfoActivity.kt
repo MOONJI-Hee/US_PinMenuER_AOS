@@ -21,8 +21,6 @@ import retrofit2.Response
 
 class SetCustomerInfoActivity : BaseActivity() {
     lateinit var binding: ActivitySetCustomerInfoBinding
-    val mActivity = this@SetCustomerInfoActivity
-    val TAG = "SetCustomerInfoActivity"
 
     val tableList = ArrayList<PgTableDTO>()
     val tableAdapter = PgTableAdapter(tableList)
@@ -66,7 +64,7 @@ class SetCustomerInfoActivity : BaseActivity() {
                 val result = response.body() ?: return
                 when(result.status) {
                     1 -> {
-                        Toast.makeText(mActivity, R.string.complete, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
                         store.blname = useName
                         store.blphone = usePhone
                         store.bladdr = useAddr

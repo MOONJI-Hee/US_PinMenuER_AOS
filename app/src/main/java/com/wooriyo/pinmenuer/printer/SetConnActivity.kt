@@ -35,9 +35,6 @@ import retrofit2.Response
 class SetConnActivity : BaseActivity() {
     lateinit var binding: ActivitySetConnBinding
 
-    val TAG = "SetConnActivity"
-    val mActivity = this@SetConnActivity
-
     val printerList = ArrayList<PrintDTO>()
     val printerAdapter = PrinterAdapter(printerList)
 
