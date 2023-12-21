@@ -4,7 +4,6 @@ import com.wooriyo.pinmenuer.model.*
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
-import java.io.File
 
 interface Api {
     // 버전 체크
@@ -372,22 +371,81 @@ interface Api {
         @Query("viewmode") viewmode: String // b : 기본, p: 3x3
     ): Call<ResultDTO>
 
-
     // 단건 주문 조회 (푸시)
     @GET("m/get.receipt.php")
     fun getReceipt(
         @Query("ordcode") ordcode: String,  // 주문 코드
     ): Call<ReceiptDTO>
 
+    // 모든 테이블 주문 목록 조회 (테이블별 조회)
+    @GET("m/tableNo.AllOrdList.php")
+    fun getTableTotalList(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int
+    ): Call<OrderListDTO>
+
+    // 테이블별 주문 리스트
+    @GET("m/tableNo.OrdList.php")
+    fun getTableOrderList(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int
+    ): Call<OrderListDTO>
+
+    // 테이블별 호출 목록 조회
+    @GET("m/tableNo.CallList.php")
+    fun getTableCallList(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int
+    ): Call<CallListDTO>
+
+    // 테이블별 완료 리스트
+    @GET("m/tableNo.CompletedList.php")
+    fun getTableCompletedList(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int
+    ): Call<OrderListDTO>
+
+    // 테이블별 전체 완료 처리
+    @GET("m/udtCompletedAllOrder.php")
+    fun setTableComplete(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("tableNo") tableNo: String,
+        @Query("iscompleted") iscompleted: String,
+    ):Call<ResultDTO>
+
     // 전체 목록(히스토리)(주문,호출) 조회
-    @GET("m/isorder.list.php")
+    @GET("m/allorder.list.php")
     fun getTotalList(
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int
     ): Call<OrderListDTO>
 
+    // 완료 목록 조회
+    @GET("m/orderCompleted.list.php")
+    fun getCompletedList(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int
+    ): Call<OrderListDTO>
+
+    // 포스 전송 실패 목록 조회
+    @GET("m/posorder.list.php")
+    fun getPosErrorList(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int
+    ): Call<OrderListDTO>
+
+    // 포스 재전송
+    @GET("m/pos_send.php")
+    fun sendToPos(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("gidx") idx: Int,            // 주문 idx
+        @Query("tableNo") tableNo: String
+    ): Call<OrderListDTO>
+
     // 주문만 호출
-    @GET("m/order.list.php")
+    @GET("m/isorder.list.php")
     fun getOrderList(
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int
@@ -444,13 +502,6 @@ interface Api {
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int
     ): Call<ResultDTO>
-
-    // 완료 목록 조회
-    @GET("m/orderCompleted.list.php")
-    fun getCompletedList(
-        @Query("useridx") useridx: Int,
-        @Query("storeidx") storeidx: Int
-    ): Call<OrderListDTO>
 
 
     // 직원 호출 등록된 목록 조회 >> (고객이 호출한 내역 아님!! 관리자가 등록했던 리스트 전체)
