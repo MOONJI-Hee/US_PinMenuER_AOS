@@ -1,29 +1,38 @@
 package com.wooriyo.pinmenuer.order.dialog
 
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
+import android.view.ViewGroup
 import com.wooriyo.pinmenuer.BaseDialog
+import com.wooriyo.pinmenuer.BaseDialogFragment
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.DialogClearBinding
+import com.wooriyo.pinmenuer.databinding.DialogConfirmBinding
 
-class ClearDialog(context: Context, val type: String, val onClickListener: View.OnClickListener): BaseDialog(context) {
+class ClearDialog(val callClickListener: OnClickListener, val ordClickListener: OnClickListener): BaseDialogFragment() {
     lateinit var binding: DialogClearBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DialogClearBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        if(type == "call") {
-            binding.content.text = context.getString(R.string.call_dialog_clear)
-        }
 
         binding.close.setOnClickListener { dismiss() }
-        binding.confirm.setOnClickListener{ dismiss() }
-        binding.clear.setOnClickListener {
-            onClickListener.onClick(it)
-        }
-    }
 
+        binding.clearCall.setOnClickListener {
+            callClickListener.onClick(it)
+            dismiss()
+        }
+
+        binding.clearOrder.setOnClickListener {
+            ordClickListener.onClick(it)
+            dismiss()
+        }
+
+        return binding.root
+    }
 }

@@ -183,25 +183,10 @@
 
     <TextView
         style="@style/menu"
-        android:id="@+id/payment"
-        android:text="@string/payment_set"
-        app:layout_constraintStart_toStartOf="@+id/byTable"
-        app:layout_constraintTop_toTopOf="@+id/printer"/>
-
-    <TextView
-        style="@style/subtext"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:text="@string/payment_set_sub"
-        app:layout_constraintStart_toStartOf="@+id/payment"
-        app:layout_constraintTop_toBottomOf="@+id/payment" />
-
-    <TextView
-        style="@style/menu"
         android:id="@+id/pgCancel"
         android:text="@string/pg_cancel_menu"
         app:layout_constraintTop_toTopOf="@+id/payment"
-        app:layout_constraintStart_toStartOf="@+id/menu"/>
+        app:layout_constraintStart_toStartOf="@+id/byTable"/>
 
     <TextView
         style="@style/subtext"
@@ -215,7 +200,7 @@
         style="@style/menu"
         android:id="@+id/design"
         android:text="@string/menu_ui"
-        app:layout_constraintStart_toStartOf="@+id/tablePass"
+        app:layout_constraintStart_toStartOf="@+id/menu"
         app:layout_constraintTop_toTopOf="@+id/pgCancel" />
 
     <TextView
@@ -242,5 +227,22 @@
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/qrCustomerInfo"
         app:layout_constraintTop_toBottomOf="@+id/qrCustomerInfo" />
+
+    <TextView
+        style="@style/menu"
+        android:id="@+id/payment"
+        android:text="@string/payment_set"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/byTable"
+        app:layout_constraintTop_toTopOf="@+id/printer"/>
+
+    <TextView
+        style="@style/subtext"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:text="@string/payment_set_sub"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/payment"
+        app:layout_constraintTop_toBottomOf="@+id/payment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

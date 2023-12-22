@@ -56,7 +56,7 @@ class CallListActivity : BaseActivity() {
         binding.back.setOnClickListener { finish() }
         binding.btnSet.setOnClickListener{  }
 
-        binding.btnClear.setOnClickListener { clearDialog.show() }
+        binding.btnClear.setOnClickListener { }
 
         getCallList()
     }
@@ -67,20 +67,6 @@ class CallListActivity : BaseActivity() {
 
     // 초기화 / 초기화 확인 다이얼로그 초기화
     fun setClearDialog() {
-        clearDialog = ClearDialog(
-            mActivity,
-            "call",
-            View.OnClickListener {
-                clearDialog.dismiss()
-                clearConfirmDialog.show()
-            })
-
-        clearConfirmDialog = NoticeDialog(
-            mActivity,
-            getString(R.string.dialog_call_clear_title),
-            getString(R.string.dialog_confrim_clear),
-            View.OnClickListener { clear() }
-        )
     }
 
     override fun onPause() {

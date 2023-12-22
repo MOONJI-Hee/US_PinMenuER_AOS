@@ -59,10 +59,10 @@ class MyFirebaseService : FirebaseMessagingService() {
         if(currentActivity != null) {
             Log.d(TAG, "currentActivity.localClassName >> ${currentActivity.localClassName}")
 
-            if (currentActivity.localClassName == "call.CallListActivity")
-                (currentActivity as CallListActivity).getCallList()
-            else if (currentActivity.localClassName == "order.OrderListActivity")
-                (currentActivity as OrderListActivity).getOrderList()
+//            if (currentActivity.localClassName == "call.CallListActivity")
+//                (currentActivity as CallListActivity).getCallList()
+//            else if (currentActivity.localClassName == "order.OrderListActivity")
+//                (currentActivity as OrderListActivity).getOrderList()
         }else{
             Log.d(TAG, "currentActivity == null")
         }

@@ -114,7 +114,7 @@ class OrderListActivity : BaseActivity() {
             hyphen.append("-")
         }
 
-        orderAdapter.setOnPayClickListener(object:ItemClickListener{
+        orderAdapter.setOnCompleteListener(object:ItemClickListener{
             override fun onItemClick(position: Int) {
                 if(orderList[position].iscompleted == 1) {
                     completeOrder(position, 0, store.popup)
@@ -183,7 +183,7 @@ class OrderListActivity : BaseActivity() {
         binding.rv.adapter = orderAdapter
 
         binding.back.setOnClickListener { finish() }
-        binding.btnClear.setOnClickListener { clearDialog.show() }
+        binding.btnClear.setOnClickListener {}
     }
 
     override fun onResume() {
@@ -193,20 +193,7 @@ class OrderListActivity : BaseActivity() {
 
     // 초기화 / 초기화 확인 다이얼로그 초기화
     fun setClearDialog() {
-        clearDialog = ClearDialog(
-            mActivity,
-            "order",
-            View.OnClickListener {
-            clearDialog.dismiss()
-            clearConfirmDialog.show()
-        })
 
-        clearConfirmDialog = NoticeDialog(
-            mActivity,
-            getString(R.string.dialog_order_clear_title),
-            getString(R.string.dialog_confrim_clear),
-            View.OnClickListener { clearOrder() }
-        )
     }
 
     // 완료 처리 안내 다이얼로그
@@ -266,11 +253,6 @@ class OrderListActivity : BaseActivity() {
         })
     }
 
-    // 주문 목록 조회
-    fun getOrderList() {
-
-    }
-
     // 주문 초기화
     fun clearOrder() {
         ApiClient.service.clearOrder(useridx, storeidx).enqueue(object:Callback<ResultDTO>{
@@ -295,7 +277,7 @@ class OrderListActivity : BaseActivity() {
     // 주문 완료 처리
     fun completeOrder(position: Int, isCompleted: Int, popup: Int) {
         val status = if(isCompleted == 1) "Y" else "N"
-        ApiClient.service.udtComplete(storeidx, orderList[position].idx, status, popup)
+        ApiClient.service.udtComplete(storeidx, orderList[position].idx, status)
             .enqueue(object:Callback<ResultDTO>{
                 override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                     Log.d(TAG, "주문 완료 url : $response")
@@ -408,26 +390,7 @@ class OrderListActivity : BaseActivity() {
         })
     }
 
-    // 호출 초기화
-    fun clearCall() {
-        ApiClient.service.clearCall(useridx, storeidx).enqueue(object:Callback<ResultDTO>{
-            override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
-                Log.d(TAG, "직원호출 초기화 url : $response")
-                if(!response.isSuccessful) return
 
-                val result = response.body() ?: return
-                Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
-                if(result.status == 1){
-                    getCallList()
-                }
-            }
-            override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
-                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
-                Log.d(TAG, "직원호출 초기화 실패 > $t")
-                Log.d(TAG, "직원호출 초기화 실패 > ${call.request()}")
-            }
-        })
-    }
 
     // 주문 프린트
     fun print(position: Int) {

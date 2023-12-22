@@ -42,6 +42,9 @@
             android:name=".history.ByTableActivity"
             android:exported="false" />
         <activity
+            android:name=".history.TableHisActivity"
+            android:exported="false" />
+        <activity
             android:name=".pg.SetCustomerInfoActivity"
             android:exported="false" />
         <activity

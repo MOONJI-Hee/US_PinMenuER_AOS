@@ -377,30 +377,9 @@ interface Api {
         @Query("ordcode") ordcode: String,  // 주문 코드
     ): Call<ReceiptDTO>
 
-    // 모든 테이블 주문 목록 조회 (테이블별 조회)
+    // 모든 테이블 내역 조회 (테이블별 조회)
     @GET("m/tableNo.AllOrdList.php")
-    fun getTableTotalList(
-        @Query("useridx") useridx: Int,
-        @Query("storeidx") storeidx: Int
-    ): Call<OrderListDTO>
-
-    // 테이블별 주문 리스트
-    @GET("m/tableNo.OrdList.php")
-    fun getTableOrderList(
-        @Query("useridx") useridx: Int,
-        @Query("storeidx") storeidx: Int
-    ): Call<OrderListDTO>
-
-    // 테이블별 호출 목록 조회
-    @GET("m/tableNo.CallList.php")
-    fun getTableCallList(
-        @Query("useridx") useridx: Int,
-        @Query("storeidx") storeidx: Int
-    ): Call<CallListDTO>
-
-    // 테이블별 완료 리스트
-    @GET("m/tableNo.CompletedList.php")
-    fun getTableCompletedList(
+    fun getTableHisList(
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int
     ): Call<OrderListDTO>
@@ -411,8 +390,48 @@ interface Api {
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int,
         @Query("tableNo") tableNo: String,
-        @Query("iscompleted") iscompleted: String,
+        @Query("iscompleted") iscompleted: String
     ):Call<ResultDTO>
+
+    // 테이블별 전체 내역 조회 (테이블별 조회)
+    @GET("m/tableNo.TotalList.php")
+    fun getTableTotalList(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("tableNo") tableNo: String
+    ): Call<OrderListDTO>
+
+    // 테이블별 주문 리스트
+    @GET("m/tableNo.OrdList.php")
+    fun getTableOrderList(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("tableNo") tableNo: String
+    ): Call<OrderListDTO>
+
+    // 테이블별 호출 목록 조회
+    @GET("m/tableNo.CallList.php")
+    fun getTableCallList(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("tableNo") tableNo: String
+    ): Call<CallListDTO>
+
+    // 테이블별 완료 리스트
+    @GET("m/tableNo.CompletedList.php")
+    fun getTableCompletedList(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("tableNo") tableNo: String
+    ): Call<OrderListDTO>
+
+    // 테이블별 포스 전송실패 리스트
+    @GET("m/tableNo.PosList.php")
+    fun getTablePosErrList(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("tableNo") tableNo: String
+    ): Call<OrderListDTO>
 
     // 전체 목록(히스토리)(주문,호출) 조회
     @GET("m/allorder.list.php")
@@ -456,8 +475,8 @@ interface Api {
     fun udtComplete(
         @Query("storeidx") storeidx: Int,
         @Query("ordidx") ordidx: Int,
-        @Query("iscompleted") iscompleted: String,
-        @Query("popup") popup: Int                   // 1: 핍업 다시보지않기 클릭, 0 : 팝업 다시보지않기 미클릭
+        @Query("iscompleted") iscompleted: String
+//        @Query("popup") popup: Int                   // 1: 핍업 다시보지않기 클릭, 0 : 팝업 다시보지않기 미클릭
     ): Call<ResultDTO>
 
     // 주문 결제 완료
