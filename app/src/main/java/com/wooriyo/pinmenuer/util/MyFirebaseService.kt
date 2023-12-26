@@ -5,6 +5,7 @@ import android.app.*
 import android.app.ActivityManager.RunningAppProcessInfo
 import android.content.Intent
 import android.media.AudioAttributes
+import android.media.AudioManager
 import android.media.AudioManager.STREAM_NOTIFICATION
 import android.media.RingtoneManager
 import android.net.Uri
@@ -28,6 +29,7 @@ import com.wooriyo.pinmenuer.call.CallListActivity
 import com.wooriyo.pinmenuer.config.AppProperties
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.CHANNEL_ID_ORDER
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.NOTIFICATION_ID_ORDER
+import com.wooriyo.pinmenuer.history.ByHistoryActivity
 import com.wooriyo.pinmenuer.model.ReceiptDTO
 import com.wooriyo.pinmenuer.order.OrderListActivity
 import retrofit2.Call
@@ -51,20 +53,26 @@ class MyFirebaseService : FirebaseMessagingService() {
 
         createNotification(message)
 
-        //알림음 재생
-        val sound = R.raw.customnoti
-        val uri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/$sound")
-        val ringtone = RingtoneManager.getRingtone(applicationContext, uri)
+//        알림음 재생
+//        val sound = R.raw.customnoti
+//        val uri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/$sound")
+//        val ringtone = RingtoneManager.getRingtone(applicationContext, uri)
 
         if(currentActivity != null) {
             Log.d(TAG, "currentActivity.localClassName >> ${currentActivity.localClassName}")
 
-//            if (currentActivity.localClassName == "call.CallListActivity")
-//                (currentActivity as CallListActivity).getCallList()
-//            else if (currentActivity.localClassName == "order.OrderListActivity")
-//                (currentActivity as OrderListActivity).getOrderList()
-        }else{
-            Log.d(TAG, "currentActivity == null")
+            if(currentActivity.localClassName == "history.ByHistoryActivity") {
+                if(message.data["chk_udt"] == "1") {
+                    when(message.data["moredata"]) {
+                        "call" -> {
+                            (currentActivity as ByHistoryActivity).newCall()
+                        }
+                        else -> {
+                            (currentActivity as ByHistoryActivity).newOrder()
+                        }
+                    }
+                }
+            }
         }
 
         if(message.data["moredata"] == "call") {
@@ -140,7 +148,7 @@ class MyFirebaseService : FirebaseMessagingService() {
     }
 
     private fun createNotification(message: RemoteMessage) {
-        val sound = R.raw.customcall
+        val sound = R.raw.customnoti
         val uri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/$sound")
 
         val builder = NotificationCompat.Builder(this, CHANNEL_ID_ORDER)
@@ -148,8 +156,7 @@ class MyFirebaseService : FirebaseMessagingService() {
             .setContentTitle(message.notification?.title)
             .setContentText(message.notification?.body)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-//            .setSound(uri, STREAM_NOTIFICATION)
-//            .setContentIntent(createPendingIntent())
+            .setSound(uri, AudioManager.STREAM_NOTIFICATION)
             .setAutoCancel(true)
 
         // 알림 생성

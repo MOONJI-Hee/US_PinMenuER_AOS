@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sewoo.jpos.command.ESCPOSConst
 import com.sewoo.jpos.printer.ESCPOSPrinter
 import com.wooriyo.pinmenuer.BaseActivity
+import com.wooriyo.pinmenuer.MyApplication.Companion.escposPrinter
 import com.wooriyo.pinmenuer.MyApplication.Companion.store
 import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
@@ -70,8 +71,6 @@ class OrderListActivity : BaseActivity() {
     // TODO 포스 에러 리스트
 
     // 프린트 관련 변수
-    val escposPrinter = ESCPOSPrinter()
-
     var hyphen = StringBuilder()    // 하이픈
     var hyphen_num = 0              // 하이픈 개수
     var font_size = 0

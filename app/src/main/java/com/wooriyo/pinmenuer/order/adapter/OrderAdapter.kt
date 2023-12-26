@@ -60,34 +60,35 @@ class OrderAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adapte
                 if(data.iscompleted == 1) {
                     tableNo.setBackgroundColor(Color.parseColor("#E0E0E0"))
                     clPrice.setBackgroundResource(R.drawable.bg_cancel_r6)
-                    payment.setBackgroundResource(R.drawable.bg_cancel_r6)
-                    payment.text = "복원"
+                    btnComplete.setBackgroundResource(R.drawable.bg_cancel_r6)
+                    btnComplete.text = "복원"
                     complete.visibility = View.VISIBLE
                     completeQr.visibility = View.GONE
                     completePos.visibility = View.GONE
                 } else if (data.paytype == 3) { // QR오더에서 들어온 주문 > 결제 완료
                     tableNo.setBackgroundResource(R.color.main)
                     clPrice.setBackgroundResource(R.drawable.bg_cancel_r6)
-                    payment.setBackgroundResource(R.drawable.bg_r6y)
-                    payment.text = "확인"
+                    btnComplete.setBackgroundResource(R.drawable.bg_r6y)
+                    btnComplete.text = "완료"
                     complete.visibility = View.GONE
                     completeQr.visibility = View.VISIBLE
                     completePos.visibility = View.GONE
                 } else if (data.paytype == 4) {
                     tableNo.setBackgroundResource(R.color.main)
-                    clPrice.setBackgroundResource(R.drawable.bg_cancel_r6)
-                    payment.setBackgroundResource(R.drawable.bg_r6y)
-                    payment.text = "확인"
+                    clPrice.setBackgroundResource(R.drawable.bg_r6y)
+                    btnComplete.setBackgroundResource(R.drawable.bg_r6y)
+                    btnComplete.text = "완료"
                     complete.visibility = View.GONE
                     completeQr.visibility = View.GONE
                     completePos.visibility = View.VISIBLE
                 } else {
                     tableNo.setBackgroundResource(R.color.main)
                     clPrice.setBackgroundResource(R.drawable.bg_r6y)
-                    payment.setBackgroundResource(R.drawable.bg_r6y)
-                    payment.text = "결제"
+                    btnComplete.setBackgroundResource(R.drawable.bg_r6y)
+                    btnComplete.text = "완료"
                     complete.visibility = View.GONE
                     completeQr.visibility = View.GONE
+                    completePos.visibility = View.GONE
                 }
 
                 delete.setOnClickListener { deleteListener.onItemClick(absoluteAdapterPosition) }
@@ -97,7 +98,7 @@ class OrderAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adapte
                     }else
                         InfoDialog(context, "", context.getString(R.string.dialog_no_printer)).show()
                 }
-                payment.setOnClickListener { completeListener.onItemClick(absoluteAdapterPosition) }
+                btnComplete.setOnClickListener { completeListener.onItemClick(absoluteAdapterPosition) }
             }
         }
     }
