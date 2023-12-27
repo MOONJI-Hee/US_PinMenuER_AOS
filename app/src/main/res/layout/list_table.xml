@@ -24,6 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"/>
 
         <ImageView
+            android:id="@+id/newIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
@@ -36,11 +37,16 @@
         <TextView
             style="@style/text_num_b"
             android:id="@+id/tableNo"
+            android:layout_width="0dp"
+            android:gravity="end"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:textSize="30sp"
-            tools:text="0011"
             android:layout_marginTop="5dp"
+            app:layout_constraintStart_toEndOf="@+id/newIcon"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="0011" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_order"
