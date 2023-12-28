@@ -36,7 +36,7 @@
             android:id="@+id/tv_gea"
             android:text="@string/gea"
             app:layout_constraintStart_toEndOf="@+id/gea"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/select"
             app:layout_constraintBottom_toBottomOf="@+id/name" />
         <TextView
             style="@style/text_num"
@@ -70,6 +70,20 @@
             android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@+id/tv_gea"
             app:layout_constraintEnd_toEndOf="@+id/tv_gea"/>
+        <CheckBox
+            android:id="@+id/select"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/selector_check_big"
+            android:button="@null"
+            android:checked="true"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@+id/tv_gea"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
     <View
         android:layout_width="match_parent"
