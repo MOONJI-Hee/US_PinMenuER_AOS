@@ -31,6 +31,7 @@ class AppProperties {
         const val REQUEST_LOCATION = 0
         const val REQUEST_ENABLE_BT = 1
         const val REQUEST_NOTIFICATION = 2
+        const val REQUEST_STORAGE = 3
 
         //프린트 관련
         const val FONT_BIG = 37

@@ -319,7 +319,7 @@
                 <TextView
                     style="@style/text18"
                     android:id="@+id/img_hint1"
-                    android:text="@string/menu_vid_reg_hint"
+                    android:text="@string/menu_img_reg_hint"
                     android:textStyle="bold"
                     android:textColor="@color/hint"
                     app:layout_constraintStart_toStartOf="@+id/thum1"
@@ -350,7 +350,7 @@
                 <TextView
                     style="@style/btn_regimg"
                     android:id="@+id/regImg1"
-                    android:text="@string/menu_vid_reg"
+                    android:text="@string/menu_img_reg"
                     android:layout_marginTop="5dp"
                     app:layout_constraintStart_toStartOf="@+id/thum1"
                     app:layout_constraintTop_toBottomOf="@+id/thum1"/>
@@ -370,14 +370,42 @@
                     android:layout_marginTop="5dp"
                     app:layout_constraintStart_toStartOf="@+id/thum3"
                     app:layout_constraintTop_toBottomOf="@+id/thum3"/>
+
+                <ImageView
+                    android:id="@+id/del1"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/btn_menu_del"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="@+id/thum1"
+                    app:layout_constraintEnd_toEndOf="@+id/thum1"/>
+
+                <ImageView
+                    android:id="@+id/del2"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/btn_menu_del"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="@+id/thum2"
+                    app:layout_constraintEnd_toEndOf="@+id/thum2"/>
+
+                <ImageView
+                    android:id="@+id/del3"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/btn_menu_del"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="@+id/thum3"
+                    app:layout_constraintEnd_toEndOf="@+id/thum3"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="17dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:visibility="gone">
                 <TextView
                     style="@style/text18"
                     android:layout_marginEnd="16dp"
@@ -391,6 +419,7 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="17dp"
                 android:gravity="center_vertical">
                 <TextView
                     style="@style/text18"
@@ -430,8 +459,8 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="17dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:visibility="gone">
                 <TextView
                     style="@style/text18"
                     android:layout_marginEnd="16dp"
@@ -444,7 +473,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:visibility="gone">
                 <LinearLayout
                     style="@style/btn_small"
                     android:id="@+id/opt_require"

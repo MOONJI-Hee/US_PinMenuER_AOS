@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
@@ -14,6 +15,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -26,11 +28,13 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.google.gson.annotations.SerializedName
 import com.wooriyo.pinmenuer.BaseActivity
+import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.MyApplication.Companion.allCateList
 import com.wooriyo.pinmenuer.MyApplication.Companion.store
 import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
+import com.wooriyo.pinmenuer.config.AppProperties
 import com.wooriyo.pinmenuer.databinding.ActivityMenuSetBinding
 import com.wooriyo.pinmenuer.listener.DialogListener
 import com.wooriyo.pinmenuer.listener.ItemClickListener
@@ -57,6 +61,10 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding: ActivityMenuSetBinding
     lateinit var cateAdapter : CateAdapter
 
+    private val permission = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+    val radius = (6 * MyApplication.density).toInt()
+
     val allGoodsList = ArrayList<GoodsDTO>()
     val selGoodsList = ArrayList<GoodsDTO>()
     val goodsAdapter = GoodsAdapter(selGoodsList)
@@ -76,23 +84,17 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     var selCate = "001"
     var goods = GoodsDTO()
 
-    val REQUEST_R_STORAGE = 1
-    var bisStorage: Boolean = false
     var selThum: ImageView ?= null
 
-    val mmtp = MediaType.parse("image/*") // 임시
+    val mmtp = MediaType.parse("image/*")
+
     var media1: MultipartBody.Part? = null
     var media2: MultipartBody.Part? = null
     var media3: MultipartBody.Part? = null
 
-    //registerForActivityResult
-    val chooseImg = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if(it.resultCode == Activity.RESULT_OK) {
-            val imgUri = it.data?.data
-            if(imgUri != null)
-                setImage(imgUri)
-        }
-    }
+    var delImg1 = 0
+    var delImg2 = 0
+    var delImg3 = 0
 
     val setCate = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if(it.resultCode == Activity.RESULT_OK) {
@@ -103,6 +105,13 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
+    val pickImg = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
+        if(it != null) {
+            Log.d(TAG, "이미지 Uri >> $it")
+            setImage(it)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMenuSetBinding.inflate(layoutInflater)
@@ -110,22 +119,9 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
         setCateAdapter()
 
-        var selBg = ""
-        when(store.bgcolor) {
-            "d" -> selBg = getString(R.string.bg_dark)
-            "s" -> selBg = getString(R.string.bg_silver)
-            "l" -> selBg = getString(R.string.bg_light)
-        }
-
-        var selMode = ""
-        when(store.viewmode) {
-            "b" -> selMode = "기본"
-            "p" -> selMode = "사진"
-        }
-
         binding.etPrice.addTextChangedListener(textWatcher)
 
-        binding.back.setOnClickListener(this)
+        binding.back.setOnClickListener{finish()}
         binding.btnCateUdt.setOnClickListener(this)     // 카테고리 수정 버튼
 
         // 좌측 메뉴 리스트 관련
@@ -149,7 +145,6 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v) {
-            binding.back -> finish()    // 백 버튼
             binding.btnCateUdt -> {     // 카테고리 수정 버튼 > 카테고리 설정 페이지로 이동
                 val intent = Intent(mActivity, CategorySetActivity::class.java)
                 setCate.launch(intent)
@@ -245,14 +240,108 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             }
 
             // 중앙 메뉴 상세 관련
+
+            // 이미지 썸네일 > 이미지 등록
+            binding.regImg1, binding.thum1 -> {
+                selThum = binding.thum1
+                checkPermissions()
+            }
+            binding.regImg2, binding.thum2 -> {
+                selThum = binding.thum2
+                checkPermissions()
+            }
+
+            binding.regImg3, binding.thum3 -> {
+                selThum = binding.thum3
+                checkPermissions()
+            }
+
+            // 옵션 추가
             binding.optRequire -> { showOptDialog(-1, OptionDTO(1)) }
             binding.optChoice -> { showOptDialog(-1, OptionDTO(0)) }
-            binding.thum1, binding.thum2, binding.thum3-> {
-                selThum = v as ImageView
-                if(bisStorage)
-                    getMedia()
-                else
-                    checkPms()
+
+        }
+    }
+
+    // 외부저장소 접근 권한 확인
+    fun checkPermissions() {
+        val deniedPms = ArrayList<String>()
+
+        for (pms in permission) {
+            if(ActivityCompat.checkSelfPermission(mActivity, pms) != PackageManager.PERMISSION_GRANTED) {
+                if(ActivityCompat.shouldShowRequestPermissionRationale(mActivity, pms)) {
+                    AlertDialog.Builder(mActivity)
+                        .setTitle(R.string.pms_storage_title)
+                        .setMessage(R.string.pms_storage_content)
+                        .setPositiveButton(R.string.confirm) { dialog, _ ->
+                            dialog.dismiss()
+                            getStoragePms()
+                        }
+                        .setNegativeButton(R.string.cancel) {dialog, _ -> dialog.dismiss()}
+                        .show()
+                    return
+                }else {
+                    deniedPms.add(pms)
+                }
+            }
+        }
+        if(deniedPms.isNotEmpty()) {
+            getStoragePms()
+        }else {
+            getImage()
+        }
+    }
+
+    // 외부저장소 권한 받아오기
+    fun getStoragePms() {
+        ActivityCompat.requestPermissions(mActivity, permission, AppProperties.REQUEST_STORAGE)
+    }
+
+    fun getImage() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            pickImg.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        } else {
+            Toast.makeText(mActivity, "지원하지 않는 버전입니다.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun setImage(imgUri: Uri) {
+        var path = ""
+
+        contentResolver.query(imgUri, null, null, null, null)?.use { cursor ->
+            val dataColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+
+            while (cursor.moveToNext()) {
+                path = cursor.getString(dataColumn)
+                Log.d(TAG, "path >>>>> $path")
+            }
+        }
+
+        if(selThum != null) {
+            Glide.with(mActivity)
+                .load(imgUri)
+                .transform(CenterCrop(), RoundedCorners(radius))
+                .into(selThum!!)
+        }
+
+        when(selThum) {
+            binding.thum1 -> {
+                goods.file1 = File(path)
+                delImg1 = 0
+                binding.imgHint1.visibility = View.GONE
+                binding.del1.visibility = View.VISIBLE
+            }
+            binding.thum2 -> {
+                goods.file2 = File(path)
+                delImg2 = 0
+                binding.imgHint2.visibility = View.GONE
+                binding.del2.visibility = View.VISIBLE
+            }
+            binding.thum3 -> {
+                goods.file3 = File(path)
+                delImg3 = 0
+                binding.imgHint3.visibility = View.GONE
+                binding.del3.visibility = View.VISIBLE
             }
         }
     }
@@ -416,28 +505,31 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             val img2 = goods.img2
             val img3 = goods.img3
 
-            if(!(img1.isNullOrEmpty() || img1.contains("default_img.png"))) {
+            if(!(img1.isNullOrEmpty() || img1.contains("noimage.png"))) {
                 Glide.with(mActivity)
                     .load(goods.img1)
-                    .transform(CenterCrop(), RoundedCorners(6))
+                    .transform(CenterCrop(), RoundedCorners(radius))
                     .into(thum1)
                 imgHint1.visibility = View.GONE
+                del1.visibility = View.VISIBLE
             }
 
-            if(!(img2.isNullOrEmpty() || img2.contains("default_img.png"))) {
+            if(!(img2.isNullOrEmpty() || img2.contains("noimage.png"))) {
                 Glide.with(mActivity)
                     .load(goods.img2)
-                    .transform(CenterCrop(), RoundedCorners(6))
+                    .transform(CenterCrop(), RoundedCorners(radius))
                     .into(thum2)
                 imgHint2.visibility = View.GONE
+                del2.visibility = View.VISIBLE
             }
 
-            if(!(img3.isNullOrEmpty() || img3.contains("default_img.png"))) {
+            if(!(img3.isNullOrEmpty() || img3.contains("noimage.png"))) {
                 Glide.with(mActivity)
                     .load(goods.img3)
-                    .transform(CenterCrop(), RoundedCorners(6))
+                    .transform(CenterCrop(), RoundedCorners(radius))
                     .into(thum3)
                 imgHint3.visibility = View.GONE
+                del3.visibility = View.VISIBLE
             }
 
             if(goods.adDisplay == y)
@@ -475,19 +567,19 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
             Glide.with(mActivity)
                 .load(R.drawable.bg_r6w)
-                .transform(RoundedCorners(6))
+                .transform(RoundedCorners(radius))
                 .into(thum1)
             imgHint1.visibility = View.VISIBLE
 
             Glide.with(mActivity)
                 .load(R.drawable.bg_r6w)
-                .transform(RoundedCorners(6))
+                .transform(RoundedCorners(radius))
                 .into(thum2)
             imgHint2.visibility = View.VISIBLE
 
             Glide.with(mActivity)
                 .load(R.drawable.bg_r6w)
-                .transform(RoundedCorners(6))
+                .transform(RoundedCorners(radius))
                 .into(thum3)
             imgHint3.visibility = View.VISIBLE
 
@@ -667,7 +759,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
     fun udtGoods() {
         goods.let {
-            ApiClient.service.udtGoods(useridx, storeidx, it.idx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption, optCode, optName, optValue, optMark, optPrice, optReq)
+            ApiClient.service.udtGoods(useridx, storeidx, it.idx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.icon, 0, 0, 0, it.adDisplay, it.boption, optCode, optName, optValue, optMark, optPrice, optReq)
                 .enqueue(object : Callback<ResultDTO> {
                     override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                         Log.d(TAG, "메뉴 수정 url : $response")
@@ -683,7 +775,6 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
                                     goodsAdapter.notifyItemChanged(goodsAdapter.selPos)
                                     uploadImage(it.idx, media1, media2, media3)
-                                    // TODO 등록된 사진 중 삭제할 것 태우기
                                 }
                                 else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                             }
@@ -814,84 +905,4 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {}
     }
 
-    //이미지 권한 설정 및 가져오기
-    // 외부저장소 권한 확인
-    fun checkPms() {
-//        if(MyApplication.osver >= Build.VERSION_CODES.Q) {
-//
-//        }else {
-//
-//        }
-        when {
-            ContextCompat.checkSelfPermission(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED -> {
-                bisStorage = true
-                getMedia()
-            }
-            ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE) -> {
-                AlertDialog.Builder(mActivity)
-                    .setTitle(R.string.pms_storage_title)
-                    .setMessage(R.string.pms_storage_content)
-                    .setPositiveButton(R.string.confirm) { dialog, _ ->
-                        dialog.dismiss()
-                        getPms()
-                    }
-                    .setNegativeButton(R.string.cancel) {dialog, _ -> dialog.dismiss()}
-                    .show()
-            }
-            else -> getPms()
-        }
-    }
-
-    // 외부저장소 권한 받아오기
-    fun getPms() {
-        ActivityCompat.requestPermissions(mActivity, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_R_STORAGE)
-    }
-
-    fun getMedia() {
-        if(selThum == binding.thum1)
-            chooseImg.launch(Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI))
-        else
-            chooseImg.launch(Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI))
-    }
-
-    fun setImage(imgUri: Uri) {
-        var path = ""
-        var name = ""
-
-        contentResolver.query(imgUri, null, null, null, null)?.use { cursor ->
-            // Cache column indices.
-            val dataColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-            val nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME)
-
-            while (cursor.moveToNext()) {
-                path = cursor.getString(dataColumn)
-                name = cursor.getString(nameColumn)
-                Log.d(TAG, "name >>>>> $name")
-                Log.d(TAG, "path >>>>> $path")
-            }
-        }
-        val file = File(path)
-
-        if(selThum != null) {
-            Glide.with(mActivity)
-                .load(imgUri)
-                .transform(CenterCrop(), RoundedCorners(6))
-                .into(selThum!!)
-        }
-
-        when(selThum) {
-            binding.thum1 -> {
-                goods.file1 = file
-                binding.imgHint1.visibility = View.GONE
-            }
-            binding.thum2 -> {
-                goods.file2 = file
-                binding.imgHint2.visibility = View.GONE
-            }
-            binding.thum3 -> {
-                goods.file3 = file
-                binding.imgHint3.visibility = View.GONE
-            }
-        }
-    }
 }
