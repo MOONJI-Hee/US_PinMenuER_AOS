@@ -17,6 +17,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia.Companion.isPhotoPickerAvailable
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -55,6 +56,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.http.Query
 import java.io.File
+import java.lang.Exception
 
 
 class MenuSetActivity : BaseActivity(), View.OnClickListener {
@@ -96,19 +98,27 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     var delImg2 = 0
     var delImg3 = 0
 
-    val setCate = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+
+    private val setCate = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if(it.resultCode == Activity.RESULT_OK) {
             if(allCateList.isNotEmpty()) {
-//                selCate = allCateList[0].code
                 cateAdapter.notifyDataSetChanged()
             }
         }
     }
 
-    val pickImg = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
+    private val pickImg = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
         if(it != null) {
             Log.d(TAG, "이미지 Uri >> $it")
             setImage(it)
+        }
+    }
+
+    private val pickImg_lgc = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if(it.resultCode == Activity.RESULT_OK) {
+            val imgUri = it.data?.data
+            if(imgUri != null)
+                setImage(imgUri)
         }
     }
 
@@ -135,6 +145,22 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         binding.thum1.setOnClickListener(this)
         binding.thum2.setOnClickListener(this)
         binding.thum3.setOnClickListener(this)
+        binding.regImg1.setOnClickListener(this)
+        binding.regImg2.setOnClickListener(this)
+        binding.regImg3.setOnClickListener(this)
+        binding.del1.setOnClickListener {
+            clearImage(binding.thum1)
+            delImg1 = 1
+        }
+        binding.del2.setOnClickListener {
+            clearImage(binding.thum2)
+            delImg2 = 1
+        }
+        binding.del3.setOnClickListener {
+            clearImage(binding.thum3)
+            delImg3 = 1
+        }
+        binding.del2.setOnClickListener(this)
 
         // 우측 메뉴 삭제 확인창 관련
         binding.delCancel.setOnClickListener(this)
@@ -250,7 +276,6 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                 selThum = binding.thum2
                 checkPermissions()
             }
-
             binding.regImg3, binding.thum3 -> {
                 selThum = binding.thum3
                 checkPermissions()
@@ -259,7 +284,6 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             // 옵션 추가
             binding.optRequire -> { showOptDialog(-1, OptionDTO(1)) }
             binding.optChoice -> { showOptDialog(-1, OptionDTO(0)) }
-
         }
     }
 
@@ -267,24 +291,27 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     fun checkPermissions() {
         val deniedPms = ArrayList<String>()
 
-        for (pms in permission) {
-            if(ActivityCompat.checkSelfPermission(mActivity, pms) != PackageManager.PERMISSION_GRANTED) {
-                if(ActivityCompat.shouldShowRequestPermissionRationale(mActivity, pms)) {
-                    AlertDialog.Builder(mActivity)
-                        .setTitle(R.string.pms_storage_title)
-                        .setMessage(R.string.pms_storage_content)
-                        .setPositiveButton(R.string.confirm) { dialog, _ ->
-                            dialog.dismiss()
-                            getStoragePms()
-                        }
-                        .setNegativeButton(R.string.cancel) {dialog, _ -> dialog.dismiss()}
-                        .show()
-                    return
-                }else {
-                    deniedPms.add(pms)
+        if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+            for (pms in permission) {
+                if(ActivityCompat.checkSelfPermission(mActivity, pms) != PackageManager.PERMISSION_GRANTED) {
+                    if(ActivityCompat.shouldShowRequestPermissionRationale(mActivity, pms)) {
+                        AlertDialog.Builder(mActivity)
+                            .setTitle(R.string.pms_storage_title)
+                            .setMessage(R.string.pms_storage_content)
+                            .setPositiveButton(R.string.confirm) { dialog, _ ->
+                                dialog.dismiss()
+                                getStoragePms()
+                            }
+                            .setNegativeButton(R.string.cancel) {dialog, _ -> dialog.dismiss()}
+                            .show()
+                        return
+                    }else {
+                        deniedPms.add(pms)
+                    }
                 }
             }
         }
+
         if(deniedPms.isNotEmpty()) {
             getStoragePms()
         }else {
@@ -298,10 +325,10 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun getImage() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        if(isPhotoPickerAvailable(mActivity)) {
             pickImg.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-        } else {
-            Toast.makeText(mActivity, "지원하지 않는 버전입니다.", Toast.LENGTH_SHORT).show()
+        }else {
+            pickImg_lgc.launch(Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI))
         }
     }
 
@@ -565,23 +592,9 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             etCookingTimeMax.text.clear()
             etPrice.text.clear()
 
-            Glide.with(mActivity)
-                .load(R.drawable.bg_r6w)
-                .transform(RoundedCorners(radius))
-                .into(thum1)
-            imgHint1.visibility = View.VISIBLE
-
-            Glide.with(mActivity)
-                .load(R.drawable.bg_r6w)
-                .transform(RoundedCorners(radius))
-                .into(thum2)
-            imgHint2.visibility = View.VISIBLE
-
-            Glide.with(mActivity)
-                .load(R.drawable.bg_r6w)
-                .transform(RoundedCorners(radius))
-                .into(thum3)
-            imgHint3.visibility = View.VISIBLE
+            clearImage(thum1)
+            clearImage(thum2)
+            clearImage(thum3)
 
             toggleSleep.isChecked = false
             rbNone.isChecked = true
@@ -590,7 +603,34 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             rvOption.visibility = View.GONE
             optionEmpty.visibility = View.VISIBLE
         }
-        Log.d(TAG, "selCate33333 >>> $selCate")
+        delImg1 = 0
+        delImg2 = 0
+        delImg3 = 0
+    }
+
+    fun clearImage(v: ImageView) {
+        Glide.with(mActivity)
+            .load(R.drawable.bg_r6w)
+            .transform(RoundedCorners(radius))
+            .into(v)
+
+        when(v) {
+            binding.thum1 -> {
+                binding.imgHint1.visibility = View.VISIBLE
+                binding.del1.visibility = View.GONE
+                goods.file1 = null
+            }
+            binding.thum2 -> {
+                binding.imgHint2.visibility = View.VISIBLE
+                binding.del2.visibility = View.GONE
+                goods.file2 = null
+            }
+            binding.thum3 -> {
+                binding.imgHint3.visibility = View.VISIBLE
+                binding.del3.visibility = View.GONE
+                goods.file3 = null
+            }
+        }
     }
 
     fun save() {
