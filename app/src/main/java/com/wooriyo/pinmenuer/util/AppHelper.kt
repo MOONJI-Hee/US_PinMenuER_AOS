@@ -118,7 +118,7 @@ class AppHelper {
             val arr_app = MyApplication.appver.split(".")
 
             for(i : Int in arr_app.indices) {
-                if(arr_app[i] < arr_cur[i]) {
+                if(arr_app[i].toInt() < arr_cur[i].toInt()) {
                     return false
                 }
             }
