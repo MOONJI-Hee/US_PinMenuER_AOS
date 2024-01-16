@@ -545,8 +545,8 @@
     <string name="dialog_dont_show">다시보지않기</string>
 
     <!--  비어있는 목록  -->
-    <string name="no_order_list">주문정보가 없습니다.</string>
-    <string name="no_call_list">호출정보가 없습니다.</string>
+    <string name="no_order_list">주문내역이 없습니다.</string>
+    <string name="no_call_list">호출내역이 없습니다.</string>
 
     <!--  토스트 메세지  -->
     <string name="msg_retry">다시 시도해 주세요.</string>
