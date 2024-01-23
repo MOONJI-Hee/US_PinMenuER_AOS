@@ -470,8 +470,8 @@
     <string name="mirroring_menu_sub">・미러링 : 화면 공유</string>
 
     <!--  PG 결제 취소  -->
-    <string name="pg_cancel_menu">PG결제취소\n(QR코드 결제)</string>
-    <string name="pg_cancel_menu_sub">・QR코드 결제내역\n・PG결제 취소</string>
+    <string name="pg_cancel_menu">PG결제 내역</string>
+    <string name="pg_cancel_menu_sub">・PG결제 내역\n・PG결제 취소</string>
     <string name="dialog_no_pg_info1">핀메뉴 QR코드 주문&amp;결제가 활성화되지 않았습니다.</string>
     <string name="dialog_no_pg_info2">신청방법</string>
     <string name="dialog_no_pg_info3">핀메뉴 웹사이트 > 햄버거버튼</string>

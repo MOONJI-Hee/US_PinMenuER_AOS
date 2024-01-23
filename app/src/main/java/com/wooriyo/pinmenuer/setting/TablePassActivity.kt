@@ -21,17 +21,16 @@ class TablePassActivity : BaseActivity() {
         binding = ActivityTablePassBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if(!MyApplication.store.tbpass.isNullOrEmpty()) {
+            binding.etTablePass.setText(MyApplication.store.tbpass)
+        }
+
         binding.back.setOnClickListener { finish() }
         binding.save.setOnClickListener { save() }
     }
 
     fun save() {
         val pass = binding.etTablePass.text.toString()
-
-        if(pass.isEmpty()) {
-            Toast.makeText(mActivity, R.string.msg_no_pw, Toast.LENGTH_SHORT).show()
-            return
-        }
 
         ApiClient.service.udtTablePwd(MyApplication.useridx, MyApplication.storeidx, pass).enqueue(object :
             Callback<ResultDTO> {
@@ -41,7 +40,10 @@ class TablePassActivity : BaseActivity() {
                 val result = response.body()
                 if(result != null) {
                     when(result.status){
-                        1 -> Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                        1 -> {
+                            Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                            MyApplication.store.tbpass = pass
+                        }
                         else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                     }
                 }
