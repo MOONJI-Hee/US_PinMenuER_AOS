@@ -48,37 +48,50 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
 
         getCategory()
 
+        val usePay = intent.getBooleanExtra("usePay", true)
+
         binding.run {
             title.text = store.name
             version.text = "Ver ${MyApplication.appver}"
 
             back.setOnClickListener{ leaveStore() }
-            udtMbr.setOnClickListener(this@StoreMenuActivity)
+            udtMbr.setOnClickListener{ startActivity(Intent(mActivity, MemberSetActivity::class.java)) }
 
-            // 주문 & 호출 내역
-            history.setOnClickListener{ startActivity(Intent(mActivity, ByHistoryActivity::class.java)) }
-            byTable.setOnClickListener{ startActivity(Intent(mActivity, ByTableActivity::class.java)) }
-            menu.setOnClickListener(this@StoreMenuActivity)
-            tablePass.setOnClickListener(this@StoreMenuActivity)
-            setCall.setOnClickListener { startActivity(Intent(mActivity, CallSetActivity::class.java)) }
+            if(usePay) {
+                history.setOnClickListener{ startActivity(Intent(mActivity, ByHistoryActivity::class.java)) }
+                byTable.setOnClickListener{ startActivity(Intent(mActivity, ByTableActivity::class.java)) }
+                tablePass.setOnClickListener{ startActivity(Intent(mActivity, TablePassActivity::class.java)) }
+                setCall.setOnClickListener { startActivity(Intent(mActivity, CallSetActivity::class.java)) }
 
-            printer.setOnClickListener{ insPrintSetting() }
-            payment.setOnClickListener{ insPaySetting() }
-            pgCancel.setOnClickListener(this@StoreMenuActivity)
-            design.setOnClickListener(this@StoreMenuActivity)
-//            qrCustomerInfo.setOnClickListener(this@StoreMenuActivity)
-        }
-    }
+                printer.setOnClickListener{ insPrintSetting() }
+                payment.setOnClickListener{ insPaySetting() }
+                pgCancel.setOnClickListener{
+                    if(store.pg_storenm.isEmpty() || store.pg_snum.isEmpty()) {
+                        NoPgInfoDialog(mActivity).show()
+                    }else {
+                        startActivity(Intent(mActivity, PgHistoryActivity::class.java))
+                    }
+                }
+                design.setOnClickListener{ startActivity(Intent(mActivity, MenuUiActivity::class.java)) }
+//                qrCustomerInfo.setOnClickListener{
+//                    if(store.paytype == 2) {
+//                        startActivity(Intent(mActivity, SetCustomerInfoActivity::class.java))
+//                    }else {
+//                        NoticeDialog(mActivity, "", getString(R.string.dialog_no_business), View.OnClickListener{}).show()
+//                    }
+//                }
+            } else {
+                history.setOnClickListener(this@StoreMenuActivity)
+                byTable.setOnClickListener(this@StoreMenuActivity)
+                tablePass.setOnClickListener(this@StoreMenuActivity)
+                setCall.setOnClickListener(this@StoreMenuActivity)
+                printer.setOnClickListener(this@StoreMenuActivity)
+                payment.setOnClickListener(this@StoreMenuActivity)
+                pgCancel.setOnClickListener(this@StoreMenuActivity)
+                design.setOnClickListener(this@StoreMenuActivity)
+            }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onClick(p0: View?) {
-        when(p0) {
-            binding.udtMbr -> startActivity(Intent(mActivity, MemberSetActivity::class.java))
-
-            binding.menu -> {
+            menu.setOnClickListener{
                 if(allCateList.isEmpty()) {
                     val intent = Intent(mActivity, CategorySetActivity::class.java)
                     startActivity(intent)
@@ -87,24 +100,15 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                     startActivity(intent)
                 }
             }
-            binding.tablePass -> startActivity(Intent(mActivity, TablePassActivity::class.java))
-            binding.design -> startActivity(Intent(mActivity, MenuUiActivity::class.java))
-
-            binding.pgCancel -> {
-                if(store.pg_storenm.isEmpty() || store.pg_snum.isEmpty()) {
-                    NoPgInfoDialog(mActivity).show()
-                }else {
-                    startActivity(Intent(mActivity, PgHistoryActivity::class.java))
-                }
-            }
-            binding.qrCustomerInfo -> {
-                if(store.paytype == 2) {
-                    startActivity(Intent(mActivity, SetCustomerInfoActivity::class.java))
-                }else {
-                    NoticeDialog(mActivity, "", getString(R.string.dialog_no_business), View.OnClickListener{}).show()
-                }
-            }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun onClick(p0: View?) {
+        Toast.makeText(mActivity, R.string.msg_no_pay, Toast.LENGTH_SHORT).show()
     }
 
     fun getCategory() {

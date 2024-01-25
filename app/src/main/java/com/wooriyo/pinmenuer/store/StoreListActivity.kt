@@ -49,8 +49,17 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
         binding.version.text = "Ver ${MyApplication.appver}"
 
         storeAdapter.setOnItemClickListener(object : ItemClickListener {
-            override fun onStoreClick(storeDTO: StoreDTO, intent: Intent) {
-                checkDeviceLimit(storeDTO, intent)
+            override fun onStoreClick(storeDTO: StoreDTO, intent: Intent, usePay: Boolean) {
+                super.onStoreClick(storeDTO, intent, usePay)
+                if(usePay)
+                    checkDeviceLimit(storeDTO, intent)
+                else {
+                    MyApplication.allCateList.clear()
+                    MyApplication.storeidx = storeDTO.idx
+                    MyApplication.store = storeDTO
+
+                    startActivity(intent)
+                }
             }
         })
 

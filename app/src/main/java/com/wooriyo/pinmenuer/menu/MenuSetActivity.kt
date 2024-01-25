@@ -266,24 +266,31 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             }
 
             // 중앙 메뉴 상세 관련
-
             // 이미지 썸네일 > 이미지 등록
             binding.regImg1, binding.thum1 -> {
                 selThum = binding.thum1
-                checkPermissions()
+                checkUsePay()
             }
             binding.regImg2, binding.thum2 -> {
                 selThum = binding.thum2
-                checkPermissions()
+                checkUsePay()
             }
             binding.regImg3, binding.thum3 -> {
                 selThum = binding.thum3
-                checkPermissions()
+                checkUsePay()
             }
 
             // 옵션 추가
             binding.optRequire -> { showOptDialog(-1, OptionDTO(1)) }
             binding.optChoice -> { showOptDialog(-1, OptionDTO(0)) }
+        }
+    }
+
+    fun checkUsePay() {
+        if((store.payuse == "Y" && AppHelper.dateNowCompare(store.paydate))) {
+            checkPermissions()
+        }else {
+            Toast.makeText(mActivity, R.string.msg_no_pay, Toast.LENGTH_SHORT).show()
         }
     }
 

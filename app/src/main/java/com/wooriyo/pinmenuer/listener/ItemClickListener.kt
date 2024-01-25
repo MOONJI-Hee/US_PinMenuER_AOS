@@ -10,7 +10,7 @@ interface ItemClickListener {
     fun onItemClick(position:Int) {}
     fun onItemMove(fromPos: Int, toPos: Int) {}
     fun onQrClick(position: Int, status: Boolean) {}
-    fun onStoreClick(storeDTO: StoreDTO, intent: Intent) {}
+    fun onStoreClick(storeDTO: StoreDTO, intent: Intent, usePay: Boolean) {}
     fun onCallClick(position: Int, data: CallDTO) {}
     fun onCheckClick(position: Int, v: CheckBox, isChecked : Boolean) {}
 }

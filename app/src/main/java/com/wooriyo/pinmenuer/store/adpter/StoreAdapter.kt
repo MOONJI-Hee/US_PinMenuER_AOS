@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
@@ -57,6 +58,7 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
 
     class ViewHolder(val context: Context, val binding: ListStoreBinding, val itemClickListener: ItemClickListener): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: StoreDTO) {
+            val usePay = data.payuse == "Y" && dateNowCompare(data.paydate)
             binding.run {
                 storeName.text = data.name
 
@@ -67,15 +69,13 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
                     storeName2.text = data.name2
                 }
 
-                if(data.payuse == "Y" && dateNowCompare(data.paydate)) {
-                    storeMenu.isEnabled = true
+                if(usePay) {
                     storeName.isEnabled = true
                     storeName2.isEnabled = true
                     storePayInfo.visibility = View.VISIBLE
                     storePayDt.visibility = View.VISIBLE
                     storePayNo.visibility = View.GONE
                 }else {
-                    storeMenu.isEnabled = false
                     storeName.isEnabled = false
                     storeName2.isEnabled = false
                     storePayInfo.visibility = View.INVISIBLE
@@ -86,7 +86,12 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
                 storePayDt.text = data.paydate.split(" ")[0].replace("-", ".")
 
                 storeMenu.setOnClickListener {
-                    itemClickListener.onStoreClick(data,Intent(context, StoreMenuActivity::class.java))
+                    if(usePay || absoluteAdapterPosition == 0) {
+                        val intent = Intent(context, StoreMenuActivity::class.java)
+                        intent.putExtra("usePay", usePay)
+                        itemClickListener.onStoreClick(data, intent, usePay)
+                    } else
+                        Toast.makeText(context, R.string.msg_no_pay, Toast.LENGTH_SHORT).show()
                 }
 
                 storeUdt.setOnClickListener{
