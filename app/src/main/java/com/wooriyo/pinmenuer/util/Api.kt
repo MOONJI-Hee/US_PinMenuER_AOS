@@ -281,8 +281,8 @@ interface Api {
         @Query("adDisplay") adDisplay : String,
         @Query("icon") icon : Int,
         @Query("boption") boption : String,
-        @Query("option_name") option_name: String,
-        @Query("option_value") option_value: String,
+        @Query("option_name") option_name: String,          // 옵션 이름 (ex 사이즈)
+        @Query("option_value") option_value: String,        // 옵션 보기 (ex 톨, 레귤러, 벤티)
         @Query("option_mark") option_mark: String,
         @Query("option_price") option_price: String,
         @Query("option_req") option_req: String
