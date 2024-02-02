@@ -467,7 +467,7 @@ interface Api {
     ): Call<OrderListDTO>
 
     // 주문만 호출
-    @GET("m/isorder.list.php")
+    @GET("m/order.list.php")
     fun getOrderList(
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int
