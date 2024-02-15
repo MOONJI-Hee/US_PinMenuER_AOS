@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothDevice
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.widget.Toast
 import com.sewoo.request.android.RequestHandler
 import com.wooriyo.pinmenuer.MyApplication
@@ -19,6 +20,8 @@ class BtDiscoveryReceiver: BroadcastReceiver() {
         var btDev: BluetoothDevice
         val remoteDevice = intent.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
         if (remoteDevice != null) {
+            Log.d("AppHelper", "remote 기기 있음")
+
             val devNum = remoteDevice.bluetoothClass.majorDeviceClass
             if (devNum != MyApplication.BT_PRINTER) return
 
@@ -42,7 +45,9 @@ class BtDiscoveryReceiver: BroadcastReceiver() {
                 MyApplication.btThread!!.start()
             } else // Connection failed.
                 Toast.makeText(context, "블루투스 연결 실패", Toast.LENGTH_SHORT).show()
-        }else
+        }else {
+            Log.d("AppHelper", "검색된 remote 기기 없음")
             Toast.makeText(context, "검색된 블루투스 기기가 없습니다.", Toast.LENGTH_SHORT).show()
+        }
     }
 }

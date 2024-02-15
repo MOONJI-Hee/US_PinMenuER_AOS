@@ -69,6 +69,8 @@ class SetConnActivity : BaseActivity() {
                     printerList[position].connected = false
 
                     status = "N"
+
+                    printerAdapter.notifyDataSetChanged()
                 } else {
                     val retVal = connDevice()
 
@@ -82,27 +84,30 @@ class SetConnActivity : BaseActivity() {
 
                         status = "Y"
 
-                        val prePos = connPos
-                        connPos = position
-                        printerAdapter.notifyItemChanged(position)
+                        printerAdapter.notifyDataSetChanged()
 
-                        if (prePos != connPos)
-                            printerAdapter.notifyItemChanged(prePos)
+//                        val prePos = connPos
+//                        connPos = position
+//                        printerAdapter.notifyItemChanged(position)
+//
+//                        if (prePos != connPos)
+//                            printerAdapter.notifyItemChanged(prePos)
 
                         setPrintConnStatus(position, status)
                     }else if (retVal == -2) {
-                      AppHelper.searchDevice()
+                        Toast.makeText(mActivity, "연결 가능한 기기가 없습니다. 기기를 재검색 합니다.", Toast.LENGTH_SHORT).show()
+                        AppHelper.searchDevice()
                     } else {
                         Toast.makeText(mActivity, "블루투스 연결 실패", Toast.LENGTH_SHORT).show()
                         status = "N"
                     }
                 }
-                val prePos = connPos
-                connPos = position
-                printerAdapter.notifyItemChanged(position)
-
-                if (prePos != connPos)
-                    printerAdapter.notifyItemChanged(prePos)
+//                val prePos = connPos
+//                connPos = position
+//                printerAdapter.notifyItemChanged(position)
+//
+//                if (prePos != connPos)
+//                    printerAdapter.notifyItemChanged(prePos)
 
                 setPrintConnStatus(position, status)
             }

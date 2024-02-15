@@ -181,7 +181,7 @@ class PrinterMenuActivity : BaseActivity() {
 
     @RequiresApi(Build.VERSION_CODES.S)
     fun getBluetoothPms() {
-        ActivityCompat.requestPermissions(mActivity, arrayOf(Manifest.permission.BLUETOOTH_CONNECT),
+        ActivityCompat.requestPermissions(mActivity, permissions_bt,
             AppProperties.REQUEST_ENABLE_BT
         )
     }

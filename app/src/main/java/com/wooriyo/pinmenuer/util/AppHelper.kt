@@ -150,6 +150,7 @@ class AppHelper {
 
         // 블루투스 & 프린터기 연결 관련 메소드
         fun searchDevice() {
+            Log.d("AppHelper", "블루투스 기기 찾기")
             MyApplication.bluetoothAdapter.startDiscovery()
         }
 
