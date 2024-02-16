@@ -15,18 +15,42 @@
         android:paddingHorizontal="10dp"
         android:background="@color/main"
         android:gravity="center_vertical"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="185" />
 
     <TextView
         style="@style/text_num"
+        android:textSize="12sp"
+        android:text="Table No."/>
+
+    <TextView
+        style="@style/text_num"
         android:id="@+id/regdt"
         android:layout_marginEnd="10dp"
-        android:textSize="18sp"
+        android:textSize="12sp"
         tools:text="2022.07.28.18:08"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tableNo"
+        app:layout_constraintBottom_toTopOf="@+id/orderNo"
+        app:layout_constraintVertical_chainStyle="packed"/>
+
+    <TextView
+        style="@style/text_num"
+        android:layout_marginEnd="3dp"
+        android:textSize="12sp"
+        android:text="Order No."
+        app:layout_constraintEnd_toStartOf="@+id/orderNo"
+        app:layout_constraintBottom_toBottomOf="@+id/orderNo"/>
+
+    <TextView
+        style="@style/text_num_b"
+        android:id="@+id/orderNo"
+        android:layout_marginEnd="10dp"
+        android:textSize="18sp"
+        tools:text="A10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/regdt"
         app:layout_constraintBottom_toBottomOf="@+id/tableNo"/>
 
     <androidx.recyclerview.widget.RecyclerView

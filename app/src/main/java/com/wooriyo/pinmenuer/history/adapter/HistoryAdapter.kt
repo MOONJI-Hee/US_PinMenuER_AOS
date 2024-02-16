@@ -81,6 +81,7 @@ class HistoryAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adap
 
                 tableNo.text = data.tableNo
                 regdt.text = data.regdt
+                orderNo.text = data.ordcode
                 gea.text = data.total.toString()
                 price.text = AppHelper.price(data.amount)
 
