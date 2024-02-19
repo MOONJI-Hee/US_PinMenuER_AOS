@@ -14,9 +14,7 @@ import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.MyApplication.Companion.allCateList
 import com.wooriyo.pinmenuer.MyApplication.Companion.androidId
 import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.call.CallListActivity
 import com.wooriyo.pinmenuer.call.CallSetActivity
-import com.wooriyo.pinmenuer.common.NoticeDialog
 import com.wooriyo.pinmenuer.databinding.ActivityStoreMenuBinding
 import com.wooriyo.pinmenuer.history.ByHistoryActivity
 import com.wooriyo.pinmenuer.history.ByTableActivity
@@ -25,10 +23,8 @@ import com.wooriyo.pinmenuer.menu.CategorySetActivity
 import com.wooriyo.pinmenuer.menu.MenuSetActivity
 import com.wooriyo.pinmenuer.model.CateListDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
-import com.wooriyo.pinmenuer.order.OrderListActivity
 import com.wooriyo.pinmenuer.payment.SetPayActivity
 import com.wooriyo.pinmenuer.pg.PgHistoryActivity
-import com.wooriyo.pinmenuer.pg.SetCustomerInfoActivity
 import com.wooriyo.pinmenuer.pg.dialog.NoPgInfoDialog
 import com.wooriyo.pinmenuer.printer.PrinterMenuActivity
 import com.wooriyo.pinmenuer.setting.MenuUiActivity

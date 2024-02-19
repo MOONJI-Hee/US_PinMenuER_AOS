@@ -12,8 +12,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.PowerManager
 import android.util.Log
-import android.view.Gravity
-import android.view.View
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -25,13 +23,11 @@ import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.MyApplication.Companion.escposPrinter
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.StartActivity
-import com.wooriyo.pinmenuer.call.CallListActivity
 import com.wooriyo.pinmenuer.config.AppProperties
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.CHANNEL_ID_ORDER
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.NOTIFICATION_ID_ORDER
 import com.wooriyo.pinmenuer.history.ByHistoryActivity
 import com.wooriyo.pinmenuer.model.ReceiptDTO
-import com.wooriyo.pinmenuer.order.OrderListActivity
 import retrofit2.Call
 import retrofit2.Response
 
