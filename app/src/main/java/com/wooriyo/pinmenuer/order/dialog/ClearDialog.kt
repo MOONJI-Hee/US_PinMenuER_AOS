@@ -13,7 +13,6 @@ import com.wooriyo.pinmenuer.BaseDialog
 import com.wooriyo.pinmenuer.BaseDialogFragment
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.DialogClearBinding
-import com.wooriyo.pinmenuer.databinding.DialogConfirmBinding
 
 class ClearDialog(val callClickListener: OnClickListener, val ordClickListener: OnClickListener): BaseDialogFragment() {
     lateinit var binding: DialogClearBinding

@@ -23,7 +23,7 @@
         </LinearLayout>
 
         <TextView
-            style="@style/text22b"
+            style="@style/text20b"
             android:id="@+id/title"
             android:layout_marginTop="60dp"
             app:layout_constraintEnd_toEndOf="parent"

@@ -86,7 +86,7 @@ class HistoryAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adap
                 price.text = AppHelper.price(data.amount)
 
                 if(data.iscompleted == 1) {
-                    tableNo.setBackgroundColor(Color.parseColor("#E0E0E0"))
+                    top.setBackgroundColor(Color.parseColor("#E0E0E0"))
                     clPrice.setBackgroundResource(R.drawable.bg_cancel_r6)
                     btnComplete.setBackgroundResource(R.drawable.bg_cancel_r6)
                     btnComplete.text = "복원"
@@ -94,7 +94,7 @@ class HistoryAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adap
                     completeQr.visibility = View.GONE
                     completePos.visibility = View.GONE
                 } else if (data.paytype == 3) { // QR오더에서 들어온 주문 > 결제 완료
-                    tableNo.setBackgroundResource(R.color.main)
+                    top.setBackgroundResource(R.color.main)
                     clPrice.setBackgroundResource(R.drawable.bg_cancel_r6)
                     btnComplete.setBackgroundResource(R.drawable.bg_r6y)
                     btnComplete.text = "완료"
@@ -102,7 +102,7 @@ class HistoryAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adap
                     completeQr.visibility = View.VISIBLE
                     completePos.visibility = View.GONE
                 } else if (data.paytype == 4) {
-                    tableNo.setBackgroundResource(R.color.main)
+                    top.setBackgroundResource(R.color.main)
                     clPrice.setBackgroundResource(R.drawable.bg_r6y)
                     btnComplete.setBackgroundResource(R.drawable.bg_r6y)
                     btnComplete.text = "완료"
@@ -110,7 +110,7 @@ class HistoryAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adap
                     completeQr.visibility = View.GONE
                     completePos.visibility = View.VISIBLE
                 } else {
-                    tableNo.setBackgroundResource(R.color.main)
+                    top.setBackgroundResource(R.color.main)
                     clPrice.setBackgroundResource(R.drawable.bg_r6y)
                     btnComplete.setBackgroundResource(R.drawable.bg_r6y)
                     btnComplete.text = "완료"

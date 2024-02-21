@@ -45,7 +45,6 @@
         android:id="@+id/img"
         android:layout_width="500dp"
         android:layout_height="300dp"
-        android:src="@drawable/img_skin_black"
         android:scaleType="centerCrop"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/img_default"

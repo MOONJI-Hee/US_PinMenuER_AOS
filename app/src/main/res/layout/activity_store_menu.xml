@@ -206,6 +206,13 @@
         app:layout_constraintTop_toBottomOf="@+id/design" />
 
     <TextView
+        android:id="@+id/Event"
+        style="@style/menu"
+        android:text="@string/title_event"
+        app:layout_constraintTop_toTopOf="@+id/pgCancel"
+        app:layout_constraintStart_toStartOf="@+id/tablePass"/>
+
+    <TextView
         android:id="@+id/qrCustomerInfo"
         style="@style/menu"
         android:text="@string/qr_customer_info_menu"
