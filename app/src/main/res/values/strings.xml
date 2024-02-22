@@ -597,4 +597,5 @@
     <string name="msg_payment_cancel">결제가 취소되었습니다.</string>
     <string name="msg_find_pwd">임시 비밀번호가 이메일로 전송되었습니다.</string>
     <string name="msg_no_pay">결제 후 이용 가능합니다.</string>
+    <string name="msg_no_event_exp">이벤트 설명을 입력해 주세요.</string>
 </resources>

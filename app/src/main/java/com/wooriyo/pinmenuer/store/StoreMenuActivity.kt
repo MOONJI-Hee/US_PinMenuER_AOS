@@ -16,6 +16,7 @@ import com.wooriyo.pinmenuer.MyApplication.Companion.androidId
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.call.CallSetActivity
 import com.wooriyo.pinmenuer.databinding.ActivityStoreMenuBinding
+import com.wooriyo.pinmenuer.event.SetEventPopup
 import com.wooriyo.pinmenuer.history.ByHistoryActivity
 import com.wooriyo.pinmenuer.history.ByTableActivity
 import com.wooriyo.pinmenuer.member.MemberSetActivity
@@ -69,6 +70,7 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                     }
                 }
                 design.setOnClickListener{ startActivity(Intent(mActivity, MenuUiActivity::class.java)) }
+                event.setOnClickListener { startActivity(Intent(mActivity, SetEventPopup::class.java)) }
 //                qrCustomerInfo.setOnClickListener{
 //                    if(store.paytype == 2) {
 //                        startActivity(Intent(mActivity, SetCustomerInfoActivity::class.java))
@@ -85,6 +87,7 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                 payment.setOnClickListener(this@StoreMenuActivity)
                 pgCancel.setOnClickListener(this@StoreMenuActivity)
                 design.setOnClickListener(this@StoreMenuActivity)
+                event.setOnClickListener(this@StoreMenuActivity)
             }
 
             menu.setOnClickListener{

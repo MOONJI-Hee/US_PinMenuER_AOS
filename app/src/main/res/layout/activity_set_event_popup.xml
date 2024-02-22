@@ -38,7 +38,6 @@
         android:id="@+id/img_default"
         android:layout_width="440dp"
         android:layout_height="330dp"
-        android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="@string/event_main_img_hint"
         android:textSize="20sp"
@@ -52,12 +51,21 @@
         android:id="@+id/img"
         android:layout_width="440dp"
         android:layout_height="330dp"
+        android:layout_marginTop="10dp"
         android:scaleType="centerCrop"
-        android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@+id/tvImg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/exp"
         app:layout_constraintHorizontal_chainStyle="packed"/>
+
+    <ImageView
+        android:id="@+id/delImg"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/btn_menu_del"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@+id/img"
+        app:layout_constraintEnd_toEndOf="@+id/img"/>
 
     <TextView
         style="@style/btn_sub"
@@ -78,11 +86,14 @@
         app:layout_constraintStart_toStartOf="@+id/exp"/>
     
     <EditText
-        style="@style/edittext_main"
+        style="@style/edittext"
         android:id="@+id/exp"
+        android:layout_width="500dp"
         android:layout_height="120dp"
         android:layout_marginTop="10dp"
         android:layout_marginStart="40dp"
+        android:paddingVertical="9dp"
+        android:gravity="top"
         android:hint="@string/event_exp_hint"
         app:layout_constraintStart_toEndOf="@+id/img"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,6 +112,7 @@
         android:id="@+id/link"
         android:layout_marginTop="10dp"
         android:hint="@string/event_link_hint"
+        android:imeOptions="actionDone"
         app:layout_constraintStart_toStartOf="@+id/exp"
         app:layout_constraintTop_toBottomOf="@+id/tvLink"/>
 
