@@ -84,6 +84,12 @@
         android:text="@string/event_exp"
         app:layout_constraintTop_toBottomOf="@+id/title"
         app:layout_constraintStart_toStartOf="@+id/exp"/>
+
+    <TextView
+        style="@style/essential"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/exp"
+        app:layout_constraintBottom_toTopOf="@+id/exp" />
     
     <EditText
         style="@style/edittext"
