@@ -2,6 +2,7 @@ package com.wooriyo.pinmenuer.util
 
 import com.wooriyo.pinmenuer.model.*
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -638,6 +639,26 @@ interface Api {
         @Query("blstatus") blstatus: String
     ): Call<ResultDTO>
 
+    // 결제 완료 후 이벤트 팝업
+    // 이벤트 팝업 설정
+    @Multipart
+    @POST("m/event.setting.php")
+    fun setEventPopup (
+        @Part("useridx") useridx: Int,
+        @Part("storeidx") storeidx: Int,
+        @Part("buse") buse: RequestBody,
+        @Part("content") content: RequestBody,
+        @Part("link") link: RequestBody,
+        @Part("delImg") delImg: Int,
+        @Part img: MultipartBody.Part?
+    ): Call<ResultDTO>
+
+    // 이벤트 팝업 정보 조회
+    @GET("getEvent.php")
+    fun getEventPopup (
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int
+    ): Call<PopupDTO>
 
     // 결제 설정 관련 Api
     // 결제 설정 최초 진입 시

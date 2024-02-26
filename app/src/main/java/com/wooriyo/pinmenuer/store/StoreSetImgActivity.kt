@@ -136,11 +136,6 @@ class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
 
     // 외부저장소 권한 확인
     fun checkPms() {
-//        if(MyApplication.osver >= Build.VERSION_CODES.Q) {
-//
-//        }else {
-//
-//        }
         when {
             ContextCompat.checkSelfPermission(this@StoreSetImgActivity, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED -> getImage()
             ActivityCompat.shouldShowRequestPermissionRationale(this@StoreSetImgActivity, Manifest.permission.READ_EXTERNAL_STORAGE) -> {

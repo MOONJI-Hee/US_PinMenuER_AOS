@@ -63,7 +63,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding: ActivityMenuSetBinding
     lateinit var cateAdapter : CateAdapter
 
-    private val permission = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    private val permission = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
 
     val radius = (6 * MyApplication.density).toInt()
 
@@ -160,7 +160,6 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             clearImage(binding.thum3)
             delImg3 = 1
         }
-        binding.del2.setOnClickListener(this)
 
         // 우측 메뉴 삭제 확인창 관련
         binding.delCancel.setOnClickListener(this)
@@ -298,7 +297,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     fun checkPermissions() {
         val deniedPms = ArrayList<String>()
 
-        if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+        if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
             for (pms in permission) {
                 if(ActivityCompat.checkSelfPermission(mActivity, pms) != PackageManager.PERMISSION_GRANTED) {
                     if(ActivityCompat.shouldShowRequestPermissionRationale(mActivity, pms)) {
