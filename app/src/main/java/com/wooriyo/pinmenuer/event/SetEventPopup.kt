@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.view.View.OnClickListener
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -26,6 +27,7 @@ import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.config.AppProperties
 import com.wooriyo.pinmenuer.databinding.ActivitySetEventPopupBinding
+import com.wooriyo.pinmenuer.event.dialog.EventConfirmDialog
 import com.wooriyo.pinmenuer.model.PopupDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.util.ApiClient
@@ -104,9 +106,10 @@ class SetEventPopup : BaseActivity() {
                     Toast.makeText(mActivity, R.string.msg_no_event_exp, Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
+                save(exp, link, bIsUse)
+            }else {
+                EventConfirmDialog { save(exp, link, bIsUse) }.show(supportFragmentManager, "EventConfirmDialog")
             }
-
-            save(exp, link, bIsUse)
         }
 
         getEvent()
@@ -118,8 +121,6 @@ class SetEventPopup : BaseActivity() {
         val deniedPms = ArrayList<String>()
 
         if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
-            Log.d(TAG, "29버전 낮 시작 아 헐")
-
             for (pms in permission) {
                 if(ActivityCompat.checkSelfPermission(mActivity, pms) != PackageManager.PERMISSION_GRANTED) {
                     if(ActivityCompat.shouldShowRequestPermissionRationale(mActivity, pms)) {
