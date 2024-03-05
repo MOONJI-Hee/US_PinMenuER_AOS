@@ -1,19 +1,16 @@
 package com.wooriyo.pinmenuer.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class OptionDTO (
-    @SerializedName("optidx") var idx : Int,
-    @SerializedName("optnm") var name : String,
-    @SerializedName("optcd") var optcd : String,
-    @SerializedName("optreq") var optreq : Int,                     // 0 : 선택 옵션, 1 : 필수 옵션
-    @SerializedName("optval") var optval : ArrayList<String>,
-    @SerializedName("optpay") var optpay : ArrayList<String>,
-    @SerializedName("optmark") var optmark : ArrayList<String>,
+    @SerializedName("opt_idx") var idx : Int,
+    @SerializedName("opt_title") var title : String,
+    @SerializedName("opt_req") var optreq : Int,               // 0 : 선택 옵션, 1 : 필수 옵션
+    @SerializedName("optlist") var optval : ArrayList<ValueDTO>
 ) {
-    constructor(type: Int) : this(0, "", "", type, ArrayList<String>(), ArrayList<String>(), ArrayList<String>())
-
-    fun copy(): OptionDTO {
-        return OptionDTO(idx, name, optcd, optreq, optval, optpay, optmark)
+    constructor(req: Int) : this(0, "", req, ArrayList<ValueDTO>())
+    fun copy() : OptionDTO {
+        return OptionDTO(idx, title, optreq, ArrayList<ValueDTO>().apply{addAll(optval)})
     }
 }

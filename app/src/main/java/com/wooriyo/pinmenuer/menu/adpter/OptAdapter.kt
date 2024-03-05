@@ -39,7 +39,7 @@ class OptAdapter(val dataSet: ArrayList<OptionDTO>): RecyclerView.Adapter<OptAda
     class ViewHolder(val binding:ListOptBinding, val itemClickListener: ItemClickListener, val context: Context): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(data: OptionDTO) {
-            binding.name.text = data.name
+            binding.name.text = data.title
 
             when(data.optreq) {
                 0 -> {
@@ -51,7 +51,7 @@ class OptAdapter(val dataSet: ArrayList<OptionDTO>): RecyclerView.Adapter<OptAda
                     binding.type.setTextColor(Color.parseColor("#FF0000"))
                 }
             }
-            binding.rvVals.adapter = ValueAdapter(data)
+            binding.rvVals.adapter = ValueAdapter(data.optval)
 
             binding.layout.setOnClickListener { itemClickListener.onItemClick(absoluteAdapterPosition) }
         }
