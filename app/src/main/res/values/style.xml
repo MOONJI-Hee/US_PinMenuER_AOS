@@ -411,6 +411,12 @@
         <item name="android:outlineProvider">none</item>
         <item name="android:includeFontPadding">false</item>
     </style>
+    <style name="spinner_mark">
+        <item name="android:dropDownVerticalOffset">10dp</item>
+        <item name="android:paddingEnd">30dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:background">@drawable/bg_spinner_opt_mark</item>
+    </style>
 
     <!-- Custom font 적용 -->
     <style name="customTextViewFontStyle" parent="@android:style/Widget.DeviceDefault.TextView">

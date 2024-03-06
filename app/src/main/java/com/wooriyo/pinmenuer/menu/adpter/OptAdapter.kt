@@ -10,6 +10,7 @@ import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.databinding.ListOptBinding
 import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.model.OptionDTO
+import com.wooriyo.pinmenuer.model.ValueDTO
 
 class OptAdapter(val dataSet: ArrayList<OptionDTO>): RecyclerView.Adapter<OptAdapter.ViewHolder>() {
     lateinit var itemClickListener: ItemClickListener
@@ -51,7 +52,7 @@ class OptAdapter(val dataSet: ArrayList<OptionDTO>): RecyclerView.Adapter<OptAda
                     binding.type.setTextColor(Color.parseColor("#FF0000"))
                 }
             }
-            binding.rvVals.adapter = ValueAdapter(data.optval)
+            binding.rvVals.adapter = ValueAdapter(data.optval ?: ArrayList<ValueDTO>())
 
             binding.layout.setOnClickListener { itemClickListener.onItemClick(absoluteAdapterPosition) }
         }

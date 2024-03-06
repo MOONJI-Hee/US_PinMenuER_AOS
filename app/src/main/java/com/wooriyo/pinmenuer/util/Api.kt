@@ -262,14 +262,14 @@ interface Api {
     ): Call<CateListDTO>
 
     // 메뉴 조회
-    @GET("m/goods.list.php")
+    @GET("m/goods.list.test.php")
     fun getGoods(
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int
     ): Call<GoodsListDTO>
 
     // 메뉴 등록
-    @GET("m/ins_goods.php")
+    @GET("m/ins_goods.test.php")
     fun insGoods(
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int,
@@ -282,11 +282,7 @@ interface Api {
         @Query("adDisplay") adDisplay : String,
         @Query("icon") icon : Int,
         @Query("boption") boption : String,
-        @Query("option_name") option_name: String,          // 옵션 이름 (ex 사이즈)
-        @Query("option_value") option_value: String,        // 옵션 보기 (ex 톨, 레귤러, 벤티)
-        @Query("option_mark") option_mark: String,
-        @Query("option_price") option_price: String,
-        @Query("option_req") option_req: String
+        @Query("JSON") JSON : String
     ): Call<ResultDTO>
 
     // 메뉴 이미지 등록
@@ -301,7 +297,7 @@ interface Api {
     ): Call<ResultDTO>
 
     // 메뉴 수정
-    @GET("m/udt_goods.php")
+    @GET("m/udt_goods.test.php")
     fun udtGoods(
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int,
@@ -318,12 +314,7 @@ interface Api {
         @Query("img3") img3: Int,
         @Query("adDisplay") adDisplay : String,
         @Query("boption") boption : String,
-        @Query("option_code") option_code: String,
-        @Query("option_name") option_name: String,
-        @Query("option_value") option_value: String,
-        @Query("option_mark") option_mark: String,
-        @Query("option_price") option_price: String,
-        @Query("option_req") option_req: String
+        @Query("JSON") JSON : String
     ): Call<ResultDTO>
 
     // 메뉴 삭제

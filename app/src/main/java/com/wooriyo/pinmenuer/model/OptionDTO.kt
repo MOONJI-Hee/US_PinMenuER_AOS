@@ -7,10 +7,10 @@ data class OptionDTO (
     @SerializedName("opt_idx") var idx : Int,
     @SerializedName("opt_title") var title : String,
     @SerializedName("opt_req") var optreq : Int,               // 0 : 선택 옵션, 1 : 필수 옵션
-    @SerializedName("optlist") var optval : ArrayList<ValueDTO>
+    @SerializedName("optlist") var optval : ArrayList<ValueDTO>?
 ) {
     constructor(req: Int) : this(0, "", req, ArrayList<ValueDTO>())
-    fun copy() : OptionDTO {
-        return OptionDTO(idx, title, optreq, ArrayList<ValueDTO>().apply{addAll(optval)})
+    fun deepCopy() : OptionDTO {
+        return OptionDTO(idx, title, optreq, ArrayList<ValueDTO>().apply{addAll(optval?:ArrayList<ValueDTO>())})
     }
 }

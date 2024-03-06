@@ -51,7 +51,7 @@ class OrderDetailAdapter(val dataSet: ArrayList<OrderDTO>): RecyclerView.Adapter
 
                     var height = 100
 
-                    val multiple = (data.opt.size - 1) / 4
+                    val multiple = (data.opt.size - 1) % 4
 
                     height += (104 * multiple)
 

@@ -434,7 +434,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
         optAdapter.setOnItemClickListener(object : ItemClickListener {
             override fun onItemClick(position: Int) {
-                val copyOpt = optList[position].copy()  // 옵션 수정 사항 저장하지 않을수도 있기 때문에 깊은 복사 진행
+                val copyOpt = optList[position].deepCopy()  // 옵션 수정 사항 저장하지 않을수도 있기 때문에 깊은 복사 진행
                 showOptDialog(position, copyOpt)
             }
         })
@@ -644,6 +644,8 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         media2 = null
         media3 = null
 
+        val jsonArray = JSONArray()
+
         binding.run {
             val strName = etName.text.toString()
             var strCookTimeMin = etCookingTimeMin.text.toString()
@@ -694,83 +696,45 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                 else -> 0
             }
             goods.boption = if(toggleOption.isChecked) y else n
-        }
 
-        optCode = ""
-        optName = ""
-        optValue = ""
-        optMark = ""
-        optPrice = ""
-        optReq = ""
+            if(!goods.opt.isNullOrEmpty()) {
+                goods.opt!!.forEach {
+                    val jsonObject = JSONObject()
 
-        goods.opt?.forEach {
-            if(optName == "") {
-                optName = it.name
-            }else
-                optName += ",${it.name}"
+                    jsonObject.put("optidx", it.idx)
+                    jsonObject.put("optionTitle", it.title)
 
-            if(optReq == "")
-                optReq = it.optreq.toString()
-            else
-                optReq += ",${it.optreq}"
+                    if(it.optreq == 0)
+                        jsonObject.put("optionType", "선택")
+                    else
+                        jsonObject.put("optionType", "필수")
 
-            var opt = ""
-            it.optval.forEach { i ->
-                if(opt == "")
-                    opt = i
-                else
-                    opt += ",$i"
-            }
+                    val jsonArray2 = JSONArray()
+                    it.optval?.forEach { value ->
+                        val jsonObject2 = JSONObject()
+                        jsonObject2.put("optionidx", value.idx)
+                        jsonObject2.put("optionName", value.name)
+                        jsonObject2.put("optionMark", value.mark)
+                        jsonObject2.put("optionPrice", value.price)
 
-            if(optValue == "")
-                optValue = opt
-            else
-                optValue += "」「$opt"
+                        jsonArray2.put(jsonObject2)
+                    }
+                    jsonObject.put("optionDetails", jsonArray2)
 
-            var mark = ""
-            it.optmark.forEach { i ->
-                if(mark == "")
-                    mark = i
-                else
-                    mark += ",$i"
-            }
-
-            if(optMark == "")
-                optMark = mark
-            else
-                optMark += "」「$mark"
-
-            var pay = ""
-            it.optpay.forEach { i ->
-                if(pay == "")
-                    pay = i
-                else
-                    pay += ",$i"
-            }
-
-            if(optPrice == "")
-                optPrice = pay
-            else
-                optPrice += "」「$pay"
-
-            if(mode == 1) {
-                if(optCode == "") {
-                    optCode = it.optcd
-                }else {
-                    optCode += ",${it.optcd}"
+                    jsonArray.put(jsonObject)
                 }
             }
         }
 
         if(mode == 0)
-            insGoods()
+            insGoods(jsonArray.toString())
         else if(mode == 1)
-            udtGoods()
+            udtGoods(jsonArray.toString())
     }
 
-    fun insGoods() {
+    fun insGoods(strJson : String) {
         goods.let {
-            ApiClient.service.insGoods(useridx, storeidx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption, optName, optValue, optMark, optPrice, optReq)
+            ApiClient.service.insGoods(useridx, storeidx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.adDisplay, it.icon, it.boption, strJson)
                 .enqueue(object : Callback<ResultDTO> {
                     override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                         Log.d(TAG, "메뉴 등록 url : $response")
@@ -803,9 +767,9 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    fun udtGoods() {
+    fun udtGoods(strJson : String) {
         goods.let {
-            ApiClient.service.udtGoods(useridx, storeidx, it.idx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.icon, 0, 0, 0, it.adDisplay, it.boption, optCode, optName, optValue, optMark, optPrice, optReq)
+            ApiClient.service.udtGoods(useridx, storeidx, it.idx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.icon, 0, 0, 0, it.adDisplay, it.boption, strJson)
                 .enqueue(object : Callback<ResultDTO> {
                     override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                         Log.d(TAG, "메뉴 수정 url : $response")

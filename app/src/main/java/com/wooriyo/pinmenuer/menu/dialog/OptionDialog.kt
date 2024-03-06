@@ -13,9 +13,11 @@ import com.wooriyo.pinmenuer.databinding.DialogOptionBinding
 import com.wooriyo.pinmenuer.listener.DialogListener
 import com.wooriyo.pinmenuer.menu.adpter.OptEditAdapter
 import com.wooriyo.pinmenuer.model.OptionDTO
+import com.wooriyo.pinmenuer.model.ValueDTO
 import java.util.*
+import kotlin.collections.ArrayList
 
-class OptionDialog(context: Context, val position: Int, private val option : OptionDTO): BaseDialog(context) {  // TODO 다이얼로그 생성할 때 수정은 깊은 복사 진행
+class OptionDialog(context: Context, val position: Int, private val option : OptionDTO): BaseDialog(context) {  // 다이얼로그 생성할 때 수정은 깊은 복사 진행
     lateinit var binding:DialogOptionBinding
     lateinit var dialogListener: DialogListener
 
@@ -23,6 +25,8 @@ class OptionDialog(context: Context, val position: Int, private val option : Opt
         super.onCreate(savedInstanceState)
         binding = DialogOptionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setCancelable(false)
 
         val window = window ?: return
         val params = window.attributes
@@ -49,27 +53,26 @@ class OptionDialog(context: Context, val position: Int, private val option : Opt
                         optNameTitle.text = context.getString(R.string.opt_chc_name)
                     }
                 }
-                optName.setText(option.name)
+                optName.setText(option.title)
                 delete.visibility = View.VISIBLE
             }
         }
 
         binding.rvOptVal.run {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            adapter = OptEditAdapter(option)
+            adapter = OptEditAdapter(option.optval?:ArrayList())
         }
 
         binding.close.setOnClickListener { dismiss() }
         binding.save.setOnClickListener {
-            option.name = binding.optName.text.toString()
-            Collections.replaceAll(option.optpay, "", "0")
-
-            Log.d("OptionDialog", "옵션 저장 ~!~!!~ >> $option")
-
-            if(option.name.isEmpty()) {
+            if(binding.optName.text.toString().isNullOrEmpty()) {
                 Toast.makeText(context, R.string.opt_name_hint, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+
+            option.title = binding.optName.text.toString()
+
+            Log.d("OptionDialog", "옵션 저장 ~!~!!~ >> $option")
 
             if(position == -1)
                 dialogListener.onOptAdd(option)

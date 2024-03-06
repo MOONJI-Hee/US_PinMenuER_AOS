@@ -29,8 +29,10 @@
             android:id="@+id/sp_mark"
             android:layout_width="68dp"
             android:layout_height="match_parent"
-            android:background="@color/f9"/>
-
+            android:background="@color/f9"
+            android:dropDownWidth="68dp"
+            android:popupElevation="3dp"
+            android:popupBackground="@drawable/bg_r6w"/>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="123dp"
             android:layout_height="wrap_content"
