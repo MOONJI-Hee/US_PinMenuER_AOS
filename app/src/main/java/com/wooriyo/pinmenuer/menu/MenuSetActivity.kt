@@ -74,6 +74,8 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     val optList = ArrayList<OptionDTO>()
     val optAdapter = OptAdapter(optList)
 
+//    var optDialog : OptionDialog ?= null
+
     // Api 보낼 때 옵션
     var optCode = ""
     var optName = ""
@@ -696,6 +698,9 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                 else -> 0
             }
             goods.boption = if(toggleOption.isChecked) y else n
+
+            goods.opt?.clear()
+            goods.opt?.addAll(optList)
 
             if(!goods.opt.isNullOrEmpty()) {
                 goods.opt!!.forEach {
