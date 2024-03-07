@@ -1,7 +1,9 @@
 package com.wooriyo.pinmenuer.menu.dialog
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -39,12 +41,13 @@ class OptionDialog(context: Context, val position: Int, private val option : Opt
                 if(option.optreq == 0) {
                     title.text = context.getString(R.string.option_choice)
                     optNameTitle.text = context.getString(R.string.opt_chc_name)
-                    optInfo1.text = context.getString(R.string.opt_chc_info1)
-                    optInfo2.text = context.getString(R.string.opt_chc_info2)
+
+                    optInfo1.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) Html.fromHtml(context.getString(R.string.opt_chc_info1), Html.FROM_HTML_MODE_LEGACY) else Html.fromHtml(context.getString(R.string.opt_chc_info1))
+                    optInfo2.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) Html.fromHtml(context.getString(R.string.opt_chc_info2), Html.FROM_HTML_MODE_LEGACY) else Html.fromHtml(context.getString(R.string.opt_chc_info2))
                 }
             }else {                // 옵션 수정
-                optInfo1.text = context.getString(R.string.opt_udt_info1)
-                optInfo2.text = context.getString(R.string.opt_udt_info2)
+                optInfo1.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) Html.fromHtml(context.getString(R.string.opt_udt_info1), Html.FROM_HTML_MODE_LEGACY) else Html.fromHtml(context.getString(R.string.opt_udt_info1))
+                optInfo2.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) Html.fromHtml(context.getString(R.string.opt_udt_info2), Html.FROM_HTML_MODE_LEGACY) else Html.fromHtml(context.getString(R.string.opt_udt_info2))
 
                 when(option.optreq) {   // 0: 선택 옵션, 1: 필수 옵션
                     1 -> title.text = context.getString(R.string.opt_udt_req)

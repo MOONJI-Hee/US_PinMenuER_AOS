@@ -184,7 +184,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/menu_save"/>
             <TextView
-                style="@style/btn_sub"
+                style="@style/btn"
                 android:id="@+id/menu_save"
                 android:layout_width="80dp"
                 android:layout_marginStart="20dp"

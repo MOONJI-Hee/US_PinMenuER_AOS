@@ -297,10 +297,10 @@
     <string name="opt_hint">옵션을 입력해 주세요.</string>
     <string name="opt_req_info1"><b>필수 옵션</b>은 사용자가 옵션을 하나만 선택할 수 있습니다.</string>
     <string name="opt_req_info2"><b>다중 선택 옵션</b>이 필요하면 팝업을 닫고, [ + 선택 옵션 ] 버튼으로 옵션을 추가해 주세요.</string>
-    <string name="opt_chc_info1"><b>선택 옵션</b>은 사용자가 옵션을 다중 선택할 수 있습니다.</string>
-    <string name="opt_chc_info2"><b>한가지 선택</b>만 가능한 옵션이 필요하면 팝업을 닫고, [ + 필수 옵션 ] 버튼으로 옵션을 추가해 주세요.</string>
-    <string name="opt_udt_info1">붉은색 글씨 [삭제]를 누르시면 <b>해당 옵션</b>이 <b>삭제</b>됩니다.</string>
-    <string name="opt_udt_info2">하단에 [삭제]버튼은 <b>옵션 전체</b>가 <b>삭제</b>됩니다.</string>
+    <string name="opt_chc_info1">&lt;b>선택 옵션&lt;/b>은 사용자가 옵션을 다중 선택할 수 있습니다.</string>
+    <string name="opt_chc_info2">&lt;b>한가지 선택&lt;/b>만 가능한 옵션이 필요하면 팝업을 닫고, [ + 필수 옵션 ] 버튼으로 옵션을 추가해 주세요.</string>
+    <string name="opt_udt_info1">붉은색 글씨 [삭제]를 누르시면 &lt;b>해당 옵션&lt;/b>이 &lt;b>삭제&lt;/b>됩니다.</string>
+    <string name="opt_udt_info2">하단에 [삭제]버튼은 &lt;b>옵션 전체&lt;/b>가 &lt;b>삭제&lt;/b>됩니다.</string>
 
     <!--  테이블 비밀번호 설정  -->
     <string name="table_pass">주문앱\n테이블 번호\n비밀번호 설정</string>

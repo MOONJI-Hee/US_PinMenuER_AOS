@@ -6,11 +6,13 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
+import com.wooriyo.pinmenuer.common.LoadingDialog
 import com.wooriyo.pinmenuer.util.AppHelper
 
 open class BaseActivity: AppCompatActivity() {
     open lateinit var mActivity: Activity
     open lateinit var TAG: String
+    open lateinit var loadingDialog : LoadingDialog
 
     val y = "Y"
     val n = "N"
@@ -37,6 +39,8 @@ open class BaseActivity: AppCompatActivity() {
 
         mActivity = this
         TAG = mActivity.localClassName
+
+        loadingDialog = LoadingDialog()
 
         super.onCreate(savedInstanceState)
     }

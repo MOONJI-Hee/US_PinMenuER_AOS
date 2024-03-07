@@ -23,6 +23,7 @@
             android:layout_width="212dp"
             android:layout_marginEnd="20dp"
             android:hint="@string/opt_hint"
+            android:imeOptions="actionNext"
             android:inputType="text"
             android:maxLines="1" />
         <Spinner

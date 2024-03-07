@@ -82,7 +82,7 @@
         <TextView
             style="@style/subtext"
             android:id="@+id/opt_info1"
-            android:layout_marginStart="120dp"
+            android:layout_marginStart="60dp"
             android:layout_marginBottom="10dp"
             android:text="@string/opt_req_info1"
             app:layout_constraintStart_toStartOf="parent"
