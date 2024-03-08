@@ -79,9 +79,10 @@ class OptEditAdapter(val dataSet: ArrayList<ValueDTO>): RecyclerView.Adapter<Rec
 
                 etVal.setText(data.name)
 
-                if(data.price.isNotEmpty() && data.price != "0") {
+                if(data.price == "0" || data.price.isEmpty())
+                    etPrice.setText("")
+                 else
                     etPrice.setText(AppHelper.price(data.price.toInt()))
-                }
 
                 if (data.mark == "-")
                     spMark.setSelection(1)

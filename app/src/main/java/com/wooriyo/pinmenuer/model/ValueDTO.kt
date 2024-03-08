@@ -10,4 +10,7 @@ data class ValueDTO(
     @SerializedName("optpay") var price : String
 ): Serializable {
     constructor(): this(0, "", "+", "")
+    fun deepCopy(): ValueDTO {
+        return ValueDTO(idx, name, mark, price)
+    }
 }
