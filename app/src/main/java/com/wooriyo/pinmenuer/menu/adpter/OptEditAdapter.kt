@@ -18,16 +18,6 @@ import com.wooriyo.pinmenuer.model.ValueDTO
 import com.wooriyo.pinmenuer.util.AppHelper
 
 class OptEditAdapter(val dataSet: ArrayList<ValueDTO>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-//    lateinit var plusClickListener: View.OnClickListener
-//    lateinit var deleteClickListener: ItemClickListener
-//    fun setOnPlusClickListener(plusClickListener: View.OnClickListener) {
-//        this.plusClickListener = plusClickListener
-//    }
-//
-//    fun setOnDeleteClickListener(deleteClickListener: ItemClickListener) {
-//        this.deleteClickListener = deleteClickListener
-//    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding = ListOptEditBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         val bindingAdd = ListOptAddBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -41,16 +31,6 @@ class OptEditAdapter(val dataSet: ArrayList<ValueDTO>): RecyclerView.Adapter<Rec
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(getItemViewType(position)) {
-            AppProperties.VIEW_TYPE_COM -> {
-                holder as ViewHolder
-                holder.bind(dataSet[position])
-
-                holder.binding.tvDel.setOnClickListener {
-                    dataSet.removeAt(position)
-                    notifyItemRemoved(position)
-                    notifyItemRangeChanged(position, itemCount - position) // 삭제한 아이템 ~ 뒤의 모든 아이템 수정 (포지션 재배치 및 옵션 번호 다시 출력)
-                }
-            }
             AppProperties.VIEW_TYPE_ADD -> {
                 holder as AddViewHolder
                 holder.bind()
@@ -61,6 +41,16 @@ class OptEditAdapter(val dataSet: ArrayList<ValueDTO>): RecyclerView.Adapter<Rec
                     notifyItemChanged(position+1)
                 }
             }
+            else -> {
+                holder as ViewHolder
+                holder.bind(dataSet[position])
+
+                holder.binding.tvDel.setOnClickListener {
+                    dataSet.removeAt(position)
+                    notifyItemRemoved(position)
+                    notifyItemRangeChanged(position, itemCount - position) // 삭제한 아이템 ~ 뒤의 모든 아이템 수정 (포지션 재배치 및 옵션 번호 다시 출력)
+                }
+            }
         }
     }
 
@@ -69,7 +59,7 @@ class OptEditAdapter(val dataSet: ArrayList<ValueDTO>): RecyclerView.Adapter<Rec
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if(position == itemCount -1) AppProperties.VIEW_TYPE_ADD else AppProperties.VIEW_TYPE_COM
+        return if(position == dataSet.size) AppProperties.VIEW_TYPE_ADD else position
     }
 
     class ViewHolder(val binding: ListOptEditBinding, val context: Context): RecyclerView.ViewHolder(binding.root) {

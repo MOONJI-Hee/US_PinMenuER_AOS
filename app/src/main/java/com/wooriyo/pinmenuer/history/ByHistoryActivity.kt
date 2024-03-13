@@ -194,7 +194,7 @@ class ByHistoryActivity : BaseActivity() {
         })
 
         adapter.setOnPrintClickListener(object:ItemClickListener{
-            override fun onItemClick(position: Int) {print(position)}
+            override fun onItemClick(position: Int) {print(totalList[position])}
         })
 
         adapter.setOnCallCompleteListener(object : ItemClickListener{
@@ -229,7 +229,7 @@ class ByHistoryActivity : BaseActivity() {
         })
 
         orderAdapter.setOnPrintClickListener(object:ItemClickListener{
-            override fun onItemClick(position: Int) {print(position)}
+            override fun onItemClick(position: Int) {print(orderList[position])}
         })
     }
 
@@ -536,10 +536,10 @@ class ByHistoryActivity : BaseActivity() {
         })
     }
 
-    fun print(position: Int) {
-        val pOrderDt = orderList[position].regdt
-        val pTableNo = orderList[position].tableNo
-        val pOrderNo = orderList[position].ordcode
+    fun print(order: OrderHistoryDTO) {
+        val pOrderDt = order.regdt
+        val pTableNo = order.tableNo
+        val pOrderNo = order.ordcode
 
         MyApplication.escposPrinter.printAndroidFont(
             MyApplication.store.name,
@@ -561,7 +561,7 @@ class ByHistoryActivity : BaseActivity() {
         MyApplication.escposPrinter.printAndroidFont(hyphen.toString(),
             AppProperties.FONT_WIDTH, font_size, ESCPOSConst.LK_ALIGNMENT_LEFT)
 
-        orderList[position].olist.forEach {
+        order.olist.forEach {
             val pOrder = getPrint(it)
             MyApplication.escposPrinter.printAndroidFont(pOrder,
                 AppProperties.FONT_WIDTH, font_size, ESCPOSConst.LK_ALIGNMENT_LEFT)
