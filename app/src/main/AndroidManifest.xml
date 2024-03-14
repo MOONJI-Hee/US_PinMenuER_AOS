@@ -131,9 +131,6 @@
             android:name=".call.CallListActivity"
             android:exported="false" />
         <activity
-            android:name=".order.OrderListActivity"
-            android:exported="false" />
-        <activity
             android:name=".menu.MenuSetActivity"
             android:exported="false" />
         <activity

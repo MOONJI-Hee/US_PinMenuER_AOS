@@ -12,7 +12,7 @@ import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.config.AppProperties
 import com.wooriyo.pinmenuer.databinding.ActivityQrBinding
-import com.wooriyo.pinmenuer.order.OrderListActivity
+import com.wooriyo.pinmenuer.history.ByHistoryActivity
 import java.net.URISyntaxException
 
 
@@ -64,7 +64,7 @@ class QrActivity : BaseActivity() {
                 if (status != null) {
                     when (status) {
                         1 -> {
-                            context.startActivity(Intent(context, OrderListActivity::class.java))
+                            context.startActivity(Intent(context, ByHistoryActivity::class.java))
                         }
                         2 -> Toast.makeText(
                             context,

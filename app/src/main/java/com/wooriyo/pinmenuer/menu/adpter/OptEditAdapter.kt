@@ -25,8 +25,8 @@ class OptEditAdapter(val dataSet: ArrayList<ValueDTO>): RecyclerView.Adapter<Rec
         val arrayAdapter = ArrayAdapter.createFromResource(parent.context, R.array.opt_mark, R.layout.spinner_opt_mark)
         binding.spMark.adapter = arrayAdapter
 
-        return if(viewType == AppProperties.VIEW_TYPE_COM) ViewHolder(binding, parent.context)
-        else AddViewHolder(bindingAdd)
+        return if(viewType == AppProperties.VIEW_TYPE_ADD) AddViewHolder(bindingAdd)
+        else ViewHolder(binding, parent.context)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
