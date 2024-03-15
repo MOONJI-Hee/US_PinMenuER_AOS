@@ -230,7 +230,6 @@
         android:id="@+id/save"
         android:text="@string/btn_save"
         android:layout_marginBottom="32dp"
-        android:background="@drawable/bg_btn_r6_grd"
         app:layout_constraintBottom_toTopOf="@+id/info"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

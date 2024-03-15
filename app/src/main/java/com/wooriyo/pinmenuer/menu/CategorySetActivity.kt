@@ -205,8 +205,10 @@ class CategorySetActivity : BaseActivity(), DialogListener {
                         Toast.makeText(this@CategorySetActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
                         setResult(RESULT_OK, intent)
 
-                        backList.clear()
-                        backList.addAll(resultDTO.cateList)
+                        if(!resultDTO.cateList.isNullOrEmpty()) {
+                            backList.clear()
+                            backList.addAll(resultDTO.cateList)
+                        }
                         setUdtMode()
                     }
                     else -> Toast.makeText(this@CategorySetActivity, resultDTO.msg, Toast.LENGTH_SHORT).show()

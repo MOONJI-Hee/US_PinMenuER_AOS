@@ -188,6 +188,7 @@
                 android:id="@+id/menu_save"
                 android:layout_width="80dp"
                 android:layout_marginStart="20dp"
+                android:background="@drawable/selector_btn_save"
                 android:text="@string/btn_save2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/etName"

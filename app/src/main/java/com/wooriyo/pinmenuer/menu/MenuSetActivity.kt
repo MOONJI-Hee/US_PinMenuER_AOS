@@ -756,9 +756,14 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
                                     it.idx = result.idx
                                     it.category = selCate
                                     it.opt = result.opt
+
                                     allGoodsList.add(goods)
                                     selGoodsList.add(GoodsDTO())
                                     goodsAdapter.notifyItemRangeChanged(selGoodsList.size-2, 2)
+
+                                    optList.clear()
+                                    optList.addAll(result.opt?:ArrayList())
+
                                     uploadImage(it.idx, media1, media2, media3)
                                     // 저장되었으니 수정모드로 변경
                                     mode = 1
@@ -777,6 +782,8 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun udtGoods(strJson : String) {
+        Log.d(TAG, "send option >> $strJson")
+
         goods.let {
             ApiClient.service.udtGoods(useridx, storeidx, it.idx, selCate, it.name, it.content?:"", it.cooking_time_min, it.cooking_time_max, it.price, it.icon, delImg1, delImg2, delImg3, it.adDisplay, it.boption, strJson)
                 .enqueue(object : Callback<ResultDTO> {
@@ -790,8 +797,13 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
 
                             when(result.status){
                                 1 -> {
+                                    Log.d(TAG, "result option >> ${result.opt}")
                                     it.opt = result.opt
                                     goodsAdapter.notifyItemChanged(goodsAdapter.selPos)
+
+                                    optList.clear()
+                                    optList.addAll(result.opt?:ArrayList())
+
                                     uploadImage(it.idx, media1, media2, media3)
                                 }
                                 else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
