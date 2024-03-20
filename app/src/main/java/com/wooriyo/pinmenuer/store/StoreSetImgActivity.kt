@@ -21,10 +21,12 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
+import com.wooriyo.pinmenuer.MyApplication.Companion.density
 import com.wooriyo.pinmenuer.MyApplication.Companion.store
 import com.wooriyo.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
+import com.wooriyo.pinmenuer.config.AppProperties.Companion.REQUEST_STORAGE
 import com.wooriyo.pinmenuer.databinding.ActivityStoreSetImgBinding
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.model.StoreDTO
@@ -39,7 +41,6 @@ import java.io.*
 
 class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding : ActivityStoreSetImgBinding
-    val REQUEST_R_STORAGE = 1
 
     var imgUri: Uri ?= null
 
@@ -62,10 +63,12 @@ class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
             imgUri = store.img.toUri()
             setImage()
         }
+        //TODO 매장 설명 있을 때 setText()
 
         binding.back.setOnClickListener(this)
         binding.save.setOnClickListener(this)
         binding.regImg.setOnClickListener(this)
+        binding.delImg.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
@@ -73,12 +76,13 @@ class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
             binding.back -> finish()
             binding.save -> save()
             binding.regImg -> checkPms()
+            binding.delImg -> delImage()
         }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode == REQUEST_R_STORAGE) {getImage()}
+        if(requestCode == REQUEST_STORAGE) {getImage()}
     }
 
     private fun save() {
@@ -99,8 +103,6 @@ class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
                 }
             }
 
-//            path = getCopyPath(imgUri!!)!!
-
             val file = File(path)
             val body = MultipartBody.Part.createFormData("img", file.name, RequestBody.create(MediaType.parse("image/*"), file))
 
@@ -109,7 +111,10 @@ class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
             Log.d(TAG, "이미지 File >> $file")
             Log.d(TAG, "이미지 body >> $body")
 
-            ApiClient.service.udtStoreImg(useridx, storeidx, body)
+            val exp = binding.etStoreExp.text.toString()
+            val expBody = RequestBody.create(MediaType.parse("text/plain"), exp)
+
+            ApiClient.service.udtStoreImg(useridx, storeidx, body, expBody)
                 .enqueue(object: retrofit2.Callback<ResultDTO>{
                     override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                         Log.d(TAG, "매장 대표 사진 등록 url : $response")
@@ -155,7 +160,7 @@ class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
 
     // 외부저장소 권한 받아오기
     fun getPms() {
-        ActivityCompat.requestPermissions(this@StoreSetImgActivity, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_R_STORAGE)
+        ActivityCompat.requestPermissions(this@StoreSetImgActivity, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_STORAGE)
     }
 
     fun getImage() {
@@ -164,15 +169,21 @@ class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun setImage() {
-        //        binding.img.setImageURI(it)
         binding.img.visibility = View.VISIBLE
+        binding.delImg.visibility = View.VISIBLE
         Glide.with(this@StoreSetImgActivity)
             .load(imgUri)
-            .transform(CenterCrop(), RoundedCorners(6))
+            .transform(CenterCrop(), RoundedCorners(6 * density.toInt()))
             .into(binding.img)
         binding.imgDefault.visibility = View.INVISIBLE
     }
 
+    fun delImage() {
+        binding.img.visibility = View.INVISIBLE
+        binding.delImg.visibility = View.INVISIBLE
+        binding.imgDefault.visibility = View.VISIBLE
+        imgUri = null
+    }
 
     // 내부저장소에 카피해서 절대경로 불러오기
     fun getCopyPath(uri: Uri): String? {

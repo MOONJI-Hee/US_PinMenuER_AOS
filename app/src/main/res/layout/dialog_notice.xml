@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="620dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_r11w">
+        android:background="@drawable/bg_r10w">
         <LinearLayout
             android:id="@+id/close"
             android:layout_width="wrap_content"

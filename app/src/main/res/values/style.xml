@@ -157,6 +157,18 @@
         <item name="android:background">@drawable/bg_edittext</item>
         <item name="android:includeFontPadding">false</item>
     </style>
+    <style name="edittext_big">
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingStart">15dp</item>
+        <item name="android:paddingEnd">15dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/hint</item>
+        <item name="android:background">@drawable/bg_edittext</item>
+        <item name="android:gravity">top</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
     <style name="edittext_main">
         <item name="android:layout_width">500dp</item>
         <item name="android:layout_height">48dp</item>

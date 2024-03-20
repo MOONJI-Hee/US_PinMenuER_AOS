@@ -534,7 +534,7 @@
             android:id="@+id/seqInfo"
             android:layout_width="560dp"
             android:layout_height="279dp"
-            android:background="@drawable/bg_r11w"
+            android:background="@drawable/bg_r10w"
             android:padding="30dp"
             android:visibility="gone">
             <TextView
@@ -565,7 +565,7 @@
             android:id="@+id/delConfirm"
             android:layout_width="560dp"
             android:layout_height="336dp"
-            android:background="@drawable/bg_r11w"
+            android:background="@drawable/bg_r10w"
             android:paddingVertical="40dp"
             android:paddingHorizontal="30dp"
             android:visibility="gone">

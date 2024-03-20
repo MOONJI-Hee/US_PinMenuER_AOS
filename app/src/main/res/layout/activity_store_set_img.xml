@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        style="@style/title"
         android:id="@+id/title"
+        style="@style/title"
         android:text="@string/title_store_img"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/back"
         android:layout_width="72dp"
@@ -20,6 +20,7 @@
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,58 +28,95 @@
     </LinearLayout>
 
     <TextView
+        style="@style/text20"
+        android:layout_marginBottom="10dp"
+        android:text="@string/store_img_rep"
+        app:layout_constraintBottom_toTopOf="@+id/img"
+        app:layout_constraintStart_toStartOf="@+id/img" />
+
+    <TextView
         android:id="@+id/img_default"
-        android:layout_width="500dp"
-        android:layout_height="300dp"
+        android:layout_width="448dp"
+        android:layout_height="336dp"
         android:layout_marginTop="80dp"
-        android:text="@string/store_img_reg_hint"
-        android:textSize="20sp"
-        android:textColor="@color/hint"
-        android:gravity="center"
         android:background="@drawable/bg_edittext"
+        android:gravity="center"
+        android:text="@string/store_img_reg_hint"
+        android:textColor="@color/hint"
+        android:textSize="20sp"
         android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toStartOf="@+id/etStoreExp"
+        app:layout_constraintHorizontal_chainStyle="packed"/>
 
     <ImageView
         android:id="@+id/img"
-        android:layout_width="500dp"
-        android:layout_height="300dp"
+        android:layout_width="448dp"
+        android:layout_height="336dp"
         android:scaleType="centerCrop"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/img_default"
         app:layout_constraintTop_toTopOf="@+id/img_default" />
 
     <TextView
-        style="@style/btn_sub"
         android:id="@+id/reg_img"
-        android:layout_width="500dp"
+        style="@style/btn_sub"
+        android:layout_width="448dp"
         android:layout_marginTop="20dp"
         android:text="@string/store_img_reg"
         android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_default"/>
+        app:layout_constraintEnd_toEndOf="@+id/img"
+        app:layout_constraintStart_toStartOf="@id/img"
+        app:layout_constraintTop_toBottomOf="@+id/img_default" />
+    
+    <ImageView
+        android:id="@+id/delImg"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/btn_photo_del_x_l"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@+id/img"
+        app:layout_constraintEnd_toEndOf="@+id/img"/>
 
     <TextView
-        style="@style/subtext"
         android:id="@+id/img_info"
-        android:text="@string/store_img_info"
-        android:lineSpacingExtra="5dp"
+        style="@style/subtext"
         android:layout_marginTop="32dp"
+        android:lineSpacingExtra="5dp"
+        android:text="@string/store_img_info"
         app:layout_constraintStart_toStartOf="@+id/reg_img"
-        app:layout_constraintTop_toBottomOf="@+id/reg_img"/>
+        app:layout_constraintTop_toBottomOf="@+id/reg_img" />
 
     <TextView
-        style="@style/btn_main"
+        style="@style/text20"
+        android:layout_marginBottom="10dp"
+        android:text="@string/store_exp_reg"
+        app:layout_constraintBottom_toTopOf="@+id/etStoreExp"
+        app:layout_constraintStart_toStartOf="@+id/etStoreExp" />
+
+    <EditText
+        android:id="@+id/etStoreExp"
+        style="@style/edittext_big"
+        android:layout_width="354dp"
+        android:layout_height="404dp"
+        android:layout_marginStart="40dp"
+        android:hint="@string/store_exp_reg_hint"
+        android:maxLength="100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/img_default"
+        app:layout_constraintTop_toTopOf="@+id/img" />
+
+    <TextView
         android:id="@+id/save"
-        android:layout_marginBottom="80dp"
+        style="@style/btn_main"
+        android:layout_marginBottom="40dp"
         android:text="@string/btn_save"
         android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_udt"
@@ -86,26 +124,27 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
+
         <TextView
-            style="@style/btn_cancel"
             android:id="@+id/delete"
+            style="@style/btn_cancel"
             android:layout_width="240dp"
             android:layout_marginEnd="20dp"
             android:text="@string/btn_delete"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
-            style="@style/btn"
             android:id="@+id/modify"
+            style="@style/btn"
             android:layout_width="240dp"
             android:text="@string/btn_save"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/delete" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="920dp"
         android:layout_height="720dp"
-        android:background="@drawable/bg_r11w">
+        android:background="@drawable/bg_r10w">
         <TextView
             style="@style/text22b"
             android:id="@+id/title"

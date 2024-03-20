@@ -7,6 +7,10 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toUri
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.MyApplication.Companion.store
@@ -65,6 +69,7 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
             binding.llUdt.visibility = View.VISIBLE
 
             binding.etName.setText(store.name)
+            binding.etName2.setText(store.name2)
             binding.etAddr.setText(store.address)
         }else if(type == 1) {
 //            binding.btnDetail.isEnabled = false
@@ -74,6 +79,8 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
             binding.llHour.visibility = View.GONE
             binding.llImg.visibility = View.GONE
         }
+
+        setStoreInfo()
 
         binding.back.setOnClickListener(this)
         binding.save.setOnClickListener(this)
@@ -125,8 +132,57 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
+    fun setStoreInfo() {
+        binding.run {
+            if(store.img.isNotEmpty()) {
+                tvStoreImg.visibility = View.GONE
+                storeImg.visibility = View.VISIBLE
+                Glide.with(mActivity)
+                    .load(store.img)
+                    .transform(CenterCrop(), RoundedCorners(6 * MyApplication.density.toInt()))
+                    .into(storeImg)
+            }else {
+                tvStoreImg.visibility = View.VISIBLE
+                storeImg.visibility = View.GONE
+            }
+
+            if(store.content.isNotEmpty()) {
+                storeExp.text = store.content
+            }else {
+                storeExp.text = getString(R.string.store_exp)
+            }
+
+            if(!store.tel.isNullOrEmpty()) {
+                storeTel.text = store.tel
+            }else {
+                storeTel.text = getString(R.string.store_tel)
+            }
+
+            if(!store.sns.isNullOrEmpty()) {
+                storeSns.text = store.sns
+            }else {
+                storeSns.text = getString(R.string.store_sns)
+            }
+
+            if(store.delivery == "Y") {
+                storeDeliver.text = getString(R.string.store_delivery_y)
+            }else {
+                storeDeliver.text = getString(R.string.store_delivery_info)
+            }
+
+            if(store.parking == "Y") {
+                storePark.text = getString(R.string.store_parking_y)
+                storeParkAdr.text = store.parkingAddr ?: ""
+            }else {
+                storePark.text = getString(R.string.store_parking_info)
+                storeParkAdr.text = ""
+            }
+        }
+    }
+
     fun save() {
         store.name = binding.etName.text.toString()
+        store.name2 = binding.etName2.text.toString()
         store.address = binding.etAddr.text.toString()
 
         if(store.name.isEmpty()) {
@@ -136,7 +192,7 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
 //            Toast.makeText(mActivity, R.string.msg_no_addr, Toast.LENGTH_SHORT).show()
 //        }
         else {
-            ApiClient.service.regStore(useridx, store.name, store.address, store.long, store.lat)
+            ApiClient.service.regStore(useridx, store.name, store.name2, store.address, store.long, store.lat)
                 .enqueue(object : Callback<ResultDTO>{
                     override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                         Log.d(TAG, "매장 등록 url : $response")
@@ -189,6 +245,7 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
 
     private fun modify() {
         store.name = binding.etName.text.toString()
+        store.name2 = binding.etName2.text.toString()
         store.address = binding.etAddr.text.toString()
         if(store.name.isEmpty()) {
             Toast.makeText(this@StoreSetActivity, R.string.store_name_hint, Toast.LENGTH_SHORT).show()
@@ -197,7 +254,7 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
 //            Toast.makeText(this@StoreSetActivity, R.string.msg_no_addr, Toast.LENGTH_SHORT).show()
 //        }
         else {
-            ApiClient.service.udtStore(useridx, storeidx, store.name, store.address, store.long, store.lat)
+            ApiClient.service.udtStore(useridx, storeidx, store.name, store.name2, store.address, store.long, store.lat)
                 .enqueue(object : Callback<ResultDTO>{
                     override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                         Log.d(TAG, "매장 수정 url : $response")
@@ -236,6 +293,8 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
                                     Log.d(TAG, "새로운 스토어~! >>> $store")
                                     binding.etName.setText(store.name)
                                     binding.etAddr.setText(store.address)
+
+                                    setStoreInfo()
                                 }
                             }
                             else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()

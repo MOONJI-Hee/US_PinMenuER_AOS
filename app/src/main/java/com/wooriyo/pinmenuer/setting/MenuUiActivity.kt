@@ -49,15 +49,28 @@ class MenuUiActivity : BaseActivity() {
             }
 
             checkBasic.setOnCheckedChangeListener { _, isChecked ->
-                if(isChecked) check3x3.isChecked = false
+                if(isChecked) {
+                    check3x3.isChecked = false
+                    checkList.isChecked = false
+                }
             }
             check3x3.setOnCheckedChangeListener { _, isChecked ->
-                if(isChecked) checkBasic.isChecked = false
+                if(isChecked)  {
+                    checkBasic.isChecked = false
+                    checkList.isChecked = false
+                }
+            }
+            checkList.setOnCheckedChangeListener { _, isChecked ->
+                if(isChecked) {
+                    checkBasic.isChecked = false
+                    check3x3.isChecked = false
+                }
             }
 
             when(MyApplication.store.viewmode) {
                 "b" -> binding.checkBasic.isChecked = true
                 "p" -> binding.check3x3.isChecked = true
+                "l" -> binding.checkList.isChecked = true
             }
 
             back.setOnClickListener { finish() }
@@ -78,6 +91,7 @@ class MenuUiActivity : BaseActivity() {
         when {
             binding.checkBasic.isChecked -> selMode = "b"
             binding.check3x3.isChecked -> selMode = "p"
+            binding.checkLight.isChecked -> selMode = "l"
         }
 
         ApiClient.service.setThema(useridx, storeidx, selColor, selMode)

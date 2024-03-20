@@ -10,7 +10,7 @@
         android:layout_height="490dp"
         android:paddingHorizontal="30dp"
         android:paddingVertical="40dp"
-        android:background="@drawable/bg_r11w">
+        android:background="@drawable/bg_r10w">
 
         <TextView
             android:id="@+id/title"

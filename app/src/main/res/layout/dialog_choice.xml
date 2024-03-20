@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:paddingVertical="60dp"
         android:paddingHorizontal="60dp"
-        android:background="@drawable/bg_r11w"
+        android:background="@drawable/bg_r10w"
         android:orientation="vertical"
         android:gravity="center">
 

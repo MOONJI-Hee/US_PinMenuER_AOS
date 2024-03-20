@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">핀메뉴 관리 (태블릿 PC)</string>
 
+    <string name="pinmenu_er">핀메뉴 관리</string>
+    <string name="pinmenu_ee">핀메뉴 주문</string>
+
     <string name="kakao_appKey">398d9c3d6b47f73780e5413b1f4b167f</string>
     <string name="kakao_apiKey">0a9047a6f0f9b350e4fca5168f2c5ef8</string>
 
@@ -133,13 +136,14 @@
     <string name="store_addr_hint">우측 지도 검색을 눌러 주소를 입력해 주세요.</string>
     <string name="store_map">지도검색</string>
     <string name="map_hint">주소를 입력하세요.</string>
-    <string name="store_addr_info">매장 주소는 매우 중요한 정보입니다.\n매장 주소를 토대로 주변 고객분들께 재방문, 신규방문 이벤트가 진행됩니다.\n매장 주소는 지도에서 정확하게 선택해 주십시요.</string>
+    <string name="store_addr_info">매장 주소를 토대로 주변 고객분들께 이벤트가 진행됩니다.\n매장 주소를 정확하게 입력해 주세요.</string>
     <string name="store_reg">매장등록</string>
     <!--  매장 세부 정보  -->
     <string name="store_detail">세부정보</string>
     <string name="store_tel">매장 전화번호</string>
     <string name="store_sns">SNS 계정 정보</string>
-    <string name="store_pd">배달/주차 정보</string>
+    <string name="store_delivery_info">배달 정보</string>
+    <string name="store_parking_info">주차 정보</string>
     <string name="store_tel_hint">예) 1688-2315</string>
     <string name="store_insta">인스타그램 계정</string>
     <string name="at"><![CDATA[@]]></string>
@@ -172,11 +176,15 @@
     <string name="store_holiday_name_hint">명칭을 입력해 주세요.</string>
     <string name="store_holiday_set_info">‘월’을 입력하지 않으면 ‘매월’로 표시합니다.</string>
     <!--  매장 대표 사진 -->
-    <string name="store_img">매장사진</string>
-    <string name="store_rep_img">대표 사진</string>
-    <string name="store_img_reg">등록 및 관리</string>
-    <string name="store_img_reg_hint">[ 등록 및 관리 ] 버튼으로\n이미지를 등록해 주세요</string>
-    <string name="store_img_info"><b>매장 대표 사진</b>\n매장을 대표할 이미지를 올려주세요.\n음식 사진 혹은 매장 내부 혹은 외부 사진을 올려주세요.</string>
+    <string name="store_img_exp">매장 사진/설명</string>
+    <string name="store_img">대표사진</string>
+    <string name="store_exp">매장설명</string>
+    <string name="store_img_rep">매장 대표 사진</string>
+    <string name="store_img_reg">등록 및 수정</string>
+    <string name="store_img_reg_hint">[ 등록 및 수정 ] 버튼으로\n이미지를 등록해 주세요</string>
+    <string name="store_exp_reg">매장 설명</string>
+    <string name="store_exp_reg_hint">매장 설명을 입력해 주세요.\n(최대 100자)</string>
+    <string name="store_img_info">매장을 대표할 이미지와 매장 설명을 작성해 주세요.\n음식 사진 혹은 매장 내부 혹은 외부 사진을 올려주세요.</string>
 
     <!--  메뉴 선택 (메인)  -->
     <string name="show_by_history">내역별 보기</string>
@@ -313,14 +321,15 @@
     <string name="menu_ui">메뉴판\n디자인 설정</string>
     <string name="title_menu_ui">메뉴판 디자인 설정</string>
     <string name="menu_ui_sub">・모드 : 기본/사진\n・색상 : 블랙/실버/화이트</string>
-    <string name="menu_ui_info">선택된 매장에서 사용되는 고객용 태블릿PC 메뉴판에 선택한 디자인이 일괄 적용됩니다.\n단, 스마트폰 메뉴판에는 적용이 되지 않습니다.</string>
+    <string name="menu_ui_info">매장에서 사용될 주문용 메뉴판의 디자인을 선택해 주세요.</string>
     <string name="sel_bg">배경선택</string>
     <string name="bg_dark">어두운 배경</string>
     <string name="bg_silver">은색 배경</string>
     <string name="bg_light">밝은 배경</string>
-    <string name="sel_viewmode">뷰어모드선택</string>
-    <string name="viewmode_basic">기본 모드</string>
-    <string name="viewmode_pic">사진 모드</string>
+    <string name="sel_viewmode">고객용 메뉴판 형태</string>
+    <string name="viewmode_basic">기본형</string>
+    <string name="viewmode_pic">사진형</string>
+    <string name="viewmode_list">글자형</string>
     <string name="save_ui">디자인 적용</string>
 
     <!-- 주문 정보 -->
@@ -525,7 +534,7 @@
     <string name="title_udt_store">매장 정보 수정</string>
     <string name="title_store_detail">매장 정보 : 세부정보</string>
     <string name="title_store_hours">매장 정보 : 영업시간</string>
-    <string name="title_store_img">매장 정보 : 매장 대표 사진</string>
+    <string name="title_store_img">매장정보 : 매장 사진/설명</string>
     <string name="title_cate_add">카테고리 입력</string>
     <string name="title_cate_udt">카테고리 수정</string>
     <string name="title_map">지도 검색</string>

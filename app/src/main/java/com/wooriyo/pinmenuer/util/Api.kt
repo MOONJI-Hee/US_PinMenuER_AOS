@@ -114,6 +114,7 @@ interface Api {
     fun regStore(
         @Query("useridx") useridx: Int,
         @Query("storenm") storenm: String,
+        @Query("storenm2") storenm2: String,
         @Query("addr") addr: String,               // 주소
         @Query("lclong") lclong: String,           // 매장 경도
         @Query("lclat") lclat: String              // 매장 위도
@@ -125,6 +126,7 @@ interface Api {
         @Query("useridx") useridx: Int,
         @Query("idx") storeidx: Int,
         @Query("storenm") storenm: String,
+        @Query("storenm2") storenm2: String,
         @Query("addr") addr: String,                // 주소
         @Query("lclong") lclong: String,            // 매장 경도
         @Query("lclat") lclat: String               // 매장 위도
@@ -157,7 +159,8 @@ interface Api {
     fun udtStoreImg (
         @Part("useridx") useridx: Int,
         @Part("idx") storeidx: Int,
-        @Part img: MultipartBody.Part?
+        @Part img: MultipartBody.Part?,
+        @Part("content") exp: RequestBody
     ): Call<ResultDTO>
 
     // 매장 영업시간 설정
@@ -168,7 +171,7 @@ interface Api {
         @Field("idx") storeidx: Int,
         @Field("JSONW") JSONW : String,
         @Field("JSONB") JSONB : String,
-        @Field("JSONH") JSONH : String,
+        @Field("JSONH") JSONH : String
     ): Call<ResultDTO>
 
     // 매장 특별 휴일 저장
@@ -363,7 +366,7 @@ interface Api {
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int,
         @Query("thema_color") color: String, // d : 어두운 배경(디폴트), g : 은색 배경, l : 밝은 배경
-        @Query("viewmode") viewmode: String // b : 기본, p: 3x3
+        @Query("viewmode") viewmode: String // b : 기본, p: 3x3, l : 리스트
     ): Call<ResultDTO>
 
     // 단건 주문 조회 (푸시)
