@@ -1,6 +1,7 @@
 package com.wooriyo.pinmenuer.store
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
@@ -72,12 +73,12 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
             binding.etName2.setText(store.name2)
             binding.etAddr.setText(store.address)
         }else if(type == 1) {
-//            binding.btnDetail.isEnabled = false
-//            binding.btnHour.isEnabled = false
-//            binding.btnImg.isEnabled = false
-            binding.llDetail.visibility = View.GONE
-            binding.llHour.visibility = View.GONE
-            binding.llImg.visibility = View.GONE
+            binding.btnDetail.isEnabled = false
+            binding.btnHour.isEnabled = false
+            binding.btnImg.isEnabled = false
+//            binding.llDetail.visibility = View.GONE
+//            binding.llHour.visibility = View.GONE
+//            binding.llImg.visibility = View.GONE
         }
 
         setStoreInfo()
@@ -146,36 +147,198 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
                 storeImg.visibility = View.GONE
             }
 
-            if(store.content.isNotEmpty()) {
+            if(!store.content.isNullOrEmpty()) {
                 storeExp.text = store.content
+                storeExp.setTypeface(storeExp.typeface, Typeface.BOLD)
             }else {
                 storeExp.text = getString(R.string.store_exp)
+                storeExp.setTypeface(storeExp.typeface, Typeface.NORMAL)
             }
 
             if(!store.tel.isNullOrEmpty()) {
                 storeTel.text = store.tel
+                storeTel.typeface = Typeface.DEFAULT_BOLD
             }else {
                 storeTel.text = getString(R.string.store_tel)
+                storeTel.setTypeface(storeExp.typeface, Typeface.NORMAL)
             }
 
             if(!store.sns.isNullOrEmpty()) {
                 storeSns.text = store.sns
+                storeSns.typeface = Typeface.DEFAULT_BOLD
             }else {
                 storeSns.text = getString(R.string.store_sns)
+                storeSns.setTypeface(storeExp.typeface, Typeface.NORMAL)
             }
 
             if(store.delivery == "Y") {
                 storeDeliver.text = getString(R.string.store_delivery_y)
+                storeDeliver.typeface = Typeface.DEFAULT_BOLD
             }else {
                 storeDeliver.text = getString(R.string.store_delivery_info)
+                storeDeliver.setTypeface(storeExp.typeface, Typeface.NORMAL)
             }
 
             if(store.parking == "Y") {
                 storePark.text = getString(R.string.store_parking_y)
+                storePark.typeface = Typeface.DEFAULT_BOLD
+
                 storeParkAdr.text = store.parkingAddr ?: ""
             }else {
                 storePark.text = getString(R.string.store_parking_info)
+                storePark.setTypeface(storeExp.typeface, Typeface.NORMAL)
+
                 storeParkAdr.text = ""
+            }
+        }
+
+        getTimeText()
+    }
+
+    fun getTimeText() {
+        binding.run {
+            if(store.opentime != null) {
+                val time = store.opentime!!
+
+                when(time.buse) {
+                    y -> {
+                        storeDay.text = getString(R.string.store_same_hour)
+                        storeDay.typeface = Typeface.DEFAULT_BOLD
+
+                        openTime.text = "${time.starttm}~${time.endtm}"
+                        openTime.visibility = View.VISIBLE
+                    }
+                    n -> {
+                        storeDay.text = getString(R.string.store_diff_hour)
+                        storeDay.typeface = Typeface.DEFAULT_BOLD
+
+                        var strOpen = ""
+                        when(y) {
+                            time.mon_buse -> {
+                                strOpen += "/월 ${time.mon_starttm}~${time.mon_endtm}"
+                            }
+                            time.tue_buse -> {
+                                strOpen += "/화 ${time.tue_starttm}~${time.tue_endtm}"
+                            }
+                            time.wed_buse -> {
+                                strOpen += "/수 ${time.wed_starttm}~${time.wed_endtm}"
+                            }
+                            time.thu_buse -> {
+                                strOpen += "/목 ${time.thu_starttm}~${time.thu_endtm}"
+                            }
+                            time.fri_buse -> {
+                                strOpen += "/금 ${time.fri_starttm}~${time.fri_endtm}"
+                            }
+                            time.sat_buse -> {
+                                strOpen += "/토 ${time.sat_starttm}~${time.sat_endtm}"
+                            }
+                            time.sun_buse -> {
+                                strOpen += "/일 ${time.sun_starttm}~${time.sun_endtm}"
+                            }
+                        }
+
+                        openTime.text = strOpen.drop(1)
+                        openTime.visibility = View.VISIBLE
+                    }
+                    else -> { // D
+                        storeDay.text = getString(R.string.store_day_of_week)
+                        storeDay.setTypeface(storeExp.typeface, Typeface.NORMAL)
+                        openTime.visibility = View.GONE
+                    }
+                }
+            }
+            if(store.breaktime != null) {
+                val bTime = store.breaktime!!
+
+                when(bTime.buse) {
+                    y -> {
+                        storeBreak.text = getString(R.string.store_same_break)
+                        storeBreak.typeface = Typeface.DEFAULT_BOLD
+
+                        breakTime.text = "${bTime.starttm}~${bTime.endtm}"
+                        breakTime.visibility = View.VISIBLE
+                    }
+                    n -> {
+                        storeBreak.text = getString(R.string.store_diff_break)
+                        storeBreak.typeface = Typeface.DEFAULT_BOLD
+
+                        var strBreak = ""
+                        when(y) {
+                            bTime.mon_buse -> {
+                                strBreak += "/월 ${bTime.mon_starttm}~${bTime.mon_endtm}"
+                            }
+                            bTime.tue_buse -> {
+                                strBreak += "/화 ${bTime.tue_starttm}~${bTime.tue_endtm}"
+                            }
+                            bTime.wed_buse -> {
+                                strBreak += "/수 ${bTime.wed_starttm}~${bTime.wed_endtm}"
+                            }
+                            bTime.thu_buse -> {
+                                strBreak += "/목 ${bTime.thu_starttm}~${bTime.thu_endtm}"
+                            }
+                            bTime.fri_buse -> {
+                                strBreak += "/금 ${bTime.fri_starttm}~${bTime.fri_endtm}"
+                            }
+                            bTime.sat_buse -> {
+                                strBreak += "/토 ${bTime.sat_starttm}~${bTime.sat_endtm}"
+                            }
+                            bTime.sun_buse -> {
+                                strBreak += "/일 ${bTime.sun_starttm}~${bTime.sun_endtm}"
+                            }
+                        }
+                        breakTime.text = strBreak.drop(1)
+                        breakTime.visibility = View.VISIBLE
+                    }
+                    else -> { // D
+                        storeBreak.text = getString(R.string.store_break)
+                        storeBreak.setTypeface(storeBreak.typeface, Typeface.NORMAL)
+                        breakTime.visibility = View.GONE
+                    }
+                }
+            }
+            when(store.hbuse) {
+                y -> {
+                    sameOff.visibility = View.VISIBLE
+                    var strOff = ""
+                    when(y) {
+                        store.mon_buse -> strOff += "/월"
+                        store.tue_buse -> strOff += "/화"
+                        store.wed_buse -> strOff += "/수"
+                        store.thu_buse -> strOff += "/목"
+                        store.fri_buse -> strOff += "/금"
+                        store.sat_buse -> strOff += "/토"
+                        store.sun_buse -> strOff += "/일"
+                    }
+                    off.text = strOff.drop(1)
+                    off.visibility = View.VISIBLE
+
+                    storeOff.visibility = View.GONE
+                }
+                else -> {
+                    sameOff.visibility =View.GONE
+                    off.visibility = View.GONE
+                }
+            }
+
+            if(store.spcHoliday != null) {
+                val specHoliday = store.spcHoliday!!
+
+                var strHoliday = ""
+                specHoliday.forEach {
+                    var hol = it.title
+                    hol += if(it.month == "") { " 매월${it.day}일" }else { " ${it.month}월${it.day}일" }
+
+                    strHoliday += "/$hol"
+                }
+
+                holiday.text = strHoliday.drop(1)
+                holiday.visibility = View.VISIBLE
+                storeHoliday.visibility = View.VISIBLE
+
+                storeOff.visibility = View.GONE
+            }else {
+                holiday.visibility = View.GONE
+                storeHoliday.visibility = View.GONE
             }
         }
     }

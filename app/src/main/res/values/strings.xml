@@ -168,6 +168,7 @@
     <string name="store_special_holiday">특별 휴일 입력</string>
     <string name="everyday">매일</string>
     <string name="everymonth">매월</string>
+    <string name="special_holiday">특별휴일</string>
     <string name="store_time_info">새벽 6시 마감은 30:00으로 설정</string>
     <string name="store_time_set">영업시간 설정</string>
     <string name="store_break_set">브레이크타임 설정</string>

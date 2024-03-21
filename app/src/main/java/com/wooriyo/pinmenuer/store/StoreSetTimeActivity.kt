@@ -170,7 +170,7 @@ class StoreSetTimeActivity : BaseActivity(), View.OnClickListener {
                 if(it.tue_endtm!="") closeTue.text = it.tue_endtm
 
                 if(it.wed_starttm!="") openWed.text = it.wed_starttm
-                if(it.wed_endtm!="")closeWed.text = it.wed_endtm
+                if(it.wed_endtm!="") closeWed.text = it.wed_endtm
 
                 if(it.thu_starttm!="") openThu.text = it.thu_starttm
                 if(it.thu_endtm!="") closeThu.text = it.thu_endtm

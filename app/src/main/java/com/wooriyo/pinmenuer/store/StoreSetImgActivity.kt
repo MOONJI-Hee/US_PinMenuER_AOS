@@ -11,6 +11,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -43,14 +44,24 @@ class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding : ActivityStoreSetImgBinding
 
     var imgUri: Uri ?= null
+    var file: File? = null
+    var delImg = 0
 
     //registerForActivityResult
-    val chooseImg = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-//        imgUri = it
+    private val pickImg = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
+        if(it != null) {
+            Log.d(TAG, "이미지 Uri >> $it")
+            imgUri = it
+            setImage(it)
+        }
+    }
 
+    private val pickImg_lgc = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if(it.resultCode == Activity.RESULT_OK) {
             imgUri = it.data?.data
-            setImage()
+            if(imgUri != null) {
+                setImage(imgUri!!)
+            }
         }
     }
 
@@ -60,10 +71,11 @@ class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         if(store.img.isNotEmpty()) {
-            imgUri = store.img.toUri()
-            setImage()
+            setImage(store.img.toUri())
         }
-        //TODO 매장 설명 있을 때 setText()
+        if(!store.content.isNullOrEmpty()) {
+            binding.etStoreExp.setText(store.content)
+        }
 
         binding.back.setOnClickListener(this)
         binding.save.setOnClickListener(this)
@@ -86,6 +98,8 @@ class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun save() {
+        var body: MultipartBody.Part? = null
+
         if(imgUri != null) {
             var path = ""
             var name = ""
@@ -104,39 +118,36 @@ class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
             }
 
             val file = File(path)
-            val body = MultipartBody.Part.createFormData("img", file.name, RequestBody.create(MediaType.parse("image/*"), file))
+            body = MultipartBody.Part.createFormData("img", file.name, RequestBody.create(MediaType.parse("image/*"), file))
 
             Log.d(TAG, "이미지 Uri >> $imgUri")
             Log.d(TAG, "이미지 절대경로 >> $path")
             Log.d(TAG, "이미지 File >> $file")
             Log.d(TAG, "이미지 body >> $body")
+        }
+        val exp = binding.etStoreExp.text.toString()
+        val expBody = RequestBody.create(MediaType.parse("text/plain"), exp)
 
-            val exp = binding.etStoreExp.text.toString()
-            val expBody = RequestBody.create(MediaType.parse("text/plain"), exp)
-
-            ApiClient.service.udtStoreImg(useridx, storeidx, body, expBody)
-                .enqueue(object: retrofit2.Callback<ResultDTO>{
-                    override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
-                        Log.d(TAG, "매장 대표 사진 등록 url : $response")
-                        if(response.isSuccessful) {
-                            val resultDTO = response.body() ?: return
-                            when(resultDTO.status) {
-                                1 -> {
-                                    Toast.makeText(this@StoreSetImgActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
-                                    setResult(RESULT_OK)
-                                }
-                                else -> Toast.makeText(this@StoreSetImgActivity, resultDTO.msg, Toast.LENGTH_SHORT).show()
+        ApiClient.service.udtStoreImg(useridx, storeidx, body, delImg, expBody)
+            .enqueue(object: retrofit2.Callback<ResultDTO>{
+                override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                    Log.d(TAG, "매장 대표 사진 등록 url : $response")
+                    if(response.isSuccessful) {
+                        val resultDTO = response.body() ?: return
+                        when(resultDTO.status) {
+                            1 -> {
+                                Toast.makeText(this@StoreSetImgActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                                setResult(RESULT_OK)
                             }
+                            else -> Toast.makeText(this@StoreSetImgActivity, resultDTO.msg, Toast.LENGTH_SHORT).show()
                         }
                     }
-                    override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
-                        Toast.makeText(this@StoreSetImgActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
-                        Log.d(TAG, "매장 대표 사진 등록 실패 > $t")
-                    }
-                })
-        } else {
-            Toast.makeText(this@StoreSetImgActivity, R.string.msg_no_img, Toast.LENGTH_SHORT).show()
-        }
+                }
+                override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                    Toast.makeText(this@StoreSetImgActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "매장 대표 사진 등록 실패 > $t")
+                }
+            })
     }
 
     // 외부저장소 권한 확인
@@ -165,10 +176,16 @@ class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
 
     fun getImage() {
 //        chooseImg.launch("image/*")
-        chooseImg.launch(Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI))
+        pickImg_lgc.launch(Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI))
+
+//        if(ActivityResultContracts.PickVisualMedia.isPhotoPickerAvailable(mActivity)) {
+//            pickImg.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+//        }else {
+//            pickImg_lgc.launch(Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI))
+//        }
     }
 
-    fun setImage() {
+    private fun setImage(imgUri: Uri) {
         binding.img.visibility = View.VISIBLE
         binding.delImg.visibility = View.VISIBLE
         Glide.with(this@StoreSetImgActivity)
@@ -176,6 +193,7 @@ class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
             .transform(CenterCrop(), RoundedCorners(6 * density.toInt()))
             .into(binding.img)
         binding.imgDefault.visibility = View.INVISIBLE
+        delImg = 0
     }
 
     fun delImage() {
@@ -183,6 +201,7 @@ class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
         binding.delImg.visibility = View.INVISIBLE
         binding.imgDefault.visibility = View.VISIBLE
         imgUri = null
+        delImg = 1
     }
 
     // 내부저장소에 카피해서 절대경로 불러오기

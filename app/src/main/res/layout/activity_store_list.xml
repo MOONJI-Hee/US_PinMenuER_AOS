@@ -53,7 +53,6 @@
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="240dp"
-        android:background="@drawable/img_arpayo"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"/>
 

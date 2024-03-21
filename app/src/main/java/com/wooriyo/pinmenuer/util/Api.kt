@@ -160,6 +160,7 @@ interface Api {
         @Part("useridx") useridx: Int,
         @Part("idx") storeidx: Int,
         @Part img: MultipartBody.Part?,
+        @Part("delImg") delImg: Int,
         @Part("content") exp: RequestBody
     ): Call<ResultDTO>
 
