@@ -91,7 +91,7 @@ class MenuUiActivity : BaseActivity() {
         when {
             binding.checkBasic.isChecked -> selMode = "b"
             binding.check3x3.isChecked -> selMode = "p"
-            binding.checkLight.isChecked -> selMode = "l"
+            binding.checkList.isChecked -> selMode = "l"
         }
 
         ApiClient.service.setThema(useridx, storeidx, selColor, selMode)
