@@ -242,7 +242,7 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
                     }
                     else -> { // D
                         storeDay.text = getString(R.string.store_day_of_week)
-                        storeDay.setTypeface(storeExp.typeface, Typeface.NORMAL)
+                        storeDay.setTypeface(storeDay.typeface, Typeface.NORMAL)
                         openTime.visibility = View.GONE
                     }
                 }
