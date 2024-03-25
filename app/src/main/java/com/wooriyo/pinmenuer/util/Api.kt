@@ -101,6 +101,13 @@ interface Api {
         @Query("useridx") useridx: Int
     ): Call<ResultDTO>
 
+    // 매장 결
+    @FormUrlEncoded
+    @POST("m/checkPayUse.php")
+    fun checkPay(
+        @Field("useridx") useridx: Int
+    ): Call<ResultDTO>
+
     // 매장 목록 조회
     @FormUrlEncoded
     @POST("m/store.list.php")
