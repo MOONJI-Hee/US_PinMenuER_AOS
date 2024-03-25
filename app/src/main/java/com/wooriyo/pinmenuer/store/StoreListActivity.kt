@@ -23,10 +23,8 @@ import com.wooriyo.pinmenuer.member.MemberSetActivity
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.model.StoreDTO
 import com.wooriyo.pinmenuer.model.StoreListDTO
-import com.wooriyo.pinmenuer.printer.PrinterMenuActivity
 import com.wooriyo.pinmenuer.store.adpter.StoreAdapter
 import com.wooriyo.pinmenuer.util.ApiClient
-import com.wooriyo.pinmenuer.util.AppHelper
 import retrofit2.Call
 import retrofit2.Response
 
@@ -76,6 +74,7 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
+        checkPay()
         getStoreList()
     }
 
@@ -108,6 +107,36 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
     @RequiresApi(33)
     fun getNotiPms() {
         ActivityCompat.requestPermissions(mActivity, arrayOf(pms_noti), AppProperties.REQUEST_NOTIFICATION)
+    }
+
+    fun checkPay() {
+        ApiClient.service.checkPay(useridx).enqueue(object: retrofit2.Callback<ResultDTO>{
+            override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                Log.d(TAG, "요금제 만료 여부 확인 url : $response")
+                if(!response.isSuccessful) return
+                val result = response.body() ?: return
+
+                when(result.status) {
+                    1 -> {
+                        result.checklist.forEach {
+                            if(it.payuse == "N") {
+                                AlertDialog.Builder(mActivity)
+                                    .setTitle(R.string.dialog_notice)
+                                    .setMessage(it.name)
+                                    .setPositiveButton(R.string.confirm) { dialog, _ -> dialog.dismiss()}
+                                    .show()
+                            }
+                        }
+                    }
+                    else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "요금제 만료 여부 확인 오류 > $t")
+            }
+        })
     }
 
     fun getStoreList() {
