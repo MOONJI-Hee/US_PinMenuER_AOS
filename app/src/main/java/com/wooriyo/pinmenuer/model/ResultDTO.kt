@@ -12,6 +12,8 @@ data class ResultDTO(
     @SerializedName("update") var update : Int,             //강제 업데이트 설정값 (0:권장 업데이트, 1:강제 업데이트)
     @SerializedName("updatemsg") var updateMsg : String,    //업데이트 메세지
 
+    @SerializedName("checklist") var checklist : ArrayList<CheckPayDTO>,    //요금제 만료 여부 리스트
+
     @SerializedName("bidx") var bidx : Int,
     @SerializedName("photo") var img1 : String?="",
     @SerializedName("photo2") var img2 : String?="",
