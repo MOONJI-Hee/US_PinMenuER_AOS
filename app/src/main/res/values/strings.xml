@@ -66,6 +66,8 @@
     <string name="btn_change">변&#160;&#160;경</string>
     <string name="btn_payment">결&#160;&#160;제</string>
     <string name="btn_clear">초&#160;기&#160;화</string>
+    <string name="btn_close">닫&#160;&#160;기</string>
+    <string name="btn_not_today">오늘 그만 보기</string>
 
     <string name="udt_info">정보변경</string>
 
@@ -506,7 +508,7 @@
     <string name="event_link_info">링크주소를 입력하시면, [ 바로가기 ] 로 표시됩니다.\n단, QR오더에서만 링크주소가 활성화됩니다.</string>
     <string name="event_preview">미리보기</string>
     <string name="event_use">이벤트 사용</string>
-    <string name="event_noti_switch_ff">이벤트 사용 스위치가 OFF상태입니다.\n\nOFF상태에서는 정보를 입력해도 주문 앱/QR오더에서는 이벤트 안내가 나오지 않습니다.</string>
+    <string name="event_noti_switch_ff">이벤트 사용 스위치가 OFF상태입니다.\n\nOFF상태에서는 정보를 입력해도 주문 앱/QR오더에서는\n이벤트 안내가 나오지 않습니다.</string>
     <string name="event_preview_info">태블릿PC로 고객이 주문을 완료하면 보여지는 ‘이벤트 안내’ 미리보기 화면입니다.</string>
 
     <!--  QR코드 결제고객 정보  -->

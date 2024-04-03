@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.view.View.OnClickListener
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -28,7 +27,7 @@ import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.config.AppProperties
 import com.wooriyo.pinmenuer.databinding.ActivitySetEventPopupBinding
 import com.wooriyo.pinmenuer.event.dialog.EventConfirmDialog
-import com.wooriyo.pinmenuer.model.PopupDTO
+import com.wooriyo.pinmenuer.model.EventDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.util.ApiClient
 import okhttp3.MediaType
@@ -236,8 +235,8 @@ class SetEventPopup : BaseActivity() {
 
     private fun getEvent() {
         ApiClient.service.getEventPopup(useridx, storeidx)
-            .enqueue(object : Callback<PopupDTO> {
-                override fun onResponse(call: Call<PopupDTO>, response: Response<PopupDTO>) {
+            .enqueue(object : Callback<EventDTO> {
+                override fun onResponse(call: Call<EventDTO>, response: Response<EventDTO>) {
                     Log.d(TAG, "주문완료 후 팝업 정보 조회 url : $response")
                     if(!response.isSuccessful) return
 
@@ -265,7 +264,7 @@ class SetEventPopup : BaseActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<PopupDTO>, t: Throwable) {
+                override fun onFailure(call: Call<EventDTO>, t: Throwable) {
                     Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "주문완료 후 팝업 정보 조회 실페 > $t")
                     Log.d(TAG, "주문완료 후 팝업 정보 조회 실패 > ${call.request()}")

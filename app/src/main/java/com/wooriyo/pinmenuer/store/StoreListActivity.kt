@@ -14,18 +14,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.MyApplication.Companion.androidId
+import com.wooriyo.pinmenuer.MyApplication.Companion.pref
 import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
+import com.wooriyo.pinmenuer.common.FullScreenDialog
 import com.wooriyo.pinmenuer.config.AppProperties
 import com.wooriyo.pinmenuer.databinding.ActivityStoreListBinding
 import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.member.MemberSetActivity
+import com.wooriyo.pinmenuer.model.PopupListDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.model.StoreDTO
 import com.wooriyo.pinmenuer.model.StoreListDTO
 import com.wooriyo.pinmenuer.store.adpter.StoreAdapter
 import com.wooriyo.pinmenuer.util.ApiClient
+import com.wooriyo.pinmenuer.util.AppHelper
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 
 class StoreListActivity : BaseActivity(), View.OnClickListener {
@@ -70,6 +75,8 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
         if(MyApplication.osver >= 33) {
             checkNotiPms()
         }
+
+        getWelcomePopup()
     }
 
     override fun onResume() {
@@ -173,6 +180,28 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
                     Log.d(TAG, "매장 리스트 조회 오류 > $t")
                 }
             })
+    }
+
+    fun getWelcomePopup() {
+        ApiClient.service.getWelcomePopup(0, 0, 1)?.enqueue(object : Callback<PopupListDTO?> {
+            override fun onResponse(call: Call<PopupListDTO?>, response: Response<PopupListDTO?>) {
+                Log.d(TAG, "전면 팝업 조회  url : $response")
+                if(!response.isSuccessful) return
+                val result = response.body() ?: return
+
+                if(result.status != 1 || result.popupList.isNullOrEmpty()) return
+
+                if(!AppHelper.CompareToday(pref.getNoPopupDate())) {
+                    FullScreenDialog(result.popupList[0]).show(supportFragmentManager, "WelcomeDialog")
+                }
+            }
+
+            override fun onFailure(call: Call<PopupListDTO?>, t: Throwable) {
+                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "전면 팝업 조회 실패 >> $t")
+                Log.d(TAG, "전면 팝업 조회 실패 >> ${call.request()}")
+            }
+        })
     }
 
     fun checkDeviceLimit(store: StoreDTO, intent: Intent) {

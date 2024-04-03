@@ -101,7 +101,15 @@ interface Api {
         @Query("useridx") useridx: Int
     ): Call<ResultDTO>
 
-    // 매장 결
+    //전면팝업 목록 조회
+    @GET("popup_list.php")
+    fun getWelcomePopup(
+        @Query("APP") nApp: Int,        // 앱 종류 0.근로자용 1.관리자용
+        @Query("PAGE") nPage: Int,      // 배너 위치 0.메인 1.더보기
+        @Query("TARGET") nTarget: Int   // TARGET 모바일 0 ,태블릿 1
+    ): Call<PopupListDTO?>?
+
+    // 매장 결제 확인
     @FormUrlEncoded
     @POST("m/checkPayUse.php")
     fun checkPay(
@@ -660,7 +668,7 @@ interface Api {
     fun getEventPopup (
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int
-    ): Call<PopupDTO>
+    ): Call<EventDTO>
 
     // 결제 설정 관련 Api
     // 결제 설정 최초 진입 시

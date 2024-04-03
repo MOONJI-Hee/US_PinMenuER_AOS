@@ -9,11 +9,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatActivity.INPUT_METHOD_SERVICE
-import androidx.recyclerview.widget.RecyclerView
-import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.MyApplication.Companion.bluetoothAdapter
 import com.wooriyo.pinmenuer.MyApplication.Companion.remoteDevices
@@ -21,10 +17,10 @@ import com.wooriyo.pinmenuer.config.AppProperties
 import com.wooriyo.pinmenuer.model.OrderDTO
 import java.io.IOException
 import java.lang.reflect.Method
-import java.text.DateFormat
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -85,6 +81,39 @@ class AppHelper {
             } else {
                 dec.format(n.toInt())
             }
+        }
+
+        // 현재 일시 yyyy-mm-dd HH:mm:ss 형식으로 리턴
+        fun getToday(): String {
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                LocalDateTime.now().toString().split("T")[0]
+            }else {
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
+                dateFormat.format(Calendar.getInstance()).split("T")[0]
+            }
+        }
+
+        // 오늘 날짜와 비교 - true: 오늘, false : 오늘 아님
+        fun CompareToday(strDate: String?): Boolean {
+            return if (strDate.isNullOrEmpty()) { false }
+                else {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        val list = strDate.split("-".toRegex()).dropLastWhile { it.isEmpty() }
+                        val year = list[0].toInt()
+                        val month = list[1].toInt()
+                        val day = list[2].toInt()
+
+                        val today = LocalDate.now()
+                        val date = LocalDate.of(year, month, day)
+                        today.isEqual(date)
+                    } else {
+                        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+
+                        val now = Calendar.getInstance()
+                        val today: String = dateFormat.format(now.time)
+                        today == strDate
+                    }
+                }
         }
 
         // 현재 날짜와 비교
