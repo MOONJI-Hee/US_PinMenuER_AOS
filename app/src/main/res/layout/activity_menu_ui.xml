@@ -85,7 +85,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:src="@drawable/img_mode_list"
-            android:visibility="gone"
             app:layout_constraintTop_toTopOf="@+id/iv_basic"
             app:layout_constraintBottom_toBottomOf="@+id/iv_basic"
             app:layout_constraintStart_toEndOf="@+id/iv_3x3" />
@@ -104,8 +103,6 @@
         <TextView
             style="@style/text18"
             android:text="@string/viewmode_list"
-            android:visibility="gone"
-
             app:layout_constraintStart_toStartOf="@+id/iv_list"
             app:layout_constraintTop_toTopOf="@+id/check_list"
             app:layout_constraintBottom_toBottomOf="@+id/check_list"/>
@@ -125,8 +122,6 @@
         <RadioButton
             style="@style/toggle"
             android:id="@+id/check_list"
-            android:visibility="gone"
-
             android:layout_marginBottom="5dp"
             app:layout_constraintEnd_toEndOf="@+id/iv_list"
             app:layout_constraintBottom_toTopOf="@id/iv_list" />
