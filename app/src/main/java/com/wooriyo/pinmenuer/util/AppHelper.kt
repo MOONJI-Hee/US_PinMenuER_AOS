@@ -83,13 +83,13 @@ class AppHelper {
             }
         }
 
-        // 현재 일시 yyyy-mm-dd HH:mm:ss 형식으로 리턴
+        // 현재 일시 yyyy-mm-dd 형식으로 리턴
         fun getToday(): String {
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                LocalDateTime.now().toString().split("T")[0]
+                LocalDate.now().toString()
             }else {
                 val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
-                dateFormat.format(Calendar.getInstance()).split("T")[0]
+                dateFormat.format(Date())
             }
         }
 
@@ -98,10 +98,10 @@ class AppHelper {
             return if (strDate.isNullOrEmpty()) { false }
                 else {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        val list = strDate.split("-".toRegex()).dropLastWhile { it.isEmpty() }
-                        val year = list[0].toInt()
-                        val month = list[1].toInt()
-                        val day = list[2].toInt()
+                        val list    = strDate.split("-".toRegex()).dropLastWhile { it.isEmpty() }
+                        val year    = list[0].toInt()
+                        val month   = list[1].toInt()
+                        val day     = list[2].toInt()
 
                         val today = LocalDate.now()
                         val date = LocalDate.of(year, month, day)

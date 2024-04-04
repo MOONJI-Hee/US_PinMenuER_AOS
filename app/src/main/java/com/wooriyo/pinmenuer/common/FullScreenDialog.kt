@@ -31,7 +31,7 @@ class FullScreenDialog(val popup: PopupDTO) : DialogFragment() {
         binding.close.setOnClickListener{ dismiss() }
 
         binding.notToday.setOnClickListener{
-            val today = AppHelper.getToday().split(" ")[0]
+            val today = AppHelper.getToday()
             Log.d("WelcomeDialog", "오늘 날짜 >> $today")
             MyApplication.pref.setNoPopupDate(today)
             dismiss()
