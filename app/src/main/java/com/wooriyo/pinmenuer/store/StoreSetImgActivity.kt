@@ -175,14 +175,11 @@ class StoreSetImgActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun getImage() {
-//        chooseImg.launch("image/*")
-        pickImg_lgc.launch(Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI))
-
-//        if(ActivityResultContracts.PickVisualMedia.isPhotoPickerAvailable(mActivity)) {
-//            pickImg.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-//        }else {
-//            pickImg_lgc.launch(Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI))
-//        }
+        if(ActivityResultContracts.PickVisualMedia.isPhotoPickerAvailable(mActivity)) {
+            pickImg.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        }else {
+            pickImg_lgc.launch(Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI))
+        }
     }
 
     private fun setImage(imgUri: Uri) {
