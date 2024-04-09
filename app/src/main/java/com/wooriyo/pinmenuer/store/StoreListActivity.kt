@@ -81,7 +81,6 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        checkPay()
         getStoreList()
     }
 

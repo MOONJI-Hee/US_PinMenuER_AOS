@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
@@ -101,6 +102,14 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
                     intent.putExtra("type", 2)  // 매장 수정 > 2
                     context.startActivity(intent)
                 }
+            }
+
+            if(data.paydate.isNotEmpty() && data.payuse == "N") {
+                AlertDialog.Builder(context)
+                    .setTitle(R.string.dialog_notice)
+                    .setMessage("${data.name}\n이용기간이 만료되었습니다.\n정기결제 후 이용을 부탁드립니다.")
+                    .setPositiveButton(R.string.confirm) { dialog, _ -> dialog.dismiss()}
+                    .show()
             }
         }
     }

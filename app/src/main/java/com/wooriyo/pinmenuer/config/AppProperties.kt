@@ -7,7 +7,7 @@ class AppProperties {
         private const val TEST_SERVER: String = "http://49.247.26.41/api/"
         private const val WEB_SERVER: String = "http://pinmenu.biz/api/"
 
-        const val SERVER: String = TEST_SERVER
+        const val SERVER: String = REAL_SERVER
         const val IMG_SERVER: String = "http://49.247.22.8/api/"
 
         const val KAKAO_URL : String = "https://dapi.kakao.com"
