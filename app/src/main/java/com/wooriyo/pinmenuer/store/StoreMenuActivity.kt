@@ -142,7 +142,8 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                     val result = response.body() ?: return
                     if(result.status == 1){
                         storeidx = 0
-                        startActivity(Intent(mActivity, StoreListActivity::class.java))
+                        finish()
+//                        startActivity(Intent(mActivity, StoreListActivity::class.java))
                     }else
                         Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                 }

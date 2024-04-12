@@ -38,7 +38,7 @@ data class StoreDTO(
     @SerializedName("Lclat") var lat : String,
     @SerializedName("Lclong") var long : String,
     @SerializedName("img") var img : String,
-    @SerializedName("content") var content : String,    // store 설명 TODO 이름 변경
+    @SerializedName("content") var content : String,    // store 설명
     @SerializedName("regdt") var regdt : String,
     @SerializedName("status") var status : String,
     @SerializedName("statusdt") var statusdt : String,
