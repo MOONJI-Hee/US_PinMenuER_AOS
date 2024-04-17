@@ -59,7 +59,9 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
 
         binding.save.visibility = View.GONE
         binding.clTerms.visibility = View.GONE
+        binding.signupInfo1.visibility = View.GONE
         binding.tvId.visibility = View.VISIBLE
+        binding.modify.visibility = View.VISIBLE
         binding.llUdt.visibility = View.VISIBLE
 
         binding.etArpayo.addTextChangedListener(object : TextWatcher {
@@ -74,7 +76,7 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
         })
 
         binding.back.setOnClickListener(this)
-        binding.save.setOnClickListener(this)
+        binding.modify.setOnClickListener(this)
         binding.drop.setOnClickListener(this)
         binding.logout.setOnClickListener(this)
         binding.btnArpayo.setOnClickListener(this)
@@ -87,7 +89,7 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when(p0) {
             binding.back -> finish()
-            binding.save -> save()
+            binding.modify -> save()
             binding.btnArpayo -> regArpayoId()
             binding.drop -> {
                 val onClickListener = View.OnClickListener { drop() }

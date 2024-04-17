@@ -227,7 +227,7 @@
         android:id="@+id/signup_info1"
         android:text="@string/signup_info1"
         android:lineSpacingExtra="0dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="@+id/et_arpayo"
         app:layout_constraintTop_toBottomOf="@+id/clTerms"/>
 
@@ -237,6 +237,7 @@
         android:text="@string/signup_info2"
         android:lineSpacingExtra="0dp"
         android:layout_marginTop="15dp"
+        app:layout_goneMarginTop="30dp"
         app:layout_constraintStart_toStartOf="@+id/signup_info1"
         app:layout_constraintTop_toBottomOf="@+id/signup_info1"/>
 
@@ -245,16 +246,28 @@
         android:id="@+id/save"
         android:layout_marginBottom="40dp"
         android:text="@string/signup"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        style="@style/btn_sub"
+        android:id="@+id/modify"
+        android:layout_width="500dp"
+        android:layout_marginTop="64dp"
+        android:text="@string/udt_info"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signup_info2"/>
 
     <LinearLayout
         android:id="@+id/ll_udt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">

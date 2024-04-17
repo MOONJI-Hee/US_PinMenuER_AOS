@@ -71,23 +71,16 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                 }
                 design.setOnClickListener{ startActivity(Intent(mActivity, MenuUiActivity::class.java)) }
                 event.setOnClickListener { startActivity(Intent(mActivity, SetEventPopup::class.java)) }
-//                qrCustomerInfo.setOnClickListener{
-//                    if(store.paytype == 2) {
-//                        startActivity(Intent(mActivity, SetCustomerInfoActivity::class.java))
-//                    }else {
-//                        NoticeDialog(mActivity, "", getString(R.string.dialog_no_business), View.OnClickListener{}).show()
-//                    }
-//                }
             } else {
-                history.setOnClickListener(this@StoreMenuActivity)
-                byTable.setOnClickListener(this@StoreMenuActivity)
-                tablePass.setOnClickListener(this@StoreMenuActivity)
-                setCall.setOnClickListener(this@StoreMenuActivity)
-                printer.setOnClickListener(this@StoreMenuActivity)
-                payment.setOnClickListener(this@StoreMenuActivity)
-                pgCancel.setOnClickListener(this@StoreMenuActivity)
+//                history.setOnClickListener(this@StoreMenuActivity)
+//                byTable.setOnClickListener(this@StoreMenuActivity)
+//                tablePass.setOnClickListener(this@StoreMenuActivity)
+//                setCall.setOnClickListener(this@StoreMenuActivity)
+//                printer.setOnClickListener(this@StoreMenuActivity)
+//                payment.setOnClickListener(this@StoreMenuActivity)
+//                pgCancel.setOnClickListener(this@StoreMenuActivity)
                 design.setOnClickListener(this@StoreMenuActivity)
-                event.setOnClickListener(this@StoreMenuActivity)
+//                event.setOnClickListener(this@StoreMenuActivity)
             }
 
             menu.setOnClickListener{
