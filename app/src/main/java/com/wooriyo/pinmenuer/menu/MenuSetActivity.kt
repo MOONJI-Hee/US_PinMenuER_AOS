@@ -288,7 +288,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun checkUsePay() {
-        if((store.payuse == "Y" && AppHelper.dateNowCompare(store.paydate))) {
+        if((store.payuse == "Y" && AppHelper.dateNowCompare(store.endDate))) {
             checkPermissions()
         }else {
             Toast.makeText(mActivity, R.string.msg_no_pay, Toast.LENGTH_SHORT).show()

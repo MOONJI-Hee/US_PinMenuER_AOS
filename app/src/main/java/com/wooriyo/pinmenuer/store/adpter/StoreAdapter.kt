@@ -60,7 +60,8 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
     class ViewHolder(val context: Context, val binding: ListStoreBinding, val itemClickListener: ItemClickListener): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: StoreDTO) {
             // 유료기능 사용 가능 여부 > 요금제 사용 중
-            val usePay = data.payuse == "Y" && dateNowCompare(data.paydate)
+            val usePay = data.payuse == "Y" && dateNowCompare(data.endDate)
+
             binding.run {
                 storeName.text = data.name
 
@@ -71,7 +72,7 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
                     storeName2.text = data.name2
                 }
 
-                if(usePay || absoluteAdapterPosition == 0) {
+                if(usePay || data.paytype == 4) {
                     storeName.isEnabled = true
                     storeName2.isEnabled = true
                     storePayInfo.visibility = View.VISIBLE
