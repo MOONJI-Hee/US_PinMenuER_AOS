@@ -55,22 +55,22 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
             udtMbr.setOnClickListener{ startActivity(Intent(mActivity, MemberSetActivity::class.java)) }
 
             if(usePay) {
-                history.setOnClickListener{ startActivity(Intent(mActivity, ByHistoryActivity::class.java)) }
-                byTable.setOnClickListener{ startActivity(Intent(mActivity, ByTableActivity::class.java)) }
-                tablePass.setOnClickListener{ startActivity(Intent(mActivity, TablePassActivity::class.java)) }
-                setCall.setOnClickListener { startActivity(Intent(mActivity, CallSetActivity::class.java)) }
+//                history.setOnClickListener{ startActivity(Intent(mActivity, ByHistoryActivity::class.java)) }
+//                byTable.setOnClickListener{ startActivity(Intent(mActivity, ByTableActivity::class.java)) }
+//                tablePass.setOnClickListener{ startActivity(Intent(mActivity, TablePassActivity::class.java)) }
+//                setCall.setOnClickListener { startActivity(Intent(mActivity, CallSetActivity::class.java)) }
 
-                printer.setOnClickListener{ insPrintSetting() }
-                payment.setOnClickListener{ insPaySetting() }
-                pgCancel.setOnClickListener{
-                    if(store.pg_storenm.isEmpty() || store.pg_snum.isEmpty()) {
-                        NoPgInfoDialog(mActivity).show()
-                    }else {
-                        startActivity(Intent(mActivity, PgHistoryActivity::class.java))
-                    }
-                }
+//                printer.setOnClickListener{ insPrintSetting() }
+//                payment.setOnClickListener{ insPaySetting() }
+//                pgCancel.setOnClickListener{
+//                    if(store.pg_storenm.isEmpty() || store.pg_snum.isEmpty()) {
+//                        NoPgInfoDialog(mActivity).show()
+//                    }else {
+//                        startActivity(Intent(mActivity, PgHistoryActivity::class.java))
+//                    }
+//                }
                 design.setOnClickListener{ startActivity(Intent(mActivity, MenuUiActivity::class.java)) }
-                event.setOnClickListener { startActivity(Intent(mActivity, SetEventPopup::class.java)) }
+//                event.setOnClickListener { startActivity(Intent(mActivity, SetEventPopup::class.java)) }
             } else {
 //                history.setOnClickListener(this@StoreMenuActivity)
 //                byTable.setOnClickListener(this@StoreMenuActivity)
@@ -82,6 +82,22 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                 design.setOnClickListener(this@StoreMenuActivity)
 //                event.setOnClickListener(this@StoreMenuActivity)
             }
+
+            history.setOnClickListener{ startActivity(Intent(mActivity, ByHistoryActivity::class.java)) }
+            byTable.setOnClickListener{ startActivity(Intent(mActivity, ByTableActivity::class.java)) }
+            tablePass.setOnClickListener{ startActivity(Intent(mActivity, TablePassActivity::class.java)) }
+            setCall.setOnClickListener { startActivity(Intent(mActivity, CallSetActivity::class.java)) }
+
+            printer.setOnClickListener{ insPrintSetting() }
+            payment.setOnClickListener{ insPaySetting() }
+            pgCancel.setOnClickListener{
+                if(store.pg_storenm.isEmpty() || store.pg_snum.isEmpty()) {
+                    NoPgInfoDialog(mActivity).show()
+                }else {
+                    startActivity(Intent(mActivity, PgHistoryActivity::class.java))
+                }
+            }
+            event.setOnClickListener { startActivity(Intent(mActivity, SetEventPopup::class.java)) }
 
             menu.setOnClickListener{
                 if(allCateList.isEmpty()) {

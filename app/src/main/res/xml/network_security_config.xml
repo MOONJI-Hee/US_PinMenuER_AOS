@@ -5,6 +5,7 @@
         <domain includeSubdomains="true">49.247.26.41</domain>
         <domain includeSubdomains="true">pinmenu.biz</domain>
         <domain includeSubdomains="true">49.247.22.8</domain>
+        <domain includeSubdomains="true">cp.wooriyo.com</domain>
         <domain includeSubdomains="true">maps.daum-img.net</domain>
     </domain-config>
 </network-security-config>

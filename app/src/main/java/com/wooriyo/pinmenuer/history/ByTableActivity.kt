@@ -58,7 +58,7 @@ class ByTableActivity : BaseActivity() {
         })
     }
 
-    private fun getTableList() {
+    fun getTableList() {
         ApiClient.service.getTableHisList(MyApplication.useridx, MyApplication.storeidx)
             .enqueue(object: retrofit2.Callback<OrderListDTO>{
                 override fun onResponse(call: Call<OrderListDTO>, response: Response<OrderListDTO>) {

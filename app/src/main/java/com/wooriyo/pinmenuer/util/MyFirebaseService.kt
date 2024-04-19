@@ -27,6 +27,8 @@ import com.wooriyo.pinmenuer.config.AppProperties
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.CHANNEL_ID_ORDER
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.NOTIFICATION_ID_ORDER
 import com.wooriyo.pinmenuer.history.ByHistoryActivity
+import com.wooriyo.pinmenuer.history.ByTableActivity
+import com.wooriyo.pinmenuer.history.TableHisActivity
 import com.wooriyo.pinmenuer.model.ReceiptDTO
 import retrofit2.Call
 import retrofit2.Response
@@ -67,6 +69,21 @@ class MyFirebaseService : FirebaseMessagingService() {
                             (currentActivity as ByHistoryActivity).newOrder()
                         }
                     }
+                }
+            }else if(currentActivity.localClassName == "history.TableHisActivity") {
+                if(message.data["chk_udt"] == "1") {
+                    when(message.data["moredata"]) {
+                        "call" -> {
+                            (currentActivity as TableHisActivity).newCall()
+                        }
+                        else -> {
+                            (currentActivity as TableHisActivity).newOrder()
+                        }
+                    }
+                }
+            }else if(currentActivity.localClassName == "history.ByTableActivity") {
+                if(message.data["chk_udt"] == "1") {
+                    (currentActivity as ByTableActivity).getTableList()
                 }
             }
         }

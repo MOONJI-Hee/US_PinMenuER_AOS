@@ -111,12 +111,14 @@ class TableHisActivity: BaseActivity() {
             selectTab(binding.tvOrder)
             binding.rv.adapter = orderAdapter
             getOrderList()
+            binding.newOrd.visibility = View.INVISIBLE
         }
 
         binding.tabCall.setOnClickListener {
             selectTab(binding.tvCall)
             binding.rv.adapter = callAdapter
             getCallList()
+            binding.newCall.visibility = View.INVISIBLE
         }
 
         binding.tabComplete.setOnClickListener {
@@ -152,6 +154,26 @@ class TableHisActivity: BaseActivity() {
             binding.tvOrder -> getOrderList()
             binding.tvCall -> getCallList()
             binding.tvCmplt -> getCompletedList()
+        }
+    }
+
+    fun newOrder() {
+        runOnUiThread{
+            when (selText) {
+                binding.tvOrder -> getOrderList()
+                binding.tvTotal -> getTotalList()
+                else -> binding.newOrd.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    fun newCall() {
+        runOnUiThread {
+            when (selText) {
+                binding.tvCall -> getCallList()
+                binding.tvTotal -> getTotalList()
+                else -> binding.newCall.visibility = View.VISIBLE
+            }
         }
     }
 
