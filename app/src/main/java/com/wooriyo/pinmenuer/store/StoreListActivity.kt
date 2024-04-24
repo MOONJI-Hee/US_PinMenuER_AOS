@@ -76,7 +76,10 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
             checkNotiPms()
         }
 
+        // 전면 팝업 조회
         getWelcomePopup()
+        // 배너 리스트 조회
+        getBannerList()
     }
 
     override fun onResume() {
@@ -199,6 +202,25 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
                 Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "전면 팝업 조회 실패 >> $t")
                 Log.d(TAG, "전면 팝업 조회 실패 >> ${call.request()}")
+            }
+        })
+    }
+
+    fun getBannerList() {
+        ApiClient.service.getBannerList(0, 0, 1)?.enqueue(object : Callback<PopupListDTO?>{
+            override fun onResponse(call: Call<PopupListDTO?>, response: Response<PopupListDTO?>) {
+                Log.d(TAG, "배너 리스트 조회  url : $response")
+                if(!response.isSuccessful) return
+                val result = response.body() ?: return
+
+                if(result.status != 1 || result.bannerList.isNullOrEmpty()) return
+
+            }
+
+            override fun onFailure(call: Call<PopupListDTO?>, t: Throwable) {
+                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "배너 리스트 조회 실패 >> $t")
+                Log.d(TAG, "배너 리스트 조회 실패 >> ${call.request()}")
             }
         })
     }
