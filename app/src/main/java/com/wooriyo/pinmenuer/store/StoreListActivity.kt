@@ -26,6 +26,7 @@ import com.wooriyo.pinmenuer.model.PopupListDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.model.StoreDTO
 import com.wooriyo.pinmenuer.model.StoreListDTO
+import com.wooriyo.pinmenuer.store.adpter.BannerAdapter
 import com.wooriyo.pinmenuer.store.adpter.StoreAdapter
 import com.wooriyo.pinmenuer.util.ApiClient
 import com.wooriyo.pinmenuer.util.AppHelper
@@ -215,6 +216,7 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
 
                 if(result.status != 1 || result.bannerList.isNullOrEmpty()) return
 
+                binding.banner.adapter = BannerAdapter(result.bannerList)
             }
 
             override fun onFailure(call: Call<PopupListDTO?>, t: Throwable) {

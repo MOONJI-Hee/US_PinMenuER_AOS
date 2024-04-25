@@ -12,6 +12,7 @@ import com.wooriyo.pinmenuer.databinding.ListCateEditBinding
 import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.menu.dialog.CategoryDialog
 import com.wooriyo.pinmenuer.model.CategoryDTO
+import java.util.Collections
 
 class CateEditAdapter(val dataSet: ArrayList<CategoryDTO>): RecyclerView.Adapter<CateEditAdapter.ViewHolder>() {
     lateinit var itemClickListener: ItemClickListener
@@ -31,6 +32,11 @@ class CateEditAdapter(val dataSet: ArrayList<CategoryDTO>): RecyclerView.Adapter
     fun setMode(flag: Int) {
         this.flag = flag
         notifyDataSetChanged()
+    }
+
+    fun swapData(fromPos: Int, toPos: Int) {
+        Collections.swap(dataSet, fromPos, toPos)
+        notifyItemMoved(fromPos, toPos)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
