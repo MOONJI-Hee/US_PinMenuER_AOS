@@ -289,14 +289,14 @@ interface Api {
     ): Call<CateListDTO>
 
     // 메뉴 조회
-    @GET("m/goods.list.test.php")
+    @GET("m/goods.list.php")
     fun getGoods(
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int
     ): Call<GoodsListDTO>
 
     // 메뉴 등록
-    @GET("m/ins_goods.test.php")
+    @GET("m/ins_goods.php")
     fun insGoods(
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int,
@@ -324,7 +324,7 @@ interface Api {
     ): Call<ResultDTO>
 
     // 메뉴 수정
-    @GET("m/udt_goods.test.php")
+    @GET("m/udt_goods.php")
     fun udtGoods(
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int,
