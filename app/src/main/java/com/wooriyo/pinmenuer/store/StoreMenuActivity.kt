@@ -79,6 +79,7 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
 //                printer.setOnClickListener(this@StoreMenuActivity)
 //                payment.setOnClickListener(this@StoreMenuActivity)
 //                pgCancel.setOnClickListener(this@StoreMenuActivity)
+//                qrcode.setOnClickListener(this@StoreMenuActivity)
                 design.setOnClickListener(this@StoreMenuActivity)
 //                event.setOnClickListener(this@StoreMenuActivity)
             }
@@ -97,6 +98,7 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                     startActivity(Intent(mActivity, PgHistoryActivity::class.java))
                 }
             }
+            qrcode.setOnClickListener {  }
             event.setOnClickListener { startActivity(Intent(mActivity, SetEventPopup::class.java)) }
 
             menu.setOnClickListener{
@@ -109,10 +111,6 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                 }
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     override fun onClick(p0: View?) {

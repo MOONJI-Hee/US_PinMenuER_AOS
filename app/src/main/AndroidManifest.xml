@@ -32,6 +32,29 @@
         android:theme="@style/Theme.PinMenuER"
         tools:targetApi="31">
         <activity
+            android:name=".SetQrcodeActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".PgJudgeActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".PgAgreeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_pg_agree"
+            android:theme="@style/Theme.PinMenuER.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".event.PreviewActivity"
             android:exported="false" />
         <activity

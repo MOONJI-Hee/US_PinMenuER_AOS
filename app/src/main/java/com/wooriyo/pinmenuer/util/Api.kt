@@ -772,6 +772,64 @@ interface Api {
         @Query("tid") tid: String
     ): Call<ResultDTO>
 
+    // QR오더 관련
+    // QR 리스트 조회
+    @GET("m/qr.list.php")
+    fun getQrList(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int
+    ): Call<QrListDTO>
+
+    // QR 생성
+    @GET("m/create_qrcode.php")
+    fun createQr(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("seq") seq: Int
+    ): Call<ResultDTO>
+
+    // QR 등록
+    @GET("m/udt_qrcode.php")
+    fun udtQr(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("qidx") qidx: Int,
+        @Query("tableNo") tableNo: String
+    ): Call<ResultDTO>
+
+    // QR 삭제
+    @GET("m/del_qrcode.php")
+    fun delQr(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("qidx") qidx: Int,
+    ): Call<ResultDTO>
+
+    // 영문매장명 등록
+    @GET("m/udt_storenm.php")
+    fun udtStoreName(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("name") storeName: String
+    ): Call<ResultDTO>
+
+    // QR 후결제 전체 사용 설정
+    @GET("m/udt_AllNonePay.php")
+    fun setPostPayAll(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("buse") buse: String
+    ): Call<ResultDTO>
+
+    // QR 후결제 개별 사용 설정
+    @GET("m/udtNonePay.php")
+    fun setPostPay(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("qidx") qidx: Int,
+        @Query("buse") buse: String
+    ): Call<ResultDTO>
+
     // 카카오 지도 관련 api
     @GET("/v2/local/search/address.json")
     fun kakaoSearch(

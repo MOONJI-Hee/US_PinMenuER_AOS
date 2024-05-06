@@ -193,10 +193,24 @@
 
     <TextView
         style="@style/menu"
-        android:id="@+id/design"
-        android:text="@string/menu_ui"
+        android:id="@+id/qrcode"
+        android:text="@string/qrcode_menu"
         app:layout_constraintStart_toStartOf="@+id/menu"
         app:layout_constraintTop_toTopOf="@+id/pgCancel" />
+
+    <TextView
+        style="@style/subtext"
+        android:layout_marginTop="10dp"
+        android:text="@string/qrcode_menu_info"
+        app:layout_constraintStart_toStartOf="@+id/qrcode"
+        app:layout_constraintTop_toBottomOf="@+id/qrcode" />
+
+    <TextView
+        style="@style/menu"
+        android:id="@+id/design"
+        android:text="@string/menu_ui"
+        app:layout_constraintStart_toStartOf="@+id/tablePass"
+        app:layout_constraintTop_toTopOf="@+id/qrcode" />
 
     <TextView
         style="@style/subtext"
@@ -209,25 +223,8 @@
         android:id="@+id/event"
         style="@style/menu"
         android:text="@string/title_event"
-        app:layout_constraintTop_toTopOf="@+id/pgCancel"
-        app:layout_constraintStart_toStartOf="@+id/tablePass"/>
-
-    <TextView
-        android:id="@+id/qrCustomerInfo"
-        style="@style/menu"
-        android:text="@string/qr_customer_info_menu"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="@+id/pgCancel"
-        app:layout_constraintStart_toStartOf="@+id/tablePass"/>
-
-    <TextView
-        style="@style/subtext"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:text="@string/qr_customer_info_menu_sub"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@+id/qrCustomerInfo"
-        app:layout_constraintTop_toBottomOf="@+id/qrCustomerInfo" />
+        app:layout_constraintTop_toTopOf="@+id/design"
+        app:layout_constraintStart_toStartOf="@+id/setCall"/>
 
     <TextView
         style="@style/menu"
