@@ -729,6 +729,13 @@ interface Api {
         @Query("addr") addr: String,
     ): Call<ResultDTO>
 
+    // 이행보증보험 동의
+    @GET("m/agreeQR.php")
+    fun setNiceAgree(
+        @Query("storeidx") storeidx: Int,
+        @Query("uuid") androidId : String
+    ): Call<ResultDTO>
+
     // pg 결제 고객 정보 받기 설정
     @GET("m/set_qrcustominfo.php")
     fun setQrCustomInfo(

@@ -28,6 +28,8 @@ import com.wooriyo.pinmenuer.payment.SetPayActivity
 import com.wooriyo.pinmenuer.pg.PgHistoryActivity
 import com.wooriyo.pinmenuer.pg.dialog.NoPgInfoDialog
 import com.wooriyo.pinmenuer.printer.PrinterMenuActivity
+import com.wooriyo.pinmenuer.qrcode.PgAgreeActivity
+import com.wooriyo.pinmenuer.qrcode.SetQrcodeActivity
 import com.wooriyo.pinmenuer.setting.MenuUiActivity
 import com.wooriyo.pinmenuer.setting.TablePassActivity
 import com.wooriyo.pinmenuer.util.ApiClient
@@ -79,7 +81,6 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
 //                printer.setOnClickListener(this@StoreMenuActivity)
 //                payment.setOnClickListener(this@StoreMenuActivity)
 //                pgCancel.setOnClickListener(this@StoreMenuActivity)
-//                qrcode.setOnClickListener(this@StoreMenuActivity)
                 design.setOnClickListener(this@StoreMenuActivity)
 //                event.setOnClickListener(this@StoreMenuActivity)
             }
@@ -98,7 +99,10 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                     startActivity(Intent(mActivity, PgHistoryActivity::class.java))
                 }
             }
-            qrcode.setOnClickListener {  }
+            qrcode.setOnClickListener {
+                val intent = if(store.agree == "Y") Intent(mActivity, SetQrcodeActivity::class.java) else Intent(mActivity, PgAgreeActivity::class.java)
+                startActivity(intent)
+            }
             event.setOnClickListener { startActivity(Intent(mActivity, SetEventPopup::class.java)) }
 
             menu.setOnClickListener{

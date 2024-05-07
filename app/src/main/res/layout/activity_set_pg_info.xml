@@ -27,12 +27,14 @@
     </LinearLayout>
 
     <TextView
-        style="@style/text18"
+        style="@style/text20"
         android:id="@+id/tv1"
         android:layout_marginTop="80dp"
+        android:gravity="center"
         android:text="@string/payment_set_pg_info"
         app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintStart_toStartOf="@+id/etRegNum"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
         style="@style/text18"
@@ -45,7 +47,7 @@
     <EditText
         style="@style/edittext_main"
         android:id="@+id/etRegNum"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:hint="@string/payment_set_pg_reg_number_hint"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -121,13 +123,12 @@
 
 
     <TextView
-        style="@style/btn"
+        style="@style/btn_main"
         android:id="@+id/save"
-        android:layout_width="500dp"
-        android:layout_marginTop="60dp"
         android:text="@string/btn_save"
+        android:layout_marginBottom="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etStoreAddr"/>
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

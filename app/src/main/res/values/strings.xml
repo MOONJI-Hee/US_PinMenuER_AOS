@@ -99,6 +99,8 @@
     <string name="sat">토</string>
     <string name="sun">일</string>
 
+    <string name="dot">・</string>
+
     <!-- 회원 가입 & 수정  -->
     <string name="email">아이디(이메일)</string>
     <string name="email_hint">이메일을 입력해 주세요</string>
@@ -205,7 +207,6 @@
     <string name="order_mgmt">주문정보</string>
     <string name="call_mgmt">직원호출</string>
 
-
     <!--  결제  -->
     <string name="payment">결제</string>
     <string name="payment_title">결제방식 설정</string>
@@ -238,13 +239,13 @@
     <string name="btn_set_nicepay">Key설정 저장</string>
     <string name="payment_title_nicepay_info">QR코드 카드결제 가맹점 가입방법 및 카드 심사 정보 작성</string>
     <string name="payment_title_pg_info">PG 카드 심사 정보</string>
-    <string name="payment_set_pg_info">사업자등록증에 등록된 내용을 작성해 주세요.\n해당 내용은 PG 결제를 위한 카드사 심사에 사용되며 고객 주문 페이지\n하단에 노출됩니다.</string>
+    <string name="payment_set_pg_info">사업자등록증에 등록된 내용을 작성해 주세요.\n해당 내용은 PG 결제를 위한 카드사 심사에 사용되며 고객 주문 페이지 하단에 노출됩니다.</string>
     <string name="payment_set_pg_store_name">상호</string>
     <string name="payment_set_pg_store_name_hint">사업자등록증의 상호를 작성해 주세요.</string>
     <string name="payment_set_pg_store_addr">사업장주소</string>
     <string name="payment_set_pg_store_addr_hint">사업자등록증의 주소를 작성해 주세요.</string>
     <string name="payment_set_pg_store_tel">연락처</string>
-    <string name="payment_set_pg_store_tel_hint">‘-’ 포함해서 매장 전화번호를 작성해 주세요.</string>
+    <string name="payment_set_pg_store_tel_hint">매장 전화번호를 작성해 주세요.</string>
     <string name="payment_set_pg_reg_number">사업자번호</string>
     <string name="payment_set_pg_reg_number_hint">사업자등록번호를 작성해 주세요.</string>
     <string name="payment_set_pg_owner_name">대표자명</string>
@@ -516,10 +517,10 @@
     <string name="qrcode_menu">QR코드 관리</string>
     <string name="qrcode_menu_info">・QR코드 생성/삭제\n・QR코드 다운로드</string>
     <string name="qr_use_info">QR코드 사용안내</string>
-    <string name="qr_pg_first">핀메뉴 QR오더와 결제를 이용하기 위해서는\n나이스페이먼츠 PG 설정이 선행되어야 합니다.</string>
+    <string name="qr_pg_first"><b>핀메뉴QR오더</b>의 <b>선결제</b>를 이용하기 위해서는 PG 설정이 선행되어야 합니다.</string>
     <string name="qr_nicepay_status">나이스페이먼츠 상태&#160;:&#160;</string>
-    <string name="qr_insurance">결제 금액 정산을 위한 이행보증보험은\n기본 월 200만원까지로, 이 이상 매출이 발생하면\n이행보증보험료가 발생합니다.</string>
-    <string name="qr_insurance_check">결제 관련 이행보증보험 결제관리를\n이해하였고 동의합니다.</string>
+    <string name="qr_insurance">결제 금액 정산을 위한 이행보증보험은 기본 월 200만원까지로,\n이 이상 매출이 발생하면 이행보증보험료가 발생합니다.</string>
+    <string name="qr_insurance_check">결제 관련 이행보증보험 결제관리를 이해하였고 동의합니다.</string>
     <string name="qr_setting_go">QR코드 설정 바로가기</string>
     <string name="qr_setting">QR코드 설정</string>
     <string name="qr_usable_cnt">추가 가능한 QR코드 수&#160;:&#160;</string>
@@ -529,19 +530,22 @@
     <string name="qr_down_all">전체 QR코드 사진첩에 저장하기</string>
     <string name="qr_down_one">QR코드 사진첩에 저장하기</string>
     <string name="qr_post_pay_all">QR코드 전체 후불결제 적용</string>
+    <string name="qr_post_pay_one">QR코드 후불결제 적용</string>
     <string name="qr_post_pay">후불결제</string>
     <string name="qr_cnt">QR-%d</string>
     <string name="table_no">Table No.</string>
     <string name="table_no_hint">테이블 번호 입력</string>
     <string name="qr_setting_info1">QR오더는 결제가 완료된 후 주문내역이 전송됩니다.\n(단, 후불결제 기능을 설정했을 경우 제외)</string>
-    <string name="qr_setting_info2">이 페이지에서 QR코드를 생성한 후 테이블번호 저장과 변경이 가능하며 QR코드 삭제가 가능합니다.</string>
-    <string name="dialog_disable_qr">이용 가능한 QR 갯수 초과</string>
+    <string name="qr_setting_info2">이 페이지에서 QR코드를 생성한 후 테이블번호\n저장과 변경이 가능하며 QR코드 삭제가 가능합니다.</string>
+    <string name="qr_pg_status">상태&#160;:&#160;</string>
 
     <string name="qr_detail_info1">생성된 QR코드는 변경할 수 없고, 삭제만 가능합니다.</string>
     <string name="qr_detail_info2">삭제된 QR코드는 다시 사용할 수 없습니다.</string>
     <string name="qr_detail_info3">입력된 테이블번호는 이 페이지에서 수정 가능합니다.</string>
     <string name="qr_detail_info4">테이블번호가 중복되지 않도록 관리해주세요.</string>
     <string name="qr_detail_info5">테이블번호를 영문과 숫자로 작성할 경우 QR코드 저장시 파일명으로 적용됩니다.\n단, 한글은 저장 파일명에 적용되지 않습니다.</string>
+
+    <string name="dialog_disable_qr">이용 가능한 QR 갯수 초과</string>
 
     <!--  QR코드 결제고객 정보  -->
     <string name="qr_customer_info_menu">QR코드\n결제고객 정보</string>

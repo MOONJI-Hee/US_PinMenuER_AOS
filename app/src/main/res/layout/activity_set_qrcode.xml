@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/f9"
     tools:context=".qrcode.SetQrcodeActivity">
     <TextView
         style="@style/title"
@@ -31,16 +32,133 @@
         android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="224dp"
-        android:paddingVertical="30dp"
         android:paddingHorizontal="60dp"
-        app:layout_constraintTop_toBottomOf="@+id/title">
+        android:paddingVertical="30dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+            android:id="@+id/tv1"
+            style="@style/text"
+            android:text="@string/qr_usable_cnt"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/qrCnt"
+            style="@style/text"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv1"
+            app:layout_constraintStart_toEndOf="@+id/tv1"
+            app:layout_constraintTop_toTopOf="@+id/tv1"
+            tools:text="5" />
+
+        <TextView
+            style="@style/text"
+            android:text="@string/gea"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv1"
+            app:layout_constraintStart_toEndOf="@+id/qrCnt"
+            app:layout_constraintTop_toTopOf="@+id/tv1" />
+
+        <TextView
+            style="@style/subtext"
+            android:id="@+id/info1"
+            android:layout_marginTop="10dp"
+            android:text="@string/qr_setting_info1"
+            app:layout_constraintTop_toBottomOf="@+id/tv1"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            style="@style/subtext"
+            android:id="@+id/info2"
+            android:layout_marginTop="10dp"
+            android:text="@string/qr_setting_info2"
+            app:layout_constraintTop_toBottomOf="@+id/info1"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv2"
+            style="@style/text20"
+            android:layout_marginTop="10dp"
+            android:text="@string/qr_store_name"
+            app:layout_constraintStart_toStartOf="@+id/etStoreName"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvEssential"
+            style="@style/text20"
+            android:layout_marginStart="10dp"
+            android:text="@string/essential"
+            android:textColor="#FF6200"
+            app:layout_constraintStart_toEndOf="@+id/tv2"
+            app:layout_constraintTop_toTopOf="@+id/tv2" />
+
+        <EditText
+            android:id="@+id/etStoreName"
+            style="@style/edittext"
+            android:layout_width="250dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:hint="@string/only_eng"
+            app:layout_constraintEnd_toStartOf="@+id/saveName"
+            app:layout_constraintTop_toBottomOf="@+id/tv2" />
+
+        <TextView
+            style="@style/btn_sub"
+            android:id="@+id/saveName"
+            android:layout_width="83dp"
+            android:layout_marginEnd="40dp"
+            android:text="@string/btn_save2"
+            app:layout_constraintBottom_toBottomOf="@+id/etStoreName"
+            app:layout_constraintEnd_toStartOf="@+id/downAll"
+            app:layout_constraintTop_toTopOf="@+id/etStoreName" />
+
+        <TextView
+            android:id="@+id/tv3"
+            style="@style/subtext"
+            android:layout_marginTop="10dp"
+            android:text="@string/qr_file_name_info"
+            app:layout_constraintStart_toStartOf="@+id/etStoreName"
+            app:layout_constraintTop_toBottomOf="@+id/etStoreName" />
+
+        <TextView
+            android:id="@+id/downAll"
+            style="@style/btn"
+            android:layout_width="300dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/qr_down_all"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/postPayAll"/>
+
+        <TextView
+            style="@style/text20"
+            android:text="@string/qr_post_pay_all"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/postPayAll"
+            app:layout_constraintBottom_toBottomOf="@+id/postPayAll"
+            app:layout_constraintTop_toTopOf="@+id/postPayAll" />
+
+        <CheckBox
+            style="@style/toggle"
+            android:id="@+id/postPayAll"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
+        android:id="@+id/rvQr"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:background="@color/f9"
+        android:paddingTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top"
         app:layout_constraintBottom_toBottomOf="parent"/>
 

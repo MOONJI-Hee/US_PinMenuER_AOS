@@ -43,6 +43,7 @@ class MyApplication: Application() {
         lateinit var store: StoreDTO
         lateinit var androidId : String
         lateinit var allCateList : ArrayList<CategoryDTO>
+        var engStoreName = ""
 
         // 블루투스 관련 변수
         lateinit var bluetoothManager: BluetoothManager

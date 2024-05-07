@@ -83,6 +83,11 @@ class AppHelper {
             }
         }
 
+        // 정수 > 00 형태의 문자열로 리턴
+        fun intToString(n: Int): String {
+            return if(n in 1..9) {"0$n"} else n.toString()
+        }
+
         // 현재 일시 yyyy-mm-dd 형식으로 리턴
         fun getToday(): String {
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
