@@ -14,7 +14,7 @@ import com.wooriyo.pinmenuer.listener.DialogListener
 import com.wooriyo.pinmenuer.util.AppHelper
 import com.wooriyo.pinmenuer.util.AppHelper.Companion.mkDouble
 
-class RegTimeDialog(context: Context, var start: String, var end: String): BaseDialog(context) {
+class RegTimeDialog(context: Context, var start: String, var end: String, val type: Int): BaseDialog(context) {
     lateinit var binding : DialogRegtimeBinding
     lateinit var dialogListener: DialogListener
 
@@ -22,6 +22,10 @@ class RegTimeDialog(context: Context, var start: String, var end: String): BaseD
         super.onCreate(savedInstanceState)
         binding = DialogRegtimeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        when(type) {
+            1 -> binding.title.text = context.getString(R.string.store_break_set)
+        }
 
         if(start != "" && start != "00:00") {
             binding.etStartHour.setText(start.substring(0, 2))

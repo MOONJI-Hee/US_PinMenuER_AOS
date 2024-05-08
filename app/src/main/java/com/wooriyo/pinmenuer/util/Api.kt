@@ -537,6 +537,13 @@ interface Api {
         @Query("iscompleted") iscompleted: String
     ): Call<ResultDTO>
 
+    // 직원 호출 삭제
+    @GET("m/delete_call.php")
+    fun deleteCall(
+        @Query("storeidx") storeidx: Int,
+        @Query("gidx") cidx: Int
+    ): Call<ResultDTO>
+
     // 직원 호출 목록 초기화
     @GET("m/del_callHistory.php")
     fun clearCall(

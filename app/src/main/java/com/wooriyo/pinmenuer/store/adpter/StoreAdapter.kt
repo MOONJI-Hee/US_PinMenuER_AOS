@@ -66,11 +66,11 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
             binding.run {
                 storeName.text = data.name
 
-                if(data.name2.isNullOrEmpty())
+                if(data.subname.isNullOrEmpty())
                     storeName2.visibility = View.GONE
                 else {
                     storeName2.visibility = View.VISIBLE
-                    storeName2.text = data.name2
+                    storeName2.text = data.subname
                 }
 
                 if(usePay || data.paytype == 4) {

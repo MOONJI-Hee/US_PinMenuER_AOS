@@ -70,7 +70,7 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
             binding.llUdt.visibility = View.VISIBLE
 
             binding.etName.setText(store.name)
-            binding.etName2.setText(store.name2)
+            binding.etName2.setText(store.subname)
             binding.etAddr.setText(store.address)
         }else if(type == 1) {
             binding.btnDetail.isEnabled = false
@@ -345,7 +345,7 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
 
     fun save() {
         store.name = binding.etName.text.toString()
-        store.name2 = binding.etName2.text.toString()
+        store.subname = binding.etName2.text.toString()
         store.address = binding.etAddr.text.toString()
 
         if(store.name.isEmpty()) {
@@ -355,7 +355,7 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
 //            Toast.makeText(mActivity, R.string.msg_no_addr, Toast.LENGTH_SHORT).show()
 //        }
         else {
-            ApiClient.service.regStore(useridx, store.name, store.name2, store.address, store.long, store.lat)
+            ApiClient.service.regStore(useridx, store.name, store.subname, store.address, store.long, store.lat)
                 .enqueue(object : Callback<ResultDTO>{
                     override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                         Log.d(TAG, "매장 등록 url : $response")
@@ -408,7 +408,7 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
 
     private fun modify() {
         store.name = binding.etName.text.toString()
-        store.name2 = binding.etName2.text.toString()
+        store.subname = binding.etName2.text.toString()
         store.address = binding.etAddr.text.toString()
         if(store.name.isEmpty()) {
             Toast.makeText(this@StoreSetActivity, R.string.store_name_hint, Toast.LENGTH_SHORT).show()
@@ -417,7 +417,7 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
 //            Toast.makeText(this@StoreSetActivity, R.string.msg_no_addr, Toast.LENGTH_SHORT).show()
 //        }
         else {
-            ApiClient.service.udtStore(useridx, storeidx, store.name, store.name2, store.address, store.long, store.lat)
+            ApiClient.service.udtStore(useridx, storeidx, store.name, store.subname, store.address, store.long, store.lat)
                 .enqueue(object : Callback<ResultDTO>{
                     override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                         Log.d(TAG, "매장 수정 url : $response")

@@ -363,7 +363,11 @@ class StoreSetTimeActivity : BaseActivity(), View.OnClickListener {
 
     // 시간 설정 다이얼로그
     fun timeDialog(tvStart : TextView, tvEnd: TextView) {
-        val dialog = RegTimeDialog(mActivity, tvStart.text.toString(), tvEnd.text.toString())
+        var type = 0
+
+        if(tvStart.toString().contains("brk")) type = 1
+
+        val dialog = RegTimeDialog(mActivity, tvStart.text.toString(), tvEnd.text.toString(), type)
         dialog.setOnTimeSetListener(object: DialogListener{
             override fun onTimeSet(start: String, end: String) {
                 tvStart.text = start

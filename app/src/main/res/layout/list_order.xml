@@ -153,7 +153,7 @@
         <LinearLayout
             android:id="@+id/delete"
             android:layout_width="60dp"
-            android:layout_height="38dp"
+            android:layout_height="40dp"
             android:gravity="center"
             android:background="@drawable/bg_cancel_r6"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -168,7 +168,7 @@
             style="@style/btn_sub"
             android:id="@+id/print"
             android:layout_width="0dp"
-            android:layout_height="38dp"
+            android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:text="@string/print"
             app:layout_constraintStart_toEndOf="@+id/delete"
