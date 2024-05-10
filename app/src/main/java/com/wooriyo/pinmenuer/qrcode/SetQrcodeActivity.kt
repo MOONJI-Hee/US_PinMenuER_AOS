@@ -1,14 +1,19 @@
 package com.wooriyo.pinmenuer.qrcode
 
+import android.Manifest
 import android.app.DownloadManager
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.widget.CheckBox
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
@@ -19,6 +24,7 @@ import com.wooriyo.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.common.InfoDialog
 import com.wooriyo.pinmenuer.common.NoticeDialog
+import com.wooriyo.pinmenuer.config.AppProperties
 import com.wooriyo.pinmenuer.databinding.ActivitySetQrcodeBinding
 import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.model.QrDTO
@@ -31,8 +37,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SetQrcodeActivity : BaseActivity() {
+class SetQrcodeActivity : BaseActivity(), DialogInterface.OnDismissListener {
     lateinit var binding: ActivitySetQrcodeBinding
+
+    private val permission = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
     val qrList = ArrayList<QrDTO>()
     val qrAdapter = QrAdapter(qrList)
@@ -86,7 +94,13 @@ class SetQrcodeActivity : BaseActivity() {
         binding.run {
             back.setOnClickListener { finish() }
             saveName.setOnClickListener { udtStoreName() }
-            downAll.setOnClickListener { downloadAll() }
+            downAll.setOnClickListener {
+                if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+                    checkPermissions()
+                }else {
+                    downloadAll()
+                }
+            }
             postPayAll.setOnClickListener {
                 if(bisBus) {
                     it as CheckBox
@@ -107,6 +121,57 @@ class SetQrcodeActivity : BaseActivity() {
         getQrList()
     }
 
+    override fun onDismiss(dialog: DialogInterface?) {
+        getQrList()
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if(grantResults.isEmpty()) return
+
+        if(requestCode == AppProperties.REQUEST_STORAGE) {downloadAll()}
+    }
+
+    // 이미지 접근 권한 확인
+    private fun checkPermissions() {
+        val deniedPms = ArrayList<String>()
+
+        for (pms in permission) {
+//            when {
+//                ActivityCompat.checkSelfPermission(mActivity, pms) != PackageManager.PERMISSION_GRANTED -> deniedPms.add(pms)
+//
+//                ActivityCompat.shouldShowRequestPermissionRationale(mActivity, pms) -> {
+//                    AlertDialog.Builder(mActivity)
+//                        .setTitle(R.string.pms_storage_title)
+//                        .setMessage(R.string.pms_storage_content)
+//                        .setPositiveButton(R.string.confirm) { dialog, _ ->
+//                            dialog.dismiss()
+//                            getStoragePms()
+//                        }
+//                        .setNegativeButton(R.string.cancel) {dialog, _ -> dialog.dismiss()}
+//                        .show()
+//                    return
+//                }
+//            }
+
+            if(ActivityCompat.checkSelfPermission(mActivity, pms) != PackageManager.PERMISSION_GRANTED) {
+                deniedPms.add(pms)
+            }
+        }
+
+        if(deniedPms.isNotEmpty()) {
+            getStoragePms()
+        }else {
+            downloadAll()
+        }
+    }
+
+    //권한 받아오기
+    fun getStoragePms() {
+        ActivityCompat.requestPermissions(mActivity, permission, AppProperties.REQUEST_STORAGE)
+    }
+
     private fun setAllCheck(buse: String) {
         bisCnt = if(buse == "Y") qrList.size else 0
 
@@ -123,7 +188,7 @@ class SetQrcodeActivity : BaseActivity() {
 
         qrList.forEachIndexed { i, it ->
             val uri = Uri.parse(it.filePath.trim())
-            var fileName = "${AppHelper.intToString(it.seq)}_${it.tableNo}.png"
+            var fileName = "${AppHelper.intToString(i+1)}_${it.tableNo}.png"
             if(engStoreName.isNotEmpty()) {
                 fileName = "${engStoreName}_" + fileName
             }

@@ -18,5 +18,8 @@ data class ResultDTO(
     @SerializedName("photo") var img1 : String?="",
     @SerializedName("photo2") var img2 : String?="",
     @SerializedName("photo3") var img3 : String?="",
-    @SerializedName("stropt") var opt : ArrayList<OptionDTO>?
+    @SerializedName("stropt") var opt : ArrayList<OptionDTO>?,
+
+    @SerializedName("qidx") var qidx : Int,
+    @SerializedName("filepath") var filePath: String
 )

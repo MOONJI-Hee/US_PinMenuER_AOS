@@ -15,6 +15,8 @@ import com.wooriyo.pinmenuer.databinding.ListQrBinding
 import com.wooriyo.pinmenuer.databinding.ListQrPlusBinding
 import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.model.QrDTO
+import com.wooriyo.pinmenuer.qrcode.SetQrcodeActivity
+import com.wooriyo.pinmenuer.qrcode.dialog.QrDetailDialog
 
 class QrAdapter(val dataSet: ArrayList<QrDTO>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     lateinit var postPayClickListener: ItemClickListener
@@ -28,7 +30,7 @@ class QrAdapter(val dataSet: ArrayList<QrDTO>): RecyclerView.Adapter<RecyclerVie
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding = ListQrBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         val bindingAdd = ListQrPlusBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return if(viewType == AppProperties.VIEW_TYPE_COM) ViewHolder(binding, parent.context) else ViewHolder_add(bindingAdd, parent.context)
+        return if(viewType == AppProperties.VIEW_TYPE_COM) ViewHolder(binding, parent.context) else ViewHolder_add(bindingAdd, parent.context, postPayClickListener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -73,7 +75,9 @@ class QrAdapter(val dataSet: ArrayList<QrDTO>): RecyclerView.Adapter<RecyclerVie
             binding.postPay.isChecked = data.qrbuse == "Y"
 
             binding.able.setOnClickListener{
-
+                val qrDetailDialog = QrDetailDialog(absoluteAdapterPosition + 1, data)
+                qrDetailDialog.setOnPostPayClickListener(postPayClickListener)
+                qrDetailDialog.show((context as SetQrcodeActivity).supportFragmentManager, "QrDetailDialog")
             }
 
             binding.disable.setOnClickListener {
@@ -92,10 +96,12 @@ class QrAdapter(val dataSet: ArrayList<QrDTO>): RecyclerView.Adapter<RecyclerVie
         }
     }
 
-    class ViewHolder_add(val binding: ListQrPlusBinding, val context: Context): RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder_add(val binding: ListQrPlusBinding, val context: Context, val postPayClickListener: ItemClickListener): RecyclerView.ViewHolder(binding.root) {
         fun bind() {
             binding.plus.setOnClickListener{
-
+                val qrDetailDialog = QrDetailDialog(absoluteAdapterPosition + 1, null)
+                qrDetailDialog.setOnPostPayClickListener(postPayClickListener)
+                qrDetailDialog.show((context as SetQrcodeActivity).supportFragmentManager, "QrAddDialog")
             }
         }
     }
