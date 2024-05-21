@@ -208,7 +208,7 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun getBannerList() {
-        ApiClient.service.getBannerList(0, 0, 1)?.enqueue(object : Callback<PopupListDTO?>{
+        ApiClient.service.getBannerList(useridx, 0, 0, 1)?.enqueue(object : Callback<PopupListDTO?>{
             override fun onResponse(call: Call<PopupListDTO?>, response: Response<PopupListDTO?>) {
                 Log.d(TAG, "배너 리스트 조회  url : $response")
                 if(!response.isSuccessful) return
