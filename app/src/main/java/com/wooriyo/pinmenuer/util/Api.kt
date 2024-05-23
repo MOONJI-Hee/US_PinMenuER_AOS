@@ -803,13 +803,14 @@ interface Api {
         @Query("seq") seq: Int
     ): Call<ResultDTO>
 
-    // QR 등록
+    // QR 등록 & 수정
     @GET("m/udt_qrcode.php")
     fun udtQr(
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int,
         @Query("qidx") qidx: Int,
-        @Query("tableNo") tableNo: String
+        @Query("tableNo") tableNo: String,
+        @Query("buse") buse: String
     ): Call<ResultDTO>
 
     // QR 삭제
@@ -839,6 +840,15 @@ interface Api {
     // QR 후결제 개별 사용 설정
     @GET("m/udtNonePay.php")
     fun setPostPay(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("qidx") qidx: Int,
+        @Query("buse") buse: String
+    ): Call<ResultDTO>
+
+    // 예약 QR 사용 여부 설정
+    @GET("m/udt_qrbuse.php")
+    fun setReservUse(
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int,
         @Query("qidx") qidx: Int,
