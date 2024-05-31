@@ -33,6 +33,10 @@ class SignUpActivity : BaseActivity(), View.OnClickListener {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.modify.visibility = View.GONE
+        binding.llUdt.visibility = View.GONE
+        binding.save.visibility = View.VISIBLE
+
         binding.etId.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}

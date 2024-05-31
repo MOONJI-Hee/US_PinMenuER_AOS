@@ -31,6 +31,7 @@ import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.order.adapter.OrderAdapter
 import com.wooriyo.pinmenuer.order.dialog.ClearDialog
 import com.wooriyo.pinmenuer.util.ApiClient
+import com.wooriyo.pinmenuer.util.AppHelper.Companion.getPrint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,16 +51,10 @@ class ByHistoryActivity : BaseActivity() {
     private val completeList = ArrayList<OrderHistoryDTO>()
     val completeAdapter = HistoryAdapter(completeList)
 
-//    private val posErrList = ArrayList<OrderHistoryDTO>()
-//    val posErrAdapter = HistoryAdapter(posErrList)
-
     // 프린트 관련 변수
-    var hyphen = StringBuilder()    // 하이픈
-    var hyphen_num = 0              // 하이픈 개수
-    var font_size = 0
-    var hangul_size = 0.0
-    var one_line = 0
-    var space = 0
+    var hyphen = StringBuilder()                // 하이픈
+    var hyphen_num = AppProperties.HYPHEN_NUM   // 하이픈 개수
+    var font_size = AppProperties.FONT_SIZE
 
     var selText: TextView ?= null
 
@@ -68,20 +63,6 @@ class ByHistoryActivity : BaseActivity() {
         binding = ActivityByHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 영수증에 들어가는 하이픈 문자열 초기화, 설정값 초기화
-        if(MyApplication.store.fontsize == 2) {
-            hyphen_num = AppProperties.HYPHEN_NUM_SMALL
-            font_size = AppProperties.FONT_SMALL
-            hangul_size = AppProperties.HANGUL_SIZE_SMALL
-            one_line = AppProperties.ONE_LINE_SMALL
-            space = AppProperties.SPACE_SMALL
-        }else if(MyApplication.store.fontsize == 1) {
-            hyphen_num = AppProperties.HYPHEN_NUM_BIG
-            font_size = AppProperties.FONT_BIG
-            hangul_size = AppProperties.HANGUL_SIZE_BIG
-            one_line = AppProperties.ONE_LINE_BIG
-            space = AppProperties.SPACE_BIG
-        }
         for (i in 1..hyphen_num) {
             hyphen.append("-")
         }
@@ -622,74 +603,5 @@ class ByHistoryActivity : BaseActivity() {
         }
         MyApplication.escposPrinter.lineFeed(4)
         MyApplication.escposPrinter.cutPaper()
-    }
-
-    fun getPrint(ord: OrderDTO) : String {
-        var total = 0.0
-
-        val result: StringBuilder = StringBuilder()
-        val underline1 = StringBuilder()
-        val underline2 = StringBuilder()
-
-        ord.name.forEach {
-            if(total < one_line)
-                result.append(it)
-            else if(total < (one_line * 2))
-                underline1.append(it)
-            else
-                underline2.append(it)
-
-            if(it == ' ') {
-                total++
-            }else
-                total += hangul_size
-        }
-
-        val mlength = result.toString().length
-        val mHangul = result.toString().replace(" ", "").length
-        val mSpace = mlength - mHangul
-        val mLine = mHangul * hangul_size + mSpace
-
-        var diff = (one_line - mLine + 0.5).toInt()
-
-        if(MyApplication.store.fontsize == 1) {
-            if(ord.gea < 10) {
-                diff += 1
-                space = 4
-            } else if (ord.gea >= 100) {
-                space = 1
-            }
-        }else if(MyApplication.store.fontsize == 2) {
-            if(ord.gea < 10) {
-                diff += 1
-                space += 2
-            } else if (ord.gea < 100) {
-                space += 1
-            }
-        }
-
-        for(i in 1..diff) {
-            result.append(" ")
-        }
-        result.append(ord.gea.toString())
-
-        for (i in 1..space) {
-            result.append(" ")
-        }
-
-        var togo = ""
-        when(ord.togotype) {
-            1-> togo = "신규"
-            2-> togo = "포장"
-        }
-        result.append(togo)
-
-        if(underline1.toString() != "")
-            result.append("\n$underline1")
-
-        if(underline2.toString() != "")
-            result.append("\n$underline2")
-
-        return result.toString()
     }
 }

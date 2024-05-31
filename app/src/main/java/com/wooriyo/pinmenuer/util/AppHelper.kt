@@ -24,6 +24,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+import java.util.regex.Pattern
 
 // 자주 쓰는 메소드 모음 - 문지희 (2022.10 갱신)
 class AppHelper {
@@ -249,46 +250,56 @@ class AppHelper {
         }
 
         fun getPrint(ord: OrderDTO) : String {
-            var hangul_size = AppProperties.HANGUL_SIZE_BIG
             var one_line = AppProperties.ONE_LINE_BIG
-            var space = AppProperties.SPACE_BIG
+            var space = AppProperties.SPACE
 
             var total = 0.0
+            var name = 0.0
 
             val result: StringBuilder = StringBuilder()
             val underline1 = StringBuilder()
             val underline2 = StringBuilder()
 
             ord.name.forEach {
-                if(total < one_line)
+                val charSize = getSewooCharSize(it)
+//                Log.d("AppHelper", "charSize $it >> $charSize")
+
+                if (total + 1 < one_line){
                     result.append(it)
-                else if(total < (one_line * 2))
+                    name += charSize
+                }
+                else if (total + 1 < (one_line * 2))
                     underline1.append(it)
                 else
                     underline2.append(it)
 
-                if(it == ' ') {
+                if (it == ' ') {
                     total++
-                }else
-                    total += hangul_size
+                } else
+                    total += charSize
             }
 
-            val mlength = result.toString().length
-            val mHangul = result.toString().replace(" ", "").length
-            val mSpace = mlength - mHangul
-            val mLine = mHangul * hangul_size + mSpace
+            var diff = (one_line - name + 1.5).toInt()
 
-            var diff = (one_line - mLine + 0.5).toInt()
+//            Log.d("AppHelper", "total >> $total")
+//            Log.d("AppHelper", "name >> $name")
+//            Log.d("AppHelper", "diff >> $diff")
 
-            if(MyApplication.store.fontsize == 1) {
+            if (MyApplication.store.fontsize == 1) {
+                space = if(ord.price >= 100000) 1
+                else if(ord.price >= 10000) 2
+                else if (ord.price >= 1000) 3
+                else if (ord.price >= 100) 6
+                else if (ord.price >= 10) 7
+                else if (ord.price >= 0) 8
+                else 1
+
                 if(ord.gea < 10) {
-                    diff += 1
-                    space = 4
-                } else if (ord.gea >= 100) {
-                    space = 1
+                    space++
                 }
-            }else if(MyApplication.store.fontsize == 2) {
-                if(ord.gea < 10) {
+
+            } else if (MyApplication.store.fontsize == 2) {
+                if (ord.gea < 10) {
                     diff += 1
                     space += 2
                 } else if (ord.gea < 100) {
@@ -296,29 +307,55 @@ class AppHelper {
                 }
             }
 
-            for(i in 1..diff) {
+            for (i in 1..diff) {
                 result.append(" ")
             }
+
             result.append(ord.gea.toString())
 
             for (i in 1..space) {
                 result.append(" ")
             }
 
-            var togo = ""
-            when(ord.togotype) {
-                1-> togo = "신규"
-                2-> togo = "포장"
-            }
-            result.append(togo)
+//            var togo = ""
+//            when (ord.togotype) {
+//                1 -> togo = "신규"
+//                2 -> togo = "포장"
+//            }
+//            result.append(togo)
 
-            if(underline1.toString() != "")
+            result.append(price(ord.price))
+
+            if (underline1.toString() != "")
                 result.append("\n$underline1")
 
-            if(underline2.toString() != "")
+            if (underline2.toString() != "")
                 result.append("\n$underline2")
 
+            if(!ord.opt.isNullOrEmpty()) {
+                ord.opt.forEach {
+                    result.append("\n - $it")
+                }
+            }
+
             return result.toString()
+        }
+
+        fun getSewooCharSize(c: Char): Double {
+            if(Pattern.matches("^[ㄱ-ㅎ가-힣]*\$", c.toString())) {
+                return AppProperties.HANGUL_SIZE
+            }
+            if(Pattern.matches("^[A-Z]*\$", c.toString())) {
+                return AppProperties.ENG_SIZE_UPPER
+            }
+            if(Pattern.matches("^[a-z]*\$", c.toString())) {
+                return AppProperties.ENG_SIZE_LOWER
+            }
+            if(Pattern.matches("^[0-9]*\$", c.toString())) {
+                return AppProperties.NUM_SIZE
+            }
+
+            return 1.0
         }
     }
 }
