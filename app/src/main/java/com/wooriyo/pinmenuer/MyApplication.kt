@@ -124,23 +124,37 @@ class MyApplication: Application() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun createNotificationChannel() {
-        val sound = R.raw.customnoti
-        val uri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/$sound")
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+
+        notificationManager.deleteNotificationChannel(AppProperties.CHANNEL_ID_ORDER)
+        notificationManager.deleteNotificationChannel(AppProperties.CHANNEL_ID_CALL)
+
+        val ordSound = R.raw.customnoti
+        val ordUri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/$ordSound")
+
+        val callSound = R.raw.customcall
+        val callUri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/$callSound")
 
         val audioAttributes = AudioAttributes.Builder()
             .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
             .setUsage(AudioAttributes.USAGE_NOTIFICATION)
             .build()
 
-//        notificationManager.deleteNotificationChannel(AppProperties.CHANNEL_ID_ORDER)
-
-        // 알림 채널 생성
+        // 주문 알림 채널 생성
         val ordChannel = NotificationChannel(AppProperties.CHANNEL_ID_ORDER, "새 주문 알림", NotificationManager.IMPORTANCE_HIGH)
         ordChannel.enableLights(true)
         ordChannel.enableVibration(true)
-        ordChannel.setSound(uri, audioAttributes)
+        ordChannel.setSound(ordUri, audioAttributes)
+        ordChannel.lockscreenVisibility = 1
         notificationManager.createNotificationChannel(ordChannel)
+
+        // 호출 알림 채널 생성
+        val callChannel = NotificationChannel(AppProperties.CHANNEL_ID_CALL, "새 호출 알림", NotificationManager.IMPORTANCE_HIGH)
+        callChannel.enableLights(true)
+        callChannel.enableVibration(true)
+        callChannel.setSound(callUri, audioAttributes)
+        ordChannel.lockscreenVisibility = 1
+        notificationManager.createNotificationChannel(callChannel)
 
     }
 }

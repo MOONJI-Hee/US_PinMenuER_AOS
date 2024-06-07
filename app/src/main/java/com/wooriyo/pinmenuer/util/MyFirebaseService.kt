@@ -24,7 +24,9 @@ import com.wooriyo.pinmenuer.MyApplication.Companion.escposPrinter
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.StartActivity
 import com.wooriyo.pinmenuer.config.AppProperties
+import com.wooriyo.pinmenuer.config.AppProperties.Companion.CHANNEL_ID_CALL
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.CHANNEL_ID_ORDER
+import com.wooriyo.pinmenuer.config.AppProperties.Companion.NOTIFICATION_ID_CALL
 import com.wooriyo.pinmenuer.config.AppProperties.Companion.NOTIFICATION_ID_ORDER
 import com.wooriyo.pinmenuer.history.ByHistoryActivity
 import com.wooriyo.pinmenuer.history.ByTableActivity
@@ -161,20 +163,38 @@ class MyFirebaseService : FirebaseMessagingService() {
     }
 
     private fun createNotification(message: RemoteMessage) {
-        val sound = R.raw.customnoti
+        val notificationManager = NotificationManagerCompat.from(this)
+
+        var channelId = ""
+        var notificationId = 0
+
+        var sound = 0
+
+        when(message.data["moredata"]) {
+            "call" -> {
+                channelId = CHANNEL_ID_CALL
+                notificationId = NOTIFICATION_ID_CALL
+                sound = R.raw.customcall
+            }
+            else -> {
+                channelId = CHANNEL_ID_ORDER
+                notificationId = NOTIFICATION_ID_ORDER
+                sound = R.raw.customnoti
+            }
+        }
+
         val uri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/$sound")
 
-        val builder = NotificationCompat.Builder(this, CHANNEL_ID_ORDER)
+        val builder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.ic_noti)
             .setContentTitle(message.notification?.title)
             .setContentText(message.notification?.body)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setSound(uri, AudioManager.STREAM_NOTIFICATION)
+//            .setContentIntent(createPendingIntent())
             .setAutoCancel(true)
 
-        // 알림 생성
-        val notificationManager = NotificationManagerCompat.from(this)
-        notificationManager.notify(NOTIFICATION_ID_ORDER, builder.build())
+        notificationManager.notify(notificationId, builder.build())
     }
 
     private fun createPendingIntent () : PendingIntent {
