@@ -532,7 +532,7 @@
     <string name="qr_post_pay_all">QR코드 전체 후불결제 적용</string>
     <string name="qr_post_pay_one">QR코드 후불결제 적용</string>
     <string name="qr_post_pay">후불결제</string>
-    <string name="qr_cnt">QR-%d</string>
+    <string name="qr_cnt">QR-%s</string>
     <string name="table_no">Table No.</string>
     <string name="table_no_hint">테이블 번호 입력</string>
     <string name="qr_setting_info1">QR오더는 결제가 완료된 후 주문내역이 전송됩니다.\n(단, 후불결제 기능을 설정했을 경우 제외)</string>
@@ -545,7 +545,21 @@
     <string name="qr_detail_info4">테이블번호가 중복되지 않도록 관리해주세요.</string>
     <string name="qr_detail_info5">테이블번호를 영문과 숫자로 작성할 경우 QR코드 저장시 파일명으로 적용됩니다.\n단, 한글은 저장 파일명에 적용되지 않습니다.</string>
 
-    <string name="dialog_disable_qr">이용 가능한 QR 갯수 초과</string>
+    <string name="use_status">사용여부</string>
+    <string name="qr_reserv">QR-예약</string>
+    <string name="reservation">예약</string>
+    <string name="qr_down_reserv">QR 사진첩 저장</string>
+    <string name="qr_copy_url_reserv">예약 URL 복사</string>
+
+    <string name="qr_reserv_info1">예약 QR 선불결제만 가능</string>
+    <string name="qr_reserv_pg_unable">PG가입 후 사용가능</string>
+    <string name="qr_reserv_info3">PG 가입 완료 후 예약 기능이 활성화 됩니다.</string>
+    <string name="qr_reserv_info4">예약 QR코드는 테이블 수에 포함되지 않습니다.</string>
+    <string name="qr_reserv_info5">예약 테이블명은 변경이 불가능합니다.</string>
+    <string name="qr_reserv_info6">QR코드를 이미지로 저장 후 사용 가능합니다.</string>
+    <string name="qr_reserv_info7">예약 URL을 복사하여 외부로 전달하여 사용할 수 있습니다.</string>
+    <string name="qr_reserv_info8">예약 QR코드로 주문된 내역은 주문내역에 다른 색으로 표시됩니다.</string>
+    <string name="qr_reserv_info9">예약 시 다음 정보를 받을 수 있습니다.\n전화번호, 예약자명, 예약일, 예약시간, 요청사항</string>
 
     <!--  QR코드 결제고객 정보  -->
     <string name="qr_customer_info_menu">QR코드\n결제고객 정보</string>
@@ -562,6 +576,7 @@
     <string name="qr_select_table">테이블 선택</string>
     <string name="qr_select_all">전체</string>
     <string name="dialog_no_business">본 기능은 비즈니스 상품 이용 고객에게 제공됩니다.\n이용을 위해서는 비즈니스 상품으로 변경해주세요.</string>
+    <string name="dialog_disable_qr">이용 가능한 QR 갯수 초과</string>
 
     <!--  타이틀  -->
     <string name="title_login">핀메뉴 로그인</string>
@@ -647,4 +662,5 @@
     <string name="msg_no_pay">결제 후 이용 가능합니다.</string>
     <string name="msg_no_event_exp">이벤트 설명을 입력해 주세요.</string>
     <string name="msg_no_table_no">테이블 번호를 입력해주세요.</string>
+    <string name="msg_copy">클립보드에 복사되었습니다.</string>
 </resources>

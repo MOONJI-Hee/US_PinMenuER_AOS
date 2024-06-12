@@ -1,9 +1,14 @@
 package com.wooriyo.pinmenuer.qrcode.dialog
 
 import android.app.DownloadManager
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Context.DOWNLOAD_SERVICE
+import android.content.DialogInterface
 import android.content.IntentFilter
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -20,7 +25,6 @@ import com.wooriyo.pinmenuer.MyApplication.Companion.engStoreName
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.common.InfoDialog
 import com.wooriyo.pinmenuer.databinding.DialogQrcodeDetailBinding
-import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.model.QrDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.util.ApiClient
@@ -32,7 +36,6 @@ import retrofit2.Response
 
 class QrDetailDialog(val seq: Int, var qrCode: QrDTO?): BaseDialogFragment() {
     lateinit var binding: DialogQrcodeDetailBinding
-    lateinit var postPayClickListener: ItemClickListener
 
     val TAG = "QrDetailDialog"
 
@@ -41,7 +44,7 @@ class QrDetailDialog(val seq: Int, var qrCode: QrDTO?): BaseDialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DialogQrcodeDetailBinding.inflate(layoutInflater)
 
-        strSeq = AppHelper.intToString(seq)
+        strSeq = if(seq == 0) "예약" else AppHelper.intToString(seq)
         binding.tvSeq.text = strSeq
 
         if(qrCode == null) {
@@ -53,21 +56,37 @@ class QrDetailDialog(val seq: Int, var qrCode: QrDTO?): BaseDialogFragment() {
             Glide.with(requireContext())
                 .load(qrCode!!.filePath)
                 .into(binding.ivQr)
-
-            binding.postPay.isChecked = qrCode!!.qrbuse == "Y"
         }
 
         binding.run {
-            close.setOnClickListener { dismiss() }
-            postPay.setOnClickListener {
-                it as CheckBox
-                if(MyApplication.store.paytype == 2) {
-                    postPayClickListener.onQrClick(seq-1, it.isChecked)
-                }else {
-                    it.isChecked = false
-                    InfoDialog(requireContext(), "", requireContext().getString(R.string.dialog_no_business)).show()
-                }
+            if(seq == 0) {
+                etTableNo.setText(R.string.reservation)
+                etTableNo.isEnabled = false
+
+                download.text = getString(R.string.qr_down_reserv)
+                copyLink.visibility = View.VISIBLE
+
+                clUdt.visibility = View.INVISIBLE
+                confirm.visibility = View.VISIBLE
+
+                tvPostPay.visibility = View.GONE
+                postPay.visibility = View.INVISIBLE
+
+                tvPgStatus.visibility = View.VISIBLE
+                pgStatus.visibility = View.VISIBLE
+                pgStatus.text =
+                    if(MyApplication.store.mid.isNullOrEmpty() || MyApplication.store.mid_key.isNullOrEmpty()) getString(R.string.qr_reserv_pg_unable) else getString(R.string.able)
+
+                binding.qrInfoArea.layoutResource = R.layout.qr_info_reserv
+            }else {
+                binding.postPay.isChecked = qrCode?.qrbuse == "Y"
+                binding.qrInfoArea.layoutResource = R.layout.qr_info
             }
+
+            qrInfoArea.inflate()
+
+            close.setOnClickListener { dismiss() }
+            confirm.setOnClickListener { dismiss() }
             save.setOnClickListener {
                 val tableNo = binding.etTableNo.text.toString()
 
@@ -106,6 +125,22 @@ class QrDetailDialog(val seq: Int, var qrCode: QrDTO?): BaseDialogFragment() {
                 intentFilter.addAction(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
 //                registerReceiver(DownloadReceiver(mActivity), intentFilter)
             }
+            copyLink.setOnClickListener {
+                val clipboardManager = requireContext().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                clipboardManager.setPrimaryClip(ClipData.newPlainText("url", qrCode?.url))
+
+                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2)
+                    Toast.makeText(context, R.string.msg_copy, Toast.LENGTH_SHORT).show()
+            }
+            postPay.setOnClickListener {
+                it as CheckBox
+                if(MyApplication.store.paytype == 2) {
+                    qrCode?.qrbuse = if(it.isChecked) "Y" else "N"
+                }else {
+                    it.isChecked = false
+                    InfoDialog(requireContext(), "", requireContext().getString(R.string.dialog_no_business)).show()
+                }
+            }
         }
 
         return binding.root
@@ -120,8 +155,11 @@ class QrDetailDialog(val seq: Int, var qrCode: QrDTO?): BaseDialogFragment() {
         window.attributes = params
     }
 
-    fun setOnPostPayClickListener(postPayClickListener: ItemClickListener) {
-        this.postPayClickListener = postPayClickListener
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        if (context is DialogInterface.OnDismissListener) {
+            (context as DialogInterface.OnDismissListener).onDismiss(dialog)
+        }
     }
 
     fun createQr() {
@@ -134,7 +172,7 @@ class QrDetailDialog(val seq: Int, var qrCode: QrDTO?): BaseDialogFragment() {
                 val result = response.body() ?: return
                 when (result.status) {
                     1 -> {
-                        qrCode = QrDTO(result.qidx, MyApplication.storeidx, seq, 1, result.filePath, "", getToday(), "N")
+                        qrCode = QrDTO(result.qidx, MyApplication.storeidx, seq, 1, result.filePath, "", "", getToday(), "N", "N")
 
                         binding.delete.isEnabled = true
                         binding.save.isEnabled = true
@@ -156,15 +194,18 @@ class QrDetailDialog(val seq: Int, var qrCode: QrDTO?): BaseDialogFragment() {
     }
 
     fun udtQr(qidx: Int, tableNo: String) {
-        ApiClient.imgService.udtQr(MyApplication.useridx, MyApplication.storeidx, qidx, tableNo, qrCode!!.qrbuse).enqueue(object :
-            Callback<ResultDTO> {
+        ApiClient.imgService.udtQr(MyApplication.useridx, MyApplication.storeidx, qidx, tableNo, qrCode!!.qrbuse)
+            .enqueue(object : Callback<ResultDTO> {
             override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                 Log.d(TAG, "Qr 수정 url : $response")
                 if(!response.isSuccessful) return
 
                 val result = response.body() ?: return
                 when (result.status) {
-                    1 -> Toast.makeText(context, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                    1 -> {
+                        Toast.makeText(context, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                        dismiss()
+                    }
                     else -> Toast.makeText(context, result.msg, Toast.LENGTH_SHORT).show()
                 }
             }

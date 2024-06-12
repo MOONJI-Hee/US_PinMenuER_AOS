@@ -2,19 +2,23 @@ package com.wooriyo.pinmenuer.qrcode
 
 import android.Manifest
 import android.app.DownloadManager
+import android.content.ClipData.Item
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.icu.text.IDNA.Info
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
+import android.view.View
 import android.widget.CheckBox
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
 import com.wooriyo.pinmenuer.BaseActivity
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.MyApplication.Companion.engStoreName
@@ -31,6 +35,7 @@ import com.wooriyo.pinmenuer.model.QrDTO
 import com.wooriyo.pinmenuer.model.QrListDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.qrcode.adapter.QrAdapter
+import com.wooriyo.pinmenuer.qrcode.dialog.QrDetailDialog
 import com.wooriyo.pinmenuer.util.ApiClient
 import com.wooriyo.pinmenuer.util.AppHelper
 import retrofit2.Call
@@ -42,8 +47,9 @@ class SetQrcodeActivity : BaseActivity(), DialogInterface.OnDismissListener {
 
     private val permission = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
-    val qrList = ArrayList<QrDTO>()
-    val qrAdapter = QrAdapter(qrList)
+    val qrList = ArrayList<QrDTO>()     // 일반 QR 리스트
+    val allQrList = ArrayList<QrDTO>()  // 예약 + 일반 QR 리스트
+    val qrAdapter = QrAdapter(allQrList)
 
     var qrCnt = 0
     var storeName = ""
@@ -73,18 +79,36 @@ class SetQrcodeActivity : BaseActivity(), DialogInterface.OnDismissListener {
 
                 Log.d(TAG, "checked Toggle Cnt > $bisCnt")
 
+                val buse = if(status) "Y" else "N"
+                setPostPay(allQrList[position].idx, buse, position)
+
                 if(bisCnt == qrList.size) {
                     binding.postPayAll.isChecked = true
-                    setAllPostPay("Y")
+                    store.qrbuse = "Y"
                 }else {
                     if(binding.postPayAll.isChecked) {
                         binding.postPayAll.isChecked = false
+                        store.qrbuse = "N"
                     }
-                    val buse = if(status) "Y" else "N"
-                    setPostPay(qrList[position].idx, buse, position)
                 }
             }
         })
+
+        qrAdapter.setOnReserBuseClickListener(object : ItemClickListener{
+            override fun onQrClick(position: Int, status: Boolean) {
+                val strStatus = if(status) "Y" else "N"
+                setUseReservation(allQrList[0].idx, strStatus)
+            }
+        })
+
+        qrAdapter.setOnAddClickListener {
+            if (qrList.size < qrCnt) {
+                val qrDetailDialog = QrDetailDialog(qrList.size, null)
+                qrDetailDialog.show(supportFragmentManager, "QrAddDialog")
+            } else {
+                InfoDialog(mActivity, "", getString(R.string.dialog_disable_qr)).show()
+            }
+        }
 
         binding.rvQr.run {
             layoutManager = GridLayoutManager(context, 5)
@@ -186,7 +210,7 @@ class SetQrcodeActivity : BaseActivity(), DialogInterface.OnDismissListener {
     fun downloadAll() {
         val manager = mActivity.getSystemService(DOWNLOAD_SERVICE) as DownloadManager
 
-        qrList.forEachIndexed { i, it ->
+        allQrList.forEachIndexed { i, it ->
             val uri = Uri.parse(it.filePath.trim())
             var fileName = "${AppHelper.intToString(i+1)}_${it.tableNo}.png"
             if(engStoreName.isNotEmpty()) {
@@ -225,22 +249,33 @@ class SetQrcodeActivity : BaseActivity(), DialogInterface.OnDismissListener {
                         qrList.clear()
                         qrList.addAll(result.qrList)
 
+                        allQrList.clear()
+                        if(!result.reservList.isNullOrEmpty()) {
+                            allQrList.add(result.reservList[0])
+                        }
+                        allQrList.addAll(qrList)
+
                         qrCnt = result.qrCnt
                         binding.qrCnt.text = (qrCnt - qrList.size).toString()
-
-                        storeName = result.enname
-                        engStoreName = storeName
-
-                        if(!storeName.isNullOrEmpty()) {
-                            binding.etStoreName.setText(storeName)
-                        }
 
                         qrAdapter.setQrCount(qrCnt)
                         qrAdapter.notifyDataSetChanged()
 
+                        storeName = result.enname
+                        engStoreName = storeName
+                        binding.etStoreName.setText(storeName)
+
                         bisCnt = 0
                         qrList.forEach {
                             if(it.qrbuse == "Y") bisCnt++
+                        }
+
+                        binding.postPayAll.isChecked = bisCnt == qrList.size
+
+                        val strBuse = if(binding.postPayAll.isChecked) "Y" else "N"
+
+                        if(store.qrbuse != strBuse) {
+//                            setPostPayStore(strBuse)
                         }
                     }
 
@@ -287,6 +322,30 @@ class SetQrcodeActivity : BaseActivity(), DialogInterface.OnDismissListener {
         }
     }
 
+    fun setUseReservation(idx: Int, status: String) {
+        ApiClient.service.setReservUse(useridx, storeidx, idx, status).enqueue(object : Callback<ResultDTO>{
+            override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                Log.d(TAG, "예약 QR 사용 설정 url : $response")
+                if(!response.isSuccessful) return
+
+                val result = response.body() ?: return
+                when (result.status) {
+                    1 -> {
+                        Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                        allQrList[0].buse = status
+                    }
+                    else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "예약 QR 사용 설정 실패 >> $t")
+                Log.d(TAG, "예약 QR 사용 설정 실패 >> ${call.request()}")
+            }
+        })
+    }
+
     fun setPostPay(qidx: Int, buse: String, position: Int) {
         ApiClient.service.setPostPay(useridx, storeidx, qidx, buse).enqueue(object :
             Callback<ResultDTO> {
@@ -297,7 +356,8 @@ class SetQrcodeActivity : BaseActivity(), DialogInterface.OnDismissListener {
                 val result = response.body() ?: return
                 when (result.status) {
                     1 -> {
-                        qrList[position].qrbuse = buse
+                        qrList[position - 1].qrbuse = buse
+                        allQrList[position].qrbuse = buse
                         qrAdapter.notifyItemChanged(position)
                     }
                     else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()

@@ -7,8 +7,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="210dp"
         android:layout_height="226dp"
+        android:layout_marginTop="30dp"
         android:layout_marginHorizontal="15dp"
-        android:layout_marginBottom="30dp"
         android:background="@drawable/bg_r6w">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,7 +47,7 @@
                 style="@style/subtext"
                 android:layout_marginBottom="8dp"
                 android:text="@string/table_no"
-                app:layout_constraintBottom_toTopOf="@+id/postPay"
+                app:layout_constraintBottom_toTopOf="@+id/buse"
                 app:layout_constraintEnd_toStartOf="@+id/tableNo"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -64,14 +64,14 @@
 
             <TextView
                 style="@style/text20"
-                android:layout_marginStart="10dp"
+                android:id="@+id/tvBuse"
                 android:text="@string/qr_post_pay"
-                app:layout_constraintBottom_toBottomOf="@+id/postPay"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/postPay" />
+                app:layout_constraintBottom_toBottomOf="@+id/buse"
+                app:layout_constraintStart_toStartOf="@+id/seq"
+                app:layout_constraintTop_toTopOf="@+id/buse" />
 
             <CheckBox
-                android:id="@+id/postPay"
+                android:id="@+id/buse"
                 style="@style/toggle"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="10dp"
