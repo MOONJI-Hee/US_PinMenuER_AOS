@@ -19,15 +19,18 @@ import com.wooriyo.pinmenuer.common.NoticeDialog
 import com.wooriyo.pinmenuer.config.AppProperties
 import com.wooriyo.pinmenuer.databinding.ActivityByHistoryBinding
 import com.wooriyo.pinmenuer.history.adapter.HistoryAdapter
+import com.wooriyo.pinmenuer.history.adapter.ReservationAdapter
+import com.wooriyo.pinmenuer.history.dialog.SetTableNoDialog
+import com.wooriyo.pinmenuer.listener.DialogListener
 import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.model.CallHistoryDTO
 import com.wooriyo.pinmenuer.model.CallListDTO
-import com.wooriyo.pinmenuer.model.OrderDTO
 import com.wooriyo.pinmenuer.model.OrderHistoryDTO
 import com.wooriyo.pinmenuer.model.OrderListDTO
 import com.wooriyo.pinmenuer.model.ResultDTO
 import com.wooriyo.pinmenuer.order.adapter.OrderAdapter
 import com.wooriyo.pinmenuer.util.ApiClient
+import com.wooriyo.pinmenuer.util.AppHelper.Companion.getPrint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,22 +44,19 @@ class TableHisActivity: BaseActivity() {
     private val orderList = ArrayList<OrderHistoryDTO>()
     val orderAdapter = OrderAdapter(orderList)
 
+    private val reservList = ArrayList<OrderHistoryDTO>()
+    val reservAdapter = ReservationAdapter(reservList)
+
     private val callList = ArrayList<CallHistoryDTO>()
     val callAdapter = CallListAdapter(callList)
 
     private val completeList = ArrayList<OrderHistoryDTO>()
     val completeAdapter = HistoryAdapter(completeList)
 
-//    private val posErrList = ArrayList<OrderHistoryDTO>()
-//    val posErrAdapter = HistoryAdapter(posErrList)
-
     // 프린트 관련 변수
     var hyphen = StringBuilder()    // 하이픈
-    var hyphen_num = 0              // 하이픈 개수
-    var font_size = 0
-    var hangul_size = 0.0
-    var one_line = 0
-    var space = 0
+    var hyphen_num = AppProperties.HYPHEN_NUM   // 하이픈 개수
+    var font_size = AppProperties.FONT_SIZE
 
     var selText: TextView?= null
 
@@ -69,20 +69,6 @@ class TableHisActivity: BaseActivity() {
 
         tableNo = intent.getStringExtra("tableNo") ?: ""
 
-        // 영수증에 들어가는 하이픈 문자열 초기화, 설정값 초기화
-        if(MyApplication.store.fontsize == 2) {
-            hyphen_num = AppProperties.HYPHEN_NUM_SMALL
-            font_size = AppProperties.FONT_SMALL
-            hangul_size = AppProperties.HANGUL_SIZE_SMALL
-            one_line = AppProperties.ONE_LINE_SMALL
-            space = AppProperties.SPACE_SMALL
-        }else if(MyApplication.store.fontsize == 1) {
-            hyphen_num = AppProperties.HYPHEN_NUM_BIG
-            font_size = AppProperties.FONT_BIG
-            hangul_size = AppProperties.HANGUL_SIZE_BIG
-            one_line = AppProperties.ONE_LINE_BIG
-            space = AppProperties.SPACE_BIG
-        }
         for (i in 1..hyphen_num) {
             hyphen.append("-")
         }
@@ -92,6 +78,7 @@ class TableHisActivity: BaseActivity() {
         setAdapterListener(totalAdapter, totalList)
         setAdapterListener(completeAdapter, completeList)
         setOrderAdapter()
+        setReservAdapter()
         setCallAdapter()
 
         binding.btnClear.visibility = View.GONE
@@ -114,6 +101,13 @@ class TableHisActivity: BaseActivity() {
             binding.newOrd.visibility = View.INVISIBLE
         }
 
+        binding.tabReserv.setOnClickListener {
+            selectTab(binding.tvReserv)
+            binding.rv.adapter = reservAdapter
+            getReservList()
+            binding.newReserv.visibility = View.INVISIBLE
+        }
+
         binding.tabCall.setOnClickListener {
             selectTab(binding.tvCall)
             binding.rv.adapter = callAdapter
@@ -126,11 +120,6 @@ class TableHisActivity: BaseActivity() {
             binding.rv.adapter = completeAdapter
             getCompletedList()
         }
-
-//        binding.tabPos.setOnClickListener {
-//            binding.rv.adapter = posErrAdapter
-//            getPosErrList()
-//        }
     }
 
     override fun onResume() {
@@ -152,6 +141,7 @@ class TableHisActivity: BaseActivity() {
         when(selText) {
             binding.tvTotal -> getTotalList()
             binding.tvOrder -> getOrderList()
+            binding.tvReserv -> getReservList()
             binding.tvCall -> getCallList()
             binding.tvCmplt -> getCompletedList()
         }
@@ -163,6 +153,16 @@ class TableHisActivity: BaseActivity() {
                 binding.tvOrder -> getOrderList()
                 binding.tvTotal -> getTotalList()
                 else -> binding.newOrd.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    fun newReservation() {
+        runOnUiThread{
+            when (selText) {
+                binding.tvReserv -> getReservList()
+                binding.tvTotal -> getTotalList()
+                else -> binding.newReserv.visibility = View.VISIBLE
             }
         }
     }
@@ -190,6 +190,12 @@ class TableHisActivity: BaseActivity() {
             }
         })
 
+        adapter.setOnConfirmListener(object : ItemClickListener{
+            override fun onItemClick(position: Int) {
+                confirmReservation(position)
+            }
+        })
+
         adapter.setOnDeleteListener(object: ItemClickListener {
             override fun onItemClick(position: Int) {
                 NoticeDialog(
@@ -202,6 +208,19 @@ class TableHisActivity: BaseActivity() {
 
         adapter.setOnPrintClickListener(object: ItemClickListener {
             override fun onItemClick(position: Int) {print(position)}
+        })
+
+        adapter.setOnTableNoListener(object: ItemClickListener{
+            override fun onItemClick(position: Int) {
+                SetTableNoDialog(
+                    list[position].idx,
+                    object : DialogListener {
+                        override fun onTableNoSet(tableNo: String) {
+                            list[position].tableNo = tableNo
+                            adapter.notifyItemChanged(position)
+                        }
+                    }).show(supportFragmentManager, "SetTableNoDialog")
+            }
         })
 
         adapter.setOnCallCompleteListener(object : ItemClickListener {
@@ -236,6 +255,12 @@ class TableHisActivity: BaseActivity() {
             }
         })
 
+        orderAdapter.setOnConfirmListener(object : ItemClickListener{
+            override fun onItemClick(position: Int) {
+                confirmReservation(position)
+            }
+        })
+
         orderAdapter.setOnDeleteListener(object: ItemClickListener {
             override fun onItemClick(position: Int) {
                 NoticeDialog(
@@ -248,6 +273,66 @@ class TableHisActivity: BaseActivity() {
 
         orderAdapter.setOnPrintClickListener(object: ItemClickListener {
             override fun onItemClick(position: Int) {print(position)}
+        })
+
+        orderAdapter.setOnTableNoListener(object: ItemClickListener{
+            override fun onItemClick(position: Int) {
+                SetTableNoDialog(
+                    orderList[position].idx,
+                    object : DialogListener{
+                        override fun onTableNoSet(tableNo: String) {
+                            orderList[position].tableNo = tableNo
+                            orderAdapter.notifyItemChanged(position)
+                        }
+                    }).show(supportFragmentManager, "SetTableNoDialog")
+            }
+        })
+    }
+
+    fun setReservAdapter() {
+        reservAdapter.setOnCompleteListener(object : ItemClickListener{
+            override fun onItemClick(position: Int) {
+                super.onItemClick(position)
+
+                if(reservList[position].iscompleted == 0) {
+                    showCompleteDialog("주문") { completeOrder(reservList[position].idx, 1) }
+                }else {
+                    completeOrder(reservList[position].idx, 0)
+                }
+            }
+        })
+
+        reservAdapter.setOnConfirmListener(object : ItemClickListener{
+            override fun onItemClick(position: Int) {
+                confirmReservation(position)
+            }
+        })
+
+        reservAdapter.setOnDeleteListener(object:ItemClickListener{
+            override fun onItemClick(position: Int) {
+                NoticeDialog(
+                    mActivity,
+                    getString(R.string.btn_delete),
+                    getString(R.string.dialog_delete_order)
+                ) { deleteOrder(reservList[position].idx) }.show()
+            }
+        })
+
+        reservAdapter.setOnPrintClickListener(object:ItemClickListener{
+            override fun onItemClick(position: Int) {print(reservList[position])}
+        })
+
+        reservAdapter.setOnTableNoListener(object: ItemClickListener{
+            override fun onItemClick(position: Int) {
+                SetTableNoDialog(
+                    reservList[position].idx,
+                    object : DialogListener{
+                        override fun onTableNoSet(tableNo: String) {
+                            reservList[position].tableNo = tableNo
+                            reservAdapter.notifyItemChanged(position)
+                        }
+                    }).show(supportFragmentManager, "SetTableNoDialog")
+            }
         })
     }
 
@@ -341,6 +426,43 @@ class TableHisActivity: BaseActivity() {
                 Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "주문 목록 조회 오류 > $t")
                 Log.d(TAG, "주문 목록 조회 오류 > ${call.request()}")
+            }
+        })
+    }
+
+    // 예약 목록 조회
+    fun getReservList() {
+        //TODO API 생성 및 바꾸기
+        ApiClient.service.getReservList(MyApplication.useridx, MyApplication.storeidx).enqueue(object: Callback<OrderListDTO> {
+            override fun onResponse(call: Call<OrderListDTO>, response: Response<OrderListDTO>) {
+                Log.d(TAG, "예약 목록 조회 url : $response")
+                if(!response.isSuccessful) return
+
+                val result = response.body()
+                if(result != null) {
+                    when(result.status){
+                        1 -> {
+                            reservList.clear()
+                            reservList.addAll(result.orderlist)
+
+                            if(orderList.isEmpty()) {
+                                binding.empty.visibility = View.VISIBLE
+                                binding.rv.visibility = View.GONE
+                            }else {
+                                binding.empty.visibility = View.GONE
+                                binding.rv.visibility = View.VISIBLE
+                                reservAdapter.notifyDataSetChanged()
+                            }
+                        }
+                        else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<OrderListDTO>, t: Throwable) {
+                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "예약 목록 조회 오류 > $t")
+                Log.d(TAG, "예약 목록 조회 오류 > ${call.request()}")
             }
         })
     }
@@ -515,6 +637,35 @@ class TableHisActivity: BaseActivity() {
         })
     }
 
+    // 예약 확인 처리
+    fun confirmReservation(position: Int) {
+        ApiClient.service.confirmReservation(
+            MyApplication.useridx,
+            MyApplication.storeidx, orderList[position].idx)
+            .enqueue(object:Callback<ResultDTO>{
+                override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
+                    Log.d(TAG, "예약 확인 url : $response")
+                    if(!response.isSuccessful) return
+
+                    val result = response.body() ?: return
+                    when(result.status){
+                        1 -> {
+                            Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
+                            orderList[position].isreser = 1
+                            orderAdapter.notifyItemChanged(position)
+                        }
+                        else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
+                    Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "예약 확인 실패 > $t")
+                    Log.d(TAG, "예약 확인 실패 > ${call.request()}")
+                }
+            })
+    }
+
     fun print(position: Int) {
         val pOrderDt = orderList[position].regdt
         val pTableNo = orderList[position].tableNo
@@ -547,74 +698,5 @@ class TableHisActivity: BaseActivity() {
         }
         MyApplication.escposPrinter.lineFeed(4)
         MyApplication.escposPrinter.cutPaper()
-    }
-
-    fun getPrint(ord: OrderDTO) : String {
-        var total = 0.0
-
-        val result: StringBuilder = StringBuilder()
-        val underline1 = StringBuilder()
-        val underline2 = StringBuilder()
-
-        ord.name.forEach {
-            if(total < one_line)
-                result.append(it)
-            else if(total < (one_line * 2))
-                underline1.append(it)
-            else
-                underline2.append(it)
-
-            if(it == ' ') {
-                total++
-            }else
-                total += hangul_size
-        }
-
-        val mlength = result.toString().length
-        val mHangul = result.toString().replace(" ", "").length
-        val mSpace = mlength - mHangul
-        val mLine = mHangul * hangul_size + mSpace
-
-        var diff = (one_line - mLine + 0.5).toInt()
-
-        if(MyApplication.store.fontsize == 1) {
-            if(ord.gea < 10) {
-                diff += 1
-                space = 4
-            } else if (ord.gea >= 100) {
-                space = 1
-            }
-        }else if(MyApplication.store.fontsize == 2) {
-            if(ord.gea < 10) {
-                diff += 1
-                space += 2
-            } else if (ord.gea < 100) {
-                space += 1
-            }
-        }
-
-        for(i in 1..diff) {
-            result.append(" ")
-        }
-        result.append(ord.gea.toString())
-
-        for (i in 1..space) {
-            result.append(" ")
-        }
-
-        var togo = ""
-        when(ord.togotype) {
-            1-> togo = "신규"
-            2-> togo = "포장"
-        }
-        result.append(togo)
-
-        if(underline1.toString() != "")
-            result.append("\n$underline1")
-
-        if(underline2.toString() != "")
-            result.append("\n$underline2")
-
-        return result.toString()
     }
 }

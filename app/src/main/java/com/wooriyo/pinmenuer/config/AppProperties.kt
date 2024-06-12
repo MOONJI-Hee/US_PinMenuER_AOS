@@ -28,6 +28,7 @@ class AppProperties {
 
         const val VIEW_TYPE_ORDER = 3
         const val VIEW_TYPE_CALL = 4
+        const val VIEW_TYPE_RESERVATION = 5
 
         // 권한 관련
         const val REQUEST_LOCATION = 0

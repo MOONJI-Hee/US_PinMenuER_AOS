@@ -1,16 +1,10 @@
 package com.wooriyo.pinmenuer.util
 
-import android.annotation.SuppressLint
 import android.app.*
-import android.app.ActivityManager.RunningAppProcessInfo
 import android.content.Intent
-import android.media.AudioAttributes
 import android.media.AudioManager
-import android.media.AudioManager.STREAM_NOTIFICATION
-import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
-import android.os.PowerManager
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
@@ -52,11 +46,6 @@ class MyFirebaseService : FirebaseMessagingService() {
         Log.d(TAG, "message.notification.body >> ${message.notification?.body}")
 
         createNotification(message)
-
-//        알림음 재생
-//        val sound = R.raw.customnoti
-//        val uri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/$sound")
-//        val ringtone = RingtoneManager.getRingtone(applicationContext, uri)
 
         if(currentActivity != null) {
             Log.d(TAG, "currentActivity.localClassName >> ${currentActivity.localClassName}")

@@ -31,6 +31,8 @@
     <string name="tableno">테이블 번호</string>
     <string name="tablepass">테이블 비밀번호</string>
     <string name="tableNo.">Table No.</string>
+    <string name="set_tableno">테이블 이동</string>
+    <string name="sel_tableno">테이블번호 선택</string>
 
     <string name="essential">필수</string>
     <string name="optional">선택</string>
@@ -61,6 +63,7 @@
     <string name="btn_call">호&#160;&#160;출</string>
     <string name="btn_call2">호&#160;출</string>
     <string name="btn_complete">완&#160;&#160;료</string>
+    <string name="btn_move">이&#160;&#160;동</string>
     <string name="btn_drop">탈&#160;&#160;퇴</string>
     <string name="btn_select">선&#160;&#160;택</string>
     <string name="btn_change">변&#160;&#160;경</string>
@@ -348,6 +351,20 @@
     <string name="order_dialog_clear">주문정보는 3일간 보관되며,\n\'초기화\'버튼을 누르면 모든 주문정보가 삭제됩니다.</string>
     <string name="order_no_pos">포스 미연동</string>
 
+    <string name="table_no_kr">테이블번호</string>
+    <string name="order_no">주문번호</string>
+
+    <!--  예약 정보  -->
+    <string name="reserv_no">예약번호</string>
+    <string name="reserv_store">매\n장</string>
+    <string name="reserv_togo">포\n장</string>
+    <string name="reserv_paid">선결제</string>
+    <string name="reserv_tel">전화번호</string>
+    <string name="reserv_name">예약자명</string>
+    <string name="reserv_request">요청사항</string>
+    <string name="reserv_addr">배송지 주소</string>
+    <string name="reserv_date">%s 예약일시</string>
+
     <!-- 주문 결제 -->
     <string name="order_select_pay">다음 중 하나를 선택해 주세요</string>
     <string name="order_pay_qr">QR코드 결제</string>
@@ -548,6 +565,7 @@
     <string name="use_status">사용여부</string>
     <string name="qr_reserv">QR-예약</string>
     <string name="reservation">예약</string>
+    <string name="togo">포장</string>
     <string name="qr_down_reserv">QR 사진첩 저장</string>
     <string name="qr_copy_url_reserv">예약 URL 복사</string>
 
@@ -609,7 +627,6 @@
     <string name="dialog_logout">로그아웃 하시겠습니까?</string>
     <string name="dialog_drop">탈퇴 시 등록한 모든 정보가 사라집니다.\n정말 탈퇴하시겠습니까?</string>
     <string name="dialog_delete_order">한번 삭제된 내역은 복원되지 않습니다.\n그래도 삭제를 진행하시겠습니까?</string>
-
     <string name="dialog_clear_history">주문/호출 정보는 3일간 보관되며,\n\'초기화\'버튼을 누르면 모든 주문/호출 정보가 삭제됩니다.</string>
     <string name="dialog_clear_warning">한번 초기화 된 내역은 복원되지 않습니다.</string>
     <string name="dialog_clear_order">주문내역 초기화</string>

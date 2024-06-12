@@ -35,10 +35,23 @@ class TableAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adapte
     class ViewHolder(val binding: ListTableBinding, val completeClickListener: ItemClickListener, val context: Context): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: OrderHistoryDTO) {
             binding.run {
-                tableNo.text = data.tableNo
+                // TODO API 확인 및 기능 구현
+                if(data.tableNo == "예약") {
+                    clOrder.visibility = View.GONE
+                    clCall.visibility = View.GONE
+                    clReservStore.visibility = View.VISIBLE
+                    clReservTogo.visibility = View.VISIBLE
+                }else {
+                    clOrder.visibility = View.VISIBLE
+                    clCall.visibility = View.VISIBLE
+                    clReservStore.visibility = View.GONE
+                    clReservTogo.visibility = View.GONE
 
-                ordCnt.text = data.totalOrdCnt.toString()
-                callCnt.text = data.totalCallCnt.toString()
+                    ordCnt.text = data.totalOrdCnt.toString()
+                    callCnt.text = data.totalCallCnt.toString()
+                }
+
+                tableNo.text = data.tableNo
 
                 totCnt.text = data.total.toString()
                 totPrice.text = AppHelper.price(data.total_price)
