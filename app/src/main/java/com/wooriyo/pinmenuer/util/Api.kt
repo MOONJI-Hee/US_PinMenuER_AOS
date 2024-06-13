@@ -525,7 +525,7 @@ interface Api {
 
     // 예약 주문 관련
     // 예약만 호출
-    @GET("m/")
+    @GET("m/reservation.list.php")
     fun getReservList(
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int
@@ -541,7 +541,7 @@ interface Api {
     ): Call<ResultDTO>
 
     // 테이블번호 리스트
-    @GET("u/tableNo.list.php")
+    @GET("m/tableNo.list.php")
     fun getTableNo(
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int

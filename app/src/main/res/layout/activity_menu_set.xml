@@ -286,7 +286,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
             <TextView
-                style="@style/text16"
+                style="@style/text16l"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="8dp"
                 android:text="@string/menu_img_reg_info"/>

@@ -19,10 +19,16 @@ data class OrderHistoryDTO(
     @SerializedName("regdt") var regdt : String,                        // 등록일시 (주문일시)
     @SerializedName("iscompleted") var iscompleted : Int,               // 완료 여부 (1 : 완료, 0 : 미완료)
     @SerializedName("complate_updt") var complate_updt : String,        // 완료일시 (결제일시)
+
     @SerializedName("total_gea") var total : Int,                       // 총 개수
     @SerializedName("total_price") var total_price : Int,               // 총 금액
+
     @SerializedName("TotalOrdCnt") var totalOrdCnt: Int,                // 테이블별 주문보기 - 주문 개수
     @SerializedName("TotalCallCnt") var totalCallCnt: Int,              // 테이블별 주문보기 - 호출 개수
+
+    @SerializedName("reserStoreCnt") var reservStoreCnt: Int,           // 테이블별 주문보기 - 주문 개수
+    @SerializedName("reserTakeCnt") var reservTogoCnt: Int,             // 테이블별 주문보기 - 호출 개수
+
     @SerializedName("completed_total_price") var completedPrice: Int,   // 테이블별 주문보기 - 완료된 가격
     @SerializedName("completed_total_gea") var completedGea: Int        // 테이블별 주문보기 - 완료된 개수
 ): Serializable

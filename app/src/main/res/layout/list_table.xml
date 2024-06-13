@@ -110,14 +110,13 @@
             android:id="@+id/clReservStore"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp"
             android:paddingHorizontal="15dp"
             android:background="@drawable/bg_r6_ec345b"
             android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/clReservTogo"
-            app:layout_constraintTop_toBottomOf="@+id/tableNo">
+            app:layout_constraintStart_toStartOf="@+id/cl_order"
+            app:layout_constraintEnd_toEndOf="@+id/cl_order"
+            app:layout_constraintTop_toTopOf="@+id/cl_order"
+            app:layout_constraintBottom_toBottomOf="@+id/cl_order">
 
             <TextView
                 style="@style/text16b"
@@ -146,9 +145,10 @@
             android:paddingHorizontal="15dp"
             android:background="@drawable/bg_r6_4db6f9"
             android:visibility="gone"
-            app:layout_constraintStart_toEndOf="@+id/clReservStore"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/clReservStore">
+            app:layout_constraintStart_toStartOf="@+id/cl_call"
+            app:layout_constraintEnd_toEndOf="@+id/cl_call"
+            app:layout_constraintTop_toTopOf="@+id/cl_call"
+            app:layout_constraintBottom_toBottomOf="@+id/cl_call">
 
             <TextView
                 style="@style/text16b"
@@ -189,7 +189,7 @@
 
         <TextView
             style="@style/text16"
-            android:text="@string/gea"
+            android:text="건"
             android:layout_marginStart="3dp"
             app:layout_constraintTop_toTopOf="@+id/totCnt"
             app:layout_constraintStart_toEndOf="@+id/totCnt"/>

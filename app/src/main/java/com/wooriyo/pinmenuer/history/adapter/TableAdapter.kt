@@ -2,6 +2,7 @@ package com.wooriyo.pinmenuer.history.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,10 +38,15 @@ class TableAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adapte
             binding.run {
                 // TODO API 확인 및 기능 구현
                 if(data.tableNo == "예약") {
-                    clOrder.visibility = View.GONE
-                    clCall.visibility = View.GONE
+                    clOrder.visibility = View.INVISIBLE
+                    clCall.visibility = View.INVISIBLE
                     clReservStore.visibility = View.VISIBLE
                     clReservTogo.visibility = View.VISIBLE
+
+                    reservCnt.text = data.reservStoreCnt.toString()
+                    togoCnt.text = data.reservTogoCnt.toString()
+
+                    tableNo.setTextColor(Color.parseColor("#EC345B"))
                 }else {
                     clOrder.visibility = View.VISIBLE
                     clCall.visibility = View.VISIBLE

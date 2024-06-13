@@ -444,7 +444,7 @@ class ByHistoryActivity : BaseActivity() {
                             reservList.clear()
                             reservList.addAll(result.orderlist)
 
-                            if(orderList.isEmpty()) {
+                            if(reservList.isEmpty()) {
                                 binding.empty.visibility = View.VISIBLE
                                 binding.rv.visibility = View.GONE
                             }else {
@@ -737,6 +737,38 @@ class ByHistoryActivity : BaseActivity() {
             MyApplication.escposPrinter.printAndroidFont(pOrder,
                 AppProperties.FONT_WIDTH, font_size, ESCPOSConst.LK_ALIGNMENT_LEFT)
         }
+
+        if(order.reserType > 0 && order.rlist.isNotEmpty()) {
+            val reserv = order.rlist[0]
+
+            MyApplication.escposPrinter.printAndroidFont("전화번호 ${reserv.tel}",
+                AppProperties.FONT_WIDTH,
+                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+            MyApplication.escposPrinter.printAndroidFont("예약자명 ${reserv.name}",
+                AppProperties.FONT_WIDTH,
+                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+            MyApplication.escposPrinter.printAndroidFont("요청사항",
+                AppProperties.FONT_WIDTH,
+                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+            MyApplication.escposPrinter.printAndroidFont(reserv.memo,
+                AppProperties.FONT_WIDTH,
+                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+
+            var str = ""
+            when(order.reserType) {
+                1 -> str = "매장"
+                2 -> str = "포장"
+            }
+            MyApplication.escposPrinter.printAndroidFont(
+                String.format(getString(R.string.reserv_date), str),
+                AppProperties.FONT_WIDTH,
+                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+
+            MyApplication.escposPrinter.printAndroidFont(reserv.reserdt,
+                AppProperties.FONT_WIDTH,
+                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+        }
+
         MyApplication.escposPrinter.lineFeed(4)
         MyApplication.escposPrinter.cutPaper()
     }

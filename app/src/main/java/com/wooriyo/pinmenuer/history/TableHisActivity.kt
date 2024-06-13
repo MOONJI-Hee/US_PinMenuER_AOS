@@ -69,6 +69,12 @@ class TableHisActivity: BaseActivity() {
 
         tableNo = intent.getStringExtra("tableNo") ?: ""
 
+        // 예약 테이블은 주문, 호출 탭 가리기 >> 텍스트로 예외처리 하는 것이 위험해서 추후 api 부터 수정 예정
+        if(tableNo == "예약") {
+            binding.tabOrder.visibility = View.GONE
+            binding.tabCall.visibility = View.GONE
+        }
+
         for (i in 1..hyphen_num) {
             hyphen.append("-")
         }
@@ -207,7 +213,7 @@ class TableHisActivity: BaseActivity() {
         })
 
         adapter.setOnPrintClickListener(object: ItemClickListener {
-            override fun onItemClick(position: Int) {print(position)}
+            override fun onItemClick(position: Int) {print(list[position])}
         })
 
         adapter.setOnTableNoListener(object: ItemClickListener{
@@ -272,7 +278,7 @@ class TableHisActivity: BaseActivity() {
         })
 
         orderAdapter.setOnPrintClickListener(object: ItemClickListener {
-            override fun onItemClick(position: Int) {print(position)}
+            override fun onItemClick(position: Int) {print(orderList[position])}
         })
 
         orderAdapter.setOnTableNoListener(object: ItemClickListener{
@@ -432,7 +438,6 @@ class TableHisActivity: BaseActivity() {
 
     // 예약 목록 조회
     fun getReservList() {
-        //TODO API 생성 및 바꾸기
         ApiClient.service.getReservList(MyApplication.useridx, MyApplication.storeidx).enqueue(object: Callback<OrderListDTO> {
             override fun onResponse(call: Call<OrderListDTO>, response: Response<OrderListDTO>) {
                 Log.d(TAG, "예약 목록 조회 url : $response")
@@ -445,7 +450,7 @@ class TableHisActivity: BaseActivity() {
                             reservList.clear()
                             reservList.addAll(result.orderlist)
 
-                            if(orderList.isEmpty()) {
+                            if(reservList.isEmpty()) {
                                 binding.empty.visibility = View.VISIBLE
                                 binding.rv.visibility = View.GONE
                             }else {
@@ -666,10 +671,10 @@ class TableHisActivity: BaseActivity() {
             })
     }
 
-    fun print(position: Int) {
-        val pOrderDt = orderList[position].regdt
-        val pTableNo = orderList[position].tableNo
-        val pOrderNo = orderList[position].ordcode
+    fun print(order: OrderHistoryDTO) {
+        val pOrderDt = order.regdt
+        val pTableNo = order.tableNo
+        val pOrderNo = order.ordcode
 
         MyApplication.escposPrinter.printAndroidFont(
             MyApplication.store.name,
@@ -691,11 +696,43 @@ class TableHisActivity: BaseActivity() {
         MyApplication.escposPrinter.printAndroidFont(hyphen.toString(),
             AppProperties.FONT_WIDTH, font_size, ESCPOSConst.LK_ALIGNMENT_LEFT)
 
-        orderList[position].olist.forEach {
+        order.olist.forEach {
             val pOrder = getPrint(it)
             MyApplication.escposPrinter.printAndroidFont(pOrder,
                 AppProperties.FONT_WIDTH, font_size, ESCPOSConst.LK_ALIGNMENT_LEFT)
         }
+
+        if(order.reserType > 0 && order.rlist.isNotEmpty()) {
+            val reserv = order.rlist[0]
+
+            MyApplication.escposPrinter.printAndroidFont("전화번호 ${reserv.tel}",
+                AppProperties.FONT_WIDTH,
+                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+            MyApplication.escposPrinter.printAndroidFont("예약자명 ${reserv.name}",
+                AppProperties.FONT_WIDTH,
+                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+            MyApplication.escposPrinter.printAndroidFont("요청사항",
+                AppProperties.FONT_WIDTH,
+                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+            MyApplication.escposPrinter.printAndroidFont(reserv.memo,
+                AppProperties.FONT_WIDTH,
+                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+
+            var str = ""
+            when(order.reserType) {
+                1 -> str = "매장"
+                2 -> str = "포장"
+            }
+            MyApplication.escposPrinter.printAndroidFont(
+                String.format(getString(R.string.reserv_date), str),
+                AppProperties.FONT_WIDTH,
+                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+
+            MyApplication.escposPrinter.printAndroidFont(reserv.reserdt,
+                AppProperties.FONT_WIDTH,
+                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+        }
+
         MyApplication.escposPrinter.lineFeed(4)
         MyApplication.escposPrinter.cutPaper()
     }
