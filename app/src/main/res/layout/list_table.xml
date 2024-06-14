@@ -121,7 +121,7 @@
             <TextView
                 style="@style/text16b"
                 android:textColor="@color/white"
-                android:text="@string/reservation"
+                android:text="매장"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>

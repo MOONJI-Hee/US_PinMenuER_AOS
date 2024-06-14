@@ -432,6 +432,14 @@ interface Api {
         @Query("tableNo") tableNo: String
     ): Call<OrderListDTO>
 
+    // 테이블별 예약 리스트
+    @GET("m/tableNo.ReservList.php")
+    fun getTableReservList(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("tableNo") tableNo: String
+    ): Call<OrderListDTO>
+
     // 테이블별 호출 목록 조회
     @GET("m/tableNo.CallList.php")
     fun getTableCallList(
@@ -443,14 +451,6 @@ interface Api {
     // 테이블별 완료 리스트
     @GET("m/tableNo.CompletedList.php")
     fun getTableCompletedList(
-        @Query("useridx") useridx: Int,
-        @Query("storeidx") storeidx: Int,
-        @Query("tableNo") tableNo: String
-    ): Call<OrderListDTO>
-
-    // 테이블별 포스 전송실패 리스트
-    @GET("m/tableNo.PosList.php")
-    fun getTablePosErrList(
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int,
         @Query("tableNo") tableNo: String
@@ -468,22 +468,6 @@ interface Api {
     fun getCompletedList(
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int
-    ): Call<OrderListDTO>
-
-    // 포스 전송 실패 목록 조회
-    @GET("m/posorder.list.php")
-    fun getPosErrorList(
-        @Query("useridx") useridx: Int,
-        @Query("storeidx") storeidx: Int
-    ): Call<OrderListDTO>
-
-    // 포스 재전송
-    @GET("m/pos_send.php")
-    fun sendToPos(
-        @Query("useridx") useridx: Int,
-        @Query("storeidx") storeidx: Int,
-        @Query("gidx") idx: Int,            // 주문 idx
-        @Query("tableNo") tableNo: String
     ): Call<OrderListDTO>
 
     // 주문만 호출

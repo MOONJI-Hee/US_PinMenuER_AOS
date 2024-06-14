@@ -10,29 +10,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wooriyo.pinmenuer.MyApplication
 import com.wooriyo.pinmenuer.R
 import com.wooriyo.pinmenuer.common.InfoDialog
-import com.wooriyo.pinmenuer.config.AppProperties.Companion.VIEW_TYPE_ORDER
-import com.wooriyo.pinmenuer.config.AppProperties.Companion.VIEW_TYPE_RESERVATION
 import com.wooriyo.pinmenuer.databinding.ListOrderBinding
-import com.wooriyo.pinmenuer.databinding.ListReservationBinding
-import com.wooriyo.pinmenuer.history.adapter.ReservationAdapter
 import com.wooriyo.pinmenuer.listener.ItemClickListener
 import com.wooriyo.pinmenuer.model.OrderHistoryDTO
 import com.wooriyo.pinmenuer.util.AppHelper
-import java.io.IOException
 
-class OrderAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class OrderAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
     lateinit var completeListener: ItemClickListener
-    lateinit var confirmListener: ItemClickListener
     lateinit var deleteListener: ItemClickListener
     lateinit var printClickListener: ItemClickListener
-    lateinit var setTableNoListener: ItemClickListener
 
     fun setOnCompleteListener(completeListener: ItemClickListener) {
         this.completeListener = completeListener
-    }
-
-    fun setOnConfirmListener(confirmListener: ItemClickListener) {
-        this.confirmListener = confirmListener
     }
 
     fun setOnDeleteListener(deleteListener: ItemClickListener) {
@@ -43,39 +32,30 @@ class OrderAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adapte
         this.printClickListener = printClickListener
     }
 
-    fun setOnTableNoListener(setTableNoListener: ItemClickListener) {
-        this.setTableNoListener = setTableNoListener
-    }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ListOrderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         binding.rv.layoutManager = LinearLayoutManager(parent.context, LinearLayoutManager.VERTICAL, false)
 
-        val reservBinding = ListReservationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        reservBinding.rv.layoutManager = LinearLayoutManager(parent.context, LinearLayoutManager.VERTICAL, false)
-
-        return if(viewType == VIEW_TYPE_ORDER) ViewHolder(binding, parent.context, completeListener, deleteListener, printClickListener)
-        else ReservationAdapter.ViewHolder(reservBinding, parent.context, completeListener, confirmListener, deleteListener, printClickListener, setTableNoListener)
+        return ViewHolder(binding, parent.context, completeListener, deleteListener, printClickListener)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if(getItemViewType(position) == VIEW_TYPE_ORDER) {
-            holder as ViewHolder
-            holder.bind(dataSet[position])
-        }else {
-            holder as ReservationAdapter.ViewHolder
-            holder.bind(dataSet[position])
-        }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(dataSet[position])
     }
 
     override fun getItemCount(): Int {
         return dataSet.size
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return if(dataSet[position].reserType == 0) VIEW_TYPE_ORDER else VIEW_TYPE_RESERVATION
+    override fun getItemId(position: Int): Long {
+        return dataSet[position].idx.toLong()
     }
 
-    class ViewHolder(val binding: ListOrderBinding, val context: Context, val completeListener: ItemClickListener, val deleteListener: ItemClickListener, val printClickListener: ItemClickListener): RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding: ListOrderBinding, val context: Context,
+                     val completeListener: ItemClickListener,
+                     val deleteListener: ItemClickListener,
+                     val printClickListener: ItemClickListener
+    ): RecyclerView.ViewHolder(binding.root) {
         fun bind (data : OrderHistoryDTO) {
             binding.run {
                 rv.adapter = OrderDetailAdapter(data.olist)

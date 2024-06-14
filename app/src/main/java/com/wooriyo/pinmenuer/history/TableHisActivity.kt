@@ -198,7 +198,7 @@ class TableHisActivity: BaseActivity() {
 
         adapter.setOnConfirmListener(object : ItemClickListener{
             override fun onItemClick(position: Int) {
-                confirmReservation(position)
+                confirmReservation(position, list)
             }
         })
 
@@ -261,12 +261,6 @@ class TableHisActivity: BaseActivity() {
             }
         })
 
-        orderAdapter.setOnConfirmListener(object : ItemClickListener{
-            override fun onItemClick(position: Int) {
-                confirmReservation(position)
-            }
-        })
-
         orderAdapter.setOnDeleteListener(object: ItemClickListener {
             override fun onItemClick(position: Int) {
                 NoticeDialog(
@@ -279,19 +273,6 @@ class TableHisActivity: BaseActivity() {
 
         orderAdapter.setOnPrintClickListener(object: ItemClickListener {
             override fun onItemClick(position: Int) {print(orderList[position])}
-        })
-
-        orderAdapter.setOnTableNoListener(object: ItemClickListener{
-            override fun onItemClick(position: Int) {
-                SetTableNoDialog(
-                    orderList[position].idx,
-                    object : DialogListener{
-                        override fun onTableNoSet(tableNo: String) {
-                            orderList[position].tableNo = tableNo
-                            orderAdapter.notifyItemChanged(position)
-                        }
-                    }).show(supportFragmentManager, "SetTableNoDialog")
-            }
         })
     }
 
@@ -310,7 +291,7 @@ class TableHisActivity: BaseActivity() {
 
         reservAdapter.setOnConfirmListener(object : ItemClickListener{
             override fun onItemClick(position: Int) {
-                confirmReservation(position)
+                confirmReservation(position, reservList)
             }
         })
 
@@ -438,7 +419,7 @@ class TableHisActivity: BaseActivity() {
 
     // 예약 목록 조회
     fun getReservList() {
-        ApiClient.service.getReservList(MyApplication.useridx, MyApplication.storeidx).enqueue(object: Callback<OrderListDTO> {
+        ApiClient.service.getTableReservList(MyApplication.useridx, MyApplication.storeidx, tableNo).enqueue(object: Callback<OrderListDTO> {
             override fun onResponse(call: Call<OrderListDTO>, response: Response<OrderListDTO>) {
                 Log.d(TAG, "예약 목록 조회 url : $response")
                 if(!response.isSuccessful) return
@@ -643,10 +624,8 @@ class TableHisActivity: BaseActivity() {
     }
 
     // 예약 확인 처리
-    fun confirmReservation(position: Int) {
-        ApiClient.service.confirmReservation(
-            MyApplication.useridx,
-            MyApplication.storeidx, orderList[position].idx)
+    fun confirmReservation(position: Int, list: ArrayList<OrderHistoryDTO>) {
+        ApiClient.service.confirmReservation(MyApplication.useridx, MyApplication.storeidx, list[position].idx)
             .enqueue(object:Callback<ResultDTO>{
                 override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                     Log.d(TAG, "예약 확인 url : $response")
@@ -656,8 +635,12 @@ class TableHisActivity: BaseActivity() {
                     when(result.status){
                         1 -> {
                             Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
-                            orderList[position].isreser = 1
-                            orderAdapter.notifyItemChanged(position)
+                            list[position].isreser = 1
+                            when(selText) {
+                                binding.tvTotal -> totalAdapter.notifyItemChanged(position)
+                                binding.tvReserv -> reservAdapter.notifyItemChanged(position)
+                                binding.tvCmplt -> completeAdapter.notifyItemChanged(position)
+                            }
                         }
                         else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                     }
@@ -705,18 +688,26 @@ class TableHisActivity: BaseActivity() {
         if(order.reserType > 0 && order.rlist.isNotEmpty()) {
             val reserv = order.rlist[0]
 
-            MyApplication.escposPrinter.printAndroidFont("전화번호 ${reserv.tel}",
+            MyApplication.escposPrinter.lineFeed(2)
+
+            MyApplication.escposPrinter.printAndroidFont("전화번호",
                 AppProperties.FONT_WIDTH,
-                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
-            MyApplication.escposPrinter.printAndroidFont("예약자명 ${reserv.name}",
+                20, ESCPOSConst.LK_ALIGNMENT_LEFT)
+            MyApplication.escposPrinter.printAndroidFont(reserv.tel,
                 AppProperties.FONT_WIDTH,
-                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+                33, ESCPOSConst.LK_ALIGNMENT_LEFT)
+            MyApplication.escposPrinter.printAndroidFont("예약자명",
+                AppProperties.FONT_WIDTH,
+                20, ESCPOSConst.LK_ALIGNMENT_LEFT)
+            MyApplication.escposPrinter.printAndroidFont(reserv.name,
+                AppProperties.FONT_WIDTH,
+                33, ESCPOSConst.LK_ALIGNMENT_LEFT)
             MyApplication.escposPrinter.printAndroidFont("요청사항",
                 AppProperties.FONT_WIDTH,
-                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+                20, ESCPOSConst.LK_ALIGNMENT_LEFT)
             MyApplication.escposPrinter.printAndroidFont(reserv.memo,
                 AppProperties.FONT_WIDTH,
-                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+                33, ESCPOSConst.LK_ALIGNMENT_LEFT)
 
             var str = ""
             when(order.reserType) {
@@ -726,11 +717,11 @@ class TableHisActivity: BaseActivity() {
             MyApplication.escposPrinter.printAndroidFont(
                 String.format(getString(R.string.reserv_date), str),
                 AppProperties.FONT_WIDTH,
-                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+                20, ESCPOSConst.LK_ALIGNMENT_LEFT)
 
             MyApplication.escposPrinter.printAndroidFont(reserv.reserdt,
                 AppProperties.FONT_WIDTH,
-                AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
+                33, ESCPOSConst.LK_ALIGNMENT_LEFT)
         }
 
         MyApplication.escposPrinter.lineFeed(4)
