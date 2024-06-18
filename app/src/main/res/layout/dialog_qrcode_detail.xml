@@ -133,7 +133,8 @@
             android:id="@+id/pgStatus"
             android:textColor="#FF6200"
             android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/etTableNo"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@+id/tvPgStatus"
             app:layout_constraintTop_toTopOf="@+id/postPay"
             app:layout_constraintBottom_toBottomOf="@+id/postPay" />
 

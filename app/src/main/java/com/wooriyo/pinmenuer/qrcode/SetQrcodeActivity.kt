@@ -103,7 +103,7 @@ class SetQrcodeActivity : BaseActivity(), DialogInterface.OnDismissListener {
 
         qrAdapter.setOnAddClickListener {
             if (qrList.size < qrCnt) {
-                val qrDetailDialog = QrDetailDialog(qrList.size, null)
+                val qrDetailDialog = QrDetailDialog(qrList.size + 1, null)
                 qrDetailDialog.show(supportFragmentManager, "QrAddDialog")
             } else {
                 InfoDialog(mActivity, "", getString(R.string.dialog_disable_qr)).show()
