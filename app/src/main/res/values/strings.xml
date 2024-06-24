@@ -1,11 +1,8 @@
 <resources>
-    <string name="app_name">핀메뉴 관리 (태블릿 PC)</string>
+    <string name="app_name" translatable="false">핀메뉴 관리 (태블릿 PC)</string>
 
     <string name="pinmenu_er">핀메뉴 관리</string>
     <string name="pinmenu_ee">핀메뉴 주문</string>
-
-    <string name="kakao_appKey">398d9c3d6b47f73780e5413b1f4b167f</string>
-    <string name="kakao_apiKey">0a9047a6f0f9b350e4fca5168f2c5ef8</string>
 
     <string name="login">로그인</string>
     <string name="id">아이디</string>
@@ -19,10 +16,10 @@
     <string name="drop">탈퇴</string>
 
     <string name="won">원</string>
-    <string name="gea">개</string>
+    <string name="gea" translatable="false">개</string>
 
-    <string name="plus">+</string>
-    <string name="minus">-</string>
+    <string name="plus" translatable="false">+</string>
+    <string name="minus" translatable="false">-</string>
 
     <string name="total">총</string>
     <string name="delete_order">주문삭제</string>
@@ -443,12 +440,12 @@
     <string name="printer_device">선택된 기기</string>
     <string name="printer_nick_info">별명은 반드시 구별 할 수 있는 명칭을 사용해 주세요.</string>
 
-    <string name="sewoo_tech">세우테크</string>
-    <string name="skl_ts400b">SKL-TS400B</string>
-    <string name="skl_te202">SKL-TE202</string>
-    <string name="sewoo_recommend">세우테크(추천)</string>
-    <string name="gcube">GCUBE</string>
-    <string name="sam4s">Sam4S</string>
+    <string name="sewoo_tech" translatable="false">세우테크</string>
+    <string name="skl_ts400b" translatable="false">SKL-TS400B</string>
+    <string name="skl_te202" translatable="false">SKL-TE202</string>
+    <string name="sewoo_recommend" translatable="false">세우테크(추천)</string>
+    <string name="gcube" translatable="false">GCUBE</string>
+    <string name="sam4s" translatable="false">Sam4S</string>
     <string name="printer_conn_way">연결방식&#160;:&#160;</string>
     <string name="printer_etc">특이사항&#160;:&#160;</string>
     <string name="printer_bluetooth">블루투스</string>

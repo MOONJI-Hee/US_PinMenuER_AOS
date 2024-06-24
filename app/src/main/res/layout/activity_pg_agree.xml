@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".qrcode.PgAgreeActivity">
+    tools:context="com.wooriyo.us.pinmenuer.qrcode.PgAgreeActivity">
     <TextView
         style="@style/title"
         android:id="@+id/title"

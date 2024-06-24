@@ -1,67 +1,45 @@
 {
   "project_info": {
-    "project_number": "916492355785",
-    "project_id": "pinmenuer",
-    "storage_bucket": "pinmenuer.appspot.com"
+    "project_number": "151520380148",
+    "project_id": "pinmenu-us",
+    "storage_bucket": "pinmenu-us.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:916492355785:android:80ea5fd8ec811f4289e518",
+        "mobilesdk_app_id": "1:151520380148:android:69b42292b856d8aea78aa1",
         "android_client_info": {
-          "package_name": "com.wooriyo.pinmenuer"
+          "package_name": "com.wooriyo.us.pinmenuer"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "916492355785-29a11c4ne5va970qrd20po5g16bf0oov.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.wooriyo.pinmenuer",
-            "certificate_hash": "5d86ba2b182a5876ac348d96f16cba10f2dcea54"
-          }
-        },
-        {
-          "client_id": "916492355785-5blr6c2poeq234vqtju7b32j9f5d54tm.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.wooriyo.pinmenuer",
-            "certificate_hash": "1f47af064778b14c4c612013bbcf6b234aa5bc48"
-          }
-        },
-        {
-          "client_id": "916492355785-cosdbo193ff7n94h3aa4loeu9ifsqdrb.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.wooriyo.pinmenuer",
-            "certificate_hash": "fbb394a786751478f87d65a7c6418e170176a72d"
-          }
-        },
-        {
-          "client_id": "916492355785-u9gq1blt9p7bacb0l5j6drvaj72v6ik1.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDr_B16_26ZtpRa3QSZGFOVe7BOiDXn-V8"
+          "current_key": "AIzaSyCc6I1-3yF4oj24SYXcfZneKvZYn8Xo9hI"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "916492355785-u9gq1blt9p7bacb0l5j6drvaj72v6ik1.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "916492355785-d1bngmkctqcri8e8b8vbd9hr63vida1u.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.wooriyo.Pinmenu"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:151520380148:android:a02f18ffb1075525a78aa1",
+        "android_client_info": {
+          "package_name": "com.wooriyo.us.pinmenumobileer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc6I1-3yF4oj24SYXcfZneKvZYn8Xo9hI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
         }
       }
     }

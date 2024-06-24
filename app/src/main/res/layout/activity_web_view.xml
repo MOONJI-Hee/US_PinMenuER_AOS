@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".common.WebViewActivity">
+    tools:context="com.wooriyo.us.pinmenuer.common.WebViewActivity">
 
     <TextView
         style="@style/title"

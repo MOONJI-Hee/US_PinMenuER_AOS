@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".history.ByTableActivity">
+    tools:context="com.wooriyo.us.pinmenuer.history.ByTableActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         style="@style/title"

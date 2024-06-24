@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/f9"
-    tools:context=".payment.PayCardActivity">
+    tools:context="com.wooriyo.us.pinmenuer.payment.PayCardActivity">
 
     <TextView
         style="@style/title"

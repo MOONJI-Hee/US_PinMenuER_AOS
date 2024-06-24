@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/f9"
-    tools:context=".menu.MenuSetActivity">
+    tools:context="com.wooriyo.us.pinmenuer.menu.MenuSetActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"

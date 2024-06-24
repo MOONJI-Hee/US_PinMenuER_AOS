@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/f9"
-    tools:context=".qrcode.SetQrcodeActivity">
+    tools:context="com.wooriyo.us.pinmenuer.qrcode.SetQrcodeActivity">
     <TextView
         style="@style/title"
         android:id="@+id/title"
