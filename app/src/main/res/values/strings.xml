@@ -16,7 +16,7 @@
     <string name="drop">탈퇴</string>
 
     <string name="won">원</string>
-    <string name="gea" translatable="false">개</string>
+    <string name="gea">개</string>
 
     <string name="plus" translatable="false">+</string>
     <string name="minus" translatable="false">-</string>
