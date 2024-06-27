@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wooriyo.us.pinmenuer.MyApplication
-import com.wooriyo.pinmenuer.R
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.common.InfoDialog
-import com.wooriyo.pinmenuer.databinding.ListReservationBinding
+import com.wooriyo.us.pinmenuer.databinding.ListReservationBinding
 import com.wooriyo.us.pinmenuer.listener.ItemClickListener
 import com.wooriyo.us.pinmenuer.model.OrderHistoryDTO
 import com.wooriyo.us.pinmenuer.order.adapter.OrderDetailAdapter
@@ -92,13 +92,11 @@ class ReservationAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.
                     1 -> {
                         clTableNo.visibility = View.VISIBLE
                         reservType.setBackgroundColor(Color.parseColor("#FF005E"))
-                        reservType.text = context.getString(R.string.reserv_store)
                         tvDate.text = String.format(context.getString(R.string.reserv_date), "매장")
                     }
                     2 -> {
                         clTableNo.visibility = View.GONE
                         reservType.setBackgroundColor(Color.parseColor("#46B6FF"))
-                        reservType.text = context.getString(R.string.reserv_togo)
                         tvDate.text = String.format(context.getString(R.string.reserv_date), "포장")
                     }
                 }

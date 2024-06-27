@@ -19,10 +19,10 @@ import com.wooriyo.us.pinmenuer.MyApplication.Companion.engStoreName
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.store
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.useridx
-import com.wooriyo.pinmenuer.R
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.common.InfoDialog
 import com.wooriyo.us.pinmenuer.config.AppProperties
-import com.wooriyo.pinmenuer.databinding.ActivitySetQrcodeBinding
+import com.wooriyo.us.pinmenuer.databinding.ActivitySetQrcodeBinding
 import com.wooriyo.us.pinmenuer.listener.ItemClickListener
 import com.wooriyo.us.pinmenuer.model.QrDTO
 import com.wooriyo.us.pinmenuer.model.QrListDTO

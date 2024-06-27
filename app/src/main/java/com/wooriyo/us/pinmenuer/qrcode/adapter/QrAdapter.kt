@@ -8,11 +8,11 @@ import android.widget.CheckBox
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.wooriyo.us.pinmenuer.MyApplication
-import com.wooriyo.pinmenuer.R
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.common.InfoDialog
 import com.wooriyo.us.pinmenuer.config.AppProperties
-import com.wooriyo.pinmenuer.databinding.ListQrBinding
-import com.wooriyo.pinmenuer.databinding.ListQrPlusBinding
+import com.wooriyo.us.pinmenuer.databinding.ListQrBinding
+import com.wooriyo.us.pinmenuer.databinding.ListQrPlusBinding
 import com.wooriyo.us.pinmenuer.listener.ItemClickListener
 import com.wooriyo.us.pinmenuer.model.QrDTO
 import com.wooriyo.us.pinmenuer.qrcode.SetQrcodeActivity

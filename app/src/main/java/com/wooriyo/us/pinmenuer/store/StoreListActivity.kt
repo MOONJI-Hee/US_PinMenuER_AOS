@@ -16,10 +16,10 @@ import com.wooriyo.us.pinmenuer.MyApplication
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.androidId
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.pref
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.useridx
-import com.wooriyo.pinmenuer.R
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.common.FullScreenDialog
 import com.wooriyo.us.pinmenuer.config.AppProperties
-import com.wooriyo.pinmenuer.databinding.ActivityStoreListBinding
+import com.wooriyo.us.pinmenuer.databinding.ActivityStoreListBinding
 import com.wooriyo.us.pinmenuer.listener.ItemClickListener
 import com.wooriyo.us.pinmenuer.member.MemberSetActivity
 import com.wooriyo.us.pinmenuer.model.PopupListDTO

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.wooriyo.pinmenuer.databinding.ListPgHistoryBinding
+import com.wooriyo.us.pinmenuer.databinding.ListPgHistoryBinding
 import com.wooriyo.us.pinmenuer.model.PgHistoryDTO
 
 class PgHistoryAdapter(val dataSet: ArrayList<PgHistoryDTO>): RecyclerView.Adapter<PgHistoryAdapter.ViewHolder>() {

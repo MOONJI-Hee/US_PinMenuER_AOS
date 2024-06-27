@@ -10,7 +10,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.wooriyo.us.pinmenuer.BaseActivity
 import com.wooriyo.us.pinmenuer.MyApplication
-import com.wooriyo.pinmenuer.databinding.ActivityPreviewBinding
+import com.wooriyo.us.pinmenuer.databinding.ActivityPreviewBinding
 
 class PreviewActivity : BaseActivity() {
 

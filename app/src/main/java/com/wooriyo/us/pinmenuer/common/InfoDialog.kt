@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import com.wooriyo.us.pinmenuer.BaseDialog
-import com.wooriyo.pinmenuer.databinding.DialogInfoBinding
+import com.wooriyo.us.pinmenuer.databinding.DialogInfoBinding
 
 class InfoDialog(context: Context, val title: String, val content: String): BaseDialog(context) {
     lateinit var binding: DialogInfoBinding

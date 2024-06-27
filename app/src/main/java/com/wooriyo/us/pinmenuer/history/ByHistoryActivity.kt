@@ -14,12 +14,12 @@ import com.wooriyo.us.pinmenuer.BaseActivity
 import com.wooriyo.us.pinmenuer.MyApplication
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.useridx
-import com.wooriyo.pinmenuer.R
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.call.adapter.CallListAdapter
 import com.wooriyo.us.pinmenuer.common.ConfirmDialog
 import com.wooriyo.us.pinmenuer.common.NoticeDialog
 import com.wooriyo.us.pinmenuer.config.AppProperties
-import com.wooriyo.pinmenuer.databinding.ActivityByHistoryBinding
+import com.wooriyo.us.pinmenuer.databinding.ActivityByHistoryBinding
 import com.wooriyo.us.pinmenuer.history.adapter.HistoryAdapter
 import com.wooriyo.us.pinmenuer.history.adapter.ReservationAdapter
 import com.wooriyo.us.pinmenuer.history.dialog.SetTableNoDialog
@@ -201,7 +201,7 @@ class ByHistoryActivity : BaseActivity() {
             override fun onItemClick(position: Int) {
                 NoticeDialog(
                     mActivity,
-                    getString(R.string.btn_delete),
+                    getString(R.string.delete),
                     getString(R.string.dialog_delete_order)
                 ) { deleteOrder(list[position].idx) }.show()
             }
@@ -236,7 +236,7 @@ class ByHistoryActivity : BaseActivity() {
                 super.onItemClick(position)
                 NoticeDialog(
                     mActivity,
-                    getString(R.string.btn_delete),
+                    getString(R.string.delete),
                     getString(R.string.dialog_delete_order)
                 ) { deleteCall(list[position].idx) }.show()
             }
@@ -260,7 +260,7 @@ class ByHistoryActivity : BaseActivity() {
             override fun onItemClick(position: Int) {
                 NoticeDialog(
                     mActivity,
-                    getString(R.string.btn_delete),
+                    getString(R.string.delete),
                     getString(R.string.dialog_delete_order)
                 ) { deleteOrder(orderList[position].idx) }.show()
             }
@@ -294,7 +294,7 @@ class ByHistoryActivity : BaseActivity() {
             override fun onItemClick(position: Int) {
                 NoticeDialog(
                     mActivity,
-                    getString(R.string.btn_delete),
+                    getString(R.string.delete),
                     getString(R.string.dialog_delete_order)
                 ) { deleteOrder(reservList[position].idx) }.show()
             }
@@ -330,7 +330,7 @@ class ByHistoryActivity : BaseActivity() {
                 super.onItemClick(position)
                 NoticeDialog(
                     mActivity,
-                    getString(R.string.btn_delete),
+                    getString(R.string.delete),
                     getString(R.string.dialog_delete_order)
                 ) { deleteCall(callList[position].idx) }.show()
             }

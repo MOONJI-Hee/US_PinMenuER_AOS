@@ -238,7 +238,6 @@
         style="@style/subtext"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
-        android:text="@string/payment_set_sub"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/payment"
         app:layout_constraintTop_toBottomOf="@+id/payment" />

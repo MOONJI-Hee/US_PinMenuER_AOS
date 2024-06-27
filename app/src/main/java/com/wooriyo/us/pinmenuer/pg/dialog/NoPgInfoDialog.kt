@@ -3,7 +3,7 @@ package com.wooriyo.us.pinmenuer.pg.dialog
 import android.content.Context
 import android.os.Bundle
 import com.wooriyo.us.pinmenuer.BaseDialog
-import com.wooriyo.pinmenuer.databinding.DialogNoPgInfoBinding
+import com.wooriyo.us.pinmenuer.databinding.DialogNoPgInfoBinding
 
 class NoPgInfoDialog(context: Context): BaseDialog(context) {
     lateinit var binding: DialogNoPgInfoBinding

@@ -67,7 +67,7 @@
         style="@style/btn"
         android:id="@+id/save"
         android:layout_width="500dp"
-        android:layout_marginTop="182dp"
+        android:layout_marginTop="40dp"
         android:text="@string/send_pwd"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

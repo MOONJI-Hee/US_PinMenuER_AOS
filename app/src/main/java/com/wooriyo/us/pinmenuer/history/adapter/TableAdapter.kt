@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.wooriyo.pinmenuer.databinding.ListTableBinding
+import com.wooriyo.us.pinmenuer.databinding.ListTableBinding
 import com.wooriyo.us.pinmenuer.history.TableHisActivity
 import com.wooriyo.us.pinmenuer.listener.ItemClickListener
 import com.wooriyo.us.pinmenuer.model.OrderHistoryDTO

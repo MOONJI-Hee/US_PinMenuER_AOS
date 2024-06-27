@@ -56,13 +56,11 @@
         </LinearLayout>
 
         <TextView
-            style="@style/text20"
-            android:text="@string/sewoo_recommend" />
+            style="@style/text20" />
 
         <TextView
             style="@style/text20"
             android:layout_marginTop="5dp"
-            android:text="@string/skl_ts400b"
             android:textStyle="bold" />
 
         <RadioButton
@@ -107,13 +105,11 @@
         </LinearLayout>
 
         <TextView
-            style="@style/text20"
-            android:text="@string/sewoo_tech" />
+            style="@style/text20" />
 
         <TextView
             style="@style/text20"
             android:layout_marginTop="5dp"
-            android:text="@string/skl_te202"
             android:textStyle="bold" />
 
         <RadioButton
@@ -158,13 +154,11 @@
         </LinearLayout>
 
         <TextView
-            style="@style/text20"
-            android:text="@string/gcube" />
+            style="@style/text20" />
 
         <TextView
             style="@style/text20"
             android:layout_marginTop="5dp"
-            android:text="@string/sam4s"
             android:textStyle="bold" />
 
         <RadioButton
@@ -209,7 +203,6 @@
         <TextView
             style="@style/text18"
             android:id="@+id/etc"
-            android:text="@string/printer_etc_ts400b"
             app:layout_constraintTop_toTopOf="@+id/tv2"
             app:layout_constraintStart_toEndOf="@+id/tv2"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,8 +3,8 @@ package com.wooriyo.us.pinmenuer.printer
 import android.os.Bundle
 import android.view.View
 import com.wooriyo.us.pinmenuer.BaseActivity
-import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.databinding.ActivityPrinterModelListBinding
+import com.wooriyo.us.pinmenuer.R
+import com.wooriyo.us.pinmenuer.databinding.ActivityPrinterModelListBinding
 
 
 class SelectPrinterActivity : BaseActivity() {

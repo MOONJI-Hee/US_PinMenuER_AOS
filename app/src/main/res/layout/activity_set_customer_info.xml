@@ -41,7 +41,7 @@
         style="@style/btn_main"
         android:id="@+id/save"
         android:layout_marginBottom="40dp"
-        android:text="@string/btn_save"
+        android:text="@string/save"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

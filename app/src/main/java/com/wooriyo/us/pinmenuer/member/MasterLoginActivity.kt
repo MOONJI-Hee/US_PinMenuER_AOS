@@ -6,8 +6,8 @@ import android.util.Log
 import android.widget.Toast
 import com.wooriyo.us.pinmenuer.BaseActivity
 import com.wooriyo.us.pinmenuer.MyApplication
-import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.databinding.ActivityMasterLoginBinding
+import com.wooriyo.us.pinmenuer.R
+import com.wooriyo.us.pinmenuer.databinding.ActivityMasterLoginBinding
 import com.wooriyo.us.pinmenuer.model.MemberDTO
 import com.wooriyo.us.pinmenuer.store.StoreListActivity
 import com.wooriyo.us.pinmenuer.util.ApiClient

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import com.wooriyo.us.pinmenuer.BaseActivity
-import com.wooriyo.pinmenuer.databinding.ActivityWebViewBinding
+import com.wooriyo.us.pinmenuer.databinding.ActivityWebViewBinding
 
 class WebViewActivity : BaseActivity() {
     lateinit var binding: ActivityWebViewBinding

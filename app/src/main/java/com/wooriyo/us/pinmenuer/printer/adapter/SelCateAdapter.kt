@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CheckBox
 import androidx.recyclerview.widget.RecyclerView
-import com.wooriyo.pinmenuer.databinding.ListSelCateBinding
+import com.wooriyo.us.pinmenuer.databinding.ListSelCateBinding
 import com.wooriyo.us.pinmenuer.listener.ItemClickListener
 import com.wooriyo.us.pinmenuer.model.CategoryDTO
 

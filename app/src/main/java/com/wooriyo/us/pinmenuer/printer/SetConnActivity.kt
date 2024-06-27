@@ -13,9 +13,9 @@ import com.wooriyo.us.pinmenuer.MyApplication
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.androidId
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.useridx
-import com.wooriyo.pinmenuer.R
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.broadcast.BtDiscoveryReceiver
-import com.wooriyo.pinmenuer.databinding.ActivitySetConnBinding
+import com.wooriyo.us.pinmenuer.databinding.ActivitySetConnBinding
 import com.wooriyo.us.pinmenuer.listener.DialogListener
 import com.wooriyo.us.pinmenuer.listener.ItemClickListener
 import com.wooriyo.us.pinmenuer.model.PrintContentDTO

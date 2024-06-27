@@ -71,7 +71,6 @@ interface Api {
     @GET("m/regmbr.php")
     fun regMember(
         @Query("userid") userid: String,
-        @Query("alpha_userid") arpayo_id: String,
         @Query("user_pwd") pw: String,
         @Query("push_token") push_token: String,
         @Query("os") os: String,
@@ -97,8 +96,7 @@ interface Api {
     @GET("m/udtmbr.php")
     fun udtMbr (
         @Query("useridx") useridx : Int,
-        @Query("pass") pass : String,
-        @Query("emplyr_id") arpayo_id: String
+        @Query("pass") pass : String
     ): Call<ResultDTO>
 
     // 로그아웃

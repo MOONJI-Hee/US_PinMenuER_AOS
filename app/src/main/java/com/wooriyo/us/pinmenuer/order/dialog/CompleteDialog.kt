@@ -3,7 +3,7 @@ package com.wooriyo.us.pinmenuer.order.dialog
 import android.content.Context
 import android.os.Bundle
 import com.wooriyo.us.pinmenuer.BaseDialog
-import com.wooriyo.pinmenuer.databinding.DialogCompleteBinding
+import com.wooriyo.us.pinmenuer.databinding.DialogCompleteBinding
 import com.wooriyo.us.pinmenuer.listener.DialogListener
 
 class CompleteDialog(context: Context): BaseDialog(context) {

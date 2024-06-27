@@ -6,8 +6,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wooriyo.us.pinmenuer.BaseActivity
 import com.wooriyo.us.pinmenuer.MyApplication
-import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.databinding.ActivityPgCancelBinding
+import com.wooriyo.us.pinmenuer.R
+import com.wooriyo.us.pinmenuer.databinding.ActivityPgCancelBinding
 import com.wooriyo.us.pinmenuer.model.PgDetailDTO
 import com.wooriyo.us.pinmenuer.model.PgDetailResultDTO
 import com.wooriyo.us.pinmenuer.model.ResultDTO

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.wooriyo.pinmenuer.databinding.ListCallDetailBinding
+import com.wooriyo.us.pinmenuer.databinding.ListCallDetailBinding
 import com.wooriyo.us.pinmenuer.model.OrderDTO
 
 class HisCallAdapter(val dataSet: ArrayList<OrderDTO>): RecyclerView.Adapter<HisCallAdapter.ViewHolder>() {

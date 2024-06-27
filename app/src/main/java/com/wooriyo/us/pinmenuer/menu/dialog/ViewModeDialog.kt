@@ -6,8 +6,8 @@ import android.util.Log
 import android.widget.Toast
 import com.wooriyo.us.pinmenuer.BaseDialog
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.store
-import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.databinding.DialogViewmodeBinding
+import com.wooriyo.us.pinmenuer.R
+import com.wooriyo.us.pinmenuer.databinding.DialogViewmodeBinding
 import com.wooriyo.us.pinmenuer.model.ResultDTO
 import com.wooriyo.us.pinmenuer.util.ApiClient
 import retrofit2.Call

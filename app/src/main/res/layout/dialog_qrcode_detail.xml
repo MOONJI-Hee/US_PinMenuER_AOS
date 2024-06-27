@@ -161,7 +161,7 @@
                 style="@style/btn_cancel"
                 android:id="@+id/delete"
                 android:layout_width="100dp"
-                android:text="@string/btn_delete"
+                android:text="@string/delete"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
             <TextView
@@ -169,7 +169,7 @@
                 android:id="@+id/save"
                 android:layout_width="0dp"
                 android:layout_marginStart="20dp"
-                android:text="@string/btn_save"
+                android:text="@string/save"
                 app:layout_constraintStart_toEndOf="@+id/delete"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -181,7 +181,7 @@
             android:id="@+id/confirm"
             android:layout_width="500dp"
             android:layout_marginBottom="60dp"
-            android:text="@string/btn_confirm"
+            android:text="@string/confirm"
             android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@+id/qrInfoArea"
             app:layout_constraintBottom_toBottomOf="parent"

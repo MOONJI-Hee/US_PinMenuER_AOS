@@ -3,7 +3,7 @@ package com.wooriyo.us.pinmenuer.store.adpter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.wooriyo.pinmenuer.databinding.ListSpecialHolidayBinding
+import com.wooriyo.us.pinmenuer.databinding.ListSpecialHolidayBinding
 import com.wooriyo.us.pinmenuer.listener.ItemClickListener
 import com.wooriyo.us.pinmenuer.model.SpcHolidayDTO
 
@@ -34,9 +34,9 @@ class SpcHolidayAdapter(val dataSet: ArrayList<SpcHolidayDTO>) : RecyclerView.Ad
         fun bind(data: SpcHolidayDTO) {
             binding.holidayName.text = data.title
             if(data.month == "") {
-                binding.holidayDate.text = "매월 ${data.day}일"
+                binding.holidayDate.text = "Every Month ${data.day}"
             }else {
-                binding.holidayDate.text = "${data.month}월 ${data.day}일"
+                binding.holidayDate.text = "${data.month} / ${data.day}"
             }
         }
     }

@@ -6,8 +6,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.wooriyo.us.pinmenuer.BaseDialog
-import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.databinding.DialogHolidayBinding
+import com.wooriyo.us.pinmenuer.R
+import com.wooriyo.us.pinmenuer.databinding.DialogHolidayBinding
 import com.wooriyo.us.pinmenuer.listener.DialogListener
 import com.wooriyo.us.pinmenuer.model.ResultDTO
 import com.wooriyo.us.pinmenuer.model.SpcHolidayDTO

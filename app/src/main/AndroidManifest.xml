@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.wooriyo.pinmenuer">
+    package="com.wooriyo.us.pinmenuer">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -64,9 +64,6 @@
             android:name="com.wooriyo.us.pinmenuer.pg.SetCustomerInfoActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.payment.SetPgInfoActivity"
-            android:exported="false" />
-        <activity
             android:name="com.wooriyo.us.pinmenuer.common.WebViewActivity"
             android:exported="false" />
         <activity
@@ -77,36 +74,6 @@
             android:exported="false" />
         <activity
             android:name="com.wooriyo.us.pinmenuer.pg.PgCancelActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.wooriyo.us.pinmenuer.payment.PayCardActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.wooriyo.us.pinmenuer.payment.QrActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="pinmenuer"
-                    android:scheme="pinmenuer"
-                    tools:ignore="AppLinkUrlError" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.wooriyo.us.pinmenuer.payment.NicepayInfoActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.wooriyo.us.pinmenuer.payment.SetPayActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.wooriyo.us.pinmenuer.payment.ReaderModelActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.wooriyo.us.pinmenuer.payment.SetNicepayActivity"
             android:exported="false" />
         <activity
             android:name="com.wooriyo.us.pinmenuer.printer.SelCateActivity"
@@ -146,9 +113,6 @@
             android:exported="false" />
         <activity
             android:name="com.wooriyo.us.pinmenuer.menu.MenuSetActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.wooriyo.us.pinmenuer.common.MapActivity"
             android:exported="false" />
         <activity
             android:name="com.wooriyo.us.pinmenuer.menu.CategorySetActivity"
@@ -193,14 +157,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
-        <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_appKey" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_noti" />
-
         <service
             android:name="com.wooriyo.us.pinmenuer.util.MyFirebaseService"
             android:exported="false">

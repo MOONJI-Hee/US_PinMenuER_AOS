@@ -3,7 +3,7 @@ package com.wooriyo.us.pinmenuer.history.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.wooriyo.pinmenuer.databinding.ListTablenoBinding
+import com.wooriyo.us.pinmenuer.databinding.ListTablenoBinding
 import com.wooriyo.us.pinmenuer.listener.ItemClickListener
 import com.wooriyo.us.pinmenuer.model.TableNoDTO
 

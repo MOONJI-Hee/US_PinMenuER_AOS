@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.wooriyo.us.pinmenuer.BaseActivity
-import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.databinding.ActivityPrinterModelListBinding
+import com.wooriyo.us.pinmenuer.R
+import com.wooriyo.us.pinmenuer.databinding.ActivityPrinterModelListBinding
 import com.wooriyo.us.pinmenuer.model.PrintModelDTO
 import com.wooriyo.us.pinmenuer.model.PrintModelListDTO
 import com.wooriyo.us.pinmenuer.util.ApiClient
@@ -31,14 +31,14 @@ class PrinterModelListActivity : BaseActivity() {
         binding.back.setOnClickListener { finish() }
         binding.ts400b.setOnClickListener {
             binding.connWay.text = getText(R.string.printer_bluetooth)
-            binding.etc.text = getText(R.string.printer_etc_ts400b)
+//            binding.etc.text = getText(R.string.printer_etc_ts400b)
             binding.areaTs.setBackgroundResource(R.drawable.bg_r6w_b2_main)
             binding.areaCube.setBackgroundColor(Color.WHITE)
         }
 
         binding.sam4s.setOnClickListener {
             binding.connWay.text = getText(R.string.printer_wifi)
-            binding.etc.text = getText(R.string.printer_etc_gcube)
+//            binding.etc.text = getText(R.string.printer_etc_gcube)
             binding.areaTs.setBackgroundColor(Color.WHITE)
             binding.areaCube.setBackgroundResource(R.drawable.bg_r6w_b2_main)
         }

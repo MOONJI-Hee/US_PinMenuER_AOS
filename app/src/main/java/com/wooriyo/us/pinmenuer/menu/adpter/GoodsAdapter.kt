@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.*
-import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.databinding.ListMenuBinding
+import com.wooriyo.us.pinmenuer.R
+import com.wooriyo.us.pinmenuer.databinding.ListMenuBinding
 import com.wooriyo.us.pinmenuer.listener.ItemClickListener
 import com.wooriyo.us.pinmenuer.model.GoodsDTO
 import com.wooriyo.us.pinmenuer.util.AppHelper

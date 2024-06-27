@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.wooriyo.pinmenuer.R
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.call.adapter.CallListAdapter.ViewHolder
-import com.wooriyo.pinmenuer.databinding.ListCallBinding
+import com.wooriyo.us.pinmenuer.databinding.ListCallBinding
 import com.wooriyo.us.pinmenuer.listener.ItemClickListener
 import com.wooriyo.us.pinmenuer.model.CallHistoryDTO
 

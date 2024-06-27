@@ -69,7 +69,7 @@
             style="@style/btn_main"
             android:id="@+id/save"
             android:layout_marginTop="40dp"
-            android:text="@string/btn_save"
+            android:text="@string/save"
             app:layout_constraintTop_toBottomOf="@+id/etNick"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

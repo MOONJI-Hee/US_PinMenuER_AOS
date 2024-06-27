@@ -7,8 +7,8 @@ import android.widget.Toast
 import com.wooriyo.us.pinmenuer.BaseDialog
 import com.wooriyo.us.pinmenuer.MyApplication
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.androidId
-import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.databinding.DialogSetNickBinding
+import com.wooriyo.us.pinmenuer.R
+import com.wooriyo.us.pinmenuer.databinding.DialogSetNickBinding
 import com.wooriyo.us.pinmenuer.listener.DialogListener
 import com.wooriyo.us.pinmenuer.model.ResultDTO
 import com.wooriyo.us.pinmenuer.util.ApiClient

@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.wooriyo.us.pinmenuer.BaseActivity
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.useridx
-import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.databinding.ActivityPgHistoryBinding
+import com.wooriyo.us.pinmenuer.R
+import com.wooriyo.us.pinmenuer.databinding.ActivityPgHistoryBinding
 import com.wooriyo.us.pinmenuer.model.PgHistoryDTO
 import com.wooriyo.us.pinmenuer.model.PgResultDTO
 import com.wooriyo.us.pinmenuer.pg.adapter.PgHistoryAdapter

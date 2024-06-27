@@ -3,7 +3,7 @@ package com.wooriyo.us.pinmenuer.printer.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.wooriyo.pinmenuer.databinding.ListPrinterCateBinding
+import com.wooriyo.us.pinmenuer.databinding.ListPrinterCateBinding
 
 class SelectedCateAdapter(val dataSet: List<String>): RecyclerView.Adapter<SelectedCateAdapter.ViewHolder>() {
 

@@ -4,8 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View.OnClickListener
 import com.wooriyo.us.pinmenuer.BaseDialog
-import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.databinding.DialogChoiceBinding
+import com.wooriyo.us.pinmenuer.R
+import com.wooriyo.us.pinmenuer.databinding.DialogChoiceBinding
 
 class CancelDialog(context: Context, val onClickListener: OnClickListener): BaseDialog(context) {
     lateinit var binding: DialogChoiceBinding

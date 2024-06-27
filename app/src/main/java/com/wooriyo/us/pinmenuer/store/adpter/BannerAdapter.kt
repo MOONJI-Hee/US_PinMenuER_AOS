@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.wooriyo.pinmenuer.databinding.ListBannerBinding
+import com.wooriyo.us.pinmenuer.databinding.ListBannerBinding
 import com.wooriyo.us.pinmenuer.model.PopupDTO
 
 class BannerAdapter(val bannerList: ArrayList<PopupDTO>) : RecyclerView.Adapter<BannerAdapter.ViewHolder>() {

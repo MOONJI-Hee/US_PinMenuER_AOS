@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
 import com.wooriyo.us.pinmenuer.BaseDialog
-import com.wooriyo.pinmenuer.databinding.DialogNoticeBinding
+import com.wooriyo.us.pinmenuer.databinding.DialogNoticeBinding
 
 class NoticeDialog(context: Context, val title: String, val content: String, private val onClickListener: OnClickListener): BaseDialog(context) {
     lateinit var binding: DialogNoticeBinding

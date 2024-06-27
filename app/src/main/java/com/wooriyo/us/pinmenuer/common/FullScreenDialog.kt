@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.wooriyo.us.pinmenuer.BaseDialog
 import com.wooriyo.us.pinmenuer.MyApplication
-import com.wooriyo.pinmenuer.databinding.DialogFullscreenBinding
+import com.wooriyo.us.pinmenuer.databinding.DialogFullscreenBinding
 import com.wooriyo.us.pinmenuer.model.PopupDTO
 import com.wooriyo.us.pinmenuer.util.AppHelper
 

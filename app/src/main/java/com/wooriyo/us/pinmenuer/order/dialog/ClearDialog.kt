@@ -6,7 +6,7 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import com.wooriyo.us.pinmenuer.BaseDialogFragment
-import com.wooriyo.pinmenuer.databinding.DialogClearBinding
+import com.wooriyo.us.pinmenuer.databinding.DialogClearBinding
 
 class ClearDialog(val callClickListener: OnClickListener, val ordClickListener: OnClickListener): BaseDialogFragment() {
     lateinit var binding: DialogClearBinding

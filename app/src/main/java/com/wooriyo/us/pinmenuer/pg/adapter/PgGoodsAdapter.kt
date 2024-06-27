@@ -3,7 +3,7 @@ package com.wooriyo.us.pinmenuer.pg.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.wooriyo.pinmenuer.databinding.ListPgGoodsBinding
+import com.wooriyo.us.pinmenuer.databinding.ListPgGoodsBinding
 import com.wooriyo.us.pinmenuer.model.PgDetailDTO
 import com.wooriyo.us.pinmenuer.util.AppHelper
 

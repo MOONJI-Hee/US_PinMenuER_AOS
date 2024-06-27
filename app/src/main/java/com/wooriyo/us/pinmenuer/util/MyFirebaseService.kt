@@ -15,7 +15,7 @@ import com.sewoo.jpos.command.ESCPOSConst
 import com.wooriyo.us.pinmenuer.BaseActivity.Companion.currentActivity
 import com.wooriyo.us.pinmenuer.MyApplication
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.escposPrinter
-import com.wooriyo.pinmenuer.R
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.StartActivity
 import com.wooriyo.us.pinmenuer.config.AppProperties
 import com.wooriyo.us.pinmenuer.config.AppProperties.Companion.CHANNEL_ID_CALL
@@ -211,7 +211,7 @@ class MyFirebaseService : FirebaseMessagingService() {
             }
         }
 
-        val uri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/$sound")
+        val uri: Uri = Uri.parse("android.resource://com.wooriyo.us.pinmenuer/$sound")
 
         val builder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.ic_noti)

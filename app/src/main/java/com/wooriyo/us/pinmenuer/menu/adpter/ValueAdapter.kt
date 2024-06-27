@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.wooriyo.pinmenuer.databinding.ListValueBinding
+import com.wooriyo.us.pinmenuer.databinding.ListValueBinding
 import com.wooriyo.us.pinmenuer.model.ValueDTO
 import com.wooriyo.us.pinmenuer.util.AppHelper
 

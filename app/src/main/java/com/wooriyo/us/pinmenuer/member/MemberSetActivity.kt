@@ -1,19 +1,16 @@
 package com.wooriyo.us.pinmenuer.member
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.wooriyo.us.pinmenuer.BaseActivity
 import com.wooriyo.us.pinmenuer.MyApplication
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.useridx
-import com.wooriyo.pinmenuer.R
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.common.ConfirmDialog
-import com.wooriyo.pinmenuer.databinding.ActivitySignUpBinding
+import com.wooriyo.us.pinmenuer.databinding.ActivitySignUpBinding
 import com.wooriyo.us.pinmenuer.model.MemberDTO
 import com.wooriyo.us.pinmenuer.model.ResultDTO
 import com.wooriyo.us.pinmenuer.util.ApiClient
@@ -44,12 +41,6 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
 
         binding.title.text = getString(R.string.title_udt_mbr)
         binding.tvId.text = userid
-        if(arpayoId.isNotEmpty()) {
-            binding.etArpayo.setText(arpayoId)
-            arpaLinked = true
-            binding.linkResult.text = getString(R.string.link_after)
-            binding.linkResult.setTextColor(Color.parseColor("#FF6200"))
-        }
         binding.etPwd.setText(MyApplication.pref.getPw())
 
         binding.etId.visibility = View.INVISIBLE
@@ -63,22 +54,10 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
         binding.modify.visibility = View.VISIBLE
         binding.llUdt.visibility = View.VISIBLE
 
-        binding.etArpayo.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) {
-                binding.linkResult.text = ""
-                if(arpaLinked) {
-                    arpaLinked = false
-                }
-            }
-        })
-
         binding.back.setOnClickListener(this)
         binding.modify.setOnClickListener(this)
         binding.drop.setOnClickListener(this)
         binding.logout.setOnClickListener(this)
-        binding.btnArpayo.setOnClickListener(this)
     }
 
     override fun onResume() {
@@ -89,21 +68,19 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
         when(p0) {
             binding.back -> finish()
             binding.modify -> save()
-            binding.btnArpayo -> regArpayoId()
             binding.drop -> {
                 val onClickListener = View.OnClickListener { drop() }
-                ConfirmDialog(getString(R.string.dialog_drop), "", getString(R.string.btn_confirm), onClickListener).show(supportFragmentManager, "DropDialog")
+                ConfirmDialog(getString(R.string.dialog_drop), "", getString(R.string.drop), onClickListener).show(supportFragmentManager, "DropDialog")
             }
             binding.logout -> {
                 val onClickListener = View.OnClickListener {logout()}
-                ConfirmDialog("", getString(R.string.dialog_logout), getString(R.string.btn_confirm), onClickListener).show(supportFragmentManager, "LogoutDialog")
+                ConfirmDialog("", getString(R.string.dialog_logout), getString(R.string.confirm), onClickListener).show(supportFragmentManager, "LogoutDialog")
             }
         }
     }
 
     private fun save() {
         val pass : String = binding.etPwd.text.toString()
-        arpayoId = binding.etArpayo.text.toString()
 
         if(pass.isEmpty() || pass == "") {
             Toast.makeText(mActivity, R.string.msg_no_pw, Toast.LENGTH_SHORT).show()
@@ -116,13 +93,12 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
             return
         }
 
-        ApiClient.service.udtMbr(useridx, pass, arpayoId)
+        ApiClient.service.udtMbr(useridx, pass)
             .enqueue(object : Callback<ResultDTO> {
                 override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
                     Log.d(TAG, "회원정보 수정 url : $response")
                     if(response.body()?.status == 1) {
                         MyApplication.pref.setPw(pass)
-                        memberDTO?.arpayoid = arpayoId
                         memberDTO?.let { MyApplication.pref.setMbrDTO(it) }
                         Toast.makeText(this@MemberSetActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
                         finish()
@@ -132,43 +108,6 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
                 override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
                     Toast.makeText(this@MemberSetActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "회원정보 수정 오류 > $t")
-                }
-            })
-    }
-
-    // 알파요 아이디 연동
-    fun regArpayoId () {
-        arpayoId = binding.etArpayo.text.toString()
-
-        if(arpayoId.isEmpty() || arpayoId == "") {
-            Toast.makeText(mActivity, R.string.arpayo_id_hint, Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        ApiClient.arpaService.checkArpayo(arpayoId)
-            .enqueue(object : Callback<ResultDTO> {
-                override fun onResponse(call: Call<ResultDTO>, response: Response<ResultDTO>) {
-                    Log.d(TAG, "알파요 아이디 연동 url : $response")
-                    if (!response.isSuccessful) return
-
-                    val result = response.body()
-                    if(result != null) {
-                        if (result.status == 1) {
-                            arpaLinked = true
-                            binding.linkResult.text = getString(R.string.link_after)
-                            binding.linkResult.setTextColor(Color.parseColor("#FF6200"))
-                        } else {
-                            Toast.makeText(this@MemberSetActivity, result.msg, Toast.LENGTH_SHORT).show()
-                            arpaLinked = false
-                            binding.linkResult.text = getString(R.string.link_fail)
-                            binding.linkResult.setTextColor(Color.parseColor("#5A5A5A"))
-                        }
-                    }
-                }
-                override fun onFailure(call: Call<ResultDTO>, t: Throwable) {
-                    Toast.makeText(this@MemberSetActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
-                    Log.d(TAG, "알파요 아이디 연동 실패 > $t")
-                    Log.d(TAG, "알파요 아이디 연동 실패 > ${call.request()}")
                 }
             })
     }

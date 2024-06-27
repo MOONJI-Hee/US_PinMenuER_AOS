@@ -6,9 +6,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.wooriyo.us.pinmenuer.BaseActivity
 import com.wooriyo.us.pinmenuer.MyApplication
-import com.wooriyo.pinmenuer.R
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.common.ConfirmDialog
-import com.wooriyo.pinmenuer.databinding.ActivityByTableBinding
+import com.wooriyo.us.pinmenuer.databinding.ActivityByTableBinding
 import com.wooriyo.us.pinmenuer.history.adapter.TableAdapter
 import com.wooriyo.us.pinmenuer.listener.ItemClickListener
 import com.wooriyo.us.pinmenuer.model.OrderHistoryDTO

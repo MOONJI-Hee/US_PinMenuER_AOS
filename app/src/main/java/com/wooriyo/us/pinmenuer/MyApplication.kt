@@ -16,7 +16,7 @@ import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import com.sewoo.jpos.printer.ESCPOSPrinter
 import com.sewoo.port.android.BluetoothPort
-import com.wooriyo.pinmenuer.R
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.config.AppProperties
 import com.wooriyo.us.pinmenuer.db.AppDatabase
 import com.wooriyo.us.pinmenuer.model.CategoryDTO
@@ -129,10 +129,10 @@ class MyApplication: Application() {
         notificationManager.deleteNotificationChannel(AppProperties.CHANNEL_ID_CALL)
 
         val ordSound = R.raw.customnoti
-        val ordUri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/$ordSound")
+        val ordUri: Uri = Uri.parse("android.resource://com.wooriyo.us.pinmenuer/$ordSound")
 
         val callSound = R.raw.customcall
-        val callUri: Uri = Uri.parse("android.resource://com.wooriyo.pinmenuer/$callSound")
+        val callUri: Uri = Uri.parse("android.resource://com.wooriyo.us.pinmenuer/$callSound")
 
         val audioAttributes = AudioAttributes.Builder()
             .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)

@@ -24,9 +24,9 @@ import com.wooriyo.us.pinmenuer.MyApplication.Companion.density
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.store
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.useridx
-import com.wooriyo.pinmenuer.R
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.config.AppProperties.Companion.REQUEST_STORAGE
-import com.wooriyo.pinmenuer.databinding.ActivityStoreSetImgBinding
+import com.wooriyo.us.pinmenuer.databinding.ActivityStoreSetImgBinding
 import com.wooriyo.us.pinmenuer.model.ResultDTO
 import com.wooriyo.us.pinmenuer.util.ApiClient
 import okhttp3.MediaType

@@ -22,9 +22,9 @@ import com.bumptech.glide.Glide
 import com.wooriyo.us.pinmenuer.BaseDialogFragment
 import com.wooriyo.us.pinmenuer.MyApplication
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.engStoreName
-import com.wooriyo.pinmenuer.R
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.common.InfoDialog
-import com.wooriyo.pinmenuer.databinding.DialogQrcodeDetailBinding
+import com.wooriyo.us.pinmenuer.databinding.DialogQrcodeDetailBinding
 import com.wooriyo.us.pinmenuer.model.QrDTO
 import com.wooriyo.us.pinmenuer.model.ResultDTO
 import com.wooriyo.us.pinmenuer.util.ApiClient

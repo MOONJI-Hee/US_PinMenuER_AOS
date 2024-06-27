@@ -15,9 +15,8 @@ import com.wooriyo.us.pinmenuer.MyApplication
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.store
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.useridx
-import com.wooriyo.pinmenuer.R
-import com.wooriyo.us.pinmenuer.common.MapActivity
-import com.wooriyo.pinmenuer.databinding.ActivityStoreSetBinding
+import com.wooriyo.us.pinmenuer.R
+import com.wooriyo.us.pinmenuer.databinding.ActivityStoreSetBinding
 import com.wooriyo.us.pinmenuer.model.ResultDTO
 import com.wooriyo.us.pinmenuer.model.StoreListDTO
 import com.wooriyo.us.pinmenuer.util.ApiClient
@@ -86,7 +85,6 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
         binding.btnDetail.setOnClickListener(this)
         binding.btnHour.setOnClickListener(this)
         binding.btnImg.setOnClickListener(this)
-        binding.btnMap.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
@@ -118,13 +116,6 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
 //                    setStore.launch(Intent(mActivity, StoreSetImgActivity::class.java).putExtra("store", store))
 //                else if (type == 1)
 //                    Toast.makeText(mActivity, R.string.msg_reg_store_first, Toast.LENGTH_SHORT).show()
-            }
-            binding.btnMap -> {
-                val intent = Intent(mActivity, MapActivity::class.java)
-                intent.putExtra("lat", store.lat) // 위도 (latitude)
-                intent.putExtra("long", store.long) // 경도 (longitude)
-                intent.putExtra("address", store.address)
-                setAddr.launch(intent)
             }
         }
     }
@@ -211,25 +202,25 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
                         var strOpen = ""
                         when(y) {
                             time.mon_buse -> {
-                                strOpen += "/월 ${time.mon_starttm}~${time.mon_endtm}"
+                                strOpen += "/MO ${time.mon_starttm}~${time.mon_endtm}"
                             }
                             time.tue_buse -> {
-                                strOpen += "/화 ${time.tue_starttm}~${time.tue_endtm}"
+                                strOpen += "/TU ${time.tue_starttm}~${time.tue_endtm}"
                             }
                             time.wed_buse -> {
-                                strOpen += "/수 ${time.wed_starttm}~${time.wed_endtm}"
+                                strOpen += "/WE ${time.wed_starttm}~${time.wed_endtm}"
                             }
                             time.thu_buse -> {
-                                strOpen += "/목 ${time.thu_starttm}~${time.thu_endtm}"
+                                strOpen += "/TH ${time.thu_starttm}~${time.thu_endtm}"
                             }
                             time.fri_buse -> {
-                                strOpen += "/금 ${time.fri_starttm}~${time.fri_endtm}"
+                                strOpen += "/FR ${time.fri_starttm}~${time.fri_endtm}"
                             }
                             time.sat_buse -> {
-                                strOpen += "/토 ${time.sat_starttm}~${time.sat_endtm}"
+                                strOpen += "/SA ${time.sat_starttm}~${time.sat_endtm}"
                             }
                             time.sun_buse -> {
-                                strOpen += "/일 ${time.sun_starttm}~${time.sun_endtm}"
+                                strOpen += "/SU ${time.sun_starttm}~${time.sun_endtm}"
                             }
                         }
 
@@ -261,25 +252,25 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
                         var strBreak = ""
                         when(y) {
                             bTime.mon_buse -> {
-                                strBreak += "/월 ${bTime.mon_starttm}~${bTime.mon_endtm}"
+                                strBreak += "/MO ${bTime.mon_starttm}~${bTime.mon_endtm}"
                             }
                             bTime.tue_buse -> {
-                                strBreak += "/화 ${bTime.tue_starttm}~${bTime.tue_endtm}"
+                                strBreak += "/TU ${bTime.tue_starttm}~${bTime.tue_endtm}"
                             }
                             bTime.wed_buse -> {
-                                strBreak += "/수 ${bTime.wed_starttm}~${bTime.wed_endtm}"
+                                strBreak += "/WE ${bTime.wed_starttm}~${bTime.wed_endtm}"
                             }
                             bTime.thu_buse -> {
-                                strBreak += "/목 ${bTime.thu_starttm}~${bTime.thu_endtm}"
+                                strBreak += "/TH ${bTime.thu_starttm}~${bTime.thu_endtm}"
                             }
                             bTime.fri_buse -> {
-                                strBreak += "/금 ${bTime.fri_starttm}~${bTime.fri_endtm}"
+                                strBreak += "/FR ${bTime.fri_starttm}~${bTime.fri_endtm}"
                             }
                             bTime.sat_buse -> {
-                                strBreak += "/토 ${bTime.sat_starttm}~${bTime.sat_endtm}"
+                                strBreak += "/SA ${bTime.sat_starttm}~${bTime.sat_endtm}"
                             }
                             bTime.sun_buse -> {
-                                strBreak += "/일 ${bTime.sun_starttm}~${bTime.sun_endtm}"
+                                strBreak += "/SU ${bTime.sun_starttm}~${bTime.sun_endtm}"
                             }
                         }
                         breakTime.text = strBreak.drop(1)
@@ -297,13 +288,13 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
                     sameOff.visibility = View.VISIBLE
                     var strOff = ""
                     when(y) {
-                        store.mon_buse -> strOff += "/월"
-                        store.tue_buse -> strOff += "/화"
-                        store.wed_buse -> strOff += "/수"
-                        store.thu_buse -> strOff += "/목"
-                        store.fri_buse -> strOff += "/금"
-                        store.sat_buse -> strOff += "/토"
-                        store.sun_buse -> strOff += "/일"
+                        store.mon_buse -> strOff += "/MO"
+                        store.tue_buse -> strOff += "/TU"
+                        store.wed_buse -> strOff += "/WE"
+                        store.thu_buse -> strOff += "/TH"
+                        store.fri_buse -> strOff += "/FR"
+                        store.sat_buse -> strOff += "/SA"
+                        store.sun_buse -> strOff += "/SU"
                     }
                     off.text = strOff.drop(1)
                     off.visibility = View.VISIBLE
@@ -322,7 +313,7 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
                 var strHoliday = ""
                 specHoliday.forEach {
                     var hol = it.title
-                    hol += if(it.month == "") { " 매월${it.day}일" }else { " ${it.month}월${it.day}일" }
+                    hol += if(it.month == "") { " Every Month ${it.day}" }else { " ${it.month}/${it.day}" }
 
                     strHoliday += "/$hol"
                 }

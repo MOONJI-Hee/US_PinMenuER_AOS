@@ -49,7 +49,7 @@
         style="@style/btn_main"
         android:id="@+id/confirm"
         android:layout_marginBottom="80dp"
-        android:text="@string/btn_confirm"
+        android:text="@string/confirm"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
@@ -95,7 +95,7 @@
             android:layout_width="285dp"
             android:layout_height="27.36dp"
             android:textSize="11.4sp"
-            android:text="@string/btn_confirm"
+            android:text="@string/confirm"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
@@ -138,7 +138,7 @@
             android:layout_width="match_parent"
             android:layout_height="27.36dp"
             android:textSize="11.4sp"
-            android:text="@string/btn_confirm"
+            android:text="@string/confirm"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>

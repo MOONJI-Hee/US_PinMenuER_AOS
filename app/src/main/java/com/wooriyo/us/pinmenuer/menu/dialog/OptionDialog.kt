@@ -10,8 +10,8 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wooriyo.us.pinmenuer.BaseDialog
-import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.databinding.DialogOptionBinding
+import com.wooriyo.us.pinmenuer.R
+import com.wooriyo.us.pinmenuer.databinding.DialogOptionBinding
 import com.wooriyo.us.pinmenuer.listener.DialogListener
 import com.wooriyo.us.pinmenuer.menu.adpter.OptEditAdapter
 import com.wooriyo.us.pinmenuer.model.OptionDTO

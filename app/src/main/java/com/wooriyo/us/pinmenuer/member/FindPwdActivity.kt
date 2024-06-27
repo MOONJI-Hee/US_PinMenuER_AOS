@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.wooriyo.us.pinmenuer.BaseActivity
-import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.databinding.ActivityFindPwdBinding
+import com.wooriyo.us.pinmenuer.R
+import com.wooriyo.us.pinmenuer.databinding.ActivityFindPwdBinding
 import com.wooriyo.us.pinmenuer.model.ResultDTO
 import com.wooriyo.us.pinmenuer.util.ApiClient
 import com.wooriyo.us.pinmenuer.util.AppHelper

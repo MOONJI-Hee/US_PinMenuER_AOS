@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.wooriyo.pinmenuer.databinding.ListPgBinding
+import com.wooriyo.us.pinmenuer.databinding.ListPgBinding
 import com.wooriyo.us.pinmenuer.model.PgDetailDTO
 import com.wooriyo.us.pinmenuer.pg.PgCancelActivity
 import com.wooriyo.us.pinmenuer.util.AppHelper

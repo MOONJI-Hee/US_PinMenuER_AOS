@@ -3,9 +3,9 @@ package com.wooriyo.us.pinmenuer.store.dialog
 import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.BaseDialog
-import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.databinding.DialogRegtimeBinding
+import com.wooriyo.us.pinmenuer.databinding.DialogRegtimeBinding
 import com.wooriyo.us.pinmenuer.listener.DialogListener
 import com.wooriyo.us.pinmenuer.util.AppHelper.Companion.mkDouble
 

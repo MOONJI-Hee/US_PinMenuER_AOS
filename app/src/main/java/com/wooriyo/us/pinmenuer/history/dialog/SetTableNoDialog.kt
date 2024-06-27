@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.wooriyo.us.pinmenuer.BaseDialogFragment
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.useridx
-import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.databinding.DialogSetTableNoBinding
+import com.wooriyo.us.pinmenuer.R
+import com.wooriyo.us.pinmenuer.databinding.DialogSetTableNoBinding
 import com.wooriyo.us.pinmenuer.listener.ItemClickListener
 import com.wooriyo.us.pinmenuer.history.adapter.TableNoAdapter
 import com.wooriyo.us.pinmenuer.listener.DialogListener

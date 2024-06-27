@@ -17,9 +17,9 @@ import com.wooriyo.us.pinmenuer.MyApplication
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.androidId
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.useridx
-import com.wooriyo.pinmenuer.R
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.config.AppProperties
-import com.wooriyo.pinmenuer.databinding.ActivityPrinterMenuBinding
+import com.wooriyo.us.pinmenuer.databinding.ActivityPrinterMenuBinding
 import com.wooriyo.us.pinmenuer.model.PrintDTO
 import com.wooriyo.us.pinmenuer.model.PrintListDTO
 import com.wooriyo.us.pinmenuer.util.ApiClient

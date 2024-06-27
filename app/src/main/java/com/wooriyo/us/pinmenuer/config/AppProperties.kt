@@ -7,11 +7,8 @@ class AppProperties {
         private const val TEST_SERVER: String = "http://testapp.pinmenu.biz/api/"
         private const val AWS_SERVER: String = "http://app.pinmenu.net/api/"
 
-        const val SERVER: String = REAL_SERVER
+        const val SERVER: String = AWS_SERVER
         const val IMG_SERVER: String = "http://img.pinmenu.net/api/"
-        const val CP_SERVER: String = "http://cp.wooriyo.com/api/"
-
-        const val KAKAO_URL : String = "https://dapi.kakao.com"
 
         // 푸시 알림 아이디
         const val NOTIFICATION_ID_ORDER = 1

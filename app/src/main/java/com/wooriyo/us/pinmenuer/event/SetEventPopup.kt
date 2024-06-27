@@ -23,9 +23,9 @@ import com.wooriyo.us.pinmenuer.BaseActivity
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.density
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.useridx
-import com.wooriyo.pinmenuer.R
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.config.AppProperties
-import com.wooriyo.pinmenuer.databinding.ActivitySetEventPopupBinding
+import com.wooriyo.us.pinmenuer.databinding.ActivitySetEventPopupBinding
 import com.wooriyo.us.pinmenuer.event.dialog.EventConfirmDialog
 import com.wooriyo.us.pinmenuer.model.EventDTO
 import com.wooriyo.us.pinmenuer.model.ResultDTO

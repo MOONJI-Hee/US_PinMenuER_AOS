@@ -228,7 +228,7 @@
     <TextView
         style="@style/btn_main"
         android:id="@+id/save"
-        android:text="@string/btn_save"
+        android:text="@string/save"
         android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toTopOf="@+id/info"
         app:layout_constraintStart_toStartOf="parent"

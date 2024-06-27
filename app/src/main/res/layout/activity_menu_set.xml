@@ -189,7 +189,7 @@
                 android:layout_width="80dp"
                 android:layout_marginStart="20dp"
                 android:background="@drawable/selector_btn_save"
-                android:text="@string/btn_save2"
+                android:text="@string/save"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/etName"
                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -600,7 +600,7 @@
                 android:id="@+id/delCancel"
                 android:layout_width="0dp"
                 android:layout_marginTop="30dp"
-                android:text="@string/btn_cancel"
+                android:text="@string/cancel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/delSave"/>
@@ -610,7 +610,7 @@
                 android:id="@+id/delSave"
                 android:layout_width="0dp"
                 android:layout_marginStart="20dp"
-                android:text="@string/btn_delete"
+                android:text="@string/delete"
                 app:layout_constraintTop_toTopOf="@+id/delCancel"
                 app:layout_constraintBottom_toBottomOf="@+id/delCancel"
                 app:layout_constraintStart_toEndOf="@+id/delCancel"

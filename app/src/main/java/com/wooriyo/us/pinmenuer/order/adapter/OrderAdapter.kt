@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wooriyo.us.pinmenuer.MyApplication
-import com.wooriyo.pinmenuer.R
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.common.InfoDialog
-import com.wooriyo.pinmenuer.databinding.ListOrderBinding
+import com.wooriyo.us.pinmenuer.databinding.ListOrderBinding
 import com.wooriyo.us.pinmenuer.listener.ItemClickListener
 import com.wooriyo.us.pinmenuer.model.OrderHistoryDTO
 import com.wooriyo.us.pinmenuer.util.AppHelper

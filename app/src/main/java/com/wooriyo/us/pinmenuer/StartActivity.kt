@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.wooriyo.pinmenuer.R
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.androidId
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.appver
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.pref

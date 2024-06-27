@@ -54,7 +54,7 @@
         <EditText
             style="@style/edittext"
             android:id="@+id/et_month"
-            android:layout_width="210dp"
+            android:layout_width="180dp"
             android:layout_marginTop="32dp"
             android:hint="@string/everymonth"
             android:inputType="date"
@@ -72,9 +72,9 @@
         <EditText
             style="@style/edittext"
             android:id="@+id/et_day"
-            android:layout_width="210dp"
+            android:layout_width="180dp"
             android:layout_marginEnd="10dp"
-            android:hint="@string/zero2"
+            android:hint="DD"
             android:inputType="date"
             android:maxLength="2"
             android:gravity="center"
@@ -114,20 +114,20 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="20dp"
-                android:text="@string/btn_delete" />
+                android:text="@string/delete" />
             <TextView
                 style="@style/btn"
                 android:id="@+id/modify"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:text="@string/btn_save"/>
+                android:text="@string/save"/>
         </LinearLayout>
         <TextView
             style="@style/btn_main"
             android:id="@+id/save"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="60dp"
-            android:text="@string/btn_confirm"
+            android:text="@string/confirm"
             android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

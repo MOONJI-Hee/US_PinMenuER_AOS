@@ -30,7 +30,7 @@
         style="@style/btn_main"
         android:id="@+id/save"
         android:layout_marginBottom="40dp"
-        android:text="@string/btn_save"
+        android:text="@string/save"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
@@ -96,12 +96,12 @@
                 app:layout_constraintBottom_toBottomOf="@+id/ll_open_same"/>
             <TextView
                 android:id="@+id/tv1"
-                style="@style/subtext"
-                android:layout_height="24dp"
+                style="@style/text16l"
+                android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginTop="10dp"
                 android:text="@string/store_time_info"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ll_open_same" />
             <LinearLayout
                 android:id="@+id/ll2"
@@ -153,7 +153,7 @@
                 android:gravity="center_vertical"
                 app:layout_constraintTop_toBottomOf="@+id/ll_open_mon"
                 app:layout_constraintBottom_toTopOf="@+id/ll_open_wed">
-            <CheckBox
+                <CheckBox
                     style="@style/check"
                     android:id="@+id/check_open_tue"
                     android:text="@string/tuesday" />

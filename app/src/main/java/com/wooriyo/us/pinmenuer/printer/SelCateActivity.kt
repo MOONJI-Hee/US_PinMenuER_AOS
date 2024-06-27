@@ -6,8 +6,8 @@ import android.widget.CheckBox
 import androidx.recyclerview.widget.GridLayoutManager
 import com.wooriyo.us.pinmenuer.BaseActivity
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.allCateList
-import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.databinding.ActivitySelCateBinding
+import com.wooriyo.us.pinmenuer.R
+import com.wooriyo.us.pinmenuer.databinding.ActivitySelCateBinding
 import com.wooriyo.us.pinmenuer.listener.ItemClickListener
 import com.wooriyo.us.pinmenuer.printer.adapter.SelCateAdapter
 

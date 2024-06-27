@@ -11,9 +11,8 @@ import com.wooriyo.us.pinmenuer.BaseActivity
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.store
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.useridx
-import com.wooriyo.pinmenuer.R
-import com.wooriyo.us.pinmenuer.common.MapActivity
-import com.wooriyo.pinmenuer.databinding.ActivityStoreSetDetailBinding
+import com.wooriyo.us.pinmenuer.R
+import com.wooriyo.us.pinmenuer.databinding.ActivityStoreSetDetailBinding
 import com.wooriyo.us.pinmenuer.model.ResultDTO
 import com.wooriyo.us.pinmenuer.util.ApiClient
 import com.wooriyo.us.pinmenuer.util.AppHelper
@@ -78,20 +77,12 @@ class StoreSetDetailActivity : BaseActivity(), View.OnClickListener {
         }
 
         binding.back.setOnClickListener(this)
-        binding.btnMap.setOnClickListener(this)
         binding.save.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
         when(p0) {
             binding.back -> finish()
-            binding.btnMap -> {
-                val intent = Intent(this@StoreSetDetailActivity, MapActivity::class.java)
-                intent.putExtra("lat", parkingLat)
-                intent.putExtra("long", parkingLong)
-                intent.putExtra("address", parkingAddr)
-                setAddr.launch(intent)
-            }
             binding.save -> save()
         }
     }

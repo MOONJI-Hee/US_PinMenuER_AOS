@@ -9,11 +9,11 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.wooriyo.pinmenuer"
+        applicationId "com.wooriyo.us.pinmenuer"
         minSdk 21
         targetSdk 33
-        versionCode 40
-        versionName "1.1.28"
+        versionCode 1
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

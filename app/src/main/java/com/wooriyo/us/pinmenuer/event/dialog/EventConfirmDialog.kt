@@ -6,8 +6,8 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import com.wooriyo.us.pinmenuer.BaseDialogFragment
-import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.databinding.DialogChoiceBinding
+import com.wooriyo.us.pinmenuer.R
+import com.wooriyo.us.pinmenuer.databinding.DialogChoiceBinding
 
 class EventConfirmDialog(val onClickListener: OnClickListener): BaseDialogFragment() {
 
@@ -17,7 +17,7 @@ class EventConfirmDialog(val onClickListener: OnClickListener): BaseDialogFragme
         binding = DialogChoiceBinding.inflate(layoutInflater)
 
         binding.content.text = resources.getString(R.string.event_noti_switch_ff)
-        binding.confirm.text = resources.getString(R.string.btn_save)
+        binding.confirm.text = resources.getString(R.string.save)
 
         binding.cancel.setOnClickListener{dismiss()}
         binding.confirm.setOnClickListener {

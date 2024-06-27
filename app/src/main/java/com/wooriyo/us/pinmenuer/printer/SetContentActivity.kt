@@ -10,8 +10,8 @@ import com.wooriyo.us.pinmenuer.BaseActivity
 import com.wooriyo.us.pinmenuer.MyApplication
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.androidId
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.useridx
-import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.databinding.ActivitySetContentBinding
+import com.wooriyo.us.pinmenuer.R
+import com.wooriyo.us.pinmenuer.databinding.ActivitySetContentBinding
 import com.wooriyo.us.pinmenuer.model.PrintContentDTO
 import com.wooriyo.us.pinmenuer.printer.adapter.SelectedCateAdapter
 import com.wooriyo.us.pinmenuer.util.ApiClient

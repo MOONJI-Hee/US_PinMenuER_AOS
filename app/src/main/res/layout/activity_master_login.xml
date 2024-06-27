@@ -64,7 +64,7 @@
             android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_marginTop="40dp"
-            android:text="@string/btn_login"/>
+            android:text="@string/login"/>
 <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="wrap_content"-->

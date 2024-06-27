@@ -10,8 +10,8 @@ import android.view.WindowManager
 import android.widget.Toast
 import com.wooriyo.us.pinmenuer.BaseDialog
 import com.wooriyo.us.pinmenuer.MyApplication
-import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.databinding.DialogCategoryBinding
+import com.wooriyo.us.pinmenuer.R
+import com.wooriyo.us.pinmenuer.databinding.DialogCategoryBinding
 import com.wooriyo.us.pinmenuer.listener.DialogListener
 import com.wooriyo.us.pinmenuer.model.CateListDTO
 import com.wooriyo.us.pinmenuer.model.CategoryDTO

@@ -79,20 +79,20 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="20dp"
-                android:text="@string/btn_delete" />
+                android:text="@string/delete" />
             <TextView
                 style="@style/btn"
                 android:id="@+id/modify"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:text="@string/btn_save"/>
+                android:text="@string/save"/>
         </LinearLayout>
         <TextView
             style="@style/btn_main"
             android:id="@+id/save"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="32dp"
-            android:text="@string/btn_save"
+            android:text="@string/save"
             android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

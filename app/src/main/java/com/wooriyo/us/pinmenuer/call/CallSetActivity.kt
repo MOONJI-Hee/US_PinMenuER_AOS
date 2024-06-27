@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.wooriyo.us.pinmenuer.BaseActivity
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.useridx
-import com.wooriyo.pinmenuer.R
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.call.adapter.CallSetAdapter
 import com.wooriyo.us.pinmenuer.call.dialog.CallDialog
-import com.wooriyo.pinmenuer.databinding.ActivityCallListBinding
+import com.wooriyo.us.pinmenuer.databinding.ActivityCallListBinding
 import com.wooriyo.us.pinmenuer.listener.DialogListener
 import com.wooriyo.us.pinmenuer.listener.ItemClickListener
 import com.wooriyo.us.pinmenuer.model.CallDTO

@@ -56,7 +56,7 @@
     <TextView
         style="@style/btn_small"
         android:id="@+id/btn_check_id"
-        android:layout_width="98dp"
+        android:layout_width="168dp"
         android:layout_marginStart="10dp"
         android:text="@string/check_id"
         android:visibility="visible"
@@ -91,49 +91,13 @@
         app:layout_constraintStart_toStartOf="@+id/et_id"
         app:layout_constraintEnd_toEndOf="@+id/et_id"/>
 
-    <TextView
-        style="@style/text18"
-        android:layout_marginEnd="16dp"
-        android:text="@string/arpayo_id"
-        app:layout_constraintEnd_toStartOf="@+id/et_arpayo"
-        app:layout_constraintTop_toTopOf="@+id/et_arpayo"
-        app:layout_constraintBottom_toBottomOf="@+id/et_arpayo" />
-
-    <EditText
-        style="@style/edittext_main"
-        android:id="@+id/et_arpayo"
-        android:layout_marginTop="32dp"
-        android:hint="@string/arpayo_id_hint"
-        android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@+id/et_pwd"
-        app:layout_constraintStart_toStartOf="@+id/et_pwd"
-        app:layout_constraintEnd_toEndOf="@+id/et_pwd"/>
-
-    <TextView
-        style="@style/btn_small"
-        android:id="@+id/btn_arpayo"
-        android:layout_width="98dp"
-        android:layout_marginStart="10dp"
-        android:text="@string/link"
-        app:layout_constraintTop_toTopOf="@+id/et_arpayo"
-        app:layout_constraintBottom_toBottomOf="@+id/et_arpayo"
-        app:layout_constraintStart_toEndOf="@+id/et_arpayo" />
-
-    <TextView
-        style="@style/disable"
-        android:id="@+id/link_result"
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toEndOf="@+id/btn_arpayo"
-        app:layout_constraintTop_toTopOf="@+id/btn_arpayo"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_arpayo"/>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clTerms"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/et_arpayo"
-        app:layout_constraintStart_toStartOf="@id/et_arpayo"
-        app:layout_constraintEnd_toEndOf="@id/et_arpayo">
+        app:layout_constraintTop_toBottomOf="@+id/et_pwd"
+        app:layout_constraintStart_toStartOf="@id/et_pwd"
+        app:layout_constraintEnd_toEndOf="@id/et_pwd">
 
         <TextView
             style="@style/text18"
@@ -228,18 +192,8 @@
         android:text="@string/signup_info1"
         android:lineSpacingExtra="0dp"
         android:layout_marginTop="30dp"
-        app:layout_constraintStart_toStartOf="@+id/et_arpayo"
+        app:layout_constraintStart_toStartOf="@+id/et_pwd"
         app:layout_constraintTop_toBottomOf="@+id/clTerms"/>
-
-    <TextView
-        style="@style/subtext"
-        android:id="@+id/signup_info2"
-        android:text="@string/signup_info2"
-        android:lineSpacingExtra="0dp"
-        android:layout_marginTop="15dp"
-        app:layout_goneMarginTop="30dp"
-        app:layout_constraintStart_toStartOf="@+id/signup_info1"
-        app:layout_constraintTop_toBottomOf="@+id/signup_info1"/>
 
     <TextView
         style="@style/btn_main"
@@ -260,7 +214,7 @@
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signup_info2"/>
+        app:layout_constraintTop_toBottomOf="@id/signup_info1"/>
 
     <LinearLayout
         android:id="@+id/ll_udt"
@@ -276,7 +230,7 @@
             android:id="@+id/drop"
             android:layout_width="240dp"
             android:layout_marginEnd="20dp"
-            android:text="@string/btn_drop"/>
+            android:text="@string/drop"/>
         <TextView
             style="@style/btn"
             android:id="@+id/logout"

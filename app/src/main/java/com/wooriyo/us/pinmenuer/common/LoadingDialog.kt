@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.wooriyo.us.pinmenuer.BaseDialogFragment
-import com.wooriyo.pinmenuer.databinding.DialogLoadingBinding
+import com.wooriyo.us.pinmenuer.databinding.DialogLoadingBinding
 
 class LoadingDialog: BaseDialogFragment() {
     lateinit var binding: DialogLoadingBinding

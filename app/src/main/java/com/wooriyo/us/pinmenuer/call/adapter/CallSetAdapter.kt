@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wooriyo.us.pinmenuer.config.AppProperties
-import com.wooriyo.pinmenuer.databinding.ListCallAddBinding
-import com.wooriyo.pinmenuer.databinding.ListCallSetBinding
+import com.wooriyo.us.pinmenuer.databinding.ListCallAddBinding
+import com.wooriyo.us.pinmenuer.databinding.ListCallSetBinding
 import com.wooriyo.us.pinmenuer.listener.ItemClickListener
 import com.wooriyo.us.pinmenuer.model.CallDTO
 

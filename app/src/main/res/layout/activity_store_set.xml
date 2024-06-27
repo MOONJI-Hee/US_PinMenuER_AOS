@@ -51,7 +51,7 @@
         android:id="@+id/et_name2"
         style="@style/edittext_main"
         android:layout_marginTop="8dp"
-        android:hint="@string/store_name_hint"
+        android:hint="@string/store_name_hint2"
         android:inputType="text"
         android:imeOptions="actionDone"
         android:maxLines="1"
@@ -83,16 +83,6 @@
         app:layout_constraintEnd_toEndOf="@+id/et_name2"
         app:layout_constraintStart_toStartOf="@+id/et_name2"
         app:layout_constraintTop_toBottomOf="@+id/et_name2" />
-
-    <TextView
-        android:id="@+id/btn_map"
-        style="@style/btn_small"
-        android:layout_width="98dp"
-        android:layout_marginStart="10dp"
-        android:text="@string/store_map"
-        app:layout_constraintBottom_toBottomOf="@+id/et_addr"
-        app:layout_constraintStart_toEndOf="@+id/et_addr"
-        app:layout_constraintTop_toTopOf="@+id/et_addr" />
 
     <!--    <TextView-->
     <!--        style="@style/essential"-->
@@ -307,14 +297,14 @@
             android:layout_width="0dp"
             android:layout_marginEnd="20dp"
             android:layout_weight="1"
-            android:text="@string/btn_delete" />
+            android:text="@string/delete" />
 
         <TextView
             android:id="@+id/modify"
             style="@style/btn"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="@string/btn_save" />
+            android:text="@string/save" />
     </LinearLayout>
 
     <TextView

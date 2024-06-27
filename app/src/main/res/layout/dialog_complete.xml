@@ -38,12 +38,12 @@
             android:layout_marginHorizontal="60dp"
             android:layout_marginTop="30dp"
             android:lineSpacingExtra="3dp"
-            android:text="@string/order_complete_info"
             app:layout_constraintTop_toBottomOf="@+id/title" />
 
         <CheckBox
             style="@style/check"
             android:id="@+id/visibility"
+            android:layout_width="wrap_content"
             android:layout_marginTop="18dp"
             android:textColor="@color/sub_text"
             android:text="@string/dialog_dont_show"

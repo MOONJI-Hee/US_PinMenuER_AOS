@@ -91,7 +91,7 @@
     <TextView
         style="@style/text20"
         android:layout_marginBottom="10dp"
-        android:text="@string/store_exp_reg"
+        android:text="@string/store_exp"
         app:layout_constraintBottom_toTopOf="@+id/etStoreExp"
         app:layout_constraintStart_toStartOf="@+id/etStoreExp" />
 
@@ -113,7 +113,7 @@
         android:id="@+id/save"
         style="@style/btn_main"
         android:layout_marginBottom="40dp"
-        android:text="@string/btn_save"
+        android:text="@string/save"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -134,7 +134,7 @@
             style="@style/btn_cancel"
             android:layout_width="240dp"
             android:layout_marginEnd="20dp"
-            android:text="@string/btn_delete"
+            android:text="@string/delete"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -142,7 +142,7 @@
             android:id="@+id/modify"
             style="@style/btn"
             android:layout_width="240dp"
-            android:text="@string/btn_save"
+            android:text="@string/save"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/delete" />
     </androidx.constraintlayout.widget.ConstraintLayout>

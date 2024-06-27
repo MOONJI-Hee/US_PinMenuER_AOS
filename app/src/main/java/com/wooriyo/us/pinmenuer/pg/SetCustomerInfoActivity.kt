@@ -8,8 +8,8 @@ import com.wooriyo.us.pinmenuer.BaseActivity
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.store
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.useridx
-import com.wooriyo.pinmenuer.R
-import com.wooriyo.pinmenuer.databinding.ActivitySetCustomerInfoBinding
+import com.wooriyo.us.pinmenuer.R
+import com.wooriyo.us.pinmenuer.databinding.ActivitySetCustomerInfoBinding
 import com.wooriyo.us.pinmenuer.model.PgResultDTO
 import com.wooriyo.us.pinmenuer.model.PgTableDTO
 import com.wooriyo.us.pinmenuer.model.ResultDTO

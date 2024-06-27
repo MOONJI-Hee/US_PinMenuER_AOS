@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">app.pinmenu.net</domain>
+        <domain includeSubdomains="true">img.pinmenu.net</domain>
+        <domain includeSubdomains="true">3.137.221.84</domain>
+        <domain includeSubdomains="true">52.14.102.240</domain>
         <domain includeSubdomains="true">app.pinmenu.biz</domain>
-        <domain includeSubdomains="true">49.247.26.41</domain>
-        <domain includeSubdomains="true">pinmenu.biz</domain>
-        <domain includeSubdomains="true">49.247.22.8</domain>
-        <domain includeSubdomains="true">cp.wooriyo.com</domain>
-        <domain includeSubdomains="true">maps.daum-img.net</domain>
+        <domain includeSubdomains="true">img.pinmenu.biz</domain>
     </domain-config>
 </network-security-config>

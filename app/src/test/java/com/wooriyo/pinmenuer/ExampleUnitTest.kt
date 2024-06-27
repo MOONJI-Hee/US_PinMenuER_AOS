@@ -1,4 +1,4 @@
-package com.wooriyo.pinmenuer
+package com.wooriyo.us.pinmenuer
 
 import org.junit.Test
 

@@ -9,7 +9,8 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import com.wooriyo.us.pinmenuer.BaseDialogFragment
-import com.wooriyo.pinmenuer.databinding.DialogConfirmBinding
+import com.wooriyo.us.pinmenuer.R
+import com.wooriyo.us.pinmenuer.databinding.DialogConfirmBinding
 
 class UpdateDialog(private val update: Int, val msg: String): BaseDialogFragment() {
     lateinit var binding: DialogConfirmBinding
@@ -27,7 +28,7 @@ class UpdateDialog(private val update: Int, val msg: String): BaseDialogFragment
 
         if(update == 0) {   // 권장 업데이트
             binding.cancel.run {
-                text = "나중에 하기"
+                text = "Do it later"
                 setOnClickListener {
                     onClickListener.onClick(it)
                     dismiss()
@@ -38,7 +39,8 @@ class UpdateDialog(private val update: Int, val msg: String): BaseDialogFragment
         }
 
         binding.content.text = msg
-        binding.confirm.text = "업데이트"
+        binding.confirm.text = requireContext().getString(R.string.update)
+
         binding.confirm.setOnClickListener {
             try {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${context?.packageName}")))

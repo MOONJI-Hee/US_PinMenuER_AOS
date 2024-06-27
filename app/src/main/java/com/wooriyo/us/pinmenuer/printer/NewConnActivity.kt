@@ -16,9 +16,9 @@ import com.sewoo.request.android.RequestHandler
 import com.wooriyo.us.pinmenuer.BaseActivity
 import com.wooriyo.us.pinmenuer.MyApplication
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.bidx
-import com.wooriyo.pinmenuer.R
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.broadcast.BtDiscoveryReceiver
-import com.wooriyo.pinmenuer.databinding.ActivityNewConnBinding
+import com.wooriyo.us.pinmenuer.databinding.ActivityNewConnBinding
 import com.wooriyo.us.pinmenuer.listener.DialogListener
 import com.wooriyo.us.pinmenuer.model.PrintContentDTO
 import com.wooriyo.us.pinmenuer.model.ResultDTO
@@ -143,15 +143,12 @@ class NewConnActivity : BaseActivity() {
         var img = 0
         when(printType) {
             1 -> {
-                printerModel = getString(R.string.skl_ts400b)
                 img = R.drawable.skl_ts400b
             }
             2 -> {
-                printerModel = getString(R.string.skl_te202)
                 img = R.drawable.skl_te202
             }
             3 -> {
-                printerModel = getString(R.string.sam4s)
                 img = R.drawable.sam4s
             }
         }

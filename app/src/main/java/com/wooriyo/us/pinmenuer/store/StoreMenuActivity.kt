@@ -13,9 +13,9 @@ import com.wooriyo.us.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.allCateList
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.androidId
-import com.wooriyo.pinmenuer.R
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.call.CallSetActivity
-import com.wooriyo.pinmenuer.databinding.ActivityStoreMenuBinding
+import com.wooriyo.us.pinmenuer.databinding.ActivityStoreMenuBinding
 import com.wooriyo.us.pinmenuer.event.SetEventPopup
 import com.wooriyo.us.pinmenuer.history.ByHistoryActivity
 import com.wooriyo.us.pinmenuer.history.ByTableActivity
@@ -24,11 +24,9 @@ import com.wooriyo.us.pinmenuer.menu.CategorySetActivity
 import com.wooriyo.us.pinmenuer.menu.MenuSetActivity
 import com.wooriyo.us.pinmenuer.model.CateListDTO
 import com.wooriyo.us.pinmenuer.model.ResultDTO
-import com.wooriyo.us.pinmenuer.payment.SetPayActivity
 import com.wooriyo.us.pinmenuer.pg.PgHistoryActivity
 import com.wooriyo.us.pinmenuer.pg.dialog.NoPgInfoDialog
 import com.wooriyo.us.pinmenuer.printer.PrinterMenuActivity
-import com.wooriyo.us.pinmenuer.qrcode.PgAgreeActivity
 import com.wooriyo.us.pinmenuer.qrcode.SetQrcodeActivity
 import com.wooriyo.us.pinmenuer.setting.MenuUiActivity
 import com.wooriyo.us.pinmenuer.setting.TablePassActivity
@@ -100,7 +98,7 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                 }
             }
             qrcode.setOnClickListener {
-                val intent = if(store.agree == "Y") Intent(mActivity, SetQrcodeActivity::class.java) else Intent(mActivity, PgAgreeActivity::class.java)
+                Intent(mActivity, SetQrcodeActivity::class.java)
                 startActivity(intent)
             }
             event.setOnClickListener { startActivity(Intent(mActivity, SetEventPopup::class.java)) }
@@ -202,7 +200,6 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
 
                     if(result.status == 1) {
                         MyApplication.bidx = result.bidx
-                        startActivity(Intent(mActivity, SetPayActivity::class.java))
                     }else
                         Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                 }

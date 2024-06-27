@@ -9,13 +9,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.wooriyo.us.pinmenuer.MyApplication
-import com.wooriyo.pinmenuer.R
+import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.config.AppProperties.Companion.VIEW_TYPE_ADD
 import com.wooriyo.us.pinmenuer.config.AppProperties.Companion.VIEW_TYPE_COM
 import com.wooriyo.us.pinmenuer.config.AppProperties.Companion.VIEW_TYPE_EMPTY
-import com.wooriyo.pinmenuer.databinding.ListStoreAddBinding
-import com.wooriyo.pinmenuer.databinding.ListStoreBinding
-import com.wooriyo.pinmenuer.databinding.ListStoreEmptyBinding
+import com.wooriyo.us.pinmenuer.databinding.ListStoreAddBinding
+import com.wooriyo.us.pinmenuer.databinding.ListStoreBinding
+import com.wooriyo.us.pinmenuer.databinding.ListStoreEmptyBinding
 import com.wooriyo.us.pinmenuer.listener.ItemClickListener
 import com.wooriyo.us.pinmenuer.model.StoreDTO
 import com.wooriyo.us.pinmenuer.store.StoreMenuActivity
@@ -110,7 +110,7 @@ class StoreAdapter(val dataSet: ArrayList<StoreDTO>): RecyclerView.Adapter<Recyc
             if(data.paydate.isNotEmpty() && data.payuse == "N") {
                 AlertDialog.Builder(context)
                     .setTitle(R.string.dialog_notice)
-                    .setMessage("${data.name}\n이용기간이 만료되었습니다.\n정기결제 후 이용을 부탁드립니다.")
+                    .setMessage("${data.name}\nThe period of use has expired.\nPlease use it after payment.")
                     .setPositiveButton(R.string.confirm) { dialog, _ -> dialog.dismiss()}
                     .show()
             }
