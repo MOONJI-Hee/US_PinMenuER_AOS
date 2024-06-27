@@ -73,7 +73,7 @@
             style="@style/btn"
             android:layout_width="0dp"
             android:layout_marginBottom="32dp"
-            android:text="@string/confirm"
+            android:text="@string/btn_add"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/opt_info1"
             app:layout_constraintEnd_toEndOf="@+id/opt_name"

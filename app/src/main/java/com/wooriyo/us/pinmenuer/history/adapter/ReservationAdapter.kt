@@ -92,11 +92,13 @@ class ReservationAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.
                     1 -> {
                         clTableNo.visibility = View.VISIBLE
                         reservType.setBackgroundColor(Color.parseColor("#FF005E"))
+                        ivReservType.setImageResource(R.drawable.icon_res_store)
                         tvDate.text = String.format(context.getString(R.string.reserv_date), "매장")
                     }
                     2 -> {
                         clTableNo.visibility = View.GONE
                         reservType.setBackgroundColor(Color.parseColor("#46B6FF"))
+                        ivReservType.setImageResource(R.drawable.icon_res_togo)
                         tvDate.text = String.format(context.getString(R.string.reserv_date), "포장")
                     }
                 }

@@ -141,7 +141,7 @@
     <string name="show_by_table_sub">・View Call History</string>
     <string name="menu_mgmt">Menu Management</string>
     <string name="event_mgmt">Event</string>
-    <string name="menu_mgmt_sub">・Categories\\n・Menu, Price, Picture, Description</string>
+    <string name="menu_mgmt_sub">・Categories\n・Menu, Price, Picture,\nDescription</string>
     <string name="order_mgmt">Order Info</string>
 
     <string name="menu_manage">Menu Mgmt.</string>
@@ -151,10 +151,12 @@
     <string name="menu_seq_change_way">Method of change : Press and drag the menu you want to change up or down</string>
     <string name="menu_name_hint">Please enter the product name.</string>
     <string name="menu_exp_hint">Please enter the product description.</string>
-    <string name="cookingTime">Cook time</string>
+    <string name="cookingTime">Cooking Time</string>
     <string name="price">Price</string>
+    <string name="menu_img_reg_info">Recommended: 800×600 (4:3) / Max : 5MB.</string>
     <string name="menu_img_reg_info2">Recommended: 800×600 (4:3) / Max : 5MB</string>
-    <string name="menu_img_reg">Photo\nUpload</string>
+    <string name="menu_img_reg_hint">No image</string>
+    <string name="menu_img_reg">Photo Upload</string>
     <string name="menu_sleep">Product Exposure in Sleep Mode</string>
     <string name="menu_status">Menu Status</string>
 
@@ -162,32 +164,61 @@
     <string name="option_require">Required Option</string>
     <string name="option_choice">Select Option</string>
 
-    <string name="opt_num">Option %d</string>
 
-    <string name="opt_req_name">Option Name(Customers can only choose one)</string>
-    <string name="opt_chc_name">Option Name(Customers can choose multiple)</string>
-    <string name="opt_hint">Please enter the option name</string>
+    <string name="opt_req_name">Option Name</string>
+    <string name="opt_chc_name">Option Name</string>
+    <string name="opt_num">Option %d</string>
+    <string name="opt_udt_req">Modify Required Option</string>
+    <string name="opt_udt_chc">Modify Select Option</string>
+    <string name="opt_name_hint">Please enter the option name</string>
+    <string name="opt_hint">Option name</string>
+    <string name="opt_req_info1">The <b>required option</b> allows the user to select only one option.</string>
+    <string name="opt_req_info2">If you need a <b>multiple selection option</b>, close the popup, use [ + Select Option ] button to add option.</string>
+    <string name="opt_chc_info1"><b>Select option</b> allows users to choose multiple options.</string>
+    <string name="opt_chc_info2">If you need <b>single selection</b>, close the popup and use the [ + Required Option ] button to add.</string>
+    <string name="opt_udt_info1">Click the red text [Delete] to <b>delete</b> the <b>corresponding option.</b></string>
+    <string name="opt_udt_info2">The [Delete] button at the bottom will <b>delete all options.</b></string>
+
+    <string name="table_pass">Ordering App\nTable Number\nPassword Set</string>
+    <string name="table_pass_sub">Set Table Password</string>
+    <string name="table_pass_hint">Ex)1234</string>
+    <string name="table_pass_info">Customers can modify the table number by tapping the top right corner of\nthe menu app.\nThis is to allow staff to quickly change table numbers while delivering\nmenus to guests.\nHowever, because customers can easily change table numbers, only staff\nwith the password can change the table number. You can set a password to\nallow only staff who know the password to change the table number.\nWhen setting a table password, it will be applied to all customer menu apps.</string>
+    <string name="table_pass_info2">If you do not want to set a password, delete the password and save.</string>
 
     <string name="dialog_delete_title">Delete %s</string>
 
     <string name="dialog_delete_confirm">Delete this %s?</string>
     <string name="category_delete_info">Pressing delete will remove all items within this category, and once deleted, they cannot be restored.</string>
-    <string name="menu_delete_info">Pressing delete will erase all entered information, and once deleted, they cannot be restored.</string>
+    <string name="menu_delete_info">Delete this menu?\nPressing delete will erase all entered information, and once deleted, they cannot be restored.</string>
 
+    <string name="category_info_seq"><b>To change the order of categories,</b>\nclick on the category you want to change and use the left and right buttons to move it.\nAfter making changes, click [Save] to apply the changes.</string>
+    <string name="category_info_udt"><b>If you want to [Edit], [Delete], or [Hide] a category,</b>\nclick on the category you want to change, and then you can edit, delete, or hide it in the pop up window.</string>
     <string name="category_name">Category Name</string>
     <string name="category_name_hint">Please enter the category name.</string>
-    <string name="category_exp">Category Description</string>
+    <string name="category_exp">Description</string>
     <string name="category_exp_hint">Please enter a brief description.</string>
-    <string name="category_dialog_info1"><b>To change the order of categories,</b>click on [Change Category Order] in the upper right corner. Then select the category you want to change, and move it left or right to change the order. After making changes, click [Save] to apply them.</string>
+    <string name="category_dialog_info1"><b>To change the order of categories,</b>\nclick on [Change Category Order] in the upper right corner.\nThen select the category you want to change, and move it left or right\nto change the order. After making changes, click [Save] to apply them.</string>
     <string name="category_dialog_info2"><b>If you need to [Hide] a category,</b>\nchange the Off button next to [Hide] in the top right corner to On, and then click Save.\nDeleting will remove all menu information entered in the category, but [Hide] will make it not visible to customers.</string>
     <string name="category_hide">Hide</string>
+    <string name="category_set">Category\nSettings</string>
     <string name="category_add">Add Category</string>
-
     <string name="category_seq">Change Category Order</string>
     <string name="category_seq_change_way">Method of change : Press and drag the category you want to change up or down</string>
 
+    <string name="change_seq">Change Order</string>
+    <string name="change_seq_cmplt">Complete</string>
+    <string name="change_seq_way">Method of Change Menu Order</string>
+    <string name="change_seq_way_info1">1. Click the [Change Order] button.\n2. Select the menu item you want to reorder from the left\n\tcolumn, then drag it to the desired position to move it.\n3. Once the order is changed, click the [Complete] button at the\n\tbottom.</string>
+    <string name="change_seq_way_info2">※ This popup closes automatically after changes are completed.</string>
+    <string name="menu_delete">Menu Delete</string>
+    <string name="menu_delete_cmplt">Complete</string>
+
     <string name="printer_title_store">Select Store</string>
+
     <string name="printer">Printer</string>
+    <string name="printer_set">Printer\nSettings</string>
+    <string name="printer_conn">프린터 연결</string>
+    <string name="printer_set_sub">・Connect and\nChange Printer</string>
     <string name="printer_title_set">Printer Settings</string>
     <string name="printer_menu_conn">Manage Printer\nConnections</string>
     <string name="printer_menu_support">View Available\nPrinters</string>
@@ -285,6 +316,12 @@
     <string name="event_popup_set">Event Settings after Order</string>
     <string name="event_img_hint">Image/Photo\nRegistration</string>
     <string name="event_img_info">Recommended: 800×600 (4:3) / Max : 5MB. Without image, only description displayed.</string>
+
+    <string name="title_event">Event</string>
+    <string name="event_set_popup">주문완료 후 이벤트 설정</string>
+    <string name="event_main_img">대표 이미지</string>
+    <string name="event_main_img_hint">[ 등록 및 수정 ] 버튼으로\n이미지/사진을 등록해 주세요\n이미지 : 800×600권장, 최대 5MB\n이미지/사진 미등록 시 설명만 보여집니다.</string>
+    <string name="event_reg_udt">등록 및 수정</string>
     <string name="event_exp">Event Description</string>
     <string name="event_exp_hint">Please register within 400byte Ex)Participate in the Naver receipt review event and receive complimentary beverages.</string>
     <string name="event_link">Link Registration</string>
@@ -300,9 +337,21 @@
     <string name="more_store_img">Store Photo</string>
 
     <string name="title_viewmode">Customer Menu Mode</string>
+
+    <string name="menu_ui">Menu Design</string>
+    <string name="title_menu_ui">Menu Design Setup</string>
+    <string name="menu_ui_sub">・Mode: Basic/Picture/Text\n・Color: Black/Silver/White</string>
+    <string name="menu_ui_info">Please select the design for the menu board to be used in the store.</string>
+    <string name="sel_bg">배경선택</string>
+    <string name="bg_dark">어두운 배경</string>
+    <string name="bg_silver">은색 배경</string>
+    <string name="bg_light">밝은 배경</string>
+    <string name="sel_viewmode">Menu Display\nfor Customers</string>
     <string name="viewmode_basic">Basic Mode</string>
     <string name="viewmode_pic">Picture Mode</string>
     <string name="viewmode_list">Text Mode</string>
+    <string name="save_ui">Apply Design</string>
+
     <string name="viewmode_info">Please select the design for the menu\nboard to be used in the store.</string>
 
     <string name="special_holiday">Special Holidays</string>
@@ -438,4 +487,15 @@
     <string name="title_store_detail">Store Info : Details</string>
     <string name="title_store_hours">Store Info : Open</string>
     <string name="title_store_img">Store Info: Photos/Description</string>
+    <string name="title_table_pass">Ordering App Table Number Password Set</string>
+    <string name="togo">To-go</string>
+    <string name="call_manage">View\nCall History</string>
+    <string name="pg_cancel_menu">PG Payment\\nHistory</string>
+    <string name="pg_cancel_menu_sub">・PG payment details\\n・PG payment cancellation</string>
+    <string name="qrcode_menu">QR Code</string>
+    <string name="qrcode_menu_info">・Generate/delete QR code\\n・Download QR code</string>
+    <string name="opt_list">Entered Options</string>
+    <string name="opt_list_empty">No Entered Options</string>
+
+
 </resources>

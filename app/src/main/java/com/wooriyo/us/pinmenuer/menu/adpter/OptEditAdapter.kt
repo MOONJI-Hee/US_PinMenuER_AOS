@@ -65,7 +65,7 @@ class OptEditAdapter(val dataSet: ArrayList<ValueDTO>): RecyclerView.Adapter<Rec
     class ViewHolder(val binding: ListOptEditBinding, val context: Context): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ValueDTO) {
             binding.run {
-                num.text = "옵션${absoluteAdapterPosition + 1}"
+                num.text = "Option ${absoluteAdapterPosition + 1}"
 
                 etVal.setText(data.name)
 
@@ -112,7 +112,7 @@ class OptEditAdapter(val dataSet: ArrayList<ValueDTO>): RecyclerView.Adapter<Rec
 
     class AddViewHolder(val binding: ListOptAddBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind() {
-            binding.num.text = "옵션${absoluteAdapterPosition + 1}"
+            binding.num.text = "Option ${absoluteAdapterPosition + 1}"
         }
     }
 }

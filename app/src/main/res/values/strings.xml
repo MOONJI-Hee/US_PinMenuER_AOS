@@ -217,8 +217,6 @@
     <string name="menu_exp_hint">상품 설명을 입력해 주세요.\n두 줄 이상으로 상품 설명을 입력하실 수 있습니다.\n외국어 설명이 필요한 경우 줄을 바꿔 입력하여 사용할 수 있습니다.</string>
     <string name="cookingTime">조리시간</string>
     <string name="menu_img_reg_info">이미지 권장 규격 800×600(비율 4:3) / 최대 5MB</string>
-    <string name="menu_vid_reg">동영상 / 사진 등록</string>
-    <string name="menu_vid_reg_hint">동영상 / 이미지 없음</string>
     <string name="menu_img_reg">사진 등록</string>
     <string name="menu_img_reg_hint">이미지 없음</string>
     <string name="menu_sleep">슬립 모드 때 상품 노출</string>
@@ -273,14 +271,9 @@
     <string name="save_ui">디자인 적용</string>
 
     <!-- 주문 정보 -->
-    <string name="order_btn_merge">주문 합치기</string>
     <string name="tot_price">총 합계</string>
     <string name="print">프 린 트</string>
     <string name="order_total" translatable="false">TOTAL</string>
-    <string name="order_sel_merge">이 항목으로 합치기</string>
-    <string name="order_merge">주문항목 합치기</string>
-    <string name="order_merge_info">해당 항목으로 선택된 주문 정보를 합칩니다.\n합쳐진 이후에는 복구가 불가능합니다.</string>
-    <string name="merge">합치기</string>
     <string name="order_dialog_clear">주문정보는 3일간 보관되며,\n\'초기화\'버튼을 누르면 모든 주문정보가 삭제됩니다.</string>
 
     <string name="table_no_kr">테이블번호</string>
@@ -543,7 +536,6 @@
     <string name="msg_typemiss_pw">비밀번호는 8자리 이상 영문, 숫자만 입력해 주세요.</string>
     <string name="msg_typemiss_id">이메일 형식이 아닙니다.</string>
     <string name="msg_no_checked">아이디 중복체크를 해주세요.</string>
-    <string name="msg_no_linked">알파요 아이디를 연동해 주세요.</string>
     <string name="msg_agree_term1">이용약관에 동의해 주세요.</string>
     <string name="msg_agree_term2">개인정보 취급방침에 동의해 주세요.</string>
     <string name="msg_no_addr">주소를 입력해 주세요.</string>
@@ -567,9 +559,6 @@
     <string name="msg_no_event_exp">이벤트 설명을 입력해 주세요.</string>
     <string name="msg_no_table_no">테이블 번호를 입력해주세요.</string>
     <string name="msg_copy">클립보드에 복사되었습니다.</string>
-
-
-
 
     <string name="btn_relocation">Relocation</string>
     <string name="empty">Nothing</string>

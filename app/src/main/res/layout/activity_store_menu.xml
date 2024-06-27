@@ -105,10 +105,10 @@
 
     <TextView
         style="@style/subtext"
-        android:layout_marginTop="10dp"
         android:text="@string/show_by_history_sub"
+        app:layout_constraintBottom_toBottomOf="@+id/menu_sub"
         app:layout_constraintStart_toStartOf="@+id/history"
-        app:layout_constraintBottom_toBottomOf="@+id/menu_sub" />
+        app:layout_constraintTop_toTopOf="@+id/menu_sub" />
 
     <TextView
         style="@style/menu"
@@ -121,8 +121,10 @@
         app:layout_constraintTop_toTopOf="@+id/history"/>
 
     <TextView
+        android:id="@+id/textView"
         style="@style/subtext"
         android:text="@string/show_by_table_sub"
+        app:layout_constraintTop_toTopOf="@+id/menu_sub"
         app:layout_constraintBottom_toBottomOf="@+id/menu_sub"
         app:layout_constraintStart_toStartOf="@+id/byTable" />
 
@@ -136,8 +138,8 @@
         app:layout_constraintTop_toTopOf="@+id/byTable" />
 
     <TextView
-        style="@style/subtext"
         android:id="@+id/menu_sub"
+        style="@style/subtext"
         android:layout_marginTop="10dp"
         android:text="@string/menu_mgmt_sub"
         app:layout_constraintStart_toStartOf="@+id/menu"
