@@ -10,9 +10,9 @@
         style="@style/text18"
         android:id="@+id/num"
         android:text="@string/opt_num"
-        android:layout_marginEnd="26dp" />
+        android:layout_marginEnd="14dp" />
     <ImageView
         style="@style/btn_plus"
         android:id="@+id/btn_plus"
-        android:layout_width="428dp"/>
+        android:layout_width="416dp"/>
 </LinearLayout>

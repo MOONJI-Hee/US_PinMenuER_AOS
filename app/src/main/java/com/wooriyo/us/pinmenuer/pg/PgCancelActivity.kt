@@ -62,7 +62,7 @@ class PgCancelActivity : BaseActivity() {
                         goodsAdapter.notifyDataSetChanged()
 
                         binding.run {
-                            cardInfo.text = "${result.cardname} 뒷자리 ${result.cardnum}"
+                            cardInfo.text = "${result.cardname} CARD NUM ${result.cardnum}"
                             price.text = AppHelper.price(result.amt)
                             regdt.text = result.pay_regdt
                             tableNo.text = result.tableNo

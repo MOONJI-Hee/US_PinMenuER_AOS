@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="920dp"
-        android:layout_height="wrap_content"
+        android:layout_height="570dp"
         android:background="@drawable/bg_r10w">
         <TextView
             style="@style/text22b"
@@ -103,7 +103,7 @@
             style="@style/subtext"
             android:id="@+id/cate_info"
             android:layout_marginBottom="60dp"
-            android:lineSpacingExtra="5dp"
+            android:lineSpacingExtra="3dp"
             android:text="@string/category_dialog_info1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/et_exp" />

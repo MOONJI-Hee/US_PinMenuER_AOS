@@ -72,7 +72,7 @@ class OptEditAdapter(val dataSet: ArrayList<ValueDTO>): RecyclerView.Adapter<Rec
                 if(data.price == "0" || data.price.isEmpty())
                     etPrice.setText("")
                  else
-                    etPrice.setText(AppHelper.price(data.price.toInt()))
+                    etPrice.setText(AppHelper.price(data.price.toDouble()))
 
                 if (data.mark == "-")
                     spMark.setSelection(1)
@@ -87,11 +87,11 @@ class OptEditAdapter(val dataSet: ArrayList<ValueDTO>): RecyclerView.Adapter<Rec
                     var result = ""
                     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
                     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                        if(!s.isNullOrEmpty() && s.toString() != result) {
-                            result = AppHelper.price(s.toString().replace(",", "").toInt())
-                            binding.etPrice.setText(result)
-                            binding.etPrice.setSelection(result.length)
-                        }
+//                        if(!s.isNullOrEmpty() && s.toString() != result) {
+//                            result = AppHelper.price(s.toString().replace(",", "").toInt())
+//                            binding.etPrice.setText(result)
+//                            binding.etPrice.setSelection(result.length)
+//                        }
                     }
                     override fun afterTextChanged(s: Editable?) {
                         if(s != null) {

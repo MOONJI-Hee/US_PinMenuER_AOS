@@ -116,7 +116,7 @@
         <TextView
             style="@style/text18"
             android:id="@+id/tvReserv"
-            android:text="@string/reservation"
+            android:text="@string/reserv"
             android:textColor="@color/white"
             android:layout_marginHorizontal="30dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -219,17 +219,6 @@
             android:src="@drawable/btn_orderlist_info"
             android:visibility="visible" />
     </LinearLayout>
-    <TextView
-        style="@style/btn_small"
-        android:id="@+id/btn_merge"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:text="@string/order_btn_merge"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="@+id/title"
-        app:layout_constraintBottom_toBottomOf="@+id/title"
-        app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"

@@ -70,7 +70,7 @@ class OrderAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adapte
                     top.setBackgroundColor(Color.parseColor("#E0E0E0"))
                     clPrice.setBackgroundResource(R.drawable.bg_cancel_r6)
                     btnComplete.setBackgroundResource(R.drawable.bg_cancel_r6)
-                    btnComplete.text = "복원"
+                    btnComplete.text = "Restore"
                     complete.visibility = View.VISIBLE
                     completeQr.visibility = View.GONE
                     completePos.visibility = View.GONE
@@ -78,7 +78,7 @@ class OrderAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adapte
                     top.setBackgroundResource(R.color.main)
                     clPrice.setBackgroundResource(R.drawable.bg_cancel_r6)
                     btnComplete.setBackgroundResource(R.drawable.bg_r6y)
-                    btnComplete.text = "완료"
+                    btnComplete.text = "Done"
                     complete.visibility = View.GONE
                     completeQr.visibility = View.VISIBLE
                     completePos.visibility = View.GONE
@@ -86,7 +86,7 @@ class OrderAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adapte
                     top.setBackgroundResource(R.color.main)
                     clPrice.setBackgroundResource(R.drawable.bg_r6y)
                     btnComplete.setBackgroundResource(R.drawable.bg_r6y)
-                    btnComplete.text = "완료"
+                    btnComplete.text = "Done"
                     complete.visibility = View.GONE
                     completeQr.visibility = View.GONE
                     completePos.visibility = View.VISIBLE
@@ -94,7 +94,7 @@ class OrderAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adapte
                     top.setBackgroundResource(R.color.main)
                     clPrice.setBackgroundResource(R.drawable.bg_r6y)
                     btnComplete.setBackgroundResource(R.drawable.bg_r6y)
-                    btnComplete.text = "완료"
+                    btnComplete.text = "Done"
                     complete.visibility = View.GONE
                     completeQr.visibility = View.GONE
                     completePos.visibility = View.GONE

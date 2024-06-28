@@ -98,8 +98,7 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                 }
             }
             qrcode.setOnClickListener {
-                Intent(mActivity, SetQrcodeActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(mActivity, SetQrcodeActivity::class.java))
             }
             event.setOnClickListener { startActivity(Intent(mActivity, SetEventPopup::class.java)) }
 

@@ -36,7 +36,7 @@ class ValueAdapter(val dataSet: ArrayList<ValueDTO>): RecyclerView.Adapter<Value
             else {
                 binding.extra.visibility = View.VISIBLE
                 binding.mark.text = data.mark
-                binding.price.text = AppHelper.price(price.toInt())
+                binding.price.text = AppHelper.price(price.toDouble())
             }
             binding.value.text = data.name
         }

@@ -28,7 +28,7 @@ class PgAdapter(val dataSet: ArrayList<PgDetailDTO>): RecyclerView.Adapter<PgAda
     class ViewHolder(val context: Context, val binding: ListPgBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: PgDetailDTO) {
             binding.run {
-                cardInfo.text = "${data.cardname} 뒷자리 ${data.cardnum}"
+                cardInfo.text = "${data.cardname} CARD NUM ${data.cardnum}"
                 regdt.text = data.regdt
                 goods.text = data.name
                 price.text = AppHelper.price(data.price)

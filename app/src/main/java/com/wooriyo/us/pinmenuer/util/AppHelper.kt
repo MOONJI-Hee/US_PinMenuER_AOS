@@ -25,6 +25,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 import java.util.regex.Pattern
+import kotlin.math.floor
 
 // 자주 쓰는 메소드 모음 - 문지희 (2022.10 갱신)
 class AppHelper {
@@ -71,8 +72,26 @@ class AppHelper {
         val nformat = NumberFormat.getInstance()
 
         // 천 단위 콤마 찍기
-        fun price(n: Int): String {
-            return nformat.format(n)
+        fun price(d: Double): String {
+            val nFormat = DecimalFormat("0")
+
+//            val arr = d.toString().split(".")
+//            arr[0].toInt()
+
+//            val n = nFormat.format(d)
+//            val n = floor(d)
+//            val r = d.minus(n)
+//
+//            Log.d("AppHelper", "정수부분 >> $n")
+//            Log.d("AppHelper", "실수부분 >> $r")
+//
+//            val strN = nformat.format(n)
+//
+//            val result = strN + r.toString()
+//
+//            Log.d("AppHelper", "최종 >> $result")
+
+            return d.toString()
         }
 
         // 한자리 수 n > 0n 형식으로 변환하기 + 빈 문자열 > 00으로 변환

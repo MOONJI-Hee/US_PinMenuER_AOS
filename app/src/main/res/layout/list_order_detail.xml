@@ -39,19 +39,20 @@
             app:layout_constraintEnd_toStartOf="@+id/select"
             app:layout_constraintBottom_toBottomOf="@+id/name" />
         <TextView
-            style="@style/text_num"
-            android:id="@+id/price"
-            android:layout_marginTop="7dp"
-            android:textSize="16sp"
-            tools:text="5,000"
+            style="@style/text16"
+            android:id="@+id/unit"
+            android:text="@string/won"
+            android:layout_marginTop="3dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name"/>
         <TextView
-            style="@style/text16"
-            android:text="@string/won"
-            android:layout_marginTop="3dp"
-            android:layout_marginStart="1dp"
-            app:layout_constraintStart_toEndOf="@+id/price"
+            style="@style/text_num"
+            android:id="@+id/price"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="7dp"
+            android:textSize="16sp"
+            tools:text="5,000"
+            app:layout_constraintStart_toEndOf="@+id/unit"
             app:layout_constraintTop_toBottomOf="@+id/name"/>
         <TextView
             style="@style/text16"

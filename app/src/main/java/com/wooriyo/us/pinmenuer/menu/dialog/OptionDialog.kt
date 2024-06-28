@@ -55,6 +55,7 @@ class OptionDialog(context: Context, val position: Int, private val option : Opt
                     }
                 }
                 optName.setText(option.title)
+                save.text = context.getString(R.string.btn_update)
                 delete.visibility = View.VISIBLE
             }
         }

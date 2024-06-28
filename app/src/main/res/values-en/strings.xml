@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="pinmenu_er">Pinmenu Admin</string>
-    <string name="pinmenu_ee">Pinmenu Order</string>
+    <string name="pinmenu_ee">Pinmenu Order App</string>
 
     <string name="login">Sign In</string>
     <string name="logout">Log Out</string>
@@ -42,7 +42,7 @@
     <string name="btn_choice">Select</string>
     <string name="btn_add">Add</string>
     <string name="btn_close">Close</string>
-    <string name="btn_not_today">Do not open\nfor a day</string>
+    <string name="btn_not_today">Do not open for a day</string>
     <string name="btn_relocation">Relocation</string>
     <string name="btn_pg_cancel">Pmt. Cancel</string>
 
@@ -141,7 +141,7 @@
     <string name="show_by_table_sub">・View Call History</string>
     <string name="menu_mgmt">Menu Management</string>
     <string name="event_mgmt">Event</string>
-    <string name="menu_mgmt_sub">・Categories\n・Menu, Price, Picture,\nDescription</string>
+    <string name="menu_mgmt_sub">・Categories\n・Menu, Price, Picture,\n\tDescription</string>
     <string name="order_mgmt">Order Info</string>
 
     <string name="menu_manage">Menu Mgmt.</string>
@@ -150,7 +150,7 @@
     <string name="menu_seq">Change Menu Order</string>
     <string name="menu_seq_change_way">Method of change : Press and drag the menu you want to change up or down</string>
     <string name="menu_name_hint">Please enter the product name.</string>
-    <string name="menu_exp_hint">Please enter the product description.</string>
+    <string name="menu_exp_hint">Please enter the product description. You can enter a product description of more than two lines. If foreign language descriptions are needed, you can enter them by line.</string>
     <string name="cookingTime">Cooking Time</string>
     <string name="price">Price</string>
     <string name="menu_img_reg_info">Recommended: 800×600 (4:3) / Max : 5MB.</string>
@@ -161,6 +161,8 @@
     <string name="menu_status">Menu Status</string>
 
     <string name="option">Options</string>
+    <string name="options_require">Required Options</string>
+    <string name="options_choice">Select Options</string>
     <string name="option_require">Required Option</string>
     <string name="option_choice">Select Option</string>
 
@@ -198,7 +200,7 @@
     <string name="category_exp">Description</string>
     <string name="category_exp_hint">Please enter a brief description.</string>
     <string name="category_dialog_info1"><b>To change the order of categories,</b>\nclick on [Change Category Order] in the upper right corner.\nThen select the category you want to change, and move it left or right\nto change the order. After making changes, click [Save] to apply them.</string>
-    <string name="category_dialog_info2"><b>If you need to [Hide] a category,</b>\nchange the Off button next to [Hide] in the top right corner to On, and then click Save.\nDeleting will remove all menu information entered in the category, but [Hide] will make it not visible to customers.</string>
+    <string name="category_dialog_info2">If you need to [Hide] a category,\nchange the Off button next to [Hide] in the top right corner to On, and\nthen click Save. Deleting will remove all menu information entered in\nthe category, but [Hide] will make it not visible to customers.</string>
     <string name="category_hide">Hide</string>
     <string name="category_set">Category\nSettings</string>
     <string name="category_add">Add Category</string>
@@ -211,14 +213,26 @@
     <string name="change_seq_way_info1">1. Click the [Change Order] button.\n2. Select the menu item you want to reorder from the left\n\tcolumn, then drag it to the desired position to move it.\n3. Once the order is changed, click the [Complete] button at the\n\tbottom.</string>
     <string name="change_seq_way_info2">※ This popup closes automatically after changes are completed.</string>
     <string name="menu_delete">Menu Delete</string>
+    <string name="menu_delete_title">Delete Menu</string>
     <string name="menu_delete_cmplt">Complete</string>
 
     <string name="printer_title_store">Select Store</string>
 
+    <string name="call_emp">Call</string>
+    <string name="call_manage">Manage Call List</string>
+    <string name="call_info">To <b>add to the call list,</b> click the [+] button.\nIf editing is necessary, select the added list to make changes.</string>
+    <string name="call_add">Add Call List</string>
+    <string name="call_udt">Edit Call List</string>
+    <string name="call_name">List Name</string>
+    <string name="call_name_hint">Please enter the list name.</string>
+
+    <string name="pay_complete">Payment</string>
+    <string name="dialog_table_complete_confirm">Would you like to complete all orders for the selected table?</string>
+
     <string name="printer">Printer</string>
     <string name="printer_set">Printer\nSettings</string>
     <string name="printer_conn">프린터 연결</string>
-    <string name="printer_set_sub">・Connect and\nChange Printer</string>
+    <string name="printer_set_sub">・Connect and\n\tChange Printer</string>
     <string name="printer_title_set">Printer Settings</string>
     <string name="printer_menu_conn">Manage Printer\nConnections</string>
     <string name="printer_menu_support">View Available\nPrinters</string>
@@ -281,20 +295,20 @@
 
     <string name="qr_file_name_info">Use as filename when saving QR code</string>
     <string name="qr_down_all">Save to Entire QR Code Album</string>
-    <string name="qr_down_one">Save to QR Code Album</string>
-    <string name="qr_post_pay_all">Enable All QR Code Post-pay</string>
-    <string name="qr_post_pay_one">Enable QR Code Post-pay</string>
+    <string name="qr_down_one">Save to QR Album</string>
+    <string name="qr_post_pay_all">Enable All QR Post-pay</string>
+    <string name="qr_post_pay_one">Enable QR Post-pay</string>
     <string name="qr_post_pay">Post-pay</string>
 
     <string name="table_no_hint">Enter Table No.</string>
     <string name="qr_setting_info1">QR order transmit order details after payment completion.\n(Excluding if post-pay option is enabled)</string>
-    <string name="qr_setting_info2">After generating the QR on this page, you can save and modify the table number, and also delete the QR.</string>
+    <string name="qr_setting_info2">After generating the QR on this page, you can save and\nmodify the table number, and also delete the QR.</string>
 
     <string name="qr_detail_info1">The generated QR code cannot be altered, only deleted.</string>
     <string name="qr_detail_info2">The deleted QR code cannot be reused.</string>
     <string name="qr_detail_info3">The entered table number can be modified on this page.</string>
     <string name="qr_detail_info4">Please manage to ensure that the table numbers are not duplicated.</string>
-    <string name="qr_detail_info5">If you write the table number in English and numbers, it will be applied as the file name when saving the QR code.</string>
+    <string name="qr_detail_info5">If you write the table number in English and numbers,\nit will be applied as the file name when saving the QR code.</string>
 
     <string name="use_status">On/Off</string>
     <string name="qr_reserv">QR-Reservation</string>
@@ -310,7 +324,7 @@
     <string name="qr_reserv_info6">You can save the QR code as an image for later use.</string>
     <string name="qr_reserv_info7">You can copy the reservation URL and share it externally for use.</string>
     <string name="qr_reserv_info8">Orders made via reservation QR codes are marked differently in the order history.</string>
-    <string name="qr_reserv_info9">When reserving, we collect the following information: phone number, reservation name, reservation date, reservation time, special requests.</string>
+    <string name="qr_reserv_info9">When reserving, we collect the following information: phone number,\ㅜreservation name, reservation date, reservation time, special requests.</string>
 
     <string name="event_popup">After Ordering, Event Instr.</string>
     <string name="event_popup_set">Event Settings after Order</string>
@@ -318,18 +332,20 @@
     <string name="event_img_info">Recommended: 800×600 (4:3) / Max : 5MB. Without image, only description displayed.</string>
 
     <string name="title_event">Event</string>
-    <string name="event_set_popup">주문완료 후 이벤트 설정</string>
-    <string name="event_main_img">대표 이미지</string>
-    <string name="event_main_img_hint">[ 등록 및 수정 ] 버튼으로\n이미지/사진을 등록해 주세요\n이미지 : 800×600권장, 최대 5MB\n이미지/사진 미등록 시 설명만 보여집니다.</string>
-    <string name="event_reg_udt">등록 및 수정</string>
+    <string name="event_set_popup">Event Settings after Order</string>
+    <string name="event_main_img">Representative Image</string>
+    <string name="event_main_img_hint">Please upload an image/photo\nusing the [Register and Edit] button.\nRecommended: 800×600 (4:3) / Max : 5MB.\nWithout image, only description displayed.</string>
+    <string name="event_reg_udt">Register and Modify</string>
     <string name="event_exp">Event Description</string>
-    <string name="event_exp_hint">Please register within 400byte Ex)Participate in the Naver receipt review event and receive complimentary beverages.</string>
-    <string name="event_link">Link Registration</string>
+    <string name="event_exp_hint">Please register within 400byte\nEx)Participate in the Naver receipt review event\nand receive complimentary beverages.</string>
+    <string name="event_link">Event Link URL Registration</string>
     <string name="event_link_hint">Please Enter Link Address</string>
-    <string name="event_link_info">When entering the link address, it will display as [Shortcut], but only active in QR orders.</string>
+    <string name="event_link_info">When entering the link address, it will display as\n[Shortcut], but only active in QR orders.</string>
     <string name="event_preview">Preview</string>
-    <string name="event_preview_info">After QR order completion,\nevent details appear on the preview screen.</string>
+    <string name="event_preview_info">This is the ‘Event Information’ preview on the Tablet PC after customer orders.</string>
     <string name="event_goto">Shortcut</string>
+    <string name="event_use">Use Event</string>
+    <string name="event_noti_switch_ff"><b>The event use switch is in the OFF state.</b>\n\nWhen in the OFF state, entering information will not\ndisplay event notifications on the order app/QR order.</string>
 
     <string name="more">More</string>
     <string name="pinmenu_manual">Pinmenu User Guide</string>
@@ -374,16 +390,14 @@
 
     <string name="version_info">Version info</string>
 
-    <string name="call_emp">Call</string>
-
     <string name="title_order">Order Info</string>
     <string name="order_history">Order Info</string>
     <string name="print">Print</string>
 
     <string name="complete">Done</string>
 
-    <string name="dialog_clear">Order/call information is stored\nfor 3 days. Pressing the ‘Reset’ button\nwill delete all order/call information.</string>
-    <string name="dialog_clear_warning">Once reset, the data cannot be\nrestored.</string>
+    <string name="dialog_clear_history">Order/call information is stored for 3 days.\nPressing the ‘Reset’ button will delete all order/call information.</string>
+    <string name="dialog_clear_warning">Once reset, the data cannot be restored.</string>
 
     <string name="table_no_kr">Table No.</string>
     <string name="order_no">Order No.</string>
@@ -402,14 +416,14 @@
     <string name="pg_history">PG Payment History</string>
     <string name="pg_cancel">PG Payment Cancel</string>
     <string name="pg_history_search_hint">Amount($)</string>
-    <string name="dialog_no_pg_info1">The Pinmenu QR code ordering &amp; payment feature is not activated.</string>
+    <string name="dialog_no_pg_info1">The Pinmenu QR code ordering &amp; payment feature is not\nactivated.</string>
     <string name="dialog_no_pg_info2">Application method</string>
     <string name="dialog_no_pg_info3">Pinmenu website ></string>
     <string name="dialog_no_pg_info4">Hamburger button ></string>
     <string name="dialog_no_pg_info5">PG Application/Management</string>
     <string name="dialog_pg_cancel_info">Once the payment cancellation is processed, it cannot be reversed.\n(Cancellation procedures may vary depending on the credit card company)</string>
 
-    <string name="dialog_complete">Would you like to proceed with completing the selected %s?</string>
+    <string name="dialog_complete">Would you like to proceed with completing\nthe selected %s?</string>
 
     <string name="title_login">Pinmenu Sign In</string>
     <string name="title_master_login">Pinmenu Master Sign In</string>
@@ -428,9 +442,9 @@
 
     <string name="dialog_logout">Do you want to Log out?</string>
     <string name="dialog_drop">Your account data will be deleted upon withdrawal.\nAre you sure you want to proceed with withdrawal?</string>
-    <string name="dialog_order_clear_title">Reset Order History</string>
-    <string name="dialog_call_clear_title">Reset Call History</string>
-    <string name="dialog_delete">Once deleted, history cannot be restored.\nDo you still want to proceed with the deletion?</string>
+    <string name="dialog_clear_order">Reset Order History</string>
+    <string name="dialog_clear_call">Reset Call History</string>
+    <string name="dialog_delete_order">Once deleted, history cannot be restored.\nDo you still want to proceed with the deletion?</string>
 
     <string name="dialog_notice">Notice</string>
     <string name="dialog_no_printer">Printer not connecting.</string>
@@ -460,7 +474,10 @@
     <string name="msg_check_addr">Please Check the address</string>
     <string name="msg_reg_store_first">You can use it after registering for the store.</string>
     <string name="msg_no_endtm">Please check the time</string>
+    <string name="msg_no_worktm">Please Enter Business Time.</string>
+    <string name="msg_no_brktm">Please Enter Break Time.</string>
     <string name="msg_no_date">Please check the date</string>
+    <string name="msg_no_category">Please register at least one category.</string>
     <string name="msg_no_img">Please register your image</string>
     <string name="msg_no_name">Please enter the name.</string>
     <string name="msg_no_item_name">Please enter a list name</string>
@@ -489,11 +506,10 @@
     <string name="title_store_img">Store Info: Photos/Description</string>
     <string name="title_table_pass">Ordering App Table Number Password Set</string>
     <string name="togo">To-go</string>
-    <string name="call_manage">View\nCall History</string>
-    <string name="pg_cancel_menu">PG Payment\\nHistory</string>
-    <string name="pg_cancel_menu_sub">・PG payment details\\n・PG payment cancellation</string>
+    <string name="pg_cancel_menu">PG Payment\nHistory</string>
+    <string name="pg_cancel_menu_sub">・PG payment details\n・PG payment cancellation</string>
     <string name="qrcode_menu">QR Code</string>
-    <string name="qrcode_menu_info">・Generate/delete QR code\\n・Download QR code</string>
+    <string name="qrcode_menu_info">・Generate/delete QR code\n・Download QR code</string>
     <string name="opt_list">Entered Options</string>
     <string name="opt_list_empty">No Entered Options</string>
 

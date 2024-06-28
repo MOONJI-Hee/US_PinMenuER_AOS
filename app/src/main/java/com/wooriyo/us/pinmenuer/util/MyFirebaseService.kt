@@ -158,8 +158,8 @@ class MyFirebaseService : FirebaseMessagingService() {
 
                                     var str = ""
                                     when(result.reserType) {
-                                        1 -> str = "매장"
-                                        2 -> str = "포장"
+                                        1 -> str = "Store"
+                                        2 -> str = "To-go"
                                     }
                                     escposPrinter.printAndroidFont(
                                         String.format(getString(R.string.reserv_date), str),

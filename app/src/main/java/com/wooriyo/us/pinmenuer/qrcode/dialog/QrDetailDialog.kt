@@ -44,7 +44,7 @@ class QrDetailDialog(val seq: Int, var qrCode: QrDTO?): BaseDialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DialogQrcodeDetailBinding.inflate(layoutInflater)
 
-        strSeq = if(seq == 0) "예약" else AppHelper.intToString(seq)
+        strSeq = if(seq == 0) "Res." else AppHelper.intToString(seq)
         binding.tvSeq.text = strSeq
 
         if(qrCode == null) {
@@ -60,7 +60,7 @@ class QrDetailDialog(val seq: Int, var qrCode: QrDTO?): BaseDialogFragment() {
 
         binding.run {
             if(seq == 0) {
-                etTableNo.setText(R.string.reservation)
+                etTableNo.setText(R.string.reserv)
                 etTableNo.isEnabled = false
 
                 download.text = getString(R.string.qr_down_reserv)
@@ -73,9 +73,6 @@ class QrDetailDialog(val seq: Int, var qrCode: QrDTO?): BaseDialogFragment() {
                 postPay.visibility = View.INVISIBLE
 
                 tvPgStatus.visibility = View.VISIBLE
-                pgStatus.visibility = View.VISIBLE
-                pgStatus.text =
-                    if(MyApplication.store.mid.isNullOrEmpty() || MyApplication.store.mid_key.isNullOrEmpty()) getString(R.string.qr_reserv_pg_unable) else getString(R.string.able)
 
                 binding.qrInfoArea.layoutResource = R.layout.qr_info_reserv
             }else {
@@ -112,8 +109,8 @@ class QrDetailDialog(val seq: Int, var qrCode: QrDTO?): BaseDialogFragment() {
                 val request = DownloadManager.Request(uri)
 
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED) //진행 중, 완료 모두 노티 보여줌
-                request.setTitle("핀메뉴 관리")
-                request.setDescription("QR코드 다운로드 중") // [다운로드 중 표시되는 내용]
+                request.setTitle("Pinmenu Admin")
+                request.setDescription("QR Code Downloading...") // [다운로드 중 표시되는 내용]
                 request.setNotificationVisibility(1) // [앱 상단에 다운로드 상태 표시]
                 request.setTitle(fileName) // [다운로드 제목 표시]
                 request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName) // [다운로드 폴더 지정]

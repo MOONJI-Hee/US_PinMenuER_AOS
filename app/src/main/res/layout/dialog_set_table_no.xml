@@ -41,7 +41,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvtableNo"
-            android:layout_width="640dp"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginTop="66dp"
             android:layout_marginBottom="10dp"
@@ -56,7 +56,7 @@
             android:layout_width="500dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="60dp"
-            android:text="@string/btn_move"
+            android:text="@string/btn_relocation"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

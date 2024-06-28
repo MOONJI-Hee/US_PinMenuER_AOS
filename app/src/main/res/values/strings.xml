@@ -37,7 +37,6 @@
     <string name="save">저장</string>
     <string name="delete">삭제</string>
     <string name="update">수정</string>
-    <string name="sequence">순서</string>
     <string name="order">주문</string>
     <string name="call">호출</string>
     <string name="complete">완료</string>
@@ -47,7 +46,6 @@
     <!--  버튼 텍스트  -->
     <string name="btn_update">수&#160;&#160;정</string>
     <string name="btn_complete">완&#160;&#160;료</string>
-    <string name="btn_move">이&#160;&#160;동</string>
     <string name="btn_select">선&#160;&#160;택</string>
     <string name="btn_change">변&#160;&#160;경</string>
     <string name="btn_payment">결&#160;&#160;제</string>
@@ -187,7 +185,6 @@
     <!--  결제  -->
     <string name="payment">결제</string>
     <string name="payment_title">결제방식 설정</string>
-    <string name="payment_dialog_back">돌아가기</string>
 
     <!--  카테고리 설정  -->
     <string name="category_info_seq"><b>카테고리 순서 변경</b>은\n변경하고자하는 카테고리를 누른 후 좌우 버튼을 눌러 순서를 변경합니다.\n변경 후에는 [ 저장 ] 버튼을 눌러주셔야 변경된 내용이 적용됩니다.</string>
@@ -210,6 +207,7 @@
     <string name="change_seq_way_info1">1. [ 순서변경 ] 버튼을 누른다.\n2. 좌측 항목에서 순서를 변경할 메뉴를 선택 후\n\t변경하고자 하는 위치로 드래그하여 이동 시킵니다.\n3. 순서 변경이 완료되면, 하단에 있는 [ 변경완료 ] 버튼을 누릅니다.</string>
     <string name="change_seq_way_info2">※ 이 팝업창은 변경 완료가 되면 자동으로 닫힙니다.</string>
     <string name="menu_delete">메뉴삭제</string>
+    <string name="menu_delete_title">Delete Menu</string>
     <string name="menu_delete_cmplt">삭제완료</string>
     <string name="menu_delete_name" translatable="false">[ %s ]</string>
     <string name="menu_delete_info">메뉴를 삭제하시겠습니까?\n삭제를 누르시면 입력한 모든 정보가 삭제되며,\n삭제 이후에는 복원하실 수 없습니다.</string>
@@ -228,6 +226,8 @@
     <string name="New" translatable="false">New</string>
 
     <string name="option">옵션</string>
+    <string name="options_require">필수 옵션</string>
+    <string name="options_choice">선택 옵션</string>
     <string name="option_require">필수 옵션</string>
     <string name="option_choice">선택 옵션</string>
 
@@ -271,10 +271,8 @@
     <string name="save_ui">디자인 적용</string>
 
     <!-- 주문 정보 -->
-    <string name="tot_price">총 합계</string>
     <string name="print">프 린 트</string>
     <string name="order_total" translatable="false">TOTAL</string>
-    <string name="order_dialog_clear">주문정보는 3일간 보관되며,\n\'초기화\'버튼을 누르면 모든 주문정보가 삭제됩니다.</string>
 
     <string name="table_no_kr">테이블번호</string>
     <string name="order_no">주문번호</string>
@@ -307,7 +305,6 @@
     <string name="call_udt">호출목록 수정</string>
     <string name="call_name">목록명</string>
     <string name="call_name_hint">목록명을 입력해 주세요.</string>
-    <string name="call_dialog_clear">직원호출 목록은 3일간 보관되며,\n\'초기화\'버튼을 누르면 모든 호출정보가 삭제됩니다.</string>
 
     <!--  주문정보 테이블별 보기  -->
     <string name="pay_complete">결제완료</string>
@@ -419,10 +416,6 @@
     <string name="qrcode_menu">QR코드 관리</string>
     <string name="qrcode_menu_info">・QR코드 생성/삭제\n・QR코드 다운로드</string>
     <string name="qr_use_info">QR코드 사용안내</string>
-    <string name="qr_pg_first"><b>핀메뉴QR오더</b>의 <b>선결제</b>를 이용하기 위해서는 PG 설정이 선행되어야 합니다.</string>
-    <string name="qr_nicepay_status">나이스페이먼츠 상태&#160;:&#160;</string>
-    <string name="qr_insurance">결제 금액 정산을 위한 이행보증보험은 기본 월 200만원까지로,\n이 이상 매출이 발생하면 이행보증보험료가 발생합니다.</string>
-    <string name="qr_insurance_check">결제 관련 이행보증보험 결제관리를 이해하였고 동의합니다.</string>
     <string name="qr_setting_go">QR코드 설정 바로가기</string>
     <string name="qr_setting">QR코드 설정</string>
     <string name="qr_usable_cnt">추가 가능한 QR코드 수&#160;:&#160;</string>
@@ -439,7 +432,6 @@
     <string name="table_no_hint">테이블 번호 입력</string>
     <string name="qr_setting_info1">QR오더는 결제가 완료된 후 주문내역이 전송됩니다.\n(단, 후불결제 기능을 설정했을 경우 제외)</string>
     <string name="qr_setting_info2">이 페이지에서 QR코드를 생성한 후 테이블번호\n저장과 변경이 가능하며 QR코드 삭제가 가능합니다.</string>
-    <string name="qr_pg_status">상태&#160;:&#160;</string>
 
     <string name="qr_detail_info1">생성된 QR코드는 변경할 수 없고, 삭제만 가능합니다.</string>
     <string name="qr_detail_info2">삭제된 QR코드는 다시 사용할 수 없습니다.</string>
@@ -455,7 +447,6 @@
     <string name="qr_copy_url_reserv">예약 URL 복사</string>
 
     <string name="qr_reserv_info1">예약 QR 선불결제만 가능</string>
-    <string name="qr_reserv_pg_unable">PG가입 후 사용가능</string>
     <string name="qr_reserv_info3">PG 가입 완료 후 예약 기능이 활성화 됩니다.</string>
     <string name="qr_reserv_info4">예약 QR코드는 테이블 수에 포함되지 않습니다.</string>
     <string name="qr_reserv_info5">예약 테이블명은 변경이 불가능합니다.</string>
@@ -520,7 +511,6 @@
     <!--  알림 다이얼로그  -->
     <string name="dialog_no_printer">연결된 프린트 기기가 없습니다.</string>
     <string name="dialog_check_conn">프린터 연결 상태를 확인해주세요.</string>
-    <string name="dialog_information">안&#160;&#160;내</string>
     <string name="dialog_notice">알&#160;&#160;림</string>
     <string name="dialog_dont_show">다시보지않기</string>
 
@@ -601,14 +591,10 @@
     <string name="viewmode_info">Please select the design for the menu</string>
     <string name="version_info">Version info</string>
     <string name="order_history">Order Info</string>
-    <string name="dialog_clear">Order/call information is stored</string>
     <string name="payment_cancel_complete">Cancel</string>
     <string name="dialog_no_pg_info5">PG Application/Management</string>
     <string name="title_cate">Category</string>
     <string name="no_store_list">No Store</string>
-    <string name="dialog_order_clear_title">Reset Order History</string>
-    <string name="dialog_call_clear_title">Reset Call History</string>
-    <string name="dialog_delete">Once deleted, history cannot be restored.</string>
     <string name="msg_no_now_pw">Please enter your current password.</string>
     <string name="msg_no_new_pw">Please enter New Password.</string>
     <string name="msg_success_down">Download Complete</string>

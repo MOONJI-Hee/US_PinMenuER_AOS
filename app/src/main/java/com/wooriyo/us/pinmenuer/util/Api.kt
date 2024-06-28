@@ -323,7 +323,7 @@ interface Api {
         @Query("content") content : String,
         @Query("cooking_time_min") cooking_time_min : String,
         @Query("cooking_time_max") cooking_time_max : String,
-        @Query("price") price : Int,
+        @Query("price") price : Double,
         @Query("adDisplay") adDisplay : String,
         @Query("icon") icon : Int,
         @Query("boption") boption : String,
@@ -352,7 +352,7 @@ interface Api {
         @Query("content") content : String,
         @Query("cooking_time_min") cooking_time_min : String,
         @Query("cooking_time_max") cooking_time_max : String,
-        @Query("price") price : Int,
+        @Query("price") price : Double,
         @Query("icon") icon : Int,
         @Query("img1") img1: Int,       // 이미지 삭제 여부 1:삭제, 0: 유지
         @Query("img2") img2: Int,

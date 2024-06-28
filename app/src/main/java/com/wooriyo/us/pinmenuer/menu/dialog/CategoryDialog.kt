@@ -3,7 +3,9 @@ package com.wooriyo.us.pinmenuer.menu.dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -40,7 +42,8 @@ class CategoryDialog(context: Context, val position: Int, val category: Category
 
         val params = window?.attributes
         params?.width = WindowManager.LayoutParams.WRAP_CONTENT
-        params?.height = WindowManager.LayoutParams.WRAP_CONTENT
+//        params?.height = WindowManager.LayoutParams.WRAP_CONTENT
+        params?.height = 570 * MyApplication.density.toInt()
         window?.attributes = params
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
@@ -53,6 +56,7 @@ class CategoryDialog(context: Context, val position: Int, val category: Category
                 save.visibility = View.GONE
                 cateInfo.text = context.getString(R.string.category_dialog_info2)
 
+                title.text = context.getString(R.string.title_cate_udt)
                 etName.setText(category.name)
                 etExp.setText(category.subname)
 

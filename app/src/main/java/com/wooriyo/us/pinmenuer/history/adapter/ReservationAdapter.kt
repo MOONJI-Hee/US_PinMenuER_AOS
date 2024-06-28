@@ -93,13 +93,13 @@ class ReservationAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.
                         clTableNo.visibility = View.VISIBLE
                         reservType.setBackgroundColor(Color.parseColor("#FF005E"))
                         ivReservType.setImageResource(R.drawable.icon_res_store)
-                        tvDate.text = String.format(context.getString(R.string.reserv_date), "매장")
+                        tvDate.text = String.format(context.getString(R.string.reserv_date), "Store")
                     }
                     2 -> {
                         clTableNo.visibility = View.GONE
                         reservType.setBackgroundColor(Color.parseColor("#46B6FF"))
                         ivReservType.setImageResource(R.drawable.icon_res_togo)
-                        tvDate.text = String.format(context.getString(R.string.reserv_date), "포장")
+                        tvDate.text = String.format(context.getString(R.string.reserv_date), "To-go")
                     }
                 }
 
@@ -107,21 +107,21 @@ class ReservationAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.
                     top.setBackgroundColor(Color.parseColor("#E0E0E0"))
                     clPrice.setBackgroundResource(R.drawable.bg_cancel_r6)
                     btnComplete.setBackgroundResource(R.drawable.bg_cancel_r6)
-                    btnComplete.text = "복원"
+                    btnComplete.text = "Restore"
                     complete.visibility = View.VISIBLE
                     arrowTableNo.visibility = View.GONE
                 } else if (data.isreser != 0) {
                     top.setBackgroundResource(R.color.main)
                     clPrice.setBackgroundResource(R.drawable.bg_cancel_r6)
                     btnComplete.setBackgroundResource(R.drawable.bg_r6y)
-                    btnComplete.text = "완료"
+                    btnComplete.text = "Done"
                     complete.visibility = View.GONE
                     arrowTableNo.visibility = View.VISIBLE
                 } else {
                     top.setBackgroundResource(R.color.main)
                     clPrice.setBackgroundResource(R.drawable.bg_r6y)
                     btnComplete.setBackgroundResource(R.drawable.bg_r6y)
-                    binding.btnComplete.text = context.getString(R.string.confirm)
+                    binding.btnComplete.text = "OK"
                     complete.visibility = View.GONE
                     arrowTableNo.visibility = View.VISIBLE
                 }

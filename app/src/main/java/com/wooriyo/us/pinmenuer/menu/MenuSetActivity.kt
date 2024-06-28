@@ -673,7 +673,7 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
             goods.content = etContent.text.toString()       // 상품설명
             goods.cooking_time_min = strCookTimeMin         // 조리시간 최소
             goods.cooking_time_max = strCookTimeMax         // 조리시간 최대
-            goods.price = strPrice.toInt()                  // 가격
+            goods.price = strPrice.toDouble()                  // 가격
 
             if(goods.file1 != null) {
                 val body = RequestBody.create(mmtp, goods.file1!!)
@@ -913,9 +913,11 @@ class MenuSetActivity : BaseActivity(), View.OnClickListener {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             if(!s.isNullOrEmpty() && s.toString() != result) {
-                result = AppHelper.price(s.toString().replace(",", "").toInt())
-                binding.etPrice.setText(result)
-                binding.etPrice.setSelection(result.length)
+                val num = s.toString().replace(",", "")
+//                result = AppHelper.price(num)
+//                result = AppHelper.price(s.toString().replace(",", "").toInt())
+//                binding.etPrice.setText(result)
+//                binding.etPrice.setSelection(result.length)
             }
         }
         override fun afterTextChanged(s: Editable?) {}

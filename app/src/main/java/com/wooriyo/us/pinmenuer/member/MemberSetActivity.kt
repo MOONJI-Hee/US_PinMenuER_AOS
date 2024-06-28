@@ -24,9 +24,6 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
 
     var memberDTO: MemberDTO? = null
     var userid : String = ""
-    var arpayoId : String = ""
-
-    var arpaLinked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +33,6 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
         memberDTO = MyApplication.pref.getMbrDTO()
         if(memberDTO != null) {
             userid = memberDTO!!.userid
-            arpayoId = memberDTO!!.arpayoid?:""
         }
 
         binding.title.text = getString(R.string.title_udt_mbr)
@@ -87,9 +83,6 @@ class MemberSetActivity: BaseActivity(), View.OnClickListener {
             return
         }else if(!AppHelper.verifyPw(pass)) {
             Toast.makeText(mActivity, R.string.msg_typemiss_pw, Toast.LENGTH_SHORT).show()
-            return
-        }else if ((arpayoId.isNotEmpty() && arpayoId != "") && !arpaLinked) {
-            Toast.makeText(mActivity, R.string.msg_no_linked, Toast.LENGTH_SHORT).show()
             return
         }
 

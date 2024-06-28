@@ -111,12 +111,14 @@
                 style="@style/btn_sub"
                 android:id="@+id/btn_seq"
                 android:layout_width="130dp"
+                android:textSize="18sp"
                 android:text="@string/change_seq"/>
             <TextView
                 style="@style/btn_sub"
                 android:id="@+id/btn_del"
                 android:layout_width="130dp"
                 android:layout_marginStart="20dp"
+                android:textSize="18sp"
                 android:text="@string/menu_delete"/>
         </LinearLayout>
 
@@ -205,7 +207,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="117dp"
                 android:layout_marginBottom="22dp"
-                android:hint="@string/menu_exp_hint" />
+                android:hint="@string/menu_exp_hint"
+                android:lineSpacingExtra="5dp"/>
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -267,8 +270,8 @@
                     style="@style/edittext_menu18b"
                     android:id="@+id/et_price"
                     android:layout_width="200dp"
-                    android:paddingEnd="37dp"
-                    android:inputType="number"
+                    android:paddingStart="37dp"
+                    android:inputType="numberDecimal"
                     android:hint="@string/zero"
                     android:maxLength="11"
                     android:textSize="20sp"
@@ -279,8 +282,8 @@
                 <TextView
                     style="@style/text18"
                     android:text="@string/won"
-                    android:layout_marginEnd="15dp"
-                    app:layout_constraintEnd_toEndOf="@+id/et_price"
+                    android:layout_marginStart="15dp"
+                    app:layout_constraintStart_toStartOf="@+id/et_price"
                     app:layout_constraintTop_toTopOf="@+id/et_price"
                     app:layout_constraintBottom_toBottomOf="@+id/et_price"/>
 
@@ -485,7 +488,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/opt_choice">
                     <TextView
                         style="@style/text18"
-                        android:text="@string/option_require" />
+                        android:text="@string/options_require" />
                     <ImageView
                         android:id="@+id/plus1"
                         android:layout_width="wrap_content"
@@ -504,7 +507,7 @@
                     app:layout_constraintEnd_toEndOf="parent">
                     <TextView
                         style="@style/text18"
-                        android:text="@string/option_choice" />
+                        android:text="@string/options_choice" />
                     <ImageView
                         android:id="@+id/plus2"
                         android:layout_width="wrap_content"
@@ -532,33 +535,37 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/seqInfo"
-            android:layout_width="560dp"
-            android:layout_height="279dp"
+            android:layout_width="620dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/bg_r10w"
-            android:padding="30dp"
+            android:paddingVertical="60dp"
             android:visibility="gone">
             <TextView
                 style="@style/text22b"
                 android:id="@+id/seq_title"
+                android:layout_marginBottom="30dp"
                 android:text="@string/change_seq_way"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/seq_info1"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
             <TextView
-                android:id="@+id/seq_info1"
                 style="@style/subtext"
+                android:id="@+id/seq_info1"
+                android:layout_marginStart="60dp"
+                android:layout_marginBottom="3dp"
+                android:lineSpacingExtra="3dp"
                 android:text="@string/change_seq_way_info1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/seq_info2"
-                app:layout_constraintTop_toBottomOf="@+id/seq_title"/>
+                app:layout_constraintBottom_toTopOf="@+id/seq_info2"/>
 
             <TextView
                 style="@style/subtext"
                 android:id="@+id/seq_info2"
                 android:text="@string/change_seq_way_info2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/seq_info1"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -572,7 +579,7 @@
             <TextView
                 style="@style/text22b"
                 android:id="@+id/del_title"
-                android:text="@string/menu_delete"
+                android:text="@string/menu_delete_title"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>

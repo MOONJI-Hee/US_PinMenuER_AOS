@@ -37,7 +37,7 @@ class TableAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adapte
         fun bind(data: OrderHistoryDTO) {
             binding.run {
                 // TODO API 확인 및 기능 구현
-                if(data.tableNo == "예약") {
+                if(data.tableNo == "Res.") {
                     clOrder.visibility = View.INVISIBLE
                     clCall.visibility = View.INVISIBLE
                     clReservStore.visibility = View.VISIBLE
@@ -64,10 +64,8 @@ class TableAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adapte
 
                 if(data.total == data.completedGea && data.total_price == data.completedPrice) {
                     completeCnt.visibility = View.GONE
-                    tvGea.visibility = View.GONE
                 }else {
                     completeCnt.visibility = View.VISIBLE
-                    tvGea.visibility = View.VISIBLE
                     completeCnt.text = data.completedGea.toString()
                 }
 

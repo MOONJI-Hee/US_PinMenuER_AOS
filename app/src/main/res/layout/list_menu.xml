@@ -27,23 +27,23 @@
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
-            android:id="@+id/price"
-            style="@style/text_num"
-            android:textSize="20sp"
+            android:id="@+id/won"
+            style="@style/text20"
+            android:layout_marginTop="3dp"
+            android:text="@string/won"
             app:layout_constraintStart_toStartOf="@+id/name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name" />
+
+        <TextView
+            style="@style/text_num"
+            android:id="@+id/price"
+            android:layout_marginStart="4dp"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/won"
             app:layout_constraintTop_toTopOf="@+id/won"
             app:layout_constraintBottom_toBottomOf="@+id/won"
             tools:text="2,000"/>
-
-        <TextView
-            android:id="@+id/won"
-            style="@style/text20"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="3dp"
-            android:text="@string/won"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/price"
-            app:layout_constraintTop_toBottomOf="@+id/name" />
 
         <ImageView
             android:id="@+id/icon"
