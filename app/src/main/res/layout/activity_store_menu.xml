@@ -231,7 +231,6 @@
     <TextView
         style="@style/menu"
         android:id="@+id/payment"
-        android:text="@string/payment_set"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/byTable"
         app:layout_constraintTop_toTopOf="@+id/printer"/>
