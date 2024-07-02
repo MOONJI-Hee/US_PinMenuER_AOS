@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name" translatable="false">Pinmenu Admin (Tablet PC)</string>
+    <string name="app_name" translatable="false">Pinmenu Mgmt (Tablet PC)</string>
 
-    <string name="pinmenu_er">Pinmenu Admin</string>
+    <string name="pinmenu_er">Pinmenu Mgmt</string>
     <string name="pinmenu_ee">Pinmenu Order App</string>
 
     <string name="login">Sign In</string>
