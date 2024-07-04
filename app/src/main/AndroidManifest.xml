@@ -19,7 +19,7 @@
         android:maxSdkVersion="29" />
 
     <application
-        android:name="com.wooriyo.us.pinmenuer.MyApplication"
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -32,120 +32,123 @@
         android:theme="@style/Theme.PinMenuER"
         tools:targetApi="31">
         <activity
-            android:name="com.wooriyo.us.pinmenuer.qrcode.SetQrcodeActivity"
+            android:name=".tiptax.TipTaxActivity"
+            android:exported="false" />
+        <activity
+            android:name=".qrcode.SetQrcodeActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="com.wooriyo.us.pinmenuer.qrcode.PgAgreeActivity"
+            android:name=".qrcode.PgAgreeActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="com.wooriyo.us.pinmenuer.event.PreviewActivity"
+            android:name=".event.PreviewActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.event.SetEventPopup"
+            android:name=".event.SetEventPopup"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.history.ByHistoryActivity"
+            android:name=".history.ByHistoryActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.history.ByTableActivity"
+            android:name=".history.ByTableActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.history.TableHisActivity"
+            android:name=".history.TableHisActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.pg.SetCustomerInfoActivity"
+            android:name=".pg.SetCustomerInfoActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.common.WebViewActivity"
+            android:name=".common.WebViewActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.member.MasterLoginActivity"
+            android:name=".member.MasterLoginActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.pg.PgHistoryActivity"
+            android:name=".pg.PgHistoryActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.pg.PgCancelActivity"
+            android:name=".pg.PgCancelActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.printer.SelCateActivity"
+            android:name=".printer.SelCateActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.printer.SelectPrinterActivity"
+            android:name=".printer.SelectPrinterActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.printer.SetContentActivity"
+            android:name=".printer.SetContentActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.printer.SetConnActivity"
+            android:name=".printer.SetConnActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.printer.PrinterModelListActivity"
+            android:name=".printer.PrinterModelListActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.printer.NewConnActivity"
+            android:name=".printer.NewConnActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.printer.PrinterMenuActivity"
+            android:name=".printer.PrinterMenuActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.setting.MenuUiActivity"
+            android:name=".setting.MenuUiActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.setting.TablePassActivity"
+            android:name=".setting.TablePassActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.member.FindPwdActivity"
+            android:name=".member.FindPwdActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.call.CallSetActivity"
+            android:name=".call.CallSetActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.call.CallListActivity"
+            android:name=".call.CallListActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.menu.MenuSetActivity"
+            android:name=".menu.MenuSetActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.menu.CategorySetActivity"
+            android:name=".menu.CategorySetActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.member.LoginActivity"
+            android:name=".member.LoginActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.member.SignUpActivity"
+            android:name=".member.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.member.MemberSetActivity"
+            android:name=".member.MemberSetActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.store.StoreListActivity"
+            android:name=".store.StoreListActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.store.StoreMenuActivity"
+            android:name=".store.StoreMenuActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.store.StoreSetActivity"
+            android:name=".store.StoreSetActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.store.StoreSetDetailActivity"
+            android:name=".store.StoreSetDetailActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.store.StoreSetTimeActivity"
+            android:name=".store.StoreSetTimeActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.store.StoreSetImgActivity"
+            android:name=".store.StoreSetImgActivity"
             android:exported="false" />
         <activity
-            android:name="com.wooriyo.us.pinmenuer.StartActivity"
+            android:name=".StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -157,11 +160,13 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_noti" />
+
         <service
-            android:name="com.wooriyo.us.pinmenuer.util.MyFirebaseService"
+            android:name=".util.MyFirebaseService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

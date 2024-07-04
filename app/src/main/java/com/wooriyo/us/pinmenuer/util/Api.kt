@@ -20,6 +20,7 @@ import com.wooriyo.us.pinmenuer.model.ReceiptDTO
 import com.wooriyo.us.pinmenuer.model.ResultDTO
 import com.wooriyo.us.pinmenuer.model.StoreListDTO
 import com.wooriyo.us.pinmenuer.model.TableNoListDTO
+import com.wooriyo.us.pinmenuer.model.TipTaxDTO
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -818,6 +819,26 @@ interface Api {
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int,
         @Query("tid") tid: String
+    ): Call<ResultDTO>
+
+    // 팁 & 택스 조회
+    @GET("m/getTipTax.php")
+    fun getTipTax(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int
+    ): Call<TipTaxDTO>
+
+    // 팁 & 택스 설정
+    @GET("m/tiptax.php")
+    fun setTipTax(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("tipuse") tipuse: String,
+        @Query("tip1") tip1: Int,
+        @Query("tip2") tip2: Int,
+        @Query("tip3") tip3: Int,
+        @Query("tip4") tip4: Int,
+        @Query("tax") tax: String
     ): Call<ResultDTO>
 
     // QR오더 관련

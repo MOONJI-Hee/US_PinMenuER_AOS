@@ -188,7 +188,7 @@
         <TextView
             style="@style/text18"
             android:id="@+id/tvCmplt"
-            android:text="@string/complete"
+            android:text="@string/done"
             android:textColor="@color/white"
             android:layout_marginHorizontal="30dp"
             app:layout_constraintStart_toStartOf="parent"

@@ -49,7 +49,7 @@ class ByTableActivity : BaseActivity() {
                 val confirmDialog = ConfirmDialog(
                     "",
                     getString(R.string.dialog_table_complete_confirm),
-                    getString(R.string.btn_complete)
+                    getString(R.string.done)
                 ) { completeTable(position) }
 
                 confirmDialog.show(supportFragmentManager, "CompleteDialog")

@@ -40,13 +40,13 @@
     <string name="update">Update</string>
     <string name="order">Order</string>
     <string name="call">Call</string>
+    <string name="done">Done</string>
     <string name="complete">Complete</string>
     <string name="setting">Settings</string>
     <string name="restore">Restore</string>
 
     <!--  버튼 텍스트  -->
     <string name="btn_update">Edit</string>
-    <string name="btn_complete">Done</string>
     <string name="btn_select">Select</string>
     <string name="btn_change">Change</string>
     <string name="btn_close">Close</string>
@@ -62,6 +62,7 @@
     <string name="month">Month</string>
     <string name="day">Day</string>
 
+    <string name="percent" translatable="false">%</string>
     <string name="tilde" translatable="false">~</string>
     <string name="colon" translatable="false">:</string>
     <string name="zero" translatable="false">0</string>
@@ -391,6 +392,13 @@
     <string name="event_use">Use Event</string>
     <string name="event_noti_switch_ff"><b>The event use switch is in the OFF state.</b>\n\nWhen in the OFF state, entering information will not\ndisplay event notifications on the order app/QR order.</string>
 
+    <!--  Tip & Tax  -->
+    <string name="tiptax">Tip &amp; Tax</string>
+    <string name="tips">Tips</string>
+    <string name="tax">Tax</string>
+    <string name="tip_info">The asterisked tip entered in the second column is automatically selected and displayed on the bill.\nCustomers can change the tips they will pay by pressing the [Change] button.\nYou can adjust the percentage of tips yourself.\n Please enter four percentage options.\n You can activate tips by toggling On/Off.</string>
+    <string name="tax_info">Every January 1st, you must manually adjust the tax.\nTips are not calculated in the tax.</string>
+
     <!--  QR 오더  -->
     <string name="qrcode">QR Code</string>
     <string name="qrcode_menu">QR Code</string>
@@ -487,7 +495,7 @@
 
     <!--  토스트 메세지  -->
     <string name="msg_retry">Please try again.</string>
-    <string name="msg_complete">Done.</string>
+    <string name="msg_complete">Success.</string>
     <string name="msg_no_id">Please enter your ID</string>
     <string name="msg_no_pw">Please enter your Password</string>
     <string name="msg_typemiss_pw">Please enter 8 digits or more in English and numbers only.</string>
@@ -527,4 +535,4 @@
     <string name="dialog_delete_confirm">Delete this %s?</string>
     <string name="category_seq_change_way">Method of change : Press and drag the category you want to change up or down</string>
     <string name="category_delete_info">Pressing delete will remove all items within this category, and once deleted, they cannot be restored.</string>
- </resources>
+</resources>

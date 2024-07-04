@@ -30,6 +30,7 @@ import com.wooriyo.us.pinmenuer.printer.PrinterMenuActivity
 import com.wooriyo.us.pinmenuer.qrcode.SetQrcodeActivity
 import com.wooriyo.us.pinmenuer.setting.MenuUiActivity
 import com.wooriyo.us.pinmenuer.setting.TablePassActivity
+import com.wooriyo.us.pinmenuer.tiptax.TipTaxActivity
 import com.wooriyo.us.pinmenuer.util.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -45,8 +46,6 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
 
         getCategory()
 
-        val usePay = intent.getBooleanExtra("usePay", true)
-
         binding.run {
             title.text = store.name
             version.text = "Ver ${MyApplication.appver}"
@@ -54,40 +53,10 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
             back.setOnClickListener{ leaveStore() }
             udtMbr.setOnClickListener{ startActivity(Intent(mActivity, MemberSetActivity::class.java)) }
 
-            if(usePay) {
-//                history.setOnClickListener{ startActivity(Intent(mActivity, ByHistoryActivity::class.java)) }
-//                byTable.setOnClickListener{ startActivity(Intent(mActivity, ByTableActivity::class.java)) }
-//                tablePass.setOnClickListener{ startActivity(Intent(mActivity, TablePassActivity::class.java)) }
-//                setCall.setOnClickListener { startActivity(Intent(mActivity, CallSetActivity::class.java)) }
-
-//                printer.setOnClickListener{ insPrintSetting() }
-//                payment.setOnClickListener{ insPaySetting() }
-//                pgCancel.setOnClickListener{
-//                    if(store.pg_storenm.isEmpty() || store.pg_snum.isEmpty()) {
-//                        NoPgInfoDialog(mActivity).show()
-//                    }else {
-//                        startActivity(Intent(mActivity, PgHistoryActivity::class.java))
-//                    }
-//                }
-                design.setOnClickListener{ startActivity(Intent(mActivity, MenuUiActivity::class.java)) }
-//                event.setOnClickListener { startActivity(Intent(mActivity, SetEventPopup::class.java)) }
-            } else {
-//                history.setOnClickListener(this@StoreMenuActivity)
-//                byTable.setOnClickListener(this@StoreMenuActivity)
-//                tablePass.setOnClickListener(this@StoreMenuActivity)
-//                setCall.setOnClickListener(this@StoreMenuActivity)
-//                printer.setOnClickListener(this@StoreMenuActivity)
-//                payment.setOnClickListener(this@StoreMenuActivity)
-//                pgCancel.setOnClickListener(this@StoreMenuActivity)
-                design.setOnClickListener(this@StoreMenuActivity)
-//                event.setOnClickListener(this@StoreMenuActivity)
-            }
-
             history.setOnClickListener{ startActivity(Intent(mActivity, ByHistoryActivity::class.java)) }
             byTable.setOnClickListener{ startActivity(Intent(mActivity, ByTableActivity::class.java)) }
             tablePass.setOnClickListener{ startActivity(Intent(mActivity, TablePassActivity::class.java)) }
             setCall.setOnClickListener { startActivity(Intent(mActivity, CallSetActivity::class.java)) }
-
             printer.setOnClickListener{ insPrintSetting() }
             payment.setOnClickListener{ insPaySetting() }
             pgCancel.setOnClickListener{
@@ -97,9 +66,13 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                     startActivity(Intent(mActivity, PgHistoryActivity::class.java))
                 }
             }
+            tiptax.setOnClickListener {
+                startActivity(Intent(mActivity, TipTaxActivity::class.java))
+            }
             qrcode.setOnClickListener {
                 startActivity(Intent(mActivity, SetQrcodeActivity::class.java))
             }
+            design.setOnClickListener{ startActivity(Intent(mActivity, MenuUiActivity::class.java)) }
             event.setOnClickListener { startActivity(Intent(mActivity, SetEventPopup::class.java)) }
 
             menu.setOnClickListener{

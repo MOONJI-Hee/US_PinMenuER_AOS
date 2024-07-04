@@ -48,199 +48,208 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <!--    <TextView-->
-    <!--        style="@style/num_badge40"-->
-    <!--        android:id="@+id/badge_order"-->
-    <!--        android:layout_marginStart="-30dp"-->
-    <!--        android:layout_marginBottom="-30dp"-->
-    <!--        android:visibility="invisible"-->
-    <!--        app:layout_constraintStart_toEndOf="@+id/history"-->
-    <!--        app:layout_constraintBottom_toTopOf="@+id/history" />-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="60dp">
+            <TextView
+                style="@style/text20b"
+                android:text="@string/order_mgmt"
+                app:layout_constraintStart_toEndOf="@+id/line1"
+                app:layout_constraintEnd_toStartOf="@+id/line2"
+                app:layout_constraintTop_toTopOf="@+id/line1"
+                app:layout_constraintBottom_toBottomOf="@+id/line1"/>
 
-    <TextView
-        style="@style/text20b"
-        android:text="@string/order_mgmt"
-        app:layout_constraintStart_toEndOf="@+id/line1"
-        app:layout_constraintEnd_toStartOf="@+id/line2"
-        app:layout_constraintTop_toTopOf="@+id/line1"
-        app:layout_constraintBottom_toBottomOf="@+id/line1"/>
+            <View
+                android:id="@+id/line1"
+                android:layout_width="164dp"
+                android:layout_height="3dp"
+                android:layout_marginBottom="24dp"
+                android:background="@color/main"
+                app:layout_constraintStart_toStartOf="@+id/history"
+                app:layout_constraintBottom_toTopOf="@+id/history"/>
 
-    <View
-        android:id="@+id/line1"
-        android:layout_width="164dp"
-        android:layout_height="3dp"
-        android:layout_marginBottom="24dp"
-        android:background="@color/main"
-        app:layout_constraintStart_toStartOf="@+id/history"
-        app:layout_constraintBottom_toTopOf="@+id/history"/>
+            <View
+                android:id="@+id/line2"
+                android:layout_width="164dp"
+                android:layout_height="3dp"
+                android:layout_marginBottom="24dp"
+                android:background="@color/main"
+                app:layout_constraintEnd_toEndOf="@+id/byTable"
+                app:layout_constraintBottom_toTopOf="@+id/byTable"/>
 
-    <View
-        android:id="@+id/line2"
-        android:layout_width="164dp"
-        android:layout_height="3dp"
-        android:layout_marginBottom="24dp"
-        android:background="@color/main"
-        app:layout_constraintEnd_toEndOf="@+id/byTable"
-        app:layout_constraintBottom_toTopOf="@+id/byTable"/>
+            <View
+                android:id="@+id/line3"
+                android:layout_width="446dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/main"
+                app:layout_constraintEnd_toEndOf="@+id/byTable"
+                app:layout_constraintStart_toStartOf="@+id/history"
+                app:layout_constraintTop_toBottomOf="@+id/history"/>
 
-    <View
-        android:id="@+id/line3"
-        android:layout_width="446dp"
-        android:layout_height="3dp"
-        android:layout_marginTop="24dp"
-        android:background="@color/main"
-        app:layout_constraintEnd_toEndOf="@+id/byTable"
-        app:layout_constraintStart_toStartOf="@+id/history"
-        app:layout_constraintTop_toBottomOf="@+id/history"/>
+            <TextView
+                style="@style/menu"
+                android:id="@+id/history"
+                android:layout_marginTop="100dp"
+                android:text="@string/show_by_history"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintEnd_toStartOf="@+id/byTable"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        style="@style/menu"
-        android:id="@+id/history"
-        android:layout_marginTop="100dp"
-        android:text="@string/show_by_history"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintEnd_toStartOf="@+id/byTable"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+            <TextView
+                style="@style/subtext"
+                android:text="@string/show_by_history_sub"
+                app:layout_constraintBottom_toBottomOf="@+id/menu_sub"
+                app:layout_constraintStart_toStartOf="@+id/history"
+                app:layout_constraintTop_toTopOf="@+id/menu_sub" />
 
-    <TextView
-        style="@style/subtext"
-        android:text="@string/show_by_history_sub"
-        app:layout_constraintBottom_toBottomOf="@+id/menu_sub"
-        app:layout_constraintStart_toStartOf="@+id/history"
-        app:layout_constraintTop_toTopOf="@+id/menu_sub" />
+            <TextView
+                style="@style/menu"
+                android:id="@+id/byTable"
+                android:layout_marginHorizontal="30dp"
+                android:text="@string/show_by_table"
+                app:layout_constraintBottom_toBottomOf="@+id/history"
+                app:layout_constraintEnd_toStartOf="@+id/menu"
+                app:layout_constraintStart_toEndOf="@+id/history"
+                app:layout_constraintTop_toTopOf="@+id/history"/>
 
-    <TextView
-        style="@style/menu"
-        android:id="@+id/byTable"
-        android:layout_marginHorizontal="30dp"
-        android:text="@string/show_by_table"
-        app:layout_constraintBottom_toBottomOf="@+id/history"
-        app:layout_constraintEnd_toStartOf="@+id/menu"
-        app:layout_constraintStart_toEndOf="@+id/history"
-        app:layout_constraintTop_toTopOf="@+id/history"/>
+            <TextView
+                android:id="@+id/textView"
+                style="@style/subtext"
+                android:text="@string/show_by_table_sub"
+                app:layout_constraintTop_toTopOf="@+id/menu_sub"
+                app:layout_constraintBottom_toBottomOf="@+id/menu_sub"
+                app:layout_constraintStart_toStartOf="@+id/byTable" />
 
-    <TextView
-        android:id="@+id/textView"
-        style="@style/subtext"
-        android:text="@string/show_by_table_sub"
-        app:layout_constraintTop_toTopOf="@+id/menu_sub"
-        app:layout_constraintBottom_toBottomOf="@+id/menu_sub"
-        app:layout_constraintStart_toStartOf="@+id/byTable" />
+            <TextView
+                android:id="@+id/menu"
+                style="@style/menu"
+                android:text="@string/menu_mgmt"
+                app:layout_constraintBottom_toBottomOf="@+id/byTable"
+                app:layout_constraintEnd_toStartOf="@+id/tablePass"
+                app:layout_constraintStart_toEndOf="@+id/byTable"
+                app:layout_constraintTop_toTopOf="@+id/byTable" />
 
-    <TextView
-        android:id="@+id/menu"
-        style="@style/menu"
-        android:text="@string/menu_mgmt"
-        app:layout_constraintBottom_toBottomOf="@+id/byTable"
-        app:layout_constraintEnd_toStartOf="@+id/tablePass"
-        app:layout_constraintStart_toEndOf="@+id/byTable"
-        app:layout_constraintTop_toTopOf="@+id/byTable" />
+            <TextView
+                android:id="@+id/menu_sub"
+                style="@style/subtext"
+                android:layout_marginTop="10dp"
+                android:text="@string/menu_mgmt_sub"
+                app:layout_constraintStart_toStartOf="@+id/menu"
+                app:layout_constraintTop_toBottomOf="@+id/menu" />
 
-    <TextView
-        android:id="@+id/menu_sub"
-        style="@style/subtext"
-        android:layout_marginTop="10dp"
-        android:text="@string/menu_mgmt_sub"
-        app:layout_constraintStart_toStartOf="@+id/menu"
-        app:layout_constraintTop_toBottomOf="@+id/menu" />
+            <TextView
+                style="@style/menu"
+                android:id="@+id/tablePass"
+                android:layout_marginHorizontal="30dp"
+                android:text="@string/table_pass"
+                app:layout_constraintBottom_toBottomOf="@+id/menu"
+                app:layout_constraintEnd_toStartOf="@+id/setCall"
+                app:layout_constraintStart_toEndOf="@+id/menu"
+                app:layout_constraintTop_toTopOf="@+id/menu" />
 
-    <TextView
-        style="@style/menu"
-        android:id="@+id/tablePass"
-        android:layout_marginHorizontal="30dp"
-        android:text="@string/table_pass"
-        app:layout_constraintBottom_toBottomOf="@+id/menu"
-        app:layout_constraintEnd_toStartOf="@+id/setCall"
-        app:layout_constraintStart_toEndOf="@+id/menu"
-        app:layout_constraintTop_toTopOf="@+id/menu" />
+            <TextView
+                android:id="@+id/setCall"
+                style="@style/menu"
+                android:text="@string/call_manage"
+                app:layout_constraintStart_toEndOf="@+id/tablePass"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tablePass"
+                app:layout_constraintBottom_toBottomOf="@+id/tablePass" />
 
-    <TextView
-        android:id="@+id/setCall"
-        style="@style/menu"
-        android:text="@string/call_manage"
-        app:layout_constraintStart_toEndOf="@+id/tablePass"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tablePass"
-        app:layout_constraintBottom_toBottomOf="@+id/tablePass" />
+            <TextView
+                android:id="@+id/printer"
+                style="@style/menu"
+                android:layout_marginTop="100dp"
+                android:text="@string/printer_set"
+                app:layout_constraintStart_toStartOf="@+id/history"
+                app:layout_constraintTop_toBottomOf="@+id/history"/>
 
-    <TextView
-        android:id="@+id/printer"
-        style="@style/menu"
-        android:layout_marginTop="100dp"
-        android:text="@string/printer_set"
-        app:layout_constraintStart_toStartOf="@+id/history"
-        app:layout_constraintTop_toBottomOf="@+id/history"/>
+            <TextView
+                style="@style/subtext"
+                android:layout_marginTop="10dp"
+                android:text="@string/printer_set_sub"
+                app:layout_constraintStart_toStartOf="@+id/printer"
+                app:layout_constraintTop_toBottomOf="@+id/printer" />
 
-    <TextView
-        style="@style/subtext"
-        android:layout_marginTop="10dp"
-        android:text="@string/printer_set_sub"
-        app:layout_constraintStart_toStartOf="@+id/printer"
-        app:layout_constraintTop_toBottomOf="@+id/printer" />
+            <TextView
+                style="@style/menu"
+                android:id="@+id/pgCancel"
+                android:text="@string/pg_cancel_menu"
+                app:layout_constraintTop_toTopOf="@+id/payment"
+                app:layout_constraintStart_toStartOf="@+id/byTable"/>
 
-    <TextView
-        style="@style/menu"
-        android:id="@+id/pgCancel"
-        android:text="@string/pg_cancel_menu"
-        app:layout_constraintTop_toTopOf="@+id/payment"
-        app:layout_constraintStart_toStartOf="@+id/byTable"/>
+            <TextView
+                style="@style/subtext"
+                android:layout_marginTop="10dp"
+                android:text="@string/pg_cancel_menu_sub"
+                app:layout_constraintStart_toStartOf="@+id/pgCancel"
+                app:layout_constraintTop_toBottomOf="@+id/pgCancel" />
 
-    <TextView
-        style="@style/subtext"
-        android:layout_marginTop="10dp"
-        android:text="@string/pg_cancel_menu_sub"
-        app:layout_constraintStart_toStartOf="@+id/pgCancel"
-        app:layout_constraintTop_toBottomOf="@+id/pgCancel" />
+            <TextView
+                style="@style/menu"
+                android:id="@+id/tiptax"
+                android:text="@string/tiptax"
+                app:layout_constraintStart_toStartOf="@+id/menu"
+                app:layout_constraintTop_toTopOf="@+id/pgCancel" />
 
-    <TextView
-        style="@style/menu"
-        android:id="@+id/qrcode"
-        android:text="@string/qrcode_menu"
-        app:layout_constraintStart_toStartOf="@+id/menu"
-        app:layout_constraintTop_toTopOf="@+id/pgCancel" />
+            <TextView
+                style="@style/menu"
+                android:id="@+id/qrcode"
+                android:text="@string/qrcode_menu"
+                app:layout_constraintStart_toStartOf="@+id/tablePass"
+                app:layout_constraintTop_toTopOf="@+id/tiptax" />
 
-    <TextView
-        style="@style/subtext"
-        android:layout_marginTop="10dp"
-        android:text="@string/qrcode_menu_info"
-        app:layout_constraintStart_toStartOf="@+id/qrcode"
-        app:layout_constraintTop_toBottomOf="@+id/qrcode" />
+            <TextView
+                style="@style/subtext"
+                android:layout_marginTop="10dp"
+                android:text="@string/qrcode_menu_info"
+                app:layout_constraintStart_toStartOf="@+id/qrcode"
+                app:layout_constraintTop_toBottomOf="@+id/qrcode" />
 
-    <TextView
-        style="@style/menu"
-        android:id="@+id/design"
-        android:text="@string/menu_ui"
-        app:layout_constraintStart_toStartOf="@+id/tablePass"
-        app:layout_constraintTop_toTopOf="@+id/qrcode" />
+            <TextView
+                style="@style/menu"
+                android:id="@+id/design"
+                android:text="@string/menu_ui"
+                app:layout_constraintTop_toTopOf="@+id/qrcode"
+                app:layout_constraintStart_toStartOf="@+id/setCall" />
 
-    <TextView
-        style="@style/subtext"
-        android:layout_marginTop="10dp"
-        android:text="@string/menu_ui_sub"
-        app:layout_constraintStart_toStartOf="@+id/design"
-        app:layout_constraintTop_toBottomOf="@+id/design" />
+            <TextView
+                style="@style/subtext"
+                android:layout_marginTop="10dp"
+                android:text="@string/menu_ui_sub"
+                app:layout_constraintStart_toStartOf="@+id/design"
+                app:layout_constraintTop_toBottomOf="@+id/design" />
 
-    <TextView
-        android:id="@+id/event"
-        style="@style/menu"
-        android:text="@string/title_event"
-        app:layout_constraintTop_toTopOf="@+id/design"
-        app:layout_constraintStart_toStartOf="@+id/setCall"/>
+            <TextView
+                android:id="@+id/event"
+                style="@style/menu"
+                android:text="@string/title_event"
+                android:layout_marginTop="100dp"
+                app:layout_constraintTop_toBottomOf="@+id/printer"
+                app:layout_constraintStart_toStartOf="@+id/printer"/>
 
-    <TextView
-        style="@style/menu"
-        android:id="@+id/payment"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@+id/byTable"
-        app:layout_constraintTop_toTopOf="@+id/printer"/>
+            <TextView
+                style="@style/menu"
+                android:id="@+id/payment"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/byTable"
+                app:layout_constraintTop_toTopOf="@+id/printer"/>
 
-    <TextView
-        style="@style/subtext"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@+id/payment"
-        app:layout_constraintTop_toBottomOf="@+id/payment" />
-
+            <TextView
+                style="@style/subtext"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/payment"
+                app:layout_constraintTop_toBottomOf="@+id/payment" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

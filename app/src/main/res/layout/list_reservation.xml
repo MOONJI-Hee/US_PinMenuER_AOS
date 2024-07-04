@@ -254,7 +254,7 @@
             android:id="@+id/btnComplete"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:text="@string/complete"
+            android:text="@string/done"
             android:gravity="center"
             android:paddingHorizontal="15dp"
             android:background="@drawable/bg_r6y"

@@ -338,7 +338,7 @@ class ByHistoryActivity : BaseActivity() {
     }
 
     fun showCompleteDialog(type: String, event: View.OnClickListener) {
-        val completeDialog = ConfirmDialog("", String.format(getString(R.string.dialog_complete), type), getString(R.string.btn_complete), event)
+        val completeDialog = ConfirmDialog("", String.format(getString(R.string.dialog_complete), type), getString(R.string.done), event)
         completeDialog.show(supportFragmentManager, "CompleteDialog")
     }
 
