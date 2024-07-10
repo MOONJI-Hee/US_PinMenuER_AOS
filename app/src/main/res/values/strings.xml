@@ -268,11 +268,10 @@
     <string name="save_ui">Apply Design</string>
 
     <!-- 주문 정보 -->
-    <string name="print">프 린 트</string>
+    <string name="print">Print</string>
     <string name="order_total" translatable="false">TOTAL</string>
 
-    <string name="table_no_kr">테이블번호</string>
-    <string name="order_no">주문번호</string>
+    <string name="order_no">Order No.</string>
 
     <!--  예약 정보  -->
     <string name="reserv_no">Reservation No.</string>
@@ -491,8 +490,8 @@
     <string name="dialog_disable_qr">Number of QRs available exceeded</string>
 
     <!--  비어있는 목록  -->
-    <string name="no_order_list">No Order List</string>
-    <string name="no_call_list">No Call List</string>
+    <string name="no_order_list">There is no order information</string>
+    <string name="no_call_list">There is no call information</string>
     <string name="no_store_list">No Store</string>
 
     <!--  토스트 메세지  -->

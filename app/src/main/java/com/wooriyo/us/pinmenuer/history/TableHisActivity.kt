@@ -70,7 +70,7 @@ class TableHisActivity: BaseActivity() {
         tableNo = intent.getStringExtra("tableNo") ?: ""
 
         // 예약 테이블은 주문, 호출 탭 가리기 >> 텍스트로 예외처리 하는 것이 위험해서 추후 api 부터 수정 예정
-        if(tableNo == "예약") {
+        if(tableNo == "Res.") {
             binding.tabOrder.visibility = View.GONE
             binding.tabCall.visibility = View.GONE
         }
@@ -349,6 +349,8 @@ class TableHisActivity: BaseActivity() {
 
     // 전체 목록 조회
     private fun getTotalList() {
+        loadingDialog.show(supportFragmentManager)
+//        loadingDialog.show(supportFragmentManager, "LoadingDialog")
         ApiClient.service.getTableTotalList(MyApplication.useridx, MyApplication.storeidx, tableNo)
             .enqueue(object: Callback<OrderListDTO> {
             override fun onResponse(call: Call<OrderListDTO>, response: Response<OrderListDTO>) {
@@ -370,9 +372,12 @@ class TableHisActivity: BaseActivity() {
                         totalAdapter.notifyDataSetChanged()
                     }
                 }else Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+
+                loadingDialog.dismiss()
             }
 
             override fun onFailure(call: Call<OrderListDTO>, t: Throwable) {
+                loadingDialog.dismiss()
                 Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "전체 내역 조회 오류 > $t")
                 Log.d(TAG, "전체 내역 조회 오류 > ${call.request()}")
@@ -382,6 +387,7 @@ class TableHisActivity: BaseActivity() {
 
     // 주문 목록 조회
     fun getOrderList() {
+        loadingDialog.show(supportFragmentManager)
         ApiClient.service.getTableOrderList(MyApplication.useridx, MyApplication.storeidx, tableNo).enqueue(object:
             Callback<OrderListDTO> {
             override fun onResponse(call: Call<OrderListDTO>, response: Response<OrderListDTO>) {
@@ -407,9 +413,11 @@ class TableHisActivity: BaseActivity() {
                         else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                     }
                 }
+                loadingDialog.dismiss()
             }
 
             override fun onFailure(call: Call<OrderListDTO>, t: Throwable) {
+                loadingDialog.dismiss()
                 Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "주문 목록 조회 오류 > $t")
                 Log.d(TAG, "주문 목록 조회 오류 > ${call.request()}")
@@ -419,6 +427,7 @@ class TableHisActivity: BaseActivity() {
 
     // 예약 목록 조회
     fun getReservList() {
+        loadingDialog.show(supportFragmentManager)
         ApiClient.service.getTableReservList(MyApplication.useridx, MyApplication.storeidx, tableNo).enqueue(object: Callback<OrderListDTO> {
             override fun onResponse(call: Call<OrderListDTO>, response: Response<OrderListDTO>) {
                 Log.d(TAG, "예약 목록 조회 url : $response")
@@ -443,9 +452,11 @@ class TableHisActivity: BaseActivity() {
                         else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                     }
                 }
+                loadingDialog.dismiss()
             }
 
             override fun onFailure(call: Call<OrderListDTO>, t: Throwable) {
+                loadingDialog.dismiss()
                 Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "예약 목록 조회 오류 > $t")
                 Log.d(TAG, "예약 목록 조회 오류 > ${call.request()}")
@@ -455,6 +466,7 @@ class TableHisActivity: BaseActivity() {
 
     // 호출 리스트 (히스토리) 조회
     fun getCallList() {
+        loadingDialog.show(supportFragmentManager)
         ApiClient.service.getTableCallList(MyApplication.useridx, MyApplication.storeidx, tableNo)
             .enqueue(object: Callback<CallListDTO> {
             override fun onResponse(call: Call<CallListDTO>, response: Response<CallListDTO>) {
@@ -478,8 +490,10 @@ class TableHisActivity: BaseActivity() {
                 } else
                     Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
 
+                loadingDialog.dismiss()
             }
             override fun onFailure(call: Call<CallListDTO>, t: Throwable) {
+                loadingDialog.dismiss()
                 Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "호출 목록 조회 오류 > $t")
                 Log.d(TAG, "호출 목록 조회 오류 > ${call.request()}")
@@ -488,6 +502,7 @@ class TableHisActivity: BaseActivity() {
     }
 
     fun getCompletedList() {
+        loadingDialog.show(supportFragmentManager)
         ApiClient.service.getTableCompletedList(MyApplication.useridx, MyApplication.storeidx, tableNo)
             .enqueue(object : Callback<OrderListDTO> {
             override fun onResponse(call: Call<OrderListDTO>, response: Response<OrderListDTO>) {
@@ -509,9 +524,12 @@ class TableHisActivity: BaseActivity() {
                     }
                 }else
                     Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+
+                loadingDialog.dismiss()
             }
 
             override fun onFailure(call: Call<OrderListDTO>, t: Throwable) {
+                loadingDialog.dismiss()
                 Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "완료 목록 조회 오류 > $t")
                 Log.d(TAG, "완료 목록 조회 오류 > ${call.request()}")

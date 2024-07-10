@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import com.wooriyo.us.pinmenuer.BaseDialogFragment
 import com.wooriyo.us.pinmenuer.databinding.DialogLoadingBinding
 
@@ -24,5 +25,11 @@ class LoadingDialog: BaseDialogFragment() {
         params.width = LayoutParams.MATCH_PARENT
         params.height = LayoutParams.MATCH_PARENT
         window.attributes = params
+    }
+
+    fun show(manager: FragmentManager) {
+        if(!isAdded) {
+            show(manager, "LoadingDialog")
+        }
     }
 }

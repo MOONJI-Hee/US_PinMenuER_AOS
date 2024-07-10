@@ -233,6 +233,7 @@
         style="@style/text20"
         android:id="@+id/empty"
         android:text="@string/no_order_list"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"
