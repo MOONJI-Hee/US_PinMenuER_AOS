@@ -1,9 +1,11 @@
 package com.wooriyo.us.pinmenuer
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.androidId
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.appver
@@ -17,6 +19,8 @@ import com.wooriyo.us.pinmenuer.util.ApiClient
 import com.wooriyo.us.pinmenuer.util.AppHelper
 import retrofit2.Call
 import retrofit2.Response
+import java.sql.Time
+import java.util.TimeZone
 
 class StartActivity: BaseActivity() {
     var id = ""
@@ -26,6 +30,13 @@ class StartActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
+//        Log.d(TAG, "TimeZone.getDefault >> ${TimeZone.getTimeZone("GMT")}")
+//        Log.d(TAG, "TimeZone.getDefault >> ${TimeZone.getTimeZone("UTC")}")
+//
+//        val t = TimeZone.getDefault()
+//        val result = t.getOffset(System.currentTimeMillis())
+//
+//        Log.d(TAG, "TimeZoen.getDefault.getOffset >> $result")
     }
 
     override fun onResume() {

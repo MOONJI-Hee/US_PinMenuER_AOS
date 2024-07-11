@@ -375,6 +375,7 @@ class SetQrcodeActivity : BaseActivity(), DialogInterface.OnDismissListener {
                 val result = response.body() ?: return
                 when (result.status) {
                     1 -> {
+                        Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
                         store.qrbuse = buse
                     }
                     else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()

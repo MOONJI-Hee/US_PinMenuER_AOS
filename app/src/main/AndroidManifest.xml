@@ -42,13 +42,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".qrcode.PgAgreeActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".event.PreviewActivity"
             android:exported="false" />
         <activity
@@ -62,9 +55,6 @@
             android:exported="false" />
         <activity
             android:name=".history.TableHisActivity"
-            android:exported="false" />
-        <activity
-            android:name=".pg.SetCustomerInfoActivity"
             android:exported="false" />
         <activity
             android:name=".common.WebViewActivity"
@@ -110,9 +100,6 @@
             android:exported="false" />
         <activity
             android:name=".call.CallSetActivity"
-            android:exported="false" />
-        <activity
-            android:name=".call.CallListActivity"
             android:exported="false" />
         <activity
             android:name=".menu.MenuSetActivity"
