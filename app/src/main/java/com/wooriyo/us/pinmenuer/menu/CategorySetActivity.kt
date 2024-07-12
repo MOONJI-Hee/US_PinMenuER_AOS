@@ -91,6 +91,7 @@ class CategorySetActivity : BaseActivity(), DialogListener {
         allCateList.removeAt(position)
         cateAdapter.notifyItemRemoved(position)
         cateEditAdapter.notifyItemRemoved(position)
+        cateEditAdapter.notifyItemRangeChanged(position, allCateList.size - position)
         setResult(RESULT_OK, intent)
     }
 
@@ -101,6 +102,7 @@ class CategorySetActivity : BaseActivity(), DialogListener {
         cateEditAdapter.setOnItemClickListener(object: ItemClickListener {
             override fun onItemClick(position: Int) {
                 super.onItemClick(position)
+                Log.d(TAG, "position >>>> $position")
                 showCateDialog(position, allCateList[position])
             }
         })
