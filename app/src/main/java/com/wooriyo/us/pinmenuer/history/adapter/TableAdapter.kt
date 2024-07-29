@@ -55,6 +55,8 @@ class TableAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adapte
 
                     ordCnt.text = data.totalOrdCnt.toString()
                     callCnt.text = data.totalCallCnt.toString()
+
+                    tableNo.setTextColor(Color.parseColor("#000000"))
                 }
 
                 tableNo.text = data.tableNo
