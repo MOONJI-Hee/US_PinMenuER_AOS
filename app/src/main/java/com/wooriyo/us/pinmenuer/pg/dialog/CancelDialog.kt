@@ -19,7 +19,7 @@ class CancelDialog(context: Context, val onClickListener: OnClickListener): Base
         binding.content.text = context.getString(R.string.dialog_pg_cancel_info)
 
         binding.cancel.text = context.getString(R.string.back)
-        binding.confirm.text = context.getString(R.string.payment_cancel)
+        binding.confirm.text = context.getString(R.string.btn_pg_cancel)
 
         binding.cancel.setOnClickListener { dismiss() }
         binding.confirm.setOnClickListener {

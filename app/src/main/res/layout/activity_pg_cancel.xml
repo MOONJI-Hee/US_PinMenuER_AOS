@@ -29,7 +29,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="500dp"
         android:layout_height="0dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/bg_r6_f9"
         app:layout_constraintTop_toBottomOf="@+id/title"
         app:layout_constraintBottom_toTopOf="@+id/btnCancel"
@@ -104,7 +105,7 @@
         style="@style/btn_main"
         android:id="@+id/btnCancel"
         android:layout_marginBottom="40dp"
-        android:text="@string/payment_cancel"
+        android:text="@string/btn_pg_cancel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

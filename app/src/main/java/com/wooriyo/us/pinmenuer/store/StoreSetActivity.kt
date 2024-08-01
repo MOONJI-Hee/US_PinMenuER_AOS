@@ -158,13 +158,13 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
                 storeSns.setTypeface(storeExp.typeface, Typeface.NORMAL)
             }
 
-            if(store.delivery == "Y") {
-                storeDeliver.text = getString(R.string.store_delivery_y)
-                storeDeliver.typeface = Typeface.DEFAULT_BOLD
-            }else {
-                storeDeliver.text = getString(R.string.store_delivery_info)
-                storeDeliver.setTypeface(storeExp.typeface, Typeface.NORMAL)
-            }
+//            if(store.delivery == "Y") {
+//                storeDeliver.text = getString(R.string.store_delivery_y)
+//                storeDeliver.typeface = Typeface.DEFAULT_BOLD
+//            }else {
+//                storeDeliver.text = getString(R.string.store_delivery_info)
+//                storeDeliver.setTypeface(storeExp.typeface, Typeface.NORMAL)
+//            }
 
             if(store.parking == "Y") {
                 storePark.text = getString(R.string.store_parking_y)

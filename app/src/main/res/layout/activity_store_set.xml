@@ -55,6 +55,7 @@
         android:inputType="text"
         android:imeOptions="actionDone"
         android:maxLines="1"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_name" />
@@ -190,12 +191,12 @@
                 <TextView
                     style="@style/text16l"
                     android:id="@+id/storeDeliver"
-                    android:text="@string/store_delivery_info" />
+                    android:text="@string/store_delivery_info"
+                    android:visibility="gone"/>
 
                 <TextView
                     style="@style/text16l"
                     android:id="@+id/storePark"
-                    android:layout_marginTop="6dp"
                     android:text="@string/store_parking_info" />
 
                 <TextView

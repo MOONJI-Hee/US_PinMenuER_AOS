@@ -79,6 +79,7 @@
         style="@style/text18"
         android:layout_marginEnd="16dp"
         android:text="@string/store_delivery"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/group_delivery"
         app:layout_constraintTop_toTopOf="@+id/group_delivery"
         app:layout_constraintBottom_toBottomOf="@+id/group_delivery" />
@@ -89,6 +90,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/et_insta"
         app:layout_constraintEnd_toEndOf="@+id/et_insta"
         app:layout_constraintTop_toBottomOf="@+id/et_insta">
@@ -127,8 +129,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        app:layout_constraintStart_toStartOf="@+id/group_delivery"
-        app:layout_constraintEnd_toEndOf="@+id/group_delivery"
+        app:layout_constraintStart_toStartOf="@+id/et_insta"
+        app:layout_constraintEnd_toEndOf="@+id/et_insta"
         app:layout_constraintTop_toBottomOf="@+id/group_delivery">
         <RadioButton
             android:id="@+id/parking_y"

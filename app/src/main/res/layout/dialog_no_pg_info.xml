@@ -8,18 +8,6 @@
         android:layout_width="620dp"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_r10w">
-        <LinearLayout
-            android:id="@+id/close"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/btn_popup_close"/>
-        </LinearLayout>
         <TextView
             android:id="@+id/text1"
             style="@style/text18"

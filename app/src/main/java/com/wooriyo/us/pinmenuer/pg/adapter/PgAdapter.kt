@@ -28,22 +28,24 @@ class PgAdapter(val dataSet: ArrayList<PgDetailDTO>): RecyclerView.Adapter<PgAda
     class ViewHolder(val context: Context, val binding: ListPgBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: PgDetailDTO) {
             binding.run {
-                cardInfo.text = "${data.cardname} CARD NUM ${data.cardnum}"
+                cardInfo.text = "${data.cardname}(${data.cardnum})"
                 regdt.text = data.regdt
                 goods.text = data.name
                 price.text = AppHelper.price(data.price)
 
                 if(data.cancel == 0) {
                     cancelComplete.visibility = View.GONE
+                    tvCancelComplete.visibility = View.GONE
                     btnCancel.visibility = View.VISIBLE
                 }else {
                     cancelComplete.visibility = View.VISIBLE
-                    btnCancel.visibility = View.GONE
+                    tvCancelComplete.visibility = View.VISIBLE
+                    btnCancel.visibility = View.INVISIBLE
                 }
-
                 btnCancel.setOnClickListener {
                     val intent = Intent(context, PgCancelActivity::class.java)
                     intent.putExtra("ordcode", data.ordcode_key)
+                    intent.putExtra("tid", data.tid)
                     context.startActivity(intent)
                 }
             }

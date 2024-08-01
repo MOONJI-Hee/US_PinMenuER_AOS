@@ -26,11 +26,16 @@
         tools:text="2023.10.05 12:34"/>
 
     <TextView
-        android:id="@+id/goods"
         style="@style/text18"
+        android:id="@+id/goods"
+        android:layout_width="0dp"
+        android:layout_marginEnd="3dp"
+        android:maxLines="1"
+        android:ellipsize="end"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/regdt"
+        app:layout_constraintEnd_toStartOf="@+id/btnCancel"
         tools:text="맛있는 스테이크 1개"/>
 
     <TextView
@@ -51,29 +56,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/price" />
 
+    <View
+        android:id="@+id/cancelComplete"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#BFFFFFFF"
+        android:visibility="gone"/>
+
     <TextView
         android:id="@+id/btnCancel"
         style="@style/btn"
         android:layout_width="wrap_content"
-        android:paddingHorizontal="15dp"
+        android:paddingHorizontal="20dp"
         android:text="@string/payment_cancel"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cancelComplete"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#BFFFFFFF"
-        android:visibility="gone">
-
-        <ImageView
-            android:layout_width="96dp"
-            android:layout_height="68dp"
-            android:src="@drawable/img_pg_cancel_complete"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        style="@style/text18"
+        android:id="@+id/tvCancelComplete"
+        android:gravity="center"
+        android:text="@string/payment_cancel_complete"
+        android:textColor="#FF0000"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

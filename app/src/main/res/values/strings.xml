@@ -255,7 +255,7 @@
     <!--  메뉴판 디자인 설정  -->
     <string name="menu_ui">Menu Design</string>
     <string name="title_menu_ui">Menu Design Setup</string>
-    <string name="menu_ui_sub">・Mode: Basic/Picture/Text\n・Color: Black/Silver/White</string>
+    <string name="menu_ui_sub">・Mode: Basic/Picture/Text</string>
     <string name="menu_ui_info">Please select the design for the menu board to be used in the store.</string>
     <string name="sel_bg">배경선택</string>
     <string name="bg_dark">어두운 배경</string>
@@ -372,6 +372,7 @@
     <string name="pg_cancel">PG Payment Cancel</string>
     <string name="payment_history">Pmt. Hist.</string>
     <string name="payment_cancel">Cancel</string>
+    <string name="payment_cancel_complete">Cancel\nCompleted</string>
     <string name="pg_history_search_hint">Amount($)</string>
 
     <!--  이벤트 설정  -->

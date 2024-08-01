@@ -15,7 +15,6 @@ class NoPgInfoDialog(context: Context): BaseDialog(context) {
         binding = DialogNoPgInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.close.setOnClickListener { dismiss() }
         binding.confirm.setOnClickListener { dismiss() }
     }
 }

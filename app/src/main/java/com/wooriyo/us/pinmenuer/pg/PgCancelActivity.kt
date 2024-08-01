@@ -34,6 +34,7 @@ class PgCancelActivity : BaseActivity() {
         setContentView(binding.root)
 
         ordcode = intent.getStringExtra("ordcode") ?: ""
+        tid = intent.getStringExtra("tid") ?: ""
 
         binding.rvGoods.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false)
         binding.rvGoods.adapter = goodsAdapter
@@ -47,9 +48,11 @@ class PgCancelActivity : BaseActivity() {
     }
 
     fun getPgDetail() {
-        ApiClient.service.getPgDetail(MyApplication.useridx, MyApplication.storeidx, ordcode).enqueue(object: Callback<PgDetailResultDTO> {
+        loadingDialog.show(supportFragmentManager)
+        ApiClient.service.getPgDetail(MyApplication.useridx, MyApplication.storeidx, ordcode, tid).enqueue(object: Callback<PgDetailResultDTO> {
             override fun onResponse(call: Call<PgDetailResultDTO>, response: Response<PgDetailResultDTO>) {
                 Log.d(TAG, "pg 결제 내역 상세 조회 url : $response")
+                loadingDialog.dismiss()
 
                 if(!response.isSuccessful) return
 
@@ -62,13 +65,11 @@ class PgCancelActivity : BaseActivity() {
                         goodsAdapter.notifyDataSetChanged()
 
                         binding.run {
-                            cardInfo.text = "${result.cardname} CARD NUM ${result.cardnum}"
+                            cardInfo.text = "${result.cardname}(${result.cardnum})"
                             price.text = AppHelper.price(result.amt)
                             regdt.text = result.pay_regdt
                             tableNo.text = result.tableNo
                         }
-
-                        tid = result.tid
                     }
                     else -> Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
                 }
@@ -76,6 +77,7 @@ class PgCancelActivity : BaseActivity() {
             }
 
             override fun onFailure(call: Call<PgDetailResultDTO>, t: Throwable) {
+                loadingDialog.dismiss()
                 Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "pg 결제 내역 상세 조회 오류 >> $t")
                 Log.d(TAG, "pg 결제 내역 상세 조회 오류 >> ${call.request()}")
