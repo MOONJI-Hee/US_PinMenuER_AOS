@@ -267,6 +267,16 @@
     <string name="viewmode_list">Text Mode</string>
     <string name="save_ui">Apply Design</string>
 
+    <!--  다국어 설정  -->
+    <string name="language">Language</string>
+    <string name="title_set_language">Multilingual Settings</string>
+    <string name="lang_kor">한국어</string>
+    <string name="lang_eng">English</string>
+    <string name="lang_chn">中國語</string>
+    <string name="lang_esp">Español</string>
+    <string name="lang_jpn">日本語</string>
+    <string name="set_language_info">On tabletPC, you can toggle the language settings on and off.\nYou can enter language-specific text on the Pinmenu website.\nURL : www.pinmenu.net\nPlease sign in with your Pinmenu Mgmt app ID.</string>
+
     <!-- 주문 정보 -->
     <string name="print">Print</string>
     <string name="order_total" translatable="false">TOTAL</string>
@@ -328,13 +338,13 @@
     <string name="printer_support_info">In the Pinmenu, printers are not provided.\nIf you have a printer that can be connected to the Pinmenu, you can use it immediately by connecting directly. If you do not have a printer that can be connected, you can purchase one and connect it for use.</string>
 
     <string name="printer_title_conn_mng">Manage Printer Connections</string>
-    <string name="print_btn_test">시&#160;&#160;험\n인&#160;&#160;쇄</string>
+    <string name="print_btn_test">Test\nPrint</string>
     <string name="good">Good</string>
     <string name="unrest">Unstable</string>
     <string name="btn_conn">Connect</string>
     <string name="printer_clear">Disconnect</string>
     <string name="btn_printer_clear">Disconnect</string>
-    <string name="printer_not_conn">Not\nConnected</string>
+    <string name="printer_not_conn">Not Connected</string>
     <string name="printer_conn_mng_info">핀메뉴 관리앱에는 여러대의 프린터를\n연결해 놓을 수 있지만, 사용은 한대만 가능합니다.\n연결된 프린터를 변경하시려면 ‘연결해제’ 후\n새로운 프린터를 연결해 주세요.</string>
 
     <!--  테스트 인쇄 문구  -->

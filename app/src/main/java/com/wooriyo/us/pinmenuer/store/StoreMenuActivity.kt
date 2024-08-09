@@ -29,6 +29,7 @@ import com.wooriyo.us.pinmenuer.pg.dialog.NoPgInfoDialog
 import com.wooriyo.us.pinmenuer.printer.PrinterMenuActivity
 import com.wooriyo.us.pinmenuer.qrcode.SetQrcodeActivity
 import com.wooriyo.us.pinmenuer.setting.MenuUiActivity
+import com.wooriyo.us.pinmenuer.setting.SetUseLangActivity
 import com.wooriyo.us.pinmenuer.setting.TablePassActivity
 import com.wooriyo.us.pinmenuer.tiptax.TipTaxActivity
 import com.wooriyo.us.pinmenuer.util.ApiClient
@@ -66,12 +67,9 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                     startActivity(Intent(mActivity, PgHistoryActivity::class.java))
                 }
             }
-            tiptax.setOnClickListener {
-                startActivity(Intent(mActivity, TipTaxActivity::class.java))
-            }
-            qrcode.setOnClickListener {
-                startActivity(Intent(mActivity, SetQrcodeActivity::class.java))
-            }
+            tiptax.setOnClickListener { startActivity(Intent(mActivity, TipTaxActivity::class.java)) }
+            qrcode.setOnClickListener { startActivity(Intent(mActivity, SetQrcodeActivity::class.java)) }
+            language.setOnClickListener { startActivity(Intent(mActivity, SetUseLangActivity::class.java)) }
             design.setOnClickListener{ startActivity(Intent(mActivity, MenuUiActivity::class.java)) }
             event.setOnClickListener { startActivity(Intent(mActivity, SetEventPopup::class.java)) }
 

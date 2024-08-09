@@ -842,6 +842,14 @@ interface Api {
         @Query("tax") tax: String
     ): Call<ResultDTO>
 
+    // 다국어 설정
+    @GET("m/setLanguage")
+    fun setLanguage(
+        @Query("useridx") useridx: Int,
+        @Query("storeidx") storeidx: Int,
+        @Query("lang") lang: String
+    ):Call<ResultDTO>
+
     // QR오더 관련
     // QR 리스트 조회
     @GET("m/qr.list.php")

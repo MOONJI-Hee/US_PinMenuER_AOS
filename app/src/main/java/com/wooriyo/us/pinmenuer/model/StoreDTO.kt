@@ -62,8 +62,13 @@ data class StoreDTO(
     @SerializedName("sun_buse") var sun_buse : String,
     @SerializedName("workList")  var opentime: OpenTimeDTO?,
     @SerializedName("breakList")  var breaktime: BrkTimeDTO?,
-    @SerializedName("holidayList")  var spcHoliday: ArrayList<SpcHolidayDTO>?
+    @SerializedName("holidayList")  var spcHoliday: ArrayList<SpcHolidayDTO>?,
+    @SerializedName("lang_use_kor") var kor_buse : String,
+    @SerializedName("lang_use_usa") var eng_buse : String,
+    @SerializedName("lang_use_esp") var esp_buse : String,
+    @SerializedName("lang_use_chn") var chn_buse : String,
+    @SerializedName("lang_use_jpn") var jpn_buse : String
 ):Serializable {
     constructor(useridx: Int) :  this(0, useridx, "", "", "", "N", "", "", "", 0, "", 1, 1, 0, 0, 0, "", "", "","", "", "", "", "", "N", "N", "N", "N", "N", "", "N", "", "", "", "", "", "", "", "", null, null, null, null, null, null, null,
-        "d", "l", "N", "N", "N", "N", "N", "N", "N", "N" ,null, null, null)
+        "d", "l", "N", "N", "N", "N", "N", "N", "N", "N" ,null, null, null, "N", "Y", "N", "N", "N")
 }
