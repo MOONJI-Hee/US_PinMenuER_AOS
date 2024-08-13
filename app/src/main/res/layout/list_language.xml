@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="30dp">
+    <ImageView
+        android:id="@+id/imgLang"
+        android:layout_width="160dp"
+        android:layout_height="100dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <TextView
+        style="@style/text20"
+        android:id="@+id/tvLang"
+        app:layout_constraintTop_toTopOf="@+id/check"
+        app:layout_constraintBottom_toBottomOf="@+id/check"
+        app:layout_constraintStart_toStartOf="@+id/imgLang" />
+    <CheckBox
+        style="@style/toggle"
+        android:id="@+id/check"
+        android:layout_marginTop="5dp"
+        android:clickable="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgLang"/>
+    <View
+        android:id="@+id/disable"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white75"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@+id/imgLang"
+        app:layout_constraintEnd_toEndOf="@+id/imgLang"
+        app:layout_constraintStart_toStartOf="@+id/imgLang"
+        app:layout_constraintBottom_toBottomOf="@+id/imgLang"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

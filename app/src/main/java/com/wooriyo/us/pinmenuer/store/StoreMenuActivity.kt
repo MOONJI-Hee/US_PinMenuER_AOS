@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.Toast
+import com.google.gson.Gson
 import com.wooriyo.us.pinmenuer.BaseActivity
 import com.wooriyo.us.pinmenuer.MyApplication
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.store
@@ -23,6 +24,7 @@ import com.wooriyo.us.pinmenuer.member.MemberSetActivity
 import com.wooriyo.us.pinmenuer.menu.CategorySetActivity
 import com.wooriyo.us.pinmenuer.menu.MenuSetActivity
 import com.wooriyo.us.pinmenuer.model.CateListDTO
+import com.wooriyo.us.pinmenuer.model.LangResultDTO
 import com.wooriyo.us.pinmenuer.model.ResultDTO
 import com.wooriyo.us.pinmenuer.pg.PgHistoryActivity
 import com.wooriyo.us.pinmenuer.pg.dialog.NoPgInfoDialog
@@ -69,7 +71,7 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
             }
             tiptax.setOnClickListener { startActivity(Intent(mActivity, TipTaxActivity::class.java)) }
             qrcode.setOnClickListener { startActivity(Intent(mActivity, SetQrcodeActivity::class.java)) }
-            language.setOnClickListener { startActivity(Intent(mActivity, SetUseLangActivity::class.java)) }
+            language.setOnClickListener { insLangSetting() }
             design.setOnClickListener{ startActivity(Intent(mActivity, MenuUiActivity::class.java)) }
             event.setOnClickListener { startActivity(Intent(mActivity, SetEventPopup::class.java)) }
 
@@ -179,5 +181,28 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
                     Log.d(TAG, "결제 설정 최초 진입 시 row 추가 오류 >> ${call.request()}")
                 }
             })
+    }
+
+    fun insLangSetting() {
+        ApiClient.service.insLangSetting(useridx,storeidx).enqueue(object : Callback<LangResultDTO>{
+            override fun onResponse(call: Call<LangResultDTO>, response: Response<LangResultDTO>) {
+                Log.d(TAG, "언어 설정 페이지 진입 url : $response")
+                if(!response.isSuccessful) return
+                val result = response.body() ?: return
+
+                if(result.status == 1) {
+                    val intent = Intent(mActivity, SetUseLangActivity::class.java)
+                    intent.putExtra("language", Gson().toJson(result))
+                    startActivity(intent)
+                }else
+                    Toast.makeText(mActivity, result.msg, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onFailure(call: Call<LangResultDTO>, t: Throwable) {
+                Toast.makeText(mActivity, R.string.msg_retry, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "언어 설정 페이지 진입 오류 >> $t")
+                Log.d(TAG, "언어 설정 페이지 진입 오류 >> ${call.request()}")
+            }
+        })
     }
 }
