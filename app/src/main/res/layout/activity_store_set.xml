@@ -128,11 +128,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <TextView
-                    style="@style/text16l"
-                    android:id="@+id/tvStoreImg"
-                    android:text="@string/store_img" />
                 <ImageView
                     android:id="@+id/storeImg"
                     android:layout_width="190dp"
@@ -140,10 +135,11 @@
                     android:layout_gravity="center"
                     android:visibility="gone"/>
                 <TextView
-                    style="@style/text16l"
+                    style="@style/text16b"
                     android:id="@+id/storeExp"
                     android:layout_marginTop="6dp"
-                    android:text="@string/store_exp" />
+                    android:text="@string/store_exp"
+                    android:visibility="gone"/>
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -178,24 +174,24 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-                    style="@style/text16l"
+                    style="@style/text16b"
                     android:id="@+id/storeTel"
                     android:text="@string/store_tel" />
 
                 <TextView
-                    style="@style/text16l"
+                    style="@style/text16b"
                     android:id="@+id/storeSns"
                     android:layout_marginVertical="6dp"
                     android:text="@string/store_sns" />
 
                 <TextView
-                    style="@style/text16l"
+                    style="@style/text16b"
                     android:id="@+id/storeDeliver"
                     android:text="@string/store_delivery_info"
                     android:visibility="gone"/>
 
                 <TextView
-                    style="@style/text16l"
+                    style="@style/text16b"
                     android:id="@+id/storePark"
                     android:text="@string/store_parking_info" />
 
@@ -234,29 +230,26 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-                    style="@style/text16l"
+                    style="@style/text16b"
                     android:id="@+id/storeDay"
-                    android:text="@string/store_day_of_week" />
+                    android:text="@string/store_day_of_week"
+                    android:visibility="gone"/>
                 <TextView
                     style="@style/text16"
                     android:id="@+id/openTime"
                     android:visibility="gone"/>
 
                 <TextView
-                    style="@style/text16l"
+                    style="@style/text16b"
                     android:id="@+id/storeBreak"
                     android:layout_marginTop="6dp"
-                    android:text="@string/store_break" />
+                    android:text="@string/store_break"
+                    android:visibility="gone"/>
                 <TextView
                     style="@style/text16"
                     android:id="@+id/breakTime"
                     android:visibility="gone"/>
 
-                <TextView
-                    style="@style/text16l"
-                    android:id="@+id/storeOff"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/store_holiday" />
                 <TextView
                     style="@style/text16b"
                     android:id="@+id/sameOff"

@@ -71,9 +71,6 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
             binding.btnDetail.isEnabled = false
             binding.btnHour.isEnabled = false
             binding.btnImg.isEnabled = false
-//            binding.llDetail.visibility = View.GONE
-//            binding.llHour.visibility = View.GONE
-//            binding.llImg.visibility = View.GONE
         }
 
         setStoreInfo()
@@ -95,27 +92,12 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
             binding.modify -> modify()
             binding.btnDetail-> {
                 setStore.launch(Intent(mActivity, StoreSetDetailActivity::class.java).putExtra("store", store))
-
-//                if(type == 2)
-//                    setStore.launch(Intent(mActivity, StoreSetDetailActivity::class.java).putExtra("store", store))
-//                else if (type == 1)
-//                    Toast.makeText(mActivity, R.string.msg_reg_store_first, Toast.LENGTH_SHORT).show()
             }
             binding.btnHour -> {
                 setStore.launch(Intent(mActivity, StoreSetTimeActivity::class.java).putExtra("store", store))
-
-//                if(type == 2)
-//                    setStore.launch(Intent(mActivity, StoreSetTimeActivity::class.java).putExtra("store", store))
-//                else if (type == 1)
-//                    Toast.makeText(mActivity, R.string.msg_reg_store_first, Toast.LENGTH_SHORT).show()
             }
             binding.btnImg -> {
                 setStore.launch(Intent(mActivity, StoreSetImgActivity::class.java).putExtra("store", store))
-
-//                if(type == 2)
-//                    setStore.launch(Intent(mActivity, StoreSetImgActivity::class.java).putExtra("store", store))
-//                else if (type == 1)
-//                    Toast.makeText(mActivity, R.string.msg_reg_store_first, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -123,58 +105,42 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
     fun setStoreInfo() {
         binding.run {
             if(store.img.isNotEmpty()) {
-                tvStoreImg.visibility = View.GONE
                 storeImg.visibility = View.VISIBLE
                 Glide.with(mActivity)
                     .load(store.img)
                     .transform(CenterCrop(), RoundedCorners(6 * MyApplication.density.toInt()))
                     .into(storeImg)
             }else {
-                tvStoreImg.visibility = View.VISIBLE
                 storeImg.visibility = View.GONE
             }
 
             if(!store.content.isNullOrEmpty()) {
+                storeExp.visibility = View.VISIBLE
                 storeExp.text = store.content
-                storeExp.setTypeface(storeExp.typeface, Typeface.BOLD)
             }else {
-                storeExp.text = getString(R.string.store_exp)
-                storeExp.setTypeface(storeExp.typeface, Typeface.NORMAL)
+                storeExp.visibility = View.GONE
             }
 
             if(!store.tel.isNullOrEmpty()) {
+                storeTel.visibility = View.VISIBLE
                 storeTel.text = store.tel
-                storeTel.typeface = Typeface.DEFAULT_BOLD
             }else {
-                storeTel.text = getString(R.string.store_tel)
-                storeTel.setTypeface(storeExp.typeface, Typeface.NORMAL)
+                storeTel.visibility = View.GONE
             }
 
             if(!store.sns.isNullOrEmpty()) {
+                storeSns.visibility = View.VISIBLE
                 storeSns.text = store.sns
-                storeSns.typeface = Typeface.DEFAULT_BOLD
             }else {
-                storeSns.text = getString(R.string.store_sns)
-                storeSns.setTypeface(storeExp.typeface, Typeface.NORMAL)
+                storeSns.visibility = View.GONE
             }
 
-//            if(store.delivery == "Y") {
-//                storeDeliver.text = getString(R.string.store_delivery_y)
-//                storeDeliver.typeface = Typeface.DEFAULT_BOLD
-//            }else {
-//                storeDeliver.text = getString(R.string.store_delivery_info)
-//                storeDeliver.setTypeface(storeExp.typeface, Typeface.NORMAL)
-//            }
-
             if(store.parking == "Y") {
+                storePark.visibility = View.VISIBLE
                 storePark.text = getString(R.string.store_parking_y)
-                storePark.typeface = Typeface.DEFAULT_BOLD
-
                 storeParkAdr.text = store.parkingAddr ?: ""
             }else {
-                storePark.text = getString(R.string.store_parking_info)
-                storePark.setTypeface(storeExp.typeface, Typeface.NORMAL)
-
+                storePark.visibility = View.GONE
                 storeParkAdr.text = ""
             }
         }
@@ -190,14 +156,14 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
                 when(time.buse) {
                     y -> {
                         storeDay.text = getString(R.string.store_same_hour)
-                        storeDay.typeface = Typeface.DEFAULT_BOLD
+                        storeDay.visibility = View.VISIBLE
 
                         openTime.text = "${time.starttm}~${time.endtm}"
                         openTime.visibility = View.VISIBLE
                     }
                     n -> {
                         storeDay.text = getString(R.string.store_diff_hour)
-                        storeDay.typeface = Typeface.DEFAULT_BOLD
+                        storeDay.visibility = View.VISIBLE
 
                         var strOpen = ""
                         when(y) {
@@ -228,8 +194,7 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
                         openTime.visibility = View.VISIBLE
                     }
                     else -> { // D
-                        storeDay.text = getString(R.string.store_day_of_week)
-                        storeDay.setTypeface(storeDay.typeface, Typeface.NORMAL)
+                        storeDay.visibility = View.GONE
                         openTime.visibility = View.GONE
                     }
                 }
@@ -240,14 +205,14 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
                 when(bTime.buse) {
                     y -> {
                         storeBreak.text = getString(R.string.store_same_break)
-                        storeBreak.typeface = Typeface.DEFAULT_BOLD
+                        storeBreak.visibility = View.VISIBLE
 
                         breakTime.text = "${bTime.starttm}~${bTime.endtm}"
                         breakTime.visibility = View.VISIBLE
                     }
                     n -> {
                         storeBreak.text = getString(R.string.store_diff_break)
-                        storeBreak.typeface = Typeface.DEFAULT_BOLD
+                        storeBreak.visibility = View.VISIBLE
 
                         var strBreak = ""
                         when(y) {
@@ -277,8 +242,7 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
                         breakTime.visibility = View.VISIBLE
                     }
                     else -> { // D
-                        storeBreak.text = getString(R.string.store_break)
-                        storeBreak.setTypeface(storeBreak.typeface, Typeface.NORMAL)
+                        storeBreak.visibility = View.GONE
                         breakTime.visibility = View.GONE
                     }
                 }
@@ -298,8 +262,6 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
                     }
                     off.text = strOff.drop(1)
                     off.visibility = View.VISIBLE
-
-                    storeOff.visibility = View.GONE
                 }
                 else -> {
                     sameOff.visibility =View.GONE
@@ -321,8 +283,6 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
                 holiday.text = strHoliday.drop(1)
                 holiday.visibility = View.VISIBLE
                 storeHoliday.visibility = View.VISIBLE
-
-                storeOff.visibility = View.GONE
             }else {
                 holiday.visibility = View.GONE
                 storeHoliday.visibility = View.GONE
