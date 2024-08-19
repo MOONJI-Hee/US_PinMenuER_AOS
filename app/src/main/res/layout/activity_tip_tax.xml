@@ -29,9 +29,9 @@
     <View
         android:id="@+id/line"
         android:layout_width="2dp"
-        android:layout_height="316dp"
+        android:layout_height="328dp"
         android:layout_marginTop="100dp"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="230dp"
         android:background="#F9F9F9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,43 +86,48 @@
         app:layout_constraintEnd_toEndOf="@+id/useTip"/>
 
     <TextView
-        style="@style/text18"
+        style="@style/text_num"
         android:text="@string/percent"
-        android:layout_marginEnd="15dp"
+        android:textSize="20dp"
+        android:layout_marginEnd="30dp"
         app:layout_constraintBottom_toBottomOf="@+id/prop1"
         app:layout_constraintTop_toTopOf="@+id/prop1"
         app:layout_constraintEnd_toEndOf="@+id/prop1"/>
 
     <TextView
-        style="@style/text18"
+        style="@style/text_num"
         android:text="@string/percent"
-        android:layout_marginEnd="15dp"
+        android:textSize="20dp"
+        android:layout_marginEnd="30dp"
         app:layout_constraintBottom_toBottomOf="@+id/prop2"
         app:layout_constraintTop_toTopOf="@+id/prop2"
         app:layout_constraintEnd_toEndOf="@+id/prop2"/>
 
     <TextView
-        style="@style/text18"
+        style="@style/text_num"
         android:text="@string/percent"
-        android:layout_marginEnd="15dp"
+        android:textSize="20dp"
+        android:layout_marginEnd="30dp"
         app:layout_constraintBottom_toBottomOf="@+id/prop3"
         app:layout_constraintTop_toTopOf="@+id/prop3"
         app:layout_constraintEnd_toEndOf="@+id/prop3"/>
 
     <TextView
-        style="@style/text18"
+        style="@style/text_num"
         android:text="@string/percent"
-        android:layout_marginEnd="15dp"
+        android:textSize="20dp"
+        android:layout_marginEnd="30dp"
         app:layout_constraintBottom_toBottomOf="@+id/prop4"
         app:layout_constraintTop_toTopOf="@+id/prop4"
         app:layout_constraintEnd_toEndOf="@+id/prop4"/>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/icon_tip_tax_default"
-        app:layout_constraintTop_toTopOf="@+id/prop2"
-        app:layout_constraintEnd_toEndOf="@+id/prop2" />
+    <View
+        android:layout_width="120dp"
+        android:layout_height="5dp"
+        android:background="@drawable/bg_btn_rb6"
+        app:layout_constraintStart_toStartOf="@+id/prop2"
+        app:layout_constraintEnd_toEndOf="@+id/prop2"
+        app:layout_constraintBottom_toBottomOf="@+id/prop2"/>
 
     <TextView
         style="@style/subtext"
@@ -145,8 +150,9 @@
     <EditText
         style="@style/edittext_tip_tax"
         android:id="@+id/tax"
-        android:layout_width="390dp"
+        android:layout_width="280dp"
         android:layout_marginTop="20dp"
+        android:paddingEnd="36dp"
         android:inputType="numberDecimal"
         android:imeOptions="actionDone"
         app:layout_constraintTop_toBottomOf="@+id/tvTax"

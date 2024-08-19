@@ -62,13 +62,7 @@ class StoreMenuActivity : BaseActivity(), OnClickListener {
             setCall.setOnClickListener { startActivity(Intent(mActivity, CallSetActivity::class.java)) }
             printer.setOnClickListener{ insPrintSetting() }
             payment.setOnClickListener{ insPaySetting() }
-            pgCancel.setOnClickListener{
-                if(store.pg_storenm.isEmpty() || store.pg_snum.isEmpty()) {
-                    NoPgInfoDialog(mActivity).show()
-                }else {
-                    startActivity(Intent(mActivity, PgHistoryActivity::class.java))
-                }
-            }
+            pgCancel.setOnClickListener{ startActivity(Intent(mActivity, PgHistoryActivity::class.java)) }
             tiptax.setOnClickListener { startActivity(Intent(mActivity, TipTaxActivity::class.java)) }
             qrcode.setOnClickListener { startActivity(Intent(mActivity, SetQrcodeActivity::class.java)) }
             language.setOnClickListener { insLangSetting() }
