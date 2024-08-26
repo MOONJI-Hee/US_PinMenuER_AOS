@@ -105,13 +105,14 @@
                     android:id="@+id/rvGoods"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="4dp" />
+                    android:paddingBottom="4dp"
+                    tools:listitem="@layout/list_pg_goods"
+                    tools:itemCount="5"/>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/clSubTotal"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
-                    android:paddingHorizontal="10dp"
-                    app:layout_constraintBottom_toTopOf="@+id/clTipTax">
+                    android:paddingHorizontal="20dp">
                     <TextView
                         style="@style/text18"
                         android:text="@string/subtotal"
@@ -138,9 +139,9 @@
                     android:id="@+id/clTipTax"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:padding="10dp"
-                    android:background="@color/white"
-                    app:layout_constraintBottom_toTopOf="@+id/bottom">
+                    android:paddingVertical="10dp"
+                    android:paddingHorizontal="20dp"
+                    android:background="@color/white">
                     <TextView
                         style="@style/text16"
                         android:id="@+id/tvTip"
