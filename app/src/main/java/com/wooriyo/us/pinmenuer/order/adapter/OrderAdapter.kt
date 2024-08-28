@@ -114,10 +114,7 @@ class OrderAdapter(val dataSet: ArrayList<OrderHistoryDTO>): RecyclerView.Adapte
 
                 delete.setOnClickListener { deleteListener.onItemClick(absoluteAdapterPosition) }
                 print.setOnClickListener {
-                    if(MyApplication.bluetoothPort.isConnected) {
-                        printClickListener.onItemClick(absoluteAdapterPosition)
-                    }else
-                        InfoDialog(context, "", context.getString(R.string.dialog_no_printer)).show()
+                    printClickListener.onItemClick(absoluteAdapterPosition)
                 }
                 btnComplete.setOnClickListener { completeListener.onItemClick(absoluteAdapterPosition) }
             }

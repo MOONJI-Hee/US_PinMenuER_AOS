@@ -12,6 +12,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.wooriyo.us.pinmenuer.BaseActivity
 import com.wooriyo.us.pinmenuer.MyApplication
+import com.wooriyo.us.pinmenuer.MyApplication.Companion.androidId
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.store
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.useridx
@@ -389,7 +390,7 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun getStore() {
-        ApiClient.service.getStoreList(useridx, storeidx.toString())
+        ApiClient.service.getStoreList(useridx, androidId, storeidx.toString())
             .enqueue(object: Callback<StoreListDTO>{
                 override fun onResponse(call: Call<StoreListDTO>, response: Response<StoreListDTO>) {
                     Log.d(TAG, "한 매장 조회 url : $response")

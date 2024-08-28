@@ -18,7 +18,7 @@ open class BaseActivity: AppCompatActivity() {
     val d = "D"
 
     companion object {
-        lateinit var currentActivity: Activity
+        var currentActivity: Activity? = null
     }
 
     override fun onBackPressed() {}

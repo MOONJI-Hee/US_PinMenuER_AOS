@@ -135,6 +135,7 @@
         android:layout_marginEnd="60dp"
         android:padding="20dp"
         android:background="@drawable/bg_r6w"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/tv_kitchen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_kitchen">
@@ -175,6 +176,7 @@
         android:layout_width="2dp"
         android:layout_height="72dp"
         android:background="@color/white"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/cl_cate"
         app:layout_constraintEnd_toEndOf="@+id/cl_cate"
         app:layout_constraintTop_toTopOf="@+id/customer"/>
@@ -208,12 +210,14 @@
         android:id="@+id/tv_orderno"
         android:text="@string/printer_order_no"
         android:layout_marginStart="30dp"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/line"
         app:layout_constraintTop_toTopOf="@+id/tv_customer"/>
 
     <CheckBox
         style="@style/toggle"
         android:id="@+id/orderNo"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="@+id/tv_orderno"
         app:layout_constraintBottom_toBottomOf="@+id/tv_orderno"
         app:layout_constraintEnd_toEndOf="@+id/kitchen"/>
@@ -222,6 +226,7 @@
         style="@style/subtext"
         android:layout_marginTop="11dp"
         android:text="@string/printer_order_no_info"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/tv_orderno"
         app:layout_constraintTop_toBottomOf="@+id/orderNo"/>
 

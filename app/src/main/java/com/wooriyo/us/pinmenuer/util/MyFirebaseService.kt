@@ -25,6 +25,7 @@ import com.wooriyo.us.pinmenuer.config.AppProperties.Companion.NOTIFICATION_ID_O
 import com.wooriyo.us.pinmenuer.history.ByHistoryActivity
 import com.wooriyo.us.pinmenuer.history.ByTableActivity
 import com.wooriyo.us.pinmenuer.history.TableHisActivity
+import com.wooriyo.us.pinmenuer.model.OrderHistoryDTO
 import com.wooriyo.us.pinmenuer.model.ReceiptDTO
 import retrofit2.Call
 import retrofit2.Response
@@ -48,9 +49,9 @@ class MyFirebaseService : FirebaseMessagingService() {
         createNotification(message)
 
         if(currentActivity != null) {
-            Log.d(TAG, "currentActivity.localClassName >> ${currentActivity.localClassName}")
+            Log.d(TAG, "currentActivity.localClassName >> ${currentActivity!!.localClassName}")
 
-            if(currentActivity.localClassName == "history.ByHistoryActivity") {
+            if(currentActivity!!.localClassName == "history.ByHistoryActivity") {
                 if(message.data["chk_udt"] == "1") {
                     if(message.data["moredata"] == "call") {
                         (currentActivity as ByHistoryActivity).newCall()
@@ -60,7 +61,7 @@ class MyFirebaseService : FirebaseMessagingService() {
                         (currentActivity as ByHistoryActivity).newReservation()
                     }
                 }
-            }else if(currentActivity.localClassName == "history.TableHisActivity") {
+            }else if(currentActivity!!.localClassName == "history.TableHisActivity") {
                 if(message.data["chk_udt"] == "1") {
                     if(message.data["moredata"] == "call") {
                         (currentActivity as TableHisActivity).newCall()
@@ -70,7 +71,7 @@ class MyFirebaseService : FirebaseMessagingService() {
                         (currentActivity as TableHisActivity).newReservation()
                     }
                 }
-            }else if(currentActivity.localClassName == "history.ByTableActivity") {
+            }else if(currentActivity!!.localClassName == "history.ByTableActivity") {
                 if(message.data["chk_udt"] == "1") {
                     (currentActivity as ByTableActivity).getTableList()
                 }
@@ -83,10 +84,8 @@ class MyFirebaseService : FirebaseMessagingService() {
             val ordCode_key = message.data["moredata"]
             val ordCode = message.data["moredata_ordcode"]
 
-//        val storeidx = message.data["storeidx"]
-
-            ApiClient.service.getReceipt(ordCode_key.toString()).enqueue(object : retrofit2.Callback<ReceiptDTO>{
-                override fun onResponse(call: Call<ReceiptDTO>, response: Response<ReceiptDTO>) {
+            ApiClient.service.getReceipt(ordCode_key.toString()).enqueue(object : retrofit2.Callback<OrderHistoryDTO>{
+                override fun onResponse(call: Call<OrderHistoryDTO>, response: Response<OrderHistoryDTO>) {
                     Log.d(TAG, "단건 주문 조회 URL : $response")
                     if(!response.isSuccessful) return
 
@@ -94,94 +93,14 @@ class MyFirebaseService : FirebaseMessagingService() {
 
                     when(result.status) {
                         1 -> {
-                            if(MyApplication.bluetoothPort.isConnected) {
-                                val pOrderDt = result.regdt
-                                val pTableNo = result.tableNo
-                                val pOrderNo = ordCode
-
-                                val hyphen_num = AppProperties.HYPHEN_NUM_BIG
-                                val font_size = AppProperties.FONT_BIG
-
-                                val hyphen = StringBuilder()    // 하이픈
-                                for (i in 1..hyphen_num) {
-                                    hyphen.append("-")
-                                }
-
-                                escposPrinter.printAndroidFont(
-                                    result.storenm,
-                                    AppProperties.FONT_WIDTH,
-                                    AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
-                                escposPrinter.printAndroidFont("주문날짜 : $pOrderDt",
-                                    AppProperties.FONT_WIDTH,
-                                    AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
-                                escposPrinter.printAndroidFont("주문번호 : $pOrderNo",
-                                    AppProperties.FONT_WIDTH,
-                                    AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
-                                escposPrinter.printAndroidFont("테이블번호 : $pTableNo",
-                                    AppProperties.FONT_WIDTH,
-                                    AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
-                                escposPrinter.printAndroidFont(
-                                    AppProperties.TITLE_MENU,
-                                    AppProperties.FONT_WIDTH, AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
-                                escposPrinter.printAndroidFont(hyphen.toString(),
-                                    AppProperties.FONT_WIDTH, font_size, ESCPOSConst.LK_ALIGNMENT_LEFT)
-
-                                result.orderdata.forEach {
-                                    val pOrder = AppHelper.getPrint(it)
-                                    escposPrinter.printAndroidFont(pOrder,
-                                        AppProperties.FONT_WIDTH, font_size, ESCPOSConst.LK_ALIGNMENT_LEFT)
-                                }
-
-                                if(result.reserType > 0 && result.rlist.isNotEmpty()) {
-                                    val reserv = result.rlist[0]
-
-                                    escposPrinter.lineFeed(2)
-
-                                    escposPrinter.printAndroidFont("전화번호",
-                                        AppProperties.FONT_WIDTH,
-                                        20, ESCPOSConst.LK_ALIGNMENT_LEFT)
-                                    escposPrinter.printAndroidFont(reserv.tel,
-                                        AppProperties.FONT_WIDTH,
-                                        33, ESCPOSConst.LK_ALIGNMENT_LEFT)
-                                    escposPrinter.printAndroidFont("예약자명",
-                                        AppProperties.FONT_WIDTH,
-                                        20, ESCPOSConst.LK_ALIGNMENT_LEFT)
-                                    escposPrinter.printAndroidFont(reserv.name,
-                                        AppProperties.FONT_WIDTH,
-                                        33, ESCPOSConst.LK_ALIGNMENT_LEFT)
-                                    escposPrinter.printAndroidFont("요청사항",
-                                        AppProperties.FONT_WIDTH,
-                                        20, ESCPOSConst.LK_ALIGNMENT_LEFT)
-                                    escposPrinter.printAndroidFont(reserv.memo,
-                                        AppProperties.FONT_WIDTH,
-                                        33, ESCPOSConst.LK_ALIGNMENT_LEFT)
-
-                                    var str = ""
-                                    when(result.reserType) {
-                                        1 -> str = "Store"
-                                        2 -> str = "To-go"
-                                    }
-                                    escposPrinter.printAndroidFont(
-                                        String.format(getString(R.string.reserv_date), str),
-                                        AppProperties.FONT_WIDTH,
-                                        20, ESCPOSConst.LK_ALIGNMENT_LEFT)
-
-                                    escposPrinter.printAndroidFont(reserv.reserdt,
-                                        AppProperties.FONT_WIDTH,
-                                        33, ESCPOSConst.LK_ALIGNMENT_LEFT)
-                                }
-
-                                escposPrinter.lineFeed(4)
-                                escposPrinter.cutPaper()
-                            }else {
-                                Log.d(TAG, "프린트 연결 안됨")
-                            }
+                            result.ordcode = ordCode ?: ""
+                            AppHelper.print(result, applicationContext)
                         }
                         else -> Toast.makeText(applicationContext, result.msg, Toast.LENGTH_SHORT).show()
                     }
                 }
 
-                override fun onFailure(call: Call<ReceiptDTO>, t: Throwable) {
+                override fun onFailure(call: Call<OrderHistoryDTO>, t: Throwable) {
                     Toast.makeText(applicationContext, R.string.msg_retry, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "단건 주문 조회 오류 >> $t")
                     Log.d(TAG, "단건 주문 조회 오류 >> ${call.request()}")

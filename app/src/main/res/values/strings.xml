@@ -345,7 +345,7 @@
     <string name="printer_clear">Disconnect</string>
     <string name="btn_printer_clear">Disconnect</string>
     <string name="printer_not_conn">Not Connected</string>
-    <string name="printer_conn_mng_info">핀메뉴 관리앱에는 여러대의 프린터를\n연결해 놓을 수 있지만, 사용은 한대만 가능합니다.\n연결된 프린터를 변경하시려면 ‘연결해제’ 후\n새로운 프린터를 연결해 주세요.</string>
+    <string name="printer_conn_mng_info">If you want to change the connected printer, please “disconnect” the current one and then connect the new printer.</string>
 
     <!--  테스트 인쇄 문구  -->
     <string name="print_test">Original Smart Menu PinMenu Print TEST\n1234567890 가나다라마바사아자차카타파하 ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
@@ -357,14 +357,14 @@
     <string name="font">Font</string>
     <string name="big">Large</string>
     <string name="small">Small</string>
-    <string name="printer_contents_info">본 기기와 연결된 프린터 설정을 할 수 있습니다.</string>
+    <string name="printer_contents_info">You can adjust the settings of the printer\nconnected to this device.</string>
     <string name="printer_kitchen">Kitchen Receipt</string>
     <string name="printer_kitchen_format">Selected Category : %d</string>
     <string name="printer_kitchen_info">Only selected categories can be printed. (up to 10)\nIf none are selected, all categories will be printed.</string>
     <string name="printer_customer">Customer Receipt</string>
     <string name="printer_customer_info">You can print the receipt for the paid customer.</string>
     <string name="printer_order_no">Order Number</string>
-    <string name="printer_order_no_info">We print the order number generated in the Pinmenu.</string>
+    <string name="printer_order_no_info">Please make sure to save before leaving this page.</string>
     <string name="printer_title_category_set">Selected Category(%d/10)</string>
     <string name="printer_category_info">Up to 10 selections allowed.</string>
     <string name="printer_category_sel_info">카테고리 선택 취소는 선택된 카테고리를 다시 선택하면 취소됩니다.</string>

@@ -8,6 +8,7 @@ import com.wooriyo.us.pinmenuer.model.GoodsListDTO
 import com.wooriyo.us.pinmenuer.model.KakaoResultDTO
 import com.wooriyo.us.pinmenuer.model.LangResultDTO
 import com.wooriyo.us.pinmenuer.model.MemberDTO
+import com.wooriyo.us.pinmenuer.model.OrderHistoryDTO
 import com.wooriyo.us.pinmenuer.model.OrderListDTO
 import com.wooriyo.us.pinmenuer.model.PaySettingDTO
 import com.wooriyo.us.pinmenuer.model.PgDetailResultDTO
@@ -149,6 +150,7 @@ interface Api {
     @POST("m/store.list.php")
     fun getStoreList(
         @Field("useridx") useridx: Int,
+        @Field("uuid") androidId : String,
         @Field("storeidx") storeidx: String?="" // null일 때 처리를 위해서 여기만 String
     ): Call<StoreListDTO>
 
@@ -417,7 +419,7 @@ interface Api {
     @GET("m/get.receipt.php")
     fun getReceipt(
         @Query("ordcode") ordcode: String,  // 주문 코드
-    ): Call<ReceiptDTO>
+    ): Call<OrderHistoryDTO>
 
     // 모든 테이블 내역 조회 (테이블별 조회)
     @GET("m/tableNo.AllOrdList.php")
@@ -625,7 +627,7 @@ interface Api {
         @Query("useridx") useridx: Int,
         @Query("storeidx") storeidx: Int,
         @Query("uuid") androidId : String
-    ): Call<ResultDTO>
+    ): Call<PrintContentDTO>
 
     // 등록한 프린터 목록
     @GET("m/connect_print_list.php")

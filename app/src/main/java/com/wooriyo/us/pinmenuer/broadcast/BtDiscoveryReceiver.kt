@@ -1,5 +1,6 @@
 package com.wooriyo.us.pinmenuer.broadcast
 
+import android.bluetooth.BluetoothClass
 import android.bluetooth.BluetoothDevice
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -22,7 +23,7 @@ class BtDiscoveryReceiver: BroadcastReceiver() {
             Log.d("AppHelper", "remote 기기 있음")
 
             val devNum = remoteDevice.bluetoothClass.majorDeviceClass
-            if (devNum != MyApplication.BT_PRINTER) return
+            if (devNum != BluetoothClass.Device.Major.IMAGING) return
 
             if (MyApplication.bluetoothPort.isValidAddress(remoteDevice.address)) {
                 for (i in remoteDevices.indices) {

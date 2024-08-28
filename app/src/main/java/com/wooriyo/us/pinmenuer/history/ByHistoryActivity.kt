@@ -9,9 +9,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sewoo.jpos.command.ESCPOSConst
 import com.wooriyo.us.pinmenuer.BaseActivity
 import com.wooriyo.us.pinmenuer.MyApplication
+import com.wooriyo.us.pinmenuer.MyApplication.Companion.store
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.us.pinmenuer.R
@@ -33,7 +33,7 @@ import com.wooriyo.us.pinmenuer.model.ResultDTO
 import com.wooriyo.us.pinmenuer.order.adapter.OrderAdapter
 import com.wooriyo.us.pinmenuer.order.dialog.ClearDialog
 import com.wooriyo.us.pinmenuer.util.ApiClient
-import com.wooriyo.us.pinmenuer.util.AppHelper.Companion.getPrint
+import com.wooriyo.us.pinmenuer.util.AppHelper
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -79,6 +79,21 @@ class ByHistoryActivity : BaseActivity() {
         setOrderAdapter()
         setReservAdapter()
         setCallAdapter()
+
+        Log.d(TAG, "store 왜 뭔데 너 뭔데 > $store")
+
+        when (MyApplication.store.fontsize) {
+            1 -> {
+                AppProperties.RT_ONE_LINE = AppProperties.RT_ONE_LINE_BIG
+                AppProperties.RT_PRODUCT = AppProperties.RT_PRODUCT_BIG
+                AppProperties.RT_QTY = AppProperties.RT_QTY_BIG
+            }
+            2 -> {
+                AppProperties.RT_ONE_LINE = AppProperties.RT_ONE_LINE_SMALL
+                AppProperties.RT_PRODUCT = AppProperties.RT_PRODUCT_SMALL
+                AppProperties.RT_QTY = AppProperties.RT_QTY_SMALL
+            }
+        }
 
         binding.rv.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false)
         binding.rv.adapter = totalAdapter
@@ -208,7 +223,7 @@ class ByHistoryActivity : BaseActivity() {
         })
 
         adapter.setOnPrintClickListener(object: ItemClickListener {
-            override fun onItemClick(position: Int) {print(list[position])}
+            override fun onItemClick(position: Int) {AppHelper.print(list[position], mActivity)}
         })
 
         adapter.setOnTableNoListener(object: ItemClickListener {
@@ -267,7 +282,7 @@ class ByHistoryActivity : BaseActivity() {
         })
 
         orderAdapter.setOnPrintClickListener(object: ItemClickListener {
-            override fun onItemClick(position: Int) {print(orderList[position])}
+            override fun onItemClick(position: Int) {AppHelper.print(orderList[position], mActivity)}
         })
     }
 
@@ -301,7 +316,7 @@ class ByHistoryActivity : BaseActivity() {
         })
 
         reservAdapter.setOnPrintClickListener(object: ItemClickListener {
-            override fun onItemClick(position: Int) {print(reservList[position])}
+            override fun onItemClick(position: Int) {AppHelper.print(reservList[position], mActivity)}
         })
 
         reservAdapter.setOnTableNoListener(object: ItemClickListener {
@@ -707,80 +722,5 @@ class ByHistoryActivity : BaseActivity() {
                     Log.d(TAG, "예약 확인 실패 > ${call.request()}")
                 }
             })
-    }
-
-
-    fun print(order: OrderHistoryDTO) {
-        val pOrderDt = order.regdt
-        val pTableNo = order.tableNo
-        val pOrderNo = order.ordcode
-
-        MyApplication.escposPrinter.printAndroidFont(
-            MyApplication.store.name,
-            AppProperties.FONT_WIDTH,
-            AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
-        MyApplication.escposPrinter.printAndroidFont("주문날짜 : $pOrderDt",
-            AppProperties.FONT_WIDTH,
-            AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
-        MyApplication.escposPrinter.printAndroidFont("주문번호 : $pOrderNo",
-            AppProperties.FONT_WIDTH,
-            AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
-        MyApplication.escposPrinter.printAndroidFont("테이블번호 : $pTableNo",
-            AppProperties.FONT_WIDTH,
-            AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
-        MyApplication.escposPrinter.printAndroidFont(
-            AppProperties.TITLE_MENU,
-            AppProperties.FONT_WIDTH,
-            AppProperties.FONT_SMALL, ESCPOSConst.LK_ALIGNMENT_LEFT)
-        MyApplication.escposPrinter.printAndroidFont(hyphen.toString(),
-            AppProperties.FONT_WIDTH, font_size, ESCPOSConst.LK_ALIGNMENT_LEFT)
-
-        order.olist.forEach {
-            val pOrder = getPrint(it)
-            MyApplication.escposPrinter.printAndroidFont(pOrder,
-                AppProperties.FONT_WIDTH, font_size, ESCPOSConst.LK_ALIGNMENT_LEFT)
-        }
-
-        if(order.reserType > 0 && order.rlist.isNotEmpty()) {
-            val reserv = order.rlist[0]
-
-            MyApplication.escposPrinter.lineFeed(2)
-
-            MyApplication.escposPrinter.printAndroidFont("전화번호",
-                AppProperties.FONT_WIDTH,
-                20, ESCPOSConst.LK_ALIGNMENT_LEFT)
-            MyApplication.escposPrinter.printAndroidFont(reserv.tel,
-                AppProperties.FONT_WIDTH,
-                33, ESCPOSConst.LK_ALIGNMENT_LEFT)
-            MyApplication.escposPrinter.printAndroidFont("예약자명",
-                AppProperties.FONT_WIDTH,
-                20, ESCPOSConst.LK_ALIGNMENT_LEFT)
-            MyApplication.escposPrinter.printAndroidFont(reserv.name,
-                AppProperties.FONT_WIDTH,
-                33, ESCPOSConst.LK_ALIGNMENT_LEFT)
-            MyApplication.escposPrinter.printAndroidFont("요청사항",
-                AppProperties.FONT_WIDTH,
-                20, ESCPOSConst.LK_ALIGNMENT_LEFT)
-            MyApplication.escposPrinter.printAndroidFont(reserv.memo,
-                AppProperties.FONT_WIDTH,
-                33, ESCPOSConst.LK_ALIGNMENT_LEFT)
-
-            var str = ""
-            when(order.reserType) {
-                1 -> str = "Store"
-                2 -> str = "To-go"
-            }
-            MyApplication.escposPrinter.printAndroidFont(
-                String.format(getString(R.string.reserv_date), str),
-                AppProperties.FONT_WIDTH,
-                20, ESCPOSConst.LK_ALIGNMENT_LEFT)
-
-            MyApplication.escposPrinter.printAndroidFont(reserv.reserdt,
-                AppProperties.FONT_WIDTH,
-                33, ESCPOSConst.LK_ALIGNMENT_LEFT)
-        }
-
-        MyApplication.escposPrinter.lineFeed(4)
-        MyApplication.escposPrinter.cutPaper()
     }
 }

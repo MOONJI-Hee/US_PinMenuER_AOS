@@ -13,8 +13,10 @@ import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wooriyo.us.pinmenuer.BaseActivity
 import com.wooriyo.us.pinmenuer.MyApplication
+import com.wooriyo.us.pinmenuer.MyApplication.Companion
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.androidId
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.pref
+import com.wooriyo.us.pinmenuer.MyApplication.Companion.store
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.us.pinmenuer.R
 import com.wooriyo.us.pinmenuer.common.FullScreenDialog
@@ -54,7 +56,9 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
 
         storeAdapter.setOnItemClickListener(object : ItemClickListener {
             override fun onStoreClick(storeDTO: StoreDTO, intent: Intent, usePay: Boolean) {
-                super.onStoreClick(storeDTO, intent, usePay)
+                Log.d(TAG, "store 왜 뭔데 너 뭔데 > $store")
+
+
                 if(usePay)
                     checkDeviceLimit(storeDTO, intent)
                 else {
@@ -150,7 +154,7 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun getStoreList() {
-        ApiClient.service.getStoreList(useridx)
+        ApiClient.service.getStoreList(useridx, androidId)
             .enqueue(object: retrofit2.Callback<StoreListDTO>{
                 override fun onResponse(call: Call<StoreListDTO>, response: Response<StoreListDTO>) {
                     Log.d(TAG, "매장 리스트 조회 url : $response")
@@ -239,6 +243,9 @@ class StoreListActivity : BaseActivity(), View.OnClickListener {
                         MyApplication.allCateList.clear()
                         MyApplication.storeidx = store.idx
                         MyApplication.store = store
+
+                        Log.d(TAG, "store 왜 뭔데 너 뭔데 > ${MyApplication.store}")
+
 
                         startActivity(intent)
                     }else

@@ -14,6 +14,9 @@ import android.os.Build
 import android.provider.Settings
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
+import com.rt.printerlibrary.factory.printer.ThermalPrinterFactory
+import com.rt.printerlibrary.printer.RTPrinter
+import com.rt.printerlibrary.printer.ThermalPrinter
 import com.sewoo.jpos.printer.ESCPOSPrinter
 import com.sewoo.port.android.BluetoothPort
 import com.wooriyo.us.pinmenuer.R
@@ -44,22 +47,23 @@ class MyApplication: Application() {
         lateinit var allCateList : ArrayList<CategoryDTO>
         var engStoreName = ""
 
-        // 블루투스 관련 변수
+        lateinit var arrRemoteDevice : ArrayList<String>
+        // 블루투스 관련 객체 (영수증 프린터 연결)
         lateinit var bluetoothManager: BluetoothManager
         lateinit var bluetoothAdapter: BluetoothAdapter
-        lateinit var remoteDevices: ArrayList<BluetoothDevice>
-        lateinit var arrRemoteDevice : ArrayList<String>
+        lateinit var pairedDevices: ArrayList<BluetoothDevice>  // 페어링 기기 목록
+        lateinit var remoteDevices: ArrayList<BluetoothDevice>  // 연결 가능한 기기 목록 (페어링 + 검색 기기)
+        var btThread: Thread? = null                            // 블루투스 기기 검색 / 연결 시 사용 쓰레드
 
         var bidx = 0    //프린터 설정 시 부여되는 idx (기기별 매장 하나 당 한개씩 부여)
 
+        // RP325
+        lateinit var rtPrinter: RTPrinter<ThermalPrinter>
+
         //세우전자 프린터 관련
         lateinit var bluetoothPort: BluetoothPort
-        val escposPrinter = ESCPOSPrinter()
-        val BT_PRINTER = 1536
-        var btThread: Thread? = null
-
-        // 영수증 프린터 연결 여부(추후 변경 가능성 높음)
-//        var btConn = false
+        lateinit var escposPrinter: ESCPOSPrinter
+        var connDev_sewoo = "00:00:00:00:00:00"
 
         fun setStoreDTO() {
             store = StoreDTO(useridx)
@@ -107,12 +111,17 @@ class MyApplication: Application() {
         //블루투스
         bluetoothManager = this.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
         bluetoothAdapter = bluetoothManager.adapter
-        remoteDevices = ArrayList<BluetoothDevice>()
-        arrRemoteDevice = ArrayList<String>()
+        pairedDevices = ArrayList()
+        remoteDevices = ArrayList()
 
-        //세우전자
+        // RP325 프린터
+        val printerFactory = ThermalPrinterFactory()
+        rtPrinter = printerFactory.create() as RTPrinter<ThermalPrinter>
+
+        //세우전자 프린터
         bluetoothPort = BluetoothPort.getInstance()
         bluetoothPort.SetMacFilter(false)
+        escposPrinter = ESCPOSPrinter()
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel()

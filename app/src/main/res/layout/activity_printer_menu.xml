@@ -10,7 +10,7 @@
     <TextView
         android:id="@+id/title"
         style="@style/title"
-        android:text="@string/printer_set"
+        android:text="Printer Settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -61,7 +61,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/model"
         app:layout_constraintTop_toTopOf="@+id/model"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
 
     <TextView
         style="@style/subtext"
