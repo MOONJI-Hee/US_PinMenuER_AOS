@@ -122,6 +122,19 @@
     <string name="store_addr_hint">Please enter the address.</string>
     <string name="store_addr_info">Events will be held based on the store address provided.\nPlease enter the store address accurately.</string>
     <string name="store_reg">Store Registration</string>
+
+    <!--  타임존 설정  -->
+    <string name="timezone">Time Zone</string>
+    <string name="timezone_title">Select a Time Zone</string>
+    <string name="timezone_eastern">Eastern Time Zone (UTC-5)</string>
+    <string name="timezone_central">Central Time Zone (UTC-6)</string>
+    <string name="timezone_mountain">Mountain Time Zone (UTC-7)</string>
+    <string name="timezone_pacific">Pacific Time Zone (UTC-8)</string>
+    <string name="timezone_alaska">Alaska Time Zone (UTC-9)</string>
+    <string name="timezone_hawaii">Hawaii Aleutian Time Zone (UTC-10)</string>
+    <string name="timezone_info1">Please select a store time zone.\nOrder time will be recorded in the selected time zone.</string>
+    <string name="timezone_info2">Please, don’t let me choose the store time zone or make the wrong choice so that my order time goes wrong.\nTime errors are not Pinmenu responsibility.</string>
+
     <!--  매장 세부 정보  -->
     <string name="store_detail">Detailed Info</string>
     <string name="store_tel">Store phone</string>

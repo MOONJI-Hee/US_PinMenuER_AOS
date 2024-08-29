@@ -22,6 +22,14 @@
         <item name="android:stateListAnimator">@null</item>
         <item name="android:includeFontPadding">false</item>
     </style>
+    <style name="check_big">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:button">@null</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:background">@drawable/selector_check_big</item>
+    </style>
     <style name="toggle">
         <item name="android:layout_width">60dp</item>
         <item name="android:layout_height">42dp</item>

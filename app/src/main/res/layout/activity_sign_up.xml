@@ -183,7 +183,6 @@
             app:layout_constraintTop_toTopOf="@+id/terms3"
             app:layout_constraintBottom_toBottomOf="@+id/terms3"/>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
