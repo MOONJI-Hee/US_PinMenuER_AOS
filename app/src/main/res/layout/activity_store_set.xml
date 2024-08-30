@@ -79,7 +79,6 @@
         android:id="@+id/et_addr"
         style="@style/edittext_main"
         android:layout_marginTop="32dp"
-        android:enabled="false"
         android:hint="@string/store_addr_hint"
         app:layout_constraintEnd_toEndOf="@+id/et_name2"
         app:layout_constraintStart_toStartOf="@+id/et_name2"

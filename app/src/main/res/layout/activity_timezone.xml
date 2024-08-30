@@ -43,7 +43,9 @@
             app:layout_constraintTop_toBottomOf="@+id/title">
             <TextView
                 style="@style/text18"
+                android:id="@+id/tvEastern"
                 android:text="@string/timezone_eastern"
+                android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -63,7 +65,8 @@
             app:layout_constraintTop_toBottomOf="@+id/eastern">
             <TextView
                 style="@style/text18"
-                android:text="@string/timezone_eastern"
+                android:id="@+id/tvCentral"
+                android:text="@string/timezone_central"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -82,7 +85,8 @@
             app:layout_constraintTop_toBottomOf="@+id/central">
             <TextView
                 style="@style/text18"
-                android:text="@string/timezone_eastern"
+                android:id="@+id/tvMountain"
+                android:text="@string/timezone_mountain"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -101,7 +105,8 @@
             app:layout_constraintTop_toBottomOf="@+id/mountain">
             <TextView
                 style="@style/text18"
-                android:text="@string/timezone_eastern"
+                android:id="@+id/tvPacific"
+                android:text="@string/timezone_pacific"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -120,7 +125,8 @@
             app:layout_constraintTop_toBottomOf="@id/pacific">
             <TextView
                 style="@style/text18"
-                android:text="@string/timezone_eastern"
+                android:id="@+id/tvAlaska"
+                android:text="@string/timezone_alaska"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -139,7 +145,8 @@
             app:layout_constraintTop_toBottomOf="@+id/alaska">
             <TextView
                 style="@style/text18"
-                android:text="@string/timezone_eastern"
+                android:id="@+id/tvHawaii"
+                android:text="@string/timezone_hawaii"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -169,7 +176,7 @@
         style="@style/btn_main"
         android:id="@+id/save"
         android:layout_marginBottom="40dp"
-        android:text="@string/store_reg"
+        android:text="@string/save"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

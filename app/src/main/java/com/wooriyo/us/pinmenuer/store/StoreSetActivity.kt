@@ -52,6 +52,21 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
+    val setTimezone = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == RESULT_OK) {
+            if(type != 2) {
+                type = 2
+                binding.title.text = getString(R.string.title_udt_store)
+                binding.save.visibility = View.GONE
+                binding.llUdt.visibility = View.VISIBLE
+
+                binding.etName.setText(store.name)
+                binding.etName2.setText(store.subname)
+                binding.etAddr.setText(store.address)
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStoreSetBinding.inflate(layoutInflater)
@@ -313,9 +328,10 @@ class StoreSetActivity : BaseActivity(), View.OnClickListener {
                                 Toast.makeText(mActivity, R.string.msg_complete, Toast.LENGTH_SHORT).show()
                                 store.idx = resultDTO.idx
                                 storeidx = resultDTO.idx
-                                intent.putExtra("type", 2)
-                                startActivity(intent)
-                                finish()
+
+                                val intent = Intent(mActivity, TimezoneActivity::class.java)
+                                intent.putExtra("pre", "reg")
+                                setTimezone.launch(intent)
                             }else {
                                 Toast.makeText(mActivity, resultDTO.msg, Toast.LENGTH_SHORT).show()
                             }

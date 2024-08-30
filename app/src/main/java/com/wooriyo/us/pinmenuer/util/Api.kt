@@ -184,6 +184,14 @@ interface Api {
         @Query("idx") storeidx: Int
     ): Call<ResultDTO>
 
+    // 매장 타임존 설정
+    @GET("m/set_timezone.php")
+    fun setTimezone(
+        @Query("useridx") useridx: Int,
+        @Query("idx") storeidx: Int,
+        @Query("utc") utc: String
+    ): Call<ResultDTO>
+
     //매장 세부정보 설정
     @GET("m/udtstoredetail.php")
     fun udtStoreDetail (
