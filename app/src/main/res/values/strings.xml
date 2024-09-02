@@ -402,10 +402,10 @@
     <string name="title_event">Event</string>
     <string name="event_set_popup">Event Settings after Order</string>
     <string name="event_main_img">Representative Image</string>
-    <string name="event_main_img_hint">Please upload an image/photo\nusing the [Register and Edit] button.\nRecommended: 800×600 (4:3) / Max : 5MB.\nWithout image, only description displayed.</string>
+    <string name="event_main_img_hint">Please upload an image/photo\nusing the [Register and Modify] button.\nRecommended: 800×600 (4:3) / Max : 5MB.\nWithout image, only description displayed.</string>
     <string name="event_reg_udt">Register and Modify</string>
     <string name="event_exp">Event Description</string>
-    <string name="event_exp_hint">Please register within 400byte\nEx)Participate in the Naver receipt review event\nand receive complimentary beverages.</string>
+    <string name="event_exp_hint">Please register within 400byte\nEx)Participate in the receipt review event\nand receive a free beverages.</string>
     <string name="event_link">Event Link URL Registration</string>
     <string name="event_link_hint">Please Enter Link Address</string>
     <string name="event_link_info">When entering the link address, it will display as\n[Shortcut], but only active in QR orders.</string>
