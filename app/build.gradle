@@ -33,6 +33,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'com.wooriyo.us.pinmenuer'
 }
 dependencies {
     implementation 'androidx.core:core-ktx:1.8.0'
