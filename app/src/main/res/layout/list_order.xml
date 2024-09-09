@@ -177,10 +177,9 @@
             style="@style/btn_y"
             android:id="@+id/cl_price"
             android:layout_width="0dp"
-            android:paddingBottom="11dp"
-            android:paddingHorizontal="15dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
+            android:paddingHorizontal="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnComplete"
             app:layout_constraintBottom_toTopOf="@+id/print">
@@ -189,6 +188,7 @@
                 style="@style/text16"
                 android:id="@+id/tv_total"
                 android:text="@string/total"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
 
@@ -198,6 +198,7 @@
                 android:text="@string/zero"
                 android:textSize="20sp"
                 android:layout_marginStart="3dp"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tv_total"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -206,6 +207,7 @@
                 android:id="@+id/won"
                 android:text="@string/won"
                 android:layout_marginEnd="3dp"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/price"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -216,6 +218,7 @@
                 android:textSize="20sp"
                 android:maxLines="1"
                 android:ellipsize="end"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
