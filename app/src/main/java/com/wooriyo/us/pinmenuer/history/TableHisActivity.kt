@@ -30,6 +30,7 @@ import com.wooriyo.us.pinmenuer.model.ResultDTO
 import com.wooriyo.us.pinmenuer.order.adapter.OrderAdapter
 import com.wooriyo.us.pinmenuer.util.ApiClient
 import com.wooriyo.us.pinmenuer.util.AppHelper
+import com.wooriyo.us.pinmenuer.util.PrinterHelper
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -225,7 +226,7 @@ class TableHisActivity: BaseActivity() {
         })
 
         adapter.setOnPrintClickListener(object: ItemClickListener {
-            override fun onItemClick(position: Int) {AppHelper.print(list[position], mActivity)}
+            override fun onItemClick(position: Int) {PrinterHelper.print(list[position], mActivity)}
         })
 
         adapter.setOnTableNoListener(object: ItemClickListener {
@@ -284,7 +285,7 @@ class TableHisActivity: BaseActivity() {
         })
 
         orderAdapter.setOnPrintClickListener(object: ItemClickListener {
-            override fun onItemClick(position: Int) {AppHelper.print(orderList[position], mActivity)}
+            override fun onItemClick(position: Int) {PrinterHelper.print(orderList[position], mActivity)}
         })
     }
 
@@ -318,7 +319,7 @@ class TableHisActivity: BaseActivity() {
         })
 
         reservAdapter.setOnPrintClickListener(object: ItemClickListener {
-            override fun onItemClick(position: Int) {AppHelper.print(reservList[position], mActivity)}
+            override fun onItemClick(position: Int) {PrinterHelper.print(reservList[position], mActivity)}
         })
 
         reservAdapter.setOnTableNoListener(object: ItemClickListener {

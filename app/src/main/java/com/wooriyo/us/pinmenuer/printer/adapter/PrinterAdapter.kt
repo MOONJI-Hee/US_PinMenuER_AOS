@@ -24,8 +24,6 @@ import com.wooriyo.us.pinmenuer.config.AppProperties.Companion.VIEW_TYPE_COM
 import com.wooriyo.us.pinmenuer.databinding.ListPrinterAddBinding
 import com.wooriyo.us.pinmenuer.databinding.ListPrinterBinding
 import com.wooriyo.us.pinmenuer.listener.ItemClickListener
-import com.wooriyo.us.pinmenuer.model.PrintDTO
-import com.wooriyo.us.pinmenuer.printer.NewConnActivity
 import com.wooriyo.us.pinmenuer.printer.SetConnActivity
 import com.wooriyo.us.pinmenuer.printer.dialog.DetailPrinterDialog
 import com.wooriyo.us.pinmenuer.util.PrinterHelper

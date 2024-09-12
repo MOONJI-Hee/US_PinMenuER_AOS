@@ -93,9 +93,6 @@
             android:name=".printer.PrinterModelListActivity"
             android:exported="false" />
         <activity
-            android:name=".printer.NewConnActivity"
-            android:exported="false" />
-        <activity
             android:name=".printer.PrinterMenuActivity"
             android:exported="false" />
         <activity

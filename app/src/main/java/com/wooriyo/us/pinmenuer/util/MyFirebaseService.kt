@@ -94,7 +94,7 @@ class MyFirebaseService : FirebaseMessagingService() {
                     when(result.status) {
                         1 -> {
                             result.ordcode = ordCode ?: ""
-                            AppHelper.print(result, applicationContext)
+                            PrinterHelper.print(result, applicationContext)
                         }
                         else -> Toast.makeText(applicationContext, result.msg, Toast.LENGTH_SHORT).show()
                     }

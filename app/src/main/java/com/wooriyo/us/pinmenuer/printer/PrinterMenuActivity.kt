@@ -56,13 +56,9 @@ class PrinterMenuActivity : BaseActivity() {
 
         binding.back.setOnClickListener{finish()}
         binding.setConn.setOnClickListener {
-            if(printerList.isEmpty()) {
-                startActivity(Intent(mActivity, NewConnActivity::class.java))
-            }else {
-                val intent = Intent(mActivity, SetConnActivity::class.java)
-                intent.putExtra("printerList", printerList)
-                startActivity(intent)
-            }
+            val intent = Intent(mActivity, SetConnActivity::class.java)
+            intent.putExtra("printerList", printerList)
+            startActivity(intent)
         }
         binding.model.setOnClickListener { startActivity(Intent(mActivity, PrinterModelListActivity::class.java)) }
         binding.setContents.setOnClickListener { startActivity(Intent(mActivity, SetContentActivity::class.java)) }

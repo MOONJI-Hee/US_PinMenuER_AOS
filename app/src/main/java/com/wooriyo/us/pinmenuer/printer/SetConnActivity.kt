@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -17,7 +18,6 @@ import com.rt.printerlibrary.enumerate.CommonEnum
 import com.rt.printerlibrary.observer.PrinterObserver
 import com.rt.printerlibrary.observer.PrinterObserverManager
 import com.rt.printerlibrary.utils.FuncUtils
-import com.sewoo.request.android.RequestHandler
 import com.wooriyo.us.pinmenuer.BaseActivity
 import com.wooriyo.us.pinmenuer.MyApplication
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.androidId
@@ -27,20 +27,15 @@ import com.wooriyo.us.pinmenuer.MyApplication.Companion.remoteDevices
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.storeidx
 import com.wooriyo.us.pinmenuer.MyApplication.Companion.useridx
 import com.wooriyo.us.pinmenuer.R
-import com.wooriyo.us.pinmenuer.broadcast.BtDiscoveryReceiver
 import com.wooriyo.us.pinmenuer.databinding.ActivitySetConnBinding
 import com.wooriyo.us.pinmenuer.listener.DialogListener
 import com.wooriyo.us.pinmenuer.listener.ItemClickListener
 import com.wooriyo.us.pinmenuer.model.PrintContentDTO
-import com.wooriyo.us.pinmenuer.model.PrintDTO
-import com.wooriyo.us.pinmenuer.model.PrintListDTO
-import com.wooriyo.us.pinmenuer.model.ResultDTO
 import com.wooriyo.us.pinmenuer.printer.adapter.PrinterAdapter
 import com.wooriyo.us.pinmenuer.printer.dialog.DiscoveryPrinterDialog
 import com.wooriyo.us.pinmenuer.printer.dialog.SetNickDialog
 import com.wooriyo.us.pinmenuer.util.ApiClient
-import com.wooriyo.us.pinmenuer.util.AppHelper
-import com.wooriyo.us.pinmenuer.util.AppHelper.Companion.connDevice
+import com.wooriyo.us.pinmenuer.util.PrinterHelper
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -66,7 +61,7 @@ class SetConnActivity : BaseActivity(), PrinterObserver {
         getPrintSetting()
 
         // 페어링 된 프린터 리스트 조회
-        AppHelper.getPairedDevice()
+        PrinterHelper.getPairedDevice()
 
         // 연결 프린트 리사이클러뷰
         printerAdapter = PrinterAdapter(remoteDevices)
@@ -113,7 +108,12 @@ class SetConnActivity : BaseActivity(), PrinterObserver {
                 mBluetoothIntentFilter?.addAction(BluetoothDevice.ACTION_FOUND)
                 mBluetoothIntentFilter?.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)
 
-                registerReceiver(mBluetoothReceiver, mBluetoothIntentFilter)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    registerReceiver(mBluetoothReceiver, mBluetoothIntentFilter, Context.RECEIVER_NOT_EXPORTED)
+                }else {
+                    registerReceiver(mBluetoothReceiver, mBluetoothIntentFilter)
+                }
+
                 bluetoothAdapter.startDiscovery()
             }
         })
@@ -147,8 +147,13 @@ class SetConnActivity : BaseActivity(), PrinterObserver {
                 }
             }
         }
-        registerReceiver(connectDevice, IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED))
-        registerReceiver(connectDevice, IntentFilter(BluetoothDevice.ACTION_ACL_DISCONNECTED))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerReceiver(connectDevice, IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED), Context.RECEIVER_NOT_EXPORTED)
+            registerReceiver(connectDevice, IntentFilter(BluetoothDevice.ACTION_ACL_DISCONNECTED), Context.RECEIVER_NOT_EXPORTED)
+        }else {
+            registerReceiver(connectDevice, IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED))
+            registerReceiver(connectDevice, IntentFilter(BluetoothDevice.ACTION_ACL_DISCONNECTED))
+        }
 
         val nickDialog = SetNickDialog(mActivity, "", 1, "안드로이드 태블릿 PC")
         nickDialog.setOnNickChangeListener(object : DialogListener {
